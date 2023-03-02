@@ -8,4 +8,8 @@ public class TestController {
 
 	@GetMapping("/test")
 	public void test() throws Exception {}
+	
+	@GetMapping("/business_schedule")
+	public void testBusinessSchedule() throws Exception {}
+	
 }
