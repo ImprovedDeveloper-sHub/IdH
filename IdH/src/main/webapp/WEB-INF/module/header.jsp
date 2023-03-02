@@ -127,14 +127,17 @@ nav a:hover::before {
 
 
 
-
-
 thead {
   background: #f2f3f5;
 }
+
+thead th {
+	font-size: 12px;
+}
+
 thead tr td {
   color: #757e92;
-  font-size: 15px;
+  font-size: 10px;
   text-transform: uppercase;
   padding: 14px 5px;
   font-weight:bold;
@@ -143,7 +146,7 @@ thead tr td {
 tbody tr td {
   padding: 14px 5px;
   border-bottom: #eaecee solid 1px;
-  font-size:15px;
+  font-size:10px;
 }
 tbody tr:hover {
   background: #fefaf2;
