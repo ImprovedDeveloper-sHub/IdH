@@ -43,13 +43,13 @@ body{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  background-color:#16A2B8;
+  background-color:#B7C4CF;
   
 }
 .menu{
   display:inline-block;
   font-size:18px;
-  color:#9E9E9E;
+  color:black;
 }
 .menu:hover{
   color:white;

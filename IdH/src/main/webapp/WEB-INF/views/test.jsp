@@ -12,37 +12,27 @@
 
       <!--col-6시작-->
       <div class="col-6">
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">종료 프로젝트</h3>
-            <div class="card-tools">
-              
-              <div class="input-group input-group-sm" style="width: 300px;">
-                <div class="btn-group">
-<button type="button" class="btn btn-info">Action</button>
-<button type="button" class="btn btn-info dropdown-toggle dropdown-icon" data-toggle="dropdown">
-<span class="sr-only">Toggle Dropdown</span>
-</button>
-<div class="dropdown-menu" role="menu">
-<a class="dropdown-item" href="#">Action</a>
-<a class="dropdown-item" href="#">Another action</a>
-<a class="dropdown-item" href="#">Something else here</a>
-<div class="dropdown-divider"></div>
-<a class="dropdown-item" href="#">Separated link</a>
-</div>
-</div>
-                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                <div class="input-group-append">
-                  <button type="submit" class="btn btn-default">
-                    <i class="fas fa-search"></i>
-                  </button>
-                </div>
-              </div>
+      	<div id="content" class="card">
+         <div class="card-header">
+            <h3 class="card-title">등록한 이슈</h3>
+         </div>
+            <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse;">
+               <div class="input-group input-group-sm" style="width: 150px;">
+                  <input type="text" name="table_search"
+                     class="form-control float-right" placeholder="Search">
+                  <div class="input-group-append">
+                     <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                     </button>
+                  </div>
+               </div>
+         <button type="button" class="btn btn-block btn-info btn-sm"
+            style="width: 80px;">등록</button>
             </div>
-          </div>
-          <div class="card-body table-responsive p-0">
-            <table class="table table-hover ">
-              <thead>
+         <div id="table-content">
+            <div class="card-body table-responsive p-0">
+               <table class="table table-hover text-center">
+                  <thead>
                 <tr>
                   <th>프로젝트 이름</th>
                   <th>프로젝트 상태</th>
@@ -88,10 +78,10 @@
                   <td> flank fatback doner.</td>
                 </tr>
               </tbody>
-            </table>
-          </div>
-        </div>
-
+               </table>
+            </div>
+         </div>
+      </div>
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">종료 프로젝트</h3>
@@ -178,30 +168,16 @@
 
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Progress bars</h3>
+            <h3 class="card-title">chart</h3>
           </div>
 
           <div class="card-body">
-            <div class="progress mb-3">
-              <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                <span class="sr-only">40% Complete (success)</span>
-              </div>
-            </div>
-            <div class="progress mb-3">
-              <div class="progress-bar bg-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                <span class="sr-only">20% Complete</span>
-              </div>
-            </div>
-            <div class="progress mb-3">
-              <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                <span class="sr-only">60% Complete (warning)</span>
-              </div>
-            </div>
-            <div class="progress mb-3">
-              <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                <span class="sr-only">80% Complete</span>
-              </div>
-            </div>
+            <div id="curve_chart"></div>
+            <div id="budget_chart"></div>
+            <div id="schedule_chart"></div>
+            <div id="issue_chart"></div>
+            <div id="product_chart"></div>
+            <div id="workforce_chart"></div>
           </div>
           
  
@@ -210,11 +186,12 @@
 
         <div class="card ">
           <div class="card-body row">
-            <div class="col-4"><button type="button" class="btn btn-block btn-info btn-sm">예산현황</button>
-              <button type="button" class="btn btn-block btn-info btn-sm">인력현황</button></div>
-             <div class="col-4"> <button type="button" class="btn btn-block btn-info btn-sm">일정현황</button>
-              <button type="button" class="btn btn-block btn-info btn-sm">이슈현황</button>   
-</div><div class="col-4"> <button type="button" class="btn btn-block btn-info btn-sm">산출물현황</button></div>
+            <div class="col-4"><button type="button" class="btn btn-block btn-info btn-sm"
+            onclick="ajax_print_chart('budget');">예산현황</button>
+              <button type="button" class="btn btn-block btn-info btn-sm" onclick="ajax_print_chart('workforce');">인력현황</button></div>
+             <div class="col-4"> <button type="button" class="btn btn-block btn-info btn-sm" onclick="ajax_print_chart('schedule');" >일정현황</button>
+              <button type="button" class="btn btn-block btn-info btn-sm" onclick="ajax_print_chart('issue');">이슈현황</button>   
+</div><div class="col-4"> <button type="button" class="btn btn-block btn-info btn-sm" onclick="ajax_print_chart('product');">산출물현황</button></div>
           </div>
         </div>
 
@@ -256,17 +233,7 @@
             <h3 class="card-title ">종료 프로젝트</h3>
            
               <div class="card-body table-responsive p-0">
-            <table class="table table-hover ">
-              <thead>
-                <tr>
-                  <th>1</th>
-                  <th>2</th>
-                  <th>3</th>
-                  <th>4</th>
-                  <th>5</th>
-                </tr>
-              </thead>
-              </table></div>
+            </div>
               
               
               
@@ -278,13 +245,12 @@
 
       <!--col-6종료-->
 
+	<div>
 	
-	<button onclick="ajax_test()">ajax</button>
-	<button onclick="table_print()">table</button>
-	
-	 <div id="curve_chart" style="width: 900px; height: 500px"></div>
+	</div><br/>
+	 <!-- <div id="curve_chart" style="width: 900px; height: 500px"></div>
 	 <div id="Line_chart" style="width: 900px; height: 500px"></div>
-      <a class="2015-btn" href="#">2015</a>
+     <a class="2015-btn" href="#">2015</a> -->
     </div>
 
     </div>
@@ -299,22 +265,27 @@
   
   
   <script>
-  var test="test";
+  var last_chart="curve_chart";
+  var chart_type="";
+  var chart_data="test";
   var data_table_test;
-  function ajax_test(){
+  
+  
+  function ajax_print_chart(url){
 	  test = $.ajax({
-			url:"${request.ContextPath()}/IdH/test5",		//서버url
+			url:"${request.ContextPath()}/IdH/"+url,		//서버url
 			method:"post",	//get post 보내는 방식
 			success:function(data){
-				console.log(data);
-				test = JSON.stringify(data);
-				
+				//alert(url);
+				chart_data = JSON.stringify(data);
+				chart_type= url+"_chart";
+				table_print();
 			},	//서버에서 보내는 데이터
 			error:function(error){
 				alert('error')
 			},
 			complete:function(){
-				alert('complete')
+				//alert('complete')
 			},
 		})
   }
@@ -328,13 +299,15 @@
         };
   
   function table_print(){
-	  alert(test);
-	  data_table_test = new google.visualization.DataTable(test);
-	  var chart2 = new google.visualization.LineChart(document.getElementById('Line_chart'));
+	  data_table_test = new google.visualization.DataTable(chart_data);
+	  var chart2 = new google.visualization.LineChart(document.getElementById(chart_type));
 	  google.charts.setOnLoadCallback(drawChart);
 	  
 	   function drawChart() {
-
+		   
+		  document.getElementById(last_chart).style.display="none";
+		  document.getElementById(chart_type).style.display="block";
+		  last_chart=chart_type;
           var options = {
             title: 'Company Performance',
             curveType: 'function',
@@ -342,8 +315,6 @@
           };
           chart2.draw(data_table_test,options);
         }
-	  
-	  
   }
   
   window.onload = function(){
@@ -377,7 +348,7 @@
         }
     
     
-    $(document).ready(function(){
+    /* $(document).ready(function(){
       $(".2015-btn").click(function(){
     	  var data = google.visualization.arrayToDataTable([
               ['Year', '프로젝트1', '프로젝트2'],
@@ -392,7 +363,7 @@
 
           chart.draw(data, options);
       });
-  });
+  }); */
     
 }
   
