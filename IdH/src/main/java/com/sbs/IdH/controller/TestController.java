@@ -9,7 +9,13 @@ public class TestController {
 	@GetMapping("/test")
 	public void test() throws Exception {}
 	
-	@GetMapping("/business_schedule")
-	public void testBusinessSchedule() throws Exception {}
+	@GetMapping("/business_schedule_detail")
+	public void testBusinessScheduleDetail() throws Exception {}
+	
+	@GetMapping("/business_budget_detail")
+	public void testBusinessBudgetDetail() throws Exception{}
+	
+	@GetMapping("/business_group_detail")
+	public void testBusinessGroupDetail() throws Exception{}
 	
 }
