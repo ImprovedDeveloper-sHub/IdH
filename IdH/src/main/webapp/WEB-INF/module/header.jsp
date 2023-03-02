@@ -36,6 +36,7 @@ body{
 }
 
 .logo{
+  background-color:#dfdfdf;
   width:100px;
   height:100px;
 }
@@ -141,58 +142,8 @@ table td{
 
 
 
-<<<<<<< HEAD
 
 
-=======
-thead {
-  background: #f2f3f5;
-}
-
-thead th {
-	font-size: 12px;
-}
-
-thead tr td {
-  color: #757e92;
-  font-size: 10px;
-  text-transform: uppercase;
-  padding: 14px 5px;
-  font-weight:bold;
-  color:black;
-}
-tbody tr td {
-  padding: 14px 5px;
-  border-bottom: #eaecee solid 1px;
-  font-size:10px;
-}
-tbody tr:hover {
-  background: #fefaf2;
-}
-.issue-content{
-  height:600px;
-}
-
-#searchbar{
-  margin-bottom:15px;
-  margin-left:auto;
-}
-#navoption{
-  width:200px;
-}
-.issue-content{
-  text-align:center;
-}
-.card{
-  overflow:scroll;
-  overflow-x:hidden;
-  margin:0 10px 20px 10px;
-}
-#reg-btn{
-
-  margin-left:-620px;
-}
->>>>>>> refs/heads/choi
 </style>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
