@@ -1,0 +1,75 @@
+package com.sbs.IdH.dto;
+
+import java.util.Date;
+
+public class ProjectVO {
+
+	private int project_number;
+	private String project_name;
+	private Date project_regDate;
+	private Date proejct_endDate;
+	private String project_status;
+	private  int project_require_number;
+	private int project_business_number;
+	private String project_member_id;
+	private String project_discription;
+	
+	
+	public int getProject_number() {
+		return project_number;
+	}
+	public void setProject_number(int project_number) {
+		this.project_number = project_number;
+	}
+	public String getProject_name() {
+		return project_name;
+	}
+	public void setProject_name(String project_name) {
+		this.project_name = project_name;
+	}
+	public Date getProject_regDate() {
+		return project_regDate;
+	}
+	public void setProject_regDate(Date project_regDate) {
+		this.project_regDate = project_regDate;
+	}
+	public Date getProejct_endDate() {
+		return proejct_endDate;
+	}
+	public void setProejct_endDate(Date proejct_endDate) {
+		this.proejct_endDate = proejct_endDate;
+	}
+	public String getProject_status() {
+		return project_status;
+	}
+	public void setProject_status(String project_status) {
+		this.project_status = project_status;
+	}
+	public int getProject_require_number() {
+		return project_require_number;
+	}
+	public void setProject_require_number(int project_require_number) {
+		this.project_require_number = project_require_number;
+	}
+	public int getProject_business_number() {
+		return project_business_number;
+	}
+	public void setProject_business_number(int project_business_number) {
+		this.project_business_number = project_business_number;
+	}
+	public String getProject_member_id() {
+		return project_member_id;
+	}
+	public void setProject_member_id(String project_member_id) {
+		this.project_member_id = project_member_id;
+	}
+	public String getProject_discription() {
+		return project_discription;
+	}
+	public void setProject_discription(String project_discription) {
+		this.project_discription = project_discription;
+	}
+	
+	
+	
+}
