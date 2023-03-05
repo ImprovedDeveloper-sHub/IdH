@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Unitwork-Mapper">
+	
+	<sql id="search">
+		<if test="searchType == 'i'.toString() ">
+			and id like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'n'.toString() ">
+			and name like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'p'.toString() ">
+			and phone like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'e'.toString() ">
+			and email like '%'||#{keyword}||'%'
+		</if>
+	</sql>
+	
+	
+	<select id="selectUnitworkList"	resultType="unitwork">
+		select *
+		from unitwork
+		where unitwork_number is not null
+		<include refid="search" />
+		order by unitwork_regdate desc
+	</select>
+	
+	<select id="selectUnitworkForProject"	resultType="unitwork">
+		select *
+		from unitwork
+		where unitwork_project_number = #{project_number}
+	</select>
+	
+	
+	<select id="selectSearchUnitworkListCount" resultType="int">
+		select count(*)
+		from unitwork
+		where unitwork_number	is not null
+		<include refid="search" />
+		order by unitwork_regdate desc
+	</select>
+	
+	<select id="selectUnitwork"  resultType="unitwork">
+		select * 
+		from unitwork 
+		where unitwork_number=#{unitwork_number}
+	</select>
+	
+	<select id="selectUnitworkSeqNext" resultType="int">
+		select unitwork_seq.nextval as unitwork_number from dual
+	</select>
+	
+	<update id="insertUnitwork" parameterType="unitwork">
+		insert 
+		into 
+		unitwork(unitwork_number,unitwork_name,unitwork_status,unitwork_check,unitwork_detail,unitwork_project_number,unitwork_member_id,unitwork_regdate,unitwork_enddate)
+		values(#{unitwork_number},#{unitwork_name},0,#{unitwork_check},#{unitwork_detail},#{unitwork_project_number},#{unitwork_member_id},#{unitwork_regdate},#{unitwork_enddate})
+	</update>
+	
+	<update id="updateUnitworkForProjectStart" parameterType="unitwork">
+		update unitwork 
+		set unitwork_project_number=#{unitwork_project_number}, unitwork_status=1
+		where unitwork_number=#{unitwork_number}
+	</update>
+	
+	<update id="updateUnitworkForProjectEnd" parameterType="unitwork">
+		update unitwork 
+		set unitwork_status=2
+		where unitwork_number=#{unitwork_number}
+	</update>
+	
+	
+	<update id="deleteUnitwork" parameterType="int">
+		delete 
+		from unitwork 
+		where unitwork_number=#{unitwork_number}
+	</update>
+	
+	
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+

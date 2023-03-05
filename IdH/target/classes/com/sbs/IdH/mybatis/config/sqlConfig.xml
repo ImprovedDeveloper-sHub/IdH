@@ -18,6 +18,7 @@
 		<typeAlias type="com.jsp.dto.ReplyVO" alias="reply" /> -->
 		<typeAlias type="com.sbs.IdH.dto.BudgetVO" alias="budget" />
 		<typeAlias type="com.sbs.IdH.dto.WorkforceVO" alias="workforce" />
+		<typeAlias type="com.sbs.IdH.dto.UnitworkVO" alias="unitwork" />
 	</typeAliases>
 	
 	

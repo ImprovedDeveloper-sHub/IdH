@@ -19,6 +19,9 @@
 		p:session-ref="sqlSession"
 	/>
 	
+	<bean id="unitworkDAO" class="com.sbs.IdH.dao.UnitworkDAOImpl"
+		p:session-ref="sqlSession"
+	/>
 	
 </beans>
 
