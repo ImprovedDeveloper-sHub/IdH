@@ -10,8 +10,12 @@
 
 	<!-- member.picture -->
 	
-	
 	<!-- repository -->
+	<bean id="budgetDAO" class="com.sbs.IdH.dao.BudgetDAOImpl"
+		p:session-ref="sqlSession"
+	/>
+	
+	
 	
 </beans>
 

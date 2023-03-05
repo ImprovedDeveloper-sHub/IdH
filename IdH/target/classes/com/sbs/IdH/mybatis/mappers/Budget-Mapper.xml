@@ -49,6 +49,10 @@
 		where budget_number=#{budget_number}
 	</select>
 	
+	<select id="selectBudgetSeqNext" resultType="int">
+		select budget_seq.nextval as budget_number from dual
+	</select>
+	
 	<update id="insertBudget" parameterType="budget">
 		insert 
 		into 
@@ -76,9 +80,7 @@
 	</update>
 	
 	
-	<select id="selectBudgetSeqNext" resultType="int">
-		select budget_seq.nextval as budget_number from dual
-	</select>
+	
 	
 	
 </mapper>
