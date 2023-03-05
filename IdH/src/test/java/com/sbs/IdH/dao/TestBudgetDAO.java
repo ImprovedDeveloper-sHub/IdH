@@ -52,7 +52,7 @@ public class TestBudgetDAO {
    }
    
    public void testBudget_SEQ() throws Exception{
-	   System.out.println(budgetDAO.selectBoardSeqNext());
+	   System.out.println(budgetDAO.selectBudgetSeqNext());
    }
    
   
