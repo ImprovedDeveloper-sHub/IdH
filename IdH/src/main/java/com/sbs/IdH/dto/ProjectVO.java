@@ -6,8 +6,8 @@ public class ProjectVO {
 
 	private int project_number;
 	private String project_name;
-	private Date project_regDate;
-	private Date proejct_endDate;
+	private Date project_regdate;
+	private Date proejct_enddate;
 	private String project_status;
 	private  int project_require_number;
 	private int project_business_number;
@@ -27,17 +27,17 @@ public class ProjectVO {
 	public void setProject_name(String project_name) {
 		this.project_name = project_name;
 	}
-	public Date getProject_regDate() {
-		return project_regDate;
+	public Date getProject_regdate() {
+		return project_regdate;
 	}
-	public void setProject_regDate(Date project_regDate) {
-		this.project_regDate = project_regDate;
+	public void setProject_regdate(Date project_regdate) {
+		this.project_regdate = project_regdate;
 	}
-	public Date getProejct_endDate() {
-		return proejct_endDate;
+	public Date getProejct_enddate() {
+		return proejct_enddate;
 	}
-	public void setProejct_endDate(Date proejct_endDate) {
-		this.proejct_endDate = proejct_endDate;
+	public void setProejct_enddate(Date proejct_enddate) {
+		this.proejct_enddate = proejct_enddate;
 	}
 	public String getProject_status() {
 		return project_status;

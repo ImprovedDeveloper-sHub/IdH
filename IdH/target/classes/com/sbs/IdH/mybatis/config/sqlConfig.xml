@@ -16,6 +16,7 @@
 		<typeAlias type="com.jsp.dto.BoardVO" alias="board" />
 		<typeAlias type="com.jsp.dto.NoticeVO" alias="notice" />
 		<typeAlias type="com.jsp.dto.ReplyVO" alias="reply" /> -->
+		<typeAlias type="com.sbs.IdH.dto.BudgetVO" alias="budget" />
 	</typeAliases>
 	
 	
