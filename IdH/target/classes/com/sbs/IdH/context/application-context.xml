@@ -15,6 +15,9 @@
 		p:session-ref="sqlSession"
 	/>
 	
+	<bean id="workforceDAO" class="com.sbs.IdH.dao.WorkforceDAOImpl"
+		p:session-ref="sqlSession"
+	/>
 	
 	
 </beans>
