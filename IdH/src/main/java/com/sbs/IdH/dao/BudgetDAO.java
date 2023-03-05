@@ -17,13 +17,13 @@ public interface BudgetDAO {
 
 	BudgetVO selectBudget(int budget_number) throws SQLException;	
 
-	void insertBudget(BudgetVO board) throws SQLException;
-
-	void updateBudgetForProjectStart(BudgetVO board) throws SQLException;
-
-	void updateBudgetForProjectEnd(BudgetVO board) throws SQLException;
-
 	int selectBoardSeqNext() throws SQLException;
+
+	void insertBudget(BudgetVO budget) throws SQLException;
+
+	void updateBudgetForProjectStart(BudgetVO budget) throws SQLException;
+
+	void updateBudgetForProjectEnd(BudgetVO budget) throws SQLException;
 	
-	void deleteBudget() throws SQLException;
+	void deleteBudget(int budget_number) throws SQLException;
 }

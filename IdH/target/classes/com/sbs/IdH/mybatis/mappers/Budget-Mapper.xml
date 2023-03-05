@@ -23,14 +23,15 @@
 	
 	<select id="selectBudgetList"	resultType="budget">
 		select *
-		from board is not null
+		from budget
+		where budget_number is not null
 		<include refid="search" />
-		order by regDate desc
+		order by budget_regdate desc
 	</select>
 	
 	<select id="selectBudgetForProject"	resultType="budget">
 		select *
-		from board
+		from budget
 		where budget_project_number = #{project_number}
 	</select>
 	
@@ -40,7 +41,7 @@
 		from budget
 		where budget_number	is not null
 		<include refid="search" />
-		order by regDate desc 	
+		order by budget_regdate desc
 	</select>
 	
 	<select id="selectBudget"  resultType="budget">
@@ -56,8 +57,8 @@
 	<update id="insertBudget" parameterType="budget">
 		insert 
 		into 
-		budget(budget_number,budget_status,budget_detail,budget_price,budget_member_id)
-		values(#{budget_number},0,#{budget_detail},#{budget_price},#{budget_member_id})
+		budget(budget_number,budget_status,budget_detail,budget_price,budget_project_number,budget_member_id,budget_regdate)
+		values(#{budget_number},0,#{budget_detail},#{budget_price},#{budget_project_number},#{budget_member_id},sysdate)
 	</update>
 	
 	<update id="updateBudgetForProjectStart" parameterType="budget">

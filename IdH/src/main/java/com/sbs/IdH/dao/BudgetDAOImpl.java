@@ -50,26 +50,26 @@ public class BudgetDAOImpl implements BudgetDAO{
 	
 
 	@Override
-	public void insertBudget(BudgetVO board) throws SQLException {
-		session.update("Budget-Mapper.insertBudget", board);
+	public void insertBudget(BudgetVO budget) throws SQLException {
+		session.update("Budget-Mapper.insertBudget", budget);
 		
 	}
 
 	@Override
-	public void updateBudgetForProjectStart(BudgetVO board) throws SQLException {
-		session.update("Budget-Mapper.updateBudgetForProjectStart", board);		
+	public void updateBudgetForProjectStart(BudgetVO budget) throws SQLException {
+		session.update("Budget-Mapper.updateBudgetForProjectStart", budget);		
 	}
 
 	@Override
-	public void updateBudgetForProjectEnd(BudgetVO board) throws SQLException {
-		session.update("Budget-Mapper.updateBudgetForProjectEnd", board);
+	public void updateBudgetForProjectEnd(BudgetVO budget) throws SQLException {
+		session.update("Budget-Mapper.updateBudgetForProjectEnd", budget);
 		
 	}
 
 	
 	@Override
-	public void deleteBudget() throws SQLException {
-		session.update("Budget-Mapper.deleteBudget");
+	public void deleteBudget(int budget_number) throws SQLException {
+		session.update("Budget-Mapper.deleteBudget", budget_number);
 		
 	}
 
