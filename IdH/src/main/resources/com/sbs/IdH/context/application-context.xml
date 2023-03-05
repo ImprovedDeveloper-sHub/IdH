@@ -6,17 +6,20 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	<context:component-scan base-package="kr.ac.sbs.service" />
+	<context:component-scan
+		base-package="kr.ac.sbs.service" />
 
 	<!-- member.picture -->
-	
+
 	<!-- repository -->
 	<bean id="budgetDAO" class="com.sbs.IdH.dao.BudgetDAOImpl"
-		p:session-ref="sqlSession"
-	/>
-	
-	
-	
+		p:session-ref="sqlSession" />
+
+	<bean id="scheduleDAO" class="com.sbs.IdH.dao.ScheduleDAOImpl"
+		p:session-ref="sqlSession" />
+
+
+
 </beans>
 
 
