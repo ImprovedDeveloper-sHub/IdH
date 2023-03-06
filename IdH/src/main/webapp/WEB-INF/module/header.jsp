@@ -128,7 +128,11 @@ nav a:hover::before {
 
 
 
-
+/* table *{
+text-overflow:ellipsis;
+overflow:hidden;
+white-space:nowrap;
+} */
 thead {
   background: #f2f3f5;
 }
@@ -140,6 +144,16 @@ thead tr td {
   font-weight:bold;
   color:black;
 }
+th{
+width:15%;
+}
+.table-content>table>td{
+  width:80px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
 tbody tr td {
   padding: 14px 5px;
   border-bottom: #eaecee solid 1px;

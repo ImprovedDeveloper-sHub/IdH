@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Product-Mapper">
+
+	<sql id="search">
+		<if test="searchType == 't'.toString()">
+			and product_title like '%'||#{keyword}||'%'			
+		</if>
+		<if test="searchType == 'w'.toString()">
+			and product_member_id like '%'||#{keyword}||'%'			
+		</if>
+		<if test="searchType == 'c'.toString()">
+			and product_content like '%'||#{keyword}||'%'			
+		</if>
+		<if test="searchType == 'tc'.toString()">
+			and (
+			product_title like '%'||#{keyword}||'%'
+			or
+			product_content like '%'||#{keyword}||'%'						
+			)			
+		</if>
+		<if test="searchType == 'cw'.toString()">
+			and (
+			product_member like '%'||#{keyword}||'%'
+			or
+			product_content like '%'||#{keyword}||'%'						
+			)			
+		</if>
+		<if test="searchType == 'tcw'.toString()">
+			and (
+			product_title like '%'||#{keyword}||'%'
+			or
+			product_member like '%'||#{keyword}||'%'
+			or
+			product_content like '%'||#{keyword}||'%'						
+			)			
+		</if>
+	</sql>
+	
+
+	<select id="selectProduct" resultType="product">
+		select
+		*
+		from product
+		where product_number=#{product_number}
+	</select>
+		
+		<update id="deleteProduct" parameterType="int">
+		delete 
+		from product 
+		where product_number=#{product_number}
+	</update>
+	<update id="insertProduct">
+		insert 
+		into 
+		product(product_number,product_stage,product_title,product_content,product_status
+		,product_member_id,product_project_number,product_regdate)
+		values
+		(#{product_number},#{product_stage},#{product_title},#{product_content},#{product_status},#{product_member_id},#{product_project_number},sysdate)
+	</update>
+	<update id="updateProduct" parameterType="product">
+		update 
+		product
+		set 
+		product_stage=#{product_stage}, product_title=#{product_title},product_content=#{product_content}, product_regdate=sysdate 
+		where product_number=#{product_number}
+	</update>
+	<update id="increaseViewCnt" parameterType="int">
+		update 
+		product 
+		set 
+		viewcnt=viewcnt+1 
+		where product_number=#{product_number}
+	</update>
+	<select id="selectSearchProductList" resultType="product">
+		select
+		*
+		from
+		product
+		where product_number is not null  			  	
+		<include refid="search" />
+		order by product_number desc
+	</select>
+	<select id="selectSearchProductListCount"  resultType="int">
+		select
+		count(*)
+		from
+		product
+		where product_number is not null  			  	
+		<include refid="search" />
+		order by product_number desc
+	</select>
+	<select id="selectProductSeqNext" resultType="int">
+		select product_seq.nextval as product_number from dual
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+

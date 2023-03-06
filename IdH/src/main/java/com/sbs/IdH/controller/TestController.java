@@ -8,4 +8,7 @@ public class TestController {
 
 	@GetMapping("/test")
 	public void test() throws Exception {}
+	
+	@GetMapping("/Product")
+	public void Product() throws Exception {}
 }

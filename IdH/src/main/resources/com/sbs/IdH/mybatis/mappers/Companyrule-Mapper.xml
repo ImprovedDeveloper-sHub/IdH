@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Companyrule-Mapper">
+
+	<sql id="search">
+		<if test="searchType == 't'.toString()">
+			and companyrule_title like '%'||#{keyword}||'%'			
+		</if>
+		<if test="searchType == 'w'.toString()">
+			and companyrule_member_id like '%'||#{keyword}||'%'			
+		</if>
+		<if test="searchType == 'c'.toString()">
+			and companyrule_content like '%'||#{keyword}||'%'			
+		</if>
+		<if test="searchType == 'tc'.toString()">
+			and (
+			companyrule_title like '%'||#{keyword}||'%'
+			or
+			companyrule_content like '%'||#{keyword}||'%'						
+			)			
+		</if>
+		<if test="searchType == 'cw'.toString()">
+			and (
+			companyrule_member like '%'||#{keyword}||'%'
+			or
+			companyrule_content like '%'||#{keyword}||'%'						
+			)			
+		</if>
+		<if test="searchType == 'tcw'.toString()">
+			and (
+			companyrule_title like '%'||#{keyword}||'%'
+			or
+			companyrule_member like '%'||#{keyword}||'%'
+			or
+			companyrule_content like '%'||#{keyword}||'%'						
+			)			
+		</if>
+	</sql>
+	
+
+	<select id="selectCompanyrule" resultType="companyrule">
+		select
+		*
+		from companyrule
+		where companyrule_number=#{companyrule_number}
+	</select>
+		
+		<update id="deleteCompanyrule" parameterType="int">
+		delete 
+		from companyrule 
+		where companyrule_number=#{companyrule_number}
+	</update>
+	<update id="insertCompanyrule">
+		insert 
+		into 
+		companyrule(companyrule_number,companyrule_title,companyrule_content,companyrule_regdate,companyrule_member_id)
+		values
+		(#{companyrule_number},#{companyrule_title},#{companyrule_content},sysdate,#{companyrule_member_id})
+	</update>
+	<update id="updateCompanyrule" parameterType="companyrule">
+		update 
+		companyrule
+		set 
+		companyrule_title=#{companyrule_title},companyrule_content=#{companyrule_content}, companyrule_regdate=sysdate 
+		where companyrule_number=#{companyrule_number}
+	</update>
+	<update id="increaseViewCnt" parameterType="int">
+		update 
+		companyrule 
+		set 
+		viewcnt=viewcnt+1 
+		where companyrule_number=#{companyrule_number}
+	</update>
+	<select id="selectSearchCompanyruleList" resultType="companyrule">
+		select
+		*
+		from
+		companyrule
+		where companyrule_number is not null  			  	
+		<include refid="search" />
+		order by companyrule_regdate desc
+	</select>
+	<select id="selectSearchCompanyruleListCount"  resultType="int">
+		select
+		count(*)
+		from
+		companyrule
+		where companyrule_number is not null  			  	
+		<include refid="search" />
+		order by companyrule_regdate desc
+	</select>
+	<select id="selectCompanyruleSeqNext" resultType="int">
+		select companyrule_seq.nextval as companyrule_number from dual
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+

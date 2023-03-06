@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beansProjectDescription>
 	<version>1</version>
-	<pluginVersion><![CDATA[2.5.0.201010141000-RC1]]></pluginVersion>
+	<pluginVersion><![CDATA[3.9.12.202003180620-RELEASE]]></pluginVersion>
 	<configSuffixes>
 		<configSuffix><![CDATA[xml]]></configSuffix>
 	</configSuffixes>
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
+		<config>src/main/resources/com/sbs/IdH/context/servlet-context.xml</config>
+		<config>src/main/resources/com/sbs/IdH/context/root-context.xml</config>
 	</configs>
+	<autoconfigs>
+	</autoconfigs>
 	<configSets>
 	</configSets>
 </beansProjectDescription>
