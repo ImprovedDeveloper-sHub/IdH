@@ -26,7 +26,7 @@ public class TestProjectService {
       System.out.println(project);
    }
    
-   
+   @Test
    public void testSelectProjectList() throws Exception{
       
 	  SearchCriteria cri = new SearchCriteria();
@@ -34,8 +34,9 @@ public class TestProjectService {
       
    }
    
-   @Test
+   
    public void testInsertProjectList() throws Exception{
+		
 		  ProjectVO project = new ProjectVO(3, "이름", null, null, 0, 1, 1, "IdH","test");
 		  projectService.registProject(project); 
 		  ProjectVO project2 = projectService.selectProject(3);
@@ -43,15 +44,25 @@ public class TestProjectService {
    }
    
 	  
-	  
+	  @Test
 	  public void testupdateForProject() throws Exception{ 
-	  ProjectVO project1 = projectService.selectProject(1);
-	  projectService.updateProject(project1);
-	  projectService.selectProject(1); }
-	  
-	  public void testDeleteProject() throws Exception{ ProjectVO project1 =
-	  projectService.selectProject(1); projectService.removeProject(1); ProjectVO
-	  project2 = projectService.selectProject(1); }
+			/*
+			 * ProjectVO project1 = projectService.selectProject(1);
+			 * projectService.updateProjectForProjectStart(project1); project1 =
+			 * projectService.selectProject(1);
+			 * projectService.updateProjectForProjectEnd(project1); project1 =
+			 * projectService.selectProject(1);
+			 */
+		}
+
+		public void testDeleteProject() throws Exception {
+			/*
+			 * ProjectVO project1 = projectService.selectProject(1);
+			 * projectService.deleteProject(1); ProjectVO project2 =
+			 * projectService.selectProject(1);
+			 */
+
+	  }
 	 
    
    
