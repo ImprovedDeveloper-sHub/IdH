@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Issue-Mapper">
+
+	<sql id="search">
+		<if test="searchType == 'n'.toString() ">
+			and issue_number like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 't'.toString() ">
+			and issue_title like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'c'.toString() ">
+			and issue_content like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'l'.toString() ">
+			and issue_level like '%'||#{keyword}||'%'
+		</if>
+	</sql>
+	
+	<select id="selectSearchIssueList" resultType="issue">
+		select
+		*
+		from issue
+		where issue_number is not null
+		<include refid="search" />
+		order by issue_regdate desc
+	</select>
+
+	<select id="selectSearchIssueListCount" resultType="int">
+		select count(*)
+		from issue
+		where issue_number is not null
+		<include refid="search" />
+	</select>
+	
+	<select id="selectIssueByIssue_Number" resultType="issue">
+		select
+		*
+		from
+		Issue
+		where issue_number=#{issue_number}
+	</select>
+	
+	<update id="insertIssue" parameterType="issue">
+		insert into 
+		issue(issue_number, issue_title, issue_content, issue_level, issue_regdate, issue_setter_id, issue_project_number, issue_getter_id)
+		values(#{issue_number},#{issue_title},#{issue_content},#{issue_level},#{issue_regdate},#{issue_setter_id},#{issue_project_number},#{issue_getter_id})
+	</update>
+	
+	<update id="updateIssue" parameterType="issue">
+		update issue 
+		set 
+		issue_title=#{issue_title},issue_content=#{issue_content}
+		
+		where issue_number=#{issue_number}
+	</update>
+	
+	<update id="deleteIssue">
+		delete 
+		from issue 
+		where issue_number=#{issue_number}
+	</update>
+</mapper>  
+
+
+
+
+
