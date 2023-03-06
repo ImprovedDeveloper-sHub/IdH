@@ -21,6 +21,9 @@
 	<bean id="scheduleDAO" class="com.sbs.IdH.dao.ScheduleDAOImpl"
 		p:session-ref="sqlSession" />
 	
+	<bean id="projectDAO" class="com.sbs.IdH.dao.ProjectDAOImpl"
+		p:session-ref="sqlSession" />
+	
 </beans>
 
 
