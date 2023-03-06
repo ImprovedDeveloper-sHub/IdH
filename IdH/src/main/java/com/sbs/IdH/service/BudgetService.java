@@ -1,14 +1,16 @@
 package com.sbs.IdH.service;
 
+import java.util.List;
+
 import com.sbs.IdH.dto.BudgetVO;
 
 public interface BudgetService {
 
-	public void selectBudget(int budget_number) throws Exception;
+	public BudgetVO selectBudget(int budget_number) throws Exception;
 	
-	public void selectBudgetListforProject(int project_number) throws Exception;
+	public List<BudgetVO> selectBudgetListforProject(int project_number) throws Exception;
 	
-	public void selectBudgetListByMemberId(int project_member_id) throws Exception;
+	public List<BudgetVO> selectBudgetListByMemberId(int project_member_id) throws Exception;
 	
 	public void registBudget(BudgetVO budget) throws Exception;
 	

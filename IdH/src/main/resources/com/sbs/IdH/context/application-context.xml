@@ -21,7 +21,9 @@
 	<bean id="scheduleDAO" class="com.sbs.IdH.dao.ScheduleDAOImpl"
 		p:session-ref="sqlSession" />
 	
-	
+	<bean id="budgetService" class="com.sbs.IdH.service.BudgetServiceImpl"
+		p:budgetDAO-ref="budgetDAO"
+	/>
 	
 	
 </beans>

@@ -1,5 +1,7 @@
 package com.sbs.IdH.service;
 
+import java.util.List;
+
 import com.sbs.IdH.dao.BudgetDAO;
 import com.sbs.IdH.dto.BudgetVO;
 
@@ -13,24 +15,26 @@ public class BudgetServiceImpl implements BudgetService {
 	}
 	
 	@Override
-	public void selectBudget(int budget_number) throws Exception {
-		budgetDAO.selectBudget(budget_number);
+	public BudgetVO selectBudget(int budget_number) throws Exception {
+		BudgetVO budget = budgetDAO.selectBudget(budget_number);
+		return budget;
 	}
 
 	@Override
-	public void selectBudgetListforProject(int project_number) throws Exception {
-		budgetDAO.selectSearchBudgetListForProject(project_number);
-		
+	public List<BudgetVO> selectBudgetListforProject(int project_number) throws Exception {
+		List<BudgetVO> budgetList = budgetDAO.selectSearchBudgetListForProject(project_number);
+		return budgetList;
 	}
 
 	@Override
-	public void selectBudgetListByMemberId(int project_member_id) throws Exception {
+	public List<BudgetVO> selectBudgetListByMemberId(int project_member_id) throws Exception {
 		
-		
+		return null;
 	}
 
 	@Override
 	public void registBudget(BudgetVO budget) throws Exception {
+		budget.setBudget_number(budgetDAO.selectBudgetSeqNext());
 		budgetDAO.insertBudget(budget);
 		
 	}
