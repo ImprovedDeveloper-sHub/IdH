@@ -37,7 +37,6 @@ public class TestBudgetService {
    
    @Test
    public void testInsertBudgetList() throws Exception{
-	   
 	   BudgetVO budget =  new BudgetVO(3, 0, "1", 0, 1, "IdH");
 	   budgetService.registBudget(budget);
 	   BudgetVO budget2 = budgetService.selectBudget(0);
