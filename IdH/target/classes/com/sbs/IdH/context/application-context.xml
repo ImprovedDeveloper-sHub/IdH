@@ -24,6 +24,10 @@
 	<bean id="projectDAO" class="com.sbs.IdH.dao.ProjectDAOImpl"
 		p:session-ref="sqlSession" />
 	
+	
+	<bean id="projectService" class="com.sbs.IdH.service.ProjectServiceImpl"
+		p:projectDAO-ref="projectDAO"
+	/>
 </beans>
 
 

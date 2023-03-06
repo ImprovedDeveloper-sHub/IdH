@@ -22,7 +22,7 @@ public class TestProjectDAO {
    @Autowired
    private ProjectDAO projectDAO;
    
-   
+   @Test
    public void testSelectProject() throws Exception{
       ProjectVO project = projectDAO.selectProject(1);
       System.out.println(project);
