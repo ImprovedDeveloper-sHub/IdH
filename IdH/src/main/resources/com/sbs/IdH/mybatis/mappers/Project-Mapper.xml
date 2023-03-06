@@ -5,6 +5,89 @@
 
 <mapper namespace="Project-Mapper">
 			
+	<sql id="search">
+		<if test="searchType == 'i'.toString() ">
+			and id like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'n'.toString() ">
+			and name like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'p'.toString() ">
+			and phone like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'e'.toString() ">
+			and email like '%'||#{keyword}||'%'
+		</if>
+	</sql>
+	
+	
+	<select id="selectProjectList"	resultType="project">
+		select *
+		from project
+		where project_number is not null
+		<include refid="search" />
+		order by project_regdate desc
+	</select>
+	
+	<select id="selectProjectListByBusinessNumber"	resultType="project">
+		select *
+		from project
+		where project_business_number = #{project_number}
+	</select>
+	
+	<select id="selectProjectListByRequireNumber"	resultType="project">
+		select *
+		from project
+		where project_require_number = #{project_require_number}
+	</select>
+	
+	
+	<select id="selectSearchProjectListCount" resultType="int">
+		select count(*)
+		from project
+		where project_number	is not null
+		<include refid="search" />
+		order by project_regdate desc
+	</select>
+	
+	<select id="selectProject"  resultType="project">
+		select * 
+		from project 
+		where project_number=#{project_number}
+	</select>
+	
+	
+	
+	
+	<select id="selectProjectSeqNext" resultType="int">
+		select project_seq.nextval as project_number from dual
+	</select>
+	
+	<update id="insertProject" parameterType="project">
+		insert 
+		into 
+		project(project_number,project_name,project_status,project_discription,project_business_number,project_member_id,project_regdate)
+		values(#{project_number},#{project_name},0,#{project_discription},#{project_business_number},#{project_member_id},sysdate)
+	</update>
+	
+	<update id="updateProjectForProjectStart" parameterType="project">
+		update project 
+		set project_project_number=#{project_project_number}, project_status=1
+		where project_number=#{project_number}
+	</update>
+	
+	<update id="updateProjectForProjectEnd" parameterType="project">
+		update project 
+		set project_status=2
+		where project_number=#{project_number}
+	</update>
+	
+	
+	<update id="deleteProject" parameterType="int">
+		delete 
+		from project 
+		where project_number=#{project_number}
+	</update>
 	
 </mapper>
 

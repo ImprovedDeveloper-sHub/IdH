@@ -17,7 +17,7 @@ public interface BudgetDAO {
 
 	BudgetVO selectBudget(int budget_number) throws SQLException;	
 
-	int selectBoardSeqNext() throws SQLException;
+	int selectBudgetSeqNext() throws SQLException;
 
 	void insertBudget(BudgetVO budget) throws SQLException;
 

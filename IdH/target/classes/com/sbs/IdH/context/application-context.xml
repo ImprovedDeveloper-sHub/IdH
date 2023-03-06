@@ -6,20 +6,42 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	<context:component-scan
-		base-package="kr.ac.sbs.service" />
+	<context:component-scan base-package="kr.ac.sbs.service" />
 
 	<!-- member.picture -->
-
+	
 	<!-- repository -->
 	<bean id="budgetDAO" class="com.sbs.IdH.dao.BudgetDAOImpl"
-		p:session-ref="sqlSession" />
-
+		p:session-ref="sqlSession"
+	/>
+	
+	<bean id="workforceDAO" class="com.sbs.IdH.dao.WorkforceDAOImpl"
+		p:session-ref="sqlSession"
+	/>
 	<bean id="scheduleDAO" class="com.sbs.IdH.dao.ScheduleDAOImpl"
 		p:session-ref="sqlSession" />
-
-
-
+	
+	<bean id="projectDAO" class="com.sbs.IdH.dao.ProjectDAOImpl"
+		p:session-ref="sqlSession" />
+	
+	<bean id="unitworkDAO" class="com.sbs.IdH.dao.UnitworkDAOImpl"
+		p:session-ref="sqlSession"
+	/>
+	
+	<bean id="projectService" class="com.sbs.IdH.service.ProjectServiceImpl"
+		p:projectDAO-ref="projectDAO"
+	/>
+	<bean id="unitworkService" class="com.sbs.IdH.service.UnitworkServiceImpl"
+		p:unitworkDAO-ref="unitworkDAO"
+	/>
+	
+	<bean id="workforceService" class="com.sbs.IdH.service.WorkforceServiceImpl"
+		p:workforceDAO-ref="workforceDAO"
+	/>
+	
+	<bean id="scheduleService" class="com.sbs.IdH.service.ScheduleServiceImpl"
+		p:scheduleDAO-ref="scheduleDAO"
+	/>
 </beans>
 
 

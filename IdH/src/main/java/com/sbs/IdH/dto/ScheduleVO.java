@@ -58,6 +58,9 @@ public class ScheduleVO {
 	public void setSchedule_detail(String schedule_detail) {
 		this.schedule_detail = schedule_detail;
 	}
+	
+	public ScheduleVO() {}
+	
 	public ScheduleVO(int schedule_number, int schedule_status, String schedule_member_id, int schedule_project_number,
 			String schedule_detail, Date schedule_regdate, Date schedule_enddate) {
 		super();

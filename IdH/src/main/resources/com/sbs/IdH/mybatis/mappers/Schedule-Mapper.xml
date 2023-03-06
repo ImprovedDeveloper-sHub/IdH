@@ -57,8 +57,8 @@
 	<update id="insertSchedule" parameterType="schedule">
 		insert 
 		into 
-		schedule(schedule_number,schedule_status,schedule_detail,schedule_project_number,schedule_member_id,schedule_regdate)
-		values(#{schedule_number},0,#{schedule_detail},#{schedule_project_number},#{schedule_member_id},sysdate)
+		schedule(schedule_number,schedule_status,schedule_detail,schedule_project_number,schedule_member_id,schedule_regdate,schedule_enddate)
+		values(#{schedule_number},0,#{schedule_detail},#{schedule_project_number},#{schedule_member_id},sysdate,#{schedule_enddate})
 	</update>
 	
 	<update id="updateScheduleForProjectStart" parameterType="schedule">
