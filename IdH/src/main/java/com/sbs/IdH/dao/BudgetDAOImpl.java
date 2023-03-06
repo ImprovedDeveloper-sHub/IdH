@@ -3,7 +3,6 @@ package com.sbs.IdH.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.apache.catalina.mapper.Mapper;
 import org.apache.ibatis.session.SqlSession;
 
 import com.sbs.IdH.command.SearchCriteria;
