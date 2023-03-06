@@ -25,14 +25,11 @@ public class TestBudgetDAO {
    
   
    public void testSelectBudget() throws Exception{
-      
       BudgetVO budget = budgetDAO.selectBudget(1);
-      
    }
    
   
    public void testSelectBudgetList() throws Exception{
-      
 	  SearchCriteria cri = new SearchCriteria();
       List<BudgetVO> budgetList = budgetDAO.selectSearchBudgetList(cri);
       
@@ -43,7 +40,6 @@ public class TestBudgetDAO {
    
    
    public void testInsertBudgetList() throws Exception{
-	   
 	   BudgetVO budget =  new BudgetVO(3, 0, "1", 0, 1, "IdH");
 	   budgetDAO.insertBudget(budget);
 	   BudgetVO budget2 = budgetDAO.selectBudget(3);
@@ -63,7 +59,18 @@ public class TestBudgetDAO {
 	   budgetDAO.updateBudgetForProjectEnd(budget1);
 	   budget1 = budgetDAO.selectBudget(1);
    }
+   
+   
    @Test
+   public void testupdateBudget() throws Exception{
+	   BudgetVO budget = budgetDAO.selectBudget(1);
+	   budget.setBudget_price(10000);
+	   budget.setBudget_detail("예산변경 테스트");
+	   budgetDAO.updateBudget(budget);
+	   budget = budgetDAO.selectBudget(1);
+   }
+   
+   
    public void testDeleteBudget() throws Exception{
 	   BudgetVO budget1 = budgetDAO.selectBudget(1);
 	   budgetDAO.deleteBudget(1);

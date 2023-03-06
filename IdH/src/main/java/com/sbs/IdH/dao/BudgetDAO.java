@@ -21,6 +21,8 @@ public interface BudgetDAO {
 
 	void insertBudget(BudgetVO budget) throws SQLException;
 
+	void updateBudget(BudgetVO budget) throws SQLException;
+	
 	void updateBudgetForProjectStart(BudgetVO budget) throws SQLException;
 
 	void updateBudgetForProjectEnd(BudgetVO budget) throws SQLException;

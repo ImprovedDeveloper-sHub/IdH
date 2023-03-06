@@ -61,6 +61,15 @@
 		values(#{budget_number},0,#{budget_detail},#{budget_price},#{budget_project_number},#{budget_member_id},sysdate)
 	</update>
 	
+	
+	
+	<update id="updateBudget" parameterType="budget">
+		update budget 
+		set budget_project_number=#{budget_project_number}, budget_status=#{budget_status}, budget_detail=#{budget_detail}, budget_price=#{budget_price}, budget_member_id = #{budget_member_id}
+		where budget_number=#{budget_number}
+	</update>
+	
+	
 	<update id="updateBudgetForProjectStart" parameterType="budget">
 		update budget 
 		set budget_project_number=#{budget_project_number}, budget_status=1
