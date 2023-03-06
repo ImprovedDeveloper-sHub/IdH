@@ -21,10 +21,7 @@
 		<typeAlias type="com.sbs.IdH.dto.UnitworkVO" alias="unitwork" />
 		<typeAlias type="com.sbs.IdH.dto.ScheduleVO" alias="schedule" />
 		<typeAlias type="com.sbs.IdH.dto.ProjectVO" alias="project" />
-<<<<<<< HEAD
-=======
-		
->>>>>>> refs/heads/budget
+
 	</typeAliases>
 	
 	
