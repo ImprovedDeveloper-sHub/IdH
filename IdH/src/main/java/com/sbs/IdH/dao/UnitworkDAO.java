@@ -20,6 +20,8 @@ public interface UnitworkDAO {
 	int selectUnitworkSeqNext() throws SQLException;
 
 	void insertUnitwork(UnitworkVO unitwork) throws SQLException;
+	
+	void updateUnitwork(UnitworkVO unitwork) throws SQLException;
 
 	void updateUnitworkForProjectStart(UnitworkVO unitwork) throws SQLException;
 

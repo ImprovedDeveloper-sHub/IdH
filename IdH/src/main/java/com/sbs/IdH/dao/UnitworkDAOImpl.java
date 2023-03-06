@@ -73,4 +73,10 @@ public class UnitworkDAOImpl implements UnitworkDAO{
 		
 	}
 
+	@Override
+	public void updateUnitwork(UnitworkVO unitwork) throws SQLException {
+		session.update("Unitwork-Mapper.updateUnitwork", unitwork);
+		
+	}
+
 }

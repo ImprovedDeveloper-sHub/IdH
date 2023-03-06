@@ -14,6 +14,7 @@ public class UnitworkVO {
 	private Date unitwork_enddate;
 	
 	
+	public UnitworkVO() {}
 	
 	
 	public UnitworkVO(int unitwork_number, int unitwork_status, String unitwork_name, int unitwork_check,

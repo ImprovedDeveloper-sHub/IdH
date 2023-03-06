@@ -61,6 +61,13 @@
 		values(#{unitwork_number},#{unitwork_name},0,#{unitwork_check},#{unitwork_detail},#{unitwork_project_number},#{unitwork_member_id},#{unitwork_regdate},#{unitwork_enddate})
 	</update>
 	
+	<update id="updateUnitwork" parameterType="unitwork">
+		update unitwork 
+		set unitwork_number=#{unitwork_project_number}, unitwork_name=#{unitwork_name}, unitwork_detail=#{unitwork_detail}, unitwork_check=#{unitwork_check}
+		where unitwork_number=#{unitwork_number}
+	</update>
+	
+	
 	<update id="updateUnitworkForProjectStart" parameterType="unitwork">
 		update unitwork 
 		set unitwork_project_number=#{unitwork_project_number}, unitwork_status=1

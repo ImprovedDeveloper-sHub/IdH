@@ -31,6 +31,9 @@
 	<bean id="projectService" class="com.sbs.IdH.service.ProjectServiceImpl"
 		p:projectDAO-ref="projectDAO"
 	/>
+	<bean id="unitworkService" class="com.sbs.IdH.service.UnitworkServiceImpl"
+		p:unitworkDAO-ref="unitworkDAO"
+	/>
 </beans>
 
 

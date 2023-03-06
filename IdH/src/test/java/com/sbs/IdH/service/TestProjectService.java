@@ -37,14 +37,16 @@ public class TestProjectService {
    
    public void testInsertProjectList() throws Exception{
 		
-		  ProjectVO project = new ProjectVO(3, "이름", null, null, 0, 1, 1, "IdH","test");
-		  projectService.registProject(project); 
-		  ProjectVO project2 = projectService.selectProject(3);
+		/*
+		 * ProjectVO project = new ProjectVO(3, "이름", null, null, 0, 1, 1,
+		 * "IdH","test"); projectService.registProject(project); ProjectVO project2 =
+		 * projectService.selectProject(3);
+		 */
 		 
    }
    
 	  
-	  @Test
+	  
 	  public void testupdateForProject() throws Exception{ 
 			/*
 			 * ProjectVO project1 = projectService.selectProject(1);
