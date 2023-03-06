@@ -19,6 +19,8 @@
 		<typeAlias type="com.sbs.IdH.dto.BudgetVO" alias="budget" />
 		<typeAlias type="com.sbs.IdH.dto.WorkforceVO" alias="workforce" />
 		<typeAlias type="com.sbs.IdH.dto.UnitworkVO" alias="unitwork" />
+		<typeAlias type="com.sbs.IdH.dto.ScheduleVO" alias="schedule" />
+		<typeAlias type="com.sbs.IdH.dto.ProjectVO" alias="project" />
 	</typeAliases>
 	
 	

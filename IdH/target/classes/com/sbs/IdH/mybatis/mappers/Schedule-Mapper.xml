@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Schedule-Mapper">
+	
+	<sql id="search">
+		<if test="searchType == 'i'.toString() ">
+			and id like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'n'.toString() ">
+			and name like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'p'.toString() ">
+			and phone like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'e'.toString() ">
+			and email like '%'||#{keyword}||'%'
+		</if>
+	</sql>
+	
+	
+	<select id="selectScheduleList"	resultType="schedule">
+		select *
+		from schedule
+		where schedule_number is not null
+		<include refid="search" />
+		order by schedule_regdate desc
+	</select>
+	
+	<select id="selectScheduleForProject"	resultType="schedule">
+		select *
+		from schedule
+		where schedule_project_number = #{project_number}
+	</select>
+	
+	
+	<select id="selectSearchScheduleListCount" resultType="int">
+		select count(*)
+		from schedule
+		where schedule_number	is not null
+		<include refid="search" />
+		order by schedule_regdate desc
+	</select>
+	
+	<select id="selectSchedule"  resultType="schedule">
+		select * 
+		from schedule 
+		where schedule_number=#{schedule_number}
+	</select>
+	
+	<select id="selectScheduleSeqNext" resultType="int">
+		select schedule_seq.nextval as schedule_number from dual
+	</select>
+	
+	<update id="insertSchedule" parameterType="schedule">
+		insert 
+		into 
+		schedule(schedule_number,schedule_status,schedule_detail,schedule_project_number,schedule_member_id,schedule_regdate)
+		values(#{schedule_number},0,#{schedule_detail},#{schedule_project_number},#{schedule_member_id},sysdate)
+	</update>
+	
+	<update id="updateScheduleForProjectStart" parameterType="schedule">
+		update schedule 
+		set schedule_project_number=#{schedule_project_number}, schedule_status=1
+		where schedule_number=#{schedule_number}
+	</update>
+	
+	<update id="updateScheduleForProjectEnd" parameterType="schedule">
+		update schedule 
+		set schedule_status=2
+		where schedule_number=#{schedule_number}
+	</update>
+	
+	
+	<update id="deleteSchedule" parameterType="int">
+		delete 
+		from schedule 
+		where schedule_number=#{schedule_number}
+	</update>
+	
+	
+</mapper>
+
+
+
+
+
+
+

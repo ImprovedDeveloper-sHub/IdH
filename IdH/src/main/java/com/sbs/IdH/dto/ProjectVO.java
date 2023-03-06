@@ -8,7 +8,7 @@ public class ProjectVO {
 	private String project_name;
 	private Date project_regdate;
 	private Date proejct_enddate;
-	private String project_status;
+	private int project_status;
 	private  int project_require_number;
 	private int project_business_number;
 	private String project_member_id;
@@ -39,10 +39,13 @@ public class ProjectVO {
 	public void setProejct_enddate(Date proejct_enddate) {
 		this.proejct_enddate = proejct_enddate;
 	}
-	public String getProject_status() {
+	
+	
+	
+	public int getProject_status() {
 		return project_status;
 	}
-	public void setProject_status(String project_status) {
+	public void setProject_status(int project_status) {
 		this.project_status = project_status;
 	}
 	public int getProject_require_number() {
@@ -69,6 +72,25 @@ public class ProjectVO {
 	public void setProject_discription(String project_discription) {
 		this.project_discription = project_discription;
 	}
+	
+	
+	public ProjectVO() {}
+	public ProjectVO(int project_number, String project_name, Date project_regdate, Date proejct_enddate,
+			int project_status, int project_require_number, int project_business_number, String project_member_id,
+			String project_discription) {
+		super();
+		this.project_number = project_number;
+		this.project_name = project_name;
+		this.project_regdate = project_regdate;
+		this.proejct_enddate = proejct_enddate;
+		this.project_status = project_status;
+		this.project_require_number = project_require_number;
+		this.project_business_number = project_business_number;
+		this.project_member_id = project_member_id;
+		this.project_discription = project_discription;
+	}
+	
+	
 	
 	
 	
