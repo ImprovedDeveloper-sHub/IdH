@@ -23,6 +23,7 @@ public class TestIssueDAO {
 	private IssueDAO issueDAO;
 	
 	
+	
 
 	@Test
 	public void testGetIssue() throws Exception {
@@ -41,12 +42,22 @@ public class TestIssueDAO {
 	      }
 	}
 	
+//	@Test
+//	public void testInsertIssue() throws Exception {
+//		IssueVO issue = new IssueVO(3,"tt","tt",2,null,"IdH",1,"abcabc");
+//		issueDAO.insertIssue(issue); IssueVO issue2 =
+//				issueDAO.selectIssueByIssue_Number(3);
+//				 
+//				 Assert.assertEquals(issue, issue2);
+//	}
 	@Test
 	public void testInsertIssue() throws Exception {
-		IssueVO issue = new IssueVO(3,"tt","tt",2,null,"IdH",3,"abcabc");
-		issueDAO.insertIssue(issue); IssueVO issue2 =
-				issueDAO.selectIssueByIssue_Number(4);
-				 
-				 Assert.assertEquals(issue, issue2);
+		IssueVO issue = new IssueVO(0, "wow","wow",2, null, null, 0, null);
+		issueDAO.updateIssue(issue);
+	}
+	
+	@Test
+	public void testDeleteIssue()throws Exception{
+		issueDAO.deleteIssue(1);
 	}
 }

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Minutis-Mapper">
+
+	<sql id="search">
+		<if test="searchType == 'n'.toString() ">
+			and Minutis_number like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 't'.toString() ">
+			and Minutis_title like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'c'.toString() ">
+			and Minutis_content like '%'||#{keyword}||'%'
+		</if>
+	</sql>
+
+	<select id="selectSearchMinutisList" resultType="minutis">
+		select
+		*
+		from minutis
+		where minutis_number is not null
+		<include refid="search" />
+		order by minutis_regdate desc
+	</select>
+
+	<select id="selectSearchMinutisListCount" resultType="int">
+		select count(*)
+		from minutis
+		where minutis_number is not null
+		<include refid="search" />
+	</select>
+
+	<select id="selectMinutisByMinutis_Number" resultType="minutis">
+		select
+		*
+		from
+		minutis
+		where minutis_number=#{minutis_number}
+	</select>
+
+	<update id="insertMinutis" parameterType="minutis">
+		insert into
+		minutis(minutis_number, minutis_title,minutis_regdate, minutis_content,
+		minutis_member_id, minutis_project_number)
+		values(#{minutis_number},#{minutis_title},sysdate,#{minutis_content},#{minutis_member_id},#{minutis_project_number})
+	</update>
+
+	<update id="updateMinutis" parameterType="minutis">
+		update minutis
+		set
+		minutis_title=#{minutis_title},minutis_content=#{minutis_content},minutis_project_number=#{minutis_project_number}
+		where minutis_number=#{minutis_number}
+	</update>
+
+	<update id="deleteMinutis">
+		delete
+		from minutis
+		where minutis_number=#{minutis_number}
+	</update>
+</mapper>  
+
+
+
+
+

@@ -47,14 +47,13 @@
 	<update id="insertIssue" parameterType="issue">
 		insert into 
 		issue(issue_number, issue_title, issue_content, issue_level, issue_regdate, issue_setter_id, issue_project_number, issue_getter_id)
-		values(#{issue_number},#{issue_title},#{issue_content},#{issue_level},#{issue_regdate},#{issue_setter_id},#{issue_project_number},#{issue_getter_id})
+		values(#{issue_number},#{issue_title},#{issue_content},#{issue_level},sysdate,#{issue_setter_id},#{issue_project_number},#{issue_getter_id})
 	</update>
 	
 	<update id="updateIssue" parameterType="issue">
 		update issue 
 		set 
-		issue_title=#{issue_title},issue_content=#{issue_content}
-		
+		issue_title=#{issue_title},issue_content=#{issue_content},issue_level=#{issue_level}
 		where issue_number=#{issue_number}
 	</update>
 	

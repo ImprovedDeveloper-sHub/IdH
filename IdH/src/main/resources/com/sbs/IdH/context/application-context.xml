@@ -8,6 +8,7 @@
 
 	<context:component-scan base-package="com.sbs.IdH.service" />
 	<bean id="issueDAO" class="com.sbs.IdH.dao.IssueDAOImpl" p:session-ref="sqlSession"/>
+	<bean id="minutisDAO" class="com.sbs.IdH.dao.MinutisDAOImpl" p:session-ref="sqlSession"/>
 	
 </beans>
 

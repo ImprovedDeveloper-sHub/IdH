@@ -10,6 +10,7 @@
 		<typeAlias type="java.lang.Integer" alias="int" />
 		
 		<typeAlias type="com.sbs.IdH.dto.IssueVO"  alias="issue"/>
+		<typeAlias type="com.sbs.IdH.dto.MinutisVO"  alias="minutis"/>
 	</typeAliases>
 	
 	
