@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Business-Mapper">
+
+	<select id="selectBusiness_number" resultType="business">
+		select
+		*
+		from business
+		where business_number = #{business_number}
+	</select>
+	
+	<select id="selectBusiness_name" resultType="business">
+		select
+		*
+		from business
+		where business_name like '%'||#{business_name}||'%'
+	</select>
+	
+	<select id="selectBusiness_content" resultType="business">
+		select
+		*
+		from business
+		where business_content like '%'||#{business_content}||'%'
+	</select>
+	
+	<update id="insertBusiness" parameterType="business">
+		insert
+		into
+		business(business_number, business_name, business_people, business_begin, business_end, business_content, business_budget, business_nationbudget, business_companybudget, business_usebudget, business_member_id)
+		values(#{business_number}, #{business_name}, #{business_people}, sysdate, #{business_end}, #{business_content}, #{business_budget}, #{business_nationbudget}, #{business_companybudget}, #{business_usebudget}, #{business_member_id})
+	</update>
+	
+	<update id="updateBusiness" parameterType="business">
+		update
+		business
+		set
+		business_name = #{business_name}, business_people = #{business_people}, business_end = #{business_end}, business_content = #{business_content}, business_budget = #{business_budget}, business_nationbudget = #{business_nationbudget}, business_companybudget = #{business_companybudget}, business_usebudget = #{business_usebudget} 
+	</update>
+	
+	<update id="deleteBusiness" parameterType="business">
+		delete
+		from business
+		where business_number=#{business_number}
+	</update>
+	
+</mapper>
