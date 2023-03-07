@@ -12,8 +12,10 @@ public class TestController {
 	public void notice() throws Exception {}
 	@GetMapping("/mywork")
 	public void mywork() throws Exception {}
-	@GetMapping("/test")
-	public void test() throws Exception {}
+	@GetMapping("/detail")
+	public void detail() throws Exception {}
+	@GetMapping("/regist")
+	public void regist() throws Exception {}
 	@GetMapping("/teamone")
 	public void teamone() throws Exception {}
 }
