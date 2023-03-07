@@ -11,8 +11,12 @@
 		from
 		project_authority
 		where project_authority_number is not null  			  	
-<!-- 		<include refid="search" />
-		order by project_authority_number desc -->
+		<!-- <include refid="search" /> -->
+		order by project_authority_number desc 
+	</select>
+	
+	<select id="selectProject_authoritySeqNext" resultType="int">
+		select project_authority_seq.nextval as project_authority_number from dual
 	</select>
 	
 	<select id="selectProject_authority"  resultType="project_authority">
@@ -23,9 +27,9 @@
 	
 	<update id="insertProject_authority" parameterType="project_authority">
 		insert into 
-		project_authority(project_authority_number,project_authority,project_authority_pro_number,
+		project_authority(project_authority_number,project_authority_status,project_authority_pro_number,
 		project_authority_member_id)
-		values(#{project_authority_number},#{project_authority},#{project_authority_pro_number},
+		values(#{project_authority_number},#{project_authority_status},#{project_authority_pro_number},
 		#{project_authority_member_id})
 	</update>
 	
@@ -33,7 +37,7 @@
 		update 
 		project_authority
 		set 
-		project_authority=#{project_authority}
+		project_authority_status=#{project_authority_status}
 		where project_authority_number=#{project_authority_number}
 	</update>
 	

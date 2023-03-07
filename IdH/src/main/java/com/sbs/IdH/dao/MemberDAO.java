@@ -12,12 +12,12 @@ public interface MemberDAO {
 
 	int selectSearchMemberListCount(SearchCriteria cri) throws SQLException;
 
-	MemberVO selectMember(String id) throws SQLException;
+	MemberVO selectMember(String member_id) throws SQLException;
 
 	public void insertMember(MemberVO member) throws SQLException;
 
 	public void updateMember(MemberVO member) throws SQLException;
 
-	void deleteMember(String id) throws SQLException;
+	void deleteMember(String member_id) throws SQLException;
 	
 }
