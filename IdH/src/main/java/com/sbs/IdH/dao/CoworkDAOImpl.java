@@ -63,7 +63,7 @@ public class CoworkDAOImpl implements CoworkDAO {
 	}
 
 	@Override
-	public int selectSeqNextValue() throws SQLException {
+	public int selectCoworkSeqNextValue() throws SQLException {
 		int cowork_number=session.selectOne("Cowork-Mapper.selectCoworkSeqNext");
 		return  cowork_number;
 	}

@@ -40,7 +40,7 @@ public class CompanyruleServiceImpl implements CompanyruleService {
 
 	@Override
 	public void registCompanyrule(CompanyruleVO companyrule) throws SQLException {
-		int companyrule_number = companyruleDAO.selectSeqNextValue();
+		int companyrule_number = companyruleDAO.selectCompanySeqNextValue();
 		companyrule.setCompanyrule_number(companyrule_number);
 		companyruleDAO.insertCompanyrule(companyrule);
 

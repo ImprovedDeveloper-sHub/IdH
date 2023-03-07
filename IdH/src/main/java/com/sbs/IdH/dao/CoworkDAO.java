@@ -23,7 +23,7 @@ public interface CoworkDAO {
 
 	int selectCoworkCriteriaTotalCount(SearchCriteria cri) throws SQLException ;
 	
-	 int selectSeqNextValue() throws SQLException ;
+	 int selectCoworkSeqNextValue() throws SQLException ;
 	
 
 }

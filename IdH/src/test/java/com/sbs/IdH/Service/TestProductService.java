@@ -1,44 +1,56 @@
 package com.sbs.IdH.Service;
 
-public class TestProductService {}
-	/*
-	private ProductService productService;// = new MemberServiceImpl();
-	{
-		String beanConfigXml = "build/classes/com/jsp/context/application-context.xml";
-		try {
-			ApplicationContextLoader.build(beanConfigXml);
-			Map<String,Object> container = ApplicationContext.getApplicationContext();			
-			memberService=(MemberService)container.get("memberService");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}		
+import java.sql.SQLException;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.sbs.IdH.command.SearchCriteria;
+import com.sbs.IdH.dto.ProductVO;
+import com.sbs.IdH.service.ProductService;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath:com/sbs/IdH/context/root-context.xml")
+@Transactional
+public class TestProductService {
+
+	@Autowired
+	private ProductService productService;
+
+	@Test
+	public void testSelectproduct() throws SQLException {
+		ProductVO product = productService.selectProduct(1);
+
 	}
-	
+
 	@Test
-	public void testGetMember()throws Exception{
-		String id = "mimi";
-		
-		MemberVO member = memberService.getMember(id);
-		
-		Assert.assertEquals(id, member.getId());
-	} 	
-	
-	@Test
-	public void testMemberList()throws Exception{
+	public void testSelectProductList() throws SQLException {
 		SearchCriteria cri = new SearchCriteria();
-		Map<String,Object> dataMap = memberService.getMemberListForPage(cri);
-
-		List<MemberVO> memberList = (List<MemberVO>)dataMap.get("memberList");
-		
-		Assert.assertEquals(cri.getPerPageNum(),memberList.size() );
+		productService.selectProductList(cri);
 	}
-	
+
+	@Test
+	public void testInsertProductList() throws SQLException {
+		ProductVO product = new ProductVO(2,1,"aaa","aaaa",1,null,null,"IdH",1);
+		productService.registProduct(product);
+	}
+
+	@Test
+	public void testupdateProduct() throws SQLException {
+
+		ProductVO product = productService.selectProduct(1);
+		productService.modifyProduct(product);
+		product = productService.selectProduct(1);
+
+	}
+
+	/*
+	 * @Test public void testDeleteCowork() throws Exception{
+	 * 
+	 * }
+	 */
 }
-
-
-
-
-
-
-}
-*/

@@ -17,6 +17,12 @@
 	<bean id="coworkService"
 		class="com.sbs.IdH.service.CoworkServiceImpl"
 		p:coworkDAO-ref="coworkDAO" />
+	<bean id="productService"
+		class="com.sbs.IdH.service.ProductServiceImpl"
+		p:productDAO-ref="productDAO" />
+		<bean id="companyruleService"
+		class="com.sbs.IdH.service.CompanyruleServiceImpl"
+		p:companyruleDAO-ref="companyruleDAO" />
 </beans>
 
 

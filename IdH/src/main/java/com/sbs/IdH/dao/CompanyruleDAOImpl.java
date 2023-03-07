@@ -63,7 +63,7 @@ public class CompanyruleDAOImpl implements CompanyruleDAO{
 	}
 
 	@Override
-	public int selectSeqNextValue() throws SQLException {
+	public int selectCompanySeqNextValue() throws SQLException {
 		int companyrule_number=session.selectOne("Companyrule-Mapper.selectCompanyruleSeqNext");
 		return  companyrule_number;
 	}

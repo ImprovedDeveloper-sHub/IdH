@@ -47,10 +47,10 @@ public class TestProductDAO {
 	  
 	 
 
-	/*
-	 * @Test public void testCoworkrule_SEQ() throws Exception {
-	 * System.out.println(coworkruleDAO.selectSeqNextValue()); }
-	 */
+	
+	  @Test public void testProduct_SEQ() throws Exception {
+	  System.out.println(productDAO.selectProductSeqNextValue()); }
+	 
 	 @Test
 	public void testupdateProduct() throws Exception {
 		 ProductVO product = productDAO.selectProduct(1);

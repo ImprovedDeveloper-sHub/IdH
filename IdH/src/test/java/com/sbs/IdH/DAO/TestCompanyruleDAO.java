@@ -43,10 +43,10 @@ public class TestCompanyruleDAO {
 		
 	}
 
-	/*
-	 * @Test public void testCompanyrule_SEQ() throws Exception {
-	 * System.out.println(companyruleDAO.selectSeqNextValue()); }
-	 */
+	
+	  @Test public void testCompanyrule_SEQ() throws Exception {
+	  System.out.println(companyruleDAO.selectCompanySeqNextValue()); }
+	 
 	 @Test
 	public void testupdateCompanyrule() throws Exception {
 		CompanyruleVO companyrule = companyruleDAO.selectCompanyrule(1);

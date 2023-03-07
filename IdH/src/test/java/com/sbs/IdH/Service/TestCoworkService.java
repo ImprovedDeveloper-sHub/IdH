@@ -1,5 +1,7 @@
 package com.sbs.IdH.Service;
 
+import java.sql.SQLException;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,37 +25,39 @@ import com.sbs.IdH.service.CoworkService;
 	   
 	   
 	   @Test
-	   public void testSelectCowork() throws Exception{
+	   public void testSelectCowork() throws SQLException{
 		   CoworkVO cowork = coworkService.selectCowork(1);
 	    
 	   }
 	   
 	   @Test 
-	   public void testSelectCoworkList() throws Exception{
+	   public void testSelectCoworkList() throws SQLException{
 		   SearchCriteria cri = new SearchCriteria();
 		   coworkService.selectCoworkList(cri);
 	   }
 	   
 	   @Test
-	   public void testInsertCoworkList() throws Exception{
+	   public void testInsertCoworkList() throws SQLException{
 		   CoworkVO cowork =  new CoworkVO(2,null,null,"abc",1,"IdH",1);
 		   coworkService.registCowork(cowork);
 	   }
 	   
-		/*
-		 * @Test public void testupdateForProject() throws Exception{
-		 * 
-		 * }
-		 * 
-		 * 
-		 * @Test public void testupdateBudget() throws Exception{
-		 * 
-		 * }
-		 * 
-		 * @Test public void testDeleteBudget() throws Exception{
-		 * 
-		 * }
-		 */
+	
+		  @Test public void testupdateCowork() throws SQLException{
+		  
+			  CoworkVO cowork = coworkService.selectCowork(1);
+			  coworkService.modifyCowork(cowork); 
+			  cowork =
+					  coworkService.selectCowork(1);
+				
+		  }
+		 
+			/*
+			 * @Test public void testDeleteCowork() throws Exception{
+			 * 
+			 * }
+			 */
+		 
 	   
 	   
 	}

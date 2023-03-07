@@ -46,10 +46,10 @@ public class TestCoworkDAO {
 	  }
 	 
 
-	/*
-	 * @Test public void testCoworkrule_SEQ() throws Exception {
-	 * System.out.println(coworkruleDAO.selectSeqNextValue()); }
-	 */
+	
+	  @Test public void testCoworkrule_SEQ() throws Exception {
+	  System.out.println(coworkDAO.selectCoworkSeqNextValue()); }
+	 
 	 @Test
 	public void testupdateCowork() throws Exception {
 		CoworkVO cowork = coworkDAO.selectCowork(1);

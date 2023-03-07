@@ -41,7 +41,7 @@ public class CoworkServiceImpl implements CoworkService{
 
 	@Override
 	public void registCowork(CoworkVO cowork) throws SQLException {
-		
+		int cowork_number = coworkDAO.selectCoworkSeqNextValue();
 		cowork.setCowork_number(2);
 		coworkDAO.insertCowork(cowork);
 

@@ -62,7 +62,7 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public int selectSeqNextValue() throws SQLException {
+	public int selectProductSeqNextValue() throws SQLException {
 		int product_number=session.selectOne("Product-Mapper.selectProductSeqNext");
 		return  product_number;
 	}

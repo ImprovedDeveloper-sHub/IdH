@@ -40,7 +40,7 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public void registProduct(ProductVO product) throws SQLException {
 		
-			int product_number = productDAO.selectSeqNextValue();
+			int product_number = productDAO.selectProductSeqNextValue();
 			product.setProduct_number(product_number);
 			productDAO.insertProduct(product);
 

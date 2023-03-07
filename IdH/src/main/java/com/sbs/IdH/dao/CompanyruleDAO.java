@@ -24,7 +24,7 @@ public interface CompanyruleDAO {
 
 	 	int selectCompanyruleCriteriaTotalCount(SearchCriteria cri) throws SQLException ;
 	 	
-	 	 int selectSeqNextValue() throws SQLException ;
+	 	 int selectCompanySeqNextValue() throws SQLException ;
 	 	
 
 }

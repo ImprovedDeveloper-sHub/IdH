@@ -24,7 +24,7 @@ public interface ProductDAO {
 
  	int selectProductCriteriaTotalCount(SearchCriteria cri) throws SQLException ;
  	
- 	 int selectSeqNextValue() throws SQLException ;
+ 	 int selectProductSeqNextValue() throws SQLException ;
  	
  	
      
