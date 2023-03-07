@@ -24,7 +24,7 @@ public class Project_authorityDAOImpl implements Project_authorityDAO {
 		RowBounds rowBounds = new RowBounds(offset,limit);
 		
 		List<Project_authorityVO> projecet_authorityList 
-			= session.selectList("Projecet_authority-Mapper.selectSearchProject_authorityList",cri,rowBounds);
+			= session.selectList("Project_authority-Mapper.selectSearchProject_authorityList",cri,rowBounds);
 		return projecet_authorityList;
 	}
 
@@ -50,6 +50,12 @@ public class Project_authorityDAOImpl implements Project_authorityDAO {
 	public void deleteProject_authority(int project_authority_number) throws SQLException {
 		session.update("Project_authority-Mapper.deleteProject_authority",project_authority_number);
 		
+	}
+
+	@Override
+	public int selectProject_authoritySeqNext() throws SQLException {
+		int seq_num = session.selectOne("Project_authority-Mapper.selectProject_authoritySeqNext");
+		return seq_num;
 	}
 
 }

@@ -20,10 +20,15 @@
 	
 	
  	<!-- Service -->
-
-<!-- 	<bean id="boardService" class="com.spring.service.BoardServiceImpl"
-		p:boardDAO-ref="boardDAOBean"
-		p:replyDAO-ref="replyDAOBean"
-	/>  -->
+<!-- p:require_attachDAO-ref="require_attachDAO" -->
+ 	<bean id="requireService" class="com.sbs.IdH.service.RequireServiceImpl"
+		p:requireDAO-ref="requireDAO"
+	/>  
+	<bean id="memberService" class="com.sbs.IdH.service.MemberServiceImpl"
+		p:memberDAO-ref="memberDAO"
+	/>  
+ 	<bean id="project_authorityService" class="com.sbs.IdH.service.Project_authorityServiceImpl"
+		p:project_authorityDAO-ref="project_authorityDAO"
+	/>   
 	
 </beans>

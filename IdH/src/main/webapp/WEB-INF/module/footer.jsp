@@ -15,8 +15,8 @@
 <!-- AdminLTE App -->
 <script
 	src="<%=request.getContextPath() %>/resources/bootstrap/dist/js/adminlte.min.js"></script>
-
+<!-- common -->
+<script src="<%=request.getContextPath() %>/resources/js/common.min.js"></script>
 </body>
 </html>
-
 

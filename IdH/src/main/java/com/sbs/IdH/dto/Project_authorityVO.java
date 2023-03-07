@@ -34,7 +34,7 @@ public class Project_authorityVO {
 	
 	public Project_authorityVO() {}
 	public Project_authorityVO(int project_authority_number, int project_authority_status, int project_authority_pro_number,
-			String project_authority_member_id) {
+			String project_authority_member_id) { 
 		super();
 		this.project_authority_number = project_authority_number;
 		this.project_authority_status = project_authority_status;
@@ -49,7 +49,7 @@ public class Project_authorityVO {
 	
 	
 	
-	
+	 
 	
 	
 }

@@ -17,4 +17,6 @@ public interface Project_authorityDAO {
 	void updateProject_authority(Project_authorityVO project_authority) throws SQLException;
 
 	void deleteProject_authority(int project_authority_number) throws SQLException;
+	
+	int selectProject_authoritySeqNext() throws SQLException;
 }

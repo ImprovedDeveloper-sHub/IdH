@@ -35,8 +35,8 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public MemberVO selectMember(String id) throws SQLException {
-		MemberVO member = session.selectOne("Member-Mapper.selectMember", id);
+	public MemberVO selectMember(String member_id) throws SQLException {
+		MemberVO member = session.selectOne("Member-Mapper.selectMember", member_id);
 		return member;
 	}
 
@@ -52,8 +52,8 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public void deleteMember(String id) throws SQLException {
-		session.update("Member-Mapper.deleteMember", id);
+	public void deleteMember(String member_id) throws SQLException {
+		session.update("Member-Mapper.deleteMember", member_id);
 
 	}
 
