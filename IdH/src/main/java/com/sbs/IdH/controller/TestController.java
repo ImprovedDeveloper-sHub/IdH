@@ -11,4 +11,10 @@ public class TestController {
 	
 	@GetMapping("/Product")
 	public void Product() throws Exception {}
+	
+	@GetMapping("/detail")
+	public void detail() throws Exception {}
+	
+	@GetMapping("/regist")
+	public void regist() throws Exception {}
 }

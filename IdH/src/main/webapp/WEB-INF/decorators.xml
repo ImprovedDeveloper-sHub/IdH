@@ -7,6 +7,8 @@
 	<decorator name="openWindow" page="open_decorator.jsp">
 		<pattern>/**/*</pattern>
 		<pattern>/main</pattern>
+		<pattern>/detail</pattern>
+		<pattern>/regist</pattern>
 	</decorator>
 
 	<excludes>

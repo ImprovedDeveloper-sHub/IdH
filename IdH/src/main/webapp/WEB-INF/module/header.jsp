@@ -1,18 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="decorator"
-	uri="http://www.opensymphony.com/sitemesh/decorator"%>
+   uri="http://www.opensymphony.com/sitemesh/decorator"%>
 
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
-<html lang="en">
+<html lang="kor">
 <head>
 <style>
+ul,li{
+   list-sytle:none;
+}
+
+a{
+   text-decoration:none;
+}
+
 body{
   margin:0;
   padding:0;
@@ -36,13 +44,13 @@ body{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  background-color:#00005B;
+  background-color:#B7C4CF;
   
 }
 .menu{
   display:inline-block;
   font-size:18px;
-  color:#9E9E9E;
+  color:black;
 }
 .menu:hover{
   color:white;
@@ -67,20 +75,20 @@ body{
 }
 
 nav {
-	position: relative;
-	z-index: 1;
-	white-space: nowrap;
+   position: relative;
+   z-index: 1;
+   white-space: nowrap;
   float: left;
   position: relative;
 }
 
 nav a {
-	position: relative;
-	display: inline-block;
-	padding: 1.9em 3em 1.2em 1em;
-	color: #757c8f;
-	text-decoration: none;
-	margin: 0 -2px;
+   position: relative;
+   display: inline-block;
+   padding: 1.9em 3em 1.2em 1em;
+   color: #757c8f;
+   text-decoration: none;
+   margin: 0 -2px;
   position: relative;
   top: 0px;
   font-size: 15px;
@@ -88,32 +96,32 @@ nav a {
 } 
 
 nav a:hover::before {
-	content: ''; /* To generate the box */
-	position: absolute;
-	top: 0; right: 0; bottom: .5em; left: 0;
-	z-index: -1;
-	border-bottom: none;
-	border-radius: 5px 2px 0 0;
-	background: #eaedf2;
-	box-shadow: 0 2px hsla(0,0%,100%,.5) inset;
-	transform: perspective(6px) rotateX(1.9deg);
-	transform-origin: bottom left;
+   content: ''; /* To generate the box */
+   position: absolute;
+   top: 0; right: 0; bottom: .5em; left: 0;
+   z-index: -1;
+   border-bottom: none;
+   border-radius: 5px 2px 0 0;
+   background: #eaedf2;
+   box-shadow: 0 2px hsla(0,0%,100%,.5) inset;
+   transform: perspective(6px) rotateX(1.9deg);
+   transform-origin: bottom left;
    height: 80px;
   margin-top: -24px;
 }
 
 .active-tab::before {
-	content: ''; /* To generate the box */
-	position: absolute;
+   content: ''; /* To generate the box */
+   position: absolute;
   
-	top: 0; right: 0; bottom: .5em; left: 0;
-	z-index: -10;
-	border-bottom: none;
-	border-radius: 5px 2px 0 0;
-	background: #eaedf2;
-	box-shadow: 0 2px hsla(0,0%,100%,.5) inset;
-	transform: perspective(6px) rotateX(1.9deg);
-	transform-origin: bottom left;
+   top: 0; right: 0; bottom: .5em; left: 0;
+   z-index: -10;
+   border-bottom: none;
+   border-radius: 5px 2px 0 0;
+   background: #eaedf2;
+   box-shadow: 0 2px hsla(0,0%,100%,.5) inset;
+   transform: perspective(6px) rotateX(1.9deg);
+   transform-origin: bottom left;
   box-shadow: inset 0px 0px 10px #dadce0;
   height: 80px;
   margin-top: -24px;
@@ -124,83 +132,36 @@ nav a:hover::before {
   padding: 1.9em 4em 1.2em 1em;
   margin-left: 1px
 }
+table th{
+   font-size:7px;
+   padding: 0.6rem !important;
+}
+table td{
+   font-size:10px;
+   padding: 0.6rem !important;
+}
+
 
 
 
 
-/* table *{
-text-overflow:ellipsis;
-overflow:hidden;
-white-space:nowrap;
-} */
-thead {
-  background: #f2f3f5;
-}
-thead tr td {
-  color: #757e92;
-  font-size: 15px;
-  text-transform: uppercase;
-  padding: 14px 5px;
-  font-weight:bold;
-  color:black;
-}
-th{
-width:15%;
-}
-.table-content>table>td{
-  width:80px;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
 
-tbody tr td {
-  padding: 14px 5px;
-  border-bottom: #eaecee solid 1px;
-  font-size:15px;
-}
-tbody tr:hover {
-  background: #fefaf2;
-}
-.issue-content{
-  height:600px;
-}
-
-#searchbar{
-  margin-bottom:15px;
-  margin-left:auto;
-}
-#navoption{
-  width:200px;
-}
-.issue-content{
-  text-align:center;
-}
-.card{
-  overflow:scroll;
-  overflow-x:hidden;
-  margin:0 10px 20px 10px;
-}
-#reg-btn{
-
-  margin-left:-620px;
-}
 </style>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><decorator:title default="Improved Developer's Hub" /></title>
 <!-- 부트스트랩 불러오기 -->
 <script
-	src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
+   src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
 
 <link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
+   href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
 
 <script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+   src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- 폰트어썸 -->
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 <div class="main-custom">
   <div class="header-custom row">
     <div class="header-logo col-1">

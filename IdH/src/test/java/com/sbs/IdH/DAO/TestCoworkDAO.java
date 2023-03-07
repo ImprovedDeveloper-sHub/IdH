@@ -37,13 +37,13 @@ public class TestCoworkDAO {
 		}
 	}
 	
-	/*
-	 * @Test public void testInsertCoworkList() throws Exception {
-	 * 
-	 * CoworkVO cowork = new CoworkVO(2,"abc",null,1,"IdH",1);
-	 * coworkDAO.insertCowork(cowork);
+	
+	  @Test public void testInsertCoworkList() throws Exception {
+	  
+	  CoworkVO cowork = new CoworkVO(2,null,null,"abc",1,"IdH",1);
+	  coworkDAO.insertCowork(cowork);
 	 
-	  }*/
+	  }
 	 
 
 	/*

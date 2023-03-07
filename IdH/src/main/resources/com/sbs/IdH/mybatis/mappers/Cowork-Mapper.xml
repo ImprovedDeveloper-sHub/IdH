@@ -56,9 +56,9 @@
 	<update id="insertCowork">
 		insert 
 		into 
-		cowork(cowork_number,cowork_content,cowork_regdate,cowork_status,cowork_member_id,cowork_product_number)
+		cowork(cowork_number,cowork_regdate,cowork_enddate,cowork_content,cowork_status,cowork_member_id,cowork_product_number)
 		values
-		(#{cowork_number},#{cowork_content},sysdate,#{cowork_status},,#{cowork_member_id},#{cowork_product_number})
+		(#{cowork_number},sysdate,sysdate,#{cowork_content},#{cowork_status},#{cowork_member_id},#{cowork_product_number})
 	</update>
 	<update id="updateCowork" parameterType="cowork">
 		update 

@@ -37,13 +37,13 @@ public class TestProductDAO {
 		}
 	}
 	
-	/*
-	 * @Test public void testInsertProductList() throws Exception {
-	 * 
-	 * ProductVO product = new ProductVO(2,1,"aaa","aaaa",1,"IdH",1,null);
-	 * productDAO.insertProduct(product);
-	 * }
-	 */
+	
+	  @Test public void testInsertProductList() throws Exception {
+	  
+	  ProductVO product = new ProductVO(2,1,"aaa","aaaa",1,null,null,"IdH",1);
+	  productDAO.insertProduct(product);
+	  }
+	 
 	  
 	 
 

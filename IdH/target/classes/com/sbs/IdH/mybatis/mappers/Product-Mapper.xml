@@ -56,10 +56,10 @@
 	<update id="insertProduct">
 		insert 
 		into 
-		product(product_number,product_stage,product_title,product_content,product_status
-		,product_member_id,product_project_number,product_regdate)
+		product(product_number,product_stage,product_title,product_content,product_status,product_regdate,product_modifydate
+		,product_member_id,product_project_number)
 		values
-		(#{product_number},#{product_stage},#{product_title},#{product_content},#{product_status},#{product_member_id},#{product_project_number},sysdate)
+		(#{product_number},#{product_stage},#{product_title},#{product_content},#{product_status},sysdate,sysdate,#{product_member_id},#{product_project_number})
 	</update>
 	<update id="updateProduct" parameterType="product">
 		update 

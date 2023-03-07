@@ -10,11 +10,13 @@
 		base-package="kr.ac.sbs.service" />
 	<bean id="productDAO" class="com.sbs.IdH.dao.ProductDAOImpl"
 		p:session-ref="sqlSession" />
-			<bean id="companyruleDAO" class="com.sbs.IdH.dao.CompanyruleDAOImpl"
+	<bean id="companyruleDAO"
+		class="com.sbs.IdH.dao.CompanyruleDAOImpl" p:session-ref="sqlSession" />
+	<bean id="coworkDAO" class="com.sbs.IdH.dao.CoworkDAOImpl"
 		p:session-ref="sqlSession" />
-			<bean id="coworkDAO" class="com.sbs.IdH.dao.CoworkDAOImpl"
-		p:session-ref="sqlSession" />
-
+	<bean id="coworkService"
+		class="com.sbs.IdH.service.CoworkServiceImpl"
+		p:coworkDAO-ref="coworkDAO" />
 </beans>
 
 
