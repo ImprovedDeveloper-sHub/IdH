@@ -11,8 +11,8 @@
 		from
 		project_authority
 		where project_authority_number is not null  			  	
-		<include refid="search" />
-		order by project_authority_number desc
+<!-- 		<include refid="search" />
+		order by project_authority_number desc -->
 	</select>
 	
 	<select id="selectProject_authority"  resultType="project_authority">
