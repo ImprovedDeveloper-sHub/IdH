@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Project_authority-Mapper">
+
+	<select id="selectSearchProject_authorityList" resultType="project_authority">
+		select
+		*
+		from
+		project_authority
+		where project_authority_number is not null  			  	
+		<include refid="search" />
+		order by project_authority_number desc
+	</select>
+	
+	<select id="selectProject_authority"  resultType="project_authority">
+		select * 
+		from project_authority
+		where project_authority_number=#{project_authority_number}
+	</select>
+	
+	<update id="insertProject_authority" parameterType="project_authority">
+		insert into 
+		project_authority(project_authority_number,project_authority,project_authority_pro_number,
+		project_authority_member_id)
+		values(#{project_authority_number},#{project_authority},#{project_authority_pro_number},
+		#{project_authority_member_id})
+	</update>
+	
+	<update id="updateProject_authority" parameterType="project_authority">
+		update 
+		project_authority
+		set 
+		project_authority=#{project_authority}
+		where project_authority_number=#{project_authority_number}
+	</update>
+	
+	<update id="deleteProject_authority" parameterType="int">
+		delete 
+		from project_authority 
+		where project_authority_number=#{project_authority_number}
+	</update>
+	
+</mapper>
