@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<context:component-scan base-package="com.sbs.IdH.service" />
+
+	
+	<!-- repository -->
+	<bean id="requireDAO" class="com.sbs.IdH.dao.RequireDAOImpl" 
+		p:session-ref="sqlSession" />
+	<bean id="memberDAO" class="com.sbs.IdH.dao.MemberDAOImpl" 
+		p:session-ref="sqlSession" />
+	<bean id="project_authorityDAO" class="com.sbs.IdH.dao.Project_authorityDAOImpl" 
+		p:session-ref="sqlSession" />
+
+	
+	
+ 	<!-- Service -->
+<!-- p:require_attachDAO-ref="require_attachDAO" -->
+ 	<bean id="requireService" class="com.sbs.IdH.service.RequireServiceImpl"
+		p:requireDAO-ref="requireDAO"
+	/>  
+	<bean id="memberService" class="com.sbs.IdH.service.MemberServiceImpl"
+		p:memberDAO-ref="memberDAO"
+	/>  
+ 	<bean id="project_authorityService" class="com.sbs.IdH.service.Project_authorityServiceImpl"
+		p:project_authorityDAO-ref="project_authorityDAO"
+	/>   
+	
+</beans>
