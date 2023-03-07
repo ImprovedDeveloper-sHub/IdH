@@ -13,6 +13,8 @@ public interface ProjectDAO {
 
 	List<ProjectVO> selectSearchProjectListForProject(int project_number) throws SQLException;
 	
+	//List<ProjectVO> selectSearchProjectListByStatus(SearchCriteria cri, int project_status) throws SQLException;
+	
 	int selectSearchProjectListCount(SearchCriteria cri) throws SQLException;
 
 	ProjectVO selectProject(int project_number) throws SQLException;	

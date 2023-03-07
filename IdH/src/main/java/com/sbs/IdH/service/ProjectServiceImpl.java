@@ -45,4 +45,24 @@ public class ProjectServiceImpl implements ProjectService{
 		return dataMap;
 	}
 
+	@Override
+	public Map<String, Object> selectProceedingProject(SearchCriteria cri) throws Exception {
+		Map<String, Object> dataMap = new HashMap<String,Object>();
+		cri.setStatus(1);
+		dataMap.put("proccedingProjectList", projectDAO.selectSearchProjectList(cri));
+		return dataMap;
+	}
+	
+	@Override
+	public Map<String, Object> selectEndProject(SearchCriteria cri) throws Exception {
+		Map<String, Object> dataMap = new HashMap<String,Object>();
+		cri.setStatus(0);
+		dataMap.put("endProjectList", projectDAO.selectSearchProjectList(cri));
+		return dataMap;
+	}
+
+	
+	
+	
+
 }

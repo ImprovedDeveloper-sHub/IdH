@@ -8,7 +8,7 @@ public class WorkforceVO {
 	private String workforce_member_id;
 	
 	
-	
+	public WorkforceVO() {}
 	
 	public WorkforceVO(int workforce_number, int workforce_staus, int workforce_project_number, String workforce_detail,
 			String workforce_member_id) {

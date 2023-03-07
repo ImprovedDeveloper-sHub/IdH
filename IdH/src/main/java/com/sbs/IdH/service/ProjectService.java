@@ -18,4 +18,9 @@ public interface ProjectService {
 	
 	public Map<String,Object> selectProjectList(SearchCriteria cri) throws Exception;
 	
+	//public Map<String,Object> selectProjectByStatus(SearchCriteria cri, int status) throws Exception; 
+	
+	public Map<String,Object> selectProceedingProject(SearchCriteria cri) throws Exception;
+
+	public Map<String,Object> selectEndProject(SearchCriteria cri) throws Exception;
 }

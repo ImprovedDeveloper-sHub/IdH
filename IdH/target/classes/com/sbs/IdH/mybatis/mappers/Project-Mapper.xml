@@ -18,6 +18,9 @@
 		<if test="searchType == 'e'.toString() ">
 			and email like '%'||#{keyword}||'%'
 		</if>
+		<if test="status != null">
+			and project_status = #{status}
+		</if>
 	</sql>
 	
 	
@@ -32,13 +35,19 @@
 	<select id="selectProjectListByBusinessNumber"	resultType="project">
 		select *
 		from project
-		where project_business_number = #{project_number}
+		where project_business_number = #{project_business_number}
 	</select>
 	
 	<select id="selectProjectListByRequireNumber"	resultType="project">
 		select *
 		from project
 		where project_require_number = #{project_require_number}
+	</select>
+	
+	<select id="selectProjectListByProjectStatus"	resultType="project">
+		select *
+		from project
+		where project_status = #{project_status}
 	</select>
 	
 	

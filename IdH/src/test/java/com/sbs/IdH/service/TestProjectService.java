@@ -26,17 +26,20 @@ public class TestProjectService {
       System.out.println(project);
    }
    
-   @Test
    public void testSelectProjectList() throws Exception{
-      
 	  SearchCriteria cri = new SearchCriteria();
       projectService.selectProjectList(cri);
       
    }
    
+   @Test
+   public void testSelectProceedingProject() throws Exception{
+	   SearchCriteria cri = new SearchCriteria();
+	   projectService.selectProceedingProject(cri);
+   }
+   
    
    public void testInsertProjectList() throws Exception{
-		
 		/*
 		 * ProjectVO project = new ProjectVO(3, "이름", null, null, 0, 1, 1,
 		 * "IdH","test"); projectService.registProject(project); ProjectVO project2 =

@@ -133,10 +133,12 @@ nav a:hover::before {
   margin-left: 1px
 }
 table th{
-   font-size:12px;
+   font-size:7px;
+   padding: 0.6rem !important;
 }
 table td{
    font-size:10px;
+   padding: 0.6rem !important;
 }
 
 

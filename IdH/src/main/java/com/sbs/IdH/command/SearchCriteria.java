@@ -6,15 +6,19 @@ public class SearchCriteria {
 	private int perPageNum=10;
 	private String searchType="";
 	private String keyword="";
+	private int status;
 
 	private int startRowNum=0;
 	
 	
 	public SearchCriteria() {}
 	
-	public SearchCriteria(int page, int perPageNum, String searchType, String keyword) {
-		parseSearchCriteria(page,perPageNum,searchType,keyword);
-	}
+	
+	  public SearchCriteria(int page, int perPageNum, String searchType, String keyword) 
+	  { parseSearchCriteria(page,perPageNum,searchType,keyword); }
+	 
+	
+	
 	
 	/* 이건 확인해봐야할 문제긴한데. 생성자로 가능하다? 받아오면서? 애초에 생성자로 값넣어주는건지.
 	 * 
@@ -39,6 +43,16 @@ public class SearchCriteria {
 		setStartRowNum();
 		
 	}	
+	public SearchCriteria(int page, int perPageNum, String searchType, String keyword, int status, int startRowNum) {
+		super();
+		this.page = page;
+		this.perPageNum = perPageNum;
+		this.searchType = searchType;
+		this.keyword = keyword;
+		this.status = status;
+		this.startRowNum = startRowNum;
+	}
+
 	public int getPage() {
 		return page;
 	}
@@ -71,6 +85,14 @@ public class SearchCriteria {
 	}
 	
 	
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 	private void setStartRowNum() {
 		this.startRowNum = (this.page-1)* this.perPageNum;	
 	}
