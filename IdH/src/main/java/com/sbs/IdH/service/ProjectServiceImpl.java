@@ -49,7 +49,7 @@ public class ProjectServiceImpl implements ProjectService{
 	public Map<String, Object> selectProceedingProject(SearchCriteria cri) throws Exception {
 		Map<String, Object> dataMap = new HashMap<String,Object>();
 		cri.setStatus(1);
-		dataMap.put("proccedingProjectList", projectDAO.selectSearchProjectList(cri));
+		dataMap.put("proceedingProjectList", projectDAO.selectSearchProjectList(cri));
 		return dataMap;
 	}
 	

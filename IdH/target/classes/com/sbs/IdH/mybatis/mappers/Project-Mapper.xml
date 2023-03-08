@@ -6,19 +6,14 @@
 <mapper namespace="Project-Mapper">
 			
 	<sql id="search">
-		<if test="searchType == 'i'.toString() ">
-			and id like '%'||#{keyword}||'%'
-		</if>
+		
 		<if test="searchType == 'n'.toString() ">
-			and name like '%'||#{keyword}||'%'
+			and project_name like '%'||#{keyword}||'%'
 		</if>
-		<if test="searchType == 'p'.toString() ">
-			and phone like '%'||#{keyword}||'%'
+		<if test="searchType == 'd'.toString() ">
+			and project_discription like '%'||#{keyword}||'%'
 		</if>
-		<if test="searchType == 'e'.toString() ">
-			and email like '%'||#{keyword}||'%'
-		</if>
-		<if test="status != null">
+		<if test="status != null ">
 			and project_status = #{status}
 		</if>
 	</sql>

@@ -4,7 +4,7 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        
+        <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
         <!--   <script>alert('${test}');</script> -->
           
  <div class= "content">
@@ -18,89 +18,105 @@
          </div>
             <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse;">
                <div class="input-group input-group-sm" style="width: 270px">
+               <select name="perPageNum" style="display:none"><option value="5" selected></option></select>
                   <select class="form-control-sm" name="searchType" id="searchType" style="hegith:30px; width:90px !important; border-color:#CED4DA !important;">
-							<option value="tcw"  ${cri.searchType eq 'tcw' ? 'selected':'' }>전 체</option>
-							<option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제 목</option>
-							<option value="w" ${cri.searchType eq 'w' ? 'selected':'' }>작성자</option>
-							<option value="c" ${cri.searchType eq 'c' ? 'selected':'' }>내 용</option>
+							<option value="n" ${cri.searchType eq 'n' ? 'selected':'' }>제목</option>
+							<option value="d" ${cri.searchType eq 'd' ? 'selected':'' }>내용</option>
+							
 						</select>
-                  <input type="text" name="table_search"
+                  <input type="text" name="keyword"
                      class="form-control float-right" placeholder="Search">
                   <div class="input-group-append">
-                  	
-                  	
-                     <button type="submit" class="btn btn-default" onclick="list_go(1)">
+                  	<button type="submit" class="btn btn-default" onclick="search_go_ajax(0, '<%=request.getContextPath()%>/projectManage/getProceeding', $('.proceedingThead'),$('#proceedingProject-list-template'))">
                         <i class="fas fa-search"></i>
                      </button>
+                  	
+                   
                   </div>
                </div>
          <button type="button" class="btn btn-block btn-info btn-sm"
             style="width: 80px;">등록</button>
             </div>
          <div id="table-content">
-            <div class="card-body table-responsive p-0">
-               <table class="table table-hover">
-                  <thead class="text-left">
-                <tr>
-                  <th style="width:20%">프로젝트 이름</th>
-                  <th style="width:30%">프로젝트 상태</th>
-                  <th style="width:20%">등록 날짜</th>
-                  <th style="width:15%">요구사항</th>
-                  <th style="width:15%">설명</th>
-                </tr>
-              </thead>
-              <tbody class="text-left">
-              	<c:if test="${empty proccedingProjectList}">
+            <div  class="card-body table-responsive p-0">
+               <table  class="table table-hover">
+                  <thead class="proceedingThead" class="text-left">
+	                <tr>
+	                  <th style="width:20%">프로젝트 이름</th>
+	                  <th style="width:30%">프로젝트 상태</th>
+	                  <th style="width:20%">등록 날짜</th>
+	                  <th style="width:15%">요구사항</th>
+	                  <th style="width:15%">설명</th>
+	                </tr>
+              	</thead>
+              
+              <tbody class="proceedingProjectLi" class="text-left">
+              	<c:if test="${empty proceedingProjectList}">
 				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
 			 	 </c:if>
-			 	 <c:forEach items="${proccedingProjectList }" var="project">
+			 	 <c:forEach items="${proceedingProjectList }" var="project">
 					 <tr>
 			                  <td style="text-align:left;max-width:20%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;">${project.project_name}</td>
 			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;">${project.project_status}</td>
 			                  <td style="text-align:left;max-width: 20%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">${project.project_regdate}</td>
+                                    white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate value="${project.project_regdate}" pattern="yyyy-MM-dd"/></td>
 			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;">test</td>
 			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;"> ${project.project_discription}</td>
 	                </tr>
 			 	 </c:forEach>
-                
-                
               </tbody>
+              
                </table>
             </div>
+            
+            
          </div>
       </div>
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">종료 프로젝트</h3>
-            <div class="card-tools">
-              <div class="input-group input-group-sm" style="width: 150px;">
-                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                <div class="input-group-append">
-                  <button type="submit" class="btn btn-default">
-                    <i class="fas fa-search"></i>
-                  </button>
-                </div>
-              </div>
+      
+      <div id="content" class="card">
+         <div class="card-header">
+            <h3 class="card-title">진행 프로젝트</h3>
+         </div>
+            <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse;">
+               <div class="input-group input-group-sm" style="width: 270px">
+               <select name="perPageNum" style="display:none"><option value="5" selected></option></select>
+                  <select class="form-control-sm" name="searchType" id="searchType" style="hegith:30px; width:90px !important; border-color:#CED4DA !important;">
+							<option value="n" ${cri.searchType eq 'n' ? 'selected':'' }>제목</option>
+							<option value="d" ${cri.searchType eq 'd' ? 'selected':'' }>내용</option>
+							
+						</select>
+                  <input type="text" name="keyword"
+                     class="form-control float-right" placeholder="Search">
+                  <div class="input-group-append">
+                  	<button type="submit" class="btn btn-default" onclick="search_go_ajax(0, '<%=request.getContextPath()%>/projectManage/getProceeding', $('.proceedingThead'),$('#proceedingProject-list-template'))">
+                        <i class="fas fa-search"></i>
+                     </button>
+                  	
+                   
+                  </div>
+               </div>
+         <button type="button" class="btn btn-block btn-info btn-sm"
+            style="width: 80px;">등록</button>
             </div>
-          </div>
-          <div class="card-body table-responsive p-0">
-            <table class="table table-hover ">
-              <thead>
-                <tr>
-                  <th>프로젝트 이름</th>
-                  <th>프로젝트 상태</th>
-                  <th>등록 날짜</th>
-                  <th>요구사항</th>
-                  <th>설명</th>
-                </tr>
-              </thead>
-              <tbody>
-                <c:if test="${empty endProjectList}">
+         <div id="table-content">
+            <div  class="card-body table-responsive p-0">
+               <table  class="table table-hover">
+                  <thead class="proceedingThead" class="text-left">
+	                <tr>
+	                  <th style="width:20%">프로젝트 이름</th>
+	                  <th style="width:30%">프로젝트 상태</th>
+	                  <th style="width:20%">등록 날짜</th>
+	                  <th style="width:15%">요구사항</th>
+	                  <th style="width:15%">설명</th>
+	                </tr>
+              	</thead>
+              
+              <tbody class="proceedingProjectLi" class="text-left">
+              	<c:if test="${empty endProjectList}">
 				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
 			 	 </c:if>
 			 	 <c:forEach items="${endProjectList }" var="project">
@@ -113,9 +129,14 @@
 	                </tr>
 				</c:forEach>
               </tbody>
-            </table>
-          </div>
-        </div>
+              
+               </table>
+            </div>
+            
+            
+         </div>
+      </div>
+       
 
     <div class="card ">
           <div class="card-body row">
@@ -221,12 +242,19 @@
 	 <div id="Line_chart" style="width: 900px; height: 500px"></div>
      <a class="2015-btn" href="#">2015</a> -->
     </div>
-
+		<%@ include file="./ajax_list_js.jsp" %>
+		<%@ include file="/WEB-INF/module/pagination.jsp" %>
     </div>
 
 
     <!--row종료-->
-  </div>
+    
+    
+
+
+
+
+  
   <!--content종료-->
   
   
@@ -335,15 +363,16 @@
   }); */
     
 }
-  
-  
  
   </script>
+  
   
   <script>
   	
   
+  
   </script>
- 
+  
+
   
   
