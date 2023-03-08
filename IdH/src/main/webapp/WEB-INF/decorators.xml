@@ -1,6 +1,6 @@
 <decorators defaultdir="/WEB-INF/decorator">
 
-	<decorator name="member" page="decorator.jsp">
+	<decorator name="IdH" page="decorator.jsp">
 		<pattern>*</pattern>
 	</decorator>
 

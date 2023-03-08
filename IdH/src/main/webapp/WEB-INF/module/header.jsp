@@ -168,7 +168,8 @@ table td{
       <div class="logo"><img src="<%=request.getContextPath() %>/resources/img/IdH로고2.jpg"style="max-width: 100%;max-height: 100%;"/></div>
     </div>
     <!-- header종료 -->
-    <div class="main-menu-custom col-11">
+   <div class="main-menu-custom col-11">
+    <!-- 
       <div class="menu"><i class="fa-solid fa-border-all"></i>&nbsp대시보드</div>
       <div class="menu"><i class="fa-solid fa-globe"></i>&nbsp사업관리</div>
       <div class="menu"><i class="fa-solid fa-keyboard"></i>&nbsp요구사항관리</div>
@@ -177,7 +178,16 @@ table td{
       <div class="menu active"><i class="fa-solid fa-users-line"></i>&nbsp커뮤니케이션</div>
       <div class="menu"><i class="fa-solid fa-bell"></i>&nbsp공지사항</div>
       <div class="menu"><i class="fa-sharp fa-solid fa-book"></i>&nbsp표준관리</div>
+       -->
     </div>
+    
+    <c:forEach items="${menuList }" var="menu">
+	      <li class="nav-item d-none d-sm-inline-block">
+	      	<a href="javascript:subMenu_go('${menu.mcode}');goPage('<%=request.getContextPath() %>${menu.murl }','${menu.mcode }');" class="nav-link">
+	      	<i class="${menu.micon}"></i>&nbsp;${menu.mname }</a>
+	      </li>
+      </c:forEach>
+    
     <!--main-menu종료 -->
     <div class="col-12 sub-menu">
       <div class="top-menu">

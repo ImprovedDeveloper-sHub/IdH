@@ -18,8 +18,6 @@
 	<bean id="budgetDAO" class="com.sbs.IdH.dao.BudgetDAOImpl"
 		p:session-ref="sqlSession"
 	/>
-	
-	
 	<bean id="scheduleDAO" class="com.sbs.IdH.dao.ScheduleDAOImpl"
 		p:session-ref="sqlSession" />
 	
@@ -27,6 +25,9 @@
 		p:session-ref="sqlSession" />
 	
 	<bean id="unitworkDAO" class="com.sbs.IdH.dao.UnitworkDAOImpl"
+		p:session-ref="sqlSession"
+	/>
+	<bean id="menuDAO" class="com.sbs.IdH.dao.MenuDAOImpl"
 		p:session-ref="sqlSession"
 	/>
 	
@@ -45,7 +46,9 @@
 	<bean id="budgetService" class="com.sbs.IdH.service.BudgetServiceImpl"
 		p:budgetDAO-ref="budgetDAO"
 	/>
-	
+	<bean id="menuService" class="com.sbs.IdH.service.MenuServiceImpl"
+		p:menuDAO-ref="menuDAO"
+	/>
 	
 </beans>
 
