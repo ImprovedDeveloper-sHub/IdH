@@ -16,6 +16,8 @@
 		<if test="status != null ">
 			and project_status = #{status}
 		</if>
+		
+		
 	</sql>
 	
 	
@@ -49,7 +51,7 @@
 	<select id="selectSearchProjectListCount" resultType="int">
 		select count(*)
 		from project
-		where project_number	is not null
+		where project_number is not null
 		<include refid="search" />
 		order by project_regdate desc
 	</select>
@@ -60,8 +62,7 @@
 		where project_number=#{project_number}
 	</select>
 	
-	
-	
+
 	
 	<select id="selectProjectSeqNext" resultType="int">
 		select project_seq.nextval as project_number from dual

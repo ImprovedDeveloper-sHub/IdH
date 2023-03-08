@@ -27,7 +27,7 @@
 	}
 	
 	//handelbars printElement (args : data Array, appent target, handlebar template, remove class)
-	function printData(dataArr,target,templateObject,removeSelector){
+	/* function printData(dataArr,target,templateObject,removeSelector){
 		
 		var template=Handlebars.compile(templateObject.html());
 		
@@ -35,7 +35,7 @@
 		
 		$(removeSelector).remove();
 		target.append(html);
-	}
+	} */
 	
 	function goPage(url,mCode){
 		//alert(url);
@@ -59,13 +59,10 @@
 		}
 	}
 	
-	window.onload=function(){
-		goPage('<%=request.getContextPath()%>${menu.murl}','${menu.mcode}');
-		subMenu_go('${menu.mcode}'.substring(0,3)+"0000");
-	}
+
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+
 <script type="text/x-handlebars-template"  id="subMenu-list-template" >
 {{#each .}}
 	<li class="nav-item subMenu" >

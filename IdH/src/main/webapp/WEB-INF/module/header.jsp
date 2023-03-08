@@ -191,7 +191,7 @@ table td{
     <!--main-menu종료 -->
     <div class="col-12 sub-menu">
       <div class="top-menu">
-        <nav class="left">
+        <nav class="subMenu left">
           <a href="#">내 작업</a>
           <a class="selected active-tab" href="#" >업무관리</a>
           <a class="" href="#">회의관리</a>
