@@ -19,15 +19,15 @@
             <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse;">
                <div class="input-group input-group-sm" style="width: 270px">
                <select name="perPageNum" style="display:none"><option value="5" selected></option></select>
-                  <select class="form-control-sm" name="searchType" id="searchType" style="hegith:30px; width:90px !important; border-color:#CED4DA !important;">
+                  <select class="form-control-sm" name="searchType" id="proceedingSearchType" style="hegith:30px; width:90px !important; border-color:#CED4DA !important;">
 							<option value="n" ${cri.searchType eq 'n' ? 'selected':'' }>제목</option>
 							<option value="d" ${cri.searchType eq 'd' ? 'selected':'' }>내용</option>
 							
 						</select>
-                  <input type="text" name="keyword"
+                  <input id="proceedingKeyword" type="text" name="keyword"
                      class="form-control float-right" placeholder="Search">
                   <div class="input-group-append">
-                  	<button type="submit" class="btn btn-default" onclick="search_go_ajax(0, '<%=request.getContextPath()%>/projectManage/getProceeding', $('.proceedingThead'),$('#proceedingProject-list-template'))">
+                  	<button type="submit" class="btn btn-default" onclick="search_go_ajax(0, $('#proceedingSearchType'), $('#proceedingKeyword'),'<%=request.getContextPath()%>/projectManage/getProceeding', $('.proceedingThead'), $('.proceedingProjectLi') ,$('#proceedingProject-list-template'))">
                         <i class="fas fa-search"></i>
                      </button>
                   	
@@ -35,7 +35,7 @@
                   </div>
                </div>
          <button type="button" class="btn btn-block btn-info btn-sm"
-            style="width: 80px;">등록</button>
+            style="width: 80px;">등록</button> 
             </div>
          <div id="table-content">
             <div  class="card-body table-responsive p-0">
@@ -79,20 +79,21 @@
       
       <div id="content" class="card">
          <div class="card-header">
-            <h3 class="card-title">진행 프로젝트</h3>
+            <h3 class="card-title">종료 프로젝트</h3>
          </div>
             <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse;">
                <div class="input-group input-group-sm" style="width: 270px">
                <select name="perPageNum" style="display:none"><option value="5" selected></option></select>
-                  <select class="form-control-sm" name="searchType" id="searchType" style="hegith:30px; width:90px !important; border-color:#CED4DA !important;">
+                  <select class="form-control-sm" name="endSearchType" id="endSearchType" style="hegith:30px; width:90px !important; border-color:#CED4DA !important;">
 							<option value="n" ${cri.searchType eq 'n' ? 'selected':'' }>제목</option>
 							<option value="d" ${cri.searchType eq 'd' ? 'selected':'' }>내용</option>
 							
 						</select>
-                  <input type="text" name="keyword"
+                  <input type="text" name="endKeyword" id="endKeyword"
                      class="form-control float-right" placeholder="Search">
                   <div class="input-group-append">
-                  	<button type="submit" class="btn btn-default" onclick="search_go_ajax(0, '<%=request.getContextPath()%>/projectManage/getProceeding', $('.proceedingThead'),$('#proceedingProject-list-template'))">
+                  
+                  	<button type="submit" class="btn btn-default"  onclick="search_go_ajax(0, $('#endSearchType'), $('#endKeyword'), '<%=request.getContextPath()%>/projectManage/getEnd', $('.endThead'), $('.endProjectLi') ,$('#endProject-list-template'))">
                         <i class="fas fa-search"></i>
                      </button>
                   	
@@ -105,7 +106,7 @@
          <div id="table-content">
             <div  class="card-body table-responsive p-0">
                <table  class="table table-hover">
-                  <thead class="proceedingThead" class="text-left">
+                  <thead class="endThead" class="text-left">
 	                <tr>
 	                  <th style="width:20%">프로젝트 이름</th>
 	                  <th style="width:30%">프로젝트 상태</th>
@@ -115,7 +116,7 @@
 	                </tr>
               	</thead>
               
-              <tbody class="proceedingProjectLi" class="text-left">
+              <tbody class="endProjectLi" class="text-left">
               	<c:if test="${empty endProjectList}">
 				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
 			 	 </c:if>
@@ -123,7 +124,7 @@
 					 <tr>
 			                  <td>${project.project_number}</td>
 			                  <td>${project.project_name}</td>
-			                  <td>${project.project_regdate}</td>
+			                  <td><fmt:formatDate value="${project.project_regdate}" pattern="yyyy-MM-dd"/></td>
 			                  <td><span class="tag tag-success"></span></td>
 			                  <td> ${project.project_discription}</td>
 	                </tr>
@@ -142,7 +143,7 @@
           <div class="card-body row">
             <div class="col-6"><button type="button" class="btn btn-block btn-info btn-sm">프로젝트 계획</button>
               </div>
-             <div class="col-6"> <button type="button" class="btn btn-block btn-info btn-sm">프로젝트 비교</button>
+             <div class="col-6"> <button type="button" class="btn btn-block btn-info btn-sm" onclick="comparisonButton()">프로젝트 비교</button>
 </div>
           </div>
         </div>
@@ -176,12 +177,12 @@
 
         <div class="card ">
           <div class="card-body row">
-            <div class="col-4"><button type="button" class="btn btn-block btn-info btn-sm"
-            onclick="ajax_print_chart('budget');">예산현황</button>
-              <button type="button" class="btn btn-block btn-info btn-sm" onclick="ajax_print_chart('workforce');">인력현황</button></div>
-             <div class="col-4"> <button type="button" class="btn btn-block btn-info btn-sm" onclick="ajax_print_chart('schedule');" >일정현황</button>
-              <button type="button" class="btn btn-block btn-info btn-sm" onclick="ajax_print_chart('issue');">이슈현황</button>   
-</div><div class="col-4"> <button type="button" class="btn btn-block btn-info btn-sm" onclick="ajax_print_chart('product');">산출물현황</button></div>
+            <div class="col-4"><input id="budgetButton" type="button" class="btn btn-block btn-info btn-sm"
+            onclick="ajax_print_chart('budget');" value="예산현황" />
+              <input id="workforceButton" type="button" class="btn btn-block btn-info btn-sm" onclick="ajax_print_chart('workforce');" value="인력현황"/></div>
+             <div class="col-4"> <input id="scheduleButton" type="button" class="btn btn-block btn-info btn-sm" onclick="ajax_print_chart('schedule');" value="일정현황">
+              <input id="issueButton" type="button" class="btn btn-block btn-info btn-sm" onclick="ajax_print_chart('issue');" value="이슈현황"/>   
+</div><div class="col-4"> <input id="productButton" type="button" class="btn btn-block btn-info btn-sm" onclick="ajax_print_chart('product');" value="산출물현황"></div>
           </div>
         </div>
 
@@ -368,7 +369,13 @@
   
   
   <script>
-  	
+  	function comparisonButton(){
+  		$('#budgetButton').val('예산비교');
+  		$('#scheduleButton').val('일정비교');
+  		$('#workforceButton').val('인력비교');
+  		$('#issueButton').val('이슈비교');
+  		$('#productButton').val('산출물비교');
+  	}
   
   
   </script>

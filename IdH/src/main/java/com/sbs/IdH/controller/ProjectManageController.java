@@ -38,8 +38,10 @@ public class ProjectManageController {
 	@PostMapping("/getProceeding")
 	@ResponseBody
 	public ResponseEntity<Map<String,Object>> getProceeding(SearchCriteria cri) throws Exception{
-		System.out.println("searchType" + cri.getSearchType());
-		System.out.println("keyword" + cri.getKeyword());
+		
+		  System.out.println("searchType" + cri.getSearchType());
+		  System.out.println("keyword" + cri.getKeyword());
+		 
 		
 		ResponseEntity<Map<String,Object>> entity =null;
 		HttpStatus status;
@@ -55,6 +57,23 @@ public class ProjectManageController {
 		return entity;
 	}
 	
+	@PostMapping("/getEnd")
+	@ResponseBody
+	public ResponseEntity<Map<String,Object>> getEnd(SearchCriteria cri) throws Exception{
+		
+		ResponseEntity<Map<String,Object>> entity =null;
+		HttpStatus status;
+		Map<String, Object> dataMap = null;
+		try {
+			dataMap = projectService.selectEndProject(cri);
+			status = HttpStatus.OK;
+		}catch (Exception e) {
+			status = HttpStatus.BAD_REQUEST;
+		}
+		entity = new ResponseEntity<Map<String,Object>>(dataMap, status);
+		
+		return entity;
+	}
 	
 	
 

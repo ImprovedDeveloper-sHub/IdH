@@ -11,7 +11,6 @@ function OpenWindow(UrlStr, WinTitle, WinWidth, WinHeight) {
 
 //팝업창 닫기
 function CloseWindow(parentURL){
-	
 	window.opener.location.reload(true);		
 	window.close();
 }
@@ -27,31 +26,32 @@ function list_go(page,url){
 		.val($('select[name="searchType"]').val());
 	jobForm.find("[name='keyword']")
 		.val($('div.input-group>input[name="keyword"]').val());
-	
-
 	jobForm.attr({action:url,method:'get'}).submit();
 }
 
 
 
 
-function search_go_ajax(page, url, target, templateObject) {
+function search_go_ajax(page, searchType, keyword, url, target, del_target, templateObject) {
 	
 	var jobForm=$('#jobForm');
 	//var jobForm = document.getElementById('#jobForm');
 	jobForm.find("[name='page']").val(page);
-	jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
-	jobForm.find("[name='searchType']")
-		.val($('select[name="searchType"]').val());
-	jobForm.find("[name='keyword']")
-		.val($('div.input-group>input[name="keyword"]').val());
+	jobForm.find("[name='perPageNum']").val(5);
+	jobForm.find("[name='searchType']").val(searchType.val());
+	jobForm.find("[name='keyword']").val(keyword.val());
 	
-	//alert(jobForm.find("[name='searchType']").val());
-	alert(jobForm.find("[name='keyword']").val());
-	alert(url);
+	alert('search' + searchType.val());
+	alert('keyword' +keyword.val());
+	
+	/*alert(jobForm.find("[name='searchType']").val());
+	alert(jobForm.find("[name='keyword']").val());*/
+	
 	
 	
 	//var formData = new FormData(jobForm);
+	
+	//var data = data.proceedingProjectList;
 	
 	$.ajax({
 		url: url,
@@ -59,7 +59,7 @@ function search_go_ajax(page, url, target, templateObject) {
     	type: "POST",	    	
     	success: function(data) {    		
     		alert(JSON.stringify(data));
-    		printData(data.proceedingProjectList,target,templateObject);
+    		printData(data,target,del_target,templateObject);
     	},
     	error:function(error){
     		alert('errortest');
