@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.sbs.IdH.exception;
 
 public class NotNumberException extends Exception {
@@ -6,3 +7,13 @@ public class NotNumberException extends Exception {
 		super("숫자가 아닌 값이 입력되었음.");
 	}
 }
+=======
+package com.sbs.IdH.exception;
+
+public class NotNumberException extends Exception {
+
+	public NotNumberException() {
+		super("숫자가 아닌 값이 입력되었음.");
+	}
+}
+>>>>>>> refs/remotes/origin/choi

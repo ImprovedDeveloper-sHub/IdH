@@ -22,6 +22,9 @@
 		<typeAlias type="com.sbs.IdH.dto.ScheduleVO" alias="schedule" />
 		<typeAlias type="com.sbs.IdH.dto.ProjectVO" alias="project" />
 		<typeAlias type="com.sbs.IdH.dto.MenuVO" alias="menu" />
+		<typeAlias type="com.sbs.IdH.dto.RequireVO"  alias="require"/>
+		<typeAlias type="com.sbs.IdH.dto.Project_authorityVO"  alias="project_authority"/>
+		<typeAlias type="com.sbs.IdH.dto.MemberVO"  alias="member"/>
 		
 	</typeAliases>
 	
