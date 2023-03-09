@@ -65,6 +65,6 @@
 		c:sqlSessionFactory-ref="sqlSessionFactory"
 		/>
 		
-		<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"></bean>
 
 </beans>
