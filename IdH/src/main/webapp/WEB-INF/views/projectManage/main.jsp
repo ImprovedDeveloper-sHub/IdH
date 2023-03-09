@@ -18,16 +18,16 @@
          </div>
             <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse;">
                <div class="input-group input-group-sm" style="width: 270px">
-               <select name="perPageNum" style="display:none"><option value="5" selected></option></select>
-                  <select class="form-control-sm" name="searchType" id="searchType" style="hegith:30px; width:90px !important; border-color:#CED4DA !important;">
+               <select id="proceedingPerPageNum" name="perPageNum" style="display:none"><option value="5" selected></option></select>
+                  <select class="form-control-sm" name="searchType" id="proceedingSearchType" style="hegith:30px; width:90px !important; border-color:#CED4DA !important;">
 							<option value="n" ${cri.searchType eq 'n' ? 'selected':'' }>제목</option>
 							<option value="d" ${cri.searchType eq 'd' ? 'selected':'' }>내용</option>
 							
 						</select>
-                  <input type="text" name="keyword"
+                  <input type="text" name="keyword" id ="proceedingKeyword"
                      class="form-control float-right" placeholder="Search">
                   <div class="input-group-append">
-                  	<button type="submit" class="btn btn-default" onclick="search_go_ajax(0, '<%=request.getContextPath()%>/projectManage/getProceeding', $('.proceedingThead'),$('#proceedingProject-list-template'))">
+                  	<button type="submit" class="btn btn-default" onclick="search_go_ajax(0, $('#proceedingPerPageNum'), $('#proceedingSearchType'), $('#proceedingKeyword'), '<%=request.getContextPath()%>/projectManage/getProceeding', $('.proceedingThead'),$('.proceedingProjectLi'),$('#proceedingProject-list-template'))">
                         <i class="fas fa-search"></i>
                      </button>
                   	
@@ -79,20 +79,19 @@
       
       <div id="content" class="card">
          <div class="card-header">
-            <h3 class="card-title">진행 프로젝트</h3>
+            <h3 class="card-title">종료 프로젝트</h3>
          </div>
             <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse;">
                <div class="input-group input-group-sm" style="width: 270px">
-               <select name="perPageNum" style="display:none"><option value="5" selected></option></select>
-                  <select class="form-control-sm" name="searchType" id="searchType" style="hegith:30px; width:90px !important; border-color:#CED4DA !important;">
+               <select id="endPerPageNum" name="perPageNum" style="display:none"><option value="5" selected></option></select>
+                  <select class="form-control-sm" name="searchType" id="endSearchType" style="hegith:30px; width:90px !important; border-color:#CED4DA !important;">
 							<option value="n" ${cri.searchType eq 'n' ? 'selected':'' }>제목</option>
 							<option value="d" ${cri.searchType eq 'd' ? 'selected':'' }>내용</option>
-							
 						</select>
-                  <input type="text" name="keyword"
+                  <input type="text" name="keyword" id="endKeyword"
                      class="form-control float-right" placeholder="Search">
                   <div class="input-group-append">
-                  	<button type="submit" class="btn btn-default" onclick="search_go_ajax(0, '<%=request.getContextPath()%>/projectManage/getProceeding', $('.proceedingThead'),$('#proceedingProject-list-template'))">
+                  	<button type="submit" class="btn btn-default" onclick="search_go_ajax(0, $('#endPerPageNum'), $('#endSearchType'), $('#endKeyword'), '<%=request.getContextPath()%>/projectManage/getEnd', $('.endThead'),$('.endProjectLi'),$('#endProject-list-template'))">
                         <i class="fas fa-search"></i>
                      </button>
                   	
@@ -105,7 +104,7 @@
          <div id="table-content">
             <div  class="card-body table-responsive p-0">
                <table  class="table table-hover">
-                  <thead class="proceedingThead" class="text-left">
+                  <thead class="endThead" class="text-left">
 	                <tr>
 	                  <th style="width:20%">프로젝트 이름</th>
 	                  <th style="width:30%">프로젝트 상태</th>
@@ -115,18 +114,23 @@
 	                </tr>
               	</thead>
               
-              <tbody class="proceedingProjectLi" class="text-left">
+              <tbody class="endProjectLi" class="text-left">
               	<c:if test="${empty endProjectList}">
 				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
 			 	 </c:if>
 			 	 <c:forEach items="${endProjectList }" var="project">
 					 <tr>
-			                  <td>${project.project_number}</td>
-			                  <td>${project.project_name}</td>
-			                  <td>${project.project_regdate}</td>
-			                  <td><span class="tag tag-success"></span></td>
-			                  <td> ${project.project_discription}</td>
-	                </tr>
+					 <td style="text-align:left;max-width:20%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;">${project.project_name}</td>
+			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;">${project.project_status}</td>
+			                  <td style="text-align:left;max-width: 20%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate value="${project.project_regdate}" pattern="yyyy-MM-dd"/></td>
+			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;">요구사항</td>
+			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;"> ${project.project_discription}</td>
+					 </tr>
 				</c:forEach>
               </tbody>
               
