@@ -7,9 +7,9 @@
 
 <head></head>
 
-<body>
-  <div class="content-wrapper">
-     <iframe name="ifr" src="" frameborder="0" style="width:100%;height:95vh;"></iframe> 				
-  </div>
+<body >
+	<div style="text-align:center;">
+     <iframe name="ifr" src="" frameborder="0" width="98%" height="630px" scrolling="yes" ></iframe> 				
+	</div>
 </body>
     
