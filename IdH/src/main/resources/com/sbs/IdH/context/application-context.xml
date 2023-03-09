@@ -8,9 +8,32 @@
 
 	<context:component-scan base-package="com.sbs.IdH.service" />
 	
+	
+	
+	<!-- DAO -->
+	
 	<bean id="businessDAO"
 		  class="com.sbs.IdH.dao.BusinessDAOImpl"
 		  p:session-ref="sqlSession"
+	/>
+	
+	<bean id="noticeDAO"
+		  class="com.sbs.IdH.dao.NoticeDAOImpl"
+		  p:session-ref="sqlSession"
+	/>
+	
+	
+	
+	<!-- Service -->
+	
+	<bean id="businessService"
+		  class="com.sbs.IdH.service.BusinessServiceImpl"
+		  p:businessDAO-ref="businessDAO"
+	/>
+	
+	<bean id="noticeService"
+		  class="com.sbs.IdH.service.NoticeServiceImpl"
+		  p:noticeDAO-ref="noticeDAO"
 	/>
 	
 </beans>

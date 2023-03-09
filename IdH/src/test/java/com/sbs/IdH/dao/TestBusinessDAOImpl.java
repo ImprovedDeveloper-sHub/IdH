@@ -3,10 +3,11 @@ package com.sbs.IdH.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +19,7 @@ import com.sbs.IdH.dto.BusinessVO;
 @Transactional
 public class TestBusinessDAOImpl {
 	
-	@Autowired
+	@Resource(name="businessDAO")
 	private BusinessDAO businessDAO;
 	
 	@Test
@@ -26,14 +27,14 @@ public class TestBusinessDAOImpl {
 		
 		BusinessVO business = businessDAO.selectBusiness_number(1);
 		
-		Assert.assertNotNull(business);
+		Assert.assertEquals("1", business.getBusiness_name());
 		
 	}
 	
 	@Test
 	public void testSelectBusiness_name() throws SQLException {
 		
-		List<BusinessVO> business = businessDAO.selectBusiness_name("star");
+		List<BusinessVO> business = businessDAO.selectBusiness_name("1");
 		
 		for(BusinessVO businessVO : business) {
 			System.out.println(businessVO);
@@ -52,13 +53,24 @@ public class TestBusinessDAOImpl {
 	@Test
 	public void testSelectBusiness_content() throws SQLException {
 		
-		List<BusinessVO> business = businessDAO.selectBusiness_content("star");
+		List<BusinessVO> business = businessDAO.selectBusiness_content("1");
 		
 		for(BusinessVO businessVO : business) {
 			System.out.println(businessVO);
 		}
 		
 	}
+	
+	/*
+	@Test
+	public void testSelectBusinessSequenceNextValue() throws SQLException {
+		
+		BusinessVO business = new BusinessVO().setTestRegistBusiness();
+		
+		Assert.assertEquals(9999, business.getBusiness_number());
+		
+	}
+	*/
 	
 	@Test
 	public void testInsertBusiness() throws SQLException {
@@ -90,21 +102,16 @@ public class TestBusinessDAOImpl {
 		
 	}
 	
-	/* 사업 기록 삭제 불가, 상태 변경 조치(사업 종료, 취소 등 상태메세지 표기)
 	@Test
 	public void testDeleteBusiness() throws SQLException {
 		
 		int targetBusiness_number = 1;
 		
 		BusinessVO targetBusiness = businessDAO.selectBusiness_number(targetBusiness_number);
-		Assert.assertNotNull(targetBusiness);
+		Assert.assertEquals(targetBusiness_number, targetBusiness.getBusiness_number());
 		
 		businessDAO.deleteBusiness(targetBusiness_number);
 		
-		BusinessVO getBusiness = businessDAO.selectBusiness_number(targetBusiness_number);
-		Assert.assertNull(getBusiness);
-		
 	}
-	*/
 	
 }

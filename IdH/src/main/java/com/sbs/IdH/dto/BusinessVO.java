@@ -11,10 +11,10 @@ public class BusinessVO {
 	private Date business_begin;
 	private Date business_end;
 	private String business_content;
-	private String business_budget;
-	private String business_nationbudget;
-	private String business_companybudget;
-	private String business_usebudget;
+	private int business_budget;
+	private int business_nationbudget;
+	private int business_companybudget;
+	private int business_usebudget;
 	private String business_member_id;
 	
 	public void setBusiness_number(int business_number) {
@@ -69,35 +69,35 @@ public class BusinessVO {
 		this.business_content = business_content;
 	}
 	
-	public String getBusiness_budget() {
+	public int getBusiness_budget() {
 		return business_budget;
 	}
 	
-	public void setBusiness_budget(String business_budget) {
+	public void setBusiness_budget(int business_budget) {
 		this.business_budget = business_budget;
 	}
 	
-	public String getBusiness_nationbudget() {
+	public int getBusiness_nationbudget() {
 		return business_nationbudget;
 	}
 	
-	public void setBusiness_nationbudget(String business_nationbudget) {
+	public void setBusiness_nationbudget(int business_nationbudget) {
 		this.business_nationbudget = business_nationbudget;
 	}
 	
-	public String getBusiness_companybudget() {
+	public int getBusiness_companybudget() {
 		return business_companybudget;
 	}
 	
-	public void setBusiness_companybudget(String business_companybudget) {
+	public void setBusiness_companybudget(int business_companybudget) {
 		this.business_companybudget = business_companybudget;
 	}
 	
-	public String getBusiness_usebudget() {
+	public int getBusiness_usebudget() {
 		return business_usebudget;
 	}
 	
-	public void setBusiness_usebudget(String business_usebudget) {
+	public void setBusiness_usebudget(int business_usebudget) {
 		this.business_usebudget = business_usebudget;
 	}
 	
@@ -121,11 +121,10 @@ public class BusinessVO {
 	
 	public BusinessVO() {}
 
-	public BusinessVO(int business_number, String business_name, int business_people, Date business_begin,
-			Date business_end, String business_content, String business_budget, String business_nationbudget,
-			String business_companybudget, String business_usebudget, String business_member_id) {
+	public BusinessVO(String business_name, int business_people, Date business_begin,
+			Date business_end, String business_content, int business_budget, int business_nationbudget,
+			int business_companybudget, int business_usebudget, String business_member_id) {
 		super();
-		this.business_number = business_number;
 		this.business_name = business_name;
 		this.business_people = business_people;
 		this.business_begin = business_begin;
@@ -143,7 +142,7 @@ public class BusinessVO {
 		Calendar cal = Calendar.getInstance();
 		cal.set(2199, 13, 31);
 		
-		BusinessVO testBusinessVO = new BusinessVO(9999, "testName", 9, null, new Date(cal.getTimeInMillis()), "testContent", "test원", "test원", "test원", "test원", "abcabc");
+		BusinessVO testBusinessVO = new BusinessVO("testName", 9, null, new Date(cal.getTimeInMillis()), "testContent", 999, 444, 555, 333, "IdH");
 		
 		return testBusinessVO;
 		

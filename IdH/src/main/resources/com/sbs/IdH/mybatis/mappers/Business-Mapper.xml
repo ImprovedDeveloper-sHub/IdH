@@ -5,6 +5,61 @@
 
 <mapper namespace="Business-Mapper">
 
+	<sql id="search">
+		<if test="searchType == 't'.toString()">
+			and title like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'w'.toString()">
+			and writer like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'c'.toString()">
+			and content like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'tc'.toString()">
+			and (
+			title like '%'||#{keyword}||'%'
+			or
+			content like '%'||#{keyword}||'%'
+			)
+		</if>
+		<if test="searchType == 'cw'.toString()">
+			and (
+			writer like '%'||#{keyword}||'%'
+			or
+			content like '%'||#{keyword}||'%'
+			)
+		</if>
+		<if test="searchType == 'tcw'.toString()">
+			and (
+			title like '%'||#{keyword}||'%'
+			or
+			writer like '%'||#{keyword}||'%'
+			or
+			content like '%'||#{keyword}||'%'
+			)
+		</if>
+	</sql>
+	
+	<select id="selectSearchBusinessList" resultType="business">
+		select
+		*
+		from
+		business
+		where business_number is not null
+		<include refid="search" />
+		order by business_number desc
+	</select>
+	
+	<select id="selectSearchBusinessListCount"  resultType="int">
+		select
+		count(*)
+		from
+		business
+		where business_number is not null
+		<include refid="search" />
+		order by business_number desc
+	</select>
+	
 	<select id="selectBusiness_number" resultType="business">
 		select
 		*
@@ -26,6 +81,11 @@
 		where business_content like '%'||#{business_content}||'%'
 	</select>
 	
+	<select id="selectBusinessSequenceNextValue" resultType="int">
+		select business_seq.nextVal
+		from dual
+	</select>
+	
 	<update id="insertBusiness" parameterType="business">
 		insert
 		into
@@ -40,10 +100,10 @@
 		business_name = #{business_name}, business_people = #{business_people}, business_end = #{business_end}, business_content = #{business_content}, business_budget = #{business_budget}, business_nationbudget = #{business_nationbudget}, business_companybudget = #{business_companybudget}, business_usebudget = #{business_usebudget} 
 	</update>
 	
-	<update id="deleteBusiness" parameterType="business">
+	<update id="deleteBusiness" parameterType="int">
 		delete
 		from business
-		where business_number=#{business_number}
+		where business_number = #{business_number}
 	</update>
 	
 </mapper>

@@ -3,15 +3,41 @@ package com.sbs.IdH.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
+import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.BusinessVO;
 
 public class BusinessDAOImpl implements BusinessDAO {
 	
 	private SqlSession session;
+	
 	public void setSession(SqlSession session) {
 		this.session = session;
+	}
+	
+	@Override
+	public List<BusinessVO> selectBusinessCriteria(SearchCriteria cri) throws SQLException {
+		
+		int offset = cri.getStartRowNum();
+		int limit = cri.getPerPageNum();
+		
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		
+		List<BusinessVO> businessList = session.selectList("Business-Mapper.selectSearchBusinessList", cri, rowBounds);	
+		
+		return businessList;
+		
+	}
+
+	@Override
+	public int selectBusinessCriteriaTotalCount(SearchCriteria cri) throws SQLException {
+		
+		int count = session.selectOne("Business-Mapper.selectSearchBusinessListCount", cri);
+		
+		return count;
+		
 	}
 	
 	@Override
@@ -40,6 +66,15 @@ public class BusinessDAOImpl implements BusinessDAO {
 		return business;
 		
 	}
+	
+	@Override
+	public int selectBusinessSequenceNextValue() throws SQLException {
+		
+		int seq_num = session.selectOne("Business-Mapper.selectBusinessSequenceNextValue");
+		
+		return seq_num;
+		
+	}
 
 	@Override
 	public void insertBusiness(BusinessVO business) throws SQLException {
@@ -55,13 +90,11 @@ public class BusinessDAOImpl implements BusinessDAO {
 		
 	}
 	
-	/* 사업 삭제 불가, 상태 변경 조치(사업 종료, 취소 등 상태 메세지 표기)
 	@Override
-	public void deleteBusiness(int business) throws SQLException {
+	public void deleteBusiness(int business_number) throws SQLException {
 		
-		session.update("Business-Mapper.deleteBusiness", business);
+		session.update("Business-Mapper.deleteBusiness", business_number);
 		
 	}
-	*/
 	
 }
