@@ -46,13 +46,6 @@
 	font-size: 13px;
 	color: #64697a;
 }
-
-input {
-	width: 100%;
-	font-size: 13px;
-	color: #64697a;
-	border:none;
-}
 </style>
 
 <!-- CSS end -->
@@ -77,10 +70,10 @@ input {
 					<table>
 						<thead>
 							<tr>
-								<td class="name-td" style="width:15%;">분류</td>
-								<td class="name-td" colspan="3" style="width:35%;">세부사항</td>
-								<td class="name-td" style="width:15%;">분류</td>
-								<td class="name-td" style="width:35%;">세부사항</td>
+								<td class="name-td" style="width: 15%;">분류</td>
+								<td class="name-td" colspan="3" style="width: 35%;">세부사항</td>
+								<td class="name-td" style="width: 15%;">분류</td>
+								<td class="name-td" style="width: 35%;">세부사항</td>
 							</tr>
 						</thead>
 						<tbody>
@@ -98,17 +91,20 @@ input {
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">할당자</td>
-								<td colspan="5"><input type="text"
-									placeholder="할당자를 입력하세요." /></td>
+								<td class="table-td">서승훈</td>
 							</tr>
 							<tr>
 								<td class="name-td">제목</td>
-								<td colspan="5"><input type="text"
-									placeholder="제목을 입력하여 주세요." /></td>
+								<td class="table-td">이슈발생~~~</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 							</tr>
 							<tr style="height: 100px;">
 								<td class="name-td">내용</td>
-								<td class="table-td" colspan="5"><textarea class="summernote" rows="15" cols="40" style="display:none;"></textarea></td>
+								<td class="table-td" colspan="5" style="height: 250px;">lorem
+									itsum</td>
 							</tr>
 
 							<tr>
@@ -123,11 +119,15 @@ input {
 					</table>
 				</div>
 			</div>
+			<div class="card-tools" style="margin-left:auto">
+				<button type="button" id="regbtn" class="btn btn-info"
+					onclick="modify_go();">수정</button>
+				<button type="button" id="removebtn" class="btn btn-info"
+					onclick="remove_go();">삭제</button>
+				<button type="button" id="close" class="btn btn-info"
+					onclick="CloseWindow();">닫기</button>
+			</div>
 		</div>
 	</div>
 </div>
-<script>
-	window.onload = function() {
-		summernote_go($('.summernote'),'<%=request.getContextPath()%>');
-	};
-</script>
+

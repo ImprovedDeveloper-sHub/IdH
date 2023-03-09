@@ -88,150 +88,132 @@ tbody tr td {
 
 	<div class="content-parts col-6">
 		<div id="content" class="card">
-			<div class="card-header">
-				<h3 class="card-title">등록한 이슈</h3>
-			</div>
-				<div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse;">
-					<div class="input-group input-group-sm" style="width: 150px;">
-						<input type="text" name="table_search"
-							class="form-control float-right" placeholder="Search">
-						<div class="input-group-append">
-							<button type="submit" class="btn btn-default">
-								<i class="fas fa-search"></i>
-							</button>
-						</div>
-					</div>
-			<button type="button" class="btn btn-block btn-info btn-sm"
-				style="width: 80px;">등록</button>
-				</div>
-			<div id="table-content">
-				<div class="card-body table-responsive p-0">
-					<table class="table table-hover text-center">
-						<thead>
-							<tr>
-								<th>프로젝트번호</th>
-								<th>산출물이름</th>
-								<th>작성자</th>
-								<th>등록일</th>
-								<th>산출물내용</th>
-								<th>프로젝트 담장자</th>
-
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>P12313121</td>
-								<td>1월12일산출물 자료</td>
-								<td>송창현</td>
-								<td>2022-03-12</td>
-								<td>산출물 내용이 들어갑니다.</td>
-								<td>서승훈</td>
-
-							</tr>
-							<tr>
-								<td>P12313121</td>
-								<td>1월12일산출물 자료</td>
-								<td>송창현</td>
-								<td>2022-03-12</td>
-								<td>산출물 내용이 들어갑니다.</td>
-								<td>서승훈</td>
-
-							</tr>
-							<tr>
-								<td>P12313121</td>
-								<td>1월12일산출물 자료</td>
-								<td>송창현</td>
-								<td>2022-03-12</td>
-								<td>산출물 내용이 들어갑니다.</td>
-								<td>서승훈</td>
-
-							</tr>
-							<tr>
-								<td>P12313121</td>
-								<td>1월12일산출물 자료</td>
-								<td>송창현</td>
-								<td>2022-03-12</td>
-								<td>산출물 내용이 들어갑니다.</td>
-								<td>서승훈</td>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
+         <div class="card-header">
+            <h3 class="card-title">진행 프로젝트</h3>
+         </div>
+            <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse;">
+               <div class="input-group input-group-sm" style="width: 270px">
+                  <select class="form-control-sm" name="searchType" id="searchType" style="hegith:30px; width:90px !important; border-color:#CED4DA !important;">
+							<option value="tcw"  ${cri.searchType eq 'tcw' ? 'selected':'' }>전 체</option>
+							<option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제 목</option>
+							<option value="w" ${cri.searchType eq 'w' ? 'selected':'' }>작성자</option>
+							<option value="c" ${cri.searchType eq 'c' ? 'selected':'' }>내 용</option>
+						</select>
+                  <input type="text" name="table_search"
+                     class="form-control float-right" placeholder="Search">
+                  <div class="input-group-append">
+                  	
+                  	
+                     <button type="submit" class="btn btn-default" onclick="list_go(1)">
+                        <i class="fas fa-search"></i>
+                     </button>
+                  </div>
+               </div>
+         <button type="button" class="btn btn-block btn-info btn-sm"
+            style="width: 80px;">등록</button>
+            </div>
+         <div id="table-content">
+            <div class="card-body table-responsive p-0">
+               <table class="table table-hover">
+                  <thead class="text-left">
+                <tr>
+                  <th style="width:20%">프로젝트 이름</th>
+                  <th style="width:30%">프로젝트 상태</th>
+                  <th style="width:20%">등록 날짜</th>
+                  <th style="width:15%">요구사항</th>
+                  <th style="width:15%">설명</th>
+                </tr>
+              </thead>
+              <tbody class="text-left">
+              	<c:if test="${empty issueList}">
+				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
+			 	 </c:if>
+			 	 <c:forEach items="${issueList }" var="project">
+					 <tr>
+			                  <td style="text-align:left;max-width:20%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;">${issue_name}</td>
+			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;">${issue_status}</td>
+			                  <td style="text-align:left;max-width: 20%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;">${issue_regdate}</td>
+			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;">test</td>
+			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;"> ${issue_discription}</td>
+	                </tr>
+			 	 </c:forEach>
+                
+                
+              </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
 	</div>
 
 
 	<div class="content-parts col-6">
 		<div id="content" class="card">
-			<div class="card-header">
-				<h3 class="card-title">등록한 이슈</h3>
-			</div>
-				<div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse;">
-					<div class="input-group input-group-sm" style="width: 150px;">
-						<input type="text" name="table_search"
-							class="form-control float-right" placeholder="Search">
-						<div class="input-group-append">
-							<button type="submit" class="btn btn-default">
-								<i class="fas fa-search"></i>
-							</button>
-						</div>
-					</div>
-			<button type="button" class="btn btn-block btn-info btn-sm"
-				style="width: 80px;">등록</button>
-				</div>
-			<div id="table-content">
-				<div class="card-body table-responsive p-0">
-					<table class="table table-hover text-center">
-						<thead>
-							<tr>
-								<th>프로젝트번호</th>
-								<th>산출물이름</th>
-								<th>작성자</th>
-								<th>등록일</th>
-								<th>산출물내용</th>
-								<th>프로젝트 담장자</th>
-
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>P12313121</td>
-								<td>1월12일산출물 자료</td>
-								<td>송창현</td>
-								<td>2022-03-12</td>
-								<td>산출물 내용이 들어갑니다.</td>
-								<td>서승훈</td>
-
-							</tr>
-							<tr>
-								<td>P12313121</td>
-								<td>1월12일산출물 자료</td>
-								<td>송창현</td>
-								<td>2022-03-12</td>
-								<td>산출물 내용이 들어갑니다.</td>
-								<td>서승훈</td>
-
-							</tr>
-							<tr>
-								<td>P12313121</td>
-								<td>1월12일산출물 자료</td>
-								<td>송창현</td>
-								<td>2022-03-12</td>
-								<td>산출물 내용이 들어갑니다.</td>
-								<td>서승훈</td>
-
-							</tr>
-							<tr>
-								<td>P12313121</td>
-								<td>1월12일산출물 자료</td>
-								<td>송창현</td>
-								<td>2022-03-12</td>
-								<td>산출물 내용이 들어갑니다.</td>
-								<td>서승훈</td>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
+         <div class="card-header">
+            <h3 class="card-title">진행 프로젝트</h3>
+         </div>
+            <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse;">
+               <div class="input-group input-group-sm" style="width: 270px">
+                  <select class="form-control-sm" name="searchType" id="searchType" style="hegith:30px; width:90px !important; border-color:#CED4DA !important;">
+							<option value="tcw"  ${cri.searchType eq 'tcw' ? 'selected':'' }>전 체</option>
+							<option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제 목</option>
+							<option value="w" ${cri.searchType eq 'w' ? 'selected':'' }>작성자</option>
+							<option value="c" ${cri.searchType eq 'c' ? 'selected':'' }>내 용</option>
+						</select>
+                  <input type="text" name="table_search"
+                     class="form-control float-right" placeholder="Search">
+                  <div class="input-group-append">
+                  	
+                  	
+                     <button type="submit" class="btn btn-default" onclick="list_go(1)">
+                        <i class="fas fa-search"></i>
+                     </button>
+                  </div>
+               </div>
+         <button type="button" class="btn btn-block btn-info btn-sm"
+            style="width: 80px;">등록</button>
+            </div>
+         <div id="table-content">
+            <div class="card-body table-responsive p-0">
+               <table class="table table-hover">
+                  <thead class="text-left">
+                <tr>
+                  <th style="width:20%">프로젝트 이름</th>
+                  <th style="width:30%">프로젝트 상태</th>
+                  <th style="width:20%">등록 날짜</th>
+                  <th style="width:15%">요구사항</th>
+                  <th style="width:15%">설명</th>
+                </tr>
+              </thead>
+              <tbody class="text-left">
+              	<c:if test="${empty issueList}">
+				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
+			 	 </c:if>
+			 	 <c:forEach items="${issueList }" var="project">
+					 <tr>
+			                  <td style="text-align:left;max-width:20%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;">${issue_name}</td>
+			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;">${issue_status}</td>
+			                  <td style="text-align:left;max-width: 20%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;">${issue_regdate}</td>
+			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;">test</td>
+			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;"> ${issue_discription}</td>
+	                </tr>
+			 	 </c:forEach>
+                
+                
+              </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
 	</div>
 </div>

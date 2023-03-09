@@ -10,6 +10,20 @@
 	<bean id="issueDAO" class="com.sbs.IdH.dao.IssueDAOImpl" p:session-ref="sqlSession"/>
 	<bean id="minutesDAO" class="com.sbs.IdH.dao.MinutesDAOImpl" p:session-ref="sqlSession"/>
 	<bean id="workDAO" class="com.sbs.IdH.dao.WorkDAOImpl" p:session-ref="sqlSession"/>
+	<bean id="menuDAO" class="com.sbs.IdH.dao.MenuDAOImpl" p:session-ref="sqlSession"/>
+	
+	<bean id="issueService"
+		  class="com.sbs.IdH.service.IssueServiceImpl"
+		  p:issueDAO-ref="issueDAO" />
+	<bean id="minutesService"
+		  class="com.sbs.IdH.service.MinutesServiceImpl"
+		  p:minutesDAO-ref="minutesDAO" />
+	<bean id="workService"
+		  class="com.sbs.IdH.service.WorkServiceImpl"
+		  p:workDAO-ref="workDAO" />
+	<bean id="menuService"
+		  class="com.sbs.IdH.service.MenuServiceImpl"
+		  p:menuDAO-ref="menuDAO" />
 	
 </beans>
 

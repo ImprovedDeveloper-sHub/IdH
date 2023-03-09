@@ -36,10 +36,6 @@
 	border-bottom: #eaecee solid 1px;
 }
 
-#table-content tbody tr:hover {
-	background: #fefaf2;
-}
-
 .name-td {
 	font-size: 13px;
 	font-weight: 600;
@@ -50,6 +46,14 @@
 	font-size: 13px;
 	color: #64697a;
 }
+
+input {
+	width: 100%;
+	font-size: 13px;
+	color: #64697a;
+	border:none;
+}
+
 </style>
 
 <!-- CSS end -->
@@ -95,19 +99,17 @@
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">할당자</td>
-								<td class="table-td">서승훈</td>
+								<td colspan="5"><input type="text"
+									placeholder="할당자를 입력하세요." /></td>
 							</tr>
 							<tr>
 								<td class="name-td">제목</td>
-								<td class="table-td">이슈발생~~~</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
+								<td colspan="5"><input type="text"
+									placeholder="제목을 입력하여 주세요." /></td>
 							</tr>
 							<tr style="height: 100px;">
 								<td class="name-td">내용</td>
-								<td class="table-td" colspan="5" style="height:250px;">lorem itsum</td>
+								<td class="table-td td-summernote" colspan="5"><textarea class="summernote" rows="15" cols="40" style="display:none;"></textarea></td>
 							</tr>
 
 							<tr>
@@ -125,4 +127,8 @@
 		</div>
 	</div>
 </div>
-
+<script>
+	window.onload = function() {
+		summernote_go($('.summernote'),'<%=request.getContextPath()%>');
+	};
+</script>

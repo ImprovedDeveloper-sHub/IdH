@@ -61,14 +61,19 @@ public class IssueVO {
 		this.issue_getter_id = issue_getter_id;
 	}
 	public IssueVO() {}
-	public IssueVO(int issue_number, String issue_title, String issue_content, int issue_level,
-			Date issue_regdate, String issue_setter_id, int issue_project_number, String issue_getter_id) {
+	public Date getIssue_regdate() {
+		return issue_regdate;
+	}
+	public void setIssue_regdate(Date issue_regdate) {
+		this.issue_regdate = issue_regdate;
+	}
+	public IssueVO(int issue_number, String issue_title, String issue_content, int issue_level, Date issue_regdate,
+			String issue_setter_id, int issue_project_number, String issue_getter_id) {
 		super();
 		this.issue_number = issue_number;
 		this.issue_title = issue_title;
 		this.issue_content = issue_content;
 		this.issue_level = issue_level;
-		this.issue_regdate = issue_regdate;
 		this.issue_regdate = issue_regdate;
 		this.issue_setter_id = issue_setter_id;
 		this.issue_project_number = issue_project_number;

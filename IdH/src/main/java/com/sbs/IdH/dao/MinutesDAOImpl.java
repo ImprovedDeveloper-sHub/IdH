@@ -1,7 +1,9 @@
 package com.sbs.IdH.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.sbs.IdH.command.SearchCriteria;
@@ -16,7 +18,11 @@ public class MinutesDAOImpl implements MinutesDAO{
 	
 	@Override
 	public List<MinutesVO> selectSearchMinutesList(SearchCriteria cri) {
-		List<MinutesVO>minutesList = session.selectList("Minutes-Mapper.selectSearchMinutesList");
+		int offset = cri.getStartRowNum();
+		int limit = cri.getPerPageNum();
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		
+		List<MinutesVO>minutesList = session.selectList("Minutes-Mapper.selectSearchMinutesList",cri,rowBounds);
 		return minutesList;
 	}
 
@@ -27,7 +33,7 @@ public class MinutesDAOImpl implements MinutesDAO{
 	}
 
 	@Override
-	public MinutesVO selectMinutesByMinutes_Number(int minutes_number) throws Exception {
+	public MinutesVO selectMinutesByMinutes_Number(int minutes_number) throws SQLException {
 		MinutesVO minutes = session.selectOne("Minutes-Mapper.selectMinutesByMinutes_Number",minutes_number);
 		return minutes;
 	}
@@ -48,6 +54,12 @@ public class MinutesDAOImpl implements MinutesDAO{
 	public void deleteMinutes(int minutes_number) {
 		session.update("Minutes-Mapper.deleteMinutes",minutes_number);
 		
+	}
+
+	@Override
+	public int selectMinutesCriteriaTotalCount(SearchCriteria cri) {
+		int count = session.selectOne("Minutes-Mapper.selectSearchMinutesListCount",cri);
+		return count;
 	}
 
 }

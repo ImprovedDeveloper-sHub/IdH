@@ -1,5 +1,6 @@
 package com.sbs.IdH.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -16,14 +17,18 @@ public class IssueDAOImpl implements IssueDAO{
 	}
 
 	@Override
-	public IssueVO selectIssueByIssue_Number(int issue_number) throws Exception {
+	public IssueVO selectIssueByIssue_Number(int issue_number) throws SQLException {
 		IssueVO issue = session.selectOne("Issue-Mapper.selectIssueByIssue_Number",issue_number);
 		return issue;
 	}
 
 	@Override
 	public List<IssueVO> selectSearchIssueList(SearchCriteria cri) {
-		List<IssueVO> issueList = session.selectList("Issue-Mapper.selectSearchIssueList",cri);
+		int offset = cri.getStartRowNum();
+		int limit = cri.getPerPageNum();
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		
+		List<IssueVO> issueList = session.selectList("Issue-Mapper.selectSearchIssueList",cri,rowBounds);
 		return issueList;
 	}
 
@@ -49,6 +54,12 @@ public class IssueDAOImpl implements IssueDAO{
 	public void deleteIssue(int issue_number) {
 		session.update("Issue-Mapper.deleteIssue",issue_number);
 		
+	}
+
+	@Override
+	public int selectIssueCriteriaTotalCount(SearchCriteria cri) {
+		int count = session.selectOne("Issue-Mapper.selectSearchIssueListCount",cri);
+		return count;
 	}
 	
 }

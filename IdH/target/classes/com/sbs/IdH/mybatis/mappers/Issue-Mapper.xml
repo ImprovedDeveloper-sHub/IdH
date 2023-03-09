@@ -18,7 +18,14 @@
 		<if test="searchType == 'l'.toString() ">
 			and issue_level like '%'||#{keyword}||'%'
 		</if>
+		<if test="memberId != null and memberStatus = 1">
+			and issue_setter_id = #{memberId}
+		</if>
+		<if test="memberId != null and memberStatus = 2">
+			and issue_getter_id = #{memberId}
+		</if>
 	</sql>
+	
 	
 	<select id="selectSearchIssueList" resultType="issue">
 		select
