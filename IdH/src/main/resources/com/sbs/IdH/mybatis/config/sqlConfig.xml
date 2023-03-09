@@ -10,8 +10,9 @@
 		<typeAlias type="java.lang.Integer" alias="int" />
 		
 		<typeAlias type="com.sbs.IdH.dto.ProductVO" alias="product"/>
-			<typeAlias type="com.sbs.IdH.dto.CompanyruleVO" alias="companyrule"/>
-				<typeAlias type="com.sbs.IdH.dto.CoworkVO" alias="cowork"/>
+		<typeAlias type="com.sbs.IdH.dto.CompanyruleVO" alias="companyrule"/>
+		<typeAlias type="com.sbs.IdH.dto.CoworkVO" alias="cowork"/>
+		<typeAlias type="com.sbs.IdH.dto.Product_AttachVO" alias="product_attach"/>
 		
 	</typeAliases>
 	

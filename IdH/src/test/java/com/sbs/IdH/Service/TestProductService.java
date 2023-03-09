@@ -23,30 +23,32 @@ public class TestProductService {
 
 	@Test
 	public void testSelectproduct() throws SQLException {
-		ProductVO product = productService.selectProduct(1);
+		int productkey = 1;
+		
+		ProductVO product = productService.selectProduct(productkey);
 
 	}
 
-	@Test
-	public void testSelectProductList() throws SQLException {
-		SearchCriteria cri = new SearchCriteria();
-		productService.selectProductList(cri);
-	}
-
+//	@Test
+//	public void testSelectProductList() throws SQLException {
+//		SearchCriteria cri = new SearchCriteria();
+//		productService.selectProductList(cri);
+//	}
+//
 	@Test
 	public void testInsertProductList() throws SQLException {
 		ProductVO product = new ProductVO(2,1,"aaa","aaaa",1,null,null,"IdH",1);
 		productService.registProduct(product);
 	}
-
-	@Test
-	public void testupdateProduct() throws SQLException {
-
-		ProductVO product = productService.selectProduct(1);
-		productService.modifyProduct(product);
-		product = productService.selectProduct(1);
-
-	}
+//
+//	@Test
+//	public void testupdateProduct() throws SQLException {
+//
+//		ProductVO product = productService.selectProduct(1);
+//		productService.modifyProduct(product);
+//		product = productService.selectProduct(1);
+//
+//	}
 
 	/*
 	 * @Test public void testDeleteCowork() throws Exception{

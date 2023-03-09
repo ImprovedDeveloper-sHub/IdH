@@ -28,7 +28,9 @@ public interface ProductService {
 		// 글삭제
 		void removeProduct(int product_number) throws SQLException;
 
-		Product_AttachVO getProduct_AttachByAno(int product_attach_number)throws SQLException;
+		Product_AttachVO selectProduct_AttachByAno(int ano)throws SQLException;
 		
-	    void removeProduct_Attach(int product_attach_number)throws SQLException;
+	    void removeProduct_AttachByAno(int ano)throws SQLException;
+	    
+	    
 }

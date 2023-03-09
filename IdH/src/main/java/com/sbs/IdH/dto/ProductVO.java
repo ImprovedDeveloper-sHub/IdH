@@ -1,6 +1,7 @@
 package com.sbs.IdH.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class ProductVO {
 
@@ -13,10 +14,16 @@ public class ProductVO {
     private Date product_modifydate;
     private String product_member_id;
     private int product_project_number;
-    
-    
+    private List<Product_AttachVO> attachList;
 
-	
+    
+    
+    public List<Product_AttachVO> getAttachList() {
+		return attachList;
+	}
+	public void setProduct_AttachList(List<Product_AttachVO> attachList) {
+		this.attachList = attachList;
+	}
 	
 	public int getProduct_number() {
 		return product_number;

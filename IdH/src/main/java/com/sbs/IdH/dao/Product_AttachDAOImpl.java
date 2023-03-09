@@ -10,9 +10,13 @@ import com.sbs.IdH.dto.Product_AttachVO;
 public class Product_AttachDAOImpl implements Product_AttachDAO{
 
 	private SqlSession session;
+	public void setSession(SqlSession session) {
+		this.session = session;
+	}
+
 	@Override
-	public List<Product_AttachVO> selectAttachesByProduct_attach_number(int product_attach_number) throws SQLException {
-		List<Product_AttachVO> attachList=session.selectList("Product_Attach-Mapper.selectAttachByProduct_attach_number",product_attach_number);
+	public List<Product_AttachVO> selectAttachesByProduct_number(int product_number) throws SQLException {
+		List<Product_AttachVO> attachList=session.selectList("Product_Attach-Mapper.selectAttachByProduct_number",product_number);
 		return attachList;
 	}
 
@@ -34,8 +38,8 @@ public class Product_AttachDAOImpl implements Product_AttachDAO{
 	}
 
 	@Override
-	public void deleteAllProduct_Attach(int product_attach_number) throws SQLException {
-		session.update("Product_Attach-Mapper.deleteAllProduct_Attach",product_attach_number);		
+	public void deleteAllProduct_Attach(int product_number) throws SQLException {
+		session.update("Product_Attach-Mapper.deleteAllProduct_Attach",product_number);		
 	}
 	
 

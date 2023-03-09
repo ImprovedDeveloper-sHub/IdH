@@ -12,95 +12,103 @@ import com.sbs.IdH.dao.Product_AttachDAO;
 import com.sbs.IdH.dto.ProductVO;
 import com.sbs.IdH.dto.Product_AttachVO;
 
-public class ProductServiceImpl implements ProductService{
-	
+public class ProductServiceImpl implements ProductService {
+
 	private ProductDAO productDAO;
-		
+	private Product_AttachDAO product_attachDAO;
 	public void setProductDAO(ProductDAO productDAO) {
 		this.productDAO = productDAO;
 	}
-	private Product_AttachDAO product_attachDAO;
+	public void setProduct_attachDAO(Product_AttachDAO product_attachDAO) {
+		this.product_attachDAO = product_attachDAO;
+	}
 
 	@Override
 	public Map<String, Object> selectProductList(SearchCriteria cri) throws SQLException {
-		
-			List<ProductVO> productList = productDAO.selectProductCriteria(cri);
-			if (productList != null)
-				for (ProductVO product : productList);
-			
-			/*
-			 * addProduct_AttachList(productList);
-			 */
-			PageMaker pageMaker = new PageMaker();
-			pageMaker.setCri(cri);
-			pageMaker.setTotalCount(productDAO.selectProductCriteriaTotalCount(cri));
 
-			Map<String, Object> dataMap = new HashMap<String, Object>();
-			dataMap.put("productList", productList);
-			dataMap.put("pageMaker", pageMaker);
+		List<ProductVO> productList = productDAO.selectProductCriteria(cri);
+		if (productList != null)
+			for (ProductVO product : productList)
+				addAttachList(product);
 
-			return dataMap;
-		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(productDAO.selectProductCriteriaTotalCount(cri));
+
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		dataMap.put("productList", productList);
+		dataMap.put("pageMaker", pageMaker);
+
+		return dataMap;
+
 	}
+
 	@Override
 	public void registProduct(ProductVO product) throws SQLException {
-		
-			int product_number = productDAO.selectProductSeqNextValue();
-			product.setProduct_number(product_number);
-			productDAO.insertProduct(product);
 
-		
-		}
+		int product_number = productDAO.selectProductSeqNextValue();
+		product.setProduct_number(product_number);
+		productDAO.insertProduct(product);
 
-	
-
+	}
 
 	@Override
 	public ProductVO readProduct(int product_number) throws SQLException {
-		
-		
 
-			ProductVO product = productDAO.selectProduct(product_number);
-			productDAO.increaseViewCnt(product_number);
+		ProductVO product = productDAO.selectProduct(product_number);
+		productDAO.increaseViewCnt(product_number);
 
-			
-			return product;
+		return product;
 
-		
 	}
 
 	@Override
 	public ProductVO selectProduct(int product_number) throws SQLException {
-		
 
-			ProductVO product = productDAO.selectProduct(product_number);
+		ProductVO product = productDAO.selectProduct(product_number);
 
-		
-			
-			return product;
-		
+		return product;
+
 	}
 
 	@Override
 	public void modifyProduct(ProductVO product_number) throws SQLException {
-		
-			productDAO.updateProduct(product_number);
-	}
 
+		productDAO.updateProduct(product_number);
+	}
 
 	@Override
 	public void removeProduct(int product_number) throws SQLException {
 		productDAO.deleteProduct(product_number);
 	}
-	@Override
-	public Product_AttachVO getProduct_AttachByAno(int product_attach_number) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+
+	private void addAttachList(ProductVO product) throws SQLException {
+
+		if (product == null)
+			return;
+
+		int product_number = product.getProduct_number();
+		List<Product_AttachVO> attachList = product_attachDAO.selectAttachesByProduct_number(product_number);
+
+		product.setProduct_AttachList(attachList);
+		System.out.println("product");
+		System.out.println("attachList");
 	}
+
 	@Override
-	public void removeProduct_Attach(int product_attach_number) throws SQLException {
-		// TODO Auto-generated method stub
-		
+	public Product_AttachVO selectProduct_AttachByAno(int ano) throws SQLException {
+
+		Product_AttachVO product_attach = product_attachDAO.selectProduct_AttachByAno(ano);
+
+		return product_attach;
+
+	}
+
+	@Override
+	public void removeProduct_AttachByAno(int ano) throws SQLException {
+
+		product_attachDAO.deleteProduct_Attach(ano);
+
 	}
 
 }

@@ -11,14 +11,22 @@
 <div class="content-parts col-8">
       <div id="content" class="card">
          <div class="card-header">
-            <h3 class="card-title"></h3>
+            <h3 class="card-title">정책관리</h3>
          </div>
             <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse;">
-               <div class="input-group input-group-sm" style="width: 150px;">
+               <div class="input-group input-group-sm" style="width: 270px">
+                  <select class="form-control-sm" name="searchType" id="searchType" style="hegith:30px; width:90px !important; border-color:#CED4DA !important;">
+                     <option value="tcw"  ${cri.searchType eq 'n' ? 'selected':'' }>전 체</option>
+                     <option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제목</option>
+                     <option value="w" ${cri.searchType eq 'l' ? 'selected':'' }>수준</option>
+                     <option value="c" ${cri.searchType eq 'c' ? 'selected':'' }>내용</option>
+                  </select>
                   <input type="text" name="table_search"
                      class="form-control float-right" placeholder="Search">
                   <div class="input-group-append">
-                     <button type="submit" class="btn btn-default">
+                     
+                     
+                     <button type="submit" class="btn btn-default" onclick="list_go(1)">
                         <i class="fas fa-search"></i>
                      </button>
                   </div>
@@ -28,118 +36,38 @@
             </div>
          <div id="table-content">
             <div class="card-body table-responsive p-0">
-               <table class="table table-hover text-center">
-                  <thead>
-                     <tr>
-                        <th>프로젝트번호</th>
-                        <th>산출물이름</th>
-                        <th>작성자</th>
-                        <th>등록일</th>
-                        <th>산출물내용</th>
-                        <th>프로젝트 담장자</th>
-
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                        <td>P12313121</td>
-                        <td>1월12일산출물 자료</td>
-                        <td>송창현</td>
-                        <td>2022-03-12</td>
-                        <td>산출물 내용이 들어갑니다.</td>
-                        <td>서승훈</td>
-
-                     </tr>
-                                                              <tr>
-                        <td>P12313121</td>
-                        <td>1월12일산출물 자료</td>
-                        <td>송창현</td>
-                        <td>2022-03-12</td>
-                        <td>산출물 내용이 들어갑니다.</td>
-                        <td>서승훈</td>
-
-                     </tr>
-                                                              <tr>
-                        <td>P12313121</td>
-                        <td>1월12일산출물 자료</td>
-                        <td>송창현</td>
-                        <td>2022-03-12</td>
-                        <td>산출물 내용이 들어갑니다.</td>
-                        <td>서승훈</td>
-
-                     </tr>
-                                                              <tr>
-                        <td>P12313121</td>
-                        <td>1월12일산출물 자료</td>
-                        <td>송창현</td>
-                        <td>2022-03-12</td>
-                        <td>산출물 내용이 들어갑니다.</td>
-                        <td>서승훈</td>
-
-                     </tr>
-                                                              <tr>
-                        <td>P12313121</td>
-                        <td>1월12일산출물 자료</td>
-                        <td>송창현</td>
-                        <td>2022-03-12</td>
-                        <td>산출물 내용이 들어갑니다.</td>
-                        <td>서승훈</td>
-
-                     </tr>
-                                                              <tr>
-                        <td>P12313121</td>
-                        <td>1월12일산출물 자료</td>
-                        <td>송창현</td>
-                        <td>2022-03-12</td>
-                        <td>산출물 내용이 들어갑니다.</td>
-                        <td>서승훈</td>
-
-                     </tr>
-                                                              <tr>
-                        <td>P12313121</td>
-                        <td>1월12일산출물 자료</td>
-                        <td>송창현</td>
-                        <td>2022-03-12</td>
-                        <td>산출물 내용이 들어갑니다.</td>
-                        <td>서승훈</td>
-
-                     </tr>
-                                                              <tr>
-                        <td>P12313121</td>
-                        <td>1월12일산출물 자료</td>
-                        <td>송창현</td>
-                        <td>2022-03-12</td>
-                        <td>산출물 내용이 들어갑니다.</td>
-                        <td>서승훈</td>
-
-                     </tr>
-                                                           
-                     <tr>
-                        <td>P12313121</td>
-                        <td>1월12일산출물 자료</td>
-                        <td>송창현</td>
-                        <td>2022-03-12</td>
-                        <td>산출물 내용이 들어갑니다.</td>
-                        <td>서승훈</td>
-
-                     </tr>
-                     <tr>
-                        <td>P12313121</td>
-                        <td>1월12일산출물 자료</td>
-                        <td>송창현</td>
-                        <td>2022-03-12</td>
-                        <td>산출물 내용이 들어갑니다.</td>
-                        <td>서승훈</td>
-
-                     </tr>
-                     <tr>
-                        <td>P12313121</td>
-                        <td>1월12일산출물 자료</td>
-                        <td>송창현</td>
-                        <td>2022-03-12</td>
-                        <td>산출물 내용이 들어갑니다.</td>
-                        <td>서승훈</td>
-                  </tbody>
+               <table class="table table-hover">
+                  <thead class="text-left">
+                <tr>
+                  <th style="width:15%">번호</th>
+                  <th style="width:20%">제목</th>
+                  <th style="width:15%">담당자</th>
+                  <th style="width:15%">등록일</th>
+                  <th style="width:35%">내용</th>
+                
+                </tr>
+              </thead>
+              <tbody class="text-left">
+              <c:if test="${empty productList}">
+              <tr><td colspan="5">데이터가 없습니다.</td></tr>
+              </c:if>
+              <c:forEach items="${productList }" var="product">
+                <tr>
+                           <td style="text-align:left;max-width:15%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;">${product.product_number}</td>
+                           <td style="text-align:left;max-width: 20%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;">${product.product_title}</td>
+                           <td style="text-align:left;max-width: 15%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;">${product.product_member_id}</td>
+                           <td style="text-align:left;max-width: 15%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;" ><fmt:formatDate value="${product.product_regdate}" pattern="yyyy-MM-dd"/></td>
+                           <c:forEach items="${product.attachList }" var="attach">
+                           <td style="text-align:left;max-width: 35%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;">${attach.ano}</td>
+                           </c:forEach>
+                   </tr>
+              </c:forEach>
+              </tbody>
                </table>
             </div>
          </div>

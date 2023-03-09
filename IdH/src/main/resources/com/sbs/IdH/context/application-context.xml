@@ -5,27 +5,32 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-
-	<context:component-scan
-		base-package="kr.ac.sbs.service" />
+<!-- songchanghyun -->
+	
+	<context:component-scan base-package="com.sbs.IdH.service" />
+	
+	
 	<bean id="productDAO" class="com.sbs.IdH.dao.ProductDAOImpl"
 		p:session-ref="sqlSession" />
 	<bean id="companyruleDAO"
 		class="com.sbs.IdH.dao.CompanyruleDAOImpl" p:session-ref="sqlSession" />
 	<bean id="coworkDAO" class="com.sbs.IdH.dao.CoworkDAOImpl"
 		p:session-ref="sqlSession" />
-	<bean id="coworkService"
-		class="com.sbs.IdH.service.CoworkServiceImpl"
+ 	<bean id="product_attachDAO" class="com.sbs.IdH.dao.Product_AttachDAOImpl"
+		p:session-ref="sqlSession" /> 
+		
+		
+	<bean id="coworkService" class="com.sbs.IdH.service.CoworkServiceImpl"
 		p:coworkDAO-ref="coworkDAO" />
-	<bean id="productService"
-		class="com.sbs.IdH.service.ProductServiceImpl"
-		p:productDAO-ref="productDAO" />
-		<bean id="companyruleService"
-		class="com.sbs.IdH.service.CompanyruleServiceImpl"
+	<bean id="productService" class="com.sbs.IdH.service.ProductServiceImpl"
+		p:productDAO-ref="productDAO" 
+	    p:product_attachDAO-ref="product_attachDAO"/> 
+ 	<bean id="companyruleService" class="com.sbs.IdH.service.CompanyruleServiceImpl"
 		p:companyruleDAO-ref="companyruleDAO" />
+		 
 </beans>
 
-
+<!-- songchanghyun -->
 
 
 

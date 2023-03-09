@@ -4,10 +4,10 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Product_Attach-Mapper">
-	<select id="selectAttachByProduct_attach_number" resultType="product_attach">
+	<select id="selectAttachByProduct_number" resultType="product_attach">
 		select * 
 		from product_attach 
-		where product_attach_number = #{product_attach_number}
+		where product_number = #{product_number}
 	</select>	
 	
 	<select id="selectProduct_AttachByAno" resultType="product_attach">
@@ -18,9 +18,9 @@
 	
 	<update id="insertProduct_Attach">
 		insert into 
-		product_attach (ano, uploadpath, filename, filetype, product_attach_number, product_attach_attacher)
+		product_attach (ano, uploadpath, filename, filetype, product_number, product_attach_attacher)
 		values (product_attach_seq.nextval, #{uploadPath}, #{fileName},#{fileType}, 
-				#{product_attach_number},#{product_attach_attacher} )
+				#{product_number},#{product_attach_attacher} )
 	</update>
 	
 	<update id="deleteProduct_Attach">
@@ -30,7 +30,7 @@
 	<update id="deleteAllProduct_Attach">
 		delete 
 		from product_attach 
-		where product_attach_number = #{product_attach_number}
+		where ano = #{ano}
 	</update>
 </mapper>
 
