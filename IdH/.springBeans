@@ -9,6 +9,7 @@
 	<configs>
 	</configs>
 	<autoconfigs>
+		<config>src/main/resources/com/sbs/IdH/context/servlet-context.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>

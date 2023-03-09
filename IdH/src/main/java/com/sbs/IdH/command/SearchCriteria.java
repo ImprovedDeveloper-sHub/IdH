@@ -1,3 +1,4 @@
+
 package com.sbs.IdH.command;
 
 public class SearchCriteria {
