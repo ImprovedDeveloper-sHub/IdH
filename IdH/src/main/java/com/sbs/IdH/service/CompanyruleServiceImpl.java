@@ -23,8 +23,7 @@ public class CompanyruleServiceImpl implements CompanyruleService {
 	public Map<String, Object> selectCompanyruleList(SearchCriteria cri) throws SQLException {
 		List<CompanyruleVO> companyruleList = companyruleDAO.selectCompanyruleCriteria(cri);
 		if (companyruleList != null)
-			for (CompanyruleVO companyrule : companyruleList)
-				;
+			for (CompanyruleVO companyrule : companyruleList);
 
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
@@ -33,7 +32,7 @@ public class CompanyruleServiceImpl implements CompanyruleService {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("companyruleList", companyruleList);
 		dataMap.put("pageMaker", pageMaker);
-
+		System.out.println(companyruleList.get(0));
 		return dataMap;
 
 	}

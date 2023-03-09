@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.ProductVO;
+import com.sbs.IdH.dto.Product_AttachVO;
 
 public interface ProductService {
 	
@@ -27,4 +28,7 @@ public interface ProductService {
 		// 글삭제
 		void removeProduct(int product_number) throws SQLException;
 
+		Product_AttachVO getProduct_AttachByAno(int product_attach_number)throws SQLException;
+		
+	    void removeProduct_Attach(int product_attach_number)throws SQLException;
 }
