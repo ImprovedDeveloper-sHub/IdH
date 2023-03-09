@@ -7,13 +7,9 @@
 	</configSuffixes>
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
-<<<<<<< HEAD
-=======
-		<config>src/main/resources/com/sbs/IdH/context/servlet-context.xml</config>
-		<config>src/main/resources/com/sbs/IdH/context/root-context.xml</config>
->>>>>>> refs/remotes/origin/choi
 	</configs>
 	<autoconfigs>
+		<config>src/main/resources/com/sbs/IdH/context/servlet-context.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>

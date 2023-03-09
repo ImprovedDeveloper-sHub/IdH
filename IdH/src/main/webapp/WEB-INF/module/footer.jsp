@@ -99,14 +99,9 @@ window.onload = function(){
 <!-- AdminLTE App -->
 <script
 	src="<%=request.getContextPath() %>/resources/bootstrap/dist/js/adminlte.min.js"></script>
-<<<<<<< HEAD
 <script
 	src="<%=request.getContextPath() %>/resources/js/common.js"></script>
 
-=======
-<!-- common -->
-<script src="<%=request.getContextPath() %>/resources/js/common.min.js"></script>
->>>>>>> refs/remotes/origin/choi
 </body>
 </html>
 
