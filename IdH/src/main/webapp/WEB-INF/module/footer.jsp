@@ -28,6 +28,8 @@
 					//alert('test');
 					//console.log(JSON.stringify(data));
 					printSubMenu(data,$('.subMenuList'),$('#subMenu-list-template'),'.subMenuList');
+					//acitve css주는 함수.
+					
 				},
 				error:function(error){
 					AjaxErrorSecurityRedirectHandler(error.status);	
