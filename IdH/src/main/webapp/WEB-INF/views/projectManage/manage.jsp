@@ -14,7 +14,139 @@
       <div class="col-6">
       	<div id="content" class="card">
          <div class="card-header">
-            <h3 class="card-title">진행 프로젝트</h3>
+            <h3 class="card-title">일정관리</h3>
+         </div>
+            <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse;">
+               <div class="input-group input-group-sm" style="width: 270px">
+               <select name="perPageNum" style="display:none"><option value="5" selected></option></select>
+                  <select class="form-control-sm" name="searchType" id="searchType" style="hegith:30px; width:90px !important; border-color:#CED4DA !important;">
+							<option value="n" ${cri.searchType eq 'n' ? 'selected':'' }>제목</option>
+							<option value="d" ${cri.searchType eq 'd' ? 'selected':'' }>내용</option>
+							
+						</select>
+                  <input type="text" name="keyword"
+                     class="form-control float-right" placeholder="Search">
+                  <div class="input-group-append">
+                  	<button type="submit" class="btn btn-default" onclick="search_go_ajax(0, '<%=request.getContextPath()%>/projectManage/getProceeding', $('.proceedingThead'),$('#proceedingProject-list-template'))">
+                        <i class="fas fa-search"></i>
+                     </button>
+                  	
+                   
+                  </div>
+               </div>
+         <button type="button" class="btn btn-block btn-info btn-sm"
+            style="width: 80px; " onclick="OpenWindow('detail.do?from=list&bno=','상세보기',800,700);">등록</button>
+            </div>
+         <div id="table-content">
+            <div  class="card-body table-responsive p-0">
+               <table  class="table table-hover">
+                  <thead class="proceedingThead" class="text-left">
+	                <tr>
+	                  <th style="width:20%">일정 이름</th>
+	                  <th style="width:30%">일정 상태</th>
+	                  <th style="width:20%">시작 날짜</th>
+	                  <th style="width:15%">종료 날짜</th>
+	                  <th style="width:15%">일정 설명</th>
+	                </tr>
+              	</thead>
+              
+              <tbody class="proceedingProjectLi" class="text-left">
+              	<c:if test="${empty proceedingProjectList}">
+				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
+			 	 </c:if>
+			 	 <c:forEach items="${proceedingProjectList }" var="project">
+					 <tr>
+			                  <td style="text-align:left;max-width:20%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;">${schedule.schedule_name}</td>
+			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;">${schedule.schedule_status}</td>
+			                  <td style="text-align:left;max-width: 20%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate value="${schedule.schedule_startdate}" pattern="yyyy-MM-dd"/></td>
+			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate value="${schedule.schedule_enddate}" pattern="yyyy-MM-dd"/></td>
+			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;"> ${schedule.schedule_discription}</td>
+	                </tr>
+			 	 </c:forEach>
+              </tbody>
+              
+               </table>
+            </div>
+            
+            
+         </div>
+      </div>
+      
+      <div id="content" class="card">
+         <div class="card-header">
+            <h3 class="card-title">예산 관리</h3>
+         </div>
+            <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse;">
+               <div class="input-group input-group-sm" style="width: 270px">
+               <select id="searchPerPageNum" name="perPageNum" style="display:none"><option value="5" selected></option></select>
+                  <select class="form-control-sm" name="searchType" id="searchType" style="hegith:30px; width:90px !important; border-color:#CED4DA !important;">
+							<option value="n" ${cri.searchType eq 'n' ? 'selected':'' }>제목</option>
+							<option value="d" ${cri.searchType eq 'd' ? 'selected':'' }>내용</option>
+							
+						</select>
+                  <input type="text" name="keyword"
+                     class="form-control float-right" placeholder="Search">
+                  <div class="input-group-append">
+                  	<button type="submit" class="btn btn-default" onclick="search_go_ajax(0, '<%=request.getContextPath()%>/projectManage/getEnd', $('.endThead'),$('#endProject-list-template'))">
+                        <i class="fas fa-search"></i>
+                     </button>
+                  	
+                   
+                  </div>
+               </div>
+         <button type="button" class="btn btn-block btn-info btn-sm"
+            style="width: 80px;">등록</button>
+            </div>
+         <div id="table-content">
+            <div  class="card-body table-responsive p-0">
+               <table  class="table table-hover">
+                  <thead class="endThead" class="text-left">
+	                <tr>
+	                  <th style="width:20%">사업 예산</th>
+	                  <th style="width:30%">예산 이름</th>
+	                  <th style="width:20%">예산 분류</th>
+	                  <th style="width:15%">예산 금액</th>
+	                  <th style="width:15%">예산 내용</th>
+	                </tr>
+              	</thead>
+              
+              <tbody class="endProjectLi" class="text-left">
+              	<c:if test="${empty endProjectList}">
+				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
+			 	 </c:if>
+			 	 <c:forEach items="${endProjectList }" var="project">
+					 <tr>
+			                  <td>${project.project_number}</td>
+			                  <td>${project.project_name}</td>
+			                  <td>${project.project_regdate}</td>
+			                  <td><span class="tag tag-success"></span></td>
+			                  <td> ${project.project_discription}</td>
+	                </tr>
+				</c:forEach>
+              </tbody>
+              
+               </table>
+            </div>
+            
+            
+         </div>
+      </div>
+       
+
+
+
+        <!--col-6종료-->
+      </div>
+
+     <div class="col-6">
+      	<div id="content" class="card">
+         <div class="card-header">
+            <h3 class="card-title">인력 프로젝트</h3>
          </div>
             <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse;">
                <div class="input-group input-group-sm" style="width: 270px">
@@ -79,7 +211,7 @@
       
       <div id="content" class="card">
          <div class="card-header">
-            <h3 class="card-title">종료 프로젝트</h3>
+            <h3 class="card-title">단위업무</h3>
          </div>
             <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse;">
                <div class="input-group input-group-sm" style="width: 270px">
@@ -107,10 +239,10 @@
                <table  class="table table-hover">
                   <thead class="endThead" class="text-left">
 	                <tr>
-	                  <th style="width:20%">프로젝트 이름</th>
-	                  <th style="width:30%">프로젝트 상태</th>
-	                  <th style="width:20%">등록 날짜</th>
-	                  <th style="width:15%">요구사항</th>
+	                  <th style="width:20%">업무명</th>
+	                  <th style="width:30%">상태</th>
+	                  <th style="width:20%">시작날짜</th>
+	                  <th style="width:15%">종료날짜</th>
 	                  <th style="width:15%">설명</th>
 	                </tr>
               	</thead>
@@ -119,13 +251,13 @@
               	<c:if test="${empty endProjectList}">
 				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
 			 	 </c:if>
-			 	 <c:forEach items="${endProjectList }" var="project">
+			 	 <c:forEach items="${unitworkList }" var="unitwork">
 					 <tr>
-			                  <td>${project.project_number}</td>
-			                  <td>${project.project_name}</td>
-			                  <td>${project.project_regdate}</td>
-			                  <td><span class="tag tag-success"></span></td>
-			                  <td> ${project.project_discription}</td>
+			                  <td>${unitwork.unitwork_name}</td>
+			                  <td>${unitwork.unitwork_check}</td>
+			                  <td>${unitwork.unitwork_startdate}</td>
+			                  <td>${unitwork.unitwork_enddate}</td>
+			                  <td>${unitwork.unitwork_discription}</td>
 	                </tr>
 				</c:forEach>
               </tbody>
@@ -138,101 +270,11 @@
       </div>
        
 
-    <div class="card ">
-          <div class="card-body row">
-            <div class="col-6"><button type="button" class="btn btn-block btn-info btn-sm">프로젝트 계획</button>
-              </div>
-             <div class="col-6"> <button type="button" class="btn btn-block btn-info btn-sm">프로젝트 비교</button>
-</div>
-          </div>
-        </div>
 
 
         <!--col-6종료-->
       </div>
-
-
-      <!--col-6시작-->
-      <div class="col-6">
-
-
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">chart</h3>
-          </div>
-
-          <div class="card-body">
-            <div id="curve_chart"></div>
-            <div id="budget_chart"></div>
-            <div id="schedule_chart"></div>
-            <div id="issue_chart"></div>
-            <div id="product_chart"></div>
-            <div id="workforce_chart"></div>
-          </div>
-          
- 
-        </div>
-
-
-        <div class="card ">
-          <div class="card-body row">
-            <div class="col-4"><button type="button" class="btn btn-block btn-info btn-sm"
-            onclick="ajax_print_chart('budget');">예산현황</button>
-              <button type="button" class="btn btn-block btn-info btn-sm" onclick="ajax_print_chart('workforce');">인력현황</button></div>
-             <div class="col-4"> <button type="button" class="btn btn-block btn-info btn-sm" onclick="ajax_print_chart('schedule');" >일정현황</button>
-              <button type="button" class="btn btn-block btn-info btn-sm" onclick="ajax_print_chart('issue');">이슈현황</button>   
-</div><div class="col-4"> <button type="button" class="btn btn-block btn-info btn-sm" onclick="ajax_print_chart('product');">산출물현황</button></div>
-          </div>
-        </div>
-
-
-        
-        <div class="row">
-          <div class="card col-6 card-info">
-            <div class="card-header ">
-            <h3 class="card-title ">종료 프로젝트</h3>
-           
-               <div class="card-body table-responsive p-0">
-            <table class="table table-hover ">
-              <thead>
-                <tr>
-                  <th>1</th>
-                  <th>2</th>
-                  <th>3</th>
-                  <th>4</th>
-                  <th>5</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>2</td>
-                  <td>3</td>
-                  <td><span class="tag tag-success">4</span></td>
-                  <td> 5</td>
-                </tr></tbody>
-              </table>
-              
-              
-              </div>
-            </div>
-          </div>
-          
-           <div class="card col-6 card-info">
-            <div class="card-header ">
-            <h3 class="card-title ">종료 프로젝트</h3>
-           
-              <div class="card-body table-responsive p-0">
-            </div>
-              
-              
-              
-            </div>
-          </div>
-        </div>
-      </div>
-
-
+      
       <!--col-6종료-->
 
 	<div>

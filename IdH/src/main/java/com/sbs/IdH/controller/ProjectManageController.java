@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sbs.IdH.command.SearchCriteria;
+import com.sbs.IdH.service.BudgetService;
 import com.sbs.IdH.service.ProjectService;
+import com.sbs.IdH.service.ScheduleService;
+import com.sbs.IdH.service.UnitworkService;
+import com.sbs.IdH.service.WorkforceService;
 
 
 @Controller
@@ -24,7 +28,30 @@ public class ProjectManageController {
 	
 	@Resource
 	private ProjectService projectService;
+	@Resource
+	private BudgetService budgetService;
+	@Resource
+	private UnitworkService unitworkService;
+	@Resource
+	private ScheduleService scheduleService;
+	@Resource
+	private WorkforceService workforceService;
 	
+	public void setProjectService(ProjectService projectService) {
+		this.projectService = projectService;
+	}
+	public void setBudgetService(BudgetService budgetService) {
+		this.budgetService = budgetService;
+	}
+	public void setUnitworkService(UnitworkService unitworkService) {
+		this.unitworkService = unitworkService;
+	}
+	public void setScheduleService(ScheduleService scheduleService) {
+		this.scheduleService = scheduleService;
+	}
+	public void setWorkforceService(WorkforceService workforceService) {
+		this.workforceService = workforceService;
+	}
 	@GetMapping("/main")
 	public ModelAndView projectManage(SearchCriteria cri, ModelAndView mnv) throws Exception {
 		mnv.addAllObjects(projectService.selectProceedingProject(cri));
@@ -32,6 +59,24 @@ public class ProjectManageController {
 		mnv.setViewName("projectManage/main");
 		return mnv;
 	}
+	
+	
+	@GetMapping("/regist")
+	public ModelAndView regist(ModelAndView mnv) {
+		
+		return mnv;
+	}
+	
+	@GetMapping("/manage")
+	public ModelAndView manage(ModelAndView mnv, SearchCriteria cri, int project_number) throws Exception {
+		mnv.addAllObjects( budgetService.selectBudgetListforProject(project_number));
+		mnv.addAllObjects( workforceService.selectWorkforceList(cri));
+		mnv.addAllObjects( unitworkService.selectUnitworkList(cri));
+		mnv.addAllObjects( scheduleService.selectScheduleList(cri));
+		return mnv;
+	}
+	
+	
 	
 	
 	@PostMapping("/getProceeding")

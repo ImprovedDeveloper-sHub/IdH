@@ -1,6 +1,8 @@
 package com.sbs.IdH.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.sbs.IdH.dao.BudgetDAO;
 import com.sbs.IdH.dto.BudgetVO;
@@ -21,14 +23,15 @@ public class BudgetServiceImpl implements BudgetService {
 	}
 
 	@Override
-	public List<BudgetVO> selectBudgetListforProject(int project_number) throws Exception {
+	public Map<String,Object> selectBudgetListforProject(int project_number) throws Exception {
+		Map<String,Object> dataMap = new HashMap<String,Object>();
 		List<BudgetVO> budgetList = budgetDAO.selectSearchBudgetListForProject(project_number);
-		return budgetList;
+		dataMap.put("budgetList", budgetList);
+		return dataMap;
 	}
 
 	@Override
-	public List<BudgetVO> selectBudgetListByMemberId(int project_member_id) throws Exception {
-		
+	public Map<String,Object> selectBudgetListByMemberId(int project_member_id) throws Exception {
 		return null;
 	}
 
