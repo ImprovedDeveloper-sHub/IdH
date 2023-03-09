@@ -39,13 +39,13 @@ public class TestBudgetDAO {
    }
    
    
-   public void testInsertBudgetList() throws Exception{
-	   BudgetVO budget =  new BudgetVO(3, 0, "1", 0, 1, "IdH");
-	   budgetDAO.insertBudget(budget);
-	   BudgetVO budget2 = budgetDAO.selectBudget(3);
-	   
-	   Assert.assertEquals(budget, budget2);
-   }
+	/*
+	 * public void testInsertBudgetList() throws Exception{ BudgetVO budget = new
+	 * BudgetVO(3, 0, "1", 0, 1, "IdH"); budgetDAO.insertBudget(budget); BudgetVO
+	 * budget2 = budgetDAO.selectBudget(3);
+	 * 
+	 * Assert.assertEquals(budget, budget2); }
+	 */
    
    public void testBudget_SEQ() throws Exception{
 	   System.out.println(budgetDAO.selectBudgetSeqNext());

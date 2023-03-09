@@ -43,8 +43,8 @@ public class BudgetDAOImpl implements BudgetDAO{
 	
 	@Override
 	public int selectBudgetSeqNext() throws SQLException {
-		session.update("Budget-Mapper.selectBudgetSeqNext");
-		return 0;
+		int budget_seq = session.update("Budget-Mapper.selectBudgetSeqNext");
+		return budget_seq;
 	}
 
 	
