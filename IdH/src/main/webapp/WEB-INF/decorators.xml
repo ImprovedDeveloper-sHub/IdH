@@ -1,14 +1,13 @@
 <decorators defaultdir="/WEB-INF/decorator">
 
 	<decorator name="member" page="decorator.jsp">
-		<pattern>*</pattern>
-	</decorator>
+		<pattern>/**/*</pattern>
+	</decorator>	
 
 	<decorator name="openWindow" page="open_decorator.jsp">
-		<pattern>/**/*</pattern>
-		<pattern>/main</pattern>
-		<pattern>/detail</pattern>
-		<pattern>/regist</pattern>
+		<pattern>/**/detail</pattern>
+		<pattern>/**/regist</pattern>
+		<pattern>/**/registForm</pattern>
 	</decorator>
 
 	<excludes>

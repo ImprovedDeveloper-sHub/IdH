@@ -8,24 +8,29 @@ import java.util.Map;
 import com.sbs.IdH.command.PageMaker;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.RequireDAO;
+import com.sbs.IdH.dao.Require_attachDAO;
 import com.sbs.IdH.dto.RequireVO;
+import com.sbs.IdH.dto.Require_attachVO;
 
 public class RequireServiceImpl implements RequireService {
 
 	private RequireDAO requireDAO;
+	private Require_attachDAO require_attachDAO;
 	public void setRequireDAO(RequireDAO requireDAO) {
 		this.requireDAO = requireDAO;
 	}
 
-//	private Require_attachDAO require_attachDAO;
-	
+	public void setRequire_attachDAO(Require_attachDAO require_attachDAO) {
+		this.require_attachDAO = require_attachDAO;
+	}
+
 	@Override
 	public Map<String, Object> selectRequireList(SearchCriteria cri) throws SQLException {
 		List<RequireVO> requireList = requireDAO.selectSearchRequireList(cri);
 
-//		if (requireList != null)
-//			for (RequireVO require : requireList)
-//				addAttachList(require);
+		if (requireList != null)
+			for (RequireVO require : requireList)
+				addAttachList(require);
 
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
@@ -46,12 +51,12 @@ public class RequireServiceImpl implements RequireService {
 		require.setRequire_number(require_number);
 		requireDAO.insertRequire(require);
 
-//		if (require.getAttachList() != null)
-//			for (Require_attachVO attach : require.getRequire_attachList()) {
-//				attach.setRequire_number(require_number);
-//				attach.setRequire_writer_id(require.getRequire_writer_id());
-//				require_attachDAO.insertAttach(attach);
-//			}
+		if (require.getAttachList() != null)
+			for (Require_attachVO attach : require.getAttachList()) {
+				attach.setRequire_number(require_number);
+				attach.setRequire_attach_attacher(require.getRequire_writer_id());
+				require_attachDAO.insertRequire_attach(attach);
+			}
 
 		
 	}
@@ -59,7 +64,7 @@ public class RequireServiceImpl implements RequireService {
 	@Override
 	public RequireVO selectRequire(int require_number) throws SQLException {
 		RequireVO require = requireDAO.selectRequire(require_number);
-//		addRequre_attachList(require);
+		addAttachList(require);
 
 		return require;
 	}
@@ -68,15 +73,15 @@ public class RequireServiceImpl implements RequireService {
 	public void modifyRequire(RequireVO require) throws SQLException {
 		
 		requireDAO.updateRequire(require);
-		// attachDAO.deleteAllAttach(pds.getPno());
+		require_attachDAO.deleteAllRequire_attach(require.getRequire_number());
 
-//		if (require.getAttachList() != null)
-//			for (Require_attachVO attach : require.getAttachList()) {
-//				attach.setRequire_number(require.getRequire_number());
-//				attach.setAttacher(require.getRequire_writer_id());
-//				require_attachDAO.insertAttach(attach);
-//
-//			}
+		if (require.getAttachList() != null)
+			for (Require_attachVO attach : require.getAttachList()) {
+				attach.setRequire_number(require.getRequire_number());
+				attach.setRequire_attach_attacher(require.getRequire_writer_id());
+				require_attachDAO.insertRequire_attach(attach);
+
+			}
 
 	}
 		
@@ -88,7 +93,34 @@ public class RequireServiceImpl implements RequireService {
 		requireDAO.deleteRequire(require_number);
 		
 	}
-
 	
+
+
+
+	@Override
+	public Require_attachVO getRequire_attachByAno(int ano) throws SQLException {
+		
+		Require_attachVO attach = require_attachDAO.selectAttachByAno(ano);
+
+		return attach;
+	}
+
+	@Override
+	public void removeRequire_attach_Ano(int ano) throws SQLException {
+
+		require_attachDAO.deleteRequire_attach(ano);
+		
+	}
+	
+	private void addAttachList(RequireVO require) throws SQLException {
+		
+		if (require == null)
+			return;
+		
+		int require_attach_number = require.getRequire_number();
+		List<Require_attachVO> attachList = require_attachDAO.selectRequire_attachsByRequire_number(require_attach_number);
+		
+		require.setAttachList(attachList);
+	}
 	
 }

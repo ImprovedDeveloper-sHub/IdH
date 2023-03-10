@@ -21,4 +21,6 @@ public interface RequireDAO {
 	void deleteRequire(int require_number) throws SQLException;
 
 	int selectRequireSeqNext() throws SQLException;
+	
+	
 }

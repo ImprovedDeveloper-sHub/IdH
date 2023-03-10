@@ -16,13 +16,15 @@
 		p:session-ref="sqlSession" />
 	<bean id="project_authorityDAO" class="com.sbs.IdH.dao.Project_authorityDAOImpl" 
 		p:session-ref="sqlSession" />
+	<bean id="require_attachDAO" class="com.sbs.IdH.dao.Require_attachDAOImpl" 
+		p:session-ref="sqlSession" />
 
 	
 	
  	<!-- Service -->
-<!-- p:require_attachDAO-ref="require_attachDAO" -->
  	<bean id="requireService" class="com.sbs.IdH.service.RequireServiceImpl"
 		p:requireDAO-ref="requireDAO"
+	 	p:require_attachDAO-ref="require_attachDAO"
 	/>  
 	<bean id="memberService" class="com.sbs.IdH.service.MemberServiceImpl"
 		p:memberDAO-ref="memberDAO"
