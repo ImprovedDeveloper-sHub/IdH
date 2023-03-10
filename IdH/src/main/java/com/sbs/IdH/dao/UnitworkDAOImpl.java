@@ -1,7 +1,9 @@
 package com.sbs.IdH.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.catalina.mapper.Mapper;
 import org.apache.ibatis.session.SqlSession;
@@ -77,6 +79,14 @@ public class UnitworkDAOImpl implements UnitworkDAO{
 	public void updateUnitwork(UnitworkVO unitwork) throws SQLException {
 		session.update("Unitwork-Mapper.updateUnitwork", unitwork);
 		
+	}
+
+	@Override
+	public Map<String, Object> selectUnitworkCountForChart(SearchCriteria cri) throws SQLException {
+		Map<String,Object> colMap = new HashMap<String, Object>();
+		int unitwork_count = session.selectOne("Unitwork-Mapper.selectSearchUnitworkListCount", cri);
+		colMap.put("v",unitwork_count);
+		return colMap;
 	}
 
 }

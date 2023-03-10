@@ -46,9 +46,9 @@ public class ChartVO {
 	}
 	
 	public void unitworkColSet() {
-		colMap1.put("label","예산 내용");
+		colMap1.put("label","단위업무 이름");
 		colMap1.put("type","string");
-		colMap2.put("label","예산 액");
+		colMap2.put("label","개수");
 		colMap2.put("type","number");
 		cols.add(colMap1);
 		cols.add(colMap2);

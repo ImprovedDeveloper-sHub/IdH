@@ -43,6 +43,7 @@
 	/>
 	<bean id="unitworkService" class="com.sbs.IdH.service.UnitworkServiceImpl"
 		p:unitworkDAO-ref="unitworkDAO"
+		p:projectDAO-ref="projectDAO"
 	/>
 	<bean id="workforceService" class="com.sbs.IdH.service.WorkforceServiceImpl"
 		p:workforceDAO-ref="workforceDAO"
