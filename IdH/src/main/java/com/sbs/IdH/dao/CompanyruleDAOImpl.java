@@ -40,10 +40,11 @@ public class CompanyruleDAOImpl implements CompanyruleDAO{
 		session.update("Companyrule-Mapper.updateCompanyrule", companyrule);
 	}
 
-	@Override
-	public void increaseViewCnt(int companyrule_number) throws SQLException {
-		session.update("Companyrule-Mapper.increaseViewCnt", companyrule_number);
-	}
+	/*
+	 * @Override public void increaseViewCnt(int companyrule_number) throws
+	 * SQLException { session.update("Companyrule-Mapper.increaseViewCnt",
+	 * companyrule_number); }
+	 */
 
 	@Override
 	public List<CompanyruleVO> selectCompanyruleCriteria(SearchCriteria cri) throws SQLException {

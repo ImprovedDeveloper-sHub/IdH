@@ -15,6 +15,5 @@ public class TestController {
 	@GetMapping("/detail")
 	public void detail() throws Exception {}
 	
-	@GetMapping("/regist")
-	public void regist() throws Exception {}
+	
 }

@@ -17,7 +17,7 @@ public interface CompanyruleDAO {
 	     
 	     void updateCompanyrule(CompanyruleVO companyrule) throws SQLException ;
 	     
-	     void increaseViewCnt(int companyrule_number) throws SQLException ;
+			/* void increaseViewCnt(int companyrule_number) throws SQLException ; */
 	    
 	     List<CompanyruleVO> selectCompanyruleCriteria(SearchCriteria cri) throws SQLException ;
 	     

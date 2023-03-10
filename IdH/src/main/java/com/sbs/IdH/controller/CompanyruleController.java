@@ -38,8 +38,6 @@ public class CompanyruleController {
              return mnv;
 	}
 	
-	
-
 	  
 	  @RequestMapping("/registForm") public String registForm() throws Exception {
 		 
@@ -74,7 +72,7 @@ public class CompanyruleController {
 	  @PostMapping(value = "/regist", produces = "text/plain;charset=utf-8")
 		public String regist(CompanyruleRegistCommand registReq, HttpServletRequest request,RedirectAttributes rttr) 
 																		throws Exception {
-			String url = "redirect:/companyrule/main.do";		
+			String url = "redirect:/companyrule/main";		
 					
 			
 			  List<MultipartFile> multiFiles = registReq.getUploadFile(); String savePath =
@@ -97,6 +95,56 @@ public class CompanyruleController {
 			return url;
 		}
 	  
-	@GetMapping("/detail")
-	public void detail() throws Exception {}
+		@GetMapping("/detail")
+		public ModelAndView detail(int companyrule_number, String from, 
+									RedirectAttributes rttr,
+								    ModelAndView mnv) throws Exception {
+			String url = "/companyrule/detail";
+
+			CompanyruleVO companyrule = null;
+			
+			
+			companyrule = companyruleService.selectCompanyrule(companyrule_number);
+			
+			
+			// 파일명 재정의
+			if (companyrule != null) {
+				List<Co_AttachVO> attachList = companyrule.getAttachList();
+				if (attachList != null) {
+					for (Co_AttachVO attach : attachList) {
+						String fileName = attach.getFileName().split("\\$\\$")[1];
+						attach.setFileName(fileName);
+					}
+				}
+			}
+			
+			mnv.addObject("companyrule", companyrule);
+			mnv.setViewName(url);
+
+			return mnv;
+		}
+		
+		 @GetMapping("/remove")
+		public String remove(int companyrule_number, RedirectAttributes rttr) throws Exception {
+			String url = "redirect:/companyrule/detail.do";
+
+			// 첨부파일 삭제
+			List<Co_AttachVO> attachList = companyruleService.selectCompanyrule(companyrule_number).getAttachList();
+			if (attachList != null) {
+				for (Co_AttachVO attach : attachList) {
+					File target = new File(attach.getUploadPath(), attach.getFileName());
+					if (target.exists()) {
+						target.delete();
+					}
+				}
+			}
+			// DB삭제
+			companyruleService.removeCompanyrule(companyrule_number);
+			
+			rttr.addFlashAttribute("from", "remove");
+			rttr.addAttribute("companyrule_number", companyrule_number);
+			
+			return url;
+		}
+		
 }

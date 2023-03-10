@@ -14,8 +14,10 @@ public interface CompanyruleService {
 				// 글작성
 				void registCompanyrule(CompanyruleVO companyrule) throws SQLException;
 
-				// 글읽기(조회수증가)
-				CompanyruleVO readCompanyrule(int companyrule_number) throws SQLException;
+				/*
+				 * // 글읽기(조회수증가) CompanyruleVO readCompanyrule(int companyrule_number) throws
+				 * SQLException;
+				 */
 
 				// 글조회
 				CompanyruleVO selectCompanyrule(int companyrule_number) throws SQLException;

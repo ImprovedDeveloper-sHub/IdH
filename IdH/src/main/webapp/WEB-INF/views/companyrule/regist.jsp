@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+
 <!-- CSS start -->
 
 <style>
@@ -50,10 +51,10 @@ input {
 
 
 
-<div class="header"style="width:680px;height:400px;">
+<div class="header"style="width:680px;height:555px;">
 		<div class="card card-info">
 			<div class="card-header">
-				<h3 class="card-title">상세화면</h3>
+				<h3 class="card-title">정책등록</h3>
 				<div class="card-tools">
 					<div class="input-group input-group-sm" style="width: 150px;">
 						<div class="input-group-append"></div>
@@ -76,25 +77,28 @@ input {
 						<tbody>
 							<tr>
 								<td class="name-td">글번호</td>
-								<td class="table-td">${companyrule.companyrule_number }</td>
+								<td class="table-td"><input type="text"
+									readonly placeholder="컴패니룰넘버" /></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">작성자</td>
-								<td class="table-td">${companyrule.companyrule_member_id }</td>
+								<td class="table-td"><input type="text"
+									readonly placeholder="user.id" /></td>
 							</tr>
 							<tr>
 								<td class="name-td">제목</td>
-								<td class="table-td">${companyrule.companyrule_title }</td>
+								<td class="table-td"><input type="text"
+									 placeholder="제목을 입력하세요" /></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">등록일</td>
-								<td colspan="5"><fmt:formatDate
-												value="${companyrule.companyrule_regdate}"
-												pattern="yyyy-MM-dd"/></td>
+								<td colspan="5"><input type="text"
+									readonly placeholder="오늘날짜들어갈것" /></td>
 							</tr>
 						
 							<tr style="height: 100px;">
-								<td class="name-td">${companyrule.companyrule_content }</td>
+								<td class="name-td">내용</td>
+								<td class="table-td td-summernote" colspan="5"><textarea class="summernote" rows="15" cols="40" style="display:none; width:500px;"></textarea></td>
 							</tr>
 
 						</tbody>
@@ -102,13 +106,19 @@ input {
 					</form>
 				</div>
 			</div>
-			<button type="button" id="modifyBtn" class="btn btn-info" onclick="submit_go('modifyForm','${companyrule.companyrule_number }');">Modify</button>						
-					    	<button type="button" id="removeBtn" class="btn btn-info" onclick="submit_go('remove','${companyrule.companyrule_number }');">REMOVE</button>
-					   
-					    <button type="button" id="listBtn" class="btn btn-primary" onclick="CloseWindow();">CLOSE </button>
+			<div class="card-tools" style="margin-left:auto">
+            <button type="button" id="regbtn" class="btn btn-info"
+               onclick="regist_go();">등록</button>
+            <button type="button" id="close" class="btn btn-info"
+               onclick="CloseWindow();">닫기</button>
+         </div>
 		</div>
 	</div>
-
+<script>
+	window.onload = function() {
+		summernote_go($('.summernote'),'<%=request.getContextPath()%>');
+	};
+</script>
 <script>
 function regist_go(){
 	   
@@ -118,24 +128,4 @@ function regist_go(){
 	   
 	
 </script>
-
-<script>
-function submit_go(url,companyrule_number ){	
-	location.href=url+"?companyrule_number="+companyrule_number;
-}
-</script>
-
-<c:if test="${from eq 'modify'}" >
-	<script>
-		alert("정상적으로 수정되었습니다.");
-		window.opener.location.reload();
-	</script>
-</c:if>    
-<c:if test="${from eq 'remove'}" >
-	<script>
-		alert("삭제되었습니다.");
-		window.close();
-		window.opener.location.reload();
-	</script>
-</c:if> 
 
