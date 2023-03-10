@@ -35,7 +35,7 @@
                   </div>
                </div>
          <button type="button" class="btn btn-block btn-info btn-sm"
-            style="width: 80px; " onclick="OpenWindow('registScheduleForm','등록',500,400);">등록</button>
+            style="width: 80px; " onclick="OpenWindow('registScheduleForm','등록',500,600);">등록</button>
             
             </div>
          <div id="table-content">
@@ -101,7 +101,7 @@
                   </div>
                </div>
          <button type="button" class="btn btn-block btn-info btn-sm"
-            style="width: 80px; " onclick="OpenWindow('registBudgetForm','등록',500,400);">등록</button>
+            style="width: 80px; " onclick="OpenWindow('registBudgetForm','등록',500,600);">등록</button>
             
             </div>
          <div id="table-content">
@@ -169,7 +169,7 @@
                   </div>
                </div>
          <button type="button" class="btn btn-block btn-info btn-sm"
-            style="width: 80px;" onclick="OpenWindow('registWorkforceForm','등록',500,400);">등록</button>
+            style="width: 80px;" onclick="OpenWindow('registWorkforceForm','등록',500,600);">등록</button>
             </div>
          <div id="table-content">
             <div  class="card-body table-responsive p-0">
@@ -234,7 +234,7 @@
                   </div>
                </div>
          <button type="button" class="btn btn-block btn-info btn-sm"
-            style="width: 80px; " onclick="OpenWindow('registUnitworkForm','등록',500,400);">등록</button>
+            style="width: 80px; " onclick="OpenWindow('registUnitworkForm','등록',500,600);">등록</button>
             </div>
             
          <div id="table-content">

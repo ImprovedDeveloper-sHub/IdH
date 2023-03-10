@@ -167,7 +167,7 @@ table td{
 <link rel="stylesheet"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 <div class="main-custom">
-  <div class="header-custom row" ">
+  <div class="header-custom row">
     <div class="header-logo col-1">
       <div class="logo"><img src="<%=request.getContextPath() %>/resources/img/IdH로고2.jpg"style="width: 100%;max-height: 100%;"/></div>
     </div>
@@ -189,16 +189,18 @@ table td{
        -->
     </div>
     
-    
+   
     
     <!--main-menu종료 -->
     <div class="col-12 sub-menu">
-      <div class="top-menu">
+      <div id="subMenuLi" class="top-menu">
+      	
         <nav id="subMenuList" class="subMenu left">
-          <a>test</a>
+          
         </nav>
       </div>
     </div>
+    
   </div>
 <decorator:head />
 </head>

@@ -60,6 +60,11 @@ public class ProjectManageController {
 		return mnv;
 	}
 
+	@GetMapping("/regist")
+	public ModelAndView regist(ModelAndView mnv) {
+		return mnv;
+	}
+	
 	
 	
 	@GetMapping("/registBudgetForm")

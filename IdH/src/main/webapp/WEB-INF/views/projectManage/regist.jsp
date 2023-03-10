@@ -31,6 +31,10 @@ table input {
 						</select></td>
 			</tr>
 			<tr>
+				<td id="title">프로젝트 명</td>
+				<td id="content"><input type="text" placeholder="프로젝트 이름을 입력하세요." /></td>
+			</tr>
+			<tr>
 				<td id="title">요구사항</td>
 				<td id="content"><input type="text" placeholder="요구사항을 입력하세요." /></td>
 			</tr>

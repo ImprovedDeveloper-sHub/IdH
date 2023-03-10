@@ -58,7 +58,6 @@ public class ProjectServiceImpl implements ProjectService{
 		dataMap.put("proceedingProjectList", projectDAO.selectSearchProjectList(cri));
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		System.out.println(projectDAO.selectSearchProjectListCount(cri));
 		pageMaker.setTotalCount(projectDAO.selectSearchProjectListCount(cri));
 		dataMap.put("pageMaker",pageMaker);
 

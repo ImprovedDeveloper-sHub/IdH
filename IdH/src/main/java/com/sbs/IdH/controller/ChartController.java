@@ -15,7 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class ChartController {
 
 
-	
+	@GetMapping("/subMenuTest")
+	public void subMenuTest() {}
 	
 	@PostMapping("/test2")
 	@ResponseBody

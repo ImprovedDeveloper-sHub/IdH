@@ -4,32 +4,27 @@
 
 
 </div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
 <script type="text/x-handlebars-template"  id="subMenu-list-template" >
+<nav id="subMenuList" class="subMenu left">
 {{#each .}}
-	<li class="nav-item subMenu" >
-    	<a href="javascript:goPage('<%=request.getContextPath()%>{{murl}}','{{mcode}}');"	class="nav-link">
-        	<i class="{{micon}}"></i>
-            <p>{{mname}}</p>
-       	</a>
-	</li>
+    	<a id="{{mcode}}" href="javascript:goPage('<%=request.getContextPath()%>/{{murl}}','{{mcode}}')">{{mname}}</a>
 {{/each}}
+</nav>
 </script>
 
 <script>
 
 	function subMenu_go(mCode){
-		//alert(mCode);
 		if(mCode!="M000000"){			
 			$.ajax({
 				url:"<%=request.getContextPath()%>/subMenu?mCode="+mCode,
 				type:"get",				
 				success:function(data){
-					//alert('test');
-					//console.log(JSON.stringify(data));
-					printSubMenu(data,$('.subMenuList'),$('#subMenu-list-template'),'.subMenuList');
+					printSubMenu(data, $('.subeMenuLi'),$('#subMenu-list-template'));
 					//acitve css주는 함수.
-					
+					$(mCode).attr('style','active');
 				},
 				error:function(error){
 					AjaxErrorSecurityRedirectHandler(error.status);	
@@ -42,11 +37,13 @@
 	}
 	
 	//handelbars printElement (args : data Array, appent target, handlebar template, remove class)
-	function printSubMenu(dataArr,target,templateObject,removeSelector){
+	function printSubMenu(data,target,templateObject,removeSelector){
 		var template=Handlebars.compile(templateObject.html());
-		var html = template(dataArr);
-		$(removeSelector).remove();
-		target.append(html);
+		var html = template(data);
+		$('#subMenuList').remove();
+		
+		$('#subMenuLi').append(html);
+		//$('#subMenuList').append(html);
 	} 
 	
 	
@@ -78,15 +75,14 @@
 
 </script>
 
+
 <script>
 window.onload = function(){
 	goPage('<%=request.getContextPath()%>${menu.murl}','${menu.mcode}');
 	subMenu_go('${menu.mcode}'.substring(0,3)+"0000");
 }
 	
-
-	</script>
-
+</script>
 
 
 
