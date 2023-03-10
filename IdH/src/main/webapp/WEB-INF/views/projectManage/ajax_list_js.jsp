@@ -17,6 +17,11 @@
                                     white-space: nowrap; text-overflow: ellipsis;"> {{project_discription}}</td>
 	                </tr> 
 {{/each}}
+<tr>
+			 	 	<td colspan="5">
+			 	 	<%@ include file="/WEB-INF/module/pagination.jsp" %>
+			 	 	</td>
+</tr>
 </tbody>
 
 </script>

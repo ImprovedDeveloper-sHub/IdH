@@ -68,6 +68,11 @@
                                     white-space: nowrap; text-overflow: ellipsis;"> ${project.project_discription}</td>
 	                </tr>
 			 	 </c:forEach>
+			 	 <tr>
+			 	 	<td colspan="5">
+			 	 	<%@ include file="/WEB-INF/module/pagination.jsp" %>
+			 	 	</td>
+			 	 </tr>
               </tbody>
               
                </table>
@@ -132,6 +137,11 @@
                                     white-space: nowrap; text-overflow: ellipsis;"> ${project.project_discription}</td>
 					 </tr>
 				</c:forEach>
+				<tr>
+			 	 	<td colspan="5">
+			 	 	<%@ include file="/WEB-INF/module/pagination.jsp" %>
+			 	 	</td>
+			 	 </tr>
               </tbody>
               
                </table>
@@ -250,7 +260,6 @@
      <a class="2015-btn" href="#">2015</a> -->
     </div>
 		<%@ include file="./ajax_list_js.jsp" %>
-		<%@ include file="/WEB-INF/module/pagination.jsp" %>
     </div>
 
 

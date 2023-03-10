@@ -35,7 +35,8 @@
                   </div>
                </div>
          <button type="button" class="btn btn-block btn-info btn-sm"
-            style="width: 80px; " onclick="OpenWindow('detail.do?from=list&bno=','상세보기',800,700);">등록</button>
+            style="width: 80px; " onclick="OpenWindow('registScheduleForm','등록',500,400);">등록</button>
+            
             </div>
          <div id="table-content">
             <div  class="card-body table-responsive p-0">
@@ -51,10 +52,10 @@
               	</thead>
               
               <tbody class="proceedingProjectLi" class="text-left">
-              	<c:if test="${empty proceedingProjectList}">
+              	<c:if test="${empty scheduleList}">
 				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
 			 	 </c:if>
-			 	 <c:forEach items="${proceedingProjectList }" var="project">
+			 	 <c:forEach items="${scheduleList }" var="schedule">
 					 <tr>
 			                  <td style="text-align:left;max-width:20%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;">${schedule.schedule_name}</td>
@@ -65,7 +66,7 @@
 			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate value="${schedule.schedule_enddate}" pattern="yyyy-MM-dd"/></td>
 			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;"> ${schedule.schedule_discription}</td>
+                                    white-space: nowrap; text-overflow: ellipsis;"> ${schedule.schedule_detail}</td>
 	                </tr>
 			 	 </c:forEach>
               </tbody>
@@ -100,7 +101,8 @@
                   </div>
                </div>
          <button type="button" class="btn btn-block btn-info btn-sm"
-            style="width: 80px;">등록</button>
+            style="width: 80px; " onclick="OpenWindow('registBudgetForm','등록',500,400);">등록</button>
+            
             </div>
          <div id="table-content">
             <div  class="card-body table-responsive p-0">
@@ -116,16 +118,16 @@
               	</thead>
               
               <tbody class="endProjectLi" class="text-left">
-              	<c:if test="${empty endProjectList}">
+              	<c:if test="${empty budgetList}">
 				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
 			 	 </c:if>
-			 	 <c:forEach items="${endProjectList }" var="project">
+			 	 <c:forEach items="${budgetList }" var="budget">
 					 <tr>
-			                  <td>${project.project_number}</td>
-			                  <td>${project.project_name}</td>
-			                  <td>${project.project_regdate}</td>
-			                  <td><span class="tag tag-success"></span></td>
-			                  <td> ${project.project_discription}</td>
+			                  <td>사업예산</td>
+			                  <td>${budget.budget_name}</td>
+			                  <td>${budget.budget_type}</td>
+			                  <td>${budget.budget_price}</td>
+			                  <td> ${budget.budget_detail}</td>
 	                </tr>
 				</c:forEach>
               </tbody>
@@ -167,37 +169,37 @@
                   </div>
                </div>
          <button type="button" class="btn btn-block btn-info btn-sm"
-            style="width: 80px; " onclick="OpenWindow('detail.do?from=list&bno=','상세보기',800,700);">등록</button>
+            style="width: 80px;" onclick="OpenWindow('registWorkforceForm','등록',500,400);">등록</button>
             </div>
          <div id="table-content">
             <div  class="card-body table-responsive p-0">
                <table  class="table table-hover">
                   <thead class="proceedingThead" class="text-left">
 	                <tr>
-	                  <th style="width:20%">프로젝트 이름</th>
-	                  <th style="width:30%">프로젝트 상태</th>
-	                  <th style="width:20%">등록 날짜</th>
+	                  <th style="width:20%">인력 이름</th>
+	                  <th style="width:30%">인력 상태</th>
+	                  <th style="width:20%">인력 날짜</th>
 	                  <th style="width:15%">요구사항</th>
 	                  <th style="width:15%">설명</th>
 	                </tr>
               	</thead>
               
-              <tbody class="proceedingProjectLi" class="text-left">
-              	<c:if test="${empty proceedingProjectList}">
+              <tbody class="workforceProjectLi" class="text-left">
+              	<c:if test="${empty workforceList}">
 				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
 			 	 </c:if>
-			 	 <c:forEach items="${proceedingProjectList }" var="project">
+			 	 <c:forEach items="${workforceList }" var="workforce">
 					 <tr>
 			                  <td style="text-align:left;max-width:20%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">${project.project_name}</td>
+                                    white-space: nowrap; text-overflow: ellipsis;">${workforce.workforce_name}</td>
 			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">${project.project_status}</td>
+                                    white-space: nowrap; text-overflow: ellipsis;">${workforce.workforce_status}</td>
 			                  <td style="text-align:left;max-width: 20%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate value="${project.project_regdate}" pattern="yyyy-MM-dd"/></td>
+                                    white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate value="${workforce.workforce_regdate}" pattern="yyyy-MM-dd"/></td>
 			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;">test</td>
 			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;"> ${project.project_discription}</td>
+                                    white-space: nowrap; text-overflow: ellipsis;"> ${workforce.workforce_discription}</td>
 	                </tr>
 			 	 </c:forEach>
               </tbody>
@@ -232,12 +234,13 @@
                   </div>
                </div>
          <button type="button" class="btn btn-block btn-info btn-sm"
-            style="width: 80px;">등록</button>
+            style="width: 80px; " onclick="OpenWindow('registUnitworkForm','등록',500,400);">등록</button>
             </div>
+            
          <div id="table-content">
             <div  class="card-body table-responsive p-0">
                <table  class="table table-hover">
-                  <thead class="endThead" class="text-left">
+                  <thead class="unitworkThead" class="text-left">
 	                <tr>
 	                  <th style="width:20%">업무명</th>
 	                  <th style="width:30%">상태</th>
@@ -247,17 +250,17 @@
 	                </tr>
               	</thead>
               
-              <tbody class="endProjectLi" class="text-left">
-              	<c:if test="${empty endProjectList}">
+              <tbody class="unitwrokLi" class="text-left">
+              	<c:if test="${empty unitworkList}">
 				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
 			 	 </c:if>
 			 	 <c:forEach items="${unitworkList }" var="unitwork">
 					 <tr>
 			                  <td>${unitwork.unitwork_name}</td>
 			                  <td>${unitwork.unitwork_check}</td>
-			                  <td>${unitwork.unitwork_startdate}</td>
-			                  <td>${unitwork.unitwork_enddate}</td>
-			                  <td>${unitwork.unitwork_discription}</td>
+			                  <td><fmt:formatDate pattern="yyyy-MM-dd" value="${unitwork.unitwork_startdate}"/></td>
+			                  <td><fmt:formatDate pattern="yyyy-MM-dd" value="${unitwork.unitwork_enddate}"/></td>
+			                  <td>${unitwork.unitwork_detail}</td>
 	                </tr>
 				</c:forEach>
               </tbody>

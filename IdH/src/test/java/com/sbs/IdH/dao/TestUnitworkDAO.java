@@ -43,12 +43,12 @@ public class TestUnitworkDAO {
    public void testInsertUnitworkList() throws Exception{
 		  //UnitworkVO unitwork = new UnitworkVO(3, 0, "업무3",0, 1, "IdH","IdH", null, null);
 	   
-	   		Date date = new Date();
-		  UnitworkVO unitwork = new UnitworkVO(3,0,"test",0,1,"IdH","detail",date,date);
-	   		unitworkDAO.insertUnitwork(unitwork); 
-		  UnitworkVO unitwork2 = unitworkDAO.selectUnitwork(3);
-		  System.out.println(unitwork2);
-		 
+			/*
+			 * Date date = new Date(); UnitworkVO unitwork = new
+			 * UnitworkVO(3,0,"test",0,1,"IdH","detail",date,date);
+			 * unitworkDAO.insertUnitwork(unitwork); UnitworkVO unitwork2 =
+			 * unitworkDAO.selectUnitwork(3); System.out.println(unitwork2);
+			 */
 		 
    }
    

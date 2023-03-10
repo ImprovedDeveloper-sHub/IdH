@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -60,18 +59,90 @@ public class ProjectManageController {
 		mnv.setViewName("projectManage/main");
 		return mnv;
 	}
+
 	
 	
-	@GetMapping("/regist")
-	public ModelAndView regist(ModelAndView mnv) {
-		
+	@GetMapping("/registBudgetForm")
+	public ModelAndView registBudgetForm(ModelAndView mnv) {
+		return mnv;
+	}
+	@GetMapping("/registBudget")
+	public ModelAndView registBudget(ModelAndView mnv) {
+		return mnv;
+	}
+	@GetMapping("/modifyBudgetForm")
+	public ModelAndView modifyBudgetForm(ModelAndView mnv) {
+		return mnv;
+	}
+	@GetMapping("/modifyBudget")
+	public ModelAndView modifyBudget(ModelAndView mnv) {
 		return mnv;
 	}
 	
+	@GetMapping("/registWorkforceForm")
+	public ModelAndView registworkforceForm(ModelAndView mnv) {
+		return mnv;
+	}
+	@GetMapping("/registWorkforce")
+	public ModelAndView registWorkforce(ModelAndView mnv) {
+		return mnv;
+	}
+	@GetMapping("/modifyWorkforceForm")
+	public ModelAndView registWorkforceForm(ModelAndView mnv) {
+		return mnv;
+	}
+	@GetMapping("/modifyWorkforce")
+	public ModelAndView modifyWorkforce(ModelAndView mnv) {
+		return mnv;
+	}
+	
+	
+	
+	@GetMapping("/registUnitwork")
+	public ModelAndView registUnitwork(ModelAndView mnv) {
+		return mnv;
+	}
+	
+	@GetMapping("/registUnitworkForm")
+	public ModelAndView registUnitworkForm(ModelAndView mnv) {
+		return mnv;
+	}
+	
+	@GetMapping("/modifyUnitwork")
+	public ModelAndView modifyUnitwork(ModelAndView mnv) {
+		return mnv;
+	}
+	
+	@GetMapping("/modifyUnitworkForm")
+	public ModelAndView modifyUnitworkForm(ModelAndView mnv) {
+		return mnv;
+	}
+	
+	
+	@GetMapping("/registScheduleForm")
+	public ModelAndView registscheduleForm(ModelAndView mnv) {
+		return mnv;
+	}
+	
+	@GetMapping("/registSchedule")
+	public ModelAndView registSchedule(ModelAndView mnv) {
+		return mnv;
+	}
+	@GetMapping("/modifyScheduleForm")
+	public ModelAndView modifyScheduleForm(ModelAndView mnv) {
+		return mnv;
+	}
+	
+	@GetMapping("/modifySchedule")
+	public ModelAndView modifySchedule(ModelAndView mnv) {
+		return mnv;
+	}
+	
+	
+	
 	@GetMapping("/manage")
-	public ModelAndView manage(ModelAndView mnv, SearchCriteria cri, int project_number) throws Exception {
-		
-		  mnv.addAllObjects( budgetService.selectBudgetListforProject(project_number));
+	public ModelAndView manage(ModelAndView mnv, SearchCriteria cri) throws Exception {
+		  mnv.addAllObjects( budgetService.selectBudgetList(cri));
 		  //mnv.addAllObjects( workforceService.selectWorkforceList(cri));
 		  mnv.addAllObjects( unitworkService.selectUnitworkList(cri));
 		  mnv.addAllObjects( scheduleService.selectScheduleList(cri));

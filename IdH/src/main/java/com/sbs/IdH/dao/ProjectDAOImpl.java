@@ -1,10 +1,9 @@
 package com.sbs.IdH.dao;
 
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.sbs.IdH.command.SearchCriteria;
@@ -20,7 +19,12 @@ public class ProjectDAOImpl implements ProjectDAO{
 	
 	@Override
 	public List<ProjectVO> selectSearchProjectList(SearchCriteria cri) throws SQLException {
-		List<ProjectVO> projectList = session.selectList("Project-Mapper.selectProjectList", cri);
+		
+		int offset=cri.getStartRowNum();
+		int limit=cri.getPerPageNum();		
+		RowBounds rowBounds=new RowBounds(offset,limit);		
+		List<ProjectVO> projectList = session.selectList("Project-Mapper.selectProjectList", cri ,rowBounds);
+		
 		return projectList;
 	}
 

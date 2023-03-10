@@ -3,6 +3,7 @@ package com.sbs.IdH.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.sbs.IdH.command.PageMaker;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.WorkforceDAO;
 import com.sbs.IdH.dto.WorkforceVO;
@@ -42,6 +43,10 @@ public class WorkforceServiceImpl implements WorkforceService{
 	public Map<String, Object> selectWorkforceList(SearchCriteria cri) throws Exception {
 		Map<String, Object> dataMap = new HashMap<String,Object>();
 		dataMap.put("workforceList", workforceDAO.selectSearchWorkforceList(cri));
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(workforceDAO.selectSearchWorkforceListCount(cri));
+		dataMap.put("pageMaker",pageMaker);
 		return dataMap;
 	}
 

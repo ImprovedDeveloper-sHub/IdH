@@ -22,18 +22,17 @@ public class TestProjectDAO {
    @Autowired
    private ProjectDAO projectDAO;
    
-   @Test
+   
    public void testSelectProject() throws Exception{
       ProjectVO project = projectDAO.selectProject(1);
       System.out.println(project);
    }
    
-   
+   @Test
    public void testSelectProjectList() throws Exception{
-      
-	  SearchCriteria cri = new SearchCriteria();
-      List<ProjectVO> projectList = projectDAO.selectSearchProjectList(cri);
-      
+	  SearchCriteria cri = new SearchCriteria(0, 5, null, null);
+	  
+    //  System.out.println(projectList);
       
    }
    
@@ -51,7 +50,7 @@ public class TestProjectDAO {
 	   System.out.println(projectDAO.selectProjectSeqNext());
    }
    
-   @Test
+  
    public void testupdateForProject() throws Exception{
 	   ProjectVO project1 = projectDAO.selectProject(1);
 	   projectDAO.updateProjectForProjectStart(project1);

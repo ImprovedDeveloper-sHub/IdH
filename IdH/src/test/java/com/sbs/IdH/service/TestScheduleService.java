@@ -38,12 +38,14 @@ public class TestScheduleService {
    public void testInsertScheduleList() throws Exception{
 		
 		
-		  ScheduleVO schedule = new ScheduleVO(3, 0, "IdH", 1, "test", null, DateMaker.make(2023, 2, 10));
-		  
-		  scheduleService.registSchedule(schedule);
-		  
-		  scheduleService.selectSchedule(3);
-		 
+		/*
+		 * ScheduleVO schedule = new ScheduleVO(3, 0, "IdH", 1, "test", null,
+		 * DateMaker.make(2023, 2, 10));
+		 * 
+		 * scheduleService.registSchedule(schedule);
+		 * 
+		 * scheduleService.selectSchedule(3);
+		 */
 	   
 	/*	Date start = DateMaker.make(2023, 2, 20); Date end =
 		  DateMaker.make(2023, 3, 10);

@@ -29,10 +29,7 @@ public class TestProjectService {
    @Test
    public void testSelectProjectList() throws Exception{
 	  SearchCriteria cri = new SearchCriteria();
-	  cri.setStatus(1);
-	  cri.setSearchType("n");
-	  cri.setKeyword("asd");
-      projectService.selectProjectList(cri);
+	 projectService.selectProceedingProject(cri);
       
    }
    
