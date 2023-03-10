@@ -35,20 +35,19 @@ function list_go(page,url){
 
 
 
-function search_go_ajax(page, url, target, templateObject) {
+function search_go_ajax(page, perPageNum, searchType, keyword, url, target, delTarget, templateObject) {
 	
 	var jobForm=$('#jobForm');
 	//var jobForm = document.getElementById('#jobForm');
 	jobForm.find("[name='page']").val(page);
-	jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
-	jobForm.find("[name='searchType']")
-		.val($('select[name="searchType"]').val());
-	jobForm.find("[name='keyword']")
-		.val($('div.input-group>input[name="keyword"]').val());
+	jobForm.find("[name='perPageNum']").val(perPageNum.val());
+	jobForm.find("[name='searchType']").val(searchType.val());
+	jobForm.find("[name='keyword']").val(keyword.val());
 	
-	//alert(jobForm.find("[name='searchType']").val());
-	alert(jobForm.find("[name='keyword']").val());
-	alert(url);
+	alert(perPageNum.val());
+	alert(searchType.val());
+	alert(keyword.val());
+
 	
 	
 	//var formData = new FormData(jobForm);
@@ -59,7 +58,7 @@ function search_go_ajax(page, url, target, templateObject) {
     	type: "POST",	    	
     	success: function(data) {    		
     		alert(JSON.stringify(data));
-    		printData(data.proceedingProjectList,target,templateObject);
+    		printData(data,target,delTarget, templateObject);
     	},
     	error:function(error){
     		alert('errortest');
