@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -69,10 +70,12 @@ public class ProjectManageController {
 	
 	@GetMapping("/manage")
 	public ModelAndView manage(ModelAndView mnv, SearchCriteria cri, int project_number) throws Exception {
-		mnv.addAllObjects( budgetService.selectBudgetListforProject(project_number));
-		mnv.addAllObjects( workforceService.selectWorkforceList(cri));
-		mnv.addAllObjects( unitworkService.selectUnitworkList(cri));
-		mnv.addAllObjects( scheduleService.selectScheduleList(cri));
+		
+		  mnv.addAllObjects( budgetService.selectBudgetListforProject(project_number));
+		  //mnv.addAllObjects( workforceService.selectWorkforceList(cri));
+		  mnv.addAllObjects( unitworkService.selectUnitworkList(cri));
+		  mnv.addAllObjects( scheduleService.selectScheduleList(cri));
+		 
 		return mnv;
 	}
 	
