@@ -1,9 +1,10 @@
 package com.sbs.IdH.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.apache.catalina.mapper.Mapper;
 import org.apache.ibatis.session.SqlSession;
 
 import com.sbs.IdH.command.SearchCriteria;
@@ -75,8 +76,19 @@ public class BudgetDAOImpl implements BudgetDAO{
 	@Override
 	public void deleteBudget(int budget_number) throws SQLException {
 		session.update("Budget-Mapper.deleteBudget", budget_number);
-		
 	}
 
+	@Override
+	public Map<String, Object> selectBudgetPriceForChart(SearchCriteria cri) throws SQLException {
+		Map<String,Object> colMap = new HashMap<String, Object>();
+		int price_total = session.selectOne("Budget-Mapper.selectBudgetPriceTotal", cri);
+		colMap.put("v",price_total);
+		return colMap;
+	}
+
+	
+	
+	
+	
 
 }

@@ -3,7 +3,6 @@ package com.sbs.IdH.dao;
 
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +61,7 @@ public class TestBudgetDAO {
    }
    
    
-   @Test
+   
    public void testupdateBudget() throws Exception{
 	   BudgetVO budget = budgetDAO.selectBudget(1);
 	   budget.setBudget_price(10000);
@@ -77,6 +76,16 @@ public class TestBudgetDAO {
 	   budgetDAO.deleteBudget(1);
 	   BudgetVO budget2 = budgetDAO.selectBudget(1);
    }
+   
+   @Test
+   public void testSumBudgetPrice() throws Exception{
+	   SearchCriteria cri = new SearchCriteria();
+	  cri.setProject_number(1);
+	  
+	   budgetDAO.selectBudgetPriceForChart(cri);
+	   
+   }
+   
    
    
    

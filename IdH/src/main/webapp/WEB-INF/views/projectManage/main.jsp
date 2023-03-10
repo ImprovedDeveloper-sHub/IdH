@@ -34,8 +34,7 @@
                    
                   </div>
                </div>
-         <button type="button" class="btn btn-block btn-info btn-sm"
-            style="width: 80px;">등록</button>
+         
             </div>
          <div id="table-content">
             <div  class="card-body table-responsive p-0">
@@ -103,8 +102,7 @@
                    
                   </div>
                </div>
-         <button type="button" class="btn btn-block btn-info btn-sm"
-            style="width: 80px;">등록</button>
+         
             </div>
          <div id="table-content">
             <div  class="card-body table-responsive p-0">
@@ -152,14 +150,7 @@
       </div>
        
 
-    <div class="card ">
-          <div class="card-body row">
-            <div class="col-6"><button type="button" class="btn btn-block btn-info btn-sm">프로젝트 계획</button>
-              </div>
-             <div class="col-6"> <button type="button" class="btn btn-block btn-info btn-sm" onclick="changeButton()">프로젝트 비교</button>
-</div>
-          </div>
-        </div>
+   
 
 
         <!--col-6종료-->
@@ -168,7 +159,30 @@
 
       <!--col-6시작-->
       <div class="col-6">
+      
+       <div class="card ">
+          <div class="card-body row">
+            <div class="col-6"><button type="button" class="btn btn-block btn-info btn-sm">프로젝트 계획</button>
+              </div>
+             <div class="col-6"> <input id="changeButton" type="button" class="btn btn-block btn-info btn-sm" onclick="changeButton()" value="프로젝트 비교"></input>
+</div>
+          </div>
+        </div>
+      
+		<div class="card ">
+          <div class="card-body row">
+            <div class="col-4"><input type="button" class="btn btn-block btn-info btn-sm" id="budgetButton"
+            onclick="ajax_print_chart('budget');" value="예산현황"></input>
+              <input type="button" class="btn btn-block btn-info btn-sm" id="workforceButton" onclick="ajax_print_chart('workforce');" value="인력현황"></input></div>
+             <div class="col-4"> <input type="button" class="btn btn-block btn-info btn-sm"  id="scheduleButton" onclick="ajax_print_chart('schedule');" value="일정현황"></input>
+              <input type="button" class="btn btn-block btn-info btn-sm" onclick="ajax_print_chart('issue');" id="issueButton" value="이슈현황"></input>   
+</div><div class="col-4"> <input type="button" class="btn btn-block btn-info btn-sm"  id="productButton" onclick="ajax_print_chart('product');" value="산출물현황"></input>
+ <input type="button" class="btn btn-block btn-info btn-sm" id="unitworkButton" onclick="ajax_print_chart('product');" value="단위업무현황"></input>
 
+</div>
+          </div>
+        </div>
+        
 
         <div class="card">
           <div class="card-header">
@@ -182,25 +196,14 @@
             <div id="issue_chart"></div>
             <div id="product_chart"></div>
             <div id="workforce_chart"></div>
+            <div id="budgetComparison_chart"></div>
           </div>
           
  
         </div>
 
 
-       <div class="card ">
-          <div class="card-body row">
-            <div class="col-4"><input type="button" class="btn btn-block btn-info btn-sm" id="budgetButton"
-            onclick="ajax_print_chart('budget');" value="예산현황"></input>
-              <input type="button" class="btn btn-block btn-info btn-sm" id="workforceButton" onclick="ajax_print_chart('workforce');" value="인력현황"></input></div>
-             <div class="col-4"> <input type="button" class="btn btn-block btn-info btn-sm"  id="scheduleButton" onclick="ajax_print_chart('schedule');" value="일정현황"></input>
-              <input type="button" class="btn btn-block btn-info btn-sm" onclick="ajax_print_chart('issue');" id="issueButton" value="이슈현황"></input>   
-</div><div class="col-4"> <input type="button" class="btn btn-block btn-info btn-sm"  id="productButton" onclick="ajax_print_chart('product');" value="산출물현황"></input>
- <input type="button" class="btn btn-block btn-info btn-sm" id="unitworkButton" onclick="ajax_print_chart('product');" value="단위업무현황"></input>
-
-</div>
-          </div>
-        </div>
+       
 
 
         
@@ -313,11 +316,10 @@
   
   function table_print(){
 	  data_table_test = new google.visualization.DataTable(chart_data);
-	  var chart2 = new google.visualization.LineChart(document.getElementById(chart_type));
+	  var chart2 = new google.visualization.BarChart(document.getElementById(chart_type));
 	  google.charts.setOnLoadCallback(drawChart);
 	  
 	   function drawChart() {
-		   
 		  document.getElementById(last_chart).style.display="none";
 		  document.getElementById(chart_type).style.display="block";
 		  last_chart=chart_type;
@@ -385,14 +387,25 @@
   
   <script>
   	function changeButton(){
-  		$('#budgetButton').val('예산비교');
+  		$('#budgetButton').val('예산비교'); $('#budgetButton').attr('onclick',"ajax_print_chart('budgetComparison')")
   		$('#workforceButton').val('인력비교');
   		$('#scheduleButton').val('일정비교');
   		$('#issueButton').val('이슈비교');
   		$('#productButton').val('산출물비교');
   		$('#unitworkButton').val('인력비교');
+  		$('#changeButton').val('프로젝트 현황');$('#changeButton').attr('onclick',"returnButton()")
   	}
   
+  	
+  	function returnButton(){
+  		$('#budgetButton').val('예산현황'); $('#budgetButton').attr('onclick',"ajax_print_chart('budget')")
+  		$('#workforceButton').val('인력현황');
+  		$('#scheduleButton').val('일정현황');
+  		$('#issueButton').val('이슈현황');
+  		$('#productButton').val('산출물현황');
+  		$('#unitworkButton').val('인력현황');
+  		$('#changeButton').val('프로젝트 비교');$('#changeButton').attr('onclick',"changeButton()")
+  	}
   
   </script>
   

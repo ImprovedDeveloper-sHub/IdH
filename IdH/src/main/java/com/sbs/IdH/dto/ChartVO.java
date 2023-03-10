@@ -10,83 +10,69 @@ public class ChartVO {
 	private List<HashMap<String, Object>> cols;
 	private List<HashMap<String, Object>> rows;
 	
-	public ChartVO(){
-		this.result = new HashMap<String, Object>();
-		this.cols = new ArrayList<HashMap<String, Object>>();
-		this.rows = new ArrayList<HashMap<String, Object>>();
-		
-		this.result.put("cols", this.cols);
-		this.result.put("rows", this.rows);
+	HashMap<String, Object> colMap1;
+	HashMap<String, Object> colMap2;
+	
+	public ChartVO() {
+		cols = new ArrayList<HashMap<String, Object>>();
+		rows = new ArrayList<HashMap<String, Object>>();
+		colMap1 = new HashMap<String,Object>();
+		colMap2 = new HashMap<String,Object>();
+		result = new HashMap<String, Object>();
+	}
+	
+
+	public void rowSet(HashMap<String, Object> rowMap) {
+		rows.add(rowMap);
 	}
 	
 	
-	public void addColumn(String label, String type){
-		addColumn("", label, "", type);
+	public void budgetColSet() {
+		colMap1.put("label","예산 내용");
+		colMap1.put("type","string");
+		colMap2.put("label","예산 금액");
+		colMap2.put("type","number");
+		cols.add(colMap1);
+		cols.add(colMap2);
 	}
 	
-	public void addColumn(String id, String label, String pattern, String type){
-		
-		HashMap<String, Object> col = new HashMap<String, Object>();
-		
-		col.put("id", id);
-		col.put("label", label);
-		col.put("pattern", pattern);
-		col.put("type", type);
-		
-		this.cols.add(col);
+	public void workforceColSet() {
+		colMap1.put("label","예산 내용");
+		colMap1.put("type","string");
+		colMap2.put("label","예산 액");
+		colMap2.put("type","number");
+		cols.add(colMap1);
+		cols.add(colMap2);
 	}
 	
-	public void addRow(String name, Object value){
-		addRow(name, value, null);
+	public void unitworkColSet() {
+		colMap1.put("label","예산 내용");
+		colMap1.put("type","string");
+		colMap2.put("label","예산 액");
+		colMap2.put("type","number");
+		cols.add(colMap1);
+		cols.add(colMap2);
 	}
 	
-	public void addRow(String name, Object value, String format){
-		
-		HashMap<String, Object> row = new HashMap<String, Object>();
-		List<HashMap<String, Object>> cells = new ArrayList<HashMap<String,Object>>();
-		
-		HashMap<String, Object> cell1 = new HashMap<String, Object>();
-		cell1.put("v", name);
-		
-		HashMap<String, Object> cell2 = new HashMap<String, Object>();
-		cell2.put("v", value);
-		cell2.put("f", format);
-		
-		cells.add(cell1);
-		cells.add(cell2);
-		
-		row.put("c", cells);
-		this.rows.add(row);
+	public void scheduleColSet() {
+		colMap1.put("label","예산 내용");
+		colMap1.put("type","string");
+		colMap2.put("label","예산 액");
+		colMap2.put("type","number");
+		cols.add(colMap1);
+		cols.add(colMap2);
+	}
+
+	
+	public void resultSet() {
+		result.put("cols", cols);
+		result.put("rows", rows);
 	}
 	
-	public void createRows(int count){
-		HashMap<String, Object> row = null;
-		List<HashMap<String, Object>> cells = null;
-		for(int i=0;i<count;i++){
-			row = new HashMap<String, Object>();
-			cells = new ArrayList<HashMap<String,Object>>();
-			row.put("c", cells);
-			this.rows.add(row);
-		}
+	public HashMap<String, Object> getResult() {
+		return result;
 	}
 	
-	public void addCell(int rowCount, Object value){
-		addCell(rowCount, value, null);
-	}
 	
-	public void addCell(int rowCount, Object value, String format){
-		
-		HashMap<String, Object> row = this.rows.get(rowCount);
-		List<HashMap<String, Object>> cells = (List<HashMap<String, Object>>)row.get("c");
-		
-		HashMap<String, Object> cell = new HashMap<String, Object>();
-		cell.put("v", value);
-		cell.put("f", format);
-		
-		cells.add(cell);
-	}
 	
-	public HashMap<String, Object> getResult(){
-		return this.result;
-	}
 }

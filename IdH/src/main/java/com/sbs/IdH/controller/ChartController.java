@@ -5,15 +5,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sbs.IdH.dto.ChartVO;
+import com.sbs.IdH.service.BudgetService;
+
 @Controller
 public class ChartController {
 
+	
+	@Resource
+	private BudgetService budgetService;
 
 	@GetMapping("/subMenuTest")
 	public void subMenuTest() {}
@@ -175,48 +183,18 @@ public class ChartController {
 	
 	@PostMapping("/budget")
 	@ResponseBody
-	public Map<String, Object> test5() throws Exception {
-		Map<String, Object> dataMap = new HashMap<String,Object>();
-	
-		List<Map<String,Object>> cols = new ArrayList<Map<String,Object>>();
-		Map<String, Object> colMap1 = new HashMap<String,Object>();
-		Map<String, Object> colMap2 = new HashMap<String,Object>();
-		
-		
-		
-		List<Map<String,Object>> rows = new ArrayList<Map<String,Object>>();
-		Map<String, Object> rowMap_c1 = new HashMap<String,Object>();
-		Map<String, Object> rowMap_c2 = new HashMap<String,Object>();
-		
-		List<Map<String,Object>> c1_list = new ArrayList<Map<String,Object>>();
-		List<Map<String,Object>> c2_list = new ArrayList<Map<String,Object>>();
-		Map<String, Object> rowMap_c1_v1 = new HashMap<String,Object>();
-		Map<String, Object> rowMap_c1_v2 = new HashMap<String,Object>();
-		Map<String, Object> rowMap_c2_v1 = new HashMap<String,Object>();
-		Map<String, Object> rowMap_c2_v2 = new HashMap<String,Object>();
-		rowMap_c1_v1.put("v","프로젝트1");
-		rowMap_c1_v2.put("v",1000);
-		c1_list.add(rowMap_c1_v1);
-		c1_list.add(rowMap_c1_v2);
-		rowMap_c1.put("c",c1_list);
-		rows.add(rowMap_c1);
-		rowMap_c2_v1.put("v","프로젝트2");
-		rowMap_c2_v2.put("v",2000);
-		c2_list.add(rowMap_c2_v1);
-		c2_list.add(rowMap_c2_v2);
-		rowMap_c2.put("c",c2_list);
-		rows.add(rowMap_c2);
-		dataMap.put("rows",rows);
-		colMap1.put("label","프로젝트");
-		colMap1.put("type","string");
-		colMap2.put("label","예산");
-		colMap2.put("type","number");
-		cols.add(colMap1);
-		cols.add(colMap2);
-		dataMap.put("cols",cols);
-		
-		return dataMap;
+	public Map<String, Object> budget() throws Exception {
+		ChartVO chart = budgetService.selectChart(1);
+		return chart.getResult();
 	}
+	
+	@PostMapping("/budgetComparison")
+	@ResponseBody
+	public Map<String, Object> budgetComparison() throws Exception {
+		ChartVO chart = budgetService.selectChartForComparison(1, 2);
+		return chart.getResult();
+	}
+
 
 	
 	@PostMapping("/workforce")

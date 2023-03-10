@@ -2,6 +2,7 @@ package com.sbs.IdH.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.BudgetVO;
@@ -28,4 +29,8 @@ public interface BudgetDAO {
 	void updateBudgetForProjectEnd(BudgetVO budget) throws SQLException;
 	
 	void deleteBudget(int budget_number) throws SQLException;
+	
+	Map<String,Object> selectBudgetPriceForChart(SearchCriteria cri)throws SQLException;
+	
+
 }
