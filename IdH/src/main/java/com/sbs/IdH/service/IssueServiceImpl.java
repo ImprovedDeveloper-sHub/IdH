@@ -11,7 +11,9 @@ import javax.servlet.http.HttpSession;
 import com.sbs.IdH.command.PageMaker;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.IssueDAO;
+import com.sbs.IdH.dao.Issue_AttachDAO;
 import com.sbs.IdH.dto.IssueVO;
+import com.sbs.IdH.dto.Issue_AttachVO;
 
 public class IssueServiceImpl implements IssueService{
 
@@ -19,12 +21,18 @@ public class IssueServiceImpl implements IssueService{
 	public void setIssueDAO(IssueDAO issueDAO) {
 		this.issueDAO = issueDAO;
 	}
+	private Issue_AttachDAO issue_attachDAO;
+	public void setIssue_AttachDAO(Issue_AttachDAO issue_attachDAO) {
+		this.issue_attachDAO = issue_attachDAO;
+	}
 
 	@Override
 	public Map<String, Object> selectIssueList(SearchCriteria cri) throws SQLException {
 		List<IssueVO>issueList = issueDAO.selectSearchIssueList(cri);
 		if(issueList != null) {
-			for(IssueVO issue : issueList);
+			for(IssueVO issue : issueList) {
+				addAttachList(issue);				
+			}
 		}
 		
 		PageMaker pageMaker = new PageMaker();
@@ -35,6 +43,19 @@ public class IssueServiceImpl implements IssueService{
 		dataMap.put("issueList",issueList);
 		dataMap.put("pageMaker",pageMaker);
 		
+		return dataMap;
+	}
+	
+	@Override
+	public Map<String, Object> selectIssueCheckList(SearchCriteria cri) throws SQLException {
+		Map<String,Object>dataMap = new HashMap<String,Object>();
+		
+		cri.setStatus(1);
+		int issuesuccess = issueDAO.selectSearchIssueListCount(cri);
+		cri.setStatus(2);
+		int issuenow = issueDAO.selectSearchIssueListCount(cri);
+		dataMap.put("issuesuccess",issuesuccess);
+		dataMap.put("issuenow",issuenow);
 		return dataMap;
 	}
 
@@ -81,6 +102,34 @@ public class IssueServiceImpl implements IssueService{
 		cri.setMemberStatus(2);
 		dataMap.put("getterIssueList", issueDAO.selectSearchIssueListCount(cri));
 		return dataMap;
+	}
+
+	private void addAttachList(IssueVO issue) throws SQLException {
+
+		if (issue == null)
+			return;
+
+		int issue_number = issue.getIssue_number();
+		List<Issue_AttachVO> attachList = issue_attachDAO.selectAttachesByIssue_number(issue_number);
+
+		issue.setAttachList(attachList);
+		
+	}
+
+	@Override
+	public Issue_AttachVO selectIssue_AttachByAno(int ano) throws SQLException {
+
+		Issue_AttachVO issue_attach = issue_attachDAO.selectIssue_AttachByAno(ano);
+
+		return issue_attach;
+
+	}
+
+	@Override
+	public void removeIssue_AttachByAno(int ano) throws SQLException {
+
+		issue_attachDAO.deleteIssue_Attach(ano);
+
 	}
 	
 }

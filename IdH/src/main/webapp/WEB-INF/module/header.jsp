@@ -200,7 +200,7 @@ table td {
 				<i class="fa-solid fa-screwdriver-wrench"></i>&nbsp프로젝트구성
 			</div>
 			<div class="menu">
-				<a href=""><i class="fa-brands fa-r-project"></i>&nbsp프로젝트</a>
+				<i class="fa-brands fa-r-project"></i>&nbsp프로젝트
 			</div>
 			<div class="menu active">
 				<i class="fa-solid fa-users-line"></i>&nbsp커뮤니케이션

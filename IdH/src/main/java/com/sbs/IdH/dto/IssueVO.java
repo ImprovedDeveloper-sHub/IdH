@@ -1,6 +1,7 @@
 package com.sbs.IdH.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class IssueVO {
 	private int issue_number;
@@ -11,7 +12,14 @@ public class IssueVO {
 	private String issue_setter_id;
 	private int issue_project_number;
 	private String issue_getter_id;
+	private List<Issue_AttachVO>attachList;
 	
+	public List<Issue_AttachVO> getAttachList() {
+		return attachList;
+	}
+	public void setAttachList(List<Issue_AttachVO> attachList) {
+		this.attachList = attachList;
+	}
 	public int getIssue_number() {
 		return issue_number;
 	}

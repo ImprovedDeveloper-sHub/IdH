@@ -29,6 +29,7 @@ public class IssueController {
 	@GetMapping("/main")
 	public ModelAndView issue(SearchCriteria cri, ModelAndView mnv) throws Exception {
 		mnv.addAllObjects(issueService.selectIssueList(cri));
+		mnv.addAllObjects(issueService.selectIssueCheckList(cri));
 		return mnv;
 	}
 	
