@@ -12,8 +12,10 @@ public class ScheduleVO {
 	
 	
 	private String schedule_detail;
+	private String schedule_name;
 	private Date schedule_regdate;
 	private Date schedule_enddate;
+	private Date schedule_startdate;
 	
 	
 	public int getSchedule_number() {
@@ -59,19 +61,36 @@ public class ScheduleVO {
 		this.schedule_detail = schedule_detail;
 	}
 	
-	public ScheduleVO() {}
 	
+	public String getSchedule_name() {
+		return schedule_name;
+	}
+	public void setSchedule_name(String schedule_name) {
+		this.schedule_name = schedule_name;
+	}
+	public Date getSchedule_startdate() {
+		return schedule_startdate;
+	}
+	public void setSchedule_startdate(Date schedule_startdate) {
+		this.schedule_startdate = schedule_startdate;
+	}
+	public ScheduleVO() {}
 	public ScheduleVO(int schedule_number, int schedule_status, String schedule_member_id, int schedule_project_number,
-			String schedule_detail, Date schedule_regdate, Date schedule_enddate) {
+			String schedule_detail, String schedule_name, Date schedule_regdate, Date schedule_enddate,
+			Date schedule_startdate) {
 		super();
 		this.schedule_number = schedule_number;
 		this.schedule_status = schedule_status;
 		this.schedule_member_id = schedule_member_id;
 		this.schedule_project_number = schedule_project_number;
 		this.schedule_detail = schedule_detail;
+		this.schedule_name = schedule_name;
 		this.schedule_regdate = schedule_regdate;
 		this.schedule_enddate = schedule_enddate;
+		this.schedule_startdate = schedule_startdate;
 	}
+	
+	
 	
 	
 	

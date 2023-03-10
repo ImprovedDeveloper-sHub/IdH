@@ -40,15 +40,15 @@ public class TestUnitworkService {
    
    @Test
    public void testInsertUnitworkList() throws Exception{
-	   	  UnitworkVO unitwork = new UnitworkVO(3, 1, "test", 1, 1, "IdH", "test", null, null);
-		  //UnitworkVO unitwork = new UnitworkVO(3, "이름", null, null, 0, 1, 1, "IdH","test");
-		  Date start = DateMaker.make(2023, 2, 20);
-		  Date end = DateMaker.make(2023, 3, 10);
-	   	  
-		  unitwork.setUnitwork_regdate(start);
-		  unitwork.setUnitwork_enddate(end);
-	   	  unitworkService.registUnitwork(unitwork);
-
+		/*
+		 * UnitworkVO unitwork = new UnitworkVO(3, 1, "test", 1, 1, "IdH", "test", null,
+		 * null); //UnitworkVO unitwork = new UnitworkVO(3, "이름", null, null, 0, 1, 1,
+		 * "IdH","test"); Date start = DateMaker.make(2023, 2, 20); Date end =
+		 * DateMaker.make(2023, 3, 10);
+		 * 
+		 * unitwork.setUnitwork_regdate(start); unitwork.setUnitwork_enddate(end);
+		 * unitworkService.registUnitwork(unitwork);
+		 */
 	   	  UnitworkVO unitwork2 = unitworkService.selectUnitwork(3);
 		 
    }

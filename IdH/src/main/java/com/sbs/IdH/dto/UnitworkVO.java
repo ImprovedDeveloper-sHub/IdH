@@ -12,14 +12,16 @@ public class UnitworkVO {
 	private String unitwork_detail;
 	private Date unitwork_regdate;
 	private Date unitwork_enddate;
+	private Date unitwork_startdate;
 	
 	
 	public UnitworkVO() {}
 	
 	
+	
 	public UnitworkVO(int unitwork_number, int unitwork_status, String unitwork_name, int unitwork_check,
 			int unitwork_project_number, String unitwork_member_id, String unitwork_detail, Date unitwork_regdate,
-			Date unitwork_enddate) {
+			Date unitwork_enddate, Date unitwork_startdate) {
 		super();
 		this.unitwork_number = unitwork_number;
 		this.unitwork_status = unitwork_status;
@@ -30,7 +32,23 @@ public class UnitworkVO {
 		this.unitwork_detail = unitwork_detail;
 		this.unitwork_regdate = unitwork_regdate;
 		this.unitwork_enddate = unitwork_enddate;
+		this.unitwork_startdate = unitwork_startdate;
 	}
+
+
+
+	public Date getUnitwork_startdate() {
+		return unitwork_startdate;
+	}
+
+
+
+	public void setUnitwork_startdate(Date unitwork_startdate) {
+		this.unitwork_startdate = unitwork_startdate;
+	}
+
+
+
 	public int getUnitwork_number() {
 		return unitwork_number;
 	}
