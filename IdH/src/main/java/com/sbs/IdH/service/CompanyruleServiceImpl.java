@@ -7,23 +7,30 @@ import java.util.Map;
 
 import com.sbs.IdH.command.PageMaker;
 import com.sbs.IdH.command.SearchCriteria;
+import com.sbs.IdH.dao.Co_AttachDAO;
 import com.sbs.IdH.dao.CompanyruleDAO;
+import com.sbs.IdH.dto.Co_AttachVO;
 import com.sbs.IdH.dto.CompanyruleVO;
-import com.sbs.IdH.dto.CoworkVO;
+
 
 public class CompanyruleServiceImpl implements CompanyruleService {
 
 	private CompanyruleDAO companyruleDAO;
-
+	private Co_AttachDAO co_attachDAO;
 	public void setCompanyruleDAO(CompanyruleDAO companyruleDAO) {
 		this.companyruleDAO = companyruleDAO;
+	}
+	public void setCo_attachDAO(Co_AttachDAO co_attachDAO) {
+		this.co_attachDAO = co_attachDAO;
 	}
 
 	@Override
 	public Map<String, Object> selectCompanyruleList(SearchCriteria cri) throws SQLException {
+		
 		List<CompanyruleVO> companyruleList = companyruleDAO.selectCompanyruleCriteria(cri);
 		if (companyruleList != null)
-			for (CompanyruleVO companyrule : companyruleList);
+			for (CompanyruleVO companyrule : companyruleList)
+		    addAttachList(companyrule);
 
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
@@ -32,7 +39,7 @@ public class CompanyruleServiceImpl implements CompanyruleService {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("companyruleList", companyruleList);
 		dataMap.put("pageMaker", pageMaker);
-		System.out.println(companyruleList.get(0));
+		
 		return dataMap;
 
 	}
@@ -69,6 +76,33 @@ public class CompanyruleServiceImpl implements CompanyruleService {
 	@Override
 	public void removeCompanyrule(int companyrule_number) throws SQLException {
 		companyruleDAO.deleteCompanyrule(companyrule_number);
+	}
+	
+	private void addAttachList(CompanyruleVO companyrule) throws SQLException {
+
+		if (companyrule == null)
+			return;
+
+		int companyrule_number = companyrule.getCompanyrule_number();
+		List<Co_AttachVO> attachList = co_attachDAO.selectAttachesByCo_number(companyrule_number);
+
+		companyrule.setCo_AttachList(attachList);
+	
+	}
+	
+
+	@Override
+	public Co_AttachVO selectCo_AttachByAno(int ano) throws SQLException {
+		Co_AttachVO co_attach = co_attachDAO.selectCo_AttachByAno(ano);
+
+		return co_attach;
+
+	}
+
+	@Override
+	public void removeCo_AttachByAno(int ano) throws SQLException {
+		co_attachDAO.deleteCo_Attach(ano);
+
 	}
 
 }

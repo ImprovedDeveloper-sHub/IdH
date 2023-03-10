@@ -13,6 +13,7 @@
 		<typeAlias type="com.sbs.IdH.dto.CompanyruleVO" alias="companyrule"/>
 		<typeAlias type="com.sbs.IdH.dto.CoworkVO" alias="cowork"/>
 		<typeAlias type="com.sbs.IdH.dto.Product_AttachVO" alias="product_attach"/>
+		<typeAlias type="com.sbs.IdH.dto.Co_AttachVO" alias="co_attach"/>
 		
 	</typeAliases>
 	

@@ -1,6 +1,7 @@
 package com.sbs.IdH.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class CompanyruleVO {
 
@@ -9,8 +10,15 @@ public class CompanyruleVO {
 	private String companyrule_content;
 	private Date companyrule_regdate;
 	private String companyrule_member_id;
+	private List<Co_AttachVO> attachList;
 	
 	
+	public List<Co_AttachVO> getAttachList() {
+		return attachList;
+	}
+	public void setCo_AttachList(List<Co_AttachVO> attachList) {
+		this.attachList = attachList;
+	}
 	public int getCompanyrule_number() {
 		return companyrule_number;
 	}

@@ -33,8 +33,9 @@
                      </button>
                   </div>
                </div>
-         <button type="button" class="btn btn-block btn-info btn-sm"
-            style="width: 80px;">등록</button>
+               
+         <button type="button" class="btn btn-block btn-info btn-sm" style="width: 80px" id="registBtn" onclick="OpenWindow('registForm.do','글등록',800,700)" 
+        >등록</button>
             </div>
          <div id="table-content">
             <div class="card-body table-responsive p-0">

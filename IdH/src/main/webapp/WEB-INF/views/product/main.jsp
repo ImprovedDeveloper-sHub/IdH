@@ -11,7 +11,7 @@
 <div class="content-parts col-8">
       <div id="content" class="card">
          <div class="card-header">
-            <h3 class="card-title">정책관리</h3>
+            <h3 class="card-title">산출물연계진행</h3>
          </div>
             <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse;">
                <div class="input-group input-group-sm" style="width: 270px">

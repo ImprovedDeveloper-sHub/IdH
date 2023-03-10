@@ -91,8 +91,7 @@ public class ProductServiceImpl implements ProductService {
 		List<Product_AttachVO> attachList = product_attachDAO.selectAttachesByProduct_number(product_number);
 
 		product.setProduct_AttachList(attachList);
-		System.out.println("product");
-		System.out.println("attachList");
+	
 	}
 
 	@Override
