@@ -66,7 +66,7 @@ public class TestNoticeServiceImpl {
 	@Test
 	public void testRegist() throws SQLException {
 		
-		NoticeVO comparisonNotice = new NoticeVO().setTestNoticeExample();
+		NoticeVO comparisonNotice = new NoticeVO();
 		
 		noticeService.regist(comparisonNotice);
 		

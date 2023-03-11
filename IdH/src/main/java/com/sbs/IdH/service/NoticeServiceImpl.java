@@ -49,7 +49,6 @@ public class NoticeServiceImpl implements NoticeService {
 		
 	}
 	
-	/*
 	@Override
 	public NoticeVO getNoticeForModify(int notice_number) throws SQLException {
 		
@@ -58,7 +57,6 @@ public class NoticeServiceImpl implements NoticeService {
 		return notice;
 		
 	}
-	*/
 
 	@Override
 	public void regist(NoticeVO notice) throws SQLException {

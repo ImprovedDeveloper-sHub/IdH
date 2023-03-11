@@ -40,7 +40,7 @@
 		</if>
 	</sql>
 	
-	<select id="selectSearchNoticeList" resultType="notice">
+	<!-- <select id="selectSearchNoticeList" resultType="notice">
 		select *
 		from(
 		    select rownum as rnum,SearchNoticeResult.*
@@ -49,13 +49,23 @@
 				from notice
 				where notice_number is not null
 				<include refid="search" />
-				<!-- order by regDate desc -->
+				order by regDate desc
 		    )  SearchNoticeResult
 		    <![CDATA[
 		    where rownum <= #{endRow}
 		)
 		where rnum > #{startRow}
 		 ]]>
+	</select> -->
+	
+	<select id="selectSearchNoticeList"	resultType="notice">
+		select
+		*
+		from
+		notice
+		where notice_number is not null  			  	
+		<include refid="search" />
+		<!-- order by regDate desc -->
 	</select>
 	
 	<select id="selectSearchNoticeListCount" resultType="int">

@@ -12,7 +12,7 @@ public interface NoticeService {
 	
 	public NoticeVO getNotice(int notice_number) throws SQLException;
 	
-	/* public NoticeVO getNoticeForModify(int notice_number) throws SQLException; */
+	public NoticeVO getNoticeForModify(int notice_number) throws SQLException;
 	
 	public void regist(NoticeVO notice) throws SQLException;
 	

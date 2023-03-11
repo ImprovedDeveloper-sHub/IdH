@@ -84,7 +84,7 @@ public class TestNoticeDAOImpl {
 	@Test
 	public void testInsertNotice() throws SQLException {
 		
-		NoticeVO insertNotice = new NoticeVO().setTestNoticeExample();
+		NoticeVO insertNotice = new NoticeVO();
 		
 		noticeDAO.insertNotice(insertNotice);
 		
