@@ -7,31 +7,31 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("test")
+@RequestMapping("business")
 public class TestBusinessController {
 
 	@GetMapping("/test")
 	public void test() throws SQLException {}
 	
-	@GetMapping("/business/schedule")
+	@GetMapping("/schedule/main")
 	public void testBusinessSchedule() throws SQLException {}
 	
-	@GetMapping("/business/schedule_detail")
+	@GetMapping("/schedule/detail")
 	public void testBusinessScheduleDetail() throws SQLException {}
 	
-	@GetMapping("/business/budget")
+	@GetMapping("/budget/main")
 	public void testBusinessBudget() throws SQLException{}
 	
-	@GetMapping("/business/budget_detail")
+	@GetMapping("/budget/detail")
 	public void testBusinessBudgetDetail() throws SQLException {}
 	
-	@GetMapping("/business/group")
+	@GetMapping("/group/main")
 	public void testBusinessGroup() throws SQLException {}
 	
-	@GetMapping("/business/group_detail")
+	@GetMapping("/group/detail")
 	public void testBusinessGroupDetail() throws SQLException {}
 	
-	@GetMapping("/business/regist")
+	@GetMapping("/regist")
 	public void testBusinessRegist() throws SQLException {}
 	
 }
