@@ -1,4 +1,4 @@
-package com.sbs.IdH.command;
+package com.sbs.IdH.exception;
 
 public class NotNumberException extends Exception {
 

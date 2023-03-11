@@ -54,6 +54,15 @@ public class IssueServiceImpl implements IssueService{
 		int issuesuccess = issueDAO.selectSearchIssueListCount(cri);
 		cri.setStatus(2);
 		int issuenow = issueDAO.selectSearchIssueListCount(cri);
+		
+		int getter = issueDAO.selectGetterIssueCount();
+		int notgetter = issueDAO.selectNotGetterIssueCount();
+		
+		int total = issueDAO.selectIssueTotalCount();
+		
+		dataMap.put("total",total);
+		dataMap.put("getter",getter);
+		dataMap.put("notgetter",notgetter);
 		dataMap.put("issuesuccess",issuesuccess);
 		dataMap.put("issuenow",issuenow);
 		return dataMap;
@@ -88,7 +97,7 @@ public class IssueServiceImpl implements IssueService{
 	public Map<String, Object> selectMyIssueList(SearchCriteria cri,HttpServletRequest request) throws SQLException {
 		Map<String, Object> dataMap = new HashMap<String,Object>();
 		HttpSession session = request.getSession();
-		cri.setMemberId((String)session.getAttribute("loginUserId"));
+		cri.setMemberId((String)session.getAttribute("loginUser"));
 		cri.setMemberStatus(1);
 		dataMap.put("myIssueList", issueDAO.selectSearchIssueList(cri));
 		return dataMap;
@@ -98,7 +107,7 @@ public class IssueServiceImpl implements IssueService{
 	public Map<String, Object> selectGetterIssueList(SearchCriteria cri,HttpServletRequest request) throws SQLException {
 		Map<String, Object> dataMap = new HashMap<String,Object>();
 		HttpSession session = request.getSession();
-		cri.setMemberId((String)session.getAttribute("loginUserId"));
+		cri.setMemberId((String)session.getAttribute("loginUser"));
 		cri.setMemberStatus(2);
 		dataMap.put("getterIssueList", issueDAO.selectSearchIssueListCount(cri));
 		return dataMap;

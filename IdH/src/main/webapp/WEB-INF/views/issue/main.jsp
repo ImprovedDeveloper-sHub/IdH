@@ -33,9 +33,9 @@
 				<tr>
 					<td>${issuesuccess }</td>
 					<td>${issuenow }</td>
-					<td>값</td>
-					<td>값</td>
-					<td>값</td>
+					<td>${getter }</td>
+					<td>${notgetter }</td>
+					<td>${total }</td>
 				</tr>
 			</tbody>
 		</table>

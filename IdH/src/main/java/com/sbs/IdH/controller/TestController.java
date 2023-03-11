@@ -9,6 +9,13 @@ public class TestController {
 	@GetMapping("/test")
 	public void test() throws Exception {
 	}
+	@GetMapping("/work/main")
+	public void main() throws Exception {
+	}
+	
+	@GetMapping("/work/main2")
+	public void main2() throws Exception {
+	}
 
 	@GetMapping("/notice")
 	public void notice() throws Exception {

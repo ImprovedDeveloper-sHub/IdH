@@ -54,6 +54,5 @@ table td{
 <!-- summernote css/js-->
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/bootstrap/plugins/summernote/summernote-bs4.min.css">
-<div class="header"style="width:1000px;">
 
   

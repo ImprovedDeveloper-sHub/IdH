@@ -11,10 +11,6 @@ public class SearchCriteria {
 	private int startRowNum=0;
 	private int memberStatus;
 
-
-	
-
-
 	public int getMemberStatus() {
 		return memberStatus;
 	}

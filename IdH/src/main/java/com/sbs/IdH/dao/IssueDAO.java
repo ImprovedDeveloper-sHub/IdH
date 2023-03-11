@@ -14,4 +14,7 @@ public interface IssueDAO{
 	public void updateIssue(IssueVO issue);
 	public void deleteIssue(int issue_number);
 	public int selectIssueCriteriaTotalCount(SearchCriteria cri);
+	public int selectNotGetterIssueCount();
+	public int selectGetterIssueCount();
+	public int selectIssueTotalCount();
 }

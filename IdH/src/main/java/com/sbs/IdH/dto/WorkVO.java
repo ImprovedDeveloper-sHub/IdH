@@ -5,11 +5,11 @@ import java.util.Date;
 public class WorkVO {
 	private int work_number;
 	private int work_project_number;
-	private String work_member_id;
+	private String work_member_id;//보낸사람
 	private int work_check;
 	private Date work_regdate;
 	private Date work_enddate;
-	private String work_member_approver;
+	private String work_member_approver;//받는사람
 
 	public int getWork_number() {
 		return work_number;

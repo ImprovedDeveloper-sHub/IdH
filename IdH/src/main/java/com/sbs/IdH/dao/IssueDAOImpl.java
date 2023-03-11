@@ -61,5 +61,23 @@ public class IssueDAOImpl implements IssueDAO{
 		int count = session.selectOne("Issue-Mapper.selectSearchIssueListCount",cri);
 		return count;
 	}
+
+	@Override
+	public int selectNotGetterIssueCount() {
+		int count = session.selectOne("Issue-Mapper.selectNotGetterIssueCount");
+		return count;
+	}
+
+	@Override
+	public int selectGetterIssueCount() {
+		int count = session.selectOne("Issue-Mapper.selectGetterIssueCount");
+		return count;
+	}
+
+	@Override
+	public int selectIssueTotalCount() {
+		int total = session.selectOne("Issue-Mapper.selectSearchIssueCount");
+		return total;
+	}
 	
 }
