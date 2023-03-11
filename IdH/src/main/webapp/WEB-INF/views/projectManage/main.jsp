@@ -27,7 +27,8 @@
                   <input type="text" name="keyword" id ="proceedingKeyword"
                      class="form-control float-right" placeholder="Search">
                   <div class="input-group-append">
-                  	<button type="submit" class="btn btn-default" onclick="search_go_ajax(0, $('#proceedingPerPageNum'), $('#proceedingSearchType'), $('#proceedingKeyword'), '<%=request.getContextPath()%>/projectManage/getProceeding', $('.proceedingThead'),$('.proceedingProjectLi'),$('#proceedingProject-list-template'),$('#pagination-template'))">
+                  																				<!--페이지번호, 몇개띄울지, 검색타입, 검색어, url, table tr. (after붙일 대상) , 실행할때마다 삭제할 대상, 리스트template, 댓글 templete , 삭제할 div, typeString값. -->
+                  	<button type="submit" class="btn btn-default" onclick="search_go_ajax(0, $('#proceedingPerPageNum'), $('#proceedingSearchType'), $('#proceedingKeyword'), '<%=request.getContextPath()%>/projectManage/getProceeding', $('.proceedingThead'),$('.proceedingProjectLi'),$('#proceedingProject-list-template'),$('#proceeding-pagination-template'),$('#proceedingPaginationBox'),'proceeding')">
                         <i class="fas fa-search"></i>
                      </button>
                   	
@@ -39,7 +40,7 @@
          <div id="table-content">
             <div  class="card-body table-responsive p-0">
                <table  class="table table-hover">
-                  <thead class="proceedingThead" class="text-left">
+                  <thead id="proceedingThead" class="proceedingThead" class="text-left">
 	                <tr>
 	                  <th style="width:20%">프로젝트 이름</th>
 	                  <th style="width:30%">프로젝트 상태</th>
@@ -49,7 +50,7 @@
 	                </tr>
               	</thead>
               
-              <tbody class="proceedingProjectLi" class="text-left">
+              <tbody id="proceedingProjectLi" class="proceedingProjectLi" class="text-left">
               	<c:if test="${empty proceedingProjectList}">
 				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
 			 	 </c:if>
@@ -67,14 +68,15 @@
                                     white-space: nowrap; text-overflow: ellipsis;"> ${project.project_discription}</td>
 	                </tr>
 			 	 </c:forEach>
-			 	 <tr>
-			 	 	<td colspan="5">
-			 	 	<%@ include file="/WEB-INF/views/projectManage/proceedingPagination.jsp" %>
-			 	 	</td>
-			 	 </tr>
+			 	 	
+			 	 	
+			 	 	
               </tbody>
               
                </table>
+               
+               <div id="proceedingPaginationBox">
+               <%@ include file="/WEB-INF/views/projectManage/proceedingPagination.jsp" %></div>
             </div>
             
             
@@ -95,7 +97,7 @@
                   <input type="text" name="keyword" id="endKeyword"
                      class="form-control float-right" placeholder="Search">
                   <div class="input-group-append">
-                  	<button type="submit" class="btn btn-default" onclick="search_go_ajax(0, $('#endPerPageNum'), $('#endSearchType'), $('#endKeyword'), '<%=request.getContextPath()%>/projectManage/getEnd', $('.endThead'),$('.endProjectLi'),$('#endProject-list-template'))">
+                  	<button type="submit" class="btn btn-default" onclick="search_go_ajax(0, $('#endPerPageNum'), $('#endSearchType'), $('#endKeyword'), '<%=request.getContextPath()%>/projectManage/getEnd', $('.endThead'),$('.endProjectLi'),$('#endProject-list-template'),$('#endPaginationBox'))">
                         <i class="fas fa-search"></i>
                      </button>
                   	
@@ -135,14 +137,14 @@
                                     white-space: nowrap; text-overflow: ellipsis;"> ${project.project_discription}</td>
 					 </tr>
 				</c:forEach>
-				<tr>
-			 	 	<td colspan="5">
-			 	 	<%@ include file="/WEB-INF/views/projectManage/proceedingPagination.jsp" %>
-			 	 	</td>
-			 	 </tr>
+				
               </tbody>
               
+              
                </table>
+                <div id="endPaginationBox">
+               <%@ include file="/WEB-INF/views/projectManage/endPagination.jsp" %></div>
+              
             </div>
             
             
@@ -323,8 +325,6 @@
   
   function ajax_print_chart(url, project_num){
 	  formData = new FormData();
-	
-	  
 	  test = $.ajax({
 			url:"${request.ContextPath()}/IdH/"+url,//서버url
 			data: {

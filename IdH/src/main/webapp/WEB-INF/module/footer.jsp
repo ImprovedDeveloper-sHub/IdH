@@ -2,8 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 
+  
+<form id="jobForm">	
+	<input type='hidden' name="page" value="" />
+	<input type='hidden' name="perPageNum" value=""/>
+	<input type='hidden' name="searchType" value="" />
+	<input type='hidden' name="keyword" value="" />
+	<input type='hidden' name="type" value="" />
+</form>
 
-</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
 <script type="text/x-handlebars-template"  id="subMenu-list-template" >

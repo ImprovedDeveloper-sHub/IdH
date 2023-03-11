@@ -5,7 +5,7 @@
 <c:set var="cri" value="${dataMap.pageMaker.cri }" />
 <c:set var="pageMaker" value="${dataMap.pageMaker }" />    
     
-	<nav aria-label="Navigation">
+	<nav id="paginationNav" aria-label="Navigation">
 		<ul class="pagination justify-content-center m-0">
 			<li class="page-item">
 				<a class="page-link" href="javascript:list_go(1);">
@@ -41,13 +41,6 @@
 	
 
 
-  
-<form id="jobForm">	
-	<input type='hidden' name="page" value="" />
-	<input type='hidden' name="perPageNum" value=""/>
-	<input type='hidden' name="searchType" value="" />
-	<input type='hidden' name="keyword" value="" />
-</form>
 
 
 

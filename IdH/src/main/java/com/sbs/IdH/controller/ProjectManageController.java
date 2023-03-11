@@ -56,6 +56,7 @@ public class ProjectManageController {
 	public ModelAndView projectManage(SearchCriteria cri, ModelAndView mnv) throws Exception {
 		mnv.addAllObjects(projectService.selectProceedingProject(cri));
 		mnv.addAllObjects(projectService.selectEndProject(cri));
+		
 		mnv.setViewName("projectManage/main");
 		return mnv;
 	}

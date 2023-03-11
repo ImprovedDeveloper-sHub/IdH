@@ -32,10 +32,23 @@ function list_go(page,url){
 	jobForm.attr({action:url,method:'get'}).submit();
 }
 
+function ajax_list_go(page,url,type){
+	if(!url) url="main";
+	
+	var jobForm=$('#jobForm');
+	jobForm.find("[name='page']").val(page);
+	jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
+	jobForm.find("[name='searchType']")
+		.val($('select[name="searchType"]').val());
+	jobForm.find("[name='keyword']")
+		.val($('div.input-group>input[name="keyword"]').val());
+	
+	jobForm.attr({action:url,method:'get'}).submit();
+}
 
 
 
-function search_go_ajax(page, perPageNum, searchType, keyword, url, target, delTarget, templateObject, pagiTemplatObject) {
+function search_go_ajax(page, perPageNum, searchType, keyword, url, target, delTarget, templateObject, pagiTemplatObject, pagenationTarget,type) {
 	var jobForm=$('#jobForm');
 	//var jobForm = document.getElementById('#jobForm');
 	jobForm.find("[name='page']").val(page);
@@ -55,10 +68,13 @@ function search_go_ajax(page, perPageNum, searchType, keyword, url, target, delT
     	success: function(data) {    		
     		//alert(JSON.stringify(data));
     		printData(data,target,delTarget, templateObject);
-    		
     		if(pagiTemplatObject){
-    			//alert(JSON.stringify(data.pageMaker));
-    			printPagination(data.pageMaekr,delTarget,pagiTemplatObject);
+    			if(type=='proceeding') {
+    				printProceedingPagination(data,pagenationTarget,pagiTemplatObject);
+    			 }
+    			if(type=='end') { 
+				printEndPagination(data,pagenationTarget,pagiTemplatObject);
+			 }
     		}
 	
     	},
