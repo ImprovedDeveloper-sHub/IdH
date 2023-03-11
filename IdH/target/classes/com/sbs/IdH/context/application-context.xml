@@ -52,6 +52,7 @@
 	/>
 	<bean id="budgetService" class="com.sbs.IdH.service.BudgetServiceImpl"
 		p:budgetDAO-ref="budgetDAO"
+		p:projectDAO-ref="projectDAO"
 	/>
 	<bean id="menuService" class="com.sbs.IdH.service.MenuServiceImpl"
 		p:menuDAO-ref="menuDAO"

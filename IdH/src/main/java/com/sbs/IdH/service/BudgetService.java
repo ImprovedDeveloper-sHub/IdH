@@ -1,10 +1,10 @@
 package com.sbs.IdH.service;
 
-import java.util.List;
 import java.util.Map;
 
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.BudgetVO;
+import com.sbs.IdH.dto.ChartVO;
 
 public interface BudgetService {
 
@@ -22,6 +22,9 @@ public interface BudgetService {
 
 	public Map<String, Object> selectBudgetList(SearchCriteria cri) throws Exception;
 	
-	
-	
+	public ChartVO selectChart(int project_number)throws Exception;
+
+	public ChartVO selectChartForComparison(int project_number, int project_number2)throws Exception;
+
+
 }
