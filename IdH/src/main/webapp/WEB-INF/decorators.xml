@@ -1,14 +1,15 @@
 <decorators defaultdir="/WEB-INF/decorator">
 
-	<decorator name="fuck" page="decorator.jsp">
+	<decorator name="sss" page="decorator.jsp">
 		<pattern>/**/*</pattern>
 	</decorator>
 	
 
 	<decorator name="openWindow" page="open_decorator.jsp">
-		<pattern>**/detail</pattern>
+		<pattern>/**/*</pattern>
 		<pattern>/**/registForm</pattern>
-			<pattern>/**/regist</pattern>
+		<pattern>/**/modifyForm</pattern>
+			
 	</decorator>
 
 	<excludes>

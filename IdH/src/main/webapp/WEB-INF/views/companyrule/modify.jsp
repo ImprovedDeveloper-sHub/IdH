@@ -53,7 +53,7 @@ input {
 <div class="header"style="width:680px;height:400px;">
 		<div class="card card-info">
 			<div class="card-header">
-				<h3 class="card-title">상세화면</h3>
+				<h3 class="card-title">수정화면</h3>
 				<div class="card-tools">
 					<div class="input-group input-group-sm" style="width: 150px;">
 						<div class="input-group-append"></div>
@@ -76,15 +76,15 @@ input {
 						<tbody>
 							<tr>
 								<td class="name-td">글번호</td>
-								<td class="table-td">${companyrule.companyrule_number }</td>
+								<td class="table-td"><input type="text" readonly placeholder="${companyrule.companyrule_number }"/></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">작성자</td>
-								<td class="table-td">${companyrule.companyrule_member_id }</td>
+								<td class="table-td"><input type="text" readonly placeholder="${companyrule.companyrule_member_id }"/></td>
 							</tr>
 							<tr>
 								<td class="name-td">제목</td>
-								<td class="table-td">${companyrule.companyrule_title }</td>
+								<td class="table-td"><input type="text" placeholder="${companyrule.companyrule_title }"></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">등록일</td>
@@ -95,25 +95,25 @@ input {
 						
 							<tr style="height: 100px;">
 							<td class="name-td">내용</td>
-								<td class="table-td">${companyrule.companyrule_content }</td>
+								<td class="table-td"><input type="text"  placeholder="${companyrule.companyrule_content }"/></td>
 							</tr>
+							<tr>
+							<td class="name-td">첨부파일</td>
+								<td class="table-td"><input type="text"  placeholder="${companyrule.companyrule_content }"/></td>
+							</tr>
+							
 
 						</tbody>
 					</table>
 					</form>
-										
-							
-						
 				</div>
 			</div>
-			
 			<div class="card-tools" style="margin-left:auto">
-			<button type="button" id="modifyBtn" class="btn btn-info" onclick="submit_go('modifyForm','${companyrule.companyrule_number }');">수정</button>						
-		    <button type="button" id="removeBtn" class="btn btn-info" onclick="submit_go('remove','${companyrule.companyrule_number }');">삭제</button>					   
+			<button type="button" id="modifyBtn" class="btn btn-info" onclick="submit_go('modifyForm','${companyrule.companyrule_number }');">수정</button>						 				   
 		    <button type="button" id="listBtn" class="btn btn-info" onclick="CloseWindow();">닫기</button>
 		</div>
-		</div>
 	</div>
+</div>
 
 <script>
 function regist_go(){

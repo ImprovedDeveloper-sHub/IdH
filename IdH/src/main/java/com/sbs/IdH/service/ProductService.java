@@ -12,6 +12,7 @@ public interface ProductService {
 	
 	// 리스트조회
 		Map<String, Object> selectProductList(SearchCriteria cri) throws SQLException;
+		
 
 		// 글작성
 		void registProduct(ProductVO product) throws SQLException;
