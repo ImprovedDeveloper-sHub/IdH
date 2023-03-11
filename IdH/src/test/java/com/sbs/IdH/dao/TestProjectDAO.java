@@ -1,8 +1,6 @@
 package com.sbs.IdH.dao;
 
 
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +26,6 @@ public class TestProjectDAO {
       System.out.println(project);
    }
    
-   @Test
    public void testSelectProjectList() throws Exception{
 	  SearchCriteria cri = new SearchCriteria(0, 5, null, null);
 	  
@@ -64,7 +61,13 @@ public class TestProjectDAO {
 	   projectDAO.deleteProject(1);
 	   ProjectVO project2 = projectDAO.selectProject(1);
    }
-   
+   @Test
+   public void testCount() throws Exception{
+	   SearchCriteria cri = new SearchCriteria();
+	   cri.setPerPageNum(5);
+	   cri.setStatus(1);
+	   projectDAO.selectSearchProjectListCount(cri);
+   }
    
    
 }

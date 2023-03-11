@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-<c:set var="cri" value="${pageMaker.cri }" />
+<c:set var="cri" value="${dataMap.pageMaker.cri }" />
+<c:set var="pageMaker" value="${dataMap.pageMaker }" />    
+    
 	<nav aria-label="Navigation">
 		<ul class="pagination justify-content-center m-0">
 			<li class="page-item">
@@ -40,7 +42,12 @@
 
 
   
-
+<form id="jobForm">	
+	<input type='hidden' name="page" value="" />
+	<input type='hidden' name="perPageNum" value=""/>
+	<input type='hidden' name="searchType" value="" />
+	<input type='hidden' name="keyword" value="" />
+</form>
 
 
 

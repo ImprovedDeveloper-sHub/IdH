@@ -8,6 +8,7 @@ public class SearchCriteria {
 	private String searchType="";
 	private String keyword="";
 	private int project_number;
+	private int business_number;
 	private int status;
 	private int type;
 	private int startRowNum=0;
@@ -55,6 +56,16 @@ public class SearchCriteria {
 	public int getPage() {
 		return page;
 	}
+	public int getBusiness_number() {
+		return business_number;
+	}
+
+
+	public void setBusiness_number(int business_number) {
+		this.business_number = business_number;
+	}
+
+
 	public int getType() {
 		return type;
 	}
@@ -69,18 +80,20 @@ public class SearchCriteria {
 	}
 
 
-	public SearchCriteria(int page, int perPageNum, String searchType, String keyword, int project_number, int status,
-			int type, int startRowNum) {
+	
+
+	public SearchCriteria(int page, int perPageNum, String searchType, String keyword, int project_number,
+			int business_number, int status, int type, int startRowNum) {
 		super();
 		this.page = page;
 		this.perPageNum = perPageNum;
 		this.searchType = searchType;
 		this.keyword = keyword;
 		this.project_number = project_number;
+		this.business_number = business_number;
 		this.status = status;
 		this.type = type;
 		this.startRowNum = startRowNum;
-		setStartRowNum();
 	}
 
 

@@ -97,4 +97,14 @@ public class PageMaker {
 		this.cri = cri;
 	}
 
+	@Override
+	public String toString() {
+		return "PageMaker [totalCount=" + totalCount + ", startPage=" + startPage + ", endPage=" + endPage
+				+ ", realEndPage=" + realEndPage + ", prev=" + prev + ", next=" + next + ", displayPageNum="
+				+ displayPageNum + ", cri=" + cri + "]";
+	}
+	
+	
+	
+
 }

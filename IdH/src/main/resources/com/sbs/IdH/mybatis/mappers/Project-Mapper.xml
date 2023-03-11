@@ -13,8 +13,9 @@
 		<if test="searchType == 'd'.toString() ">
 			and project_discription like '%'||#{keyword}||'%'
 		</if>
-		<if test="status != null ">
-			and project_status = #{status}
+		
+		<if test="status != null and status != 0 ">
+			and project_status =  #{status}
 		</if>
 		
 		

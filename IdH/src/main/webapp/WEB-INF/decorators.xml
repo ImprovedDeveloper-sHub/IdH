@@ -8,8 +8,7 @@
 		<pattern>/**/*</pattern>
 		<!-- <pattern>/main</pattern> -->
 		<pattern>/main</pattern>
-		<pattern>/detail</pattern>
-		<pattern>/regist</pattern>
+		
 	</decorator>
 
 	<excludes>

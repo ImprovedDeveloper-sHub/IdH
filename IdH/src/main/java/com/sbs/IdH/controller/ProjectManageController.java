@@ -161,8 +161,6 @@ public class ProjectManageController {
 	@PostMapping("/getProceeding")
 	@ResponseBody
 	public ResponseEntity<Map<String,Object>> getProceeding(SearchCriteria cri) throws Exception{
-		System.out.println("searchType" + cri.getSearchType());
-		System.out.println("keyword" + cri.getKeyword());
 		
 		ResponseEntity<Map<String,Object>> entity =null;
 		HttpStatus status;

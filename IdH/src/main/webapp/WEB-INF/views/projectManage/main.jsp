@@ -27,7 +27,7 @@
                   <input type="text" name="keyword" id ="proceedingKeyword"
                      class="form-control float-right" placeholder="Search">
                   <div class="input-group-append">
-                  	<button type="submit" class="btn btn-default" onclick="search_go_ajax(0, $('#proceedingPerPageNum'), $('#proceedingSearchType'), $('#proceedingKeyword'), '<%=request.getContextPath()%>/projectManage/getProceeding', $('.proceedingThead'),$('.proceedingProjectLi'),$('#proceedingProject-list-template'))">
+                  	<button type="submit" class="btn btn-default" onclick="search_go_ajax(0, $('#proceedingPerPageNum'), $('#proceedingSearchType'), $('#proceedingKeyword'), '<%=request.getContextPath()%>/projectManage/getProceeding', $('.proceedingThead'),$('.proceedingProjectLi'),$('#proceedingProject-list-template'),$('#pagination-template'))">
                         <i class="fas fa-search"></i>
                      </button>
                   	
@@ -69,7 +69,7 @@
 			 	 </c:forEach>
 			 	 <tr>
 			 	 	<td colspan="5">
-			 	 	<%@ include file="/WEB-INF/module/pagination.jsp" %>
+			 	 	<%@ include file="/WEB-INF/views/projectManage/proceedingPagination.jsp" %>
 			 	 	</td>
 			 	 </tr>
               </tbody>
@@ -137,7 +137,7 @@
 				</c:forEach>
 				<tr>
 			 	 	<td colspan="5">
-			 	 	<%@ include file="/WEB-INF/module/pagination.jsp" %>
+			 	 	<%@ include file="/WEB-INF/views/projectManage/proceedingPagination.jsp" %>
 			 	 	</td>
 			 	 </tr>
               </tbody>
