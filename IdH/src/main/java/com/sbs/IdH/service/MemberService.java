@@ -1,9 +1,12 @@
 package com.sbs.IdH.service;
 
+import java.sql.SQLException;
 import java.util.Map;
 
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.MemberVO;
+import com.sbs.IdH.exception.InvalidPasswordException;
+import com.sbs.IdH.exception.NotFoundIdException;
 
 public interface MemberService {
 
@@ -16,5 +19,7 @@ public interface MemberService {
 		public void modifyMember(MemberVO member) throws Exception;
 
 		public void removeMember(String member_id) throws Exception;
+		
+		void login(String member_id, String member_pwd) throws NotFoundIdException, InvalidPasswordException, SQLException; 
 
 }

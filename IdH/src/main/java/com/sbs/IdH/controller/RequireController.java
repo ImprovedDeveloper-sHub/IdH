@@ -8,7 +8,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -94,52 +93,52 @@ public class RequireController {
 		return url;
 	}
 	
-	@GetMapping("/detail")
-	public ModelAndView detail(int require_number, String from, 
-								RedirectAttributes rttr,
-							    ModelAndView mnv) throws Exception {
-		String url = "/require/detail";
-
-		RequireVO require = null;
-		if (from != null && from.equals("list")) {
+//	@GetMapping("/detail")
+//	public ModelAndView detail(int require_number, String from, 
+//								RedirectAttributes rttr,
+//							    ModelAndView mnv) throws Exception {
+//		String url = "/require/detail";
+//
+//		RequireVO require = null;
+//		if (from != null && from.equals("list")) {
 //			require = requireService.read(require_number);
-			url = "redirect:/require/detail";
-			
-			rttr.addAttribute("require_number",require_number);
-			mnv.setViewName(url);
-			return mnv;
-		} 
-		
-		require = requireService.selectRequire(require_number);
-		
-		
-		// 파일명 재정의
-		if (require != null) {
-			List<Require_attachVO> attachList = require.getAttachList();
-			if (attachList != null) {
-				for (Require_attachVO attach : attachList) {
-					String fileName = attach.getFilename().split("\\$\\$")[1];
-					attach.setFilename(fileName);
-				}
-			}
-		}
-		
-		mnv.addObject("require", require);
-		mnv.setViewName(url);
-
-		return mnv;
-	}
-	
-	@GetMapping("/modifyForm")
-	public ModelAndView modifyForm(ModelAndView mnv, int require_number,RedirectAttributes rttr) throws Exception {
-		String url = "/require/modify";
-		
-		mnv = detail(require_number,"modify",rttr,mnv);
-		
-		mnv.setViewName(url);
-		return mnv;
-	}
-	
+//			url = "redirect:/require/detail";
+//			
+//			rttr.addAttribute("require_number",require_number);
+//			mnv.setViewName(url);
+//			return mnv;
+//		} 
+//		
+//		require = requireService.selectRequire(require_number);
+//		
+//		
+//		// 파일명 재정의
+//		if (require != null) {
+//			List<Require_attachVO> attachList = require.getAttachList();
+//			if (attachList != null) {
+//				for (Require_attachVO attach : attachList) {
+//					String fileName = attach.getFilename().split("\\$\\$")[1];
+//					attach.setFilename(fileName);
+//				}
+//			}
+//		}
+//		
+//		mnv.addObject("require", require);
+//		mnv.setViewName(url);
+//
+//		return mnv;
+//	}
+//	
+//	@GetMapping("/modifyForm")
+//	public ModelAndView modifyForm(ModelAndView mnv, int require_number,RedirectAttributes rttr) throws Exception {
+//		String url = "/require/modify";
+//		
+//		mnv = detail(require_number,"modify",rttr,mnv);
+//		
+//		mnv.setViewName(url);
+//		return mnv;
+//	}
+//	
 //	@PostMapping(value="/modify", produces = "text/plain;charset=utf-8")
 //	public String modifyPOST(PdsModifyCommand modifyReq,HttpServletRequest request,RedirectAttributes rttr) throws Exception {
 //		String url = "redirect:/pds/detail.do";
@@ -178,40 +177,40 @@ public class RequireController {
 //		return url;
 //	}
 	
-	@GetMapping("/remove")
-	public String remove(int require_number, RedirectAttributes rttr) throws Exception {
-		String url = "redirect:/pds/detail.do";
-
-		// 첨부파일 삭제
-		List<Require_attachVO> attachList = requireService.selectRequire(require_number).getAttachList();
-		if (attachList != null) {
-			for (Require_attachVO attach : attachList) {
-				File target = new File(attach.getUploadpath(), attach.getFilename());
-				if (target.exists()) {
-					target.delete();
-				}
-			}
-		}
-		// DB삭제
-		requireService.removeRequire(require_number);
-		
-		rttr.addFlashAttribute("from", "remove");
-		rttr.addAttribute("require_number", require_number);
-		
-		return url;
-	}
-	
-	@GetMapping("/getFile")
-	public String getFile(int ano,Model model) throws Exception {
-		
-		String url="downloadFile"; //bean name
-		
-		Require_attachVO attach = requireService.getRequire_attachByAno(ano);
-		
-
-		model.addAttribute("savedPath", attach.getUploadpath());
-		model.addAttribute("fileName", attach.getFilename());		
-	
-		return url;
-	}
- }
+//	@GetMapping("/remove")
+//	public String remove(int require_number, RedirectAttributes rttr) throws Exception {
+//		String url = "redirect:/pds/detail.do";
+//
+//		// 첨부파일 삭제
+//		List<Require_attachVO> attachList = requireService.selectRequire(require_number).getAttachList();
+//		if (attachList != null) {
+//			for (Require_attachVO attach : attachList) {
+//				File target = new File(attach.getUploadpath(), attach.getFilename());
+//				if (target.exists()) {
+//					target.delete();
+//				}
+//			}
+//		}
+//		// DB삭제
+//		requireService.removeRequire(require_number);
+//		
+//		rttr.addFlashAttribute("from", "remove");
+//		rttr.addAttribute("require_number", require_number);
+//		
+//		return url;
+//	}
+//	
+//	@GetMapping("/getFile")
+//	public String getFile(int ano,Model model) throws Exception {
+//		
+//		String url="downloadFile"; //bean name
+//		
+//		Require_attachVO attach = requireService.getRequire_attachByAno(ano);
+//		
+//
+//		model.addAttribute("savedPath", attach.getUploadpath());
+//		model.addAttribute("fileName", attach.getFilename());		
+//	
+//		return url;
+//	}
+}

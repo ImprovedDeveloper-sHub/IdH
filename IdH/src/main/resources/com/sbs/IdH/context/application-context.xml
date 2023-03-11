@@ -8,6 +8,11 @@
 
 	<context:component-scan base-package="com.sbs.IdH.service" />
 
+
+	<!-- file upload -->
+	<bean id="fileUploadPath" class="java.lang.String">
+		<constructor-arg value="${uploadPath.require}"/>
+	</bean>
 	
 	<!-- repository -->
 	<bean id="requireDAO" class="com.sbs.IdH.dao.RequireDAOImpl" 

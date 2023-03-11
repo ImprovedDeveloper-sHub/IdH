@@ -13,7 +13,14 @@ public class MemberVO {
 	private int member_status;
 	private int member_rank;
 	private String member_specialty;
+	private String member_picture;
 	
+	public String getMember_picture() {
+		return member_picture;
+	}
+	public void setMember_picture(String member_picture) {
+		this.member_picture = member_picture;
+	}
 	public String getMember_id() {
 		return member_id;
 	}

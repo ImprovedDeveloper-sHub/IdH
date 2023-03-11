@@ -1,5 +1,6 @@
 package com.sbs.IdH.service;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,8 @@ import com.sbs.IdH.command.PageMaker;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.MemberDAO;
 import com.sbs.IdH.dto.MemberVO;
+import com.sbs.IdH.exception.InvalidPasswordException;
+import com.sbs.IdH.exception.NotFoundIdException;
 
 public class MemberServiceImpl implements MemberService {
 
@@ -55,6 +58,17 @@ public class MemberServiceImpl implements MemberService {
 	public void removeMember(String member_id) throws Exception {
 		memberDAO.deleteMember(member_id);
 
+	}
+
+	@Override
+	public void login(String member_id, String member_pwd)
+			throws NotFoundIdException, InvalidPasswordException, SQLException {
+
+		MemberVO member = memberDAO.selectMember(member_id);
+		if (member == null)	throw new NotFoundIdException();
+		if (!member_pwd.equals(member.getMember_pwd())) throw new InvalidPasswordException();
+		
+		
 	}
 
 }
