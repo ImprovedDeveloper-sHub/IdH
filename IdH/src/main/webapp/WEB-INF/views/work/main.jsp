@@ -15,48 +15,28 @@
 </style>
 
 
-<div class="content-body row" style="height: 550px;">
-	<div class="col-2 work-check text-center">
-		<div class="card" style="height: 49%;">
-			<div style="height: 33.3%; border: solid green 3px;">
-				<h3 class="badge-success">SUCCESS</h3>
-				<br>
-				<h1>3</h1>
-			</div>
-			<div style="height: 33.3%; border: solid gold 3px;">
-				<h3 class="badge-warning">보류</h3>
-				<br>
-				<h1>3</h1>
-			</div>
-			<div style="height: 33.3%; border: solid red 3px;">
-				<h3 class="badge-danger">미승인</h3>
-				<br>
-				<h1>3</h1>
-			</div>
-		</div>
-		
-		
-		<div class="card" style="height: 49%;">
-			<div style="height: 33.3%; border: solid green 3px;">
-				<div class="badge-success">SUCCESS</div>
-				<br>
-				<h2>3</h2>
-			</div>
-			<div style="height: 33.3%; border: solid gold 3px;">
-				<div class="badge-warning">보류</div>
-				<br>
-				<h2>3</h2>
-			</div>
-			<div style="height: 33.3%; border: solid red 3px;">
-				<div class="badge-danger">미승인</div>
-				<br>
-				<h2>3</h2>
+<div class="content-body" style="height: 550px;">
+
+
+	<div class="content-parts row" style="height: 98%;">
+		<div class="col-2 text-center">
+			<div class="card" style="height: 98%;">
+				<div style="height: 33.3%; border: solid green 3px;">
+					<div class="badge-success">SUCCESS</div>
+					<h2>3</h2>
+				</div>
+				<div style="height: 33.3%; border: solid gold 3px;">
+					<div class="badge-warning">보류</div>
+					<h2>3</h2>
+				</div>
+				<div style="height: 33.3%; border: solid red 3px;">
+					<div class="badge-danger">미승인</div>
+					<h2>3</h2>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="col-10">
-		<div class="content-parts col-12" style="height: 49%;">
-			<div id="content" class="card" style="height: 98%;">
+		<div class="col-10">
+			<div id="content" class="card" style="height: 98%;overflow:scroll;overflow-x:hidden;">
 				<div class="card-header">
 					<h3 class="card-title">받은 보고</h3>
 				</div>
@@ -128,8 +108,25 @@
 		</div>
 
 
-		<div class="content-parts col-12" style="height: 49%;">
-			<div id="content" class="card" style="height: 98%;">
+
+		<div class="col-2 text-center">
+			<div class="card" style="height: 98%;">
+				<div style="height: 33.3%; border: solid green 3px;">
+					<div class="badge-success">SUCCESS</div>
+					<h2>3</h2>
+				</div>
+				<div style="height: 33.3%; border: solid gold 3px;">
+					<div class="badge-warning">보류</div>
+					<h2>3</h2>
+				</div>
+				<div style="height: 33.3%; border: solid red 3px;">
+					<div class="badge-danger">미승인</div>
+					<h2>3</h2>
+				</div>
+			</div>
+		</div>
+		<div class="col-10">
+			<div id="content" class="card" style="height: 98%;overflow:scroll;overflow-x:hidden;">
 				<div class="card-header">
 					<h3 class="card-title">보낸 보고</h3>
 				</div>

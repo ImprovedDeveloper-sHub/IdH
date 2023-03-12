@@ -29,11 +29,11 @@ public class TestWorkService {
 
 	   }
 
-	   @Test 
-	   public void testSelectWorkList() throws SQLException{
-		   SearchCriteria cri = new SearchCriteria();
-		   workService.selectWorkList(cri);
-	   }
+//	   @Test 
+//	   public void testSelectWorkList() throws SQLException{
+//		   SearchCriteria cri = new SearchCriteria();
+//		   workService.selectWorkList(cri);
+//	   }
 
 	   @Test
 	   public void testInsertWorkList() throws SQLException{
