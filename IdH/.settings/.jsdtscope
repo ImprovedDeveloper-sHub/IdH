@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<classpathentry excluding="src/main/webapp/resources/" kind="src" path=""/>
 =======
 	<classpathentry excluding="**/resources/**" kind="src" path=""/>
 >>>>>>> refs/remotes/origin/kwon
+=======
+	<classpathentry excluding="**/resources/**" kind="src" path=""/>
+>>>>>>> refs/remotes/origin/heo
 	<classpathentry kind="con" path="org.eclipse.wst.jsdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path=""/>
 </classpath>

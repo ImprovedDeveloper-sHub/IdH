@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 package com.sbs.IdH.command;
 
@@ -12,6 +13,10 @@ public class SearchCriteria {
 	private int status;
 	private int type;
 	private int startRowNum=0;
+	private String memberId="";
+	private int memberStatus;
+	
+	
 	
 	
 	public SearchCriteria() {}

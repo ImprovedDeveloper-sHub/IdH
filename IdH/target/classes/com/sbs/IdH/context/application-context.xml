@@ -6,7 +6,22 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	<context:component-scan base-package="kr.ac.sbs.service" />
+	<context:component-scan base-package="com.sbs.IdH.service" />
+	<bean id="issueDAO" class="com.sbs.IdH.dao.IssueDAOImpl" p:session-ref="sqlSession"/>
+	<bean id="minutesDAO" class="com.sbs.IdH.dao.MinutesDAOImpl" p:session-ref="sqlSession"/>
+	<bean id="workDAO" class="com.sbs.IdH.dao.WorkDAOImpl" p:session-ref="sqlSession"/>
+	<bean id="issue_attachDAO" class="com.sbs.IdH.dao.Issue_AttachDAOImpl" p:session-ref="sqlSession"/>
+	
+	<bean id="issueService"
+		  class="com.sbs.IdH.service.IssueServiceImpl"
+		  p:issueDAO-ref="issueDAO"
+		  p:issue_AttachDAO-ref="issue_attachDAO" />
+	<bean id="minutesService"
+		  class="com.sbs.IdH.service.MinutesServiceImpl"
+		  p:minutesDAO-ref="minutesDAO" />
+	<bean id="workService"
+		  class="com.sbs.IdH.service.WorkServiceImpl"
+		  p:workDAO-ref="workDAO" />
 
 	<!-- member.picture -->
 	
@@ -127,3 +142,25 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> refs/remotes/origin/heo
