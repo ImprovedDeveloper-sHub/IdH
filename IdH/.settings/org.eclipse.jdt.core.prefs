@@ -128,4 +128,7 @@ org.eclipse.jdt.core.compiler.problem.unusedWarningToken=warning
 org.eclipse.jdt.core.compiler.problem.varargsArgumentNeedCast=warning
 org.eclipse.jdt.core.compiler.release=disabled
 org.eclipse.jdt.core.compiler.source=1.8
+<<<<<<< HEAD
 >>>>>>> refs/remotes/origin/song
+=======
+>>>>>>> refs/remotes/origin/kwon
