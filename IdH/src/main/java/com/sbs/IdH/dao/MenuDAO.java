@@ -3,11 +3,6 @@ package com.sbs.IdH.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-<<<<<<< HEAD
-=======
-import org.apache.ibatis.session.SqlSession;
-
->>>>>>> refs/remotes/origin/heo
 import com.sbs.IdH.dto.MenuVO;
 
 public interface MenuDAO {
