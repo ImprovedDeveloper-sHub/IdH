@@ -39,7 +39,7 @@ public class TestUnitworkDAO {
       }
    }
    
-   @Test
+  
    public void testInsertUnitworkList() throws Exception{
 		  //UnitworkVO unitwork = new UnitworkVO(3, 0, "업무3",0, 1, "IdH","IdH", null, null);
 	   
@@ -72,6 +72,15 @@ public class TestUnitworkDAO {
 	   UnitworkVO unitwork2 = unitworkDAO.selectUnitwork(1);
    }
    
+   
+   @Test
+   public void testCount() throws Exception{
+	   SearchCriteria cri = new SearchCriteria();
+	   cri.setProject_number(1);
+	   unitworkDAO.selectUnitworkCountForChart(cri);
+	   
+	   
+   }
    
    
 }

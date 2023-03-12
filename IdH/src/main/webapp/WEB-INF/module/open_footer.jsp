@@ -3,7 +3,6 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 
-</div>
 <!-- ./wrapper -->
 
 

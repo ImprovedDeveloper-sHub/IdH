@@ -1,6 +1,5 @@
 package com.sbs.IdH.dao;
 
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -10,8 +9,7 @@ import com.sbs.IdH.dto.MenuVO;
 
 public class MenuDAOImpl implements MenuDAO{
 
-	
-	SqlSession session;
+	private SqlSession session;
 	public void setSession(SqlSession session) {
 		this.session = session;
 	}

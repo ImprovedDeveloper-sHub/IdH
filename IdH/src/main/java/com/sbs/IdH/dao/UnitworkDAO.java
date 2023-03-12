@@ -2,6 +2,7 @@ package com.sbs.IdH.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.UnitworkVO;
@@ -28,4 +29,6 @@ public interface UnitworkDAO {
 	void updateUnitworkForProjectEnd(UnitworkVO unitwork) throws SQLException;
 	
 	void deleteUnitwork(int unitwork_number) throws SQLException;
+	
+	Map<String,Object> selectUnitworkCountForChart(SearchCriteria cri)throws SQLException;
 }

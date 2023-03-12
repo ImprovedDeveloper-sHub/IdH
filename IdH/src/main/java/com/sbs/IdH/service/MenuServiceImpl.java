@@ -39,7 +39,8 @@ public class MenuServiceImpl implements MenuService{
 	@Override
 	public MenuVO getMenuByMname(String mName) throws Exception {
 		MenuVO menu = null;
-			menu = menuDAO.selectMenuByMname(mName);
-		return menu;
+			return menu = menuDAO.selectMenuByMname(mName);
+
+
 	}
 }

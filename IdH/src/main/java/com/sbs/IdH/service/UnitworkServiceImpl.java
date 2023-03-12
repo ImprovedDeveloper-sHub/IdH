@@ -1,17 +1,27 @@
 package com.sbs.IdH.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.sbs.IdH.command.PageMaker;
 import com.sbs.IdH.command.SearchCriteria;
+import com.sbs.IdH.dao.ProjectDAO;
 import com.sbs.IdH.dao.UnitworkDAO;
+import com.sbs.IdH.dto.ChartVO;
 import com.sbs.IdH.dto.UnitworkVO;
 
 public class UnitworkServiceImpl implements UnitworkService{
 
 	
 	UnitworkDAO unitworkDAO;
+	
+	ProjectDAO projectDAO;
+	
+	public void setProjectDAO(ProjectDAO projectDAO) {
+		this.projectDAO = projectDAO;
+	}
 	
 	public void setUnitworkDAO(UnitworkDAO unitworkDAO) {
 		this.unitworkDAO = unitworkDAO;
@@ -48,4 +58,91 @@ public class UnitworkServiceImpl implements UnitworkService{
 		return dataMap;
 	}
 
+	@Override
+	public ChartVO selectChart(int project_number) throws Exception {
+		HashMap<String, Object> rowMap_c1 = new HashMap<String, Object>();
+		HashMap<String, Object> rowMap_c2 = new HashMap<String, Object>();
+		HashMap<String, Object> rowMap_c3 = new HashMap<String, Object>();
+		
+		
+		SearchCriteria cri = new SearchCriteria();
+		cri.setProject_number(project_number);
+		//계획 단위업무
+		cri.setStatus(1);
+		List<Map<String,Object>> c0_list = new ArrayList<Map<String,Object>>();
+		HashMap<String, Object> c0_list_label = new HashMap<String, Object>();
+		c0_list_label.put("v", "계획 단위업무");
+		c0_list.add(c0_list_label);
+		c0_list.add(unitworkDAO.selectUnitworkCountForChart(cri));
+		
+		//진행 단위업무
+		cri.setStatus(2);
+		List<Map<String,Object>> c1_list = new ArrayList<Map<String,Object>>();
+		HashMap<String, Object> c1_list_label = new HashMap<String, Object>();
+		c1_list_label.put("v", "진행 단위업무");
+		c1_list.add(c1_list_label);
+		c1_list.add(unitworkDAO.selectUnitworkCountForChart(cri));
+		
+		//종료 단위업무
+		cri.setStatus(3);
+		List<Map<String,Object>> c2_list = new ArrayList<Map<String,Object>>();
+		HashMap<String, Object> c2_list_label = new HashMap<String, Object>();
+		c2_list_label.put("v", "종료 단위업무");
+		c2_list.add(c2_list_label);
+		c2_list.add(unitworkDAO.selectUnitworkCountForChart(cri));
+		
+		
+		
+		rowMap_c1.put("c", c0_list);
+		rowMap_c2.put("c", c1_list);
+		rowMap_c3.put("c", c2_list);
+		
+		ChartVO chart = new ChartVO();
+		chart.budgetColSet();
+		chart.rowSet(rowMap_c1);
+		chart.rowSet(rowMap_c2);
+		chart.rowSet(rowMap_c3);
+		
+		chart.resultSet();
+		return chart;
+	}
+
+	@Override
+	public ChartVO selectChartForComparison(int project_number1, int project_number2) throws Exception {
+		
+		HashMap<String, Object> rowMap_c1 = new HashMap<String, Object>();
+		HashMap<String, Object> rowMap_c2 = new HashMap<String, Object>();
+		
+		
+		SearchCriteria cri = new SearchCriteria();
+		cri.setProject_number(project_number1);
+		List<Map<String,Object>> c0_list = new ArrayList<Map<String,Object>>();
+		HashMap<String, Object> c0_list_label = new HashMap<String, Object>();
+		
+		
+		c0_list_label.put("v", projectDAO.selectProject(project_number1).getProject_name());
+		c0_list.add(c0_list_label);
+		c0_list.add(unitworkDAO.selectUnitworkCountForChart(cri));
+		
+		cri.setProject_number(project_number2);
+		List<Map<String,Object>> c1_list = new ArrayList<Map<String,Object>>();
+		HashMap<String, Object> c1_list_label = new HashMap<String, Object>();
+		c1_list_label.put("v", projectDAO.selectProject(project_number2).getProject_name());
+		c1_list.add(c1_list_label);
+		c1_list.add(unitworkDAO.selectUnitworkCountForChart(cri));
+		
+		rowMap_c1.put("c", c0_list);
+		rowMap_c2.put("c", c1_list);
+		
+		
+		ChartVO chart = new ChartVO();
+		chart.budgetColSet();
+		chart.rowSet(rowMap_c1);
+		chart.rowSet(rowMap_c2);
+		
+		
+		chart.resultSet();
+		return chart;
+	}
+	
 }

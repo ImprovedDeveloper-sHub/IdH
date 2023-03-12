@@ -10,172 +10,24 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.sbs.IdH.dto.ChartVO;
 import com.sbs.IdH.service.BudgetService;
+import com.sbs.IdH.service.UnitworkService;
 
 @Controller
 public class ChartController {
 
 	
-	@Resource
+	@Resource(name="budgetService")
 	private BudgetService budgetService;
-
+	@Resource(name="unitworkService")
+	private UnitworkService unitworkService;
+	
 	@GetMapping("/subMenuTest")
 	public void subMenuTest() {}
-	
-	@PostMapping("/test2")
-	@ResponseBody
-	public List test2(ModelAndView mnv) throws Exception{
-		List<Object> test = new ArrayList<Object>();
-		List<Object> test2 = new ArrayList<Object>();
-		test2.add("Year");
-		test2.add("Sales");
-		test2.add("Expenses");
-		List<Object> test3 = new ArrayList<Object>();
-		test3.add("2004");
-		test3.add(1000);
-		test3.add(400);
-		List<Object> test4 = new ArrayList<Object>();
-		test4.add("2005");
-		test4.add(1200);
-		test4.add(450);
-		test.add(test2);
-		test.add(test3);
-		test.add(test4);
-		
-		return test;
-	}
-	
-	
-	@GetMapping("/test3")
-	@ResponseBody
-	public ModelAndView test3(ModelAndView mnv) throws Exception {
-		Map<String, Object> dataMap = new HashMap<String,Object>();
-	
-		List<Map<String,Object>> cols = new ArrayList<Map<String,Object>>();
-		Map<String, Object> colMap1 = new HashMap<String,Object>();
-		Map<String, Object> colMap2 = new HashMap<String,Object>();
-		List<Map<String,Object>> rows = new ArrayList<Map<String,Object>>();
-		Map<String, Object> rowMap1 = new HashMap<String,Object>();
-		Map<String, Object> rowMap2 = new HashMap<String,Object>();
-		
-		
-		
-		colMap1.put("label","프로젝트");
-		colMap1.put("type","string");
-		
-		colMap2.put("label","사람수");
-		colMap2.put("type","number");
-		cols.add(colMap1);
-		cols.add(colMap2);
-		
-		rowMap1.put("v","프로젝트계획");
-		rowMap1.put("v","10");
-		
-		rowMap2.put("v","프로젝트현황");
-		rowMap2.put("v","13");
-		rows.add(rowMap1);
-		rows.add(rowMap2);
-		
-		
-		
-		dataMap.put("cols",cols);
-		dataMap.put("rows",rows);
-		
-		mnv.setViewName("/test");
-		mnv.addAllObjects(dataMap);
-		return mnv;
-	}
-
-	
-	
-	@GetMapping("/test4")
-	@ResponseBody
-	public ModelAndView test4(ModelAndView mnv) throws Exception{
-		
-		List<Object> test = new ArrayList<Object>();
-		List<Object> test2 = new ArrayList<Object>();
-		test2.add("Year");
-		test2.add("Sales");
-		test2.add("Expenses");
-		List<Object> test3 = new ArrayList<Object>();
-		test3.add("2004");
-		test3.add(1000);
-		test3.add(400);
-		List<Object> test4 = new ArrayList<Object>();
-		test4.add("2005");
-		test4.add(1200);
-		test4.add(450);
-		test.add(test2);
-		test.add(test3);
-		test.add(test4);
-		mnv.addObject("test",test);
-		
-		mnv.setViewName("/test");
-		
-		
-		return mnv;
-	}
-	
-	@GetMapping("/test6")
-	@ResponseBody
-	public Map<String, Object> test6() throws Exception {
-		Map<String, Object> dataMap = new HashMap<String,Object>();
-	
-		List<Map<String,Object>> cols = new ArrayList<Map<String,Object>>();
-		Map<String, Object> colMap1 = new HashMap<String,Object>();
-		Map<String, Object> colMap2 = new HashMap<String,Object>();
-		
-		
-		
-		List<Map<String,Object>> rows = new ArrayList<Map<String,Object>>();
-		Map<String, Object> rowMap_c1 = new HashMap<String,Object>();
-		Map<String, Object> rowMap_c2 = new HashMap<String,Object>();
-		
-		List<Map<String,Object>> c1_list = new ArrayList<Map<String,Object>>();
-		List<Map<String,Object>> c2_list = new ArrayList<Map<String,Object>>();
-		Map<String, Object> rowMap_c1_v1 = new HashMap<String,Object>();
-		Map<String, Object> rowMap_c1_v2 = new HashMap<String,Object>();
-		Map<String, Object> rowMap_c2_v1 = new HashMap<String,Object>();
-		Map<String, Object> rowMap_c2_v2 = new HashMap<String,Object>();
-		
-		
-		
-		rowMap_c1_v1.put("v","프로젝트1");
-		rowMap_c1_v2.put("v",1000);
-		c1_list.add(rowMap_c1_v1);
-		c1_list.add(rowMap_c1_v2);
-		rowMap_c1.put("c",c1_list);
-		rows.add(rowMap_c1);
-		
-		rowMap_c2_v1.put("v","프로젝트2");
-		rowMap_c2_v2.put("v",2000);
-		c2_list.add(rowMap_c2_v1);
-		c2_list.add(rowMap_c2_v2);
-		rowMap_c2.put("c",c2_list);
-		rows.add(rowMap_c2);
-		
-		
-		dataMap.put("rows",rows);
-		
-		
-		
-		
-		
-		colMap1.put("label","프로젝트");
-		colMap1.put("type","string");
-		
-		colMap2.put("label","예산");
-		colMap2.put("type","number");
-		cols.add(colMap1);
-		cols.add(colMap2);
-		dataMap.put("cols",cols);
-		
-		return dataMap;
-	}
 	
 	
 	
@@ -183,8 +35,8 @@ public class ChartController {
 	
 	@PostMapping("/budget")
 	@ResponseBody
-	public Map<String, Object> budget() throws Exception {
-		ChartVO chart = budgetService.selectChart(1);
+	public Map<String, Object> budget(@RequestParam int project_number) throws Exception {
+		ChartVO chart = budgetService.selectChart(project_number);
 		return chart.getResult();
 	}
 	
@@ -196,6 +48,20 @@ public class ChartController {
 	}
 
 
+	@PostMapping("/unitwork")
+	@ResponseBody
+	public Map<String, Object> unitwork() throws Exception {
+		ChartVO chart = unitworkService.selectChart(1);
+		return chart.getResult();
+	}
+	
+	@PostMapping("/unitworkComparison")
+	@ResponseBody
+	public Map<String, Object> unitworkComparison() throws Exception {
+		ChartVO chart = unitworkService.selectChartForComparison(1, 2);
+		return chart.getResult();
+	}
+	
 	
 	@PostMapping("/workforce")
 	@ResponseBody

@@ -1,6 +1,5 @@
 package com.sbs.IdH.command;
 
-
 public class PageMaker {
 
 	private int totalCount; // 전체 행의 개수
@@ -98,3 +97,4 @@ public class PageMaker {
 	}
 
 }
+

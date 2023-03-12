@@ -27,7 +27,8 @@
                   <input type="text" name="keyword" id ="proceedingKeyword"
                      class="form-control float-right" placeholder="Search">
                   <div class="input-group-append">
-                  	<button type="submit" class="btn btn-default" onclick="search_go_ajax(0, $('#proceedingPerPageNum'), $('#proceedingSearchType'), $('#proceedingKeyword'), '<%=request.getContextPath()%>/projectManage/getProceeding', $('.proceedingThead'),$('.proceedingProjectLi'),$('#proceedingProject-list-template'))">
+                  																				<!--페이지번호, 몇개띄울지, 검색타입, 검색어, url, table tr. (after붙일 대상) , 실행할때마다 삭제할 대상, 리스트template, 댓글 templete , 삭제할 div, typeString값. -->
+                  	<button type="submit" class="btn btn-default" onclick="search_go_ajax(0, $('#proceedingPerPageNum'), $('#proceedingSearchType'), $('#proceedingKeyword'), '<%=request.getContextPath()%>/projectManage/getProceeding', $('.proceedingThead'),$('.proceedingProjectLi'),$('#proceedingProject-list-template'),$('#proceeding-pagination-template'),$('#proceedingPaginationBox'),'proceeding')">
                         <i class="fas fa-search"></i>
                      </button>
                   	
@@ -39,7 +40,7 @@
          <div id="table-content">
             <div  class="card-body table-responsive p-0">
                <table  class="table table-hover">
-                  <thead class="proceedingThead" class="text-left">
+                  <thead id="proceedingThead" class="proceedingThead" class="text-left">
 	                <tr>
 	                  <th style="width:20%">프로젝트 이름</th>
 	                  <th style="width:30%">프로젝트 상태</th>
@@ -49,12 +50,12 @@
 	                </tr>
               	</thead>
               
-              <tbody class="proceedingProjectLi" class="text-left">
+              <tbody id="proceedingProjectLi" class="proceedingProjectLi" class="text-left">
               	<c:if test="${empty proceedingProjectList}">
 				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
 			 	 </c:if>
 			 	 <c:forEach items="${proceedingProjectList }" var="project">
-					 <tr>
+					 <tr onclick="setProjectNum(${project.project_number})">
 			                  <td style="text-align:left;max-width:20%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;">${project.project_name}</td>
 			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
@@ -67,14 +68,15 @@
                                     white-space: nowrap; text-overflow: ellipsis;"> ${project.project_discription}</td>
 	                </tr>
 			 	 </c:forEach>
-			 	 <tr>
-			 	 	<td colspan="5">
-			 	 	<%@ include file="/WEB-INF/module/pagination.jsp" %>
-			 	 	</td>
-			 	 </tr>
+			 	 	
+			 	 	
+			 	 	
               </tbody>
               
                </table>
+               
+               <div id="proceedingPaginationBox">
+               <%@ include file="/WEB-INF/views/projectManage/proceedingPagination.jsp" %></div>
             </div>
             
             
@@ -95,7 +97,7 @@
                   <input type="text" name="keyword" id="endKeyword"
                      class="form-control float-right" placeholder="Search">
                   <div class="input-group-append">
-                  	<button type="submit" class="btn btn-default" onclick="search_go_ajax(0, $('#endPerPageNum'), $('#endSearchType'), $('#endKeyword'), '<%=request.getContextPath()%>/projectManage/getEnd', $('.endThead'),$('.endProjectLi'),$('#endProject-list-template'))">
+                  	<button type="submit" class="btn btn-default" onclick="search_go_ajax(0, $('#endPerPageNum'), $('#endSearchType'), $('#endKeyword'), '<%=request.getContextPath()%>/projectManage/getEnd', $('.endThead'),$('.endProjectLi'),$('#endProject-list-template'),$('#endPaginationBox'))">
                         <i class="fas fa-search"></i>
                      </button>
                   	
@@ -135,14 +137,14 @@
                                     white-space: nowrap; text-overflow: ellipsis;"> ${project.project_discription}</td>
 					 </tr>
 				</c:forEach>
-				<tr>
-			 	 	<td colspan="5">
-			 	 	<%@ include file="/WEB-INF/module/pagination.jsp" %>
-			 	 	</td>
-			 	 </tr>
+				
               </tbody>
               
+              
                </table>
+                <div id="endPaginationBox">
+               <%@ include file="/WEB-INF/views/projectManage/endPagination.jsp" %></div>
+              
             </div>
             
             
@@ -172,12 +174,12 @@
 		<div class="card ">
           <div class="card-body row">
             <div class="col-4"><input type="button" class="btn btn-block btn-info btn-sm" id="budgetButton"
-            onclick="ajax_print_chart('budget');" value="예산현황"></input>
+            onclick="ajax_print_chart('budget','1');" value="예산현황"></input>
               <input type="button" class="btn btn-block btn-info btn-sm" id="workforceButton" onclick="ajax_print_chart('workforce');" value="인력현황"></input></div>
              <div class="col-4"> <input type="button" class="btn btn-block btn-info btn-sm"  id="scheduleButton" onclick="ajax_print_chart('schedule');" value="일정현황"></input>
               <input type="button" class="btn btn-block btn-info btn-sm" onclick="ajax_print_chart('issue');" id="issueButton" value="이슈현황"></input>   
 </div><div class="col-4"> <input type="button" class="btn btn-block btn-info btn-sm"  id="productButton" onclick="ajax_print_chart('product');" value="산출물현황"></input>
- <input type="button" class="btn btn-block btn-info btn-sm" id="unitworkButton" onclick="ajax_print_chart('product');" value="단위업무현황"></input>
+ <input type="button" class="btn btn-block btn-info btn-sm" id="unitworkButton" onclick="ajax_print_chart('unitwork');" value="단위업무현황"></input>
 
 </div>
           </div>
@@ -196,7 +198,13 @@
             <div id="issue_chart"></div>
             <div id="product_chart"></div>
             <div id="workforce_chart"></div>
+            <div id="unitwork_chart"></div>
             <div id="budgetComparison_chart"></div>
+            <div id="scheduleComparison_chart"></div>
+            <div id="issueComparison_chart"></div>
+            <div id="productComparison_chart"></div>
+            <div id="workforceComparison_chart"></div>
+            <div id="unitworkComparison_chart"></div>
           </div>
           
  
@@ -281,15 +289,47 @@
   
   
   <script>
+  
+  function changeButton(){
+		$('#budgetButton').val('예산비교'); $('#budgetButton').attr('onclick',"ajax_print_chart('budgetComparison')");
+		$('#workforceButton').val('인력비교');$('#workforceButton').attr('onclick',"ajax_print_chart('workforceComparison')");
+		$('#scheduleButton').val('일정비교'); $('#scheduleButton').attr('onclick',"ajax_print_chart('scheduleComparison')")
+		$('#issueButton').val('이슈비교');$('#issueButton').attr('onclick',"ajax_print_chart('issueComparison')");
+		$('#productButton').val('산출물비교');$('#productButton').attr('onclick',"ajax_print_chart('productComparison')");
+		$('#unitworkButton').val('단위업무비교'); $('#unitworkButton').attr('onclick',"ajax_print_chart('unitworkComparison')")
+		$('#changeButton').val('프로젝트 현황');$('#changeButton').attr('onclick',"returnButton()");
+	}
+
+	
+	function returnButton(){
+		$('#budgetButton').val('예산현황'); $('#budgetButton').attr('onclick',"ajax_print_chart('budget')");
+		$('#workforceButton').val('인력현황');
+		$('#scheduleButton').val('일정현황');
+		$('#issueButton').val('이슈현황');
+		$('#productButton').val('산출물현황');
+		$('#unitworkButton').val('단위업무현황');
+		$('#changeButton').val('프로젝트 비교');$('#changeButton').attr('onclick',"changeButton()");
+	}
+
+	function setProjectNum(setNum){
+		project_num = setNum
+		alert(project_num);
+	}
+  
+  var project_num;
   var last_chart="curve_chart";
   var chart_type="";
   var chart_data="test";
   var data_table_test;
   
   
-  function ajax_print_chart(url){
+  function ajax_print_chart(url, project_num){
+	  formData = new FormData();
 	  test = $.ajax({
-			url:"${request.ContextPath()}/IdH/"+url,		//서버url
+			url:"${request.ContextPath()}/IdH/"+url,//서버url
+			data: {
+				project_number : project_num	
+			},
 			method:"post",	//get post 보내는 방식
 			success:function(data){
 				//alert(url);
@@ -386,27 +426,7 @@
   
   
   <script>
-  	function changeButton(){
-  		$('#budgetButton').val('예산비교'); $('#budgetButton').attr('onclick',"ajax_print_chart('budgetComparison')")
-  		$('#workforceButton').val('인력비교');
-  		$('#scheduleButton').val('일정비교');
-  		$('#issueButton').val('이슈비교');
-  		$('#productButton').val('산출물비교');
-  		$('#unitworkButton').val('인력비교');
-  		$('#changeButton').val('프로젝트 현황');$('#changeButton').attr('onclick',"returnButton()")
-  	}
-  
   	
-  	function returnButton(){
-  		$('#budgetButton').val('예산현황'); $('#budgetButton').attr('onclick',"ajax_print_chart('budget')")
-  		$('#workforceButton').val('인력현황');
-  		$('#scheduleButton').val('일정현황');
-  		$('#issueButton').val('이슈현황');
-  		$('#productButton').val('산출물현황');
-  		$('#unitworkButton').val('인력현황');
-  		$('#changeButton').val('프로젝트 비교');$('#changeButton').attr('onclick',"changeButton()")
-  	}
-  
   </script>
   
 

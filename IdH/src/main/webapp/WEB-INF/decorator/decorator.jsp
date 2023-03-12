@@ -6,9 +6,7 @@
 
 <%@ include file="/WEB-INF/module/header.jsp"%>
 
-
 <decorator:body />
-
 
 <%@ include file="/WEB-INF/module/footer.jsp"%>
 

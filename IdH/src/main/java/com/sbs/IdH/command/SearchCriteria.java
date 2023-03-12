@@ -8,9 +8,14 @@ public class SearchCriteria {
 	private String searchType="";
 	private String keyword="";
 	private int project_number;
+	private int business_number;
 	private int status;
 	private int type;
 	private int startRowNum=0;
+	private String memberId="";
+	private int memberStatus;
+	
+	
 	
 	
 	public SearchCriteria() {}
@@ -55,6 +60,36 @@ public class SearchCriteria {
 	public int getPage() {
 		return page;
 	}
+	public String getMemberId() {
+		return memberId;
+	}
+
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
+
+	public int getMemberStatus() {
+		return memberStatus;
+	}
+
+
+	public void setMemberStatus(int memberStatus) {
+		this.memberStatus = memberStatus;
+	}
+
+
+	public int getBusiness_number() {
+		return business_number;
+	}
+
+
+	public void setBusiness_number(int business_number) {
+		this.business_number = business_number;
+	}
+
+
 	public int getType() {
 		return type;
 	}
@@ -69,17 +104,25 @@ public class SearchCriteria {
 	}
 
 
-	public SearchCriteria(int page, int perPageNum, String searchType, String keyword, int project_number, int status,
-			int type, int startRowNum) {
+	
+
+	
+
+
+	public SearchCriteria(int startRowNum, String keyword, int memberStatus, int page, int type, int perPageNum,
+			int status, int business_number, String searchType, String memberId, int project_number) {
 		super();
-		this.page = page;
-		this.perPageNum = perPageNum;
-		this.searchType = searchType;
-		this.keyword = keyword;
-		this.project_number = project_number;
-		this.status = status;
-		this.type = type;
 		this.startRowNum = startRowNum;
+		this.keyword = keyword;
+		this.memberStatus = memberStatus;
+		this.page = page;
+		this.type = type;
+		this.perPageNum = perPageNum;
+		this.status = status;
+		this.business_number = business_number;
+		this.searchType = searchType;
+		this.memberId = memberId;
+		this.project_number = project_number;
 		setStartRowNum();
 	}
 
@@ -134,5 +177,6 @@ public class SearchCriteria {
 	  public void setProject_number(int project_number) { this.project_number =
 	  project_number; }
 	 
+
 	
 }

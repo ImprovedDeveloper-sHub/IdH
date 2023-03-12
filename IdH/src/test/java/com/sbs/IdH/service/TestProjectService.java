@@ -26,14 +26,14 @@ public class TestProjectService {
       System.out.println(project);
    }
    
-   @Test
+   
    public void testSelectProjectList() throws Exception{
 	  SearchCriteria cri = new SearchCriteria();
-	 projectService.selectProceedingProject(cri);
+	 projectService.selectProjectList(cri);
       
    }
    
-   
+   @Test
    public void testSelectProceedingProject() throws Exception{
 	   SearchCriteria cri = new SearchCriteria();
 	   projectService.selectProceedingProject(cri);

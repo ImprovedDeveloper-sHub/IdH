@@ -45,12 +45,15 @@ public class ProjectServiceImpl implements ProjectService{
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(projectDAO.selectSearchProjectListCount(cri));
+		
 		dataMap.put("pageMaker",pageMaker);
 		dataMap.put("projectList", projectDAO.selectSearchProjectList(cri));
-		
 		return dataMap;
 	}
 
+	
+	
+	
 	@Override
 	public Map<String, Object> selectProceedingProject(SearchCriteria cri) throws Exception {
 		Map<String, Object> dataMap = new HashMap<String,Object>();
@@ -59,8 +62,7 @@ public class ProjectServiceImpl implements ProjectService{
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(projectDAO.selectSearchProjectListCount(cri));
-		dataMap.put("pageMaker",pageMaker);
-
+		dataMap.put("proceedingPageMaker",pageMaker);
 		return dataMap;
 	}
 	
@@ -71,14 +73,12 @@ public class ProjectServiceImpl implements ProjectService{
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(projectDAO.selectSearchProjectListCount(cri));
-	
 		dataMap.put("endProjectList", projectDAO.selectSearchProjectList(cri));
-		dataMap.put("pageMaker",pageMaker);
-
+		dataMap.put("endPageMaker",pageMaker);
 		return dataMap;
 	}
 
-	
+
 	
 	
 

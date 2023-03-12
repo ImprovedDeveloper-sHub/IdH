@@ -56,6 +56,7 @@ public class ProjectManageController {
 	public ModelAndView projectManage(SearchCriteria cri, ModelAndView mnv) throws Exception {
 		mnv.addAllObjects(projectService.selectProceedingProject(cri));
 		mnv.addAllObjects(projectService.selectEndProject(cri));
+		
 		mnv.setViewName("projectManage/main");
 		return mnv;
 	}
@@ -161,8 +162,6 @@ public class ProjectManageController {
 	@PostMapping("/getProceeding")
 	@ResponseBody
 	public ResponseEntity<Map<String,Object>> getProceeding(SearchCriteria cri) throws Exception{
-		System.out.println("searchType" + cri.getSearchType());
-		System.out.println("keyword" + cri.getKeyword());
 		
 		ResponseEntity<Map<String,Object>> entity =null;
 		HttpStatus status;
