@@ -5,7 +5,6 @@
 <%@ taglib prefix="decorator"
    uri="http://www.opensymphony.com/sitemesh/decorator"%>
 
-
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -13,9 +12,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="kor">
 <head>
-
 <style>
-
 ul,li{
    list-sytle:none;
 }
@@ -33,11 +30,10 @@ body{
   margin:0 auto;
   width:1224px;
   background-color:#eaedf2;
-
 }
 
-a {
-	text-decoration: none;
+.header-custom{
+  width:1212px;
 }
 
 .logo{
@@ -60,50 +56,16 @@ a {
 
 .menu:hover{
   color:white;
-
 }
 
-.main-custom {
-	margin: 0 auto;
-	width: 1224px;
-	background-color: #eaedf2;
+.row{
+  margin:0 !important;
+  padding:0!important;
 }
 
-.header-custom {
-	width: 1212px;
-}
-
-.logo {
-	background-color: #dfdfdf;
-	width: 100px;
-	height: 100px;
-}
-
-.main-menu-custom {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	background-color: #B7C4CF;
-}
-
-.menu {
-	display: inline-block;
-	font-size: 18px;
-	color: black;
-}
-
-.menu:hover {
-	color: white;
-}
-
-.row {
-	margin: 0 !important;
-	padding: 0 !important;
-}
-
-.active {
-	color: white;
-	font-weight: bold;
+.active{
+ color:white;
+  font-weight:bold;
 }
 
 .top-menu {
@@ -112,7 +74,6 @@ a {
   max-height: 56px;
   float: left;
   margin-bottom :15px;
-
 }
 
 nav {
@@ -169,9 +130,9 @@ nav a:hover::before {
 }
 
 .active-tab {
-	color: #5e9cf7;
-	padding: 1.9em 4em 1.2em 1em;
-	margin-left: 1px
+  color: #5e9cf7;
+  padding: 1.9em 4em 1.2em 1em;
+  margin-left: 1px
 }
 table th{
    font-size:7px;
@@ -186,11 +147,22 @@ table td{
 
 
 
+
 </style>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><decorator:title default="Improved Developer's Hub" /></title>
 <!-- 부트스트랩 불러오기 -->
+<!-- <script
+   src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
+
+<link rel="stylesheet"
+   href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
+
+ -->
+ <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/summernote/summernote-bs4.min.css">
+ 
+ <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/dist/css/adminlte.min.css">
 <!-- 폰트어썸 -->
 <link rel="stylesheet"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
