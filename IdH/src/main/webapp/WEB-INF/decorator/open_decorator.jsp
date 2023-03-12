@@ -8,11 +8,6 @@
 <%@ include file="/WEB-INF/module/open_header.jsp"%>
 
 
-<%@ include file="/WEB-INF/module/open_header.jsp"%>
-
-<%@ include file="/WEB-INF/module/open_header.jsp"%>
-
-
 <decorator:body />
 
 

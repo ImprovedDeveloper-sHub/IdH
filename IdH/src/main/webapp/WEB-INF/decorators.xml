@@ -3,6 +3,7 @@
 	<decorator name="IdH" page="decorator.jsp">
 		<pattern>*</pattern>
 	</decorator>
+	
 
 	<decorator name="openWindow" page="open_decorator.jsp">
 		<pattern>/**/*</pattern>

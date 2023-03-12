@@ -153,13 +153,7 @@ table td{
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><decorator:title default="Improved Developer's Hub" /></title>
 <!-- 부트스트랩 불러오기 -->
-<!-- <script
-   src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
 
-<link rel="stylesheet"
-   href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
-
- -->
  <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/summernote/summernote-bs4.min.css">
  
  <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/dist/css/adminlte.min.css">
