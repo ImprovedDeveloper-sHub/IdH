@@ -93,7 +93,11 @@ public class ScheduleVO {
 	
 	
 	
-	
+	public CalendarVO MakeCalendarVO() {
+		CalendarVO cal = new CalendarVO();
+		
+		return cal;
+	}
 	
 	
 	
