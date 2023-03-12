@@ -3,20 +3,22 @@ package com.sbs.IdH.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.sbs.IdH.dto.MenuVO;
 
 public interface MenuDAO {
 
 	// 메인메뉴
-	List<MenuVO> selectMainMenu() throws SQLException;
+	List<MenuVO> selectMainMenu(SqlSession session) throws SQLException;
 
 	// 서브메뉴
-	List<MenuVO> selectSubMenu(String mCode) throws SQLException;
+	List<MenuVO> selectSubMenu(SqlSession session, String mCode) throws SQLException;
 
 	// 메뉴정보
-	MenuVO selectMenuByMcode(String mCode) throws SQLException;
+	MenuVO selectMenuByMcode(SqlSession session, String mCode) throws SQLException;
 
-	MenuVO selectMenuByMname(String mName) throws SQLException;
+	MenuVO selectMenuByMname(SqlSession session, String mName) throws SQLException;
 }
 
 

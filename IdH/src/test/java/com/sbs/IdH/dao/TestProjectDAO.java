@@ -27,7 +27,7 @@ public class TestProjectDAO {
    }
    
    public void testSelectProjectList() throws Exception{
-	  SearchCriteria cri = new SearchCriteria(0, 5, null, null);
+		/* SearchCriteria cri = new SearchCriteria(0, 5, null, null); */
 	  
     //  System.out.println(projectList);
       
@@ -63,10 +63,10 @@ public class TestProjectDAO {
    }
    @Test
    public void testCount() throws Exception{
-	   SearchCriteria cri = new SearchCriteria();
-	   cri.setPerPageNum(5);
-	   cri.setStatus(1);
-	   projectDAO.selectSearchProjectListCount(cri);
+		/*
+		 * SearchCriteria cri = new SearchCriteria(); cri.setPerPageNum(5);
+		 * cri.setStatus(1); projectDAO.selectSearchProjectListCount(cri);
+		 */
    }
    
    

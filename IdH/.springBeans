@@ -1,29 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beansProjectDescription>
 	<version>1</version>
-<<<<<<< HEAD
 	<pluginVersion><![CDATA[3.9.12.202003180620-RELEASE]]></pluginVersion>
 	<configSuffixes>
 		<configSuffix><![CDATA[xml]]></configSuffix>
 	</configSuffixes>
-	<enableImports><![CDATA[true]]></enableImports>
+	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-	</configs>
-	<autoconfigs>
-		<config>src/main/resources/com/sbs/IdH/context/servlet-context.xml</config>
-=======
-	<pluginVersion><![CDATA[3.9.14.202009150957-RELEASE]]></pluginVersion>
-	<configSuffixes>
-		<configSuffix><![CDATA[xml]]></configSuffix>
-	</configSuffixes>
-	<enableImports><![CDATA[true]]></enableImports>
-	<configs>
-		<config>src/main/resources/com/sbs/IdH/context/properties-context.xml</config>
-	</configs>
-	<autoconfigs>
-		<config>src/main/resources/com/sbs/IdH/context/servlet-context.xml</config>
 		<config>src/main/resources/com/sbs/IdH/context/root-context.xml</config>
->>>>>>> refs/remotes/origin/kwon
+	</configs>
+	<autoconfigs>
 	</autoconfigs>
 	<configSets>
 	</configSets>

@@ -15,7 +15,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
 
 <style>
-
 ul,li{
    list-sytle:none;
 }
@@ -33,11 +32,11 @@ body{
   margin:0 auto;
   width:1224px;
   background-color:#eaedf2;
-
 }
 
 a {
 	text-decoration: none;
+	color:inherit;
 }
 
 .logo{
@@ -60,7 +59,6 @@ a {
 
 .menu:hover{
   color:white;
-
 }
 
 .main-custom {
@@ -112,7 +110,6 @@ a {
   max-height: 56px;
   float: left;
   margin-bottom :15px;
-
 }
 
 nav {
@@ -185,12 +182,15 @@ table td{
 
 
 
-
 </style>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><decorator:title default="Improved Developer's Hub" /></title>
 <!-- 부트스트랩 불러오기 -->
+
+ <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/summernote/summernote-bs4.min.css">
+ 
+ <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/dist/css/adminlte.min.css">
 <!-- 폰트어썸 -->
 <link rel="stylesheet"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
