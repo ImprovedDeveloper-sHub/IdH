@@ -1,6 +1,6 @@
 package com.sbs.IdH.command;
 
-
+public class PageMaker {
 
 	private int totalCount; // 전체 행의 개수
 	private int startPage = 1; // 시작 페이지 번호
@@ -95,15 +95,5 @@ package com.sbs.IdH.command;
 	public void setCri(SearchCriteria cri) {
 		this.cri = cri;
 	}
-
-	@Override
-	public String toString() {
-		return "PageMaker [totalCount=" + totalCount + ", startPage=" + startPage + ", endPage=" + endPage
-				+ ", realEndPage=" + realEndPage + ", prev=" + prev + ", next=" + next + ", displayPageNum="
-				+ displayPageNum + ", cri=" + cri + "]";
-	}
-	
-	
-	
 
 }
