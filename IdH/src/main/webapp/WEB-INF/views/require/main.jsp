@@ -4,6 +4,59 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
+<style>
+#external-events {
+	position: fixed;
+	left: 20px;
+	top: 20px;
+	width: 100px;
+	padding: 0 10px;
+	border: 1px solid #ccc;
+	background: #eee;
+	text-align: left;
+}
+
+#external-events h4 {
+	font-size: 16px;
+	margin-top: 0;
+	padding-top: 1em;
+}
+
+#external-events .fc-event {
+	margin: 3px 0;
+	cursor: move;
+}
+
+#external-events p {
+	margin: 1.5em 0;
+	font-size: 11px;
+	color: #666;
+}
+
+#external-events p input {
+	margin: 0;
+	vertical-align: middle;
+}
+
+#calendar1 {
+	max-width: 1100px;
+	margin: 0 auto;
+	background: white;
+}
+
+.fc-header-toolbar {
+	max-width: 1100px;
+	font-size: 11px;
+}
+</style>
+<!-- jquery CDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- fullcalendar CDN -->
+<link
+	href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css'
+	rel='stylesheet' />
+<script
+	src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
 <!-- fullcalendar 언어 CDN -->
 <script
 	src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
@@ -24,7 +77,7 @@
 								<option value="tcw" ${cri.searchType eq 'n' ? 'selected':'' }>전체</option>
 								<option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제목</option>
 								<option value="w" ${cri.searchType eq 'l' ? 'selected':'' }>수준</option>
-								<option value="c" ${cri.searchType eq 'c' ? 'selected':'' }>내용</option>
+								<option value="c" ${cri.searchType eq 'd' ? 'selected':'' }>내용</option>
 							</select> <input type="text" name="table_search"
 								class="form-control float-right" placeholder="Search">
 							<div class="input-group-append">
@@ -37,7 +90,8 @@
 							</div>
 						</div>
 						<button type="button" class="btn btn-block btn-info btn-sm"
-							style="width: 80px;">등록</button>
+							style="width: 80px;"
+							onclick="OpenWindow('registForm','등록',680,800);">등록</button>
 					</div>
 					<div id="table-content">
 						<div class="card-body table-responsive p-0">
@@ -59,7 +113,7 @@
 										</tr>
 									</c:if>
 									<c:forEach items="${requireList }" var="require">
-										<tr>
+										<tr onclick="OpenWindow('detail?require_number=${require.require_number}','상세보기',680,800);">
 											<td
 												style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${require.require_number}</td>
 											<td
@@ -145,6 +199,12 @@
 <!--content종료-->
 
 <script>
+	function submit_go(url, pno) {
+		location.href = url + "?pno=" + pno;
+	}
+</script>
+
+<script>
 	(function() {
 		$(function() {
 			// 드래그 박스 취득
@@ -189,6 +249,5 @@
 		});
 	})();
 </script>
-<!--
 
-//-->
+

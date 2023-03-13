@@ -30,7 +30,7 @@ public class RequireController {
 	private RequireService requireService;
 	
 	@GetMapping("/main")
-	public ModelAndView test2(ModelAndView mnv, SearchCriteria cri) throws Exception{
+	public ModelAndView main(ModelAndView mnv, SearchCriteria cri) throws Exception{
 		
 		mnv.addAllObjects(requireService.selectRequireList(cri));
 		
@@ -93,25 +93,13 @@ public class RequireController {
 		return url;
 	}
 	
-//	@GetMapping("/detail")
-//	public ModelAndView detail(int require_number, String from, 
-//								RedirectAttributes rttr,
-//							    ModelAndView mnv) throws Exception {
-//		String url = "/require/detail";
-//
-//		RequireVO require = null;
-//		if (from != null && from.equals("list")) {
-//			require = requireService.read(require_number);
-//			url = "redirect:/require/detail";
-//			
-//			rttr.addAttribute("require_number",require_number);
-//			mnv.setViewName(url);
-//			return mnv;
-//		} 
-//		
-//		require = requireService.selectRequire(require_number);
-//		
-//		
+	@GetMapping("/detail")
+	public ModelAndView detail(int require_number, String from, 
+							    ModelAndView mnv) throws Exception {
+		String url = "/require/detail";
+
+		RequireVO require = requireService.selectRequire(require_number);
+		
 //		// 파일명 재정의
 //		if (require != null) {
 //			List<Require_attachVO> attachList = require.getAttachList();
@@ -122,12 +110,12 @@ public class RequireController {
 //				}
 //			}
 //		}
-//		
-//		mnv.addObject("require", require);
-//		mnv.setViewName(url);
-//
-//		return mnv;
-//	}
+		
+		mnv.addObject("require", require);
+		mnv.setViewName(url);
+
+		return mnv;
+	}
 //	
 //	@GetMapping("/modifyForm")
 //	public ModelAndView modifyForm(ModelAndView mnv, int require_number,RedirectAttributes rttr) throws Exception {
