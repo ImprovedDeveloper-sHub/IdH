@@ -7,35 +7,35 @@
 	
 	<sql id="search">
 		<if test="searchType == 't'.toString()">
-			and title like '%'||#{keyword}||'%'			
+			and require_title like '%'||#{keyword}||'%'			
 		</if>
 		<if test="searchType == 'w'.toString()">
-			and writer like '%'||#{keyword}||'%'			
+			and require_writer_id like '%'||#{keyword}||'%'			
 		</if>
-		<if test="searchType == 'c'.toString()">
-			and content like '%'||#{keyword}||'%'			
+		<if test="searchType == 'd'.toString()">
+			and require_detail like '%'||#{keyword}||'%'			
 		</if>
-		<if test="searchType == 'tc'.toString()">
+		<if test="searchType == 'td'.toString()">
 			and (
-			title like '%'||#{keyword}||'%'
+			require_title like '%'||#{keyword}||'%'
 			or
-			content like '%'||#{keyword}||'%'						
+			require_detail like '%'||#{keyword}||'%'						
 			)			
 		</if>
 		<if test="searchType == 'cw'.toString()">
 			and (
-			writer like '%'||#{keyword}||'%'
+			require_writer_id like '%'||#{keyword}||'%'
 			or
-			content like '%'||#{keyword}||'%'						
+			require_detail like '%'||#{keyword}||'%'						
 			)			
 		</if>
-		<if test="searchType == 'tcw'.toString()">
+		<if test="searchType == 'tdw'.toString()">
 			and (
-			title like '%'||#{keyword}||'%'
+			require_title like '%'||#{keyword}||'%'
 			or
-			writer like '%'||#{keyword}||'%'
+			require_writer_id like '%'||#{keyword}||'%'
 			or
-			content like '%'||#{keyword}||'%'						
+			require_detail like '%'||#{keyword}||'%'						
 			)			
 		</if>
 	</sql>

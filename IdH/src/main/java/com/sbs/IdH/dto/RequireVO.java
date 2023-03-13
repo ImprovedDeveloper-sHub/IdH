@@ -1,6 +1,7 @@
 package com.sbs.IdH.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class RequireVO {
 
@@ -16,6 +17,14 @@ public class RequireVO {
 	private int require_business_number;
 	private String require_member_id;
 	
+	private List<Require_attachVO> attachList;
+	
+	public List<Require_attachVO> getAttachList() {
+		return attachList;
+	}
+	public void setAttachList(List<Require_attachVO> attachList) {
+		this.attachList = attachList;
+	}
 	public int getRequire_number() {
 		return require_number;
 	}

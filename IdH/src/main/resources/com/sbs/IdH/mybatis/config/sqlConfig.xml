@@ -38,6 +38,7 @@
 		<typeAlias type="com.sbs.IdH.dto.MinutesVO"  alias="minutes"/>
 		<typeAlias type="com.sbs.IdH.dto.WorkVO"  alias="work"/>
 		<typeAlias type="com.sbs.IdH.dto.Issue_AttachVO"  alias="issue_attach"/>
+		<typeAlias type="com.sbs.IdH.dto.Require_attachVO"  alias="require_attach"/>
 	</typeAliases>
 	
 	

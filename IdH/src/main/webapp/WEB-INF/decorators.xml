@@ -14,5 +14,6 @@
 
 	<excludes>
 		<pattern>/resources/*</pattern>
+		<pattern>/member/loginForm</pattern>
 	</excludes>
 </decorators>
