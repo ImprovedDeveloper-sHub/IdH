@@ -18,7 +18,7 @@ public interface BudgetService {
 	
 	public void removeBudget(int budget_number) throws Exception;
 	
-	public void updateBudget(BudgetVO budget) throws Exception;
+	public void modifyBudget(BudgetVO budget) throws Exception;
 
 	public Map<String, Object> selectBudgetList(SearchCriteria cri) throws Exception;
 	

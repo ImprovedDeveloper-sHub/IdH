@@ -6,6 +6,10 @@
 <!-- CSS start -->
 
 <style>
+body{
+	width:100%;
+	height:100%;
+}
 #content {
 	background: #eaedf2;
 	position: relative;
@@ -63,7 +67,7 @@ input {
 <div class="row">
 
 	<!-- 사업 일정 상세 정보 -->
-	<div class="col-8">
+	<div class="col">
 		<div class="card card-info">
 			<div class="card-header">
 				<h3 class="card-title">이슈등록</h3>
@@ -109,7 +113,7 @@ input {
 							</tr>
 							<tr style="height: 100px;">
 								<td class="name-td">내용</td>
-								<td class="table-td td-summernote" colspan="5"><textarea class="summernote" rows="15" cols="40" style="display:none;"></textarea></td>
+								<td class="table-td td-summernote" colspan="5"><textarea class="summernote" rows="15" cols="40" style="display:none; width:400px;"></textarea></td>
 							</tr>
 
 							<tr>

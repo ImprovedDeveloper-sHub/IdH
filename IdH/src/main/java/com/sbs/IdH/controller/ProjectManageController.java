@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sbs.IdH.command.SearchCriteria;
+import com.sbs.IdH.dto.BudgetVO;
+import com.sbs.IdH.dto.UnitworkVO;
+import com.sbs.IdH.dto.WorkforceVO;
 import com.sbs.IdH.service.BudgetService;
 import com.sbs.IdH.service.ProjectService;
 import com.sbs.IdH.service.ScheduleService;
@@ -25,7 +28,6 @@ import com.sbs.IdH.service.WorkforceService;
 @RequestMapping("projectManage")
 public class ProjectManageController {
 
-	
 	@Resource
 	private ProjectService projectService;
 	@Resource
@@ -72,40 +74,56 @@ public class ProjectManageController {
 	public ModelAndView registBudgetForm(ModelAndView mnv) {
 		return mnv;
 	}
-	@GetMapping("/registBudget")
-	public ModelAndView registBudget(ModelAndView mnv) {
+	@PostMapping("/registBudget")
+	public ModelAndView registBudget(ModelAndView mnv, BudgetVO budget) throws Exception{
+		budgetService.registBudget(budget);
 		return mnv;
 	}
 	@GetMapping("/modifyBudgetForm")
-	public ModelAndView modifyBudgetForm(ModelAndView mnv) {
+	public ModelAndView modifyBudgetForm(ModelAndView mnv, int budget_number) throws Exception {
+		mnv.addObject("budget", budgetService.selectBudget(budget_number));
 		return mnv;
 	}
-	@GetMapping("/modifyBudget")
-	public ModelAndView modifyBudget(ModelAndView mnv) {
+	@PostMapping("/modifyBudget")
+	public ModelAndView modifyBudget(ModelAndView mnv, BudgetVO budget)throws Exception {
+		budgetService.modifyBudget(budget);
 		return mnv;
 	}
 	
-	@GetMapping("/registWorkforceForm")
+	@GetMapping("/budgetDetail")
+	public ModelAndView budgetDetail(ModelAndView mnv, int budget_number) throws Exception {
+		mnv.addObject("budget", budgetService.selectBudget(budget_number));
+		return mnv;
+	}
+	
+	@GetMapping("/registWorkforceForm") 
 	public ModelAndView registworkforceForm(ModelAndView mnv) {
 		return mnv;
 	}
-	@GetMapping("/registWorkforce")
-	public ModelAndView registWorkforce(ModelAndView mnv) {
+	@PostMapping("/registWorkforce") 
+	public ModelAndView registWorkforce(ModelAndView mnv, WorkforceVO workforce) throws Exception {
+		workforceService.registWorkforce(workforce);
 		return mnv;
 	}
 	@GetMapping("/modifyWorkforceForm")
 	public ModelAndView registWorkforceForm(ModelAndView mnv) {
 		return mnv;
 	}
-	@GetMapping("/modifyWorkforce")
-	public ModelAndView modifyWorkforce(ModelAndView mnv) {
+	@PostMapping("/modifyWorkforce")
+	public ModelAndView modifyWorkforce(ModelAndView mnv, WorkforceVO workforce) throws Exception{
+		workforceService.modifyWorkforce(workforce);
+		return mnv;
+	}
+	@GetMapping("/workforceDetail")
+	public ModelAndView workforceDetail(ModelAndView mnv, int workforce_number) throws Exception {
+		mnv.addObject("workforce", workforceService.selectWorkforce(workforce_number));
 		return mnv;
 	}
 	
 	
-	
-	@GetMapping("/registUnitwork")
-	public ModelAndView registUnitwork(ModelAndView mnv) {
+	@PostMapping("/registUnitwork")
+	public ModelAndView registUnitwork(ModelAndView mnv, UnitworkVO unitwork) throws Exception {
+		unitworkService.registUnitwork(unitwork);
 		return mnv;
 	}
 	
@@ -115,7 +133,8 @@ public class ProjectManageController {
 	}
 	
 	@GetMapping("/modifyUnitwork")
-	public ModelAndView modifyUnitwork(ModelAndView mnv) {
+	public ModelAndView modifyUnitwork(ModelAndView mnv, UnitworkVO unitwork) throws Exception{
+		unitworkService.modifyUnitwork(unitwork);
 		return mnv;
 	}
 	
@@ -127,11 +146,13 @@ public class ProjectManageController {
 	
 	@GetMapping("/registScheduleForm")
 	public ModelAndView registscheduleForm(ModelAndView mnv) {
+		
 		return mnv;
 	}
 	
 	@GetMapping("/registSchedule")
-	public ModelAndView registSchedule(ModelAndView mnv) {
+	public ModelAndView registSchedule(ModelAndView mnv) throws Exception{
+		
 		return mnv;
 	}
 	@GetMapping("/modifyScheduleForm")
@@ -140,7 +161,7 @@ public class ProjectManageController {
 	}
 	
 	@GetMapping("/modifySchedule")
-	public ModelAndView modifySchedule(ModelAndView mnv) {
+	public ModelAndView modifySchedule(ModelAndView mnv) throws Exception{
 		return mnv;
 	}
 	
@@ -152,7 +173,6 @@ public class ProjectManageController {
 		  //mnv.addAllObjects( workforceService.selectWorkforceList(cri));
 		  mnv.addAllObjects( unitworkService.selectUnitworkList(cri));
 		  mnv.addAllObjects( scheduleService.selectScheduleList(cri));
-		 
 		return mnv;
 	}
 	

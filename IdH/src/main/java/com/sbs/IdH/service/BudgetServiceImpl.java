@@ -60,7 +60,7 @@ public class BudgetServiceImpl implements BudgetService {
 	}
 
 	@Override
-	public void updateBudget(BudgetVO budget) throws Exception {
+	public void modifyBudget(BudgetVO budget) throws Exception {
 		budgetDAO.updateBudget(budget);
 	}
 

@@ -33,7 +33,8 @@ public class UnitworkServiceImpl implements UnitworkService{
 	}
 
 	@Override
-	public void updateUnitwork(UnitworkVO unitwork) throws Exception {
+	public void modifyUnitwork(UnitworkVO unitwork) throws Exception {
+		unitworkDAO.updateUnitwork(unitwork);
 	}
 
 	@Override

@@ -6,6 +6,11 @@
 <!-- CSS start -->
 
 <style>
+body{
+	width:100%;
+	height:100%;
+}
+
 #content {
 	background: #eaedf2;
 	position: relative;
@@ -63,7 +68,7 @@ input {
 <div class="row">
 
 	<!-- 사업 일정 상세 정보 -->
-	<div class="col-8">
+	<div class="col">
 		<div class="card card-info">
 			<div class="card-header">
 				<h3 class="card-title">이슈등록</h3>
