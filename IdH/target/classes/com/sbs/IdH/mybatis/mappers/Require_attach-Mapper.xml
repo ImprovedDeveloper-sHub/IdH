@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Require_attach-Mapper">
+	
+	<select id="selectRequire_attachesByRequire_number" resultType="require_attach">
+		select *
+		from require_attach
+		where require_number = #{require_number}
+	</select>
+	
+	<select id="selectRequire_attachByAno" resultType="require_attach">
+		select *
+		from require_attach
+		where ano = #{ano}
+	</select>
+	
+	<update id="insertRequire_attach">
+		insert into
+		attach (ano, uploadpath, filename, filetype, regdate, require_number, require_attach_attacher)
+		values (require_attach_seq.nextval, #{uploadPath}, #{fileName}, #{fileType}, sysdate, #{require_number}, #{require_attach_attacher})
+	</update>
+	
+	<update id="deleteRequire_attach">
+		delete
+		from require_attach
+		where ano = #{ano}
+	</update>
+	
+	<update id="deleteAllRequire_attach">
+		delete
+		from require_attach
+		where require_number = #{require_number}
+	</update>
+	
+</mapper>
