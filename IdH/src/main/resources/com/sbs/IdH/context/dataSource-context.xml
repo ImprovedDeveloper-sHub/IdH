@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:c="http://www.springframework.org/schema/c"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- <bean id="gugudan" class="com.spring.test.Gugudan" /> -->
@@ -15,7 +15,7 @@
 		p:url="jdbc:oracle:thin:@localhost:1521:XE" 
 		p:username="IdH"
 		p:password="IdH" 
-	/>
+		/>
 		
 	<bean id="dataSourceSpied"
 		class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
@@ -27,19 +27,21 @@
 			</bean>
 		</property>
 	</bean>	
-	
+		
+		
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
-		  p:dataSource-ref="dataSourceSpied"
-		  p:configLocation="classpath:com/sbs/IdH/mybatis/config/sqlConfig.xml"
-		  p:mapperLocations="classpath:com/sbs/IdH/mybatis/mappers/*-Mapper.xml"
-	/>
+		p:dataSource-ref="dataSourceSpied"
+		p:configLocation="classpath:com/sbs/IdH/mybatis/config/sqlConfig.xml"
+		p:mapperLocations="classpath:com/sbs/IdH/mybatis/mappers/*-Mapper.xml"
+		/>
 		
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"
-		  c:sqlSessionFactory-ref="sqlSessionFactory"
-	/>
-	
+		c:sqlSessionFactory-ref="sqlSessionFactory"
+		/>
+		
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
-		  p:dataSource-ref="dataSourceSpied"
-	/>
+	p:dataSource-ref="dataSourceSpied"/>
 	
+		
 </beans>
+

@@ -3,10 +3,19 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 
-</div>
 <!-- ./wrapper -->
 
+
+
+<form id="jobForm">	
+	<input type='hidden' name="page" value="" />
+	<input type='hidden' name="perPageNum" value="10"/>
+	<input type='hidden' name="searchType" value="" />
+	<input type='hidden' name="keyword" value="" />
+	<!-- <input type='hidden' name="status" value="" /> -->
+</form>
 <!-- REQUIRED SCRIPTS -->
+
 
 <!-- jQuery -->
 <script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/jquery/jquery.min.js"></script>
@@ -17,7 +26,7 @@
 <!-- summernote -->
 <script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/summernote/summernote-bs4.min.js"></script>
 <!-- common -->
-<script src="<%=request.getContextPath() %>/resources/js/common.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
 
 
 </body>

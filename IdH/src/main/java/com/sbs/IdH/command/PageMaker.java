@@ -15,7 +15,6 @@ public class PageMaker {
 
 	// starPage,endPage, prev, next 설정. by totalCount
 	private void calcData() {
-		
 		endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
 		startPage = (endPage - displayPageNum) + 1;
 
@@ -24,14 +23,12 @@ public class PageMaker {
 		if (startPage < 0) {
 			startPage = 1;
 		}
-		
 		if (endPage > realEndPage) {
 			endPage = realEndPage;
 		}
 
 		prev = startPage == 1 ? false : true;
 		next = endPage < realEndPage ? true : false;
-		
 	}
 
 	public int getTotalCount() {
@@ -100,3 +97,4 @@ public class PageMaker {
 	}
 
 }
+
