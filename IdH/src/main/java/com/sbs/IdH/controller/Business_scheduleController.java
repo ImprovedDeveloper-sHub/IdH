@@ -13,7 +13,7 @@ import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.service.BusinessService;
 
 @Controller
-@RequestMapping("/business_schedule")
+@RequestMapping("business/schedule")
 public class Business_scheduleController {
 	
 	@Resource(name="businessService")
