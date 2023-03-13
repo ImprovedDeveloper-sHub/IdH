@@ -7,7 +7,10 @@
 <%@ include file="/WEB-INF/module/open_header.jsp"%>
 
 
+
 <decorator:body />
 
 
 <%@ include file="/WEB-INF/module/open_footer.jsp"%>
+
+
