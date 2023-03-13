@@ -70,7 +70,7 @@ input {
 	<div class="col">
 		<div class="card card-info">
 			<div class="card-header">
-				<h3 class="card-title">이슈등록</h3>
+				<h3 class="card-title">${workforce.workforce_name }</h3>
 				<div class="card-tools">
 					<div class="input-group input-group-sm" style="width: 150px;">
 						<div class="input-group-append"></div>
@@ -91,11 +91,11 @@ input {
 						<tbody>
 							<tr>
 								<td class="name-td">글번호</td>
-								<td class="table-td">1</td>
+								<td class="table-td">${workforce.workforce_number }</td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">수준</td>
-								<td class="table-td">보통</td>
+								<td class="table-td">${workforce.workforce_name }</td>
 							</tr>
 							<tr>
 								<td class="name-td">등록자</td>
@@ -126,6 +126,13 @@ input {
 							</tr>
 						</tbody>
 					</table>
+				</div>
+			</div>
+			<div class="card-tools" style="margin-left:auto">
+            <button type="button" id="regbtn" class="btn btn-info"
+               onclick="location.href='modifyBudgetForm?budget_number=${budget.budget_number}'">수정</button>
+            <button type="button" id="close" class="btn btn-info"
+               onclick="CloseWindow();">취소</button>
 				</div>
 			</div>
 		</div>

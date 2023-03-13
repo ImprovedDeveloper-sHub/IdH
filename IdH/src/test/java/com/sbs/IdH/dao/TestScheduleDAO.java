@@ -21,6 +21,12 @@ public class TestScheduleDAO {
 
    @Autowired
    private ScheduleDAO scheduleDAO;
+
+
+   @Test
+   public void testSeq() throws Exception{
+	  System.out.println(scheduleDAO.selectScheduleSeqNext()); ;
+   }
    
    
    public void testSelectSchedule() throws Exception{
@@ -28,7 +34,7 @@ public class TestScheduleDAO {
       System.out.println(schedule);
    }
    
-   @Test
+
    public void testSelectScheduleList() throws Exception{
       
 	  SearchCriteria cri = new SearchCriteria();

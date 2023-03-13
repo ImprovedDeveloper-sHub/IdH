@@ -50,20 +50,29 @@
 		where schedule_number=#{schedule_number}
 	</select>
 	
-	<select id="selectScheduleSeqNext" resultType="int">
-		select schedule_seq.nextval as schedule_number from dual
+	<select id="selectScheduleSeqNext" resultType="string" flushCache="true">
+		select schedule_seq.nextval from dual
 	</select>
+	
+	
+	
 	
 	<update id="insertSchedule" parameterType="schedule">
 		insert 
 		into 
-		schedule(schedule_number,schedule_status,schedule_detail,schedule_project_number,schedule_member_id,schedule_regdate,schedule_enddate)
-		values(#{schedule_number},0,#{schedule_detail},#{schedule_project_number},#{schedule_member_id},sysdate,#{schedule_enddate})
+		schedule(schedule_number,schedule_name,schedule_status,schedule_detail,schedule_member_id,schedule_regdate,schedule_startdate,schedule_enddate)
+		values(#{schedule_number},#{schedule_name},0,#{schedule_detail},#{schedule_member_id},sysdate,#{schedule_startdate},#{schedule_enddate})
 	</update>
 	
 	<update id="updateScheduleForProjectStart" parameterType="schedule">
 		update schedule 
 		set schedule_project_number=#{schedule_project_number}, schedule_status=1
+		where schedule_number=#{schedule_number}
+	</update>
+	
+	<update id="updateSchedule" parameterType="schedule">
+		update schedule 
+		set schedule_enddate =#{schedule_enddate}, schedule_detail = #{schedule_detail}, schedule_name = #{schedule_name}
 		where schedule_number=#{schedule_number}
 	</update>
 	

@@ -10,7 +10,6 @@ body{
 	width:100%;
 	height:100%;
 }
-
 #content {
 	background: #eaedf2;
 	position: relative;
@@ -80,6 +79,7 @@ input {
 			</div>
 			<div id="content">
 				<div id="table-content">
+				<form enctype="multiaprt/form-data" role="form" method="post" action="regist" name="registBudgetForm">
 					<table>
 						<thead>
 							<tr>
@@ -114,7 +114,7 @@ input {
 							</tr>
 							<tr style="height: 100px;">
 								<td class="name-td">내용</td>
-								<td class="table-td td-summernote" colspan="5"><textarea class="summernote" rows="15" cols="40" style="display:none;"></textarea></td>
+								<td class="table-td td-summernote" colspan="5"><textarea class="summernote" rows="15" cols="40" style="display:none; width:400px;"></textarea></td>
 							</tr>
 
 							<tr>
@@ -127,6 +127,14 @@ input {
 							</tr>
 						</tbody>
 					</table>
+					</form>
+					<div>
+            </div>
+            <div class="card-tools" style="margin-left:auto">
+            <button type="button" id="regbtn" class="btn btn-info"
+               onclick="regist_go('budgetForm');">등록</button>
+            <button type="button" id="close" class="btn btn-info"
+               onclick="CloseWindow();">닫기</button>
 				</div>
 			</div>
 		</div>

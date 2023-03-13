@@ -72,4 +72,10 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 		
 	}
 
+	@Override
+	public void updateSchedule(ScheduleVO schedule) throws SQLException {
+		session.update("Schedule-Mapper.updateSchedule", schedule);
+		
+	}
+
 }

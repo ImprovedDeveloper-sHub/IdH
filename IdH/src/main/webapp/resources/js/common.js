@@ -16,6 +16,8 @@ function CloseWindow(parentURL){
 }
 
 
+
+
 function list_go(page,url){
 	if(!url) url="main";
 	

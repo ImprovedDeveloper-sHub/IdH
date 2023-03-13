@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.BudgetVO;
+import com.sbs.IdH.dto.ScheduleVO;
 import com.sbs.IdH.dto.UnitworkVO;
 import com.sbs.IdH.dto.WorkforceVO;
 import com.sbs.IdH.service.BudgetService;
@@ -72,6 +74,8 @@ public class ProjectManageController {
 	
 	@GetMapping("/registBudgetForm")
 	public ModelAndView registBudgetForm(ModelAndView mnv) {
+		String url = "/projectManage/registBudget";
+		mnv.setViewName(url);
 		return mnv;
 	}
 	@PostMapping("/registBudget")
@@ -82,6 +86,8 @@ public class ProjectManageController {
 	@GetMapping("/modifyBudgetForm")
 	public ModelAndView modifyBudgetForm(ModelAndView mnv, int budget_number) throws Exception {
 		mnv.addObject("budget", budgetService.selectBudget(budget_number));
+		String url = "/projectManage/modifyBudget";
+		mnv.setViewName(url);
 		return mnv;
 	}
 	@PostMapping("/modifyBudget")
@@ -96,8 +102,14 @@ public class ProjectManageController {
 		return mnv;
 	}
 	
+	
+	
+	
+	
 	@GetMapping("/registWorkforceForm") 
-	public ModelAndView registworkforceForm(ModelAndView mnv) {
+	public ModelAndView registWorkforceForm(ModelAndView mnv) {
+		String url = "/projectManage/registWorkforce";
+		mnv.setViewName(url);
 		return mnv;
 	}
 	@PostMapping("/registWorkforce") 
@@ -106,7 +118,9 @@ public class ProjectManageController {
 		return mnv;
 	}
 	@GetMapping("/modifyWorkforceForm")
-	public ModelAndView registWorkforceForm(ModelAndView mnv) {
+	public ModelAndView modifyWorkforceForm(ModelAndView mnv) {
+		String url = "/projectManage/modifyWorkforce";
+		mnv.setViewName(url);
 		return mnv;
 	}
 	@PostMapping("/modifyWorkforce")
@@ -121,6 +135,9 @@ public class ProjectManageController {
 	}
 	
 	
+	
+	
+	
 	@PostMapping("/registUnitwork")
 	public ModelAndView registUnitwork(ModelAndView mnv, UnitworkVO unitwork) throws Exception {
 		unitworkService.registUnitwork(unitwork);
@@ -129,6 +146,8 @@ public class ProjectManageController {
 	
 	@GetMapping("/registUnitworkForm")
 	public ModelAndView registUnitworkForm(ModelAndView mnv) {
+		String url = "/projectManage/registUnitwork";
+		mnv.setViewName(url);
 		return mnv;
 	}
 	
@@ -140,30 +159,72 @@ public class ProjectManageController {
 	
 	@GetMapping("/modifyUnitworkForm")
 	public ModelAndView modifyUnitworkForm(ModelAndView mnv) {
+		String url = "/projectManage/modifyUnitwork";
+		mnv.setViewName(url);
+		return mnv;
+	}
+	
+	@GetMapping("/unitworkDetail")
+	public ModelAndView unitworkDetail(ModelAndView mnv, int unitwork_number) throws Exception {
+		mnv.addObject("unitwork", unitworkService.selectUnitwork(unitwork_number));
 		return mnv;
 	}
 	
 	
 	@GetMapping("/registScheduleForm")
-	public ModelAndView registscheduleForm(ModelAndView mnv) {
-		
+	public ModelAndView registscheduleForm(ModelAndView mnv) throws Exception {
+		String url = "/projectManage/registSchedule";
+		mnv.setViewName(url);
 		return mnv;
 	}
 	
-	@GetMapping("/registSchedule")
-	public ModelAndView registSchedule(ModelAndView mnv) throws Exception{
+	@PostMapping("/registSchedule")
+	public String registSchedule(RedirectAttributes rttr, ScheduleVO schedule) throws Exception{
+		scheduleService.registSchedule(schedule);
+		//System.out.println(schedule);
+		String url = "redirect:/projectManage/main";
+		rttr.addFlashAttribute("from", "regist");
 		
-		return mnv;
+		return url;
 	}
+	
+
 	@GetMapping("/modifyScheduleForm")
-	public ModelAndView modifyScheduleForm(ModelAndView mnv) {
+	public ModelAndView modifyScheduleForm(ModelAndView mnv, int schedule_number) throws Exception{
+		String url = "/projectManage/modifySchedule";
+		mnv.addObject("schedule", scheduleService.selectSchedule(schedule_number));
+		mnv.setViewName(url);
 		return mnv;
 	}
 	
-	@GetMapping("/modifySchedule")
-	public ModelAndView modifySchedule(ModelAndView mnv) throws Exception{
+	@PostMapping("/modifySchedule")
+	public String modifySchedule(RedirectAttributes rttr, ScheduleVO schedule) throws Exception{
+		String url = "redirect:/projectManage/scheduleDetail";
+		scheduleService.modifySchedule(schedule);
+		rttr.addFlashAttribute("from", "modify");
+		rttr.addAttribute("schedule_number", schedule.getSchedule_number());
+		return url;
+	}
+	
+	
+	@GetMapping("/scheduleDetail")
+	public ModelAndView scheduleDetail(ModelAndView mnv, int schedule_number) throws Exception {
+		mnv.addObject("schedule", scheduleService.selectSchedule(schedule_number));
+		
 		return mnv;
 	}
+	
+	
+	@GetMapping("/deleteSchedule")
+	public String deleteSchedule(RedirectAttributes rttr, int schedule_number) throws Exception {
+		String url = "redirect:/projectManage/scheduleDetail";
+		scheduleService.removeSchedule(schedule_number);
+		rttr.addFlashAttribute("from", "delete");
+		rttr.addAttribute("schedule_number", schedule_number);
+
+		return url;
+	}
+	
 	
 	
 	

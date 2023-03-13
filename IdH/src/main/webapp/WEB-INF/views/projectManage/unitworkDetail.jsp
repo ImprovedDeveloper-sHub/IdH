@@ -70,7 +70,7 @@ input {
 	<div class="col">
 		<div class="card card-info">
 			<div class="card-header">
-				<h3 class="card-title">이슈등록</h3>
+				<h3 class="card-title">${unitwork.unitwork_name}</h3>
 				<div class="card-tools">
 					<div class="input-group input-group-sm" style="width: 150px;">
 						<div class="input-group-append"></div>
@@ -91,15 +91,15 @@ input {
 						<tbody>
 							<tr>
 								<td class="name-td">글번호</td>
-								<td class="table-td">1</td>
+								<td class="table-td">${unitwork.unitwork_number}</td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">수준</td>
-								<td class="table-td">보통</td>
+								<td class="table-td">${unitwork.unitwork_level}</td>
 							</tr>
 							<tr>
 								<td class="name-td">등록자</td>
-								<td class="table-td">허민호</td>
+								<td class="table-td">${unitwork.unitwork_member_id}</td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">할당자</td>
@@ -109,11 +109,11 @@ input {
 							<tr>
 								<td class="name-td">제목</td>
 								<td colspan="5"><input type="text"
-									placeholder="제목을 입력하여 주세요." /></td>
+									disabled /> ${unitwork.unitwork_name}</td>
 							</tr>
 							<tr style="height: 100px;">
 								<td class="name-td">내용</td>
-								<td class="table-td td-summernote" colspan="5"><textarea class="summernote" rows="15" cols="40" style="display:none;"></textarea></td>
+								<td class="table-td " colspan="5"><textarea class="summernote" rows="15" cols="40" style="display:none; ">${unitwork.unitwork_detail}</textarea></td>
 							</tr>
 
 							<tr>
@@ -126,6 +126,14 @@ input {
 							</tr>
 						</tbody>
 					</table>
+					
+				</div>
+			</div>
+			<div class="card-tools" style="margin-left:auto">
+            <button type="button" id="regbtn" class="btn btn-info"
+               onclick="location.href='modifyUnitworkForm?unitwork_number=${unitwork.unitwork_number}'">수정</button>
+            <button type="button" id="close" class="btn btn-info"
+               onclick="CloseWindow();">취소</button>
 				</div>
 			</div>
 		</div>

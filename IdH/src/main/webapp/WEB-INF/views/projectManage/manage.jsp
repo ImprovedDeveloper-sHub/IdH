@@ -35,7 +35,7 @@
                   </div>
                </div>
          <button type="button" class="btn btn-block btn-info btn-sm"
-            style="width: 80px; " onclick="OpenWindow('registScheduleForm','등록',500,600);">등록</button>
+            style="width: 80px; " onclick="OpenWindow('registScheduleForm','등록',550,590);">등록</button>
             
             </div>
          <div id="table-content">
@@ -56,7 +56,7 @@
 				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
 			 	 </c:if>
 			 	 <c:forEach items="${scheduleList }" var="schedule">
-					 <tr>
+					 <tr onclick="OpenWindow('scheduleDetail?schedule_number=${schedule.schedule_number}','스케줄',500,550);">
 			                  <td style="text-align:left;max-width:20%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;">${schedule.schedule_name}</td>
 			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
@@ -122,7 +122,7 @@
 				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
 			 	 </c:if>
 			 	 <c:forEach items="${budgetList }" var="budget">
-					 <tr>
+					 <tr onclick="OpenWindow('budgetDetail?budget_number=${budget.budget_number}','예산',500,600);">
 			                  <td>사업예산</td>
 			                  <td>${budget.budget_name}</td>
 			                  <td>${budget.budget_type}</td>
@@ -189,7 +189,7 @@
 				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
 			 	 </c:if>
 			 	 <c:forEach items="${workforceList }" var="workforce">
-					 <tr>
+					 <tr onclick="OpenWindow('workforceDetail?workforce_number=${workforce.workforce_number}','인력',580,800);">
 			                  <td style="text-align:left;max-width:20%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;">${workforce.workforce_name}</td>
 			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
@@ -241,7 +241,7 @@
             <div  class="card-body table-responsive p-0">
                <table  class="table table-hover">
                   <thead class="unitworkThead" class="text-left">
-	                <tr>
+	                <tr >
 	                  <th style="width:20%">업무명</th>
 	                  <th style="width:30%">상태</th>
 	                  <th style="width:20%">시작날짜</th>
@@ -255,9 +255,9 @@
 				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
 			 	 </c:if>
 			 	 <c:forEach items="${unitworkList }" var="unitwork">
-					 <tr>
+					 <tr onclick="OpenWindow('unitworkDetail?unitwork_number=${unitwork.unitwork_number}','단위업무',580,800);">
 			                  <td>${unitwork.unitwork_name}</td>
-			                  <td>${unitwork.unitwork_check}</td>
+			                  <td>${unitwork.unitwork_level}</td>
 			                  <td><fmt:formatDate pattern="yyyy-MM-dd" value="${unitwork.unitwork_startdate}"/></td>
 			                  <td><fmt:formatDate pattern="yyyy-MM-dd" value="${unitwork.unitwork_enddate}"/></td>
 			                  <td>${unitwork.unitwork_detail}</td>

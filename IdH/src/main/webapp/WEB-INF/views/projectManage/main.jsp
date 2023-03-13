@@ -55,7 +55,7 @@
 				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
 			 	 </c:if>
 			 	 <c:forEach items="${proceedingProjectList }" var="project">
-					 <tr onclick="setProjectNum(${project.project_number})">
+					 <tr onclick="setProjectNum(${project.project_number}); goPage('projectDetail')">
 			                  <td style="text-align:left;max-width:20%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;">${project.project_name}</td>
 			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
@@ -424,11 +424,13 @@
  
   </script>
   
-  
+  <c:if test="${from eq 'regist' }">
   <script>
-  	
+	  	alert('test');
+	  	window.close();
+	  	window.opener.location.reload();
   </script>
   
-
+</c:if>
   
   

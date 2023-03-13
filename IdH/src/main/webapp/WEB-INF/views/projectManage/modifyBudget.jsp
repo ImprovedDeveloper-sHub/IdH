@@ -10,7 +10,6 @@ body{
 	width:100%;
 	height:100%;
 }
-
 #content {
 	background: #eaedf2;
 	position: relative;
@@ -80,6 +79,7 @@ input {
 			</div>
 			<div id="content">
 				<div id="table-content">
+					<Form method="post" action="moidfy">
 					<table>
 						<thead>
 							<tr>
@@ -114,7 +114,7 @@ input {
 							</tr>
 							<tr style="height: 100px;">
 								<td class="name-td">내용</td>
-								<td class="table-td td-summernote" colspan="5"><textarea class="summernote" rows="15" cols="40" style="display:none;"></textarea></td>
+								<td class="table-td td-summernote" colspan="5"><textarea class="summernote" rows="15" cols="40" style="display:none; width:400px;"></textarea></td>
 							</tr>
 
 							<tr>
@@ -124,6 +124,14 @@ input {
 								<td class="table-td"></td>
 								<td class="name-td">등록일</td>
 								<td class="table-td">2023.03.07.</td>
+							</tr>
+							<tr>
+							<td>
+					  <button type="button" class="btn btn-block btn-info btn-sm"
+            style="width: 80px;" onclick="location.href='modifyBudgetForm?budget_number=${budget.budget_number}'">수정</button>
+            			</form>
+                     <button type="button" class="btn btn-block btn-info btn-sm"
+            style="width: 80px; " onclick="CloseWindow()">취소</button>
 							</tr>
 						</tbody>
 					</table>

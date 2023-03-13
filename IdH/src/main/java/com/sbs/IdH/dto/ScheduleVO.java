@@ -12,6 +12,7 @@ public class ScheduleVO {
 	
 	
 	private String schedule_detail;
+	private String schedule_level;
 	private String schedule_name;
 	private Date schedule_regdate;
 	private Date schedule_enddate;
@@ -62,6 +63,12 @@ public class ScheduleVO {
 	}
 	
 	
+	public String getSchedule_level() {
+		return schedule_level;
+	}
+	public void setSchedule_level(String schedule_level) {
+		this.schedule_level = schedule_level;
+	}
 	public String getSchedule_name() {
 		return schedule_name;
 	}
@@ -76,28 +83,34 @@ public class ScheduleVO {
 	}
 	public ScheduleVO() {}
 	public ScheduleVO(int schedule_number, int schedule_status, String schedule_member_id, int schedule_project_number,
-			String schedule_detail, String schedule_name, Date schedule_regdate, Date schedule_enddate,
-			Date schedule_startdate) {
+			String schedule_detail, String schedule_level, String schedule_name, Date schedule_regdate,
+			Date schedule_enddate, Date schedule_startdate) {
 		super();
 		this.schedule_number = schedule_number;
 		this.schedule_status = schedule_status;
 		this.schedule_member_id = schedule_member_id;
 		this.schedule_project_number = schedule_project_number;
 		this.schedule_detail = schedule_detail;
+		this.schedule_level = schedule_level;
 		this.schedule_name = schedule_name;
 		this.schedule_regdate = schedule_regdate;
 		this.schedule_enddate = schedule_enddate;
 		this.schedule_startdate = schedule_startdate;
 	}
-	
-	
-	
-	
 	public CalendarVO MakeCalendarVO() {
 		CalendarVO cal = new CalendarVO();
 		
 		return cal;
 	}
+	@Override
+	public String toString() {
+		return "ScheduleVO [schedule_number=" + schedule_number + ", schedule_status=" + schedule_status
+				+ ", schedule_member_id=" + schedule_member_id + ", schedule_project_number=" + schedule_project_number
+				+ ", schedule_detail=" + schedule_detail + ", schedule_level=" + schedule_level + ", schedule_name="
+				+ schedule_name + ", schedule_regdate=" + schedule_regdate + ", schedule_enddate=" + schedule_enddate
+				+ ", schedule_startdate=" + schedule_startdate + "]";
+	}
+	
 	
 	
 	

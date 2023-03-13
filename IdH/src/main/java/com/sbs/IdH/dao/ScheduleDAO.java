@@ -25,5 +25,7 @@ public interface ScheduleDAO {
 
 	void updateScheduleForProjectEnd(ScheduleVO schedule) throws SQLException;
 	
+	void updateSchedule(ScheduleVO schedule) throws SQLException;
+	
 	void deleteSchedule(int schedule_number) throws SQLException;
 }
