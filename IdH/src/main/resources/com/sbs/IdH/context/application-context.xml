@@ -11,8 +11,11 @@
 	
 	<!-- file upload -->
 	<bean id="fileUploadPath" class="java.lang.String">
-		<constructor-arg value="${uploadPath.pds}"/>
+		<constructor-arg value="${uploadPath.song}"/>
+		
 	</bean>
+	
+	
 	
 	<bean id="productDAO" class="com.sbs.IdH.dao.ProductDAOImpl"
 		p:session-ref="sqlSession" />

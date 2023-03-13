@@ -32,7 +32,8 @@
                   </div>
                </div>
          <button type="button" class="btn btn-block btn-info btn-sm"
-            style="width: 80px;">등록</button>
+						style="width: 80px" id="registBtn"
+						onclick="OpenWindow('registForm','글등록',680,555)">등록</button>
             </div>
          <div id="table-content">
             <div class="card-body table-responsive p-0">
@@ -52,7 +53,7 @@
               <tr><td colspan="5">데이터가 없습니다.</td></tr>
               </c:if>
               <c:forEach items="${productList }" var="product">
-                <tr>
+              <tr onclick="OpenWindow('detail?product_number=${product.product_number }&from=list','상세보기',680,400);"style="cursor:pointer;">
                            <td style="text-align:left;max-width:15%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;">${product.product_number}</td>
                            <td style="text-align:left;max-width: 20%; overflow: hidden; 
@@ -66,6 +67,7 @@
                                     white-space: nowrap; text-overflow: ellipsis;">${attach.ano}</td>
                            </c:forEach>
                    </tr>
+                   
               </c:forEach>
               </tbody>
                </table>
@@ -86,7 +88,7 @@
 </div>
 </div>
 <div class="card-body p-0" style="display: block;">
-<table class="table">
+ <table class="table table-hover">
 <thead>
 <tr>
 <th>협업 산출물</th>
@@ -95,52 +97,26 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>Functional-requirements.docx</td>
-<td>49.8005 kb</td>
+<c:if test="${empty coworkList}">
+              <tr><td colspan="5">데이터가 없습니다.</td></tr>
+              </c:if>
+              <c:forEach items="${coworkList }" var="cowork">
+              <tr onclick="OpenWindow('cowork_detail?cowork_number=${cowork.cowork_number}&from=list','상세보기',680,400);"style="cursor:pointer;">
+              
+<td style="text-align:left;max-width:15%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;">${cowork.cowork_number}</td>
+<td style="text-align:left;max-width:15%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;">${cowork.cowork_status}</td>
+
 <td class="text-right py-0 align-middle">
 <div class="btn-group btn-group-sm">
 <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
 <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
 </div>
 </td>
-</tr><tr>
-<td>UAT.pdf</td>
-<td>28.4883 kb</td>
-<td class="text-right py-0 align-middle">
-<div class="btn-group btn-group-sm">
-<a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-<a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-</div>
-</td>
-</tr><tr>
-<td>Email-from-flatbal.mln</td>
-<td>57.9003 kb</td>
-<td class="text-right py-0 align-middle">
-<div class="btn-group btn-group-sm">
-<a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-<a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-</div>
-</td>
-</tr><tr>
-<td>Logo.png</td>
-<td>50.5190 kb</td>
-<td class="text-right py-0 align-middle">
-<div class="btn-group btn-group-sm">
-<a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-<a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-</div>
-</td>
-</tr><tr>
-<td>Contract-10_12_2014.docx</td>
-<td>44.9715 kb</td>
-<td class="text-right py-0 align-middle">
-<div class="btn-group btn-group-sm">
-<a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-<a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-</div>
-</td>
-</tr></tbody>
+</tr>
+</c:forEach>
+</tbody>
 </table>
    <br>                                                       <div class="row">
 
@@ -190,7 +166,7 @@
 </div>
 
 </div>
-     
+  
 
 
   
@@ -201,8 +177,42 @@
   
   </div>
   <!--content종료-->
-
+ 
 <!--main(container)종료 -->
+<div class="col-3" style="margin: 0 auto;">
+								<nav aria-label="Navigation">
+									<ul class="pagination justify-content-center m-0">
+										<li class="page-item"><a class="page-link"
+											href="javascript:list_go(1);"> <i
+												class="fas fa-angle-double-left"></i>
+										</a></li>
+										<li class="page-item"><a class="page-link"
+											href="javascript:list_go(${pageMaker.prev ? pageMaker.startPage-1 : pageMaker.cri.page});">
+												<i class="fas fa-angle-left"></i>
+										</a></li>
+										<c:forEach var="pageNum" begin="${pageMaker.startPage }"
+											end="${pageMaker.endPage }">
+
+											<li
+												class="page-item ${pageMaker.cri.page == pageNum?'active':''}">
+												<a class="page-link"
+												href="javascript:list_go('${pageNum}');">${pageNum }</a>
+											</li>
+										</c:forEach>
+
+										<li class="page-item"><a class="page-link"
+											href="javascript:list_go(${pageMaker.next ? pageMaker.endPage+1 :pageMaker.cri.page});">
+												<i class="fas fa-angle-right"></i>
+										</a></li>
+
+										<li class="page-item"><a class="page-link"
+											href="javascript:list_go('${pageMaker.realEndPage}');"> <i
+												class="fas fa-angle-double-right"></i>
+										</a></li>
+									</ul>
+								</nav>
+							</div>
+							<br />
+						</div>  
 
 
-</div>
