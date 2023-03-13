@@ -14,6 +14,7 @@
 		<typeAlias type="com.sbs.IdH.dto.WorkVO"  alias="work"/>
 		<typeAlias type="com.sbs.IdH.dto.MenuVO"  alias="menu"/>
 		<typeAlias type="com.sbs.IdH.dto.Issue_AttachVO"  alias="issue_attach"/>
+		<typeAlias type="com.sbs.IdH.dto.Work_AttachVO"  alias="work_attach"/>
 	</typeAliases>
 	
 	

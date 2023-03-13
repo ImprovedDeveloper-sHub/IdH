@@ -36,7 +36,7 @@ public class IssueController {
 	public void test()throws Exception {}
 	
 	@GetMapping("/main")
-	public ModelAndView issue(SearchCriteria cri, ModelAndView mnv) throws Exception {
+	public ModelAndView main(SearchCriteria cri, ModelAndView mnv) throws Exception {
 		mnv.addAllObjects(issueService.selectIssueList(cri));
 		mnv.addAllObjects(issueService.selectIssueCheckList(cri));
 		return mnv;

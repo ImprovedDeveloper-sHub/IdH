@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:p="http://www.springframework.org/schema/p"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+      
+      
 	<context:component-scan base-package="com.sbs.IdH.service" />
+		
+	<bean id="fileUploadPath" class="java.lang.String">
+		<constructor-arg value="${uploadPath.minho}"/>
+	</bean>
+	
 	<bean id="issueDAO" class="com.sbs.IdH.dao.IssueDAOImpl" p:session-ref="sqlSession"/>
 	<bean id="minutesDAO" class="com.sbs.IdH.dao.MinutesDAOImpl" p:session-ref="sqlSession"/>
 	<bean id="workDAO" class="com.sbs.IdH.dao.WorkDAOImpl" p:session-ref="sqlSession"/>
 	<bean id="menuDAO" class="com.sbs.IdH.dao.MenuDAOImpl" p:session-ref="sqlSession"/>
 	<bean id="issue_attachDAO" class="com.sbs.IdH.dao.Issue_AttachDAOImpl" p:session-ref="sqlSession"/>
+	<bean id="work_attachDAO" class="com.sbs.IdH.dao.Work_AttachDAOImpl" p:session-ref="sqlSession"/>
 	
 	<bean id="issueService"
 		  class="com.sbs.IdH.service.IssueServiceImpl"
@@ -22,7 +29,8 @@
 		  p:minutesDAO-ref="minutesDAO" />
 	<bean id="workService"
 		  class="com.sbs.IdH.service.WorkServiceImpl"
-		  p:workDAO-ref="workDAO" />
+		  p:workDAO-ref="workDAO"
+		  p:work_attachDAO-ref="work_attachDAO" />
 	<bean id="menuService"
 		  class="com.sbs.IdH.service.MenuServiceImpl"
 		  p:menuDAO-ref="menuDAO" />

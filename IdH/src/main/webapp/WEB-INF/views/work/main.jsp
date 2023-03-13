@@ -5,11 +5,11 @@
 
 
 <style>
-.issue-th thead td {
+.work-th thead td {
 	font-size: 14px;
 }
 
-.issue-th tbody td {
+.work-th tbody td {
 	font-size: 30px;
 }
 </style>
@@ -56,7 +56,7 @@
 							class="form-control float-right" placeholder="Search">
 						<div class="input-group-append">
 							<button type="submit" class="btn btn-default"
-								onclick="search_go_ajax(0, $('#myIssuePerPageNum'), $('#myIssueSearchType'), $('#myIssueKeyword'),'<%=request.getContextPath()%>/issue/getMyIssue', $('.myIssueThead'), $('.myIssueTbody') ,$('#searchMyIssue'))">
+								onclick="search_go_ajax(0, $('#myIssuePerPageNum'), $('#myIssueSearchType'), $('#myIssueKeyword'),'<%=request.getContextPath()%>/work/getMyIssue', $('.myIssueThead'), $('.myIssueTbody') ,$('#searchMyIssue'))">
 								<i class="fas fa-search"></i>
 
 							</button>
@@ -83,7 +83,7 @@
 										<td colspan="5">데이터가 없습니다.</td>
 									</tr>
 								</c:if>
-								<c:forEach items="${workListByApprover }" var="issue">
+								<c:forEach items="${workListByApprover }" var="work">
 									<tr>
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${work.work_title}</td>
@@ -146,7 +146,7 @@
 							class="form-control float-right" placeholder="Search">
 						<div class="input-group-append">
 							<button type="submit" class="btn btn-default"
-								onclick="search_go_ajax(0, $('#getterIssuePerPageNum'), $('#getterIssueSearchType'), $('#getterIssueKeyword'),'<%=request.getContextPath()%>/issue/getMyIssueList', $('.myIssueThead'), $('.myIssueTbody') ,$('#searchGetterIssue'))">
+								onclick="search_go_ajax(0, $('#getterIssuePerPageNum'), $('#getterIssueSearchType'), $('#getterIssueKeyword'),'<%=request.getContextPath()%>/work/getMyIssueList', $('.myIssueThead'), $('.myIssueTbody') ,$('#searchGetterIssue'))">
 								<i class="fas fa-search"></i>
 
 							</button>
@@ -173,20 +173,20 @@
 										<td colspan="5">데이터가 없습니다.</td>
 									</tr>
 								</c:if>
-								<c:forEach items="${workListByWriter }" var="issue">
+								<c:forEach items="${workListByWriter }" var="work">
 									<tr>
 										<td
-											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${issue.issue_title}</td>
+											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${work.work_title}</td>
 										<td
-											style="text-align: left; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${issue.issue_content}</td>
+											style="text-align: left; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${work.work_content}</td>
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
 												value="${work.work_regdate}" pattern="yyyy-MM-dd" /></td>
 										<td
-											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${issue.issue_setter_id }</td>
+											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${work.work_check == 1? '결제완료':'미결제'}</td>
 										<td
-											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-											${issue.issue_level}</td>
+											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
+												value="${work.work_enddate}" pattern="yyyy-MM-dd" /></td>
 									</tr>
 								</c:forEach>
 							</tbody>
