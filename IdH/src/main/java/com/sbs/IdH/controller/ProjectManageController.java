@@ -73,34 +73,59 @@ public class ProjectManageController {
 	
 	
 	@GetMapping("/registBudgetForm")
-	public ModelAndView registBudgetForm(ModelAndView mnv) {
+	public ModelAndView registbudgetForm(ModelAndView mnv) throws Exception {
 		String url = "/projectManage/registBudget";
 		mnv.setViewName(url);
 		return mnv;
 	}
+	
 	@PostMapping("/registBudget")
-	public ModelAndView registBudget(ModelAndView mnv, BudgetVO budget) throws Exception{
+	public String registBudget(RedirectAttributes rttr, BudgetVO budget) throws Exception{
 		budgetService.registBudget(budget);
-		return mnv;
+		//System.out.println(budget);
+		String url = "redirect:/projectManage/main";
+		rttr.addFlashAttribute("from", "regist");
+		
+		return url;
 	}
+	
+
 	@GetMapping("/modifyBudgetForm")
-	public ModelAndView modifyBudgetForm(ModelAndView mnv, int budget_number) throws Exception {
-		mnv.addObject("budget", budgetService.selectBudget(budget_number));
+	public ModelAndView modifyBudgetForm(ModelAndView mnv, int budget_number) throws Exception{
 		String url = "/projectManage/modifyBudget";
+		mnv.addObject("budget", budgetService.selectBudget(budget_number));
 		mnv.setViewName(url);
 		return mnv;
 	}
+	
 	@PostMapping("/modifyBudget")
-	public ModelAndView modifyBudget(ModelAndView mnv, BudgetVO budget)throws Exception {
+	public String modifyBudget(RedirectAttributes rttr, BudgetVO budget) throws Exception{
+		String url = "redirect:/projectManage/budgetDetail";
 		budgetService.modifyBudget(budget);
-		return mnv;
+		rttr.addFlashAttribute("from", "modify");
+		rttr.addAttribute("budget_number", budget.getBudget_number());
+		return url;
 	}
+	
 	
 	@GetMapping("/budgetDetail")
 	public ModelAndView budgetDetail(ModelAndView mnv, int budget_number) throws Exception {
 		mnv.addObject("budget", budgetService.selectBudget(budget_number));
+		
 		return mnv;
 	}
+	
+	
+	@GetMapping("/deleteBudget")
+	public String deleteBudget(RedirectAttributes rttr, int budget_number) throws Exception {
+		String url = "redirect:/projectManage/budgetDetail";
+		budgetService.removeBudget(budget_number);
+		rttr.addFlashAttribute("from", "delete");
+		rttr.addAttribute("budget_number", budget_number);
+
+		return url;
+	}
+	
 	
 	
 	
@@ -138,36 +163,58 @@ public class ProjectManageController {
 	
 	
 	
-	@PostMapping("/registUnitwork")
-	public ModelAndView registUnitwork(ModelAndView mnv, UnitworkVO unitwork) throws Exception {
-		unitworkService.registUnitwork(unitwork);
-		return mnv;
-	}
-	
 	@GetMapping("/registUnitworkForm")
-	public ModelAndView registUnitworkForm(ModelAndView mnv) {
+	public ModelAndView registunitworkForm(ModelAndView mnv) throws Exception {
 		String url = "/projectManage/registUnitwork";
 		mnv.setViewName(url);
 		return mnv;
 	}
 	
-	@GetMapping("/modifyUnitwork")
-	public ModelAndView modifyUnitwork(ModelAndView mnv, UnitworkVO unitwork) throws Exception{
-		unitworkService.modifyUnitwork(unitwork);
-		return mnv;
+	@PostMapping("/registUnitwork")
+	public String registUnitwork(RedirectAttributes rttr, UnitworkVO unitwork) throws Exception{
+		unitworkService.registUnitwork(unitwork);
+		//System.out.println(unitwork);
+		String url = "redirect:/projectManage/main";
+		rttr.addFlashAttribute("from", "regist");
+		
+		return url;
 	}
 	
+
 	@GetMapping("/modifyUnitworkForm")
-	public ModelAndView modifyUnitworkForm(ModelAndView mnv) {
+	public ModelAndView modifyUnitworkForm(ModelAndView mnv, int unitwork_number) throws Exception{
 		String url = "/projectManage/modifyUnitwork";
+		mnv.addObject("unitwork", unitworkService.selectUnitwork(unitwork_number));
 		mnv.setViewName(url);
 		return mnv;
 	}
 	
+	@PostMapping("/modifyUnitwork")
+	public String modifyUnitwork(RedirectAttributes rttr, UnitworkVO unitwork) throws Exception{
+		String url = "redirect:/projectManage/unitworkDetail";
+		unitworkService.modifyUnitwork(unitwork);
+		rttr.addFlashAttribute("from", "modify");
+		rttr.addAttribute("unitwork_number", unitwork.getUnitwork_number());
+		return url;
+	}
+	
+	
 	@GetMapping("/unitworkDetail")
 	public ModelAndView unitworkDetail(ModelAndView mnv, int unitwork_number) throws Exception {
 		mnv.addObject("unitwork", unitworkService.selectUnitwork(unitwork_number));
+		
 		return mnv;
+	}
+	
+	
+	@GetMapping("/deleteUnitwork")
+	public String deleteUnitwork(RedirectAttributes rttr, int unitwork_number) throws Exception {
+		String url = "redirect:/projectManage/unitworkDetail";
+		unitworkService.removeUnitwork(unitwork_number);
+		rttr.addFlashAttribute("from", "delete");
+		rttr.addAttribute("unitwork_number", unitwork_number);
+
+		return url;
 	}
 	
 	
