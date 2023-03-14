@@ -87,7 +87,6 @@ table input {
 <script>
 	window.onload = function() {
 		summernote_go($('#summernote'),'<%=request.getContextPath()%>');
-		
 		//사업선택 셀렉트
 		$(function() {
 		    $("#business_selector").on("change", function() {
@@ -107,6 +106,7 @@ table input {
 			url:"getPlan?business_number="+business_number,
 			type:"GET",
 			success: function(data){
+				console.log(JSON.stringify(data));
 				//alert(business_number);
 				//printPlan(data,$('.project_tr'),$('.budgetPlan)');
 				//printPlan(data,$('#budgetPlan'),$('#schedluePlan'),$('#workforcePlan'),$('#unitworkPlan'));
@@ -191,9 +191,3 @@ function printPlan1(data,target, templateObject){
 
 
 
-<script>
-
-
-
-
-</script>

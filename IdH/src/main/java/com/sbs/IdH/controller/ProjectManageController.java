@@ -71,7 +71,6 @@ public class ProjectManageController {
 	public ModelAndView projectManage(SearchCriteria cri, ModelAndView mnv) throws Exception {
 		mnv.addAllObjects(projectService.selectProceedingProject(cri));
 		mnv.addAllObjects(projectService.selectEndProject(cri));
-		
 		mnv.setViewName("projectManage/main");
 		return mnv;
 	}
@@ -87,6 +86,21 @@ public class ProjectManageController {
 		mnv.setViewName(url);
 		return mnv;
 	}
+	
+	
+
+	@GetMapping("/registProjectForm2")
+	public ModelAndView regist2(ModelAndView mnv, HttpServletRequest request) throws Exception {
+		String url = "/projectManage/registProject2";
+		SearchCriteria cri = new SearchCriteria();
+		HttpSession session = request.getSession();
+		String member_id = (String) session.getAttribute("member_id");
+		cri.setMemberId(member_id);
+		mnv.addAllObjects(businessService.getBusinessListNotRowBound(cri));
+		mnv.setViewName(url);
+		return mnv;
+	}
+	
 	
 	
 	@GetMapping("/registProject")
@@ -114,6 +128,21 @@ public class ProjectManageController {
 		return entity;
 	}
 	
+	@GetMapping("/getPlan2")
+	@ResponseBody
+	public ResponseEntity<Map<String,Object>> getPlan2(int business_number) throws Exception{
+		ResponseEntity<Map<String,Object>> entity =null;
+		HttpStatus status;
+		Map<String, Object> dataMap = null;
+		try {
+			dataMap = projectService.selectProjectPlanByBusiness_number(business_number);
+			status = HttpStatus.OK;
+		}catch (Exception e) {
+			status = HttpStatus.BAD_REQUEST;
+		}
+		entity = new ResponseEntity<Map<String,Object>>(dataMap, status);
+		return entity;
+	}
 	
 	
 	@GetMapping("/registBudgetForm")
@@ -347,7 +376,7 @@ public class ProjectManageController {
 	@GetMapping("/manage")
 	public ModelAndView manage(ModelAndView mnv, SearchCriteria cri) throws Exception {
 		  mnv.addAllObjects( budgetService.selectBudgetList(cri));
-		  //mnv.addAllObjects( workforceService.selectWorkforceList(cri));
+		  mnv.addAllObjects( workforceService.selectWorkforceList(cri));
 		  mnv.addAllObjects( unitworkService.selectUnitworkList(cri));
 		  mnv.addAllObjects( scheduleService.selectScheduleList(cri));
 		return mnv;

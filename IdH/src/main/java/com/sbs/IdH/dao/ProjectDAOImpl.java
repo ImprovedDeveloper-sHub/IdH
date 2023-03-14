@@ -82,7 +82,7 @@ public class ProjectDAOImpl implements ProjectDAO{
 	//추가
 @Override
 	public List<Integer> selectProjectByBusinessNumber(int business_number) throws SQLException {
-		return session.selectOne("Project-Mapper.selectProjectNumberBybusinessNumber" ,business_number); 
+		return session.selectList("Project-Mapper.selectProjectNumberBybusinessNumber" ,business_number); 
 		
 	}
 

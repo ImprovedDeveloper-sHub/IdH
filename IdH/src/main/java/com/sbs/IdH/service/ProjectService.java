@@ -24,5 +24,7 @@ public interface ProjectService {
 
 	public Map<String,Object> selectEndProject(SearchCriteria cri) throws Exception;
 	
+	public Map<String,Object> selectProjectPlanByBusiness_number2(int business_number) throws Exception;
+	
 	public Map<String,Object> selectProjectPlanByBusiness_number(int business_number) throws Exception;
 }

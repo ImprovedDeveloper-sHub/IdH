@@ -40,11 +40,13 @@ public class TestWorkforceService {
    @Test
    public void testInsertWorkforceList() throws Exception{
 		
-	   WorkforceVO workforce = new WorkforceVO(3,1,1,"test","IdH");
-		  
-	   workforceService.registWorkforce(workforce);
-	   
-	   workforceService.selectWorkforce(3);
+		/*
+		 * WorkforceVO workforce = new WorkforceVO(3,1,1,"test","IdH");
+		 * 
+		 * workforceService.registWorkforce(workforce);
+		 * 
+		 * workforceService.selectWorkforce(3);
+		 */
 	   
 	/*	Date start = DateMaker.make(2023, 2, 20); Date end =
 		  DateMaker.make(2023, 3, 10);

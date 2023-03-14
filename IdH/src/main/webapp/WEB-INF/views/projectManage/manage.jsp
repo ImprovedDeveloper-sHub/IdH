@@ -199,7 +199,7 @@
 			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;">test</td>
 			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;"> ${workforce.workforce_discription}</td>
+                                    white-space: nowrap; text-overflow: ellipsis;"> ${workforce.workforce_detail}</td>
 	                </tr>
 			 	 </c:forEach>
               </tbody>

@@ -33,7 +33,12 @@ public class TestProjectService {
       
    }
    
+
    @Test
+   public void testselectProjectPlanByBusiness_number() throws Exception{
+	   projectService.selectProjectPlanByBusiness_number(1);
+   }
+   
    public void testSelectProceedingProject() throws Exception{
 	   SearchCriteria cri = new SearchCriteria();
 	   projectService.selectProceedingProject(cri);

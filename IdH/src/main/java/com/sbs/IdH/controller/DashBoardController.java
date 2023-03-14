@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/dashBoard")
 public class DashBoardController {
 
-	
+	@GetMapping("main")
+	public void main() {}
 	
 	@GetMapping("/teamLeader")
 	public void teamLeader() {
@@ -17,8 +18,8 @@ public class DashBoardController {
 	public void teamMember() {
 	}
 	
-	@GetMapping("/Executives")
-	public void Executives() {
+	@GetMapping("/executives")
+	public void executives() {
 	}
 	
 	
