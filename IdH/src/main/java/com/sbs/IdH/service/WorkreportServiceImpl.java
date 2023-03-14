@@ -17,14 +17,22 @@ import com.sbs.IdH.dto.WorkreportVO;
 import com.sbs.IdH.dto.Workreport_AttachVO;
 
 public class WorkreportServiceImpl implements WorkreportService{
+	
 	private WorkreportDAO workreportDAO;
+	private Workreport_AttachDAO workreport_attachDAO;
+	
+	
+	
+	
 	public void setWorkreportDAO(WorkreportDAO workreportDAO) {
 		this.workreportDAO = workreportDAO;
 	}
-	private Workreport_AttachDAO workreport_attachDAO;
-	public void setWorkreport_AttachDAO(Workreport_AttachDAO workreport_attachDAO) {
+
+
+	public void setWorkreport_attachDAO(Workreport_AttachDAO workreport_attachDAO) {
 		this.workreport_attachDAO = workreport_attachDAO;
 	}
+
 
 	@Override
 	public Map<String, Object> selectWorkreportList(SearchCriteria cri) throws SQLException {
@@ -79,6 +87,7 @@ public class WorkreportServiceImpl implements WorkreportService{
 		MemberVO member = (MemberVO) session.getAttribute("loginUser");
 		cri.setMember_id(member.getMember_id());
 		cri.setMemberStatus(1);
+		
 		dataMap.put("myWorkreportList", workreportDAO.selectSearchWorkreportList(cri));
 		return dataMap;
 	}
@@ -89,10 +98,48 @@ public class WorkreportServiceImpl implements WorkreportService{
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("loginUser");
 		cri.setMember_id(member.getMember_id());
-		cri.setMemberStatus(2);
+		cri.setMemberStatus(2);//구분자 할당받으면2
+		
 		dataMap.put("getterWorkreportList", workreportDAO.selectSearchWorkreportList(cri));
 		return dataMap;
 	}
+	
+	@Override
+	public Map<String, Object> selectMyCheckList(SearchCriteria cri) throws SQLException {
+		Map<String,Object>dataMap = new HashMap<String,Object>();
+		cri.setMemberStatus(1);
+		cri.setType(1);
+		int myissuesuccess = workreportDAO.selectSearchWorkreportListCount(cri);
+		cri.setMemberStatus(1);
+		cri.setType(2);
+		int myissuenow = workreportDAO.selectSearchWorkreportListCount(cri);
+		cri.setMemberStatus(1);
+		int mytotal = workreportDAO.selectWorkreportCriteriaTotalCount(cri);
+		
+		dataMap.put("mytotal",mytotal);
+		dataMap.put("myissuesuccess",myissuesuccess);
+		dataMap.put("myissuenow",myissuenow);
+		return dataMap;
+	}
+	
+	@Override
+	public Map<String, Object> selectGetterCheckList(SearchCriteria cri) throws SQLException {
+		Map<String,Object>dataMap = new HashMap<String,Object>();
+		cri.setMemberStatus(2);
+		cri.setType(1);
+		int getterissuesuccess = workreportDAO.selectSearchWorkreportListCount(cri);
+		cri.setMemberStatus(2);
+		cri.setType(2);
+		int getterissuenow = workreportDAO.selectSearchWorkreportListCount(cri);
+		cri.setMemberStatus(2);
+		int gettertotal = workreportDAO.selectWorkreportCriteriaTotalCount(cri);
+		
+		dataMap.put("gettertotal",gettertotal);
+		dataMap.put("getterissuesuccess",getterissuesuccess);
+		dataMap.put("getterissuenow",getterissuenow);
+		return dataMap;
+	}
+	
 
 	private void addAttachList(WorkreportVO workreport) throws SQLException {
 

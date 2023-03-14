@@ -14,4 +14,5 @@ public interface WorkreportDAO {
 	public void updateWorkreport(WorkreportVO work);
 	public void deleteWorkreport(int work_number);
 	public int selectWorkreportCriteriaTotalCount(SearchCriteria cri);
+
 }

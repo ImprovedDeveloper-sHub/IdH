@@ -19,4 +19,6 @@ public interface WorkreportService {
 	Map<String, Object> selectMyWorkreportList(SearchCriteria cri, HttpServletRequest request) throws SQLException;
 	Workreport_AttachVO selectWorkreport_AttachByAno(int ano)throws SQLException;
     void removeWorkreport_AttachByAno(int ano)throws SQLException;
+	Map<String, Object> selectMyCheckList(SearchCriteria cri) throws SQLException;
+	Map<String, Object> selectGetterCheckList(SearchCriteria cri) throws SQLException;
 }

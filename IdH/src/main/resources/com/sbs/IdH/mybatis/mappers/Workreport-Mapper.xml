@@ -21,8 +21,11 @@
 		<if test="member_id != null and memberStatus == 2">
 			and workreport_member_id = #{member_id}
 		</if>
-		<if test="status != null">
-			and workreport_status = #{status}
+		<if test="memberStatus != null != 0">
+			and workreport_memstatus = #{memberStatus}
+		</if>
+		<if test="type != null != 0">
+			and workreport_check = #{type}
 		</if>
 	</sql>
 
@@ -53,8 +56,8 @@
 	<update id="insertWorkreport" parameterType="workreport">
 		insert into
 		workreport(workreport_number, workreport_project_number,workreport_member_id, workreport_check,
-		workreport_regdate, workreport_enddate,workreport_member_approver,workreport_title)
-		values(#{workreport_number},#{workreport_project_number},#{workreport_member_id},#{workreport_check},sysdate,sysdate,#{workreport_member_approver},#{workreport_title})
+		workreport_regdate, workreport_enddate,workreport_member_approver,workreport_title,workreport_memstatus)
+		values(#{workreport_number},#{workreport_project_number},#{workreport_member_id},#{workreport_check},sysdate,sysdate,#{workreport_member_approver},#{workreport_title},#{workreport_memstatus})
 	</update>
 
 	<update id="updateWorkreport" parameterType="workreport">
@@ -69,6 +72,13 @@
 		from workreport
 		where workreport_number=#{workreport_number}
 	</update>
+	
+	<select id="selectSearchWorkreportListCount" resultType="int">
+		select count(*)
+		from issue
+		where workreport_number is not null
+		<include refid="search" />
+	</select>
 </mapper>  
 
 

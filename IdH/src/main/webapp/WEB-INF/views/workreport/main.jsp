@@ -22,11 +22,11 @@
 		<div class="col-2 text-center">
 			<div class="card" style="height: 98%;">
 				<div style="height: 33.3%; border: solid green 3px;">
-					<div class="badge-success">SUCCESS</div>
+					<div class="badge-success">승인</div>
 					<h2>3</h2>
 				</div>
 				<div style="height: 33.3%; border: solid gold 3px;">
-					<div class="badge-warning">보류</div>
+					<div class="badge-warning">전체</div>
 					<h2>3</h2>
 				</div>
 				<div style="height: 33.3%; border: solid red 3px;">
@@ -78,25 +78,25 @@
 								</tr>
 							</thead>
 							<tbody class="text-left myIssueTbody">
-								<c:if test="${empty workListByApprover}">
+								<c:if test="${empty getterWorkreportList}">
 									<tr>
 										<td colspan="5">데이터가 없습니다.</td>
 									</tr>
 								</c:if>
-								<c:forEach items="${workListByApprover }" var="work">
+								<c:forEach items="${getterWorkreportList }" var="workreport">
 									<tr>
 										<td
-											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${work.work_title}</td>
+											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_title}</td>
 										<td
-											style="text-align: left; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${work.work_content}</td>
-										<td
-											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
-												value="${work.work_regdate}" pattern="yyyy-MM-dd" /></td>
-										<td
-											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${work.work_check}</td>
+											style="text-align: left; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_content}</td>
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
-												value="${work.work_enddate}" pattern="yyyy-MM-dd" /></td>
+												value="${workreport.workreport_regdate}" pattern="yyyy-MM-dd" /></td>
+										<td
+											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_check}</td>
+										<td
+											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
+												value="${workreport.workreport_enddate}" pattern="yyyy-MM-dd" /></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -112,11 +112,11 @@
 		<div class="col-2 text-center">
 			<div class="card" style="height: 98%;">
 				<div style="height: 33.3%; border: solid green 3px;">
-					<div class="badge-success">SUCCESS</div>
+					<div class="badge-success">승인</div>
 					<h2>3</h2>
 				</div>
 				<div style="height: 33.3%; border: solid gold 3px;">
-					<div class="badge-warning">보류</div>
+					<div class="badge-warning">전체</div>
 					<h2>3</h2>
 				</div>
 				<div style="height: 33.3%; border: solid red 3px;">
@@ -168,25 +168,25 @@
 								</tr>
 							</thead>
 							<tbody class="text-left getterIssueTbody">
-								<c:if test="${empty workListByWriter}">
+								<c:if test="${empty myWorkreportList}">
 									<tr>
 										<td colspan="5">데이터가 없습니다.</td>
 									</tr>
 								</c:if>
-								<c:forEach items="${workListByWriter }" var="work">
+								<c:forEach items="${myWorkreportList }" var="workreport">
 									<tr>
 										<td
-											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${work.work_title}</td>
+											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_title}</td>
 										<td
-											style="text-align: left; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${work.work_content}</td>
-										<td
-											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
-												value="${work.work_regdate}" pattern="yyyy-MM-dd" /></td>
-										<td
-											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${work.work_check}</td>
+											style="text-align: left; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_content}</td>
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
-												value="${work.work_enddate}" pattern="yyyy-MM-dd" /></td>
+												value="${workreport.workreport_regdate}" pattern="yyyy-MM-dd" /></td>
+										<td
+											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_check}</td>
+										<td
+											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
+												value="${workreport.workreport_enddate}" pattern="yyyy-MM-dd" /></td>
 									</tr>
 								</c:forEach>
 							</tbody>
