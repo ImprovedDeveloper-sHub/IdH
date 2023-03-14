@@ -2,13 +2,13 @@ package com.sbs.IdH.dto;
 
 import java.util.Date;
 
-public class Work_AttachVO {
+public class Workreport_AttachVO {
 	private int ano;
 	private String uploadPath;
 	private String fileName;
 	private String fileType;
-	private int work_number;
-	private String work_attach_attacher; 
+	private int workreport_number;
+	private String workreport_attach_attacher; 
 	private Date regDate;
 	public int getAno() {
 		return ano;
@@ -34,17 +34,17 @@ public class Work_AttachVO {
 	public void setFileType(String fileType) {
 		this.fileType = fileType;
 	}
-	public int getWork_number() {
-		return work_number;
+	public int getWorkreport_number() {
+		return workreport_number;
 	}
-	public void setWork_number(int work_number) {
-		this.work_number = work_number;
+	public void setWorkreport_number(int workreport_number) {
+		this.workreport_number = workreport_number;
 	}
-	public String getWork_attach_attacher() {
-		return work_attach_attacher;
+	public String getWorkreport_attach_attacher() {
+		return workreport_attach_attacher;
 	}
-	public void setWork_attach_attacher(String work_attach_attacher) {
-		this.work_attach_attacher = work_attach_attacher;
+	public void setWorkreport_attach_attacher(String workreport_attach_attacher) {
+		this.workreport_attach_attacher = workreport_attach_attacher;
 	}
 	public Date getRegDate() {
 		return regDate;

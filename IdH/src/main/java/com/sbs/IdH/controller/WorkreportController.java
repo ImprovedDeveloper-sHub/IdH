@@ -16,40 +16,40 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sbs.IdH.command.WorkreportModifyCommand;
+import com.sbs.IdH.command.WorkreportRegistCommand;
 import com.sbs.IdH.command.SearchCriteria;
-import com.sbs.IdH.command.WorkModifyCommand;
-import com.sbs.IdH.command.WorkRegistCommand;
-import com.sbs.IdH.dto.WorkVO;
-import com.sbs.IdH.dto.Work_AttachVO;
-import com.sbs.IdH.service.WorkService;
+import com.sbs.IdH.dto.WorkreportVO;
+import com.sbs.IdH.dto.Workreport_AttachVO;
+import com.sbs.IdH.service.WorkreportService;
 import com.sbs.IdH.utils.MakeFileName;
 
 @Controller
-@RequestMapping("/work")
-public class WorkController {
+@RequestMapping("/workreport")
+public class WorkreportController {
 
-	@Resource(name = "workService")
-	private WorkService workService;
+	@Resource(name = "workreportService")
+	private WorkreportService workreportService;
 
 	@GetMapping("/main")
 	public ModelAndView main(SearchCriteria cri, ModelAndView mnv, HttpServletRequest request) throws Exception {
-		mnv.addAllObjects(workService.selectGetterWorkList(cri, request));
-		mnv.addAllObjects(workService.selectMyWorkList(cri, request));
+		mnv.addAllObjects(workreportService.selectGetterWorkreportList(cri, request));
+		mnv.addAllObjects(workreportService.selectMyWorkreportList(cri, request));
 		return mnv;
 	}
 
 	@GetMapping("/registForm")
 	public String registForm() throws Exception {
 
-		String url = "work/regist";
+		String url = "workreport/regist";
 		return url;
 	}
 
 	@Resource(name = "fileUploadPath")
 	private String fileUploadPath;
 
-	private List<Work_AttachVO> saveFileToWork_Attaches(List<MultipartFile> multiFiles, String savePath) throws Exception {
-		List<Work_AttachVO> attachList = new ArrayList<Work_AttachVO>();
+	private List<Workreport_AttachVO> saveFileToWorkreport_Attaches(List<MultipartFile> multiFiles, String savePath) throws Exception {
+		List<Workreport_AttachVO> attachList = new ArrayList<Workreport_AttachVO>();
 		// 저장 -> attachVO -> list.add
 		if (multiFiles != null) {
 			for (MultipartFile multi : multiFiles) {
@@ -58,7 +58,7 @@ public class WorkController {
 				target.mkdirs();
 				multi.transferTo(target);
 
-				Work_AttachVO attach = new Work_AttachVO();
+				Workreport_AttachVO attach = new Workreport_AttachVO();
 				attach.setUploadPath(savePath);
 				attach.setFileName(fileName);
 				attach.setFileType(fileName.substring(fileName.lastIndexOf('.') + 1).toUpperCase());
@@ -70,23 +70,23 @@ public class WorkController {
 	}
 
 	@PostMapping(value = "/regist", produces = "text/plain;charset=utf-8")
-	public String regist(WorkRegistCommand registReq, HttpServletRequest request, RedirectAttributes rttr)
+	public String regist(WorkreportRegistCommand registReq, HttpServletRequest request, RedirectAttributes rttr)
 			throws Exception {
-		String url = "redirect:/work/main";
+		String url = "redirect:/workreport/main";
 
 		List<MultipartFile> multiFiles = registReq.getUploadFile();
 		String savePath = this.fileUploadPath;
 
-		List<Work_AttachVO> attachList = saveFileToWork_Attaches(multiFiles, savePath);
+		List<Workreport_AttachVO> attachList = saveFileToWorkreport_Attaches(multiFiles, savePath);
 
 		// DB
-		WorkVO work = registReq.toWorkVO();
+		WorkreportVO workreport = registReq.toWorkreportVO();
 		String XSStitle = (String) request.getAttribute("XSStitle");
 		if (XSStitle != null)
-			work.setWork_title(XSStitle);
+			workreport.setWorkreport_title(XSStitle);
 
-		work.setAttachList(attachList);
-		workService.registWork(work);
+		workreport.setAttachList(attachList);
+		workreportService.registWorkreport(workreport);
 
 		// output
 		rttr.addFlashAttribute("from", "regist");
@@ -95,39 +95,39 @@ public class WorkController {
 	}
 
 	@GetMapping("/detail")
-	public ModelAndView detail(int work_number, String from, RedirectAttributes rttr, ModelAndView mnv)
+	public ModelAndView detail(int workreport_number, String from, RedirectAttributes rttr, ModelAndView mnv)
 			throws Exception {
-		String url = "/work/detail";
+		String url = "/workreport/detail";
 
-		WorkVO work = null;
+		WorkreportVO workreport = null;
 
-		work = workService.selectWork(work_number);
+		workreport = workreportService.selectWorkreport(workreport_number);
 
 		// 파일명 재정의
-		if (work != null) {
-			List<Work_AttachVO> attachList = work.getAttachList();
+		if (workreport != null) {
+			List<Workreport_AttachVO> attachList = workreport.getAttachList();
 			if (attachList != null) {
-				for (Work_AttachVO attach : attachList) {
+				for (Workreport_AttachVO attach : attachList) {
 					String fileName = attach.getFileName().split("\\$\\$")[1];
 					attach.setFileName(fileName);
 				}
 			}
 		}
 
-		mnv.addObject("work", work);
+		mnv.addObject("workreport", workreport);
 		mnv.setViewName(url);
 
 		return mnv;
 	}
 
 	@GetMapping("/remove")
-	public String remove(int work_number, RedirectAttributes rttr) throws Exception {
-		String url = "redirect:/work/main";
+	public String remove(int workreport_number, RedirectAttributes rttr) throws Exception {
+		String url = "redirect:/workreport/main";
 
 		// 첨부파일 삭제
-		List<Work_AttachVO> attachList = workService.selectWork(work_number).getAttachList();
+		List<Workreport_AttachVO> attachList = workreportService.selectWorkreport(workreport_number).getAttachList();
 		if (attachList != null) {
-			for (Work_AttachVO attach : attachList) {
+			for (Workreport_AttachVO attach : attachList) {
 				File target = new File(attach.getUploadPath(), attach.getFileName());
 				if (target.exists()) {
 					target.delete();
@@ -135,58 +135,58 @@ public class WorkController {
 			}
 		}
 		// DB삭제
-		workService.removeWork(work_number);
+		workreportService.removeWorkreport(workreport_number);
 
 		rttr.addFlashAttribute("from", "remove");
-		rttr.addAttribute("work_number", work_number);
+		rttr.addAttribute("workreport_number", workreport_number);
 
 		return url;
 	}
 
 	@GetMapping("/modifyForm")
-	public ModelAndView modifyForm(ModelAndView mnv, int work_number, RedirectAttributes rttr) throws Exception {
-		String url = "/work/modify";
+	public ModelAndView modifyForm(ModelAndView mnv, int workreport_number, RedirectAttributes rttr) throws Exception {
+		String url = "/workreport/modify";
 
-		mnv = detail(work_number, "modify", rttr, mnv);
+		mnv = detail(workreport_number, "modify", rttr, mnv);
 
 		mnv.setViewName(url);
 		return mnv;
 	}
 
 	@PostMapping(value = "/modify", produces = "text/plain;charset=utf-8")
-	public String modifyPOST(WorkModifyCommand modifyReq, HttpServletRequest request, RedirectAttributes rttr)
+	public String modifyPOST(WorkreportModifyCommand modifyReq, HttpServletRequest request, RedirectAttributes rttr)
 			throws Exception {
-		String url = "redirect:/work/main";
+		String url = "redirect:/workreport/main";
 
 		// 파일 삭제
 		if (modifyReq.getDeleteFile() != null && modifyReq.getDeleteFile().length > 0) {
 			for (int ano : modifyReq.getDeleteFile()) {
-				Work_AttachVO attach = workService.selectWork_AttachByAno(ano);
+				Workreport_AttachVO attach = workreportService.selectWorkreport_AttachByAno(ano);
 
 				File deleteFile = new File(attach.getUploadPath(), attach.getFileName());
 
 				if (deleteFile.exists()) {
 					deleteFile.delete(); // File 삭제
 				}
-				workService.removeWork_AttachByAno(ano); // DB 삭제
+				workreportService.removeWorkreport_AttachByAno(ano); // DB 삭제
 
 			}
 		}
 
 		// 파일저장
-		List<Work_AttachVO> attachList = saveFileToWork_Attaches(modifyReq.getUploadFile(), fileUploadPath);
+		List<Workreport_AttachVO> attachList = saveFileToWorkreport_Attaches(modifyReq.getUploadFile(), fileUploadPath);
 
-		WorkVO work = modifyReq.toWorkVO();
+		WorkreportVO workreport = modifyReq.toWorkreportVO();
 		String XSStitle = (String) request.getAttribute("XSStitle");
 		if (XSStitle != null)
-			work.setWork_title(XSStitle);
-		work.setAttachList(attachList);
+			workreport.setWorkreport_title(XSStitle);
+		workreport.setAttachList(attachList);
 
 		// DB 저장
-		workService.modifyWork(work);
+		workreportService.modifyWorkreport(workreport);
 
 		rttr.addFlashAttribute("from", "modify");
-		rttr.addAttribute("work_number", work.getWork_number());
+		rttr.addAttribute("workreport_number", workreport.getWorkreport_number());
 
 		return url;
 	}
@@ -196,7 +196,7 @@ public class WorkController {
 
 		String url = "downloadFile"; // bean name
 
-		Work_AttachVO attach = workService.selectWork_AttachByAno(ano);
+		Workreport_AttachVO attach = workreportService.selectWorkreport_AttachByAno(ano);
 
 		model.addAttribute("savedPath", attach.getUploadPath());
 		model.addAttribute("fileName", attach.getFileName());

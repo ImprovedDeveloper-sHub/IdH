@@ -36,9 +36,9 @@
 		<typeAlias type="com.sbs.IdH.dto.Business_attachVO" alias="business_attach" />
 		<typeAlias type="com.sbs.IdH.dto.IssueVO"  alias="issue"/>
 		<typeAlias type="com.sbs.IdH.dto.MinutesVO"  alias="minutes"/>
-		<typeAlias type="com.sbs.IdH.dto.WorkVO"  alias="work"/>
+		<typeAlias type="com.sbs.IdH.dto.WorkreportVO"  alias="workreport"/>
 		<typeAlias type="com.sbs.IdH.dto.Issue_AttachVO"  alias="issue_attach"/>
-		<typeAlias type="com.sbs.IdH.dto.Work_AttachVO"  alias="work_attach"/>
+		<typeAlias type="com.sbs.IdH.dto.Workreport_AttachVO"  alias="workreport_attach"/>
 		<typeAlias type="com.sbs.IdH.dto.Require_attachVO"  alias="require_attach"/>
 
 	</typeAliases>

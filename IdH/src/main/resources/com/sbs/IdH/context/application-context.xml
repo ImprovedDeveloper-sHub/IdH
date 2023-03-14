@@ -15,9 +15,9 @@
 	
 	<bean id="issueDAO" class="com.sbs.IdH.dao.IssueDAOImpl" p:session-ref="sqlSession"/>
 	<bean id="minutesDAO" class="com.sbs.IdH.dao.MinutesDAOImpl" p:session-ref="sqlSession"/>
-	<bean id="workDAO" class="com.sbs.IdH.dao.WorkDAOImpl" p:session-ref="sqlSession"/>
+	<bean id="workreportDAO" class="com.sbs.IdH.dao.WorkreportDAOImpl" p:session-ref="sqlSession"/>
 	<bean id="issue_attachDAO" class="com.sbs.IdH.dao.Issue_AttachDAOImpl" p:session-ref="sqlSession"/>
-	<bean id="work_attachDAO" class="com.sbs.IdH.dao.Work_AttachDAOImpl" p:session-ref="sqlSession"/>
+	<bean id="workreport_attachDAO" class="com.sbs.IdH.dao.Workreport_AttachDAOImpl" p:session-ref="sqlSession"/>
 	
 	<bean id="issueService"
 		  class="com.sbs.IdH.service.IssueServiceImpl"
@@ -26,10 +26,10 @@
 	<bean id="minutesService"
 		  class="com.sbs.IdH.service.MinutesServiceImpl"
 		  p:minutesDAO-ref="minutesDAO" />
-	<bean id="workService"
-		  class="com.sbs.IdH.service.WorkServiceImpl"
-		  p:workDAO-ref="workDAO"
-		  p:work_attachDAO-ref="work_attachDAO" />
+	<bean id="workreportService"
+		  class="com.sbs.IdH.service.WorkreportServiceImpl"
+		  p:workreportDAO-ref="workreportDAO"
+		  p:workreport_attachDAO-ref="workreport_attachDAO" />
 	<bean id="menuService"
 		  class="com.sbs.IdH.service.MenuServiceImpl"
 		  p:menuDAO-ref="menuDAO" />

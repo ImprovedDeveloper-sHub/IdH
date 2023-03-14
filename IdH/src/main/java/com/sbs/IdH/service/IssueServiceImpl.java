@@ -100,6 +100,7 @@ public class IssueServiceImpl implements IssueService{
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("loginUser");
 		cri.setMember_id(member.getMember_id());
+		//cri.setMember_id("IdH");
 		cri.setMemberStatus(1);
 		dataMap.put("myIssueList", issueDAO.selectSearchIssueList(cri));
 		return dataMap;
@@ -108,9 +109,10 @@ public class IssueServiceImpl implements IssueService{
 	@Override
 	public Map<String, Object> selectGetterIssueList(SearchCriteria cri, HttpServletRequest request) throws SQLException {
 		Map<String, Object> dataMap = new HashMap<String,Object>();
-		HttpSession session = request.getSession();
-		MemberVO member = (MemberVO) session.getAttribute("loginUser");
+		HttpSession session = request.getSession(); 
+		MemberVO member = (MemberVO)session.getAttribute("loginUser");
 		cri.setMember_id(member.getMember_id());
+		//cri.setMember_id("IdH");
 		cri.setMemberStatus(2);
 		dataMap.put("getterIssueList", issueDAO.selectSearchIssueList(cri));
 		return dataMap;
