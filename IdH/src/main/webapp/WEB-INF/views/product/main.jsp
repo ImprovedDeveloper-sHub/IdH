@@ -129,7 +129,8 @@
 								<td class="text-right py-0 align-middle">
 									<div class="btn-group btn-group-sm">
 										<a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-										<a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+										<a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>		
+										<button type="button" id="removeBtn" class="btn btn-danger" onclick="submit_go('remove.do','${pds.pno}');">REMOVE</button>
 									</div>
 								</td>
 							</tr>
