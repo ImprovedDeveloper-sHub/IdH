@@ -24,7 +24,7 @@ import com.sbs.IdH.dto.Notice_attachVO;
 import com.sbs.IdH.service.NoticeService;
 import com.sbs.IdH.utils.MakeFileName;
 
-@RequestMapping("/notice")
+@RequestMapping("notice")
 @Controller
 public class NoticeController {
 
@@ -40,49 +40,49 @@ public class NoticeController {
 	}
 
 	/* test Notice detail Controller */
-	@GetMapping("/detail")
-	public ModelAndView detail(ModelAndView mnv) throws SQLException {
-		
-		mnv.addObject("notice", noticeService.getNotice(3));
-		
-		return mnv;
-		
-	}
-
-	/* real Notice detail Controller */
 //	@GetMapping("/detail")
-//	public ModelAndView detail(int notice_number, String from, RedirectAttributes rttr, ModelAndView mnv) throws Exception {
+//	public ModelAndView detail(ModelAndView mnv, int notice_number) throws SQLException {
 //		
-//		String url = "/notice/detail";
-//
-//		NoticeVO notice = null;
+//		mnv.addObject("notice", noticeService.getNotice(notice_number));
 //		
-//		notice = noticeService.getNotice(notice_number);
-//		
-//		// 파일명 재정의
-//		if (notice != null) {
-//			
-//			List<Notice_attachVO> attachList = notice.getNotice_attachList();
-//			
-//			if (attachList != null) {
-//				
-//				for (Notice_attachVO attach : attachList) {
-//					
-//					String fileName = attach.getFilename().split("\\$\\$")[1];
-//					attach.setFilename(fileName);
-//					
-//				}
-//				
-//			}
-//			
-//		}
-//		
-//		mnv.addObject("notice", notice);
-//		mnv.setViewName(url);
-//
 //		return mnv;
 //		
 //	}
+
+	/* real Notice detail Controller */
+	@GetMapping("/detail")
+	public ModelAndView detail(int notice_number, String from, RedirectAttributes rttr, ModelAndView mnv) throws Exception {
+		
+		String url = "/notice/detail";
+
+		NoticeVO notice = null;
+		
+		notice = noticeService.getNotice(notice_number);
+		
+		// 파일명 재정의
+		if (notice != null) {
+			
+			List<Notice_attachVO> attachList = notice.getNotice_attachList();
+			
+			if (attachList != null) {
+				
+				for (Notice_attachVO attach : attachList) {
+					
+					String fileName = attach.getFilename().split("\\$\\$")[1];
+					attach.setFilename(fileName);
+					
+				}
+				
+			}
+			
+		}
+		
+		mnv.addObject("notice", notice);
+		mnv.setViewName(url);
+
+		return mnv;
+		
+	}
 
 	@RequestMapping("/registForm")
 	public String registForm() throws SQLException {
@@ -140,4 +140,19 @@ public class NoticeController {
 
 		return url;
 	}
+	
+	@GetMapping("/modifyForm")
+	public ModelAndView modifyForm(int notice_number, ModelAndView mnv) throws Exception{
+		
+		String url="/notice/modify";
+		
+		NoticeVO notice = noticeService.getNoticeForModify(notice_number);
+		
+		mnv.addObject("notice",notice);
+		mnv.setViewName(url);
+		System.out.println(notice.getNotice_title());
+		return mnv;
+		
+	}
+	
 }
