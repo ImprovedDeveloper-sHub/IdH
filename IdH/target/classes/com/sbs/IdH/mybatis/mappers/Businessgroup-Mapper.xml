@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Businessgroup-Mapper">
+
+	<sql id="search">
+		<if test="searchType == 't'.toString()">
+			and business_name like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'w'.toString()">
+			and business_member_id like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'c'.toString()">
+			and business_content like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'tc'.toString()">
+			and (
+			business_name like '%'||#{keyword}||'%'
+			or
+			business_content like '%'||#{keyword}||'%'
+			)
+		</if>
+		<if test="searchType == 'cw'.toString()">
+			and (
+			business_member_id like '%'||#{keyword}||'%'
+			or
+			business_content like '%'||#{keyword}||'%'
+			)
+		</if>
+		<if test="searchType == 'tcw'.toString()">
+			and (
+			business_name like '%'||#{keyword}||'%'
+			or
+			business_member_id like '%'||#{keyword}||'%'
+			or
+			business_content like '%'||#{keyword}||'%'
+			)
+		</if>
+	</sql>
+	
+	<select id="selectSearchbusinessList" resultType="business">
+		select *
+		from(
+		    select rownum as rnum,SearchbusinessResult.*
+		    from (
+		    	select *
+				from business
+				where business_number is not null
+				<include refid="search" />
+				order by regDate desc
+		    )  SearchbusinessResult
+		    <![CDATA[
+		    where rownum <= #{endRow}
+		)
+		where rnum > #{startRow}
+		 ]]>
+	</select>
+	
+	<select id="selectSearchbusinessListCount" resultType="int">
+		select
+		count(*)
+		from business
+		where business_number is not null
+		<include refid="search" />
+		order by regDate desc
+	</select>
+	
+	<select id="selectBusinessgroup_number" resultType="businessgroup">
+		select
+		*
+		from businessgroup
+		where businessgroup_number = #{businessgroup_number}
+	</select>
+	
+	<select id="selectBusinessgroup_name" resultType="businessgroup">
+		select
+		*
+		from businessgroup
+		where businessgroup_name like '%'||#{businessgroup_name}||'%'
+	</select>
+	
+	<update id="insertBusinessgroup" parameterType="businessgroup">
+		insert
+		into
+		businessgroup(businessgroup_number, business_name)
+		values(#{businessgroup_number}, #{businessgroup_name})
+	</update>
+	
+	<update id="updateBusinessgroup" parameterType="businessgroup">
+		update
+		businessgroup
+		set
+		businessgroup_name = #{businessgroup_number}, businessgroup_people = #{businessgroup_people}
+	</update>
+	
+	<update id="deletBusinessgroup" parameterType="businessgroup">
+		delete
+		from businessgroup
+		where businessgroup_number = ${businessgroup_number}
+	</update>
+	
+</mapper>

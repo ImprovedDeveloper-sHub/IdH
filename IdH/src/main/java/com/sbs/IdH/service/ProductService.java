@@ -11,7 +11,7 @@ public interface ProductService {
 	
 	
 	// 리스트조회
-		Map<String, Object> selectProductList(SearchCriteria cri) throws SQLException;
+		Map<String, Object> selectProductProceedList(SearchCriteria cri) throws SQLException;
 		
 
 		// 글작성
@@ -32,6 +32,15 @@ public interface ProductService {
 		Product_AttachVO selectProduct_AttachByAno(int ano)throws SQLException;
 		
 	    void removeProduct_AttachByAno(int ano)throws SQLException;
+
+
+		Map<String, Object> selectProductEndList(SearchCriteria cri) throws SQLException;
+
+
+		Map<String, Object> selectProductMyProceedList(SearchCriteria cri) throws SQLException;
+
+
+		Map<String, Object> selectProductMyEndList(SearchCriteria cri) throws SQLException;
 	    
 	    
 }

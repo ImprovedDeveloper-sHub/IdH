@@ -55,10 +55,26 @@ public class ProductController {
 	@GetMapping("/main")
 	public ModelAndView main(SearchCriteria cri, ModelAndView mnv) throws Exception {
 
-		mnv.addAllObjects(productService.selectProductList(cri));
+		mnv.addAllObjects(productService.selectProductProceedList(cri));
 		mnv.addAllObjects(coworkService.selectCoworkList(cri));
 		return mnv;
 	}
+	@GetMapping("/end")
+	public ModelAndView end(SearchCriteria cri, ModelAndView mnv) throws Exception {
+
+		mnv.addAllObjects(productService.selectProductEndList(cri));
+		
+		return mnv;
+	}
+	@GetMapping("/mywork")
+	public ModelAndView mywork(SearchCriteria cri, ModelAndView mnv) throws Exception {
+
+		mnv.addAllObjects(productService.selectProductMyProceedList(cri));
+		mnv.addAllObjects(productService.selectProductMyEndList(cri));
+		
+		return mnv;
+	}
+	
 
 	
 	

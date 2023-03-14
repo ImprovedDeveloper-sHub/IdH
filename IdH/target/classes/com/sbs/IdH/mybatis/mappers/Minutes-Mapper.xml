@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Minutes-Mapper">
+
+	<sql id="search">
+		<if test="searchType == 'n'.toString() ">
+			and Minutes_number like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 't'.toString() ">
+			and Minutes_title like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'c'.toString() ">
+			and Minutes_content like '%'||#{keyword}||'%'
+		</if>
+	</sql>
+
+	<select id="selectSearchMinutesList" resultType="minutes">
+		select
+		*
+		from minutes
+		where minutes_number is not null
+		<include refid="search" />
+		order by minutes_regdate desc
+	</select>
+
+	<select id="selectSearchMinutesListCount" resultType="int">
+		select count(*)
+		from minutes
+		where minutes_number is not null
+		<include refid="search" />
+	</select>
+
+	<select id="selectMinutesByMinutes_Number" resultType="minutes">
+		select
+		*
+		from
+		minutes
+		where minutes_number=#{minutes_number}
+	</select>
+
+	<update id="insertMinutes" parameterType="minutes">
+		insert into
+		minutes(minutes_number, minutes_title,minutes_regdate, minutes_content,
+		minutes_member_id, minutes_project_number)
+		values(#{minutes_number},#{minutes_title},sysdate,#{minutes_content},#{minutes_member_id},#{minutes_project_number})
+	</update>
+
+	<update id="updateMinutes" parameterType="minutes">
+		update minutes
+		set
+		minutes_title=#{minutes_title},minutes_content=#{minutes_content},minutes_project_number=#{minutes_project_number}
+		where minutes_number=#{minutes_number}
+	</update>
+
+	<update id="deleteMinutes">
+		delete
+		from minutes
+		where minutes_number=#{minutes_number}
+	</update>
+</mapper>  
+
+
+
+
+
