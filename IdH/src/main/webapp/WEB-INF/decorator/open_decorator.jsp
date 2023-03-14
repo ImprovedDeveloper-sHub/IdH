@@ -11,7 +11,6 @@
 <decorator:body />
 
 
-
 <%@ include file="/WEB-INF/module/open_footer.jsp"%>
 
 

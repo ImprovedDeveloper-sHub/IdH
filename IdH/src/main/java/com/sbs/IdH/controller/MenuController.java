@@ -1,6 +1,5 @@
 package com.sbs.IdH.controller;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -19,30 +18,26 @@ import com.sbs.IdH.service.MenuService;
 @Controller
 public class MenuController {
 
+	
 	@Resource(name="menuService")
 	private MenuService menuService;
 	
+	
 	@GetMapping("/index")
-	public String index(@RequestParam(defaultValue = "M000000") String mCode, Model model) throws SQLException {
+	public String index(@RequestParam(defaultValue = "M000000") String mCode, Model model) throws Exception {
 		String url = "/common/indexPage";
-
 		List<MenuVO> menuList = menuService.getMainMenuList();
 		MenuVO menu = menuService.getMenuByMcode(mCode);
-
 		model.addAttribute("menuList", menuList);
 		model.addAttribute("menu", menu);
-
 		return url;
 	}
 	
-
 	@GetMapping("/subMenu")
 	@ResponseBody
 	public ResponseEntity<List<MenuVO>> subMenuToJSON(String mCode) {
 		ResponseEntity<List<MenuVO>> entity = null;
-
 		List<MenuVO> subMenu = null;
-
 		try {
 			subMenu = menuService.getSubMenuList(mCode);
 
@@ -51,14 +46,6 @@ public class MenuController {
 			entity = new ResponseEntity<List<MenuVO>>(HttpStatus.INTERNAL_SERVER_ERROR);
 			e.printStackTrace();
 		}
-
 		return entity;
 	}	
-	
 }
-
-
-
-
-
-

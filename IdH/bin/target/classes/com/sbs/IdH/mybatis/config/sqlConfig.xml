@@ -1,0 +1,38 @@
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	
+	
+	<typeAliases>
+		<typeAlias type="java.lang.String" alias="str" />
+		<typeAlias type="java.lang.Integer" alias="int" />
+		
+		<!-- <typeAlias type="com.jsp.dto.MemberVO"  alias="member"/>
+		<typeAlias type="com.jsp.dto.PdsVO" alias="pds" />	
+		<typeAlias type="com.jsp.dto.AttachVO" alias="attach" />
+		<typeAlias type="com.jsp.dto.MenuVO" alias="menu" />
+		<typeAlias type="com.jsp.dto.BoardVO" alias="board" />
+		<typeAlias type="com.jsp.dto.NoticeVO" alias="notice" />
+		<typeAlias type="com.jsp.dto.ReplyVO" alias="reply" /> -->
+		<typeAlias type="com.sbs.IdH.dto.BudgetVO" alias="budget" />
+		<typeAlias type="com.sbs.IdH.dto.WorkforceVO" alias="workforce" />
+		<typeAlias type="com.sbs.IdH.dto.UnitworkVO" alias="unitwork" />
+		<typeAlias type="com.sbs.IdH.dto.ScheduleVO" alias="schedule" />
+		<typeAlias type="com.sbs.IdH.dto.ProjectVO" alias="project" />
+		<typeAlias type="com.sbs.IdH.dto.MenuVO" alias="menu" />
+		<typeAlias type="com.sbs.IdH.dto.RequireVO"  alias="require"/>
+		<typeAlias type="com.sbs.IdH.dto.Project_authorityVO"  alias="project_authority"/>
+		<typeAlias type="com.sbs.IdH.dto.MemberVO"  alias="member"/>
+		
+	</typeAliases>
+	
+	
+	
+</configuration>
+
+
+
+
+

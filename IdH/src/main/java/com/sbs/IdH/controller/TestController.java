@@ -26,7 +26,7 @@ public class TestController {
 	}
 
 
-	@GetMapping("/teamone")
+	@GetMapping("/teammember")
 	public void teamone() throws Exception {
 	}
 }

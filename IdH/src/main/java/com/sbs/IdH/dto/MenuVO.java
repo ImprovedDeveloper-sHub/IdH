@@ -53,4 +53,18 @@ public class MenuVO {
 	public void setMlevel(int mlevel) {
 		this.mlevel = mlevel;
 	}
+	
+	public MenuVO() {}
+	public MenuVO(String mcode, String mname, String murl, String micon, String jText, String upcode, int mlevel) {
+		super();
+		this.mcode = mcode;
+		this.mname = mname;
+		this.murl = murl;
+		this.micon = micon;
+		this.jText = jText;
+		this.upcode = upcode;
+		this.mlevel = mlevel;
+	}
+	
+	
 }

@@ -33,8 +33,8 @@ public class WorkController {
 
 	@GetMapping("/main")
 	public ModelAndView main(SearchCriteria cri, ModelAndView mnv, HttpServletRequest request) throws Exception {
-		mnv.addAllObjects(workService.selectWorkListByApprover(request, cri));
-		mnv.addAllObjects(workService.selectWorkList(cri));
+		mnv.addAllObjects(workService.selectGetterWorkList(cri, request));
+		mnv.addAllObjects(workService.selectMyWorkList(cri, request));
 		return mnv;
 	}
 

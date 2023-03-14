@@ -15,7 +15,7 @@ public interface IssueService {
 	IssueVO selectIssue(int issue_number)throws SQLException;
 	void modifyIssue(IssueVO issue)throws SQLException;
 	void removeIssue(int issue_number)throws SQLException;
-	Map<String, Object> selectGetterIssueList(SearchCriteria cri,HttpServletRequest request)throws SQLException;
+	Map<String, Object> selectGetterIssueList(SearchCriteria cri, HttpServletRequest request)throws SQLException;
 	Map<String, Object> selectMyIssueList(SearchCriteria cri, HttpServletRequest request) throws SQLException;
 	Map<String, Object> selectIssueCheckList(SearchCriteria cri) throws SQLException;
 	Issue_AttachVO selectIssue_AttachByAno(int ano)throws SQLException;

@@ -93,7 +93,7 @@
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
 												value="${work.work_regdate}" pattern="yyyy-MM-dd" /></td>
 										<td
-											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${work.work_check == 1? '결제완료':'미결제'}</td>
+											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${work.work_check}</td>
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
 												value="${work.work_enddate}" pattern="yyyy-MM-dd" /></td>
@@ -183,7 +183,7 @@
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
 												value="${work.work_regdate}" pattern="yyyy-MM-dd" /></td>
 										<td
-											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${work.work_check == 1? '결제완료':'미결제'}</td>
+											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${work.work_check}</td>
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
 												value="${work.work_enddate}" pattern="yyyy-MM-dd" /></td>
