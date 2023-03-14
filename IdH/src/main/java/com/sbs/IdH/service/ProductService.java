@@ -41,6 +41,9 @@ public interface ProductService {
 
 
 		Map<String, Object> selectProductMyEndList(SearchCriteria cri) throws SQLException;
+
+
+		Map<String, Object> selectProduct_CoworkList(SearchCriteria cri) throws SQLException;
 	    
 	    
 }

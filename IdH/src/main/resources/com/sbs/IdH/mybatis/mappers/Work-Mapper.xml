@@ -15,17 +15,17 @@
 		<if test="searchType == 'c'.toString() ">
 			and work_content like '%'||#{keyword}||'%'
 		</if>
-		<if test="searchType == 'wc'.toString() ">
-			and work_check like '%'||#{keyword}||'%'
-		</if>
-		<if test="searchType == 'pn'.toString() ">
-			and work_project_number like '%'||#{keyword}||'%'
+		<if test="searchType == 'l'.toString() ">
+			and work_level like '%'||#{keyword}||'%'
 		</if>
 		<if test="member_id != null and memberStatus == 1">
 			and work_member_id = #{member_id}
 		</if>
 		<if test="member_id != null and memberStatus == 2">
-			and work_member_approver = #{member_id}
+			and work_member_id = #{member_id}
+		</if>
+		<if test="status != null">
+			and work_check = #{status}
 		</if>
 	</sql>
 
@@ -56,15 +56,15 @@
 	<update id="insertWork" parameterType="work">
 		insert into
 		work(work_number, work_project_number,work_member_id, work_check,
-		work_regdate, work_enddate,work_member_approver)
-		values(#{work_number},#{work_project_number},#{work_member_id},#{work_check},sysdate,sysdate,#{work_member_approver})
+		work_regdate, work_enddate,work_member_approver,work_title)
+		values(#{work_number},#{work_project_number},#{work_member_id},#{work_check},sysdate,sysdate,#{work_member_approver},#{work_title})
 	</update>
 
 	<update id="updateWork" parameterType="work">
 		update work
 		set
 		work_project_number=#{work_project_number},work_check=#{work_check},work_member_approver=#{work_member_approver}
-		where work_number=#{work_number}
+		where work_number=#{work_number},work_title=#{work_title}
 	</update>
 
 	<update id="deleteWork">

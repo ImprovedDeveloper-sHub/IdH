@@ -41,6 +41,7 @@
 		<if test="status != null">
          and product_status = #{status}
       </if>
+      
      <!--  <if test="member_id != null">
          and product_member_id = #{member_id}
       </if>

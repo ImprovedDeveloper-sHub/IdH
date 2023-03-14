@@ -37,6 +37,9 @@ tbody tr td {
 #table-content {
 	height: 300px;
 }
+.card{
+	overflow-y:scroll;
+}
 </style>
 
 

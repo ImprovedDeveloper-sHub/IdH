@@ -30,6 +30,32 @@ public class ProductServiceImpl implements ProductService {
 		List<ProductVO> productProceedList = productDAO.selectProductCriteria(cri);
 		if (productProceedList != null)
 			for (ProductVO product : productProceedList)
+		addAttachList(product);
+
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(productDAO.selectProductCriteriaTotalCount(cri));
+
+		
+		int proceedtotal=productDAO.selectProductCriteriaTotalCount(cri);
+		cri.setStatus(2);//종료
+		int endtotal=productDAO.selectProductCriteriaTotalCount(cri);
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		dataMap.put("endtotal", endtotal);
+		dataMap.put("proceedtotal", proceedtotal);
+		dataMap.put("productProceedList", productProceedList);
+		dataMap.put("pageMaker", pageMaker);
+
+		return dataMap;
+
+	}
+	@Override
+	public Map<String, Object> selectProduct_CoworkList(SearchCriteria cri) throws SQLException {
+
+		cri.setStatus(3);
+		List<ProductVO> product_CoworkList = productDAO.selectProductCriteria(cri);
+		if (product_CoworkList != null)
+			for (ProductVO product : product_CoworkList)
 				addAttachList(product);
 
 		PageMaker pageMaker = new PageMaker();
@@ -37,7 +63,7 @@ public class ProductServiceImpl implements ProductService {
 		pageMaker.setTotalCount(productDAO.selectProductCriteriaTotalCount(cri));
 
 		Map<String, Object> dataMap = new HashMap<String, Object>();
-		dataMap.put("productProceedList", productProceedList);
+		dataMap.put("product_CoworkList", product_CoworkList);
 		dataMap.put("pageMaker", pageMaker);
 
 		return dataMap;

@@ -59,7 +59,7 @@
 							</c:if>
 							<c:forEach items="${productProceedList }" var="product">
 								<tr
-									onclick="OpenWindow('product_detail?product_number=${product.product_number }&from=list','상세보기',680,400);"
+									onclick="OpenWindow('detail?product_number=${product.product_number }','상세보기',680,400);"
 									style="cursor: pointer;">
 									<td
 										style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${product.product_number}</td>
@@ -73,10 +73,15 @@
 									<td
 										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${product.product_content}</td>
 									
-									<c:forEach items="${product.attachList }" var="product_attach">
-										<td
-											style="text-align: left; max-width: 35%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${product_attach.ano}</td>
-									</c:forEach>
+									<td>
+								<!-- 첨부파일 -->
+								<c:if test="${!empty product.attachList }">
+									<i class="nav-icon fas fa-file"></i>
+								</c:if>
+								<c:if test="${empty product.attachList }">
+									<span>-</span>
+								</c:if>
+							</td>
 								</tr>
 
 							</c:forEach>
@@ -104,7 +109,7 @@
 					<thead>
 						<tr>
 							<th>협업 산출물</th>
-							<th>상태</th>
+							<th>요청자</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -116,24 +121,24 @@
 						</c:if>
 						<c:forEach items="${coworkList }" var="cowork">
 
+                          <c:forEach items="${product_CoworkList}" var="product">     
 							<tr
-								onclick="OpenWindow('cowork_detail?cowork_number=${cowork.cowork_number}&from=list','상세보기',680,400);"
+								onclick="OpenWindow('detail?cowork_number=${cowork.cowork_number}&from=list','상세보기',680,400);"
 								style="cursor: pointer;">
-                          <c:forEach items="${productProceedList}" var="product">     
 								<td
 									style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${product.product_title}</td>
-								</c:forEach>
 								<td
-									style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${cowork.cowork_status}</td>
+									style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${cowork.cowork_member_id}</td>
 
 								<td class="text-right py-0 align-middle">
 									<div class="btn-group btn-group-sm">
 										<a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
 										<a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>		
-										<button type="button" id="removeBtn" class="btn btn-danger" onclick="submit_go('remove.do','${pds.pno}');">REMOVE</button>
+										
 									</div>
 								</td>
 							</tr>
+								</c:forEach>
 						</c:forEach>
 
 					</tbody>
@@ -149,7 +154,7 @@
 						<div class="small-box bg-success">
 							<div class="inner">
 								<h3>
-									53<sup style="font-size: 20px">%</sup>
+									${proceedtotal}
 								</h3>
 								<p>Progress</p>
 							</div>
@@ -165,7 +170,7 @@
 
 						<div class="small-box bg-warning">
 							<div class="inner">
-								<h3>44</h3>
+								<h3>${issuenow}/${total}</h3>
 								<p>Delay</p>
 							</div>
 							<div class="icon">
@@ -180,7 +185,7 @@
 
 						<div class="small-box bg-danger">
 							<div class="inner">
-								<h3>65</h3>
+								<h3>${endtotal}</h3>
 								<p>Finished</p>
 							</div>
 							<div class="icon">

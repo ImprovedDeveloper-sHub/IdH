@@ -24,6 +24,7 @@ import com.sbs.IdH.dto.CoworkVO;
 import com.sbs.IdH.dto.ProductVO;
 import com.sbs.IdH.dto.Product_AttachVO;
 import com.sbs.IdH.service.CoworkService;
+import com.sbs.IdH.service.IssueService;
 import com.sbs.IdH.service.ProductService;
 import com.sbs.IdH.utils.MakeFileName;
 
@@ -36,7 +37,9 @@ public class ProductController {
 	@Resource
 	private CoworkService coworkService;
 	
-
+    @Resource
+    private IssueService issueService;
+    
 	public void setProductService(ProductService productService) {
 		this.productService = productService;
 	}
@@ -57,6 +60,8 @@ public class ProductController {
 
 		mnv.addAllObjects(productService.selectProductProceedList(cri));
 		mnv.addAllObjects(coworkService.selectCoworkList(cri));
+		mnv.addAllObjects(productService.selectProduct_CoworkList(cri));
+		mnv.addAllObjects(issueService.selectIssueCheckList(cri));
 		return mnv;
 	}
 	@GetMapping("/end")
