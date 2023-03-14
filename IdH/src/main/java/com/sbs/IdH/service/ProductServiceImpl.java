@@ -7,10 +7,8 @@ import java.util.Map;
 
 import com.sbs.IdH.command.PageMaker;
 import com.sbs.IdH.command.SearchCriteria;
-import com.sbs.IdH.dao.CoworkDAO;
 import com.sbs.IdH.dao.ProductDAO;
 import com.sbs.IdH.dao.Product_AttachDAO;
-import com.sbs.IdH.dto.CoworkVO;
 import com.sbs.IdH.dto.ProductVO;
 import com.sbs.IdH.dto.Product_AttachVO;
 

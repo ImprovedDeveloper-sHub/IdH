@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sbs.IdH.command.IssueRegistCommand;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.IssueVO;
 import com.sbs.IdH.dto.Issue_AttachVO;
@@ -36,9 +37,10 @@ public class IssueController {
 	public void test()throws Exception {}
 	
 	@GetMapping("/main")
-	public ModelAndView issue(SearchCriteria cri, ModelAndView mnv) throws Exception {
-		mnv.addAllObjects(issueService.selectIssueList(cri));
+	public ModelAndView main(SearchCriteria cri, ModelAndView mnv,HttpServletRequest request) throws Exception {
 		mnv.addAllObjects(issueService.selectIssueCheckList(cri));
+		mnv.addAllObjects(issueService.selectGetterIssueList(cri, request));
+		mnv.addAllObjects(issueService.selectMyIssueList(cri, request));
 		return mnv;
 	}
 	
@@ -77,44 +79,52 @@ public class IssueController {
 		return url;
 	}
 	
-//	@Resource(name = "fileUploadPath")
-//	private String fileUploadPath;
-//	
-//	private List<Issue_AttachVO> saveFileToAttaches(List<MultipartFile> multiFiles,String savePath )throws Exception{
-//		List<Issue_AttachVO> attachList = new ArrayList<Issue_AttachVO>();
-//		
-//		if (multiFiles != null) {
-//			for (MultipartFile multi : multiFiles) {
-//				String fileName = MakeFileName.toUUIDFileName(multi.getOriginalFilename(), "$$");
-//				File target = new File(savePath, fileName);
-//				target.mkdirs();
-//				multi.transferTo(target);
-//
-//				Issue_AttachVO attach = new Issue_AttachVO();
-//				attach.setUploadPath(savePath);
-//				attach.setFileName(fileName);
-//				attach.setFileType(fileName.substring(fileName.lastIndexOf('.') + 1)
-//						.toUpperCase());
-//				
-//				attachList.add(attach);
-//			}
-//		}
-//		return attachList;
-//	}
+	@Resource(name = "fileUploadPath")
+	private String fileUploadPath;
 	
-	@PostMapping("/regist")
-	public String regist(HttpServletRequest request,RedirectAttributes rttr,IssueVO issue) throws Exception{
-		String url="redirect:/issue/main";	
-		
-		String XSStitle = (String)request.getAttribute("XSStitle");
-		if(XSStitle !=null) issue.setIssue_title(XSStitle);
-		
-		
-		
+	private List<Issue_AttachVO> saveFileToIssue_Attaches(List<MultipartFile> multiFiles, String savePath) throws Exception {
+		List<Issue_AttachVO> attachList = new ArrayList<Issue_AttachVO>();
+		// 저장 -> attachVO -> list.add
+		if (multiFiles != null) {
+			for (MultipartFile multi : multiFiles) {
+				String fileName = MakeFileName.toUUIDFileName(multi.getOriginalFilename(), "$$");
+				File target = new File(savePath, fileName);
+				target.mkdirs();
+				multi.transferTo(target);
+
+				Issue_AttachVO attach = new Issue_AttachVO();
+				attach.setUploadPath(savePath);
+				attach.setFileName(fileName);
+				attach.setFileType(fileName.substring(fileName.lastIndexOf('.') + 1).toUpperCase());
+
+				attachList.add(attach);
+			}
+		}
+		return attachList;
+	}
+	
+	@PostMapping(value = "/regist", produces = "text/plain;charset=utf-8")
+	public String regist(IssueRegistCommand registReq, HttpServletRequest request, RedirectAttributes rttr)
+			throws Exception {
+		String url = "redirect:/issue/main";
+
+		List<MultipartFile> multiFiles = registReq.getUploadFile();
+		String savePath = this.fileUploadPath;
+
+		List<Issue_AttachVO> attachList = saveFileToIssue_Attaches(multiFiles, savePath);
+
+		// DB
+		IssueVO issue = registReq.toIssueVO();
+		String XSStitle = (String) request.getAttribute("XSStitle");
+		if (XSStitle != null)
+			issue.setIssue_title(XSStitle);
+
+		issue.setAttachList(attachList);
 		issueService.registIssue(issue);
-		
-		rttr.addFlashAttribute("from","regist");
-		
+
+		// output
+		rttr.addFlashAttribute("from", "regist");
+
 		return url;
 	}
 	
@@ -149,7 +159,7 @@ public class IssueController {
 		HttpStatus status;
 		Map<String, Object> dataMap = null;
 		try {
-			dataMap = issueService.selectMyIssueList(cri,request);
+			dataMap = issueService.selectMyIssueList(cri, request);
 			status = HttpStatus.OK;
 		}catch (Exception e) {
 			status = HttpStatus.BAD_REQUEST;

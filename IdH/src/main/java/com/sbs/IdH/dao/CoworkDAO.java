@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.sbs.IdH.command.SearchCriteria;
-
 import com.sbs.IdH.dto.CoworkVO;
 
 public interface CoworkDAO {
