@@ -49,8 +49,7 @@ public class ProjectDAOImpl implements ProjectDAO{
 	
 	@Override
 	public int selectProjectSeqNext() throws SQLException {
-		session.update("Project-Mapper.selectProjectSeqNext");
-		return 0;
+		return session.selectOne("Project-Mapper.selectProjectSeqNext");
 	}
 
 	
@@ -79,5 +78,12 @@ public class ProjectDAOImpl implements ProjectDAO{
 		
 	}
 
+	
+	//추가
+@Override
+	public List<Integer> selectProjectByBusinessNumber(int business_number) throws SQLException {
+		return session.selectOne("Project-Mapper.selectProjectNumberBybusinessNumber" ,business_number); 
+		
+	}
 
 }

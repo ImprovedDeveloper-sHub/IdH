@@ -27,5 +27,8 @@ public interface ProjectDAO {
 
 	void updateProjectForProjectEnd(ProjectVO project) throws SQLException;
 	
+	
 	void deleteProject(int project_number) throws SQLException;
+	//추가
+	List<Integer> selectProjectByBusinessNumber(int business_number)throws SQLException;
 }

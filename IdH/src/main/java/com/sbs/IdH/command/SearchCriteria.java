@@ -12,7 +12,7 @@ public class SearchCriteria {
 	private int status;
 	private int type;
 	private int startRowNum=0;
-	private String memberId="";
+	private String member_id="";
 	private int memberStatus;
 	
 	
@@ -61,12 +61,12 @@ public class SearchCriteria {
 		return page;
 	}
 	public String getMemberId() {
-		return memberId;
+		return member_id;
 	}
 
 
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setMemberId(String member_id) {
+		this.member_id = member_id;
 	}
 
 
@@ -110,7 +110,7 @@ public class SearchCriteria {
 
 
 	public SearchCriteria(int startRowNum, String keyword, int memberStatus, int page, int type, int perPageNum,
-			int status, int business_number, String searchType, String memberId, int project_number) {
+			int status, int business_number, String searchType, String member_id, int project_number) {
 		super();
 		this.startRowNum = startRowNum;
 		this.keyword = keyword;
@@ -121,7 +121,7 @@ public class SearchCriteria {
 		this.status = status;
 		this.business_number = business_number;
 		this.searchType = searchType;
-		this.memberId = memberId;
+		this.member_id = member_id;
 		this.project_number = project_number;
 		setStartRowNum();
 	}

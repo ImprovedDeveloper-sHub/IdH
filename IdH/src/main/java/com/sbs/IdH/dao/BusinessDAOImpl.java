@@ -19,16 +19,11 @@ public class BusinessDAOImpl implements BusinessDAO {
 	
 	@Override
 	public List<BusinessVO> selectBusinessCriteria(SearchCriteria cri) throws SQLException {
-		
 		int offset = cri.getStartRowNum();
 		int limit = cri.getPerPageNum();
-		
 		RowBounds rowBounds = new RowBounds(offset,limit);
-		
 		List<BusinessVO> businessList = session.selectList("Business-Mapper.selectSearchBusinessList", cri, rowBounds);	
-		
 		return businessList;
-		
 	}
 
 	@Override
@@ -42,9 +37,7 @@ public class BusinessDAOImpl implements BusinessDAO {
 	
 	@Override
 	public BusinessVO selectBusiness_number(int business_number) throws SQLException {
-		
 		BusinessVO business = session.selectOne("Business-Mapper.selectBusiness_number", business_number);
-		
 		return business;
 		
 	}
@@ -96,5 +89,14 @@ public class BusinessDAOImpl implements BusinessDAO {
 		session.update("Business-Mapper.deleteBusiness", business_number);
 		
 	}
+	
+	
+	//추가
+	@Override
+	public List<BusinessVO> selectBusinessCriteriaNotRowBound(SearchCriteria cri) throws SQLException {
+		List<BusinessVO> businessList = session.selectList("Business-Mapper.selectSearchBusinessList", cri);	
+		return businessList;
+	}
+	
 	
 }

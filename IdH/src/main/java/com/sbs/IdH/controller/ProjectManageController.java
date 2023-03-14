@@ -3,6 +3,8 @@ package com.sbs.IdH.controller;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +18,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.BudgetVO;
+import com.sbs.IdH.dto.ProjectVO;
 import com.sbs.IdH.dto.ScheduleVO;
 import com.sbs.IdH.dto.UnitworkVO;
 import com.sbs.IdH.dto.WorkforceVO;
 import com.sbs.IdH.service.BudgetService;
+import com.sbs.IdH.service.BusinessService;
 import com.sbs.IdH.service.ProjectService;
 import com.sbs.IdH.service.ScheduleService;
 import com.sbs.IdH.service.UnitworkService;
@@ -40,6 +44,9 @@ public class ProjectManageController {
 	private ScheduleService scheduleService;
 	@Resource
 	private WorkforceService workforceService;
+	@Resource
+	private BusinessService businessService;
+	
 	
 	public void setProjectService(ProjectService projectService) {
 		this.projectService = projectService;
@@ -56,6 +63,10 @@ public class ProjectManageController {
 	public void setWorkforceService(WorkforceService workforceService) {
 		this.workforceService = workforceService;
 	}
+	public void setBusinessService(BusinessService businessService) {
+		this.businessService = businessService;
+	}
+	
 	@GetMapping("/main")
 	public ModelAndView projectManage(SearchCriteria cri, ModelAndView mnv) throws Exception {
 		mnv.addAllObjects(projectService.selectProceedingProject(cri));
@@ -65,9 +76,42 @@ public class ProjectManageController {
 		return mnv;
 	}
 
-	@GetMapping("/regist")
-	public ModelAndView regist(ModelAndView mnv) {
+	@GetMapping("/registProjectForm")
+	public ModelAndView regist(ModelAndView mnv, HttpServletRequest request) throws Exception {
+		String url = "/projectManage/registProject";
+		SearchCriteria cri = new SearchCriteria();
+		HttpSession session = request.getSession();
+		String member_id = (String) session.getAttribute("member_id");
+		cri.setMemberId(member_id);
+		mnv.addAllObjects(businessService.getBusinessListNotRowBound(cri));
+		mnv.setViewName(url);
 		return mnv;
+	}
+	
+	
+	@GetMapping("/registProject")
+	public String regist(RedirectAttributes rttr, ProjectVO project) throws Exception {
+		String url = "/projectManage/Main";
+		projectService.registProject(project);
+		return url;
+	}
+	
+	
+	@GetMapping("/getPlan")
+	@ResponseBody
+	public ResponseEntity<Map<String,Object>> getPlan(int business_number) throws Exception{
+		ResponseEntity<Map<String,Object>> entity =null;
+		HttpStatus status;
+		Map<String, Object> dataMap = null;
+		try {
+			dataMap = projectService.selectProjectPlanByBusiness_number(business_number);
+			status = HttpStatus.OK;
+		}catch (Exception e) {
+			status = HttpStatus.BAD_REQUEST;
+		}
+		entity = new ResponseEntity<Map<String,Object>>(dataMap, status);
+		
+		return entity;
 	}
 	
 	
@@ -131,34 +175,59 @@ public class ProjectManageController {
 	
 	
 	
-	@GetMapping("/registWorkforceForm") 
-	public ModelAndView registWorkforceForm(ModelAndView mnv) {
+	@GetMapping("/registWorkforceForm")
+	public ModelAndView registWorkforceForm(ModelAndView mnv) throws Exception {
 		String url = "/projectManage/registWorkforce";
 		mnv.setViewName(url);
 		return mnv;
 	}
-	@PostMapping("/registWorkforce") 
-	public ModelAndView registWorkforce(ModelAndView mnv, WorkforceVO workforce) throws Exception {
+	
+	@PostMapping("/registWorkforce")
+	public String registWorkforce(RedirectAttributes rttr, WorkforceVO workforce) throws Exception{
 		workforceService.registWorkforce(workforce);
-		return mnv;
+		//System.out.println(workforce);
+		String url = "redirect:/projectManage/main";
+		rttr.addFlashAttribute("from", "regist");
+		
+		return url;
 	}
+	
+
 	@GetMapping("/modifyWorkforceForm")
-	public ModelAndView modifyWorkforceForm(ModelAndView mnv) {
+	public ModelAndView modifyWorkforceForm(ModelAndView mnv, int workforce_number) throws Exception{
 		String url = "/projectManage/modifyWorkforce";
+		mnv.addObject("workforce", workforceService.selectWorkforce(workforce_number));
 		mnv.setViewName(url);
 		return mnv;
 	}
+	
 	@PostMapping("/modifyWorkforce")
-	public ModelAndView modifyWorkforce(ModelAndView mnv, WorkforceVO workforce) throws Exception{
+	public String modifyWorkforce(RedirectAttributes rttr, WorkforceVO workforce) throws Exception{
+		String url = "redirect:/projectManage/workforceDetail";
 		workforceService.modifyWorkforce(workforce);
-		return mnv;
+		rttr.addFlashAttribute("from", "modify");
+		rttr.addAttribute("workforce_number", workforce.getWorkforce_number());
+		return url;
 	}
+	
+	
 	@GetMapping("/workforceDetail")
 	public ModelAndView workforceDetail(ModelAndView mnv, int workforce_number) throws Exception {
 		mnv.addObject("workforce", workforceService.selectWorkforce(workforce_number));
+		
 		return mnv;
 	}
 	
+	
+	@GetMapping("/deleteWorkforce")
+	public String deleteWorkforce(RedirectAttributes rttr, int workforce_number) throws Exception {
+		String url = "redirect:/projectManage/workforceDetail";
+		workforceService.removeWorkforce(workforce_number);
+		rttr.addFlashAttribute("from", "delete");
+		rttr.addAttribute("workforce_number", workforce_number);
+
+		return url;
+	}
 	
 	
 	

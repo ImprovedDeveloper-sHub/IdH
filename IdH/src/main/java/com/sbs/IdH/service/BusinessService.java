@@ -25,4 +25,7 @@ public interface BusinessService {
 	
 	public void removeBusiness_attachByAno(int ano) throws SQLException;
 	
+	//추가
+	public Map<String, Object> getBusinessListNotRowBound(SearchCriteria cri) throws SQLException;
+	
 }

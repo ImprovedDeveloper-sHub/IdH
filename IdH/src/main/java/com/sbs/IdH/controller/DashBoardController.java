@@ -11,10 +11,15 @@ public class DashBoardController {
 	
 	
 	@GetMapping("/teamLeader")
-	public void test() {
-	
-		
-		
+	public void teamLeader() {
 	}
+	@GetMapping("/teamMember")
+	public void teamMember() {
+	}
+	
+	@GetMapping("/Executives")
+	public void Executives() {
+	}
+	
 	
 }
