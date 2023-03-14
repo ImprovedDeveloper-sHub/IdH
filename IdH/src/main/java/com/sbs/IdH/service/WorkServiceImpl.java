@@ -23,7 +23,7 @@ public class WorkServiceImpl implements WorkService{
 	public Map<String, Object> selectWorkListByWriter(HttpServletRequest request,SearchCriteria cri) throws SQLException {
 		HttpSession session = request.getSession();
 		String userid = (String)session.getAttribute("loginUser");
-		cri.setMemberId(userid);
+		cri.setMember_id(userid);
 		cri.setMemberStatus(1);
 		List<WorkVO>workListByWriter = workDAO.selectSearchWorkList(cri);
 		if(workListByWriter != null) {
@@ -45,7 +45,7 @@ public class WorkServiceImpl implements WorkService{
 		public Map<String, Object> selectWorkListByApprover(HttpServletRequest request,SearchCriteria cri) throws SQLException {
 			HttpSession session = request.getSession();
 			String userid = (String)session.getAttribute("loginUser");
-			cri.setMemberId(userid);
+			cri.setMember_id(userid);
 			cri.setMemberStatus(2);
 			List<WorkVO>workListByApprover = workDAO.selectSearchWorkList(cri);
 			if(workListByApprover != null) {

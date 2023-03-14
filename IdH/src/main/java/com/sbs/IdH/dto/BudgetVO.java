@@ -15,7 +15,15 @@ public class BudgetVO {
 	private int budget_type;
 	
 	
+	private String budget_project_name;
 	
+	public String getBudget_project_name() {
+		return budget_project_name;
+	}
+
+	public void setBudget_project_name(String budget_project_name) {
+		this.budget_project_name = budget_project_name;
+	}
 
 	public BudgetVO(int budget_number, int budget_status, String budget_detail, int budget_price,
 			int budget_project_number, String budget_member_id, Date budget_regdate, String budget_name,

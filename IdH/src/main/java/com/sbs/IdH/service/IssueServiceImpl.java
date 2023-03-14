@@ -97,7 +97,7 @@ public class IssueServiceImpl implements IssueService{
 	public Map<String, Object> selectMyIssueList(SearchCriteria cri,HttpServletRequest request) throws SQLException {
 		Map<String, Object> dataMap = new HashMap<String,Object>();
 		HttpSession session = request.getSession();
-		cri.setMemberId((String)session.getAttribute("loginUser"));
+		cri.setMember_id((String)session.getAttribute("loginUser"));
 		cri.setMemberStatus(1);
 		dataMap.put("myIssueList", issueDAO.selectSearchIssueList(cri));
 		return dataMap;
@@ -107,7 +107,7 @@ public class IssueServiceImpl implements IssueService{
 	public Map<String, Object> selectGetterIssueList(SearchCriteria cri,HttpServletRequest request) throws SQLException {
 		Map<String, Object> dataMap = new HashMap<String,Object>();
 		HttpSession session = request.getSession();
-		cri.setMemberId((String)session.getAttribute("loginUser"));
+		cri.setMember_id((String)session.getAttribute("loginUser"));
 		cri.setMemberStatus(2);
 		dataMap.put("getterIssueList", issueDAO.selectSearchIssueListCount(cri));
 		return dataMap;

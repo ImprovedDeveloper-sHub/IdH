@@ -109,7 +109,7 @@
                <table  class="table table-hover">
                   <thead class="endThead" class="text-left">
 	                <tr>
-	                  <th style="width:20%">사업 예산</th>
+	                  <th style="width:20%">프로젝트 이름</th>
 	                  <th style="width:30%">예산 이름</th>
 	                  <th style="width:20%">예산 분류</th>
 	                  <th style="width:15%">예산 금액</th>
@@ -123,7 +123,7 @@
 			 	 </c:if>
 			 	 <c:forEach items="${budgetList }" var="budget">
 					 <tr onclick="OpenWindow('budgetDetail?budget_number=${budget.budget_number}','예산',500,600);">
-			                  <td>사업예산</td>
+			                  <td>${budget.budget_project_name}</td>
 			                  <td>${budget.budget_name}</td>
 			                  <td>${budget.budget_type}</td>
 			                  <td>${budget.budget_price}</td>

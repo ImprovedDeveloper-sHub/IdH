@@ -86,4 +86,10 @@ public class ProjectDAOImpl implements ProjectDAO{
 		
 	}
 
+
+@Override
+public String selectProjectName(int project_number) throws Exception {
+	String project_name = session.selectOne("Project-Mapper.selectProjectName", project_number);
+	return project_name;
+}
 }

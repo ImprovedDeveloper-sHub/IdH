@@ -60,12 +60,14 @@ public class SearchCriteria {
 	public int getPage() {
 		return page;
 	}
-	public String getMemberId() {
+
+
+	public String getMember_id() {
 		return member_id;
 	}
 
 
-	public void setMemberId(String member_id) {
+	public void setMember_id(String member_id) {
 		this.member_id = member_id;
 	}
 

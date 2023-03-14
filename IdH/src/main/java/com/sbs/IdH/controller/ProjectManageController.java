@@ -81,7 +81,7 @@ public class ProjectManageController {
 		SearchCriteria cri = new SearchCriteria();
 		HttpSession session = request.getSession();
 		String member_id = (String) session.getAttribute("member_id");
-		cri.setMemberId(member_id);
+		cri.setMember_id(member_id);
 		mnv.addAllObjects(businessService.getBusinessListNotRowBound(cri));
 		mnv.setViewName(url);
 		return mnv;
@@ -95,7 +95,7 @@ public class ProjectManageController {
 		SearchCriteria cri = new SearchCriteria();
 		HttpSession session = request.getSession();
 		String member_id = (String) session.getAttribute("member_id");
-		cri.setMemberId(member_id);
+		cri.setMember_id(member_id);
 		mnv.addAllObjects(businessService.getBusinessListNotRowBound(cri));
 		mnv.setViewName(url);
 		return mnv;

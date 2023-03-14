@@ -12,7 +12,7 @@ public interface BudgetService {
 	
 	public Map<String,Object> selectBudgetListforProject(int project_number) throws Exception;
 	
-	public Map<String,Object> selectBudgetListByMemberId(int project_member_id) throws Exception;
+	public Map<String,Object> selectBudgetListByMemberId(String member_id) throws Exception;
 	
 	public void registBudget(BudgetVO budget) throws Exception;
 	

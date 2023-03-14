@@ -37,6 +37,13 @@
 		order by project_regdate desc
 	</select>
 	
+	<select id="selectProjectName"	resultType="String">
+		select project_name
+		from project
+		where project_number =#{project_number}
+	</select>
+	
+	
 	<select id="selectProjectListByBusinessNumber"	resultType="project">
 		select *
 		from project
