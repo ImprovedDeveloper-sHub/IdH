@@ -11,7 +11,7 @@ public interface UnitworkService {
 	
 	public void registUnitwork(UnitworkVO unitwork) throws Exception;
 	
-	public void updateUnitwork(UnitworkVO unitwork) throws Exception;
+	public void modifyUnitwork(UnitworkVO unitwork) throws Exception;
 	
 	public void removeUnitwork(int unitwork_number) throws Exception;
 	

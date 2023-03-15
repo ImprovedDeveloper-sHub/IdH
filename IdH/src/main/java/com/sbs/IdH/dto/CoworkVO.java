@@ -11,6 +11,7 @@ public class CoworkVO {
 	private int cowork_status;
 	private String cowork_member_id;
 	private int cowork_product_number;
+
 	
 	public int getCowork_number() {
 		return cowork_number;
@@ -66,6 +67,7 @@ public class CoworkVO {
 		this.cowork_member_id = cowork_member_id;
 		this.cowork_product_number = cowork_product_number;
 	}
+
 	
 
 }

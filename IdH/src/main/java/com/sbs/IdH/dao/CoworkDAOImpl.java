@@ -7,7 +7,6 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.sbs.IdH.command.SearchCriteria;
-import com.sbs.IdH.dto.CompanyruleVO;
 import com.sbs.IdH.dto.CoworkVO;
 
 public class CoworkDAOImpl implements CoworkDAO {

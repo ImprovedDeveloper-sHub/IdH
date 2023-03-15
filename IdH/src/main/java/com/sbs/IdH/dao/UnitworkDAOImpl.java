@@ -44,8 +44,7 @@ public class UnitworkDAOImpl implements UnitworkDAO{
 	
 	@Override
 	public int selectUnitworkSeqNext() throws SQLException {
-		session.update("Unitwork-Mapper.selectUnitworkSeqNext");
-		return 0;
+		return session.selectOne("Unitwork-Mapper.selectUnitworkSeqNext");
 	}
 
 	

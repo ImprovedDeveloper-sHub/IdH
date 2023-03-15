@@ -38,6 +38,18 @@
 			content like '%'||#{keyword}||'%'
 			)
 		</if>
+		
+		<!-- 추가 -->
+		<if test="status != null and status != 0 ">
+			and business_status =  #{status}
+		</if>
+		<if test="member_id != null ">
+			and business_member_id = #{member_id}
+		</if>
+		
+		
+		
+		
 	</sql>
 	
 	<select id="selectSearchBusinessList" resultType="business">

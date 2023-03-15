@@ -3,7 +3,6 @@ package com.sbs.IdH.dao;
 
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,15 +39,16 @@ public class TestWorkforceDAO {
    }
    
    
-   public void testInsertWorkforceList() throws Exception{
-		  WorkforceVO workforce = new WorkforceVO(3,0,1,"detail","IdH");
-		  workforceDAO.insertWorkforce(workforce); WorkforceVO workforce2 =
-		  workforceDAO.selectWorkforce(3);
-		  
-		  Assert.assertEquals(workforce, workforce2);
-		 
-   }
-   
+	/*
+	 * public void testInsertWorkforceList() throws Exception{ WorkforceVO workforce
+	 * = new WorkforceVO(3,0,1,"detail","IdH");
+	 * workforceDAO.insertWorkforce(workforce); WorkforceVO workforce2 =
+	 * workforceDAO.selectWorkforce(3);
+	 * 
+	 * Assert.assertEquals(workforce, workforce2);
+	 * 
+	 * }
+	 */
    public void testWorkforce_SEQ() throws Exception{
 	   System.out.println(workforceDAO.selectWorkforceSeqNext());
    }

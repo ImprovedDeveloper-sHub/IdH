@@ -4,15 +4,15 @@
 		<pattern>*</pattern>
 	</decorator>
 	
-
 	<decorator name="openWindow" page="open_decorator.jsp">
 		<pattern>/**/*</pattern>
 		<!-- <pattern>/main</pattern> -->
 		<pattern>/main</pattern>
-		
 	</decorator>
 
 	<excludes>
 		<pattern>/resources/*</pattern>
+		<pattern>/member/loginForm</pattern>
 	</excludes>
+	
 </decorators>

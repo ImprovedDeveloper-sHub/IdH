@@ -13,7 +13,15 @@ public class IssueVO {
 	private int issue_project_number;
 	private String issue_getter_id;
 	private List<Issue_AttachVO>attachList;
+	private int issue_status;
 	
+	
+	public int getIssue_status() {
+		return issue_status;
+	}
+	public void setIssue_status(int issue_status) {
+		this.issue_status = issue_status;
+	}
 	public List<Issue_AttachVO> getAttachList() {
 		return attachList;
 	}
@@ -76,7 +84,8 @@ public class IssueVO {
 		this.issue_regdate = issue_regdate;
 	}
 	public IssueVO(int issue_number, String issue_title, String issue_content, int issue_level, Date issue_regdate,
-			String issue_setter_id, int issue_project_number, String issue_getter_id) {
+			String issue_setter_id, int issue_project_number, String issue_getter_id, List<Issue_AttachVO> attachList,
+			int issue_status) {
 		super();
 		this.issue_number = issue_number;
 		this.issue_title = issue_title;
@@ -86,6 +95,9 @@ public class IssueVO {
 		this.issue_setter_id = issue_setter_id;
 		this.issue_project_number = issue_project_number;
 		this.issue_getter_id = issue_getter_id;
+		this.attachList = attachList;
+		this.issue_status = issue_status;
 	}
+	
 	
 }

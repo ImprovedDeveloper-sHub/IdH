@@ -49,7 +49,7 @@
 
 
 <div class="row">
-
+play
 	<!-- 사업 일정 상세 정보 -->
 	<div class="col-8">
 		<div class="card card-info">

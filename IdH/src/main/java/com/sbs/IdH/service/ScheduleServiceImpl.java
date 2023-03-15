@@ -20,11 +20,14 @@ public class ScheduleServiceImpl implements ScheduleService{
 	
 	@Override
 	public void registSchedule(ScheduleVO schedule) throws Exception {
+		schedule.setSchedule_number(scheduleDAO.selectScheduleSeqNext());
 		scheduleDAO.insertSchedule(schedule);
 	}
 
 	@Override
-	public void updateSchedule(ScheduleVO schedule) throws Exception {
+	public void modifySchedule(ScheduleVO schedule) throws Exception {
+		scheduleDAO.updateSchedule(schedule);
+	
 	}
 
 	@Override

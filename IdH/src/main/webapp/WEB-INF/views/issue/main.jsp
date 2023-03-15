@@ -88,12 +88,12 @@
 							</tr>
 						</thead>
 						<tbody class="text-left myIssueTbody">
-							<c:if test="${empty issueList}">
+							<c:if test="${empty myIssueList}">
 								<tr>
 									<td colspan="5">데이터가 없습니다.</td>
 								</tr>
 							</c:if>
-							<c:forEach items="${issueList }" var="issue">
+							<c:forEach items="${myIssueList }" var="issue">
 								<tr>
 									<td
 										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${issue.issue_title}</td>
@@ -164,12 +164,12 @@
 							</tr>
 						</thead>
 						<tbody class="text-left getterIssueTbody">
-							<c:if test="${empty issueList}">
+							<c:if test="${empty getterIssueList}">
 								<tr>
 									<td colspan="5">데이터가 없습니다.</td>
 								</tr>
 							</c:if>
-							<c:forEach items="${issueList }" var="issue">
+							<c:forEach items="${getterIssueList }" var="issue">
 								<tr>
 									<td
 										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${issue.issue_title}</td>
@@ -192,3 +192,8 @@
 		</div>
 	</div>
 </div>
+<script>
+window.onload=function(){
+	alert("${loginUser.member_id}");	
+}
+</script>

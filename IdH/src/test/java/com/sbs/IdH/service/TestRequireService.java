@@ -1,7 +1,5 @@
 package com.sbs.IdH.service;
 
-import java.util.Date;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,7 @@ public class TestRequireService {
 
 	@Autowired
 	private RequireService requireService;
-
+	
 //	@Test
 //	public void SelectRequire() throws Exception {
 //		
@@ -43,24 +41,24 @@ public class TestRequireService {
 //
 //	}
 //
-//	@Test
-//	public void updateForRequire() throws Exception {
-//
-//		RequireVO require1 = requireService.selectRequire(1);
-//		requireService.modifyRequire(require1);
-//		require1 = requireService.selectRequire(1);
-//		requireService.modifyRequire(require1);
-//		require1 = requireService.selectRequire(1);
-//
-//	}
-//
 	@Test
-	public void DeleteRequire() throws Exception {
+	public void updateForRequire() throws Exception {
 
 		RequireVO require1 = requireService.selectRequire(1);
-		requireService.removeRequire(1);
-		RequireVO require2 = requireService.selectRequire(1);
+		requireService.modifyRequire(require1);
+		require1 = requireService.selectRequire(1);
+		requireService.modifyRequire(require1);
+		require1 = requireService.selectRequire(1);
 
 	}
+//
+//	@Test
+//	public void DeleteRequire() throws Exception {
+//
+//		RequireVO require1 = requireService.selectRequire(1);
+//		requireService.removeRequire(1);
+//		RequireVO require2 = requireService.selectRequire(1);
+//
+//	}
 
 }

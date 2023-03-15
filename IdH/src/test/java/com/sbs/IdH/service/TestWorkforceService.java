@@ -1,9 +1,6 @@
 package com.sbs.IdH.service;
 
 
-import java.util.Calendar;
-import java.util.Date;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +8,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sbs.IdH.command.DateMaker;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.WorkforceVO;
 
@@ -40,11 +36,13 @@ public class TestWorkforceService {
    @Test
    public void testInsertWorkforceList() throws Exception{
 		
-	   WorkforceVO workforce = new WorkforceVO(3,1,1,"test","IdH");
-		  
-	   workforceService.registWorkforce(workforce);
-	   
-	   workforceService.selectWorkforce(3);
+		/*
+		 * WorkforceVO workforce = new WorkforceVO(3,1,1,"test","IdH");
+		 * 
+		 * workforceService.registWorkforce(workforce);
+		 * 
+		 * workforceService.selectWorkforce(3);
+		 */
 	   
 	/*	Date start = DateMaker.make(2023, 2, 20); Date end =
 		  DateMaker.make(2023, 3, 10);

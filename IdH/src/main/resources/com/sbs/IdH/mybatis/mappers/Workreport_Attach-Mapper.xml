@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Workreport_Attach-Mapper">
+	<select id="selectAttachByWorkreport_number"
+		resultType="workreport_attach">
+		select *
+		from workreport_attach
+		where Workreport_number = #{Workreport_number}
+	</select>
+
+	<select id="selectWorkreport_AttachByAno"
+		resultType="workreport_attach">
+		select *
+		from workreport_attach
+		where ano=#{ano}
+	</select>
+
+	<update id="insertWorkreport_Attach">
+		insert into
+		Workreport_attach (ano, uploadpath, filename, filetype, Workreport_number,
+		Workreport_attach_attacher)
+		values (workreport_attach_seq.nextval,
+		#{uploadPath}, #{fileName},#{fileType},
+		#{Workreport_number},#{Workreport_attach_attacher} )
+	</update>
+
+	<update id="deleteWorkreport_Attach">
+		delete from workreport_attach where ano = #{ano}
+	</update>
+
+	<update id="deleteAllWorkreport_Attach">
+		delete
+		from workreport_attach
+		where ano = #{ano}
+	</update>
+
+</mapper>  
+
+
+
+
+

@@ -25,7 +25,7 @@ public class WorkforceServiceImpl implements WorkforceService{
 	}
 
 	@Override
-	public void updateWorkforce(WorkforceVO workforce) throws Exception {
+	public void modifyWorkforce(WorkforceVO workforce) throws Exception {
 	}
 
 	@Override

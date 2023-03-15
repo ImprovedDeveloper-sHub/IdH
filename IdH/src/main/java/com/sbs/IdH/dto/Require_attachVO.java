@@ -9,7 +9,7 @@ public class Require_attachVO {
 	private String filename;
 	private String filetype;
 	private Date regdate;
-	private int require_attach_number;
+	private int require_number;
 	private String require_attach_attacher;
 	
 	public int getAno() {
@@ -42,11 +42,11 @@ public class Require_attachVO {
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
-	public int getRequire_attach_number() {
-		return require_attach_number;
+	public int getRequire_number() {
+		return require_number;
 	}
-	public void setRequire_attach_number(int require_attach_number) {
-		this.require_attach_number = require_attach_number;
+	public void setRequire_number(int require_attach_number) {
+		this.require_number = require_attach_number;
 	}
 	public String getRequire_attach_attacher() {
 		return require_attach_attacher;

@@ -16,6 +16,8 @@ function CloseWindow(parentURL){
 }
 
 
+
+
 function list_go(page,url){
 	if(!url) url="main";
 	
@@ -48,6 +50,7 @@ function ajax_list_go(page,url,type){
 
 
 function search_go_ajax(page, perPageNum, searchType, keyword, url, target, delTarget, templateObject, pagiTemplatObject, pagenationTarget,type) {
+	alert('test');
 	var jobForm=$('#jobForm');
 	//var jobForm = document.getElementById('#jobForm');
 	jobForm.find("[name='page']").val(page);

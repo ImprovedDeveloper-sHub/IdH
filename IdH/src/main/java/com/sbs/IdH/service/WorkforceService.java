@@ -10,7 +10,7 @@ public interface WorkforceService {
 	
 	public void registWorkforce(WorkforceVO workforce) throws Exception;
 	
-	public void updateWorkforce(WorkforceVO workforce) throws Exception;
+	public void modifyWorkforce(WorkforceVO workforce) throws Exception;
 	
 	public void removeWorkforce(int workforce_number) throws Exception;
 	

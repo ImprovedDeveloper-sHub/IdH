@@ -21,6 +21,13 @@
 		
 	</sql>
 	
+	<select id="selectProjectNumberBybusinessNumber" resultType="int">
+		select project_number
+		from project
+		where project_business_number = #{business_number}
+	</select>
+	
+	
 	
 	<select id="selectProjectList"	resultType="project">
 		select *
@@ -29,6 +36,13 @@
 		<include refid="search" />
 		order by project_regdate desc
 	</select>
+	
+	<select id="selectProjectName"	resultType="String">
+		select project_name
+		from project
+		where project_number =#{project_number}
+	</select>
+	
 	
 	<select id="selectProjectListByBusinessNumber"	resultType="project">
 		select *
