@@ -60,8 +60,6 @@ public class SearchCriteria {
 	public int getPage() {
 		return page;
 	}
-
-
 	public String getMember_id() {
 		return member_id;
 	}

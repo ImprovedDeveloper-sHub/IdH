@@ -111,6 +111,7 @@ public class ScheduleVO {
 				+ ", schedule_startdate=" + schedule_startdate + "]";
 	}
 
+
 	
 	
 	
