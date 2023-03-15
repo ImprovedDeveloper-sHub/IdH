@@ -82,6 +82,7 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public Map<String, Object> selectProceedingProject(SearchCriteria cri) throws Exception {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
+		cri.setPerPageNum(5);
 		cri.setStatus(1);
 		dataMap.put("proceedingProjectList", projectDAO.selectSearchProjectList(cri));
 		PageMaker pageMaker = new PageMaker();
@@ -94,6 +95,7 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public Map<String, Object> selectEndProject(SearchCriteria cri) throws Exception {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
+		cri.setPerPageNum(5);
 		cri.setStatus(2);
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);

@@ -50,8 +50,10 @@ public class MemberController {
 		} catch (NotFoundIdException | InvalidPasswordException e) {
 			url = "redirect:/loginForm";
 			
-			rttr.addFlashAttribute("message",e.getMessage());
-			rttr.addFlashAttribute("member_id", member_id);
+			/*
+			 * rttr.addFlashAttribute("message",e.getMessage());
+			 * rttr.addFlashAttribute("member_id", member_id);
+			 */
 		} 
 		return url;
 	}

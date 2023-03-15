@@ -4,13 +4,18 @@
 
 <c:if test="${empty loginUser }">
 	<script>		
-		location.href="<%=request.getContextPath() %>/common/loginForm.do";
+		location.href="<%=request.getContextPath() %>/member/loginForm";
 	</script>
 </c:if>
 
 
 <c:if test="${!empty loginUser }">
 	<script>
-		location.href="<%=request.getContextPath() %>/index.do"
+		location.href="<%=request.getContextPath() %>/index"
 	</script>
 </c:if>
+
+ 
+<%--  <script>
+		location.href="<%=request.getContextPath() %>/index"
+</script> --%>
