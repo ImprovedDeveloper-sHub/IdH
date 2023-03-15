@@ -50,7 +50,7 @@
 		where schedule_number=#{schedule_number}
 	</select>
 	
-	<select id="selectScheduleSeqNext" resultType="string" flushCache="true">
+	<select id="selectScheduleSeqNext" resultType="int" flushCache="true">
 		select schedule_seq.nextval from dual
 	</select>
 	
