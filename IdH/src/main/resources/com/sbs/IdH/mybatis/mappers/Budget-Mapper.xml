@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Budget-Mapper">
+	
+	<sql id="search">
+		<if test="searchType == 'i'.toString() ">
+			and id like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'n'.toString() ">
+			and name like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'p'.toString() ">
+			and phone like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'e'.toString() ">
+			and email like '%'||#{keyword}||'%'
+		</if>
+		<if test="project_number != null and project_number != 0 ">
+			and budget_project_number =  #{project_number}
+		</if>
+		<if test="status != null and status != 0 ">
+			and budget_status =  #{status}
+		</if>
+		<if test="type != null and type != 0 ">
+			and budget_type =  #{type}
+		</if>
+		
+		
+		
+	</sql>
+	
+	<select id="selectBudgetPriceTotal"	resultType="int">
+		select NVL(sum(budget_price), 0)
+		from budget
+		where budget_number is not null
+		<include refid="search" />
+		order by budget_regdate desc
+	</select>
+	
+	<select id="selectBudgetList"	resultType="budget">
+		select *
+		from budget
+		where budget_number is not null
+		<include refid="search" />
+		order by budget_regdate desc
+	</select>
+	
+	<select id="selectBudgetForProject"	resultType="budget">
+		select *
+		from budget
+		where budget_project_number = #{project_number}
+	</select>
+	
+	
+	<select id="selectSearchBudgetListCount" resultType="int">
+		select count(*)
+		from budget
+		where budget_number	is not null
+		<include refid="search" />
+		order by budget_regdate desc
+	</select>
+	
+	<select id="selectBudget"  resultType="budget">
+		select * 
+		from budget 
+		where budget_number=#{budget_number}
+	</select>
+	
+	<select id="selectBudgetSeqNext" resultType="int">
+		select budget_seq.nextval as budget_number from dual
+	</select>
+	
+	<update id="insertBudget" parameterType="budget">
+		insert 
+		into 
+		budget(budget_number,budget_status,budget_detail,budget_price,budget_project_number,budget_member_id,budget_regdate)
+		values(#{budget_number},0,#{budget_detail},#{budget_price},#{budget_project_number},#{budget_member_id},sysdate)
+	</update>
+	
+	
+	
+	<update id="updateBudget" parameterType="budget">
+		update budget 
+		set budget_project_number=#{budget_project_number}, budget_status=#{budget_status}, budget_detail=#{budget_detail}, budget_price=#{budget_price}, budget_member_id = #{budget_member_id}
+		where budget_number=#{budget_number}
+	</update>
+	
+	
+	<update id="updateBudgetForProjectStart" parameterType="budget">
+		update budget 
+		set budget_project_number=#{budget_project_number}, budget_status=1
+		where budget_number=#{budget_number}
+	</update>
+	
+	<update id="updateBudgetForProjectEnd" parameterType="budget">
+		update budget 
+		set budget_status=2
+		where budget_number=#{budget_number}
+	</update>
+	
+	
+	<update id="deleteBudget" parameterType="int">
+		delete 
+		from budget 
+		where budget_number=#{budget_number}
+	</update>
+	
+	
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Business-Mapper">
+
+	<sql id="search">
+		<if test="searchType == 't'.toString()">
+			and title like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'w'.toString()">
+			and writer like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'c'.toString()">
+			and content like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'tc'.toString()">
+			and (
+			title like '%'||#{keyword}||'%'
+			or
+			content like '%'||#{keyword}||'%'
+			)
+		</if>
+		<if test="searchType == 'cw'.toString()">
+			and (
+			writer like '%'||#{keyword}||'%'
+			or
+			content like '%'||#{keyword}||'%'
+			)
+		</if>
+		<if test="searchType == 'tcw'.toString()">
+			and (
+			title like '%'||#{keyword}||'%'
+			or
+			writer like '%'||#{keyword}||'%'
+			or
+			content like '%'||#{keyword}||'%'
+			)
+		</if>
+		
+		<!-- 추가 -->
+		<if test="status != null and status != 0 ">
+			and business_status =  #{status}
+		</if>
+		<if test="member_id != null ">
+			and business_member_id = #{member_id}
+		</if>
+		
+		
+		
+		
+	</sql>
+	
+	<select id="selectSearchBusinessList" resultType="business">
+		select
+		*
+		from
+		business
+		where business_number is not null
+		<include refid="search" />
+		order by business_number desc
+	</select>
+	
+	<select id="selectSearchBusinessListCount"  resultType="int">
+		select
+		count(*)
+		from
+		business
+		where business_number is not null
+		<include refid="search" />
+		order by business_number desc
+	</select>
+	
+	<select id="selectBusiness_number" resultType="business">
+		select
+		*
+		from business
+		where business_number = #{business_number}
+	</select>
+	
+	<select id="selectBusiness_name" resultType="business">
+		select
+		*
+		from business
+		where business_name like '%'||#{business_name}||'%'
+	</select>
+	
+	<select id="selectBusiness_content" resultType="business">
+		select
+		*
+		from business
+		where business_content like '%'||#{business_content}||'%'
+	</select>
+	
+	<select id="selectBusinessSequenceNextValue" resultType="int">
+		select business_seq.nextVal
+		from dual
+	</select>
+	
+	<update id="insertBusiness" parameterType="business">
+		insert
+		into
+		business(business_number, business_name, business_people, business_begin, business_end, business_content, business_budget, business_nationbudget, business_companybudget, business_usebudget, business_member_id)
+		values(#{business_number}, #{business_name}, #{business_people}, sysdate, #{business_end}, #{business_content}, #{business_budget}, #{business_nationbudget}, #{business_companybudget}, #{business_usebudget}, #{business_member_id})
+	</update>
+	
+	<update id="updateBusiness" parameterType="business">
+		update
+		business
+		set
+		business_name = #{business_name}, business_people = #{business_people}, business_end = #{business_end}, business_content = #{business_content}, business_budget = #{business_budget}, business_nationbudget = #{business_nationbudget}, business_companybudget = #{business_companybudget}, business_usebudget = #{business_usebudget} 
+	</update>
+	
+	<update id="deleteBusiness" parameterType="int">
+		delete
+		from business
+		where business_number = #{business_number}
+	</update>
+	
+</mapper>
