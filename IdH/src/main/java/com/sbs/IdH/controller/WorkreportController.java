@@ -28,13 +28,15 @@ import com.sbs.IdH.utils.MakeFileName;
 @RequestMapping("/workreport")
 public class WorkreportController {
 
-	@Resource(name = "workreportService")
+	@Resource
 	private WorkreportService workreportService;
-
+	
 	@GetMapping("/main")
 	public ModelAndView main(SearchCriteria cri, ModelAndView mnv, HttpServletRequest request) throws Exception {
 		mnv.addAllObjects(workreportService.selectGetterWorkreportList(cri, request));
 		mnv.addAllObjects(workreportService.selectMyWorkreportList(cri, request));
+		mnv.addAllObjects(workreportService.selectGetterCheckList(cri));
+		mnv.addAllObjects(workreportService.selectMyCheckList(cri));
 		return mnv;
 	}
 

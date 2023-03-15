@@ -4,7 +4,7 @@ package com.sbs.IdH.command;
 public class SearchCriteria {
 	
 	private int page=1;
-	private int perPageNum=5;
+	private int perPageNum=10;
 	private String searchType="";
 	private String keyword="";
 	private int project_number;

@@ -28,7 +28,6 @@
 		</property>
 	</bean>	
 		
-		
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
 		p:dataSource-ref="dataSourceSpied"
 		p:configLocation="classpath:com/sbs/IdH/mybatis/config/sqlConfig.xml"

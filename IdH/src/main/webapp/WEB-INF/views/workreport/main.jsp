@@ -23,15 +23,15 @@
 			<div class="card" style="height: 98%;">
 				<div style="height: 33.3%; border: solid green 3px;">
 					<div class="badge-success">승인</div>
-					<h2>3</h2>
+					<h2>${myworkreportsuccess }</h2>
 				</div>
 				<div style="height: 33.3%; border: solid gold 3px;">
 					<div class="badge-warning">전체</div>
-					<h2>3</h2>
+					<h2>${mytotal }</h2>
 				</div>
 				<div style="height: 33.3%; border: solid red 3px;">
 					<div class="badge-danger">미승인</div>
-					<h2>3</h2>
+					<h2>${myworkreportnow }</h2>
 				</div>
 			</div>
 		</div>
@@ -78,12 +78,12 @@
 								</tr>
 							</thead>
 							<tbody class="text-left myIssueTbody">
-								<c:if test="${empty getterWorkreportList}">
+								<c:if test="${empty myWorkreportList}">
 									<tr>
 										<td colspan="5">데이터가 없습니다.</td>
 									</tr>
 								</c:if>
-								<c:forEach items="${getterWorkreportList }" var="workreport">
+								<c:forEach items="${myWorkreportList }" var="workreport">
 									<tr>
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_title}</td>
@@ -113,15 +113,15 @@
 			<div class="card" style="height: 98%;">
 				<div style="height: 33.3%; border: solid green 3px;">
 					<div class="badge-success">승인</div>
-					<h2>3</h2>
+					<h2>${getterworkreportsuccess }</h2>
 				</div>
 				<div style="height: 33.3%; border: solid gold 3px;">
 					<div class="badge-warning">전체</div>
-					<h2>3</h2>
+					<h2>${gettertotal }</h2>
 				</div>
 				<div style="height: 33.3%; border: solid red 3px;">
 					<div class="badge-danger">미승인</div>
-					<h2>3</h2>
+					<h2>${getterworkreportnow }</h2>
 				</div>
 			</div>
 		</div>
@@ -168,12 +168,12 @@
 								</tr>
 							</thead>
 							<tbody class="text-left getterIssueTbody">
-								<c:if test="${empty myWorkreportList}">
+								<c:if test="${empty getterWorkreportList}">
 									<tr>
 										<td colspan="5">데이터가 없습니다.</td>
 									</tr>
 								</c:if>
-								<c:forEach items="${myWorkreportList }" var="workreport">
+								<c:forEach items="${getterWorkreportList }" var="workreport">
 									<tr>
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_title}</td>

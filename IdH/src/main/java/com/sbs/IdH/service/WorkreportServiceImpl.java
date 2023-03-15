@@ -21,19 +21,14 @@ public class WorkreportServiceImpl implements WorkreportService{
 	private WorkreportDAO workreportDAO;
 	private Workreport_AttachDAO workreport_attachDAO;
 	
-	
-	
-	
 	public void setWorkreportDAO(WorkreportDAO workreportDAO) {
 		this.workreportDAO = workreportDAO;
 	}
-
-
+	
 	public void setWorkreport_attachDAO(Workreport_AttachDAO workreport_attachDAO) {
 		this.workreport_attachDAO = workreport_attachDAO;
 	}
-
-
+	
 	@Override
 	public Map<String, Object> selectWorkreportList(SearchCriteria cri) throws SQLException {
 		List<WorkreportVO>workreportList = workreportDAO.selectSearchWorkreportList(cri);
@@ -107,36 +102,36 @@ public class WorkreportServiceImpl implements WorkreportService{
 	@Override
 	public Map<String, Object> selectMyCheckList(SearchCriteria cri) throws SQLException {
 		Map<String,Object>dataMap = new HashMap<String,Object>();
+		cri.setMemberStatus(1);//보낸것은 1
+		cri.setType(1);//승인
+		int myworkreportsuccess = workreportDAO.selectSearchWorkreportListCount(cri);
 		cri.setMemberStatus(1);
-		cri.setType(1);
-		int myissuesuccess = workreportDAO.selectSearchWorkreportListCount(cri);
-		cri.setMemberStatus(1);
-		cri.setType(2);
-		int myissuenow = workreportDAO.selectSearchWorkreportListCount(cri);
+		cri.setType(2);//미승인
+		int myworkreportnow = workreportDAO.selectSearchWorkreportListCount(cri);
 		cri.setMemberStatus(1);
 		int mytotal = workreportDAO.selectWorkreportCriteriaTotalCount(cri);
 		
 		dataMap.put("mytotal",mytotal);
-		dataMap.put("myissuesuccess",myissuesuccess);
-		dataMap.put("myissuenow",myissuenow);
+		dataMap.put("myworkreportsuccess",myworkreportsuccess);
+		dataMap.put("myworkreportnow",myworkreportnow);
 		return dataMap;
 	}
 	
 	@Override
 	public Map<String, Object> selectGetterCheckList(SearchCriteria cri) throws SQLException {
 		Map<String,Object>dataMap = new HashMap<String,Object>();
+		cri.setMemberStatus(2);//받은것은 2
+		cri.setType(1);//승인
+		int getterworkreportsuccess = workreportDAO.selectSearchWorkreportListCount(cri);
 		cri.setMemberStatus(2);
-		cri.setType(1);
-		int getterissuesuccess = workreportDAO.selectSearchWorkreportListCount(cri);
-		cri.setMemberStatus(2);
-		cri.setType(2);
-		int getterissuenow = workreportDAO.selectSearchWorkreportListCount(cri);
+		cri.setType(2);//미승인
+		int getterworkreportnow = workreportDAO.selectSearchWorkreportListCount(cri);
 		cri.setMemberStatus(2);
 		int gettertotal = workreportDAO.selectWorkreportCriteriaTotalCount(cri);
 		
 		dataMap.put("gettertotal",gettertotal);
-		dataMap.put("getterissuesuccess",getterissuesuccess);
-		dataMap.put("getterissuenow",getterissuenow);
+		dataMap.put("getterworkreportsuccess",getterworkreportsuccess);
+		dataMap.put("getterworkreportnow",getterworkreportnow);
 		return dataMap;
 	}
 	

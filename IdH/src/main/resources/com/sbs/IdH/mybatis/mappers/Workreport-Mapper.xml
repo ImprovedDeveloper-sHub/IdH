@@ -19,12 +19,12 @@
 			and workreport_member_id = #{member_id}
 		</if>
 		<if test="member_id != null and memberStatus == 2">
-			and workreport_member_id = #{member_id}
+			and workreport_member_approver = #{member_id}
 		</if>
-		<if test="memberStatus != null != 0">
+		<if test="memberStatus != null and memberStatus != 0">
 			and workreport_memstatus = #{memberStatus}
 		</if>
-		<if test="type != null != 0">
+		<if test="type != null and type != 0">
 			and workreport_check = #{type}
 		</if>
 	</sql>
@@ -73,12 +73,12 @@
 		where workreport_number=#{workreport_number}
 	</update>
 	
-	<select id="selectSearchWorkreportListCount" resultType="int">
+	<!-- <select id="selectSearchWorkreportListCount" resultType="int">
 		select count(*)
 		from issue
 		where workreport_number is not null
 		<include refid="search" />
-	</select>
+	</select> -->
 </mapper>  
 
 

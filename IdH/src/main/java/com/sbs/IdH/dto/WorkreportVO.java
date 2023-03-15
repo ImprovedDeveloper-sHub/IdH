@@ -14,6 +14,15 @@ public class WorkreportVO {
 	private String workreport_title;
 	private String workreport_content;
 	private List<Workreport_AttachVO>attachList;
+	private int workreport_memstatus;
+
+	public int getWorkreport_memstatus() {
+		return workreport_memstatus;
+	}
+
+	public void setWorkreport_memstatus(int workreport_memstatus) {
+		this.workreport_memstatus = workreport_memstatus;
+	}
 
 	public String getWorkreport_content() {
 		return workreport_content;
@@ -98,9 +107,10 @@ public class WorkreportVO {
 	public WorkreportVO() {
 	}
 
-	public WorkreportVO(int workreport_number, int workreport_project_number, String workreport_member_id, int workreport_check, Date workreport_regdate,
-			Date workreport_enddate, String workreport_member_approver, String workreport_title, String workreport_content,
-			List<Workreport_AttachVO> attachList) {
+	public WorkreportVO(int workreport_number, int workreport_project_number, String workreport_member_id,
+			int workreport_check, Date workreport_regdate, Date workreport_enddate, String workreport_member_approver,
+			String workreport_title, String workreport_content, List<Workreport_AttachVO> attachList,
+			int workreport_memstatus) {
 		super();
 		this.workreport_number = workreport_number;
 		this.workreport_project_number = workreport_project_number;
@@ -112,6 +122,9 @@ public class WorkreportVO {
 		this.workreport_title = workreport_title;
 		this.workreport_content = workreport_content;
 		this.attachList = attachList;
+		this.workreport_memstatus = workreport_memstatus;
 	}
+
+	
 
 }
