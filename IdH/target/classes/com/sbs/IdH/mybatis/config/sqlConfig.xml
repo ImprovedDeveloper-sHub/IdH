@@ -12,6 +12,7 @@
 		<typeAlias type="com.sbs.IdH.dto.RequireVO"  alias="require"/>
 		<typeAlias type="com.sbs.IdH.dto.Project_authorityVO"  alias="project_authority"/>
 		<typeAlias type="com.sbs.IdH.dto.MemberVO"  alias="member"/>
+		<typeAlias type="com.sbs.IdH.dto.Require_attachVO"  alias="require_attach"/>
 		
 	</typeAliases>
 	
