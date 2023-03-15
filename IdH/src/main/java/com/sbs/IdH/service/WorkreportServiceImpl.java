@@ -93,7 +93,7 @@ public class WorkreportServiceImpl implements WorkreportService{
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("loginUser");
 		cri.setMember_id(member.getMember_id());
-		cri.setMemberStatus(2);//구분자 할당받으면2
+		cri.setMemberStatus(2);//구분자 할당받으면2입니다.
 		
 		dataMap.put("getterWorkreportList", workreportDAO.selectSearchWorkreportList(cri));
 		return dataMap;
