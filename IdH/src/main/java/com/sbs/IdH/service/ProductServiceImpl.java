@@ -1,6 +1,7 @@
 package com.sbs.IdH.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,8 @@ import com.sbs.IdH.command.PageMaker;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.ProductDAO;
 import com.sbs.IdH.dao.Product_AttachDAO;
+import com.sbs.IdH.dao.ProjectDAO;
+import com.sbs.IdH.dto.ChartVO;
 import com.sbs.IdH.dto.ProductVO;
 import com.sbs.IdH.dto.Product_AttachVO;
 
@@ -16,13 +19,17 @@ public class ProductServiceImpl implements ProductService {
 
 	private ProductDAO productDAO;
 	private Product_AttachDAO product_attachDAO;
+	private ProjectDAO projectDAO;
+	
 	public void setProductDAO(ProductDAO productDAO) {
 		this.productDAO = productDAO;
 	}
 	public void setProduct_attachDAO(Product_AttachDAO product_attachDAO) {
 		this.product_attachDAO = product_attachDAO;
 	}
-
+	public void setProjectDAO(ProjectDAO projectDAO) {
+		this.projectDAO = projectDAO;
+	}
 	@Override
 	public Map<String, Object> selectProductProceedList(SearchCriteria cri) throws SQLException {
 
@@ -196,6 +203,80 @@ public class ProductServiceImpl implements ProductService {
 	public void removeProduct_AttachByAno(int ano) throws SQLException {
 
 		product_attachDAO.deleteProduct_Attach(ano);
+
+	}
+	
+	@Override
+	public ChartVO selectChart(int project_number) throws Exception {
+
+		HashMap<String, Object> rowMap_c1 = new HashMap<String, Object>();
+		HashMap<String, Object> rowMap_c2 = new HashMap<String, Object>();
+
+		SearchCriteria cri = new SearchCriteria();
+		cri.setProject_number(project_number);
+
+		// status 1
+		cri.setStatus(1);
+		List<Map<String, Object>> c1_list = new ArrayList<Map<String, Object>>();
+		HashMap<String, Object> c1_list_label = new HashMap<String, Object>();
+		c1_list_label.put("v", "상태1 산출물");
+		c1_list.add(c1_list_label);
+		c1_list.add(productDAO.selectProductCountForChart(cri));
+
+		// 현재 일하고 있는 인력. status 2
+		cri.setStatus(2);
+		List<Map<String, Object>> c2_list = new ArrayList<Map<String, Object>>();
+		HashMap<String, Object> c2_list_label = new HashMap<String, Object>();
+		c2_list_label.put("v", "상태2 산출물");
+		c2_list.add(c2_list_label);
+		c2_list.add(productDAO.selectProductCountForChart(cri));
+
+
+
+		rowMap_c1.put("c", c1_list);
+		rowMap_c2.put("c", c2_list);
+
+		ChartVO chart = new ChartVO();
+		chart.productColSet();
+		chart.rowSet(rowMap_c1);
+		chart.rowSet(rowMap_c2);
+
+		chart.resultSet();
+		return chart;
+	}
+
+	@Override
+	public ChartVO selectChartForComparison(int project_number1, int project_number2) throws Exception {
+
+		HashMap<String, Object> rowMap_c1 = new HashMap<String, Object>();
+		HashMap<String, Object> rowMap_c2 = new HashMap<String, Object>();
+
+		SearchCriteria cri = new SearchCriteria();
+		cri.setProject_number(project_number1);
+		List<Map<String, Object>> c0_list = new ArrayList<Map<String, Object>>();
+		HashMap<String, Object> c0_list_label = new HashMap<String, Object>();
+
+		c0_list_label.put("v", projectDAO.selectProject(project_number1).getProject_name());
+		c0_list.add(c0_list_label);
+		c0_list.add(productDAO.selectProductCountForChart(cri));
+
+		cri.setProject_number(project_number2);
+		List<Map<String, Object>> c1_list = new ArrayList<Map<String, Object>>();
+		HashMap<String, Object> c1_list_label = new HashMap<String, Object>();
+		c1_list_label.put("v", projectDAO.selectProject(project_number2).getProject_name());
+		c1_list.add(c1_list_label);
+		c1_list.add(productDAO.selectProductCountForChart(cri));
+
+		rowMap_c1.put("c", c0_list);
+		rowMap_c2.put("c", c1_list);
+
+		ChartVO chart = new ChartVO();
+		chart.workforceColSet();
+		chart.rowSet(rowMap_c1);
+		chart.rowSet(rowMap_c2);
+
+		chart.resultSet();
+		return chart;
 
 	}
 	

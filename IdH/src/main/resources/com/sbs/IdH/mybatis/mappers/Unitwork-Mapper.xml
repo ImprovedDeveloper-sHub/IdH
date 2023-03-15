@@ -21,8 +21,11 @@
 		<if test="project_number != null and project_number != 0 ">
 			and unitwork_project_number =  #{project_number}
 		</if>
-		<if test="status != null and status != 0 ">
-			and unitwork_status =  #{status}
+		<if test="status != null and status != 0">
+			and unitwork_status = #{status}
+		</if>
+		<if test="type != null and type != 0">
+			and unitwork_type = #{type}
 		</if>
 	</sql>
 	

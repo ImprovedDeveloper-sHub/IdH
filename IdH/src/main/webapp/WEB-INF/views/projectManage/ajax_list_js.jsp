@@ -61,38 +61,40 @@
 </script>
 
 <script type="text/x-handlebars-template"  id="end-pagination-template" >
-nav class="paginationNav" aria-label="Navigation">
+
+<nav class="paginationNav" aria-label="Navigation">
 		<ul class="pagination justify-content-center m-0">
 			<li class="page-item">
-				<a class="page-link" onclick="{{goPage 1}};">
+				<a class="page-link" href="{{goPageEnd 1}};">
 					<i class="fas fa-angle-double-left"></i>
 				</a>
 			</li>
 			<li class="page-item">
-				<a class="page-link" onclick="{{#if prev}}{{goPage prevPageNum}}{{else}}{{goPage cri.page}}{{/if}}">
+				<a class="page-link" href="{{#if prev}}{{goPageEnd prevPageNum}}{{else}}{{goPageEnd cri.page}}{{/if}}">
 					<i class="fas fa-angle-left"></i>
 				</a>						
 			</li>
 
-			{{#each proceeding.pageNum}}
+			{{#each pageNum}}
 <li class="paginate_button page-item  ">
-	<a onclick="{{goPage this}}" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">{{this}}</a>
+	<a href="{{goPageEnd this}}" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">{{this}}</a>
 </li>
 {{/each}}
 			
 			<li class="page-item">
-				<a class="page-link" onclick="{{#if next}}{{goPage nextPageNum}}{{else}}{{goPage cri.page}}{{/if}}">
+				<a class="page-link" href="{{#if next}}{{goPageEnd nextPageNum}}{{else}}{{goPageEnd cri.page}}{{/if}}">
 					<i class="fas fa-angle-right" ></i>
 				</a>
 			</li>
 			
 			<li class="page-item">
-				<a class="page-link" onclick="{{goPage realEndPage}}">
+				<a class="page-link" href="{{goPageEnd realEndPage}}">
 					<i class="fas fa-angle-double-right"></i>
 				</a>
 			</li>	
 		</ul>
 	</nav>
+
 
 
 </script>
@@ -144,7 +146,7 @@ function printProceedingPagination(data,target, templateObject){
 	//target.remove();
 	//target.after(html);
 	/* $(target).appendTo(html);
-	$(target).after('test'); */
+	$(target).after("test"); */
 }
 
 
@@ -171,9 +173,10 @@ Handlebars.registerHelper({
 						return year+"/"+month+"-"+date;
 					},
 	"goPageProceeding":function(pageNum){
-		return "javascript:search_go_ajax('+pageNum+', $('#proceedingPerPageNum'), $('#proceedingSearchType'), $('#proceedingKeyword'), '<%=request.getContextPath()%>/projectManage/getProceeding', $('.proceedingThead'),$('.proceedingProjectLi'),$('#proceedingProject-list-template'),$('#proceeding-pagination-template'),$('#proceedingPaginationBox'),'proceeding')"
+		return "javascript:search_go_ajax("+pageNum+", $('#proceedingPerPageNum'), $('#proceedingSearchType'), $('#proceedingKeyword'), '" + '<%=request.getContextPath()%>/projectManage/getProceeding' + "', $('.proceedingThead'),$('.proceedingProjectLi'),$('#proceedingProject-list-template'),$('#proceeding-pagination-template'),$('#proceedingPaginationBox'),'proceeding');"
+	},
+	"goPageEnd":function(pageNum){
+		return "javascript:search_go_ajax("+pageNum+", $('#endPerPageNum'), $('#endSearchType'), $('#endKeyword'), '" + '<%=request.getContextPath()%>/projectManage/getEnd' + "', $('.endThead'),$('.endProjectLi'),$('#endProject-list-template'),$('#end-pagination-template'),$('#endPaginationBox'),'end');"
 	}
-					
-					
 });
 </script>

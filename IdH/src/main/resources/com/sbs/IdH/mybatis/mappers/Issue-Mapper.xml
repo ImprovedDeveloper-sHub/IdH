@@ -18,6 +18,9 @@
 		<if test="searchType == 'l'.toString() ">
 			and issue_level like '%'||#{keyword}||'%'
 		</if>
+		<if test="project_number != null and project_number != 0 ">
+			and issue_project_number =  #{project_number}
+		</if>
 		<if test="member_id != null and memberStatus == 1">
 			and issue_setter_id = #{member_id}
 		</if>
@@ -28,6 +31,12 @@
 			and issue_status = #{status}
 		</if>
 	</sql>
+	
+	
+	
+	
+	
+	
 	
 	<select id="selectNotGetterIssueCount" resultType="int">
 		select count(*)

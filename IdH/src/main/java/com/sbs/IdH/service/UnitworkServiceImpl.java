@@ -99,7 +99,7 @@ public class UnitworkServiceImpl implements UnitworkService{
 		rowMap_c3.put("c", c2_list);
 		
 		ChartVO chart = new ChartVO();
-		chart.budgetColSet();
+		chart.unitworkColSet();
 		chart.rowSet(rowMap_c1);
 		chart.rowSet(rowMap_c2);
 		chart.rowSet(rowMap_c3);
@@ -137,7 +137,7 @@ public class UnitworkServiceImpl implements UnitworkService{
 		
 		
 		ChartVO chart = new ChartVO();
-		chart.budgetColSet();
+		chart.unitworkColSet();
 		chart.rowSet(rowMap_c1);
 		chart.rowSet(rowMap_c2);
 		

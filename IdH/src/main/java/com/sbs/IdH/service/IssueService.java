@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.sbs.IdH.command.SearchCriteria;
+import com.sbs.IdH.dto.ChartVO;
 import com.sbs.IdH.dto.IssueVO;
 import com.sbs.IdH.dto.Issue_AttachVO;
 
@@ -29,4 +30,12 @@ public interface IssueService {
 	Issue_AttachVO selectIssue_AttachByAno(int ano) throws SQLException;
 
 	void removeIssue_AttachByAno(int ano) throws SQLException;
+	
+	
+	//추가
+	public ChartVO selectChart(int project_number)throws Exception;
+
+	public ChartVO selectChartForComparison(int project_number, int project_number2)throws Exception;
+	
+	
 }

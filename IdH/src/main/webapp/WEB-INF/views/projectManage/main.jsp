@@ -97,7 +97,7 @@
                   <input type="text" name="keyword" id="endKeyword"
                      class="form-control float-right" placeholder="Search">
                   <div class="input-group-append">
-                  	<button type="submit" class="btn btn-default" onclick="search_go_ajax(0, $('#endPerPageNum'), $('#endSearchType'), $('#endKeyword'), '<%=request.getContextPath()%>/projectManage/getEnd', $('.endThead'),$('.endProjectLi'),$('#endProject-list-template'),$('#endPaginationBox'))">
+                  	<button type="submit" class="btn btn-default" onclick="search_go_ajax(0, $('#endPerPageNum'), $('#endSearchType'), $('#endKeyword'), '<%=request.getContextPath()%>/projectManage/getEnd', $('.endThead'),$('.endProjectLi'),$('#endProject-list-template'),$('#proceeding-end-template'),$('#endPaginationBox'),'end')">
                         <i class="fas fa-search"></i>
                      </button>
                   	
@@ -176,11 +176,11 @@
             <div class="col-4"><input type="button" class="btn btn-block btn-info btn-sm" id="budgetButton"
             onclick="ajax_print_chart('budget','1');" value="예산현황"></input>
               <input type="button" class="btn btn-block btn-info btn-sm" id="workforceButton" onclick="ajax_print_chart('workforce');" value="인력현황"></input></div>
-             <div class="col-4"> <input type="button" class="btn btn-block btn-info btn-sm"  id="scheduleButton" onclick="ajax_print_chart('schedule');" value="일정현황"></input>
+             <div class="col-4">  <input type="button" class="btn btn-block btn-info btn-sm" id="unitworkButton" onclick="ajax_print_chart('unitwork');" value="단위업무현황"></input>
               <input type="button" class="btn btn-block btn-info btn-sm" onclick="ajax_print_chart('issue');" id="issueButton" value="이슈현황"></input>   
 </div><div class="col-4"> <input type="button" class="btn btn-block btn-info btn-sm"  id="productButton" onclick="ajax_print_chart('product');" value="산출물현황"></input>
- <input type="button" class="btn btn-block btn-info btn-sm" id="unitworkButton" onclick="ajax_print_chart('unitwork');" value="단위업무현황"></input>
 
+<!-- <input type="button" class="btn btn-block btn-info btn-sm"  id="scheduleButton" onclick="ajax_print_chart('schedule');" value="일정현황"></input> -->
 </div>
           </div>
         </div>
@@ -200,7 +200,7 @@
             <div id="workforce_chart"></div>
             <div id="unitwork_chart"></div>
             <div id="budgetComparison_chart"></div>
-            <div id="scheduleComparison_chart"></div>
+           <!--  <div id="scheduleComparison_chart"></div> -->
             <div id="issueComparison_chart"></div>
             <div id="productComparison_chart"></div>
             <div id="workforceComparison_chart"></div>
@@ -293,7 +293,7 @@
   function changeButton(){
 		$('#budgetButton').val('예산비교'); $('#budgetButton').attr('onclick',"ajax_print_chart('budgetComparison')");
 		$('#workforceButton').val('인력비교');$('#workforceButton').attr('onclick',"ajax_print_chart('workforceComparison')");
-		$('#scheduleButton').val('일정비교'); $('#scheduleButton').attr('onclick',"ajax_print_chart('scheduleComparison')")
+		//$('#scheduleButton').val('일정비교'); $('#scheduleButton').attr('onclick',"ajax_print_chart('scheduleComparison')")
 		$('#issueButton').val('이슈비교');$('#issueButton').attr('onclick',"ajax_print_chart('issueComparison')");
 		$('#productButton').val('산출물비교');$('#productButton').attr('onclick',"ajax_print_chart('productComparison')");
 		$('#unitworkButton').val('단위업무비교'); $('#unitworkButton').attr('onclick',"ajax_print_chart('unitworkComparison')")
@@ -303,11 +303,12 @@
 	
 	function returnButton(){
 		$('#budgetButton').val('예산현황'); $('#budgetButton').attr('onclick',"ajax_print_chart('budget')");
-		$('#workforceButton').val('인력현황');
-		$('#scheduleButton').val('일정현황');
-		$('#issueButton').val('이슈현황');
-		$('#productButton').val('산출물현황');
-		$('#unitworkButton').val('단위업무현황');
+		$('#workforceButton').val('인력현황'); $('#workforceButton').attr('onclick',"ajax_print_chart('workforce')");
+		//$('#scheduleButton').val('일정현황'); $('#scheduleButton').attr('onclick',"ajax_print_chart('schedule')");
+		$('#issueButton').val('이슈현황'); $('#issueButton').attr('onclick',"ajax_print_chart('issue')");
+		$('#productButton').val('산출물현황'); $('#productButton').attr('onclick',"ajax_print_chart('product')");
+		$('#unitworkButton').val('단위업무현황'); $('#unitworkButton').attr('onclick',"ajax_print_chart('uniwork')");
+		
 		$('#changeButton').val('프로젝트 비교');$('#changeButton').attr('onclick',"changeButton()");
 	}
 

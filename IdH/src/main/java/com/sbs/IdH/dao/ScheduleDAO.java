@@ -2,6 +2,7 @@ package com.sbs.IdH.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.ScheduleVO;
@@ -28,4 +29,6 @@ public interface ScheduleDAO {
 	void updateSchedule(ScheduleVO schedule) throws SQLException;
 	
 	void deleteSchedule(int schedule_number) throws SQLException;
+	
+	public Map<String, Object> selectScheduleCountForChart(SearchCriteria cri) throws SQLException;
 }

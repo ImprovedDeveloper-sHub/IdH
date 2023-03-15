@@ -2,6 +2,7 @@ package com.sbs.IdH.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.WorkforceVO;
@@ -26,4 +27,6 @@ public interface WorkforceDAO {
 	void updateWorkforceForProjectEnd(WorkforceVO workforce) throws SQLException;
 	
 	void deleteWorkforce(int workforce_number) throws SQLException;
+	
+	Map<String,Object> selectWorkforceCountForChart(SearchCriteria cri)throws SQLException;
 }

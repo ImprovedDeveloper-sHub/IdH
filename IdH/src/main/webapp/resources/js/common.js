@@ -100,6 +100,8 @@ function search_go_ajax(page, perPageNum, searchType, keyword, url, target, delT
     				printProceedingPagination(data,pagenationTarget,pagiTemplatObject);
     			 }
     			if(type=='end') { 
+    				
+    			alert('end');
 				printEndPagination(data,pagenationTarget,pagiTemplatObject);
 			 }
     		}

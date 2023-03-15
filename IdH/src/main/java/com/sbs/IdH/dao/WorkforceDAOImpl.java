@@ -1,7 +1,9 @@
 package com.sbs.IdH.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -70,5 +72,14 @@ public class WorkforceDAOImpl implements WorkforceDAO{
 		session.update("Workforce-Mapper.deleteWorkforce", workforce_number);
 		
 	}
+	
+	@Override
+	public Map<String, Object> selectWorkforceCountForChart(SearchCriteria cri) throws SQLException {
+		Map<String,Object> colMap = new HashMap<String, Object>();
+		int workforce_count = session.selectOne("Workforce-Mapper.selectSearchWorkforceListCount", cri);
+		colMap.put("v",workforce_count);
+		return colMap;
+	}
+	
 
 }

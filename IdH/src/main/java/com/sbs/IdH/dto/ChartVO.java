@@ -28,7 +28,7 @@ public class ChartVO {
 	
 	
 	public void budgetColSet() {
-		colMap1.put("label","예산 내용");
+		colMap1.put("label","예산");
 		colMap1.put("type","string");
 		colMap2.put("label","예산 금액");
 		colMap2.put("type","number");
@@ -37,16 +37,16 @@ public class ChartVO {
 	}
 	
 	public void workforceColSet() {
-		colMap1.put("label","예산 내용");
+		colMap1.put("label","인력");
 		colMap1.put("type","string");
-		colMap2.put("label","예산 액");
+		colMap2.put("label","인력 숫자");
 		colMap2.put("type","number");
 		cols.add(colMap1);
 		cols.add(colMap2);
 	}
 	
 	public void unitworkColSet() {
-		colMap1.put("label","단위업무 이름");
+		colMap1.put("label","단위업무");
 		colMap1.put("type","string");
 		colMap2.put("label","개수");
 		colMap2.put("type","number");
@@ -55,14 +55,33 @@ public class ChartVO {
 	}
 	
 	public void scheduleColSet() {
-		colMap1.put("label","예산 내용");
+		colMap1.put("label","계획 일정");
 		colMap1.put("type","string");
-		colMap2.put("label","예산 액");
+		colMap2.put("label","일정 수");
+		colMap2.put("type","number");
+		cols.add(colMap1);
+		cols.add(colMap2);
+	}
+	
+	
+	public void issueColSet() {
+		colMap1.put("label","이슈");
+		colMap1.put("type","string");
+		colMap2.put("label","개수");
 		colMap2.put("type","number");
 		cols.add(colMap1);
 		cols.add(colMap2);
 	}
 
+	
+	public void productColSet() {
+		colMap1.put("label","산출물");
+		colMap1.put("type","string");
+		colMap2.put("label","개수");
+		colMap2.put("type","number");
+		cols.add(colMap1);
+		cols.add(colMap2);
+	}
 	
 	public void resultSet() {
 		result.put("cols", cols);
