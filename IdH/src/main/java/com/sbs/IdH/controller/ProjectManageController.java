@@ -408,7 +408,6 @@ public class ProjectManageController {
 	@ResponseBody
 	public ResponseEntity<Map<String,Object>> getEnd(SearchCriteria cri) throws Exception{
 		
-		
 		ResponseEntity<Map<String,Object>> entity =null;
 		HttpStatus status;
 		Map<String, Object> dataMap = null;

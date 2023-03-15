@@ -83,6 +83,7 @@ public class ProjectServiceImpl implements ProjectService {
 	public Map<String, Object> selectProceedingProject(SearchCriteria cri) throws Exception {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		cri.setStatus(1);
+		cri.setPerPageNum(5);
 		dataMap.put("proceedingProjectList", projectDAO.selectSearchProjectList(cri));
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
@@ -95,6 +96,7 @@ public class ProjectServiceImpl implements ProjectService {
 	public Map<String, Object> selectEndProject(SearchCriteria cri) throws Exception {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		cri.setStatus(2);
+		cri.setPerPageNum(5);
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(projectDAO.selectSearchProjectListCount(cri));

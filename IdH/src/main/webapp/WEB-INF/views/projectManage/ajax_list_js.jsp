@@ -26,30 +26,30 @@
 <nav class="paginationNav" aria-label="Navigation">
 		<ul class="pagination justify-content-center m-0">
 			<li class="page-item">
-				<a class="page-link" href="{{goPage 1}};">
+				<a class="page-link" href="{{goPageProceeding 1}};">
 					<i class="fas fa-angle-double-left"></i>
 				</a>
 			</li>
 			<li class="page-item">
-				<a class="page-link" href="{{#if prev}}{{goPage prevPageNum}}{{else}}{{goPage cri.page}}{{/if}}">
+				<a class="page-link" href="{{#if prev}}{{goPageProceeding prevPageNum}}{{else}}{{goPageProceeding cri.page}}{{/if}}">
 					<i class="fas fa-angle-left"></i>
 				</a>						
 			</li>
 
 			{{#each pageNum}}
 <li class="paginate_button page-item  ">
-	<a href="{{goPage this}}" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">{{this}}</a>
+	<a href="{{goPageProceeding this}}" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">{{this}}</a>
 </li>
 {{/each}}
 			
 			<li class="page-item">
-				<a class="page-link" href="{{#if next}}{{goPage nextPageNum}}{{else}}{{goPage cri.page}}{{/if}}">
+				<a class="page-link" href="{{#if next}}{{goPageProceeding nextPageNum}}{{else}}{{goPageProceeding cri.page}}{{/if}}">
 					<i class="fas fa-angle-right" ></i>
 				</a>
 			</li>
 			
 			<li class="page-item">
-				<a class="page-link" href="{{goPage realEndPage}}">
+				<a class="page-link" href="{{goPageProceeding realEndPage}}">
 					<i class="fas fa-angle-double-right"></i>
 				</a>
 			</li>	
@@ -64,30 +64,30 @@
 nav class="paginationNav" aria-label="Navigation">
 		<ul class="pagination justify-content-center m-0">
 			<li class="page-item">
-				<a class="page-link" href="{{goPage 1}};">
+				<a class="page-link" onclick="{{goPage 1}};">
 					<i class="fas fa-angle-double-left"></i>
 				</a>
 			</li>
 			<li class="page-item">
-				<a class="page-link" href="{{#if prev}}{{goPage prevPageNum}}{{else}}{{goPage cri.page}}{{/if}}">
+				<a class="page-link" onclick="{{#if prev}}{{goPage prevPageNum}}{{else}}{{goPage cri.page}}{{/if}}">
 					<i class="fas fa-angle-left"></i>
 				</a>						
 			</li>
 
 			{{#each proceeding.pageNum}}
 <li class="paginate_button page-item  ">
-	<a href="{{goPage this}}" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">{{this}}</a>
+	<a onclick="{{goPage this}}" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">{{this}}</a>
 </li>
 {{/each}}
 			
 			<li class="page-item">
-				<a class="page-link" href="{{#if next}}{{goPage nextPageNum}}{{else}}{{goPage cri.page}}{{/if}}">
+				<a class="page-link" onclick="{{#if next}}{{goPage nextPageNum}}{{else}}{{goPage cri.page}}{{/if}}">
 					<i class="fas fa-angle-right" ></i>
 				</a>
 			</li>
 			
 			<li class="page-item">
-				<a class="page-link" href="{{goPage realEndPage}}">
+				<a class="page-link" onclick="{{goPage realEndPage}}">
 					<i class="fas fa-angle-double-right"></i>
 				</a>
 			</li>	
@@ -170,9 +170,10 @@ Handlebars.registerHelper({
 						var date=dateObj.getDate();
 						return year+"/"+month+"-"+date;
 					},
-
-"goPage":function(pageNum){
-	return 'javascript:alert("test");';
-}
+	"goPageProceeding":function(pageNum){
+		return "javascript:search_go_ajax('+pageNum+', $('#proceedingPerPageNum'), $('#proceedingSearchType'), $('#proceedingKeyword'), '<%=request.getContextPath()%>/projectManage/getProceeding', $('.proceedingThead'),$('.proceedingProjectLi'),$('#proceedingProject-list-template'),$('#proceeding-pagination-template'),$('#proceedingPaginationBox'),'proceeding')"
+	}
+					
+					
 });
 </script>

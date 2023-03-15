@@ -123,18 +123,20 @@ table input {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
 <script type="text/x-handlebars-template"  id="budget-plan-list-template" >
 		<td id="title">예산계획</td>
-		<td id="content">
+		<td id="budget_content">
 		{{#each budgetList}}
-		<label><input type="checkbox" id="{{budget_number}}" value="{{budget_number}}" checked>{{budget_name}}</label>
+		<label><input type="checkbox" class="budget_checkbox" id="{{budget_number}}" value="{{budget_number}}" >{{budget_name}}</label>
 		{{/each}}
+		<label><input type="checkbox" id="budgetAll" onchange="{{selectCheckBox}}">예산 전체선택</label>
 		</td>
 </script>
 <script type="text/x-handlebars-template"  id="unitwork-plan-list-template" >
 		<td id="title">단위업무계획</td>
 		<td id="content">
 		{{#each unitworkList}}
-		<label><input type="checkbox" id="{{unitwork_number}}" value="{{unitwork_number}}" checked>{{unitwork_name}}</label>
+		<label><input type="checkbox" id="{{unitwork_number}}" value="{{unitwork_number}}" >{{unitwork_name}}</label>
 		{{/each}}
+		<label><input type="checkbox" id="budgetAll" >업무 전체선택</label>
 		</td>
 </script>
 
@@ -142,8 +144,9 @@ table input {
 		<td id="title">일정계획</td>
 		<td id="content">
 		{{#each scheduleList}}
-		<label><input type="checkbox" id="{{schedule_number}}" value="{{schedule_number}}" checked>{{schedule_name}}</label>
+		<label><input type="checkbox" id="{{schedule_number}}" value="{{schedule_number}}" >{{schedule_name}}</label>
 		{{/each}}
+		<label><input type="checkbox" id="budgetAll" >일정 전체선택</label>
 		</td>
 </script>
 
@@ -153,11 +156,15 @@ table input {
 		{{#each workforceList}}
 		<label><input type="checkbox" id="{{workforce_number}}" value="{{workforce_number}}" checked>{{workforce_name}}</label>
 		{{/each}}
+		<label><input type="checkbox" id="budgetAll"  >인력 전체선택</label>
 		</td>
 </script>
 
+<script>
 
 
+
+</script>
 <script>
 function printPlan2(data,target_budget, target_schedule, target_workforce, target_unitwork){
 	//var planTemplate=Handlebars.compile($('#budget-plan-list-template').html());

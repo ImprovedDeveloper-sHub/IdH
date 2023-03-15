@@ -12,7 +12,7 @@
 				</a>
 			</li>
 			<li class="page-item">
-				<a class="page-link" href="javascript:list_go(${proceedingPageMaker.prev ? proceedingPageMaker.startPage-1 : proceedingPageMaker.cri.page});">
+				<a class="page-link" href="javascript:list_go('${proceedingPageMaker.prev ? proceedingPageMaker.startPage-1 : proceedingPageMaker.cri.page}');">
 					<i class="fas fa-angle-left"></i>
 				</a>						
 			</li>
@@ -24,7 +24,7 @@
 			</c:forEach>
 			
 			<li class="page-item" >
-				<a class="page-link" href="javascript:list_go(${proceedingPageMaker.next ? proceedingPageMaker.endPage+1 :proceedingPageMaker.cri.page});">
+				<a class="page-link" href="javascript:list_go('${proceedingPageMaker.next ? proceedingPageMaker.endPage+1 :proceedingPageMaker.cri.page}');">
 					<i class="fas fa-angle-right" ></i>
 				</a>
 			</li>
