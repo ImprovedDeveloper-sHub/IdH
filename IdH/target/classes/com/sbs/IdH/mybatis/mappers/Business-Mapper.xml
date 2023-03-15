@@ -38,6 +38,7 @@
 			content like '%'||#{keyword}||'%'
 			)
 		</if>
+<<<<<<< HEAD
 		
 		<!-- 추가 -->
 		<if test="status != null and status != 0 ">
@@ -50,6 +51,8 @@
 		
 		
 		
+=======
+>>>>>>> refs/remotes/origin/master
 	</sql>
 	
 	<select id="selectSearchBusinessList" resultType="business">

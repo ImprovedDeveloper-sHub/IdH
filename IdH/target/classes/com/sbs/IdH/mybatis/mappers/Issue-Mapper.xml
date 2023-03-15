@@ -18,6 +18,7 @@
 		<if test="searchType == 'l'.toString() ">
 			and issue_level like '%'||#{keyword}||'%'
 		</if>
+<<<<<<< HEAD
 		<if test="member_id != null and memberStatus == 1">
 			and issue_setter_id = #{member_id}
 		</if>
@@ -25,6 +26,15 @@
 			and issue_getter_id = #{member_id}
 		</if>
 		<if test="status != null and status != 0">
+=======
+		<!-- <if test="memberId != null and memberStatus == 1">
+			and issue_setter_id = #{memberId}
+		</if>
+		<if test="memberId != null and memberStatus == 2">
+			and issue_getter_id = #{memberId}
+		</if> -->
+		<if test="status != null">
+>>>>>>> refs/remotes/origin/master
 			and issue_status = #{status}
 		</if>
 	</sql>
