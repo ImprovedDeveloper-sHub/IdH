@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 
 
@@ -194,7 +196,41 @@
 		</div>
 	</div>
 	<!-- 사업 예산 목록 끝 -->
+	
+	<!-- 사업 예산 그래프 -->
+	<div id="columnchart_material" class="col-4" style="width: 250px; height: 300px;"></div>
+	<!-- 사업 예산 그래프 끝 -->
 
 </div>
+
+
+
+<script>
+
+google.charts.load('current', {'packages':['bar']});
+google.charts.setOnLoadCallback(drawChart);
+ 
+function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+        ['Year', 'Sales', 'Expenses', 'Profit'],
+        ['2014', 1000, 400, 200],
+        ['2015', 1170, 460, 250],
+        ['2016', 660, 1120, 300],
+        ['2017', 1030, 540, 350]
+    ]);
+ 
+    var options = {
+        chart: {
+        title: 'Company Performance',
+        subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+        }
+    };
+ 
+    var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+ 
+    chart.draw(data, google.charts.Bar.convertOptions(options));
+}
+
+</script>
 
 

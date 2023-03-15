@@ -37,6 +37,7 @@ public class NoticeController {
 		mnv.addAllObjects(noticeService.getNoticeList(cri));
 
 		return mnv;
+		
 	}
 
 	/* test Notice detail Controller */
@@ -128,7 +129,7 @@ public class NoticeController {
 
 		// DB
 		NoticeVO notice = registReq.toNoticeVO();
-		String XSStitle = (String) request.getAttribute("XSStitle");
+		String XSStitle = (String) request.getAttribute("XSStitle");																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																														
 		if (XSStitle != null)
 			notice.setNotice_title(XSStitle);
 
@@ -150,7 +151,7 @@ public class NoticeController {
 		
 		mnv.addObject("notice",notice);
 		mnv.setViewName(url);
-		System.out.println(notice.getNotice_title());
+		/* System.out.println(notice.getNotice_title()); */
 		return mnv;
 		
 	}
