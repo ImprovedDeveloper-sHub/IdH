@@ -130,7 +130,7 @@
 							</tr>
 							<tr>
 								<td class="name-td">내용</td>
-								<td class="table-td" style="height: 350px;">${notice.notice_content}</td>
+								<td class="table-td" style="height: 250px;">${notice.notice_content}</td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 							</tr>
@@ -144,6 +144,11 @@
 						</tbody>
 					</table>
 				</div>
+			</div>
+			<div class="card-tools" style="margin-left:auto">
+				<button type="button" id="modifyBtn" class="btn btn-info" onclick="location.href='modifyForm?notice_number=${notice.notice_number}';">수정</button>						
+		    	<button type="button" id="removeBtn" class="btn btn-info" onclick="location.href='modifyForm?notice_number=${notice.notice_number}';">삭제</button>					   
+		    	<button type="button" id="listBtn" class="btn btn-info" onclick="location.href='main';">목록</button>
 			</div>
 		</div>
 	</div>
