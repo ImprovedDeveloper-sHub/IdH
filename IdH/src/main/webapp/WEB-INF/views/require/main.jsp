@@ -181,11 +181,10 @@
 
 			</div>
 		</div>
-		<!-- 드래그 박스 -->
+ 		<!-- 드래그 박스 -->
 		<div id='external-events'>
-			<h4>Draggable Events</h4>
 			<div id='external-events-list'></div>
-		</div>
+		</div> 
 		<!-- calendar 태그 -->
 		<div class="col-4">
 			<div id='calendar-wrap'>
@@ -218,13 +217,6 @@
 					}
 				}
 			});
-			// 드래그 아이템 추가하기
-			for (var i = 1; i <= 5; i++) {
-				var $div = $("<div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'></div>");
-				$event = $("<div class='fc-event-main'></div>").text(
-						"Event " + i);
-				$('#external-events-list').append($div.append($event));
-			}
 			// calendar element 취득
 			var calendarEl = $('#calendar1')[0];
 			// full-calendar 생성하기

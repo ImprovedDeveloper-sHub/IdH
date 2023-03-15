@@ -10,6 +10,7 @@
 	<bean id="issueDAO" class="com.sbs.IdH.dao.IssueDAOImpl" p:session-ref="sqlSession"/>
 	<bean id="minutesDAO" class="com.sbs.IdH.dao.MinutesDAOImpl" p:session-ref="sqlSession"/>
 	<bean id="workDAO" class="com.sbs.IdH.dao.WorkDAOImpl" p:session-ref="sqlSession"/>
+	<bean id="work_attachDAO" class="com.sbs.IdH.dao.Work_AttachDAOImpl" p:session-ref="sqlSession"/>
 	<bean id="issue_attachDAO" class="com.sbs.IdH.dao.Issue_AttachDAOImpl" p:session-ref="sqlSession"/>
 	
 	<bean id="issueService"
@@ -34,24 +35,6 @@
 		p:session-ref="sqlSession"
 	/>
 	<bean id="scheduleDAO" class="com.sbs.IdH.dao.ScheduleDAOImpl"
-		p:session-ref="sqlSession" />
-	
-	<bean id="projectDAO" class="com.sbs.IdH.dao.ProjectDAOImpl"
-		p:session-ref="sqlSession" />
-	
-	<bean id="unitworkDAO" class="com.sbs.IdH.dao.UnitworkDAOImpl"
-		p:session-ref="sqlSession"
-	/>
-	<bean id="menuDAO" class="com.sbs.IdH.dao.MenuDAOImpl"
-		p:session-ref="sqlSession"
-	/>
-		<bean id="requireDAO" class="com.sbs.IdH.dao.RequireDAOImpl" 
-		p:session-ref="sqlSession" />
-	<bean id="memberDAO" class="com.sbs.IdH.dao.MemberDAOImpl" 
-		p:session-ref="sqlSession" />
-	<bean id="project_authorityDAO" class="com.sbs.IdH.dao.Project_authorityDAOImpl" 
-		p:session-ref="sqlSession" />
-	<bean id="require_attachDAO" class="com.sbs.IdH.dao.Require_attachDAOImpl" 
 		p:session-ref="sqlSession" />
 	
 	
@@ -90,9 +73,32 @@
  	<bean id="project_authorityService" class="com.sbs.IdH.service.Project_authorityServiceImpl"
 		p:project_authorityDAO-ref="project_authorityDAO"
 	/>  
+	
+	<bean id="projectDAO" class="com.sbs.IdH.dao.ProjectDAOImpl"
+		p:session-ref="sqlSession" />
+	
+	<bean id="unitworkDAO" class="com.sbs.IdH.dao.UnitworkDAOImpl"
+		p:session-ref="sqlSession"
+	/>
+	<bean id="menuDAO" class="com.sbs.IdH.dao.MenuDAOImpl"
+		p:session-ref="sqlSession"
+	/>
+		<bean id="requireDAO" class="com.sbs.IdH.dao.RequireDAOImpl" 
+		p:session-ref="sqlSession" />
+	<bean id="memberDAO" class="com.sbs.IdH.dao.MemberDAOImpl" 
+		p:session-ref="sqlSession" />
+	<bean id="project_authorityDAO" class="com.sbs.IdH.dao.Project_authorityDAOImpl" 
+		p:session-ref="sqlSession" />
+	<bean id="require_attachDAO" class="com.sbs.IdH.dao.Require_attachDAOImpl" 
+		p:session-ref="sqlSession" />
+	
+	
+
 		<bean id="fileUploadPath" class="java.lang.String">
 		<constructor-arg value="${uploadPath.pds}"/>
 	</bean>
+	
+	
 	
 	<bean id="productDAO" class="com.sbs.IdH.dao.ProductDAOImpl"
 		p:session-ref="sqlSession" />

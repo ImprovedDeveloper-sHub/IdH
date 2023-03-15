@@ -14,6 +14,7 @@ import com.sbs.IdH.dao.IssueDAO;
 import com.sbs.IdH.dao.Issue_AttachDAO;
 import com.sbs.IdH.dto.IssueVO;
 import com.sbs.IdH.dto.Issue_AttachVO;
+import com.sbs.IdH.dto.MemberVO;
 
 public class IssueServiceImpl implements IssueService{
 
@@ -94,22 +95,25 @@ public class IssueServiceImpl implements IssueService{
 	}
 	
 	@Override
-	public Map<String, Object> selectMyIssueList(SearchCriteria cri,HttpServletRequest request) throws SQLException {
+	public Map<String, Object> selectMyIssueList(SearchCriteria cri, HttpServletRequest request) throws SQLException {
 		Map<String, Object> dataMap = new HashMap<String,Object>();
 		HttpSession session = request.getSession();
-		cri.setMember_id((String)session.getAttribute("loginUser"));
+		MemberVO member = (MemberVO) session.getAttribute("loginUser");
+		cri.setMember_id(member.getMember_id());
 		cri.setMemberStatus(1);
 		dataMap.put("myIssueList", issueDAO.selectSearchIssueList(cri));
 		return dataMap;
 	}
 	
 	@Override
-	public Map<String, Object> selectGetterIssueList(SearchCriteria cri,HttpServletRequest request) throws SQLException {
+	public Map<String, Object> selectGetterIssueList(SearchCriteria cri, HttpServletRequest request) throws SQLException {
 		Map<String, Object> dataMap = new HashMap<String,Object>();
 		HttpSession session = request.getSession();
-		cri.setMember_id((String)session.getAttribute("loginUser"));
+
+		MemberVO member = (MemberVO) session.getAttribute("loginUser");
+		cri.setMember_id(member.getMember_id());
 		cri.setMemberStatus(2);
-		dataMap.put("getterIssueList", issueDAO.selectSearchIssueListCount(cri));
+		dataMap.put("getterIssueList", issueDAO.selectSearchIssueList(cri));
 		return dataMap;
 	}
 

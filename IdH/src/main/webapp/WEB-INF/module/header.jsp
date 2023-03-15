@@ -134,18 +134,38 @@ nav a:hover::before {
   padding: 1.9em 4em 1.2em 1em;
   margin-left: 1px
 }
-table th{
+/* table th{
    font-size:7px;
-   padding: 0.6rem !important;
+   padding: 0.3rem !important;
 }
 table td{
    font-size:10px;
-   padding: 0.6rem !important;
+   padding: 0.3rem !important;
+} */
+
+table th{
+	font-size:10px;
+	padding:0.5rem !important;
+	
+}
+table td{
+	font-size:9px;
+	padding:0.4rem !important;
 }
 
 
 
+.card-header{
+	background-color:#16A2B8 !important;
+	
+}
 
+/* .card{
+	border:solid 2px #16A2B8 !important;
+	border-top-radius: 0.5rem;
+	border-radius: 0.25rem;
+}
+ */
 
 
 </style>

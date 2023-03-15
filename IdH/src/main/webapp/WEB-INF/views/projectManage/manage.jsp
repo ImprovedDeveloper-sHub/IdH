@@ -12,7 +12,7 @@
 
       <!--col-6시작-->
       <div class="col-6">
-      	<div id="content" class="card">
+      	<div id="content" class="card boarder-info-2">
          <div class="card-header">
             <h3 class="card-title">일정관리</h3>
          </div>

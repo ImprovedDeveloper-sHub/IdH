@@ -1,6 +1,7 @@
 package com.sbs.IdH.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class WorkVO {
 	private int work_number;
@@ -10,6 +11,32 @@ public class WorkVO {
 	private Date work_regdate;
 	private Date work_enddate;
 	private String work_member_approver;//받는사람
+	private String work_title;
+	private String work_content;
+	//private List<Work_AttachVO>attachList;
+
+	public String getWork_content() {
+		return work_content;
+	}
+
+	public void setWork_content(String work_content) {
+		this.work_content = work_content;
+	}
+
+	public String getWork_title() {
+		return work_title;
+	}
+
+	public void setWork_title(String work_title) {
+		this.work_title = work_title;
+	}
+
+	/*
+	 * public List<Work_AttachVO> getAttachList() { return attachList; }
+	 * 
+	 * public void setAttachList(List<Work_AttachVO> attachList) { this.attachList =
+	 * attachList; }
+	 */
 
 	public int getWork_number() {
 		return work_number;
@@ -70,16 +97,16 @@ public class WorkVO {
 	public WorkVO() {
 	}
 
-	public WorkVO(int work_number, int work_project_number, String work_member_id, int work_check, Date work_regdate,
-			Date work_enddate, String work_member_approver) {
-		super();
-		this.work_number = work_number;
-		this.work_project_number = work_project_number;
-		this.work_member_id = work_member_id;
-		this.work_check = work_check;
-		this.work_regdate = work_regdate;
-		this.work_enddate = work_enddate;
-		this.work_member_approver = work_member_approver;
-	}
+	/*
+	 * public WorkVO(int work_number, int work_project_number, String
+	 * work_member_id, int work_check, Date work_regdate, Date work_enddate, String
+	 * work_member_approver, String work_title, String work_content,
+	 * List<Work_AttachVO> attachList) { super(); this.work_number = work_number;
+	 * this.work_project_number = work_project_number; this.work_member_id =
+	 * work_member_id; this.work_check = work_check; this.work_regdate =
+	 * work_regdate; this.work_enddate = work_enddate; this.work_member_approver =
+	 * work_member_approver; this.work_title = work_title; this.work_content =
+	 * work_content; this.attachList = attachList; }
+	 */
 
 }

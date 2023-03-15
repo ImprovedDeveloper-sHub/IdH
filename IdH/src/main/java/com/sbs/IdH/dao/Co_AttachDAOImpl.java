@@ -6,7 +6,6 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.sbs.IdH.dto.Co_AttachVO;
-import com.sbs.IdH.dto.Product_AttachVO;
 
 public class Co_AttachDAOImpl implements Co_AttachDAO{
 

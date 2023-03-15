@@ -29,18 +29,46 @@ body{
 	 
 }
 table th{
-	font-size:12px;
+	font-size:10px;
+	padding:0.5rem !important;
+	
 }
 table td{
-	font-size:10px;
+	font-size:9px;
+	padding:0.4rem !important;
 }
 
 
+.card-header{
+	background-color:#16A2B8 !important;
+	color:white !important;
+	
+}
 
+.card{
+	border:solid 2px #16A2B8 !important;
+	border-radius: 10px !important;
+}
 
- 
+.card-title{
+	font-size:12px !important;
+}
 
+.note-btn{
+	width:1.9rem !important;
+}
 
+.note-btn>i{
+	width:1rem;
+}
+
+.note-dropzone card-header{
+	background-color:none !important;
+}
+
+td-summernote card{
+	boarder-radius:0px !important;
+}
 
 </style>
 <meta charset="utf-8">

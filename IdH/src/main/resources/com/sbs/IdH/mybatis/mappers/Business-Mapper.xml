@@ -44,7 +44,7 @@
 			and business_status =  #{status}
 		</if>
 		<if test="member_id != null ">
-			and buniness_member_id = #{member_id}
+			and business_member_id = #{member_id}
 		</if>
 		
 		

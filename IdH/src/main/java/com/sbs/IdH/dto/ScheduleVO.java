@@ -110,6 +110,7 @@ public class ScheduleVO {
 				+ schedule_name + ", schedule_regdate=" + schedule_regdate + ", schedule_enddate=" + schedule_enddate
 				+ ", schedule_startdate=" + schedule_startdate + "]";
 	}
+
 	
 	
 	
