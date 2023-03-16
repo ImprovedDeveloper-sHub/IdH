@@ -19,8 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sbs.IdH.command.SearchCriteria;
-import com.sbs.IdH.dao.BudgetDAO;
 import com.sbs.IdH.dto.BudgetVO;
+import com.sbs.IdH.dto.ProjectVO;
 import com.sbs.IdH.dto.ScheduleVO;
 import com.sbs.IdH.dto.UnitworkVO;
 import com.sbs.IdH.dto.WorkforceVO;
@@ -105,36 +105,43 @@ public class ProjectManageController {
 	}
 
 	@PostMapping("/registProject")
-	public String regist(@RequestParam HashMap<String, Object> dataMap, RedirectAttributes rttr) throws Exception {
+	public String regist(@RequestParam HashMap<String, Object> dataMap, ProjectVO project, RedirectAttributes rttr)
+			throws Exception {
 		String url = "redirect:/projectManage/manage";
 		String get_budget = dataMap.get("budgetArrayParam").toString();
 		String get_workforce = dataMap.get("workforceArrayParam").toString();
 		String get_schedule = dataMap.get("scheduleArrayParam").toString();
 		String get_unitwork = dataMap.get("unitworkArrayParam").toString();
 
-		String[] budget_array = get_budget.split(",");
-		String[] workforce_array = get_workforce.split(",");
-		String[] schedule_array = get_schedule.split(",");
-		String[] unitwork_array = get_unitwork.split(",");
+		projectService.registProject(project);
+		int project_number = project.getProject_number();
+		
+		if(get_budget != null & get_budget !="") {
+			String[] budget_array = get_budget.split(",");
+			for (String budget : budget_array) {
+				budgetService.updateBudgetForRegistProject(Integer.parseInt(budget), project_number);
+			}
+		}
+		if(get_workforce !=null & get_workforce !="") {
+			String[] workforce_array = get_workforce.split(",");
+			for (String workforce : workforce_array) {
+				workforceService.updateWorkforceForRegistProject(Integer.parseInt(workforce) ,project_number);
+			}
+		}
+		if(get_schedule !=null & get_schedule != "") {
+			String[] schedule_array = get_schedule.split(",");
+			for (String schedule : schedule_array) {
+				scheduleService.updateScheduleForRegistProject(Integer.parseInt(schedule), project_number);
+			}
+		}
+		if(get_unitwork !=null & get_unitwork !="") {
+			String[] unitwork_array = get_unitwork.split(",");
+			for (String unitwork : unitwork_array) {
+				unitworkService.updateUnitworkForRegistProject(Integer.parseInt(unitwork), project_number);
+			}
+			
+		}
 
-		System.out.println(get_budget);
-		System.out.println(get_workforce);
-		System.out.println(get_schedule);
-		System.out.println(get_unitwork);
-
-		for (String workforce : workforce_array) {
-			workforceService.updateWorkforceForRegistProject(Integer.parseInt(workforce), 1);
-		}
-		for (String budget : budget_array) {
-			budgetService.updateBudgetForRegistProject(Integer.parseInt(budget), 1);
-		}
-
-		for (String schedule : schedule_array) {
-			scheduleService.updateScheduleForRegistProject(Integer.parseInt(schedule), 1);
-		}
-		for (String unitwork : unitwork_array) {
-			unitworkService.updateUnitworkForRegistProject(Integer.parseInt(unitwork), 1);
-		}
 
 		// projectService.registProject(project);
 		return url;

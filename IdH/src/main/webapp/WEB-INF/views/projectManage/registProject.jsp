@@ -21,12 +21,12 @@ table input {
 <div class="content row">
 
 	<div class="col-8 content-list card">
-	<form enctype="multiaprt/form-data" role="form" method="post" action="registProject" name="registProjectForm">
+	<form role="form" method="post" action="registProject" name="registProjectForm">
+	<input name="project_member_id" type="hidden" value="${loginUser.member_id}">
 		<table style="width:100%;">
 			<tr id=business_tr>
 				<td id="title">사업</td>
-				<td id="content"><select class="form-control-sm" name="business_number" id="business_selector" style="hegith:30px; width:100% !important; border-color:#CED4DA !important;">
-				
+				<td id="content"><select class="form-control-sm" name="project_business_number" id="business_selector" style="hegith:30px; width:100% !important; border-color:#CED4DA !important;">
 							<option>사업선택</option>
 							<c:forEach items="${businessList }" var="business">
 								<option value="${business.business_number} ">${business.business_name } </option>
@@ -35,7 +35,7 @@ table input {
 			</tr>
 			<tr class="project_tr">
 				<td id="title">프로젝트 명</td>
-				<td id="content"><input type="text" placeholder="프로젝트 이름을 입력해주세요" /></td>
+				<td id="content"><input name="project_name" type="text" placeholder="프로젝트 이름을 입력해주세요" /></td>
 			</tr>
 			<tr id="reqiure">
 				<td id="title">요구사항</td>
@@ -59,7 +59,7 @@ table input {
 			</tr>
 			<tr>
 				<td id="title">내용</td>
-				<td id="content"><textarea id="summernote" name="summernote" rows="5" cols="40"></textarea></td>
+				<td id="content"><textarea name="project_discription" id="summernote" name="summernote" rows="5" cols="40"></textarea></td>
 			</tr>
 		</table>
 		

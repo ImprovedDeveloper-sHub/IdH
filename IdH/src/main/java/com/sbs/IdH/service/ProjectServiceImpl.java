@@ -57,6 +57,7 @@ public class ProjectServiceImpl implements ProjectService {
 	
 	@Override
 	public void registProject(ProjectVO project) throws Exception {
+		project.setProject_number(projectDAO.selectProjectSeqNext());
 		projectDAO.insertProject(project);
 	}
 

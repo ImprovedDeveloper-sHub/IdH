@@ -89,6 +89,14 @@ public class ProjectVO {
 		this.project_member_id = project_member_id;
 		this.project_discription = project_discription;
 	}
+	@Override
+	public String toString() {
+		return "ProjectVO [project_number=" + project_number + ", project_name=" + project_name + ", project_regdate="
+				+ project_regdate + ", proejct_enddate=" + proejct_enddate + ", project_status=" + project_status
+				+ ", project_require_number=" + project_require_number + ", project_business_number="
+				+ project_business_number + ", project_member_id=" + project_member_id + ", project_discription="
+				+ project_discription + "]";
+	}
 	
 	
 	
