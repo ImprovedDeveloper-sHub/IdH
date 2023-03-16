@@ -28,6 +28,6 @@
 <!-- common -->
 <script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
 
-
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/jquery-ui/jquery-ui.min.js" ></script>
 </body>
 </html>

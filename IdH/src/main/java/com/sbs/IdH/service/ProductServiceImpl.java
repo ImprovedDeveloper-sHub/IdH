@@ -53,6 +53,7 @@ public class ProductServiceImpl implements ProductService {
 	public Map<String, Object> selectProduct_CoworkList(SearchCriteria cri) throws SQLException {
 
 		cri.setStatus(3);
+		cri.setPerPageNum(10);
 		List<ProductVO> product_CoworkList = productDAO.selectProductCriteria(cri);
 		if (product_CoworkList != null)
 			for (ProductVO product : product_CoworkList)
@@ -73,6 +74,7 @@ public class ProductServiceImpl implements ProductService {
 	public Map<String, Object> selectProductEndList(SearchCriteria cri) throws SQLException {
 
 		cri.setStatus(2);
+		cri.setPerPageNum(10);
 		List<ProductVO> productEndList = productDAO.selectProductCriteria(cri);
 		if (productEndList != null)
 			for (ProductVO product : productEndList)
@@ -94,6 +96,7 @@ public class ProductServiceImpl implements ProductService {
 
 		cri.setMember_id("loginUser");
 		cri.setStatus(1);
+		cri.setPerPageNum(7);
 		List<ProductVO> productMyProceedList = productDAO.selectProductCriteria(cri);
 		if (productMyProceedList != null)
 			for (ProductVO product : productMyProceedList)
@@ -115,6 +118,7 @@ public class ProductServiceImpl implements ProductService {
 
 		cri.setMember_id("loginUser");
 		cri.setStatus(2);
+		cri.setPerPageNum(7);
 		List<ProductVO> productMyEndList = productDAO.selectProductCriteria(cri);
 		if (productMyEndList != null)
 			for (ProductVO product : productMyEndList)

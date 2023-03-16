@@ -10,11 +10,11 @@
 <div class="row">
 	<div class="content-parts col-8">
 		<div id="content" class="card">
-			<div class="card-header">
+			<div class="card-header bg-info">
 				<h3 class="card-title">산출물연계진행</h3>
 			</div>
 			<div class="card-tools"
-				style="justify-content: space-between; display: flex; flex-direction: row-reverse;">
+				style="justify-content: space-between;margin:3px; display: flex; flex-direction: row-reverse;">
 				<div class="input-group input-group-sm" style="width: 270px">
 					<select class="form-control-sm" name="searchType" id="searchType"
 						style="hegith: 30px; width: 90px !important; border-color: #CED4DA !important;">
@@ -95,7 +95,7 @@
 	<div class="col-4">
 		<div class="card card-info">
 
-			<div class="card-header">
+			<div class="card-header bg-info">
 				<h3 class="card-title">협업요청목록</h3>
 				<div class="card-tools">
 					<button type="button" class="btn btn-tool"

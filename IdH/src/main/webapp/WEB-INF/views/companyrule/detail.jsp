@@ -62,7 +62,7 @@ input {
 			</div>
 			<div id="content">
 				<div id="table-content">
-				<form enctype="multiaprt/form-data" role="form" method="post" action="regist" name="registForm">
+				<form enctype="multipart/form-data" role="form" method="post" action="regist" name="registForm">
 					<table>
 						<thead>
 							<tr>

@@ -22,6 +22,7 @@ import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.Co_AttachVO;
 import com.sbs.IdH.dto.CompanyruleVO;
 import com.sbs.IdH.service.CompanyruleService;
+import com.sbs.IdH.service.ProductService;
 import com.sbs.IdH.utils.MakeFileName;
 
 
@@ -33,12 +34,31 @@ public class CompanyruleController {
 	
 	@Resource
 	private CompanyruleService companyruleService;
+	@Resource
+	private ProductService productService;
+	
+	
+	
+	public void setCompanyruleService(CompanyruleService companyruleService) {
+		this.companyruleService = companyruleService;
+	}
+
+
+	public void setProductService(ProductService productService) {
+		this.productService = productService;
+	}
+
+
+	public void setFileUploadPath(String fileUploadPath) {
+		this.fileUploadPath = fileUploadPath;
+	}
+
 	
 	@GetMapping("/main")
 	public ModelAndView companyrule(SearchCriteria cri, ModelAndView mnv)throws Exception{
 			
              mnv.addAllObjects(companyruleService.selectCompanyruleList(cri));
-             
+             mnv.addAllObjects(productService.selectProductEndList(cri));
              return mnv;
 	}
 	
