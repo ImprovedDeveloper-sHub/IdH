@@ -74,17 +74,20 @@ function list_go(page,url){
 
 
 function search_go_ajax(page, perPageNum, searchType, keyword, url, target, delTarget, templateObject, pagiTemplatObject, pagenationTarget,type) {
-	alert('test');
+	if(type=='proceeding')proceedingPage = page;
+	if(type=='end')endPage = page;
+	
+	//alert('test');
 	var jobForm=$('#jobForm');
 	//var jobForm = document.getElementById('#jobForm');
 	jobForm.find("[name='page']").val(page);
 	jobForm.find("[name='perPageNum']").val(perPageNum.val());
 	jobForm.find("[name='searchType']").val(searchType.val());
 	jobForm.find("[name='keyword']").val(keyword.val());
-	alert(page);
+	/*alert(page);
 	alert(perPageNum.val());
 	alert(searchType.val());
-	alert(keyword.val());
+	alert(keyword.val());*/
 
 	//var formData = new FormData(jobForm);
 	
@@ -100,8 +103,6 @@ function search_go_ajax(page, perPageNum, searchType, keyword, url, target, delT
     				printProceedingPagination(data,pagenationTarget,pagiTemplatObject);
     			 }
     			if(type=='end') { 
-    				
-    			alert('end');
 				printEndPagination(data,pagenationTarget,pagiTemplatObject);
 			 }
     		}

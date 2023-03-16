@@ -19,8 +19,10 @@
 			<c:forEach var="endPageNum" begin="${endPageMaker.startPage }" end="${endPageMaker.endPage }" >
 	
 			<li class="page-item ${endPageMaker.cri.page == endPageNum?'active':''}">
-				<a class="page-link" href="javascript:list_go('${endPageNum}');" >${endPageNum }</a>
+				<a class="page-link" href="javascript:search_go_ajax('${endPageNum}', $('#endPerPageNum'), $('#endSearchType'), $('#endKeyword'), '<%=request.getContextPath()%>/projectManage/getEnd', $('.endThead'),$('.endProjectLi'),$('#endProject-list-template'),$('#end-pagination-template'),$('#endPaginationBox'),'end');" >${endPageNum }</a>
 			</li>
+			
+			
 			</c:forEach>
 			
 			<li class="page-item" >

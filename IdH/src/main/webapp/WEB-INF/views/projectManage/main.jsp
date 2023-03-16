@@ -164,24 +164,25 @@
       
        <div class="card ">
           <div class="card-body row">
-            <div class="col-6"><button type="button" class="btn btn-block btn-info btn-sm">프로젝트 계획</button>
-              </div>
-             <div class="col-6"> <input id="changeButton" type="button" class="btn btn-block btn-info btn-sm" onclick="changeButton()" value="프로젝트 비교"></input>
+           <div class="col-4"> <input id="" type="button" class="btn btn-info btn-sm" onclick="" value="프로젝트 계획"></input>
+</div>
+               <div class="col-4"> <input id="changeButton" type="button" class="btn btn-info btn-sm" onclick="returnButton()" value="프로젝트 현황"></input>
+</div>
+             <div class="col-4"> <input id="changeButton" type="button" class="btn btn-info btn-sm" onclick="changeButton()" value="프로젝트 비교"></input>
 </div>
           </div>
         </div>
       
 		<div class="card ">
-          <div class="card-body row">
-            <div class="col-4"><input type="button" class="btn btn-block btn-info btn-sm" id="budgetButton"
+          <div class="card-small-body row">
+            <input type="button" class="btn  btn-info btn-sm" id="budgetButton"
             onclick="ajax_print_chart('budget','1');" value="예산현황"></input>
-              <input type="button" class="btn btn-block btn-info btn-sm" id="workforceButton" onclick="ajax_print_chart('workforce');" value="인력현황"></input></div>
-             <div class="col-4">  <input type="button" class="btn btn-block btn-info btn-sm" id="unitworkButton" onclick="ajax_print_chart('unitwork');" value="단위업무현황"></input>
-              <input type="button" class="btn btn-block btn-info btn-sm" onclick="ajax_print_chart('issue');" id="issueButton" value="이슈현황"></input>   
-</div><div class="col-4"> <input type="button" class="btn btn-block btn-info btn-sm"  id="productButton" onclick="ajax_print_chart('product');" value="산출물현황"></input>
+              <input type="button" class="btn  btn-info btn-sm" id="workforceButton" onclick="ajax_print_chart('workforce');" value="인력현황"></input>
+               <input type="button" class="btn  btn-info btn-sm" id="unitworkButton" onclick="ajax_print_chart('unitwork');" value="단위업무현황"></input>
+              <input type="button" class="btn  btn-info btn-sm" onclick="ajax_print_chart('issue');" id="issueButton" value="이슈현황"></input>   
+				<input type="button" class="btn  btn-info btn-sm"  id="productButton" onclick="ajax_print_chart('product');" value="산출물현황"></input>
 
 <!-- <input type="button" class="btn btn-block btn-info btn-sm"  id="scheduleButton" onclick="ajax_print_chart('schedule');" value="일정현황"></input> -->
-</div>
           </div>
         </div>
         
@@ -291,13 +292,18 @@
   <script>
   
   function changeButton(){
-		$('#budgetButton').val('예산비교'); $('#budgetButton').attr('onclick',"ajax_print_chart('budgetComparison')");
-		$('#workforceButton').val('인력비교');$('#workforceButton').attr('onclick',"ajax_print_chart('workforceComparison')");
+	  $('#budgetButton').val('예산비교'); $('#workforceButton').val('인력비교');
+	  $('#workforceButton').val('인력비교');$('#productButton').val('산출물비교');
+	  $('#unitworkButton').val('단위업무비교'); $('#changeButton').val('프로젝트 현황');
+	  
+	  
+	  	$('#budgetButton').attr('onclick',"ajax_print_chart('budgetComparison')");
+		$('#workforceButton').attr('onclick',"ajax_print_chart('workforceComparison')");
 		//$('#scheduleButton').val('일정비교'); $('#scheduleButton').attr('onclick',"ajax_print_chart('scheduleComparison')")
-		$('#issueButton').val('이슈비교');$('#issueButton').attr('onclick',"ajax_print_chart('issueComparison')");
-		$('#productButton').val('산출물비교');$('#productButton').attr('onclick',"ajax_print_chart('productComparison')");
-		$('#unitworkButton').val('단위업무비교'); $('#unitworkButton').attr('onclick',"ajax_print_chart('unitworkComparison')")
-		$('#changeButton').val('프로젝트 현황');$('#changeButton').attr('onclick',"returnButton()");
+		S$('#issueButton').attr('onclick',"ajax_print_chart('issueComparison')");
+		$('#productButton').attr('onclick',"ajax_print_chart('productComparison')");
+		 $('#unitworkButton').attr('onclick',"ajax_print_chart('unitworkComparison')")
+		$('#changeButton').attr('onclick',"returnButton()");
 	}
 
 	
@@ -309,7 +315,7 @@
 		$('#productButton').val('산출물현황'); $('#productButton').attr('onclick',"ajax_print_chart('product')");
 		$('#unitworkButton').val('단위업무현황'); $('#unitworkButton').attr('onclick',"ajax_print_chart('uniwork')");
 		
-		$('#changeButton').val('프로젝트 비교');$('#changeButton').attr('onclick',"changeButton()");
+		/* $('#changeButton').val('프로젝트 비교');$('#changeButton').attr('onclick',"changeButton()"); */
 	}
 
 	function setProjectNum(setNum){

@@ -37,7 +37,7 @@
 			</li>
 
 			{{#each pageNum}}
-<li class="paginate_button page-item  ">
+<li class="paginate_button page-item {{signActiveProceeding this}} ">
 	<a href="{{goPageProceeding this}}" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">{{this}}</a>
 </li>
 {{/each}}
@@ -76,7 +76,7 @@
 			</li>
 
 			{{#each pageNum}}
-<li class="paginate_button page-item  ">
+<li class="paginate_button page-item {{signActiveEnd this}} ">
 	<a href="{{goPageEnd this}}" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">{{this}}</a>
 </li>
 {{/each}}
@@ -120,6 +120,11 @@
 </script>
 
 <script>
+var proceedingPage=1;
+var endPage=1;
+
+
+
 function printData(data,target,delTarget, templateObject){
 	var template=Handlebars.compile(templateObject.html());
 	//alert(JSON.stringify(data));
@@ -140,7 +145,8 @@ function printProceedingPagination(data,target, templateObject){
 	data.proceedingPageMaker.nextPageNum=data.proceedingPageMaker.endPage+1;
 	var template=Handlebars.compile(templateObject.html());	
 	var html = template(data.proceedingPageMaker);
-	alert(html);
+	
+	//alert(html);
 	//alert(html);
 	target.html("").html(html);
 	//target.remove();
@@ -160,7 +166,7 @@ function printEndPagination(data,target, templateObject){
 	data.endPageMaker.nextPageNum=data.endPageMaker.endPage+1;
 	var template=Handlebars.compile(templateObject.html());	
 	var html = template(data.endPageMaker);
-	alert(html);
+	//alert(html);
 	target.html("").html(html);
 }
 
@@ -177,6 +183,13 @@ Handlebars.registerHelper({
 	},
 	"goPageEnd":function(pageNum){
 		return "javascript:search_go_ajax("+pageNum+", $('#endPerPageNum'), $('#endSearchType'), $('#endKeyword'), '" + '<%=request.getContextPath()%>/projectManage/getEnd' + "', $('.endThead'),$('.endProjectLi'),$('#endProject-list-template'),$('#end-pagination-template'),$('#endPaginationBox'),'end');"
-	}
+	},
+	"signActiveProceeding":function(pageNum){
+		if(pageNum == proceedingPage) return 'active';
+	},
+	"signActiveEnd":function(pageNum){
+		if(pageNum == endPage) return 'active';
+	},
+	
 });
 </script>
