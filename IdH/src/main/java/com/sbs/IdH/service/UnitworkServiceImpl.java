@@ -10,6 +10,7 @@ import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.ProjectDAO;
 import com.sbs.IdH.dao.UnitworkDAO;
 import com.sbs.IdH.dto.ChartVO;
+import com.sbs.IdH.dto.ScheduleVO;
 import com.sbs.IdH.dto.UnitworkVO;
 
 public class UnitworkServiceImpl implements UnitworkService{
@@ -31,6 +32,13 @@ public class UnitworkServiceImpl implements UnitworkService{
 	public void registUnitwork(UnitworkVO unitwork) throws Exception {
 		unitworkDAO.insertUnitwork(unitwork);
 	}
+	
+	@Override
+	public void registUnitworkPlan(UnitworkVO unitwork) throws Exception {
+		unitwork.setUnitwork_status(1);
+		unitworkDAO.insertUnitwork(unitwork);
+	}
+	
 
 	@Override
 	public void modifyUnitwork(UnitworkVO unitwork) throws Exception {
@@ -48,6 +56,20 @@ public class UnitworkServiceImpl implements UnitworkService{
 		return unitworkDAO.selectUnitwork(unitwork_number);
 	}
 
+	
+	@Override
+	public void updateUnitworkForRegistProject(int unitwork_number, int project_number) throws Exception {
+		//1. 계획에 프로젝트 번호를 넣어준다.
+		UnitworkVO unitwork = unitworkDAO.selectUnitwork(unitwork_number);
+		unitwork.setUnitwork_project_number(project_number);
+		unitworkDAO.updateUnitworkForRegistProject(unitwork);
+		//2. 실제 프로젝트 진행중에 사용할 현황을 위한 단위업무를 등록한다.
+		unitwork.setUnitwork_number(unitworkDAO.selectUnitworkSeqNext());
+		unitwork.setUnitwork_status(2);
+		unitworkDAO.insertUnitwork(unitwork);
+	}
+	
+	
 	@Override
 	public Map<String, Object> selectUnitworkList(SearchCriteria cri) throws Exception {
 		Map<String, Object> dataMap = new HashMap<String,Object>();

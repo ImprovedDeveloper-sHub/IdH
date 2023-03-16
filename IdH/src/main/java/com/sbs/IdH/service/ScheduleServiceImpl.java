@@ -47,5 +47,16 @@ public class ScheduleServiceImpl implements ScheduleService{
 		dataMap.put("scheduleList", scheduleDAO.selectSearchScheduleList(cri));
 		return dataMap;
 	}
+	
+	@Override
+	public void updateScheduleForRegistProject(int schedule_number, int project_number) throws Exception {
+		ScheduleVO schedule = scheduleDAO.selectSchedule(schedule_number);
+		schedule.setSchedule_project_number(project_number);
+		scheduleDAO.updateScheduleForRegistProject(schedule);
+		//2. 실제 프로젝트 진행중에 사용할 현황을 위한 단위업무를 등록한다.
+		schedule.setSchedule_number(scheduleDAO.selectScheduleSeqNext());
+		schedule.setSchedule_status(2);
+		scheduleDAO.insertSchedule(schedule);
+	}
 
 }

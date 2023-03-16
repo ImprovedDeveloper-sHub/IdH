@@ -60,10 +60,6 @@ public class BudgetDAOImpl implements BudgetDAO{
 		session.update("Budget-Mapper.updateBudget", budget);
 	}
 	
-	@Override
-	public void updateBudgetForProjectStart(BudgetVO budget) throws SQLException {
-		session.update("Budget-Mapper.updateBudgetForProjectStart", budget);		
-	}
 
 	@Override
 	public void updateBudgetForProjectEnd(BudgetVO budget) throws SQLException {
@@ -85,7 +81,10 @@ public class BudgetDAOImpl implements BudgetDAO{
 		return colMap;
 	}
 
-	
+	@Override
+	public void updateBudgetForRegistProject(BudgetVO budget) throws SQLException {
+		session.update("Budget-Mapper.updateBudgetPlanForProjectStart", budget);
+	}
 	
 	
 	

@@ -17,5 +17,6 @@ public interface ScheduleService {
 	public Map<String,Object> selectScheduleList(SearchCriteria cri) throws Exception;
 
 	void modifySchedule(ScheduleVO schedule) throws Exception;
-	
+
+	void updateScheduleForRegistProject(int schedule_number, int project_number)throws Exception;
 }

@@ -26,5 +26,5 @@ public interface BudgetService {
 
 	public ChartVO selectChartForComparison(int project_number, int project_number2)throws Exception;
 
-
+	public void updateBudgetForRegistProject(int budget_number , int project_number)throws Exception;
 }

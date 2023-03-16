@@ -11,6 +11,8 @@ public interface UnitworkService {
 	
 	public void registUnitwork(UnitworkVO unitwork) throws Exception;
 	
+	public void registUnitworkPlan(UnitworkVO unitwork) throws Exception;
+	
 	public void modifyUnitwork(UnitworkVO unitwork) throws Exception;
 	
 	public void removeUnitwork(int unitwork_number) throws Exception;
@@ -22,4 +24,7 @@ public interface UnitworkService {
 	public ChartVO selectChart(int project_number) throws Exception;
 	
 	public ChartVO selectChartForComparison(int project_number1, int project_number2) throws Exception;
+	
+	public void updateUnitworkForRegistProject(int unitwork_number, int project_number)throws Exception;
+
 }

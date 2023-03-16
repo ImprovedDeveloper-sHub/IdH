@@ -21,7 +21,7 @@ table input {
 <div class="content row">
 
 	<div class="col-8 content-list card">
-	<form enctype="multiaprt/form-data" role="form" method="post" action="registProject" name="registSchdeulForm">
+	<form enctype="multiaprt/form-data" role="form" method="post" action="registProject" name="registProjectForm">
 		<table style="width:100%;">
 			<tr id=business_tr>
 				<td id="title">사업</td>
@@ -63,11 +63,16 @@ table input {
 			</tr>
 		</table>
 		
+			 <input type="hidden" id=budgetparam name="budgetArrayParam">
+			 <input type="hidden" id=unitworkparam name="unitworkArrayParam">
+			 <input type="hidden" id=workforceparam name="workforceArrayParam">
+			 <input type="hidden" id=scheduleparam name="scheduleArrayParam">
+			 
 			 
                </form>
                <div class="card-tool">
             <button type="button" id="regbtn" class="btn btn-info"
-               onclick="regist_go();">등록</button>
+               onclick="regist_project_go();">등록</button>
                   <button type="button" id="regbtn" class="btn btn-info"
                onclick="location.reload()">재작성</button>
               </div>
@@ -82,6 +87,53 @@ table input {
 		
 	</div>
 	
+<script>
+
+function regist_project_go(){
+	//var form = $('form[name="registSchdeulForm"]')[0];
+	var budgetArray = new Array();
+	$('input:checkbox[name=budget]:checked').each(function(){
+		budgetArray.push(this.value);
+	})
+	$('#budgetparam').val(budgetArray);
+	
+	var scheduleArray = new Array();
+	$('input:checkbox[name=schedule]:checked').each(function(){
+		scheduleArray.push(this.value);
+	})
+	$('#scheduleparam').val(scheduleArray);
+	
+	var unitworkArray = new Array();
+	$('input:checkbox[name=unitwork]:checked').each(function(){
+		unitworkArray.push(this.value);
+		//alert(this.value);
+	})
+	$('#unitworkparam').val(unitworkArray);
+	
+
+	var workforceArray = new Array();
+	$('input:checkbox[name=workforce]:checked').each(function(){
+		workforceArray.push(this.value);
+		//alert(this.value);
+	})
+	$('#workforceparam').val(workforceArray);
+	
+
+	
+	
+	var form = document.registProjectForm;
+		if(form.title.value==""){
+			alert("제목은 필수입니다.");
+			return;
+		}
+		
+		form.submit();
+	
+	}
+
+
+</script>
+
 
 
 <script>
@@ -112,7 +164,7 @@ table input {
 				//printPlan(data,$('#budgetPlan'),$('#schedluePlan'),$('#workforcePlan'),$('#unitworkPlan'));
 				printPlan(data,$('#budgetPlan'),$('#budget-plan-list-template'));
 				printPlan(data,$('#schedulePlan'),$('#schedule-plan-list-template'));
-				//printPlan(data,$('#workforcePlan'),$('#workforce-plan-list-template'));
+				printPlan(data,$('#workforcePlan'),$('#workforce-plan-list-template'));
 				printPlan(data,$('#unitworkPlan'),$('#unitwork-plan-list-template'));
 			}
 		});	
@@ -124,39 +176,39 @@ table input {
 <script type="text/x-handlebars-template"  id="budget-plan-list-template" >
 		<td id="title">예산계획</td>
 		<td id="budget_content">
-		{{#each budgetList}}
-		<label><input type="checkbox" class="budget_checkbox" id="{{budget_number}}" value="{{budget_number}}" >{{budget_name}}</label>
-		{{/each}}
 		<label><input type="checkbox" id="budgetAll" onchange="{{selectCheckBox}}">예산 전체선택</label>
+		{{#each budgetList}}
+		<label><input name="budget" type="checkbox" class="budget_checkbox" id="{{budget_number}}" value="{{budget_number}}" >{{budget_name}}</label>
+		{{/each}}
 		</td>
 </script>
 <script type="text/x-handlebars-template"  id="unitwork-plan-list-template" >
 		<td id="title">단위업무계획</td>
 		<td id="content">
+		<label><input type="checkbox" id="budgetAll" onchange="{{selectCheckBox}}">업무 전체선택</label>
 		{{#each unitworkList}}
-		<label><input type="checkbox" id="{{unitwork_number}}" value="{{unitwork_number}}" >{{unitwork_name}}</label>
+		<label><input name="unitwork" type="checkbox" id="{{unitwork_number}}" value="{{unitwork_number}}" >{{unitwork_name}}</label>
 		{{/each}}
-		<label><input type="checkbox" id="budgetAll" >업무 전체선택</label>
 		</td>
 </script>
 
 <script type="text/x-handlebars-template"  id="schedule-plan-list-template" >
 		<td id="title">일정계획</td>
 		<td id="content">
-		{{#each scheduleList}}
-		<label><input type="checkbox" id="{{schedule_number}}" value="{{schedule_number}}" >{{schedule_name}}</label>
-		{{/each}}
 		<label><input type="checkbox" id="budgetAll" >일정 전체선택</label>
+		{{#each scheduleList}}
+		<label><input name="schedule" type="checkbox" id="{{schedule_number}}" value="{{schedule_number}}" >{{schedule_name}}</label>
+		{{/each}}
 		</td>
 </script>
 
 <script type="text/x-handlebars-template"  id="workforce-plan-list-template" >
 		<td id="title">인력계획</td>
 		<td id="content">
-		{{#each workforceList}}
-		<label><input type="checkbox" id="{{workforce_number}}" value="{{workforce_number}}" checked>{{workforce_name}}</label>
-		{{/each}}
 		<label><input type="checkbox" id="budgetAll"  >인력 전체선택</label>
+		{{#each workforceList}}
+		<label><input name="workforce" type="checkbox" id="{{workforce_number}}" value="{{workforce_number}}">{{workforce_name}}</label>
+		{{/each}}
 		</td>
 </script>
 

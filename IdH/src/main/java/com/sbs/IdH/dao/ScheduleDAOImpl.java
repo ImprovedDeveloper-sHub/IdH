@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.ScheduleVO;
+import com.sbs.IdH.dto.UnitworkVO;
 
 public class ScheduleDAOImpl implements ScheduleDAO{
 
@@ -56,8 +57,9 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 	}
 
 	@Override
-	public void updateScheduleForProjectStart(ScheduleVO schdule) throws SQLException {
-		session.update("Schedule-Mapper.updateScheduleForProjectStart", schdule);		
+	public void updateScheduleForRegistProject(ScheduleVO schdule) throws SQLException {
+		session.update("Schedule-Mapper.updateSchedulePlanForProjectStart", schdule);		
+		
 	}
 
 	@Override

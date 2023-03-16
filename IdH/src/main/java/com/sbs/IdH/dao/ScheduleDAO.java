@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.ScheduleVO;
+import com.sbs.IdH.dto.UnitworkVO;
 
 public interface ScheduleDAO {
 
@@ -22,7 +23,7 @@ public interface ScheduleDAO {
 
 	void insertSchedule(ScheduleVO schedule) throws SQLException;
 
-	void updateScheduleForProjectStart(ScheduleVO schedule) throws SQLException;
+	void updateScheduleForRegistProject(ScheduleVO schedule) throws SQLException;
 
 	void updateScheduleForProjectEnd(ScheduleVO schedule) throws SQLException;
 	

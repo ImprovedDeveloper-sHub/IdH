@@ -6,7 +6,6 @@
        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
         <!--   <script>alert('${test}');</script> -->
-          
  <div class= "content">
     <div class="row">
 
@@ -15,6 +14,8 @@
       	<div id="content" class="card">
          <div class="card-header">
             <h3 class="card-title">진행 프로젝트</h3>
+         </div>
+         <div id="test">
          </div>
             <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse;">
                <div class="input-group input-group-sm" style="width: 270px">

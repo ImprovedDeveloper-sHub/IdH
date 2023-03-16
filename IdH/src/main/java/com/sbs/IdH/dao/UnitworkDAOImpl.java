@@ -56,8 +56,8 @@ public class UnitworkDAOImpl implements UnitworkDAO{
 	}
 
 	@Override
-	public void updateUnitworkForProjectStart(UnitworkVO unitwork) throws SQLException {
-		session.update("Unitwork-Mapper.updateUnitworkForProjectStart", unitwork);		
+	public void updateUnitworkForRegistProject(UnitworkVO unitwork) throws SQLException {
+		session.update("Unitwork-Mapper.updateUnitworkPlanForProjectStart", unitwork);		
 	}
 
 	@Override

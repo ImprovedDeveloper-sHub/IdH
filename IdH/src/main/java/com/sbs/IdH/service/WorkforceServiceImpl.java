@@ -10,6 +10,8 @@ import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.ProjectDAO;
 import com.sbs.IdH.dao.WorkforceDAO;
 import com.sbs.IdH.dto.ChartVO;
+import com.sbs.IdH.dto.ScheduleVO;
+import com.sbs.IdH.dto.UnitworkVO;
 import com.sbs.IdH.dto.WorkforceVO;
 
 public class WorkforceServiceImpl implements WorkforceService {
@@ -45,6 +47,20 @@ public class WorkforceServiceImpl implements WorkforceService {
 		return workforceDAO.selectWorkforce(workforce_number);
 	}
 
+	
+	
+	@Override
+	public void updateWorkforceForRegistProject(int workforce_number, int project_number) throws Exception {
+		//1. 계획에 프로젝트 번호를 넣어준다.
+				WorkforceVO workforce = workforceDAO.selectWorkforce(workforce_number);
+				workforce.setWorkforce_project_number(project_number);
+				workforceDAO.updateWorkforceForRegistProject(workforce);
+				//2. 실제 프로젝트 진행중에 사용할 현황을 위한 단위업무를 등록한다.
+				workforce.setWorkforce_number(workforceDAO.selectWorkforceSeqNext());
+				workforce.setWorkforce_status(2);
+				workforceDAO.insertWorkforce(workforce);
+	}
+	
 	@Override
 	public Map<String, Object> selectWorkforceList(SearchCriteria cri) throws Exception {
 		Map<String, Object> dataMap = new HashMap<String, Object>();

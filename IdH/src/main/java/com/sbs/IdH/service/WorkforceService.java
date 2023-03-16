@@ -23,4 +23,6 @@ public interface WorkforceService {
 	public ChartVO selectChart(int project_number)throws Exception;
 
 	public ChartVO selectChartForComparison(int project_number, int project_number2)throws Exception;
+	
+	public void updateWorkforceForRegistProject(int workforce_number, int project_number)  throws Exception;
 }

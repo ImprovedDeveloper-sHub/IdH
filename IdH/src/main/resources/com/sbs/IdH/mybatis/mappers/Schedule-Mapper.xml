@@ -69,13 +69,13 @@
 	<update id="insertSchedule" parameterType="schedule">
 		insert 
 		into 
-		schedule(schedule_number,schedule_name,schedule_status,schedule_detail,schedule_member_id,schedule_regdate,schedule_startdate,schedule_enddate)
-		values(#{schedule_number},#{schedule_name},0,#{schedule_detail},#{schedule_member_id},sysdate,#{schedule_startdate},#{schedule_enddate})
+		schedule(schedule_number,schedule_name,schedule_status,schedule_detail,schedule_member_id,schedule_project_number,schedule_regdate,schedule_startdate,schedule_enddate)
+		values(#{schedule_number},#{schedule_name},0,#{schedule_detail},#{schedule_member_id},#{schedule_project_number},sysdate,#{schedule_startdate},#{schedule_enddate})
 	</update>
 	
-	<update id="updateScheduleForProjectStart" parameterType="schedule">
+	<update id="updateSchedulePlanForProjectStart" parameterType="schedule">
 		update schedule 
-		set schedule_project_number=#{schedule_project_number}, schedule_status=1
+		set schedule_project_number=#{schedule_project_number}
 		where schedule_number=#{schedule_number}
 	</update>
 	

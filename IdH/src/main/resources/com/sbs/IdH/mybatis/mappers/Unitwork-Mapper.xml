@@ -68,8 +68,8 @@
 	<update id="insertUnitwork" parameterType="unitwork">
 		insert 
 		into 
-		unitwork(unitwork_number,unitwork_name,unitwork_status,unitwork_check,unitwork_detail,unitwork_project_number,unitwork_member_id,unitwork_regdate,unitwork_enddate)
-		values(#{unitwork_number},#{unitwork_name},0,#{unitwork_check},#{unitwork_detail},#{unitwork_project_number},#{unitwork_member_id},#{unitwork_regdate},#{unitwork_enddate})
+		unitwork(unitwork_number,unitwork_name,unitwork_status,unitwork_level,unitwork_detail,unitwork_project_number,unitwork_setter_id,unitwork_getter_id,unitwork_regdate,unitwork_startdate,unitwork_enddate)
+		values(#{unitwork_number},#{unitwork_name},#{unitwork_status},#{unitwork_level},#{unitwork_detail},#{unitwork_project_number},#{unitwork_setter_id},#{unitwork_getter_id},#{unitwork_regdate},#{unitwork_startdate},#{unitwork_enddate})
 	</update>
 	
 	<update id="updateUnitwork" parameterType="unitwork">
@@ -79,9 +79,9 @@
 	</update>
 	
 	
-	<update id="updateUnitworkForProjectStart" parameterType="unitwork">
+	<update id="updateUnitworkPlanForProjectStart" parameterType="unitwork">
 		update unitwork 
-		set unitwork_project_number=#{unitwork_project_number}, unitwork_status=1
+		set unitwork_project_number=#{unitwork_project_number}
 		where unitwork_number=#{unitwork_number}
 	</update>
 	

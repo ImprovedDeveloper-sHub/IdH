@@ -56,10 +56,10 @@ public class WorkforceDAOImpl implements WorkforceDAO{
 	}
 
 	@Override
-	public void updateWorkforceForProjectStart(WorkforceVO workforce) throws SQLException {
-		session.update("Workforce-Mapper.updateWorkforceForProjectStart", workforce);		
+	public void updateWorkforceForRegistProject(WorkforceVO workforce) throws SQLException {
+		session.update("Workforce-Mapper.updateWorkforcePlanForProjectStart", workforce);		
+		
 	}
-
 	@Override
 	public void updateWorkforceForProjectEnd(WorkforceVO workforce) throws SQLException {
 		session.update("Workforce-Mapper.updateWorkforceForProjectEnd", workforce);
