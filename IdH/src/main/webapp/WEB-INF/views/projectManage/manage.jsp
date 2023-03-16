@@ -126,7 +126,7 @@
 			                  <td>${budget.budget_project_name}</td>
 			                  <td>${budget.budget_name}</td>
 			                  <td>${budget.budget_type}</td>
-			                  <td>${budget.budget_price}</td>
+			                  <td><fmt:formatNumber value="${budget.budget_price}" pattern="#,###"/></td>
 			                  <td> ${budget.budget_detail}</td>
 	                </tr>
 				</c:forEach>
@@ -243,7 +243,8 @@
                   <thead class="unitworkThead" class="text-left">
 	                <tr >
 	                  <th style="width:20%">업무명</th>
-	                  <th style="width:30%">상태</th>
+	                  <th style="width:15%">상태</th>
+	                  <th style="width:15%">작성자</th>
 	                  <th style="width:20%">시작날짜</th>
 	                  <th style="width:15%">종료날짜</th>
 	                  <th style="width:15%">설명</th>
@@ -258,6 +259,7 @@
 					 <tr onclick="OpenWindow('unitworkDetail?unitwork_number=${unitwork.unitwork_number}','단위업무',580,800);">
 			                  <td>${unitwork.unitwork_name}</td>
 			                  <td>${unitwork.unitwork_level}</td>
+			                  <td>${unitwork.unitwork_setter_id}</td>
 			                  <td><fmt:formatDate pattern="yyyy-MM-dd" value="${unitwork.unitwork_startdate}"/></td>
 			                  <td><fmt:formatDate pattern="yyyy-MM-dd" value="${unitwork.unitwork_enddate}"/></td>
 			                  <td>${unitwork.unitwork_detail}</td>

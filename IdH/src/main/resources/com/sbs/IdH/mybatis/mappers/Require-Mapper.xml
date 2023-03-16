@@ -38,6 +38,9 @@
 			require_detail like '%'||#{keyword}||'%'						
 			)			
 		</if>
+		
+		
+		
 	</sql>
 	
 	<select id="selectSearchRequireList" resultType="require">

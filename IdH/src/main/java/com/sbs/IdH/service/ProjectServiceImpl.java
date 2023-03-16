@@ -9,22 +9,27 @@ import com.sbs.IdH.command.PageMaker;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.BudgetDAO;
 import com.sbs.IdH.dao.ProjectDAO;
+import com.sbs.IdH.dao.RequireDAO;
 import com.sbs.IdH.dao.ScheduleDAO;
 import com.sbs.IdH.dao.UnitworkDAO;
 import com.sbs.IdH.dao.WorkforceDAO;
 import com.sbs.IdH.dto.BudgetVO;
 import com.sbs.IdH.dto.ProjectVO;
+import com.sbs.IdH.dto.RequireVO;
 import com.sbs.IdH.dto.ScheduleVO;
 import com.sbs.IdH.dto.UnitworkVO;
+import com.sbs.IdH.dto.WorkforceVO;
 
 public class ProjectServiceImpl implements ProjectService {
 
-	ProjectDAO projectDAO;
-	BudgetDAO budgetDAO;
-	UnitworkDAO unitworkDAO;
-	WorkforceDAO workforceDAO;
-	ScheduleDAO scheduleDAO;
-
+	private ProjectDAO projectDAO;
+	private BudgetDAO budgetDAO;
+	private UnitworkDAO unitworkDAO;
+	private WorkforceDAO workforceDAO;
+	private ScheduleDAO scheduleDAO;
+	private RequireDAO requireDAO;
+	
+	
 	public void setProjectDAO(ProjectDAO projectDAO) {
 		this.projectDAO = projectDAO;
 	}
@@ -45,6 +50,11 @@ public class ProjectServiceImpl implements ProjectService {
 		this.scheduleDAO = scheduleDAO;
 	}
 
+	
+	public void setRequireDAO(RequireDAO requireDAO) {
+		this.requireDAO = requireDAO;
+	}
+	
 	@Override
 	public void registProject(ProjectVO project) throws Exception {
 		projectDAO.insertProject(project);
@@ -146,14 +156,18 @@ public class ProjectServiceImpl implements ProjectService {
 		cri.setBusiness_number(business_number);
 		cri.setStatus(1);
 		Map<String, Object> dataMap = new HashMap<String, Object>();
+		
 		List<UnitworkVO> unitworkList = unitworkDAO.selectSearchUnitworkList(cri);
 		List<ScheduleVO> scheduleList = scheduleDAO.selectSearchScheduleList(cri);
 		List<BudgetVO> budgetList = budgetDAO.selectSearchBudgetList(cri);
-
-
+		List<WorkforceVO> workforceList = workforceDAO.selectSearchWorkforceList(cri);
+		//List<RequireVO> requireList = requireDAO.selectSearchRequireList(cri);
+		
 		dataMap.put("budgetList", budgetList);
 		dataMap.put("unitworkList", unitworkList);
 		dataMap.put("scheduleList", scheduleList);
+		dataMap.put("workforceList", workforceList);
+		//dataMap.put("requireList", requireList);
 		// dataMap.put("workforceList", workforceDAO.selectSearchWorkforceList(cri));
 		return dataMap;
 	}

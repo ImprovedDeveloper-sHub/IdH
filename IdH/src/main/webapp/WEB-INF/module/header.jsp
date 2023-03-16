@@ -149,6 +149,10 @@ table td{
    padding: 0.3rem !important;
 } */
 
+card-small-body{
+	padding:5px;
+}
+
 table th{
 	font-size:10px;
 	padding:0.5rem !important;
@@ -165,6 +169,8 @@ table td{
 	background-color:#16A2B8 !important;
 	font-weight:bold !important;
 }
+
+
 
 /* .card{
 	border:solid 2px #16A2B8 !important;

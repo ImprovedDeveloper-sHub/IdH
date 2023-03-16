@@ -98,7 +98,7 @@ input {
 							</tr>
 							<tr>
 								<td class="name-td">등록자</td>
-								<td class="table-td" colspan="3">${unitwork.unitwork_member_id}</td>
+								<td class="table-td" colspan="3">${unitwork.unitwork_setter_id}</td>
 								<td class="name-td">상태</td>
 								<td class="table-td" colspan="3">${unitwork.unitwork_status eq '1' ? '계획' : '진행중'}</td>
 							</tr>

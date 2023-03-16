@@ -73,6 +73,15 @@ td-summernote card{
 
 }
 
+
+.page-link{
+	font-size:3px !important;
+	padding : .5rem .75rem;
+	
+}
+
+
+
 </style>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">

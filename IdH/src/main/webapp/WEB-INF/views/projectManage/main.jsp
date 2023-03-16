@@ -75,10 +75,9 @@
               
                </table>
                
-               <div id="proceedingPaginationBox">
+               <div id="proceedingPaginationBox" class="card-tool">
                <%@ include file="/WEB-INF/views/projectManage/proceedingPagination.jsp" %></div>
             </div>
-            
             
          </div>
       </div>
@@ -163,24 +162,23 @@
       <div class="col-6">
       
        <div class="card ">
-          <div class="card-body row">
-           <div class="col-4"> <input id="" type="button" class="btn btn-info btn-sm" onclick="" value="프로젝트 계획"></input>
-</div>
-               <div class="col-4"> <input id="changeButton" type="button" class="btn btn-info btn-sm" onclick="returnButton()" value="프로젝트 현황"></input>
-</div>
-             <div class="col-4"> <input id="changeButton" type="button" class="btn btn-info btn-sm" onclick="changeButton()" value="프로젝트 비교"></input>
-</div>
+          <div class="card-small-body row">
+            <input id="" type="button" class="btn btn-info btn-sm" onclick="" value="프로젝트 계획"></input>
+               <input type="button" class="btn  btn-info btn-sm" id="" onclick="" value="일정"></input>
+
+              <input id="changeButton" type="button" class="btn btn-info btn-sm" onclick="returnButton()" value="프로젝트 현황"></input>
+              <input id="changeButton" type="button" class="btn btn-info btn-sm" onclick="changeButton()" value="프로젝트 비교"></input>
           </div>
         </div>
       
 		<div class="card ">
           <div class="card-small-body row">
-            <input type="button" class="btn  btn-info btn-sm" id="budgetButton"
-            onclick="ajax_print_chart('budget','1');" value="예산현황"></input>
+            <input type="button" class="btn  btn-info btn-sm" id="budgetButton" onclick="ajax_print_chart('budget','1');" value="예산현황"></input>
               <input type="button" class="btn  btn-info btn-sm" id="workforceButton" onclick="ajax_print_chart('workforce');" value="인력현황"></input>
                <input type="button" class="btn  btn-info btn-sm" id="unitworkButton" onclick="ajax_print_chart('unitwork');" value="단위업무현황"></input>
-              <input type="button" class="btn  btn-info btn-sm" onclick="ajax_print_chart('issue');" id="issueButton" value="이슈현황"></input>   
+              <input type="button" class="btn  btn-info btn-sm" onclick="ajax_print_chart('issue');" id="issueButton" value="이슈현황"></input>
 				<input type="button" class="btn  btn-info btn-sm"  id="productButton" onclick="ajax_print_chart('product');" value="산출물현황"></input>
+				
 
 <!-- <input type="button" class="btn btn-block btn-info btn-sm"  id="scheduleButton" onclick="ajax_print_chart('schedule');" value="일정현황"></input> -->
           </div>
@@ -195,7 +193,7 @@
           <div class="card-body">
             <div id="curve_chart"></div>
             <div id="budget_chart"></div>
-            <div id="schedule_chart"></div>
+            <div id="schedule"></div>
             <div id="issue_chart"></div>
             <div id="product_chart"></div>
             <div id="workforce_chart"></div>
@@ -292,15 +290,18 @@
   <script>
   
   function changeButton(){
-	  $('#budgetButton').val('예산비교'); $('#workforceButton').val('인력비교');
-	  $('#workforceButton').val('인력비교');$('#productButton').val('산출물비교');
-	  $('#unitworkButton').val('단위업무비교'); $('#changeButton').val('프로젝트 현황');
+	  $('#budgetButton').val('예산비교');
+	  $('#workforceButton').val('인력비교');
+	  $('#issueButton').val('이슈비교');
+	  $('#productButton').val('산출물비교');
+	  $('#unitworkButton').val('단위업무비교');
+	  $('#changeButton').val('프로젝트 현황');
 	  
 	  
 	  	$('#budgetButton').attr('onclick',"ajax_print_chart('budgetComparison')");
 		$('#workforceButton').attr('onclick',"ajax_print_chart('workforceComparison')");
 		//$('#scheduleButton').val('일정비교'); $('#scheduleButton').attr('onclick',"ajax_print_chart('scheduleComparison')")
-		S$('#issueButton').attr('onclick',"ajax_print_chart('issueComparison')");
+		$('#issueButton').attr('onclick',"ajax_print_chart('issueComparison')");
 		$('#productButton').attr('onclick',"ajax_print_chart('productComparison')");
 		 $('#unitworkButton').attr('onclick',"ajax_print_chart('unitworkComparison')")
 		$('#changeButton').attr('onclick',"returnButton()");
