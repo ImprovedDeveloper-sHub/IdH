@@ -126,8 +126,8 @@
 							<thead>
 								<tr>
 									<th style="width: 15%;">사업번호</th>
-									<th style="width: 35%;">사업명</th>
-									<th style="width: 35%">진행도</th>
+									<th style="width: 45%;">사업명</th>
+									<th style="width: 25%">진행도</th>
 									<th style="width: 15%">진행률</th>
 								</tr>
 							</thead>
