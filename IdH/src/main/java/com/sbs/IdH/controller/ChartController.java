@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sbs.IdH.dto.ChartVO;
 import com.sbs.IdH.service.BudgetService;
+import com.sbs.IdH.service.ProjectService;
 import com.sbs.IdH.service.UnitworkService;
 
 @Controller
@@ -25,6 +26,8 @@ public class ChartController {
 	private BudgetService budgetService;
 	@Resource(name="unitworkService")
 	private UnitworkService unitworkService;
+	@Resource(name="projectService")
+	private ProjectService projectService;
 	
 	@GetMapping("/subMenuTest")
 	public void subMenuTest() {}

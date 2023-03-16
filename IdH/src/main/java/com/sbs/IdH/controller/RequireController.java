@@ -19,8 +19,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sbs.IdH.command.RequireModifyCommand;
 import com.sbs.IdH.command.RequireRegistCommand;
 import com.sbs.IdH.command.SearchCriteria;
+import com.sbs.IdH.dao.Require_attachDAO;
 import com.sbs.IdH.dto.RequireVO;
 import com.sbs.IdH.dto.Require_attachVO;
+import com.sbs.IdH.service.BusinessService;
 import com.sbs.IdH.service.RequireService;
 import com.sbs.IdH.utils.MakeFileName;
 
@@ -30,6 +32,10 @@ public class RequireController {
 
 	@Resource
 	private RequireService requireService;
+	@Resource
+	private Require_attachDAO require_attachDAO;
+	@Resource
+	private BusinessService businessService;
 
 	@GetMapping("/main")
 	public ModelAndView main(ModelAndView mnv, SearchCriteria cri) throws Exception {
@@ -49,7 +55,8 @@ public class RequireController {
 	@Resource(name = "fileUploadPath")
 	private String fileUploadPath;
 
-	private List<Require_attachVO> saveFileToAttaches(List<MultipartFile> multiFiles, String savePath) throws Exception {
+	private List<Require_attachVO> saveFileToAttaches(List<MultipartFile> multiFiles, String savePath)
+			throws Exception {
 		List<Require_attachVO> attachList = new ArrayList<Require_attachVO>();
 		// 저장 -> attachVO -> list.add
 		if (multiFiles != null) {
@@ -120,7 +127,7 @@ public class RequireController {
 
 	@GetMapping("/remove")
 	public String remove(int require_number, RedirectAttributes rttr) throws Exception {
-		String url = "redirect:/require/main";
+		String url = "redirect:/require/detail";
 
 		// 첨부파일 삭제
 		List<Require_attachVO> attachList = requireService.selectRequire(require_number).getAttachList();
@@ -152,9 +159,9 @@ public class RequireController {
 	}
 
 	@PostMapping(value = "/modify", produces = "text/plain;charset=utf-8")
-	public String modifyPOST(RequireModifyCommand modifyReq, HttpServletRequest request, RedirectAttributes rttr)
-			throws Exception {
-		String url = "redirect:/require/main";
+	public String modifyPOST(RequireModifyCommand modifyReq, HttpServletRequest request,
+			RedirectAttributes rttr) throws Exception {
+		String url = "redirect:/require/detail";
 
 		// 파일 삭제
 		if (modifyReq.getDeleteFile() != null && modifyReq.getDeleteFile().length > 0) {

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@page import="java.util.Date"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <!-- CSS start -->
@@ -71,7 +73,7 @@ input {
 		</div>
 		<div id="content">
 			<div id="table-content">
-				<form enctype="multiaprt/form-data" role="form" method="post"
+				<form enctype="multipart/form-data" role="form" method="post"
 					action="regist" name="registForm">
 					<table>
 						<thead>
@@ -86,7 +88,7 @@ input {
 						<tbody>
 							<tr>
 								<td class="name-td">제목</td>
-								<td class="table-td"><input type="text"
+								<td class="table-td"><input type="text" name="require_title"
 									placeholder="제목을 입력하세요" /></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
@@ -95,36 +97,41 @@ input {
 							<tr>
 								<td class="name-td">발의자</td>
 								<td class="table-td"><input type="text" readonly
-									placeholder="user.id" /></td>
+									placeholder="${loginUser.member_id } " /></td>
 									<td class="table-td"></td>
 									<td class="table-td"></td>
 								<td class="name-td">등록일</td>
 								<td colspan="5"><input type="text" readonly
-									placeholder="오늘날짜들어갈것" /></td>
+									placeholder="<fmt:formatDate value="<%=new Date() %>" pattern="yyyy-MM-dd"/>" /></td>
 							</tr>
 							<tr>
 								<td class="name-td">중요도</td>
-								<td class="table-td"><input type="text" placeholder="중요도" /></td>
+								<td class="table-td">
+								<select class="form-control col-md-3" name="require_level">
+							<option value="1" ${require.require_number eq 1 ? 'selected':'하' }>하</option>
+							<option value="2" ${require.require_number eq 2 ? 'selected':'중' }>중</option>
+							<option value="3" ${require.require_number eq 3 ? 'selected':'상' }>상</option>																			
+						</select></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">관련사업</td>
-								<td colspan="5"><input type="text" readonly
-									placeholder="관련사업" /></td>
+								<td colspan="5"><input type="text" name="require_business" readonly
+									placeholder="관련사업" />${business.business_name }</td>
 							</tr>
 							<tr>
 								<td class="name-td">프로젝트 팀</td>
-								<td class="table-td"><input type="text"
-									placeholder="프로젝트 팀" /></td>
+								<td class="table-td"><input type="text" name="require_project"
+									placeholder="미정" /></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">담당자</td>
-								<td colspan="5"><input type="text" readonly
-									placeholder="담당자" /></td>
+								<td colspan="5"><input type="text" name="require_getter_id"
+									placeholder="담당자 미정" /></td>
 							</tr>
 							<tr style="height: 100px;">
 								<td class="name-td">내용</td>
 								<td class="table-td td-summernote" colspan="5"><textarea
-										class="summernote" rows="15" cols="40"
+										class="summernote" rows="15" cols="40" name="require_detail"
 										style="display: none; width: 500px;"></textarea></td>
 							</tr>
 

@@ -5,20 +5,44 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.sbs.IdH.service.RequireService;
+import com.sbs.IdH.command.SearchCriteria;
+import com.sbs.IdH.service.ProjectService;
+import com.sbs.IdH.service.UnitworkService;
 
 @RequestMapping("/project")
 @Controller
 public class ProjectController {
 
 	@Resource
-	private RequireService requireService;
+	private UnitworkService unitworkService;
+	@Resource
+	private ProjectService projectService;
 	
+	public void setProjectService(ProjectService projectService) {
+		this.projectService = projectService;
+	}
+
+	public void setUnitworkService(UnitworkService unitworkService) {
+		this.unitworkService = unitworkService;
+	}
+
 	@GetMapping("/main")
-	public void main() {}
-	
+	public ModelAndView main(ModelAndView mnv, SearchCriteria cri) throws Exception {
+
+		mnv.addAllObjects(unitworkService.selectUnitworkList(cri));
+
+		return mnv;
+
+	}
+
 	@GetMapping("/progress")
-	public void test() {}
-	
+	public ModelAndView progress(ModelAndView mnv, SearchCriteria cri) throws Exception {
+
+		mnv.addAllObjects(projectService.selectProjectUnitwork_level(cri));
+		mnv.addAllObjects(unitworkService.selectUnitworkList(cri));
+
+		return mnv;
+	}
 }

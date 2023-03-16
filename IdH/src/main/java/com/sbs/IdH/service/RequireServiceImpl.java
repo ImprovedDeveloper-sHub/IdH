@@ -54,7 +54,7 @@ public class RequireServiceImpl implements RequireService {
 		if (require.getAttachList() != null)
 			for (Require_attachVO attach : require.getAttachList()) {
 				attach.setRequire_number(require_number);
-				attach.setRequire_attach_attacher(require.getRequire_writer_id());
+				attach.setRequire_attach_attacher(require.getRequire_setter_id());
 				require_attachDAO.insertRequire_attach(attach);
 			}
 
@@ -78,7 +78,7 @@ public class RequireServiceImpl implements RequireService {
 		if (require.getAttachList() != null)
 			for (Require_attachVO attach : require.getAttachList()) {
 				attach.setRequire_number(require.getRequire_number());
-				attach.setRequire_attach_attacher(require.getRequire_writer_id());
+				attach.setRequire_attach_attacher(require.getRequire_setter_id());
 				require_attachDAO.insertRequire_attach(attach);
 
 			}

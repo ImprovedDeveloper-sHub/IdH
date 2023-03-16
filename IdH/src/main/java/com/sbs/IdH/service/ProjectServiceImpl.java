@@ -1,5 +1,6 @@
 package com.sbs.IdH.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,11 +10,13 @@ import com.sbs.IdH.command.PageMaker;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.BudgetDAO;
 import com.sbs.IdH.dao.ProjectDAO;
+import com.sbs.IdH.dao.Project_authorityDAO;
 import com.sbs.IdH.dao.ScheduleDAO;
 import com.sbs.IdH.dao.UnitworkDAO;
 import com.sbs.IdH.dao.WorkforceDAO;
 import com.sbs.IdH.dto.BudgetVO;
 import com.sbs.IdH.dto.ProjectVO;
+import com.sbs.IdH.dto.Project_authorityVO;
 import com.sbs.IdH.dto.ScheduleVO;
 import com.sbs.IdH.dto.UnitworkVO;
 
@@ -24,6 +27,11 @@ public class ProjectServiceImpl implements ProjectService {
 	UnitworkDAO unitworkDAO;
 	WorkforceDAO workforceDAO;
 	ScheduleDAO scheduleDAO;
+	Project_authorityDAO project_authorityDAO;
+
+	public void setProject_authorityDAO(Project_authorityDAO project_authorityDAO) {
+		this.project_authorityDAO = project_authorityDAO;
+	}
 
 	public void setProjectDAO(ProjectDAO projectDAO) {
 		this.projectDAO = projectDAO;
@@ -154,6 +162,71 @@ public class ProjectServiceImpl implements ProjectService {
 		dataMap.put("scheduleList", scheduleList);
 		// dataMap.put("workforceList", workforceDAO.selectSearchWorkforceList(cri));
 		return dataMap;
+	}
+	
+	@Override
+	public Map<String, Object> selectProjectProgressByproject_number(int project_number) throws Exception {
+		SearchCriteria cri = new SearchCriteria();
+		
+		cri.setProject_number(project_number);
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		List<UnitworkVO> unitworkList = unitworkDAO.selectSearchUnitworkList(cri);
+		List<ProjectVO> projectList = projectDAO.selectSearchProjectList(cri);
+		List<Project_authorityVO> project_authorityList = project_authorityDAO.selectSearchProject_authorityList(cri);
+
+		dataMap.put("project_authorityList", project_authorityList);
+		dataMap.put("projectList", projectList);
+		dataMap.put("unitworkList", unitworkList);
+		return dataMap;
+	}
+	
+//	@Override
+//	public Map<String, Object> selectProcessunitworkList(SearchCriteria cri) throws SQLException {
+//
+//		List<UnitworkVO> unitworkList = unitworkDAO.selectSearchUnitworkList(cri);
+//
+//		PageMaker pageMaker = new PageMaker();
+//		pageMaker.setCri(cri);
+//		pageMaker.setTotalCount(unitworkDAO.selectSearchUnitworkListCount(cri));
+//
+//		
+//		int startdate = unitworkDAO.selectSearchUnitworkListCount(cri);
+//		int enddate = unitworkDAO.selectSearchUnitworkListCount(cri);
+//		
+//		Map<String, Object> dataMap = new HashMap<String, Object>();
+//		dataMap.put("startdate", startdate);
+//		dataMap.put("enddate", enddate);
+//		dataMap.put("unitworkList", unitworkList);
+//		dataMap.put("pageMaker", pageMaker);
+//
+//		return dataMap;
+//
+//	}
+	
+	@Override
+	public Map<String, Object> selectProjectUnitwork_level(SearchCriteria cri) throws SQLException {
+
+		cri.setType(1);
+		int unitwork_plan = unitworkDAO.selectSearchUnitworkListCount(cri);
+		cri.setType(2);
+		int unitwork_delay1 = unitworkDAO.selectSearchUnitworkListCount(cri);
+		cri.setType(3);
+		int unitwork_proceeding = unitworkDAO.selectSearchUnitworkListCount(cri);
+		cri.setType(4);
+		int unitwork_delay2 = unitworkDAO.selectSearchUnitworkListCount(cri);
+		cri.setType(5);
+		int unitwork_success = unitworkDAO.selectSearchUnitworkListCount(cri);
+
+		
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		dataMap.put("unitwork_plan", unitwork_plan);
+		dataMap.put("unitwork_delay1", unitwork_delay1);
+		dataMap.put("unitwork_proceeding", unitwork_proceeding);
+		dataMap.put("unitwork_delay2",unitwork_delay2);
+		dataMap.put("unitwork_success", unitwork_success);
+
+		return dataMap;
+
 	}
 
 }

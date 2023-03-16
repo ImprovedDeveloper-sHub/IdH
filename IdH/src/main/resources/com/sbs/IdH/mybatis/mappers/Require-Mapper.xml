@@ -10,33 +10,13 @@
 			and require_title like '%'||#{keyword}||'%'			
 		</if>
 		<if test="searchType == 'w'.toString()">
-			and require_writer_id like '%'||#{keyword}||'%'			
+			and require_setter_id like '%'||#{keyword}||'%'			
 		</if>
 		<if test="searchType == 'd'.toString()">
 			and require_detail like '%'||#{keyword}||'%'			
 		</if>
-		<if test="searchType == 'td'.toString()">
-			and (
-			require_title like '%'||#{keyword}||'%'
-			or
-			require_detail like '%'||#{keyword}||'%'						
-			)			
-		</if>
-		<if test="searchType == 'cw'.toString()">
-			and (
-			require_writer_id like '%'||#{keyword}||'%'
-			or
-			require_detail like '%'||#{keyword}||'%'						
-			)			
-		</if>
-		<if test="searchType == 'tdw'.toString()">
-			and (
-			require_title like '%'||#{keyword}||'%'
-			or
-			require_writer_id like '%'||#{keyword}||'%'
-			or
-			require_detail like '%'||#{keyword}||'%'						
-			)			
+		<if test="searchType == 'l'.toString()">
+			and require_level like '%'||#{keyword}||'%'			
 		</if>
 	</sql>
 	
@@ -49,6 +29,7 @@
 		<include refid="search" />
 		order by require_number desc
 	</select>
+	
 	<select id="selectSearchRequireListCount"  resultType="int">
 		select
 		count(*)
@@ -63,12 +44,12 @@
 		insert 
 		into 
 		require(require_number,require_level,require_title,require_source,require_regdate,
-		require_business,require_project,require_detail,require_writer_id,
-		require_business_number,require_member_id)
+		require_project,require_detail,require_setter_id,
+		require_business_number,require_getter_id)
 		values
 		(#{require_number},#{require_level},#{require_title},#{require_source},sysdate,
-		#{require_business},#{require_project},#{require_detail},#{require_writer_id},
-		#{require_business_number},#{require_member_id})
+		#{require_project},#{require_detail},#{require_setter_id},
+		#{require_business_number},#{require_getter_id})
 	</update>
 	<select id="selectRequireSeqNext" resultType="int">
 		select require_seq.nextval as require_number from dual
@@ -88,7 +69,7 @@
 		require_level=#{require_level},require_business=#{require_business},
 		require_project=#{require_project},require_member_id=#{require_member_id},
 		require_business_number=#{require_business_number},require_regdate=sysdate,
-		require_writer_id=#{require_writer_id}
+		require_setter_id=#{require_setter_id}
 		where require_number=#{require_number}
 	</update>
 	

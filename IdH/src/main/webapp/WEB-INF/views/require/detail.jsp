@@ -80,7 +80,7 @@
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">발의자</td>
-								<td class="table-td">${require.require_writer_id }</td>
+								<td class="table-td">${require.require_setter_id }</td>
 							</tr>
 							<tr>
 								<td class="name-td">제목</td>
@@ -96,7 +96,7 @@
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">관련사업</td>
-								<td colspan="5">${require.require_business }</td>
+								<td colspan="5">${require.require_business_number }</td>
 							</tr>
 							<tr>
 								<td class="name-td">프로젝트 팀</td>
@@ -104,7 +104,7 @@
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">담당자</td>
-								<td colspan="5">${require.require_member_id }</td>
+								<td colspan="5">${require.require_getter_id }</td>
 							</tr>
 							<tr>
 								<td class="name-td">첨부파일</td>

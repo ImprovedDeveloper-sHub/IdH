@@ -10,7 +10,7 @@ public class RequireRegistCommand {
 
 	private String require_title;
 	private String require_detail;
-	private String require_writer_id;
+	private String require_setter_id;
 	private List<MultipartFile> uploadFile;
 	
 	
@@ -39,14 +39,14 @@ public class RequireRegistCommand {
 
 
 
-	public String getRequire_writer_id() {
-		return require_writer_id;
+	public String getRequire_setter_id() {
+		return require_setter_id;
 	}
 
 
 
-	public void setRequire_writer_id(String require_writer_id) {
-		this.require_writer_id = require_writer_id;
+	public void setRequire_setter_id(String require_setter_id) {
+		this.require_setter_id = require_setter_id;
 	}
 
 
@@ -67,7 +67,7 @@ public class RequireRegistCommand {
 		RequireVO require = new RequireVO();
 		require.setRequire_title(this.require_title);
 		require.setRequire_detail(this.require_detail);
-		require.setRequire_writer_id(this.require_writer_id);
+		require.setRequire_setter_id(this.require_setter_id);
 		
 		return require;
 	}
