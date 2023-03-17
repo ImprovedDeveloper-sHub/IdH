@@ -1,6 +1,5 @@
 package com.sbs.IdH.dto;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ScheduleVO {
@@ -15,10 +14,6 @@ public class ScheduleVO {
 	private Date schedule_regdate;
 	private Date schedule_enddate;
 	private Date schedule_startdate;
-	
-	private String title;
-	private Date start;
-	private Date end;
 	
 	public int getSchedule_number() {
 		return schedule_number;
@@ -84,24 +79,6 @@ public class ScheduleVO {
 	}
 	
 	
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public Date getStart() {
-		return start;
-	}
-	public void setStart(Date start) {
-		this.start = start;
-	}
-	public Date getEnd() {
-		return end;
-	}
-	public void setEnd(Date end) {
-		this.end = end;
-	}
 	public ScheduleVO() {}
 	public ScheduleVO(int schedule_number, int schedule_status, String schedule_member_id, int schedule_project_number,
 			String schedule_detail, String schedule_type, String schedule_name, Date schedule_regdate,
@@ -117,24 +94,7 @@ public class ScheduleVO {
 		this.schedule_regdate = schedule_regdate;
 		this.schedule_enddate = schedule_enddate;
 		this.schedule_startdate = schedule_startdate;
-		/*
-		 * SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		 * this. = transFormat.format(schedule_startdate); this.enddate =
-		 * transFormat.format(schedule_enddate);
-		 */
-		title = schedule_name;
-		start = schedule_startdate;
-		end = schedule_enddate;
 	}
-
-	
-	
-	
-	
-
-
-
-	
 	
 	
 }

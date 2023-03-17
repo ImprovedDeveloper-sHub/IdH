@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sbs.IdH.command.DateMaker;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.CalendarVO;
 import com.sbs.IdH.dto.ScheduleVO;
@@ -33,24 +34,27 @@ public class CalendarController {
 	@GetMapping("/main")
 	public ModelAndView main(ModelAndView mnv, SearchCriteria cri) throws Exception {
 		// model.addAllObjects();
-		/*
-		 * CalendarVO cal = new CalendarVO(); Map<String,Object> dataMap = new
-		 * HashMap<String,Object>(); dataMap.put("eventData", cal);
-		 * dataMap.put("test","test"); mnv.addAllObjects(dataMap);
-		 * mnv.addObject("test2", "test2");
-		 */
-		/*
-		 * List<CalendarVO> testList = new ArrayList<CalendarVO>(); CalendarVO cal1 =
-		 * new CalendarVO(); cal1.setTitle("일정1"); CalendarVO cal2 = new CalendarVO();
-		 * cal2.setTitle("일정2"); testList.add(cal1); testList.add(cal2);
-		 * mnv.addObject("cal1", cal1);
-		 */
+		
+		  CalendarVO cal = new CalendarVO(); Map<String,Object> dataMap = new
+		  HashMap<String,Object>(); dataMap.put("eventData", cal);
+		  dataMap.put("test","test"); mnv.addAllObjects(dataMap);
+		 
+		
+		  List<CalendarVO> testList = new ArrayList<CalendarVO>(); CalendarVO cal1 =
+		  new CalendarVO(); cal1.setTitle("일정1"); CalendarVO cal2 = new CalendarVO();
+		  cal2.setTitle("일정2"); testList.add(cal1); testList.add(cal2);
+		  mnv.addObject("cal1", cal1);
+		 
 		// mnv.addAllObjects(scheduleService.selectScheduleList(cri));
 		// model.addAllAttributes(scheduleService.selectScheduleList(cri));
 		return mnv;
 	}
+	
+	
+	@GetMapping("/test")
+	public void test() {}
 
-	@GetMapping("/getCalendar")
+	@GetMapping("/getCalendar2")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> getCalendar() throws Exception {
 		ResponseEntity<Map<String, Object>> entity = null;
@@ -73,6 +77,16 @@ public class CalendarController {
 		entity = new ResponseEntity<Map<String, Object>>(dataMap, status);
 
 		return entity;
+	}
+
+	
+	
+	@GetMapping("/getCalendar")
+	@ResponseBody
+	public List<Map<String,Object>> getCalendar2() throws Exception {
+		SearchCriteria cri = new SearchCriteria();
+		 return scheduleService.selectScheduleListForCalendar(cri);
+
 	}
 
 	/*
