@@ -55,23 +55,17 @@
 
 
 
-<div id='wrap'>
-    <!-- 드래그 박스 -->
+<!-- <div id='wrap'>
+    드래그 박스
     <div id='external-events'>
       <h4>Draggable Events</h4>
       <div id='external-events-list'></div>
-    </div>
+    </div> -->
     <!-- calendar 태그 -->
     <div id='calendar-wrap'>
       <div id='calendar1'></div>
     </div>
-  </div>
 
-  <script>
-  	alert('${eventData.title}');
-  	alert('${eventData.start}');
-  	alert('${eventData.end}');
-  </script>
   
   <script>
   	function manage_Schedule(url){
@@ -101,30 +95,25 @@
   
   
   <script>
- 
+
   (function(){
+	  var JsonData ="";
+	  $.ajax({
+   		  url:'getCalendar',
+   		  type:"GET",
+   		  success:function(data){
+			JsonData = JSON.stringify(JSON.stringify(data.testList));
+			//alert(JsonData);
+   		  },
+   		  error:function(error){
+   			  alert('error');
+   			  AjaxErrorSecurityRedirectHandler(error.status);
+   		  }
+   	  });
+	  
+	  
 	  
 	    $(function(){
-	      // 드래그 박스 취득
-	      var containerEl = $('#external-events-list')[0];
-	      // 설정하기
-	      new FullCalendar.Draggable(containerEl, {
-	        itemSelector: '.fc-event',
-	        eventData: function(eventEl) {
-	          return {
-	            title: eventEl.innerText.trim()
-	          }
-	        }
-	      });
-	      // 드래그 아이템 추가하기
-	      for(var i=1; i<=5;i++) {
-	        var $div = $("<div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'></div>");
-	        $event = $("<div class='fc-event-main'></div>").text("Event "+i);
-	        $('#external-events-list').append($div.append($event));
-	      }
-	      
-	      
-	      
 	      // calendar element 취득
 	      var calendarEl = $('#calendar1')[0];
 	      // full-calendar 생성하기
@@ -138,24 +127,36 @@
 	        initialDate: '2023-03-13', // 초기 날짜 설정 (설정하지 않으면 오늘 날짜가 보인다.)
 	        locale: 'ko', // 한국어 설정
 	        editable: true, // 수정 가능
-	        droppable: true,  // 드래그 가능
+	        /* droppable: true,  // 드래그 가능
 	        drop: function(arg) { // 드래그 엔 드롭 성공시
 	          // 드래그 박스에서 아이템을 삭제한다.
 	           manage_Schedule('regist');
 	          arg.draggedEl.parentNode.removeChild(arg.draggedEl);
-	        },
-	        /* events:[{
+	        }, */
+	        
+	        events:JsonData.testList
+	  		/* events:[{
 	        	title:'test',
 	        	start:'2023-03-12',
 	        	end:'2023-03-14'
-	        }] */
-	        events:[{
+	        },
+	        {
+	        	title:'test',
+	        	start:'2023-03-15',
+	        	end:'2023-03-16'
+	        }
+	        
+	        ]  */
+	        
+	        /* {
 	        	title:new Date('${eventData.title}'),
 	        	start:new Date('${eventData.start}'),
 	        	end:new Date('${eventData.end}')
-	        }] 
+	        } */
+	       
 	      });
 	      // 캘린더 랜더링
+	    
 	      calendar.render();
 	    });
 	  })();

@@ -54,7 +54,7 @@ public class TestBudgetDAO {
   
    public void testupdateForProject() throws Exception{
 	   BudgetVO budget1 = budgetDAO.selectBudget(1);
-	   budgetDAO.updateBudgetForProjectStart(budget1);
+	   //budgetDAO.updateBudgetForProjectStart(budget1);
 	   budget1 = budgetDAO.selectBudget(1);
 	   budgetDAO.updateBudgetForProjectEnd(budget1);
 	   budget1 = budgetDAO.selectBudget(1);

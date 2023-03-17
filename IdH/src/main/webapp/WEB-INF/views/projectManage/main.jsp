@@ -70,8 +70,6 @@
 	                </tr>
 			 	 </c:forEach>
 			 	 	
-			 	 	
-			 	 	
               </tbody>
               
                </table>
@@ -104,7 +102,6 @@
                    
                   </div>
                </div>
-         
             </div>
          <div id="table-content">
             <div  class="card-body table-responsive p-0">
@@ -137,9 +134,7 @@
                                     white-space: nowrap; text-overflow: ellipsis;"> ${project.project_discription}</td>
 					 </tr>
 				</c:forEach>
-				
               </tbody>
-              
               
                </table>
                 <div id="endPaginationBox">
@@ -151,13 +146,8 @@
          </div>
       </div>
        
-
-   
-
-
         <!--col-6종료-->
       </div>
-
 
       <!--col-6시작-->
       <div class="col-6">
@@ -435,7 +425,7 @@
   
   <c:if test="${from eq 'regist' }">
   <script>
-	  	alert('test');
+	  	//alert('test');
 	  	window.close();
 	  	window.opener.location.reload();
   </script>

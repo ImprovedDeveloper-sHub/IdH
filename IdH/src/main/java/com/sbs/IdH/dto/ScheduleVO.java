@@ -1,5 +1,6 @@
 package com.sbs.IdH.dto;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ScheduleVO {
@@ -7,10 +8,7 @@ public class ScheduleVO {
 	private int schedule_number;
 	private int schedule_status;
 	private String schedule_member_id;
-	
 	private int schedule_project_number;
-	
-	
 	private String schedule_detail;
 	private String schedule_type;
 	private String schedule_name;
@@ -18,6 +16,9 @@ public class ScheduleVO {
 	private Date schedule_enddate;
 	private Date schedule_startdate;
 	
+	private String title;
+	private Date start;
+	private Date end;
 	
 	public int getSchedule_number() {
 		return schedule_number;
@@ -81,6 +82,26 @@ public class ScheduleVO {
 	public void setSchedule_startdate(Date schedule_startdate) {
 		this.schedule_startdate = schedule_startdate;
 	}
+	
+	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public Date getStart() {
+		return start;
+	}
+	public void setStart(Date start) {
+		this.start = start;
+	}
+	public Date getEnd() {
+		return end;
+	}
+	public void setEnd(Date end) {
+		this.end = end;
+	}
 	public ScheduleVO() {}
 	public ScheduleVO(int schedule_number, int schedule_status, String schedule_member_id, int schedule_project_number,
 			String schedule_detail, String schedule_type, String schedule_name, Date schedule_regdate,
@@ -96,20 +117,21 @@ public class ScheduleVO {
 		this.schedule_regdate = schedule_regdate;
 		this.schedule_enddate = schedule_enddate;
 		this.schedule_startdate = schedule_startdate;
+		/*
+		 * SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		 * this. = transFormat.format(schedule_startdate); this.enddate =
+		 * transFormat.format(schedule_enddate);
+		 */
+		title = schedule_name;
+		start = schedule_startdate;
+		end = schedule_enddate;
 	}
-	public CalendarVO MakeCalendarVO() {
-		CalendarVO cal = new CalendarVO();
-		
-		return cal;
-	}
-	@Override
-	public String toString() {
-		return "ScheduleVO [schedule_number=" + schedule_number + ", schedule_status=" + schedule_status
-				+ ", schedule_member_id=" + schedule_member_id + ", schedule_project_number=" + schedule_project_number
-				+ ", schedule_detail=" + schedule_detail + ", schedule_type=" + schedule_type + ", schedule_name="
-				+ schedule_name + ", schedule_regdate=" + schedule_regdate + ", schedule_enddate=" + schedule_enddate
-				+ ", schedule_startdate=" + schedule_startdate + "]";
-	}
+
+	
+	
+	
+	
+
 
 
 	

@@ -160,7 +160,6 @@ public class ProjectManageController {
 			status = HttpStatus.BAD_REQUEST;
 		}
 		entity = new ResponseEntity<Map<String, Object>>(dataMap, status);
-
 		return entity;
 	}
 

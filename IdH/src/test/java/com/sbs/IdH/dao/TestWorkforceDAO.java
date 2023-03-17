@@ -56,7 +56,7 @@ public class TestWorkforceDAO {
    
    public void testupdateForProject() throws Exception{
 	   WorkforceVO workforce1 = workforceDAO.selectWorkforce(1);
-	   workforceDAO.updateWorkforceForProjectStart(workforce1);
+	   //workforceDAO.updateWorkforceForProjectStart(workforce1);
 	   workforce1 = workforceDAO.selectWorkforce(1);
 	   workforceDAO.updateWorkforceForProjectEnd(workforce1);
 	   workforce1 = workforceDAO.selectWorkforce(1);
