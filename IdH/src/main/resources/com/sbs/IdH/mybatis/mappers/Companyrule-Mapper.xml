@@ -64,7 +64,7 @@
 		update 
 		companyrule
 		set 
-		companyrule_title=#{companyrule_title},companyrule_content=#{companyrule_content}, companyrule_regdate=sysdate 
+		companyrule_title=#{companyrule_title},companyrule_content=#{companyrule_content} 
 		where companyrule_number=#{companyrule_number}
 	</update>
 	<!-- <update id="increaseViewCnt" parameterType="int">

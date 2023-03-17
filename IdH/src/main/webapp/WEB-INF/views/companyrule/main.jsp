@@ -4,7 +4,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-
+<style>
+p,span{
+margin:0 !important;
+padding:0 !important;
+}
+</style>
 
 <!--header row종료 -->
 
@@ -188,8 +193,20 @@
 	<!--main(container)종료 -->
 	
 
-
-
+<c:if test="${from eq 'regist' }">
+<script>
+	alert("정상 등록이 되었습니다.");
+	window.close();
+	window.opener.location.reload();
+</script>
+</c:if>
+<c:if test="${from eq 'remove' }">
+<script>
+	alert("정상적으로 삭제 되었습니다.");
+	window.close();
+	window.opener.location.reload();
+</script>
+</c:if>
 
 <!--content종료-->
 <!-- <script>

@@ -244,4 +244,17 @@
 	<br />
 </div>
 
-
+<c:if test="${from eq 'regist' }">
+<script>
+	alert("정상 등록이 되었습니다.");
+	window.close();
+	window.opener.location.reload();
+</script>
+</c:if>
+<c:if test="${from eq 'remove' }">
+<script>
+	alert("정상적으로 삭제 되었습니다.");
+	window.close();
+	window.opener.location.reload();
+</script>
+</c:if>

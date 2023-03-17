@@ -107,7 +107,10 @@ public class CompanyruleController {
 			//DB 
 			CompanyruleVO companyrule = registReq.toCompanyruleVO();
 			String XSStitle = (String)request.getAttribute("XSStitle");
-			if(XSStitle !=null) companyrule.setCompanyrule_title(XSStitle);
+			if(XSStitle !=null) {
+				companyrule.setCompanyrule_title(XSStitle);
+				companyrule.setCompanyrule_content(XSStitle);
+			}
 			
 			companyrule.setCo_AttachList(attachList);
 			companyruleService.registCompanyrule(companyrule);
@@ -121,15 +124,15 @@ public class CompanyruleController {
 	  
 		@GetMapping("/detail")
 		public ModelAndView detail(int companyrule_number, String from, 
-									RedirectAttributes rttr,
 								    ModelAndView mnv) throws Exception {
 			String url = "/companyrule/detail";
 
 			CompanyruleVO companyrule = null;
 			
 			
-			companyrule = companyruleService.selectCompanyrule(companyrule_number);
 			
+			
+			companyrule = companyruleService.selectCompanyrule(companyrule_number);
 			
 			// 파일명 재정의
 			if (companyrule != null) {
@@ -170,18 +173,19 @@ public class CompanyruleController {
 			
 			return url;
 		}
+		 
 		 @GetMapping("/modifyForm")
-			public ModelAndView modifyForm(ModelAndView mnv, int companyrule_number,RedirectAttributes rttr) throws Exception {
-				String url = "/companyrule/modify";
+			public ModelAndView modifyForm(ModelAndView mnv, int companyrule_number) throws Exception {
+				String url = "companyrule/modify";
 				
-				mnv = detail(companyrule_number,"modify",rttr,mnv);
+				mnv = detail(companyrule_number,"modify",mnv);
 				
 				mnv.setViewName(url);
 				return mnv;
 			}
 		 @PostMapping(value="/modify", produces = "text/plain;charset=utf-8")
 			public String modifyPOST(CompanyruleModifyCommand modifyReq,HttpServletRequest request,RedirectAttributes rttr) throws Exception {
-				String url = "redirect:/companyrule/main";
+				String url = "redirect:/companyrule/detail";
 				
 				// 파일 삭제
 				if (modifyReq.getDeleteFile() != null && modifyReq.getDeleteFile().length > 0) {
@@ -212,7 +216,7 @@ public class CompanyruleController {
 				companyruleService.modifyCompanyrule(companyrule);
 
 				rttr.addFlashAttribute("from", "modify");
-				rttr.addAttribute("comapnyrule_number", companyrule.getCompanyrule_number());
+				rttr.addAttribute("companyrule_number", companyrule.getCompanyrule_number());
 				
 				return url;
 			}

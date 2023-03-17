@@ -52,16 +52,7 @@ public class CompanyruleServiceImpl implements CompanyruleService {
 
 	}
 
-	/*
-	 * @Override public CompanyruleVO readCompanyrule(int companyrule_number) throws
-	 * SQLException { CompanyruleVO companyrule =
-	 * companyruleDAO.selectCompanyrule(companyrule_number);
-	 * companyruleDAO.increaseViewCnt(companyrule_number);
-	 * 
-	 * return companyrule;
-	 * 
-	 * }
-	 */
+	
 	@Override
 	public CompanyruleVO selectCompanyrule(int companyrule_number) throws SQLException {
 		CompanyruleVO companyrule = companyruleDAO.selectCompanyrule(companyrule_number);
@@ -71,6 +62,7 @@ public class CompanyruleServiceImpl implements CompanyruleService {
 
 	@Override
 	public void modifyCompanyrule(CompanyruleVO companyrule_number) throws SQLException {
+		
 		companyruleDAO.updateCompanyrule(companyrule_number);
 	}
 

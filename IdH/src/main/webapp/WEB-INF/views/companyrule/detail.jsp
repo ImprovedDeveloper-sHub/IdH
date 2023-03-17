@@ -97,7 +97,8 @@ input {
 							<td class="name-td">내용</td>
 								<td class="table-td">${companyrule.companyrule_content }</td>
 							</tr>
-
+							<!-- 첨부파일 -->
+                             
 						</tbody>
 					</table>
 					</form>
@@ -115,15 +116,7 @@ input {
 		</div>
 	</div>
 
-<script>
-function regist_go(){
-	   
-	 
-	   
-	   $("form[role='form']").submit();
-	   
-	
-</script>
+
 
 <script>
 function submit_go(url,companyrule_number ){	
@@ -137,11 +130,5 @@ function submit_go(url,companyrule_number ){
 		window.opener.location.reload();
 	</script>
 </c:if>    
-<c:if test="${from eq 'remove'}" >
-	<script>
-		alert("삭제되었습니다.");
-		window.close();
-		window.opener.location.reload();
-	</script>
-</c:if> 
+
 

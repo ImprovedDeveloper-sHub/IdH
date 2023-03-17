@@ -13,6 +13,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html lang="kor">
 <head>
 <style>
+p,span{
+margin:0 !important;
+padding:0 !important;
+}
 ul,li{
    list-sytle:none;
 }
