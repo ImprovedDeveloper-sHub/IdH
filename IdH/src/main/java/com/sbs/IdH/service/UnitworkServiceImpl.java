@@ -73,8 +73,10 @@ public class UnitworkServiceImpl implements UnitworkService{
 	@Override
 	public Map<String, Object> selectUnitworkList(SearchCriteria cri) throws Exception {
 		Map<String, Object> dataMap = new HashMap<String,Object>();
+		cri.setPerPageNum(5);
 		dataMap.put("unitworkList", unitworkDAO.selectSearchUnitworkList(cri));
 		PageMaker pageMaker = new PageMaker();
+		
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(unitworkDAO.selectSearchUnitworkListCount(cri));
 		dataMap.put("pageMaker",pageMaker);

@@ -43,11 +43,11 @@
                <table  class="table table-hover">
                   <thead id="proceedingThead" class="proceedingThead" class="text-left">
 	                <tr>
+	                  <th style="width:30%">사업 이름</th>
 	                  <th style="width:20%">프로젝트 이름</th>
-	                  <th style="width:30%">프로젝트 상태</th>
-	                  <th style="width:20%">등록 날짜</th>
+	                  <th style="width:20%">시작 날짜</th>
+	                  <th style="width:20%">예상 종료 날짜</th>
 	                  <th style="width:15%">요구사항</th>
-	                  <th style="width:15%">설명</th>
 	                </tr>
               	</thead>
               
@@ -56,17 +56,17 @@
 				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
 			 	 </c:if>
 			 	 <c:forEach items="${proceedingProjectList }" var="project">
-					 <tr onclick="setProjectNum(${project.project_number}); goPage('projectDetail')">
+					 <tr onclick="setProjectNum(${project.project_number},'getProjectDetail'); goPage('projectDetail')">
+			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;">${project.project_business_name }</td>
 			                  <td style="text-align:left;max-width:20%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;">${project.project_name}</td>
-			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">${project.project_status}</td>
 			                  <td style="text-align:left;max-width: 20%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate value="${project.project_regdate}" pattern="yyyy-MM-dd"/></td>
-			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">test</td>
-			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;"> ${project.project_discription}</td>
+			                  <td style="text-align:left;max-width: 20%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate value="${project.project_enddate}" pattern="yyyy-MM-dd"/></td>
+			                  <td>요구사항</td>
+			                  
 	                </tr>
 			 	 </c:forEach>
 			 	 	
@@ -108,11 +108,11 @@
                <table  class="table table-hover">
                   <thead class="endThead" class="text-left">
 	                <tr>
-	                  <th style="width:20%">프로젝트 이름</th>
-	                  <th style="width:30%">프로젝트 상태</th>
+	                  <th style="width:20%">사업 이름</th>
+	                  <th style="width:30%">프로젝트 이름</th>
 	                  <th style="width:20%">등록 날짜</th>
+	                  <th style="width:15%">예상 종료날짜</th>
 	                  <th style="width:15%">요구사항</th>
-	                  <th style="width:15%">설명</th>
 	                </tr>
               	</thead>
               
@@ -123,15 +123,15 @@
 			 	 <c:forEach items="${endProjectList }" var="project">
 					 <tr onclick="setProjectNum(${project.project_number}); goPage('projectDetail')">
 					 <td style="text-align:left;max-width:20%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">${project.project_name}</td>
+                                    white-space: nowrap; text-overflow: ellipsis;">${project.project_business_name}</td>
 			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">${project.project_status}</td>
+                                    white-space: nowrap; text-overflow: ellipsis;">${project.project_name}</td>
 			                  <td style="text-align:left;max-width: 20%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate value="${project.project_regdate}" pattern="yyyy-MM-dd"/></td>
 			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">요구사항</td>
+                                    white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate value="${project.project_enddate}" pattern="yyyy-MM-dd"/></td>
 			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;"> ${project.project_discription}</td>
+                                    white-space: nowrap; text-overflow: ellipsis;"> 요구사항</td>
 					 </tr>
 				</c:forEach>
               </tbody>
@@ -155,7 +155,7 @@
        <div class="card ">
           <div class="card-small-body row">
             <input id="" type="button" class="btn btn-info btn-sm" onclick="" value="프로젝트 계획"></input>
-               <input type="button" class="btn  btn-info btn-sm" id="" onclick="" value="일정"></input>
+               <input type="button" class="btn  btn-info btn-sm" id="" onclick="OpenWindow('<%=request.getContextPath()%>/calendar/main','등록',850,750);" value="전체일정"></input>
 
               <input id="changeButton" type="button" class="btn btn-info btn-sm" onclick="returnButton()" value="프로젝트 현황"></input>
               <input id="changeButton" type="button" class="btn btn-info btn-sm" onclick="changeButton()" value="프로젝트 비교"></input>
@@ -164,6 +164,7 @@
       
 		<div class="card ">
           <div class="card-small-body row">
+          <input type="button" class="btn  btn-info btn-sm" id="budgetButton" onclick="OpenWindow('<%=request.getContextPath()%>/calendar/main','등록',850,750);" value="프로젝트 일정"></input>
             <input type="button" class="btn  btn-info btn-sm" id="budgetButton" onclick="ajax_print_chart('budget','1');" value="예산현황"></input>
               <input type="button" class="btn  btn-info btn-sm" id="workforceButton" onclick="ajax_print_chart('workforce');" value="인력현황"></input>
                <input type="button" class="btn  btn-info btn-sm" id="unitworkButton" onclick="ajax_print_chart('unitwork');" value="단위업무현황"></input>
@@ -310,10 +311,24 @@
 		/* $('#changeButton').val('프로젝트 비교');$('#changeButton').attr('onclick',"changeButton()"); */
 	}
 
-	function setProjectNum(setNum){
-		project_num = setNum
+	function setProjectNum(setNum,url){
+		project_num = setNum;
 		alert(project_num);
+		$.ajax({
+			url:url+project_num,
+			type:'GET',
+			success:function(data){
+				alert(data);
+			},
+			error:function(error){
+	    		AjaxErrorSecurityRedirectHandler(error.status);	
+			}
+		});
+		
 	}
+	
+	
+	
   
   var project_num = 1;
   var last_chart="curve_chart";

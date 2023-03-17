@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.BudgetVO;
+import com.sbs.IdH.dto.MemberVO;
 import com.sbs.IdH.dto.ProjectVO;
 import com.sbs.IdH.dto.ScheduleVO;
 import com.sbs.IdH.dto.UnitworkVO;
@@ -79,6 +80,18 @@ public class ProjectManageController {
 		mnv.setViewName("projectManage/main");
 		return mnv;
 	}
+	
+	@GetMapping("/manage")
+	public ModelAndView manage(ModelAndView mnv, SearchCriteria cri, HttpServletRequest request) throws Exception {
+		
+	
+		mnv.addAllObjects(projectService.selectProjectList(cri));
+		mnv.addAllObjects(budgetService.selectBudgetList(cri));
+		mnv.addAllObjects(workforceService.selectWorkforceList(cri));
+		mnv.addAllObjects(unitworkService.selectUnitworkList(cri));
+		mnv.addAllObjects(scheduleService.selectScheduleList(cri));
+		return mnv;
+	}
 
 	@GetMapping("/registProjectForm")
 	public ModelAndView regist(ModelAndView mnv, HttpServletRequest request) throws Exception {
@@ -92,17 +105,7 @@ public class ProjectManageController {
 		return mnv;
 	}
 
-	@GetMapping("/registProjectForm2")
-	public ModelAndView regist2(ModelAndView mnv, HttpServletRequest request) throws Exception {
-		String url = "/projectManage/registProject2";
-		SearchCriteria cri = new SearchCriteria();
-		HttpSession session = request.getSession();
-		String member_id = (String) session.getAttribute("member_id");
-		cri.setMember_id(member_id);
-		mnv.addAllObjects(businessService.getBusinessListNotRowBound(cri));
-		mnv.setViewName(url);
-		return mnv;
-	}
+
 
 	@PostMapping("/registProject")
 	public String regist(@RequestParam HashMap<String, Object> dataMap, ProjectVO project, RedirectAttributes rttr)
@@ -383,14 +386,7 @@ public class ProjectManageController {
 		return url;
 	}
 
-	@GetMapping("/manage")
-	public ModelAndView manage(ModelAndView mnv, SearchCriteria cri) throws Exception {
-		mnv.addAllObjects(budgetService.selectBudgetList(cri));
-		mnv.addAllObjects(workforceService.selectWorkforceList(cri));
-		mnv.addAllObjects(unitworkService.selectUnitworkList(cri));
-		mnv.addAllObjects(scheduleService.selectScheduleList(cri));
-		return mnv;
-	}
+	
 
 	@PostMapping("/getProceeding")
 	@ResponseBody
@@ -428,4 +424,24 @@ public class ProjectManageController {
 		return entity;
 	}
 
+	
+	
+	
+	@GetMapping("/getProjectDetail")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> getProjectDetail(int project_number) throws Exception {
+		ResponseEntity<Map<String, Object>> entity = null;
+		HttpStatus status;
+		Map<String, Object> dataMap = null;
+		try {
+			dataMap.put("project", projectService.selectProject(project_number));
+			status = HttpStatus.OK;
+		} catch (Exception e) {
+			status = HttpStatus.BAD_REQUEST;
+		}
+		entity = new ResponseEntity<Map<String, Object>>(dataMap, status);
+
+		return entity;
+	}
+	
 }

@@ -6,15 +6,15 @@
 {{#each proceedingProjectList}}
 					 <tr onclick="setProjectNum({{project_number}})">
 			                  <td style="text-align:left;max-width:20%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">{{project_name}}</td>
+                                    white-space: nowrap; text-overflow: ellipsis;">{{project_business_name}}</td>
 			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">{{project_status}}</td>
+                                    white-space: nowrap; text-overflow: ellipsis;">{{project_name}}</td>
 			                  <td style="text-align:left;max-width: 20%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;">{{prettifyDate project_regdate}}</td>
 			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">test</td>
+                                    white-space: nowrap; text-overflow: ellipsis;">{{prettifyDate project_enddate}}</td>
 			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;"> {{project_discription}}</td>
+                                    white-space: nowrap; text-overflow: ellipsis;"> 요구사항</td>
 	                </tr> 
 {{/each}}
 </tbody>
@@ -105,15 +105,15 @@
 {{#each endProjectList}}
 					 <tr>
 			                  <td style="text-align:left;max-width:20%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">{{project_name}}</td>
+                                    white-space: nowrap; text-overflow: ellipsis;">{{project_business_name}}</td>
 			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">{{project_status}}</td>
+                                    white-space: nowrap; text-overflow: ellipsis;">{{project_name}}</td>
 			                  <td style="text-align:left;max-width: 20%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;">{{prettifyDate project_regdate}}</td>
 			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">test</td>
+                                    white-space: nowrap; text-overflow: ellipsis;">{{prettifyDate project_enddate}}</td>
 			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;"> {{project_discription}}</td>
+                                    white-space: nowrap; text-overflow: ellipsis;"> 요구사항</td>
 	                </tr> 
 {{/each}}
 </tbody>
@@ -176,7 +176,7 @@ Handlebars.registerHelper({
 						var year=dateObj.getFullYear();
 						var month=dateObj.getMonth()+1;
 						var date=dateObj.getDate();
-						return year+"/"+month+"-"+date;
+						return year+"-"+month+"-"+date;
 					},
 	"goPageProceeding":function(pageNum){
 		return "javascript:search_go_ajax("+pageNum+", $('#proceedingPerPageNum'), $('#proceedingSearchType'), $('#proceedingKeyword'), '" + '<%=request.getContextPath()%>/projectManage/getProceeding' + "', $('.proceedingThead'),$('.proceedingProjectLi'),$('#proceedingProject-list-template'),$('#proceeding-pagination-template'),$('#proceedingPaginationBox'),'proceeding');"

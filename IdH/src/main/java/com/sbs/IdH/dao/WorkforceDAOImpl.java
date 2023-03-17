@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.sbs.IdH.command.SearchCriteria;
@@ -20,7 +21,10 @@ public class WorkforceDAOImpl implements WorkforceDAO{
 	
 	@Override
 	public List<WorkforceVO> selectSearchWorkforceList(SearchCriteria cri) throws SQLException {
-		List<WorkforceVO> workforceList = session.selectList("Workforce-Mapper.selectWorkforceList", cri);
+		int offset=cri.getStartRowNum();
+		int limit=cri.getPerPageNum();		
+		RowBounds rowBounds=new RowBounds(offset,limit);
+		List<WorkforceVO> workforceList = session.selectList("Workforce-Mapper.selectWorkforceList", cri, rowBounds);
 		return workforceList;
 	}
 

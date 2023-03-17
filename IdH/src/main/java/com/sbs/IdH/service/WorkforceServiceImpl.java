@@ -61,9 +61,11 @@ public class WorkforceServiceImpl implements WorkforceService {
 				workforceDAO.insertWorkforce(workforce);
 	}
 	
+	
 	@Override
 	public Map<String, Object> selectWorkforceList(SearchCriteria cri) throws Exception {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
+		cri.setPerPageNum(5);
 		dataMap.put("workforceList", workforceDAO.selectSearchWorkforceList(cri));
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);

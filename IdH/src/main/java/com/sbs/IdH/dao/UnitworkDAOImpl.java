@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.sbs.IdH.command.SearchCriteria;
@@ -20,7 +21,10 @@ public class UnitworkDAOImpl implements UnitworkDAO{
 	
 	@Override
 	public List<UnitworkVO> selectSearchUnitworkList(SearchCriteria cri) throws SQLException {
-		List<UnitworkVO> unitworkList = session.selectList("Unitwork-Mapper.selectUnitworkList", cri);
+		int offset=cri.getStartRowNum();
+		int limit=cri.getPerPageNum();		
+		RowBounds rowBounds=new RowBounds(offset,limit);
+		List<UnitworkVO> unitworkList = session.selectList("Unitwork-Mapper.selectUnitworkList", cri, rowBounds);
 		return unitworkList;
 	}
 

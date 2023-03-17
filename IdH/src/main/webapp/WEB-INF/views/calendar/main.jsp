@@ -51,12 +51,12 @@ body {
 }
 
 #calendar-wrap {
-	margin-left: 200px;
 }
 
 #calendar1 {
-	max-width: 1100px;
+	max-width: 800px;
 	margin: 0 auto;
+	background-color: white;
 }
 </style>
 
@@ -118,7 +118,7 @@ window.onload = function(){
 		success : function(param) {
 			var events = [];
 			$.each(param, function(index, date) {
-								console.log(date);
+								//console.log(date);
 								events.push({
 												title : date.title,
 												start : date.start,
@@ -140,11 +140,7 @@ window.onload = function(){
 					var calendar = new FullCalendar.Calendar(calendarEl,
 							{
 								// 해더에 표시할 툴바
-								headerToolbar : {
-									left : 'prev,next today',
-									center : 'title',
-									right : 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-								},
+								
 								/* initialDate : '2023-03-13', // 초기 날짜 설정 (설정하지 않으면 오늘 날짜가 보인다.) */
 								locale : 'ko', // 한국어 설정
 								timeZone : 'Asia/Seoul',

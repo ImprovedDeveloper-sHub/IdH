@@ -98,5 +98,11 @@ public class BusinessDAOImpl implements BusinessDAO {
 		return businessList;
 	}
 	
+	@Override
+	public String selectBusinessName(int businessNumber) throws SQLException {
+		BusinessVO business = session.selectOne("Business-Mapper.selectBusiness_number", businessNumber);
+		return business.getBusiness_name();
+	}
+	
 	
 }

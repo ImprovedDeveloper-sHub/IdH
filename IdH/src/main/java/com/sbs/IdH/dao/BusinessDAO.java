@@ -29,4 +29,6 @@ public interface BusinessDAO {
 	//추가
 	public List<BusinessVO> selectBusinessCriteriaNotRowBound(SearchCriteria cri) throws SQLException;
 	
+	public String selectBusinessName(int businessNumber) throws SQLException;
+
 }

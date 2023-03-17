@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sbs.IdH.command.DateMaker;
+import com.sbs.IdH.command.PageMaker;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.ScheduleDAO;
 import com.sbs.IdH.dto.ScheduleVO;
@@ -43,7 +44,12 @@ public class ScheduleServiceImpl implements ScheduleService {
 	@Override
 	public Map<String, Object> selectScheduleList(SearchCriteria cri) throws Exception {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
+		PageMaker pageMaker = new PageMaker();
+		cri.setPerPageNum(5);
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(scheduleDAO.selectSearchScheduleListCount(cri));
 		dataMap.put("scheduleList", scheduleDAO.selectSearchScheduleList(cri));
+		dataMap.put("pageMaker",pageMaker);
 		return dataMap;
 	}
 

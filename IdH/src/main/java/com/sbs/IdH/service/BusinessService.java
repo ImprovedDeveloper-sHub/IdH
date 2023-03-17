@@ -28,4 +28,5 @@ public interface BusinessService {
 	//추가
 	public Map<String, Object> getBusinessListNotRowBound(SearchCriteria cri) throws SQLException;
 	
+	
 }

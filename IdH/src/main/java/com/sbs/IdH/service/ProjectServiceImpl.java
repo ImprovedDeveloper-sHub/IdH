@@ -8,6 +8,7 @@ import java.util.Map;
 import com.sbs.IdH.command.PageMaker;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.BudgetDAO;
+import com.sbs.IdH.dao.BusinessDAO;
 import com.sbs.IdH.dao.ProjectDAO;
 import com.sbs.IdH.dao.RequireDAO;
 import com.sbs.IdH.dao.ScheduleDAO;
@@ -15,7 +16,6 @@ import com.sbs.IdH.dao.UnitworkDAO;
 import com.sbs.IdH.dao.WorkforceDAO;
 import com.sbs.IdH.dto.BudgetVO;
 import com.sbs.IdH.dto.ProjectVO;
-import com.sbs.IdH.dto.RequireVO;
 import com.sbs.IdH.dto.ScheduleVO;
 import com.sbs.IdH.dto.UnitworkVO;
 import com.sbs.IdH.dto.WorkforceVO;
@@ -28,7 +28,7 @@ public class ProjectServiceImpl implements ProjectService {
 	private WorkforceDAO workforceDAO;
 	private ScheduleDAO scheduleDAO;
 	private RequireDAO requireDAO;
-	
+	private BusinessDAO businessDAO;
 	
 	public void setProjectDAO(ProjectDAO projectDAO) {
 		this.projectDAO = projectDAO;
@@ -55,6 +55,9 @@ public class ProjectServiceImpl implements ProjectService {
 		this.requireDAO = requireDAO;
 	}
 	
+	public void setBusinessDAO(BusinessDAO businessDAO) {
+		this.businessDAO = businessDAO;
+	}
 	@Override
 	public void registProject(ProjectVO project) throws Exception {
 		project.setProject_number(projectDAO.selectProjectSeqNext());
@@ -84,7 +87,7 @@ public class ProjectServiceImpl implements ProjectService {
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(projectDAO.selectSearchProjectListCount(cri));
-
+		
 		dataMap.put("pageMaker", pageMaker);
 		dataMap.put("projectList", projectDAO.selectSearchProjectList(cri));
 		return dataMap;
@@ -95,7 +98,13 @@ public class ProjectServiceImpl implements ProjectService {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		cri.setStatus(1);
 		cri.setPerPageNum(5);
-		dataMap.put("proceedingProjectList", projectDAO.selectSearchProjectList(cri));
+		
+		List<ProjectVO> projectList = projectDAO.selectSearchProjectList(cri);
+		for(ProjectVO project : projectList) {
+			project.setProject_business_name(businessDAO.selectBusinessName(project.getProject_business_number()));
+		}
+		dataMap.put("proceedingProjectList",projectList);
+		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(projectDAO.selectSearchProjectListCount(cri));
@@ -108,10 +117,15 @@ public class ProjectServiceImpl implements ProjectService {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		cri.setStatus(2);
 		cri.setPerPageNum(5);
+		List<ProjectVO> projectList = projectDAO.selectSearchProjectList(cri);
+		for(ProjectVO project : projectList) {
+			project.setProject_business_name(businessDAO.selectBusinessName(project.getProject_business_number()));
+		}
+		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(projectDAO.selectSearchProjectListCount(cri));
-		dataMap.put("endProjectList", projectDAO.selectSearchProjectList(cri));
+		dataMap.put("endProjectList", projectList);
 		dataMap.put("endPageMaker", pageMaker);
 		return dataMap;
 	}

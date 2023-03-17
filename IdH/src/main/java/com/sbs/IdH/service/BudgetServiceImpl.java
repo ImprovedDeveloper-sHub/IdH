@@ -36,6 +36,7 @@ public class BudgetServiceImpl implements BudgetService {
 	public Map<String, Object> selectBudgetListforProject(int project_number) throws Exception {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		List<BudgetVO> budgetList = budgetDAO.selectSearchBudgetListForProject(project_number);
+		
 		dataMap.put("budgetList", budgetList);
 
 		return dataMap;
@@ -70,16 +71,18 @@ public class BudgetServiceImpl implements BudgetService {
 	@Override
 	public Map<String, Object> selectBudgetList(SearchCriteria cri) throws Exception {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
+		cri.setPerPageNum(5);
 		List<BudgetVO> budgetList = budgetDAO.selectSearchBudgetList(cri);
 		for (BudgetVO budget : budgetList) {
 			int project_number = budget.getBudget_project_number();
 			budget.setBudget_project_name(projectDAO.selectProjectName(project_number));
 		}
-		dataMap.put("budgetList", budgetList);
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(budgetDAO.selectSearchBudgetListCount(cri));
 		dataMap.put("pageMaker", pageMaker);
+		dataMap.put("budgetList", budgetList);
+		
 		return dataMap;
 	}
 
