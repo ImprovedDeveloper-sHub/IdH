@@ -23,12 +23,17 @@ public class DateMaker {
 	
 	public void setParamSchedule(ScheduleVO schedule){
 		Map <String, Object> param = new HashMap<String, Object>();
-		 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		//SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		// SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		param.put("title", schedule.getSchedule_name());
 		param.put("start", format.format(schedule.getSchedule_startdate()));
 		param.put("end", format.format(schedule.getSchedule_enddate()));
 		paramList.add(param);
+	}
+	
+	public void setParamString(String title, Date start, Date end) {
+		
+		
 	}
 	
 	

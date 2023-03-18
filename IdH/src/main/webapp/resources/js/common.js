@@ -74,6 +74,7 @@ function list_go(page,url){
 
 
 function search_go_ajax(page, perPageNum, searchType, keyword, url, target, delTarget, templateObject, pagiTemplatObject, pagenationTarget,type) {
+	
 	if(type=='proceeding')proceedingPage = page;
 	if(type=='end')endPage = page;
 	
@@ -84,10 +85,10 @@ function search_go_ajax(page, perPageNum, searchType, keyword, url, target, delT
 	jobForm.find("[name='perPageNum']").val(perPageNum.val());
 	jobForm.find("[name='searchType']").val(searchType.val());
 	jobForm.find("[name='keyword']").val(keyword.val());
-	/*alert(page);
+	alert(page);
 	alert(perPageNum.val());
 	alert(searchType.val());
-	alert(keyword.val());*/
+	alert(keyword.val());
 
 	//var formData = new FormData(jobForm);
 	
@@ -110,6 +111,28 @@ function search_go_ajax(page, perPageNum, searchType, keyword, url, target, delT
     	},
     	error:function(error){
     		alert('errortest');
+    		AjaxErrorSecurityRedirectHandler(error.status);	
+    	}
+	});
+}
+
+
+
+function go_ajax2(url, target, delTarget, templateObject ) {
+	alert('test');
+	var jobForm=$('#jobForm');
+	//var jobForm = document.getElementById('#jobForm');
+	jobForm.find("[name='page']").val(page);
+	jobForm.find("[name='perPageNum']").val(perPageNum.val());
+	jobForm.find("[name='searchType']").val(searchType.val());
+	jobForm.find("[name='keyword']").val(keyword.val());
+	$.ajax({
+		url: url,
+    	type: "GET",
+    	success: function(data) {    		
+    		printData(data,target,delTarget,templateObject);
+    	},
+    	error:function(error){
     		AjaxErrorSecurityRedirectHandler(error.status);	
     	}
 	});

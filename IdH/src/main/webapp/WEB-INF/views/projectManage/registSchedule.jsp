@@ -121,8 +121,8 @@ input {
 
 							<tr>
 								<td class="name-td">프로젝트명</td>
-								<td class="table-td"><select>
-													
+								<td class="table-td"><select name="schedule_project_number" >
+									<option value="1">미정</option>
 									</select></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>

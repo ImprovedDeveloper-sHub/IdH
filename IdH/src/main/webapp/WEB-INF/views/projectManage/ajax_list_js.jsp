@@ -4,7 +4,7 @@
 <script type="text/x-handlebars-template"  id="proceedingProject-list-template" >
 <tbody class="proceedingProjectLi" class="text-left">
 {{#each proceedingProjectList}}
-					 <tr onclick="setProjectNum({{project_number}})">
+					 <tr onclick="setProjectNum({{project_number}},'getProjectDetail');">
 			                  <td style="text-align:left;max-width:20%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;">{{project_business_name}}</td>
 			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
@@ -103,7 +103,7 @@
 <script type="text/x-handlebars-template"  id="endProject-list-template" >
 <tbody class="endProjectLi" class="text-left">
 {{#each endProjectList}}
-					 <tr>
+					 <tr onclick="setProjectNum({{project_number}},'getProjectDetail');">
 			                  <td style="text-align:left;max-width:20%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;">{{project_business_name}}</td>
 			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
@@ -119,6 +119,46 @@
 </tbody>
 </script>
 
+<script type="text/x-handlebars-template"  id="projectDetail-template" >
+{{#each .}}
+<tbody class="projectDetailtbody" class="text-left">
+						 <tr>
+								<td class="name-td">프로젝트 명</td>
+								<td class="table-td" colspan="3">{{project_name}}</td>
+								<td class="name-td">사업 번호</td>
+								<td class="table-td">{{project_business_number}}</td>
+							</tr>
+							<tr>
+								<td class="name-td">등록자</td>
+								<td class="table-td" colspan="3">{{project_member_id}}</td>
+								<td class="name-td">상태</td>
+								<td class="table-td" colspan="3">{{project_name}}</td>
+							</tr>
+							
+							<tr>
+								<td class="name-td">시작날짜</td>
+								<td class="table-td" colspan="3"></td>
+								<td class="name-td">종료날짜</td>
+								<td class="table-td" colspan="3"></td>
+							</tr>
+							
+							<tr style="height: 100px;">
+								<td class="name-td">내용</td>
+								<td class="table-td td-summernote" colspan="5"></td>
+							</tr>
+
+							<tr>
+								<td class="name-td">프로젝트번호</td>
+								<td class="table-td">1</td>
+								<td class="table-td">2</td>
+								<td class="table-td">3</td>
+								<td class="name-td">등록일</td>
+								<td class="table-td">4</td>
+</tbody>
+{{/each}}
+</script>
+
+
 <script>
 var proceedingPage=1;
 var endPage=1;
@@ -127,10 +167,8 @@ var endPage=1;
 
 function printData(data,target,delTarget, templateObject){
 	var template=Handlebars.compile(templateObject.html());
-	//alert(JSON.stringify(data));
 	var html = template(data);
 	delTarget.remove();
-	//alert(html);
 	target.after(html);
 }
 
@@ -145,7 +183,6 @@ function printProceedingPagination(data,target, templateObject){
 	data.proceedingPageMaker.nextPageNum=data.proceedingPageMaker.endPage+1;
 	var template=Handlebars.compile(templateObject.html());	
 	var html = template(data.proceedingPageMaker);
-	
 	//alert(html);
 	//alert(html);
 	target.html("").html(html);
@@ -169,6 +206,9 @@ function printEndPagination(data,target, templateObject){
 	//alert(html);
 	target.html("").html(html);
 }
+
+
+
 
 Handlebars.registerHelper({
 	"prettifyDate":function(timeValue){ //Handlbars에 날짜출력함수 등록

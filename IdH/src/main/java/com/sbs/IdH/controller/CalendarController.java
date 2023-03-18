@@ -54,9 +54,9 @@ public class CalendarController {
 	@GetMapping("/test")
 	public void test() {}
 
-	@GetMapping("/getCalendar2")
+	@GetMapping("/getCalendar3")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> getCalendar() throws Exception {
+	public ResponseEntity<Map<String, Object>> getCalendar3() throws Exception {
 		ResponseEntity<Map<String, Object>> entity = null;
 		HttpStatus status;
 		//Map<String, Object> dataMap = null;
@@ -83,10 +83,9 @@ public class CalendarController {
 	
 	@GetMapping("/getCalendar")
 	@ResponseBody
-	public List<Map<String,Object>> getCalendar2() throws Exception {
+	public List<Map<String,Object>> getCalendar() throws Exception {
 		SearchCriteria cri = new SearchCriteria();
 		 return scheduleService.selectScheduleListForCalendar(cri);
-
 	}
 
 	/*
@@ -105,7 +104,6 @@ public class CalendarController {
 	@PostMapping("/regist")
 	@ResponseBody
 	public void regist(Model model, @RequestBody ScheduleVO schedule, SearchCriteria cri) throws Exception {
-
 		scheduleService.registSchedule(schedule);
 		// model.addAllAttributes(scheduleService.selectScheduleList(cri));
 
@@ -114,7 +112,6 @@ public class CalendarController {
 	@PostMapping("/update")
 	@ResponseBody
 	public void update(Model model, @RequestBody ScheduleVO schedule, SearchCriteria cri) throws Exception {
-
 		scheduleService.modifySchedule(schedule);
 		model.addAllAttributes(scheduleService.selectScheduleList(cri));
 	}

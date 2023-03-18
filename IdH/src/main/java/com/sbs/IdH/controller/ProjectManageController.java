@@ -20,7 +20,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.BudgetVO;
-import com.sbs.IdH.dto.MemberVO;
 import com.sbs.IdH.dto.ProjectVO;
 import com.sbs.IdH.dto.ScheduleVO;
 import com.sbs.IdH.dto.UnitworkVO;
@@ -432,7 +431,7 @@ public class ProjectManageController {
 	public ResponseEntity<Map<String, Object>> getProjectDetail(int project_number) throws Exception {
 		ResponseEntity<Map<String, Object>> entity = null;
 		HttpStatus status;
-		Map<String, Object> dataMap = null;
+		Map<String, Object> dataMap = new HashMap<String,Object>();
 		try {
 			dataMap.put("project", projectService.selectProject(project_number));
 			status = HttpStatus.OK;

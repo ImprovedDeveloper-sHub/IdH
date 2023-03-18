@@ -12,7 +12,7 @@
       <!--col-6시작-->
       <div class="col-6">
       	<div id="content" class="card">
-         <div class="card-header">
+         <div class="card-header bg-info">
             <h3 class="card-title">진행 프로젝트</h3>
          </div>
          <div id="test">
@@ -39,8 +39,8 @@
          
             </div>
          <div id="table-content">
-            <div  class="card-body table-responsive p-0">
-               <table  class="table table-hover">
+            <div  class="card-body table-responsive p-0" style="height:200px">
+               <table  class="table table-hover" >
                   <thead id="proceedingThead" class="proceedingThead" class="text-left">
 	                <tr>
 	                  <th style="width:30%">사업 이름</th>
@@ -56,7 +56,7 @@
 				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
 			 	 </c:if>
 			 	 <c:forEach items="${proceedingProjectList }" var="project">
-					 <tr onclick="setProjectNum(${project.project_number},'getProjectDetail'); goPage('projectDetail')">
+					 <tr onclick="setProjectNum(${project.project_number},'getProjectDetail');">
 			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;">${project.project_business_name }</td>
 			                  <td style="text-align:left;max-width:20%; overflow: hidden; 
@@ -82,7 +82,7 @@
       </div>
       
       <div id="content" class="card">
-         <div class="card-header">
+         <div class="card-header bg-info">
             <h3 class="card-title">종료 프로젝트</h3>
          </div>
             <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse;">
@@ -104,7 +104,7 @@
                </div>
             </div>
          <div id="table-content">
-            <div  class="card-body table-responsive p-0">
+            <div  class="card-body table-responsive p-0" style="height:200px">
                <table  class="table table-hover">
                   <thead class="endThead" class="text-left">
 	                <tr>
@@ -121,7 +121,7 @@
 				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
 			 	 </c:if>
 			 	 <c:forEach items="${endProjectList }" var="project">
-					 <tr onclick="setProjectNum(${project.project_number}); goPage('projectDetail')">
+					 <tr onclick="setProjectNum(${project.project_number},'getProjectDetail');">
 					 <td style="text-align:left;max-width:20%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;">${project.project_business_name}</td>
 			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
@@ -162,26 +162,18 @@
           </div>
         </div>
       
-		<div class="card ">
-          <div class="card-small-body row">
+        <div class="card">
+          <div class="card-header bg-info">
+            <h3 class="card-title">프로젝트 현황</h3>
+          </div>
+<div class="card-small-body row">
           <input type="button" class="btn  btn-info btn-sm" id="budgetButton" onclick="OpenWindow('<%=request.getContextPath()%>/calendar/main','등록',850,750);" value="프로젝트 일정"></input>
             <input type="button" class="btn  btn-info btn-sm" id="budgetButton" onclick="ajax_print_chart('budget','1');" value="예산현황"></input>
               <input type="button" class="btn  btn-info btn-sm" id="workforceButton" onclick="ajax_print_chart('workforce');" value="인력현황"></input>
                <input type="button" class="btn  btn-info btn-sm" id="unitworkButton" onclick="ajax_print_chart('unitwork');" value="단위업무현황"></input>
               <input type="button" class="btn  btn-info btn-sm" onclick="ajax_print_chart('issue');" id="issueButton" value="이슈현황"></input>
 				<input type="button" class="btn  btn-info btn-sm"  id="productButton" onclick="ajax_print_chart('product');" value="산출물현황"></input>
-				
-
-<!-- <input type="button" class="btn btn-block btn-info btn-sm"  id="scheduleButton" onclick="ajax_print_chart('schedule');" value="일정현황"></input> -->
-          </div>
         </div>
-        
-
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">chart</h3>
-          </div>
-
           <div class="card-body">
             <div id="curve_chart"></div>
             <div id="budget_chart"></div>
@@ -199,56 +191,80 @@
           </div>
           
  
-        </div>
+        
 
 
        
 
 
         
-        <div class="row">
-          <div class="card col-6 card-info">
-            <div class="card-header ">
-            <h3 class="card-title ">종료 프로젝트</h3>
-           
-               <div class="card-body table-responsive p-0">
-            <table class="table table-hover ">
-              <thead>
-                <tr>
-                  <th>1</th>
-                  <th>2</th>
-                  <th>3</th>
-                  <th>4</th>
-                  <th>5</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>2</td>
-                  <td>3</td>
-                  <td><span class="tag tag-success">4</span></td>
-                  <td> 5</td>
-                </tr></tbody>
-              </table>
-              
-              
-              </div>
-            </div>
-          </div>
+       
+          <div class="col">
+		<div class="card card-info">
+				<div class="card-tools">
+					<div class="input-group input-group-sm" style="width: 150px;">
+						<div class="input-group-append"></div>
+					</div>
+				</div>
+			<div id="content">
+				<div id="table-content">
+					<table style="height:300px">
+						<thead class="projectDetailthead">
+							<tr>
+								<td class="name-td" style="width:15%;">분류</td>
+								<td class="name-td" colspan="3" style="width:35%;">세부사항</td>
+								<td class="name-td" style="width:15%;">분류</td>
+								<td class="name-td" style="width:35%;">세부사항</td>
+							</tr>
+						</thead>
+						<tbody class="projectDetailtbody">
+							<tr>
+								<td class="name-td">일정 번호</td>
+								<td class="table-td" colspan="3"></td>
+								<td class="name-td">수준</td>
+								<td class="table-td">보통</td>
+							</tr>
+							<tr>
+								<td class="name-td">등록자</td>
+								<td class="table-td" colspan="3"></td>
+								<td class="name-td">상태</td>
+								<td class="table-td" colspan="3"></td>
+							</tr>
+							
+							<tr>
+								<td class="name-td">시작날짜</td>
+								<td class="table-td" colspan="3"></td>
+								<td class="name-td">종료날짜</td>
+								<td class="table-td" colspan="3"></td>
+							</tr>
+							
+							<tr style="height: 100px;">
+								<td class="name-td">내용</td>
+								<td class="table-td td-summernote" colspan="5"></td>
+							</tr>
+
+							<tr>
+								<td class="name-td">프로젝트번호</td>
+								<td class="table-td"></td>
+								<td class="table-td"></td>
+								<td class="table-td"></td>
+								<td class="name-td">등록일</td>
+								<td class="table-td"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			</div>
+			</div>
+		</div>
           
-           <div class="card col-6 card-info">
-            <div class="card-header ">
-            <h3 class="card-title ">종료 프로젝트</h3>
            
-              <div class="card-body table-responsive p-0">
-            </div>
-              
-              
-              
-            </div>
-          </div>
-        </div>
+           
+           
+           
+           
+       
       </div>
 
 
@@ -311,22 +327,6 @@
 		/* $('#changeButton').val('프로젝트 비교');$('#changeButton').attr('onclick',"changeButton()"); */
 	}
 
-	function setProjectNum(setNum,url){
-		project_num = setNum;
-		alert(project_num);
-		$.ajax({
-			url:url+project_num,
-			type:'GET',
-			success:function(data){
-				alert(data);
-			},
-			error:function(error){
-	    		AjaxErrorSecurityRedirectHandler(error.status);	
-			}
-		});
-		
-	}
-	
 	
 	
   
@@ -335,7 +335,6 @@
   var chart_type="";
   var chart_data="test";
   var data_table_test;
-  
   
   function ajax_print_chart(url){
 	  formData = new FormData();
@@ -390,9 +389,31 @@
 	  google.charts.load('current', {packages: ['corechart', 'line']});
 	  google.charts.load('current', {'packages':['corechart']});
 	  google.charts.setOnLoadCallback(drawBasic);
+	  
+	  
   }
+  function go_ajax(url, target, delTarget, templateObject ) {
+	  	var jobForm=$('#jobForm');
+	  	//var jobForm = document.getElementById('#jobForm');
+	  	$.ajax({
+	  		url: url,
+	      	type: "GET",
+	      	success: function(data) {    		
+	      		//alert(JSON.stringify(data));
+	      		printData(data,target,delTarget,templateObject);
+	      	},
+	      	error:function(error){
+	      		AjaxErrorSecurityRedirectHandler(error.status);	
+	      	}
+	  	});
+	  }
   
   
+	  function setProjectNum(setNum,url){
+		  //alert(setNum);
+			project_num = setNum;
+			go_ajax(url+'?project_number='+project_num,$('.ProjectDetailthead'),$('.ProjectDetailtbody'),$('#projectDetail-template'));
+	  }
 
 
   function drawBasic() {
@@ -443,6 +464,14 @@
 	  	//alert('test');
 	  	window.close();
 	  	window.opener.location.reload();
+  </script>
+  
+  
+  <script>
+  
+
+
+  
   </script>
   
 </c:if>
