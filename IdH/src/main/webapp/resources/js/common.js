@@ -85,10 +85,10 @@ function search_go_ajax(page, perPageNum, searchType, keyword, url, target, delT
 	jobForm.find("[name='perPageNum']").val(perPageNum.val());
 	jobForm.find("[name='searchType']").val(searchType.val());
 	jobForm.find("[name='keyword']").val(keyword.val());
-	alert(page);
+	/*alert(page);
 	alert(perPageNum.val());
 	alert(searchType.val());
-	alert(keyword.val());
+	alert(keyword.val());*/
 
 	//var formData = new FormData(jobForm);
 	

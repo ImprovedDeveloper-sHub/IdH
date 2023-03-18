@@ -29,6 +29,7 @@ public class BudgetServiceImpl implements BudgetService {
 	@Override
 	public BudgetVO selectBudget(int budget_number) throws Exception {
 		BudgetVO budget = budgetDAO.selectBudget(budget_number);
+		budget.setBudget_project_name(projectDAO.selectProjectName(budget.getBudget_project_number()));
 		return budget;
 	}
 

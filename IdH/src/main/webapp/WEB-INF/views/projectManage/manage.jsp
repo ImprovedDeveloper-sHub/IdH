@@ -65,11 +65,12 @@
 						<table class="table table-hover">
 							<thead class="proceedingThead" class="text-left">
 								<tr>
-									<th style="width: 20%">일정 이름</th>
-									<th style="width: 30%">일정 상태</th>
-									<th style="width: 20%">시작 날짜</th>
+									<th style="width: 10%">일정 상태</th>
+									<th style="width: 30%">일정 이름</th>
+									<th style="width: 15%">일정 구분</th>
+									<th style="width: 15%">프로젝트 명</th>
+									<th style="width: 25%">시작 날짜</th>
 									<th style="width: 15%">종료 날짜</th>
-									<th style="width: 15%">일정 설명</th>
 								</tr>
 							</thead>
 
@@ -83,18 +84,22 @@
 									<tr
 										onclick="OpenWindow('scheduleDetail?schedule_number=${schedule.schedule_number}','스케줄',500,550);">
 										<td
+											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+											${schedule.schedule_status eq 1 ? '계획' : '진행'}</td>
+										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${schedule.schedule_name}</td>
 										<td
-											style="text-align: left; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${schedule.schedule_status}</td>
+											style="text-align: left; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${schedule.schedule_type eq '1' ? '기획' : ''}${schedule.schedule_type eq '2' ? '설계' : ''}${schedule.schedule_type eq '3' ? '구현' : ''}${schedule.schedule_type eq '4' ? '테스트' : ''}</td>
+										<td
+											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+											${schedule.schedule_project_name}</td>
+										
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
 												value="${schedule.schedule_startdate}" pattern="yyyy-MM-dd" /></td>
 										<td
 											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
 												value="${schedule.schedule_enddate}" pattern="yyyy-MM-dd" /></td>
-										<td
-											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-											${schedule.schedule_detail}</td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -141,11 +146,11 @@
 						<table class="table table-hover">
 							<thead class="endThead" class="text-left">
 								<tr>
-									<th style="width: 20%">프로젝트 이름</th>
+									<th style="width: 20%">예산 상태</th>
 									<th style="width: 30%">예산 이름</th>
-									<th style="width: 20%">예산 분류</th>
+									<th style="width: 20%">예산 구분</th>
 									<th style="width: 15%">예산 금액</th>
-									<th style="width: 15%">예산 내용</th>
+									<th style="width: 15%">프로젝트 이름</th>
 								</tr>
 							</thead>
 
@@ -158,12 +163,12 @@
 								<c:forEach items="${budgetList }" var="budget">
 									<tr
 										onclick="OpenWindow('budgetDetail?budget_number=${budget.budget_number}','예산',500,600);">
-										<td>${budget.budget_project_name}</td>
+										<td>${budget.budget_status eq 1 ? '계획' : '진행'}</td>
 										<td>${budget.budget_name}</td>
-										<td>${budget.budget_type}</td>
+										 <td>${budget.budget_type eq '1' ? '인건비' : ''}${budget.budget_type eq '2' ? '교통비' : ''}${budget.budget_type eq '3' ? '비품비' : ''}${budget.budget_type eq '4' ? '식대' : ''}</td> 
 										<td><fmt:formatNumber value="${budget.budget_price}"
 												pattern="#,###" /></td>
-										<td>${budget.budget_detail}</td>
+										<td>${budget.budget_project_name}</td>
 									</tr>
 								</c:forEach>
 							</tbody>

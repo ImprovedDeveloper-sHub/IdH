@@ -131,29 +131,22 @@
 							<tr>
 								<td class="name-td">등록자</td>
 								<td class="table-td" colspan="3">{{project_member_id}}</td>
-								<td class="name-td">상태</td>
+								<td class="name-td">프로젝트 이름</td>
 								<td class="table-td" colspan="3">{{project_name}}</td>
 							</tr>
 							
 							<tr>
 								<td class="name-td">시작날짜</td>
-								<td class="table-td" colspan="3"></td>
+								<td class="table-td" colspan="3">{{prettifyDate project_startdate}}</td>
 								<td class="name-td">종료날짜</td>
-								<td class="table-td" colspan="3"></td>
+								<td class="table-td" colspan="3">{{prettifyDate project_enddate}}</td>
 							</tr>
 							
 							<tr style="height: 100px;">
 								<td class="name-td">내용</td>
-								<td class="table-td td-summernote" colspan="5"></td>
+								<td class="table-td td-summernote" colspan="5">{{project_discription}}</td>
 							</tr>
 
-							<tr>
-								<td class="name-td">프로젝트번호</td>
-								<td class="table-td">1</td>
-								<td class="table-td">2</td>
-								<td class="table-td">3</td>
-								<td class="name-td">등록일</td>
-								<td class="table-td">4</td>
 </tbody>
 {{/each}}
 </script>

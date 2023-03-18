@@ -377,9 +377,9 @@ public class ProjectManageController {
 
 	@GetMapping("/deleteSchedule")
 	public String deleteSchedule(RedirectAttributes rttr, int schedule_number) throws Exception {
-		String url = "redirect:/projectManage/scheduleDetail";
+		String url = "redirect:/projectManage/main";
 		scheduleService.removeSchedule(schedule_number);
-		rttr.addFlashAttribute("from", "delete");
+		rttr.addFlashAttribute("from", "remove");
 		rttr.addAttribute("schedule_number", schedule_number);
 
 		return url;
@@ -443,4 +443,22 @@ public class ProjectManageController {
 		return entity;
 	}
 	
+	
+	
+	@GetMapping("/getBusinessDetail")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> getBusinessDetail(int business_number) throws Exception {
+		ResponseEntity<Map<String, Object>> entity = null;
+		HttpStatus status;
+		Map<String, Object> dataMap = new HashMap<String,Object>();
+		try {
+			dataMap.put("business", businessService.getBusiness(business_number));
+			status = HttpStatus.OK;
+		} catch (Exception e) {
+			status = HttpStatus.BAD_REQUEST;
+		}
+		entity = new ResponseEntity<Map<String, Object>>(dataMap, status);
+
+		return entity;
+	}
 }

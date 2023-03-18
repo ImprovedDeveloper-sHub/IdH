@@ -9,11 +9,12 @@ public class ScheduleVO {
 	private String schedule_member_id;
 	private int schedule_project_number;
 	private String schedule_detail;
-	private String schedule_type;
+	private int schedule_type;
 	private String schedule_name;
 	private Date schedule_regdate;
 	private Date schedule_enddate;
 	private Date schedule_startdate;
+	private String schedule_project_name;
 	
 	public int getSchedule_number() {
 		return schedule_number;
@@ -59,12 +60,7 @@ public class ScheduleVO {
 	}
 	
 	
-	public String getSchedule_type() {
-		return schedule_type;
-	}
-	public void setSchedule_type(String schedule_type) {
-		this.schedule_type = schedule_type;
-	}
+	
 	public String getSchedule_name() {
 		return schedule_name;
 	}
@@ -79,10 +75,23 @@ public class ScheduleVO {
 	}
 	
 	
+	public String getSchedule_project_name() {
+		return schedule_project_name;
+	}
+	public void setSchedule_project_name(String schedule_project_name) {
+		this.schedule_project_name = schedule_project_name;
+	}
+	
+	public int getSchedule_type() {
+		return schedule_type;
+	}
+	public void setSchedule_type(int schedule_type) {
+		this.schedule_type = schedule_type;
+	}
 	public ScheduleVO() {}
 	public ScheduleVO(int schedule_number, int schedule_status, String schedule_member_id, int schedule_project_number,
-			String schedule_detail, String schedule_type, String schedule_name, Date schedule_regdate,
-			Date schedule_enddate, Date schedule_startdate) {
+			String schedule_detail, int schedule_type, String schedule_name, Date schedule_regdate,
+			Date schedule_enddate, Date schedule_startdate, String schedule_project_name) {
 		super();
 		this.schedule_number = schedule_number;
 		this.schedule_status = schedule_status;
@@ -94,7 +103,7 @@ public class ScheduleVO {
 		this.schedule_regdate = schedule_regdate;
 		this.schedule_enddate = schedule_enddate;
 		this.schedule_startdate = schedule_startdate;
+		this.schedule_project_name = schedule_project_name;
 	}
-	
 	
 }

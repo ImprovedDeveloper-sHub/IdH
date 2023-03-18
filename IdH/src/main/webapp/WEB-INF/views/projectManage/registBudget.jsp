@@ -95,12 +95,12 @@ input {
 							<tr>
 								<td class="name-td">등록자</td>
 								<td class="table-td" colspan="3" ><input type="text" name="budget_member_id" value="${loginUser.member_id}" readonly></td>
-								<td class="name-td">수준</td>
-								<td class="table-td"><select name ="budget_level">
-													<option value="1">기획</option>
-													<option value="2">설계</option>
-													<option value="3">구현</option>
-													<option value="4">테스트</option>
+								<td class="name-td">분류</td>
+								<td class="table-td"><select name ="budget_type">
+													<option value="1">인건비</option>
+													<option value="2">교통비</option>
+													<option value="3">비품비</option>
+													<option value="4">식대</option>
 									</select></td>
 							</tr>
 							<tr>

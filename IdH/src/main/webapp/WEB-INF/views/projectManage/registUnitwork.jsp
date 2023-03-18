@@ -95,7 +95,7 @@ input {
 							<tr>
 								<td class="name-td">등록자</td>
 								<td class="table-td" colspan="3" ><input type="text" name="unitwork_member_id" value="${loginUser.member_id}" readonly></td>
-								<td class="name-td">수준</td>
+								<td class="name-td">타입</td>
 								<td class="table-td"><select name ="unitwork_level">
 													<option value="1">기획</option>
 													<option value="2">설계</option>

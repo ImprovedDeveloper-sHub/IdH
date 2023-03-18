@@ -6,6 +6,13 @@
        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
         <!--   <script>alert('${test}');</script> -->
+ <style>
+ #projectDetailtable>th,td{
+ 	border: 1px solid #444444;
+ }
+ </style>       
+        
+        
  <div class= "content">
     <div class="row">
 
@@ -43,11 +50,11 @@
                <table  class="table table-hover" >
                   <thead id="proceedingThead" class="proceedingThead" class="text-left">
 	                <tr>
-	                  <th style="width:30%">사업 이름</th>
-	                  <th style="width:20%">프로젝트 이름</th>
-	                  <th style="width:20%">시작 날짜</th>
-	                  <th style="width:20%">예상 종료 날짜</th>
-	                  <th style="width:15%">요구사항</th>
+	                  <th style="width:15%">사업 이름</th>
+	                  <th style="width:30%">프로젝트 이름</th>
+	                  <th style="width:20%; text-align:center;">시작 날짜</th>
+	                  <th style="width:20%; text-align:center;">예상 종료 날짜</th>
+	                  <th style="width:15%; text-align:center;">관련요구사항</th>
 	                </tr>
               	</thead>
               
@@ -61,11 +68,11 @@
                                     white-space: nowrap; text-overflow: ellipsis;">${project.project_business_name }</td>
 			                  <td style="text-align:left;max-width:20%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;">${project.project_name}</td>
-			                  <td style="text-align:left;max-width: 20%; overflow: hidden; 
+			                  <td style="text-align:center;max-width: 20%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate value="${project.project_regdate}" pattern="yyyy-MM-dd"/></td>
-			                  <td style="text-align:left;max-width: 20%; overflow: hidden; 
+			                  <td style="text-align:center;max-width: 20%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate value="${project.project_enddate}" pattern="yyyy-MM-dd"/></td>
-			                  <td>요구사항</td>
+			                  <td style="text-align:center;">요구사항</td>
 			                  
 	                </tr>
 			 	 </c:forEach>
@@ -154,11 +161,13 @@
       
        <div class="card ">
           <div class="card-small-body row">
+            <div class="col">
             <input id="" type="button" class="btn btn-info btn-sm" onclick="" value="프로젝트 계획"></input>
                <input type="button" class="btn  btn-info btn-sm" id="" onclick="OpenWindow('<%=request.getContextPath()%>/calendar/main','등록',850,750);" value="전체일정"></input>
 
               <input id="changeButton" type="button" class="btn btn-info btn-sm" onclick="returnButton()" value="프로젝트 현황"></input>
               <input id="changeButton" type="button" class="btn btn-info btn-sm" onclick="changeButton()" value="프로젝트 비교"></input>
+          </div>
           </div>
         </div>
       
@@ -167,14 +176,17 @@
             <h3 class="card-title">프로젝트 현황</h3>
           </div>
 <div class="card-small-body row">
-          <input type="button" class="btn  btn-info btn-sm" id="budgetButton" onclick="OpenWindow('<%=request.getContextPath()%>/calendar/main','등록',850,750);" value="프로젝트 일정"></input>
+		<div class="col">
+          <input type="button" class="btn  btn-info btn-sm" id="scheduleButton" onclick="OpenWindow('<%=request.getContextPath()%>/calendar/calByProject?project_number='+project_num,'등록',850,750);" value="프로젝트 일정"></input>
+          
             <input type="button" class="btn  btn-info btn-sm" id="budgetButton" onclick="ajax_print_chart('budget','1');" value="예산현황"></input>
               <input type="button" class="btn  btn-info btn-sm" id="workforceButton" onclick="ajax_print_chart('workforce');" value="인력현황"></input>
                <input type="button" class="btn  btn-info btn-sm" id="unitworkButton" onclick="ajax_print_chart('unitwork');" value="단위업무현황"></input>
               <input type="button" class="btn  btn-info btn-sm" onclick="ajax_print_chart('issue');" id="issueButton" value="이슈현황"></input>
 				<input type="button" class="btn  btn-info btn-sm"  id="productButton" onclick="ajax_print_chart('product');" value="산출물현황"></input>
         </div>
-          <div class="card-body">
+        </div>
+          <div id="chartDiv" class="card-body">
             <div id="curve_chart"></div>
             <div id="budget_chart"></div>
             <div id="schedule"></div>
@@ -208,7 +220,7 @@
 				</div>
 			<div id="content">
 				<div id="table-content">
-					<table style="height:300px">
+					<table id="projectDetailtable" style="width:570px; height:200px">
 						<thead class="projectDetailthead">
 							<tr>
 								<td class="name-td" style="width:15%;">분류</td>
@@ -241,15 +253,6 @@
 							<tr style="height: 100px;">
 								<td class="name-td">내용</td>
 								<td class="table-td td-summernote" colspan="5"></td>
-							</tr>
-
-							<tr>
-								<td class="name-td">프로젝트번호</td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
-								<td class="name-td">등록일</td>
-								<td class="table-td"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -306,12 +309,12 @@
 	  $('#changeButton').val('프로젝트 현황');
 	  
 	  
-	  	$('#budgetButton').attr('onclick',"ajax_print_chart('budgetComparison')");
-		$('#workforceButton').attr('onclick',"ajax_print_chart('workforceComparison')");
+	  	$('#budgetButton').attr('onclick',"ajax_print_comparison_chart('budgetComparison')");
+		$('#workforceButton').attr('onclick',"ajax_print_comparison_chart('workforceComparison')");
 		//$('#scheduleButton').val('일정비교'); $('#scheduleButton').attr('onclick',"ajax_print_chart('scheduleComparison')")
-		$('#issueButton').attr('onclick',"ajax_print_chart('issueComparison')");
-		$('#productButton').attr('onclick',"ajax_print_chart('productComparison')");
-		 $('#unitworkButton').attr('onclick',"ajax_print_chart('unitworkComparison')")
+		$('#issueButton').attr('onclick',"ajax_print_comparison_chart('issueComparison')");
+		$('#productButton').attr('onclick',"ajax_print_comparison_chart('productComparison')");
+		 $('#unitworkButton').attr('onclick',"ajax_print_comparison_chart('unitworkComparison')")
 		$('#changeButton').attr('onclick',"returnButton()");
 	}
 
@@ -336,6 +339,10 @@
   var chart_data="test";
   var data_table_test;
   
+  var project_comparison_num1 = 1;
+  var project_comparison_num2 = 2;
+  
+  
   function ajax_print_chart(url){
 	  formData = new FormData();
 	  test = $.ajax({
@@ -358,6 +365,32 @@
 			},
 		})
   }
+  
+  
+  function ajax_print_comparison_chart(url){
+	  formData = new FormData();
+	  test = $.ajax({
+			url:"${request.ContextPath()}/IdH/"+url,//서버url
+			data: {
+				project_comparison_num1 : project_comparison_num1,
+				project_comparison_num2 : project_comparison_num2
+			},
+			method:"post",	//get post 보내는 방식
+			success:function(data){
+				//alert(url);
+				chart_data = JSON.stringify(data);
+				chart_type= url+"_chart";
+				table_print();
+			},	//서버에서 보내는 데이터
+			error:function(error){
+				alert('error')
+			},
+			complete:function(){
+				//alert('complete')
+			},
+		})
+  }
+  
   
   		
  
@@ -413,6 +446,7 @@
 		  //alert(setNum);
 			project_num = setNum;
 			go_ajax(url+'?project_number='+project_num,$('.ProjectDetailthead'),$('.ProjectDetailtbody'),$('#projectDetail-template'));
+			$('#chartDiv').hidden;
 	  }
 
 
@@ -466,14 +500,17 @@
 	  	window.opener.location.reload();
   </script>
   
-  
-  <script>
-  
-
-
-  
-  </script>
-  
 </c:if>
-  
+
+<c:if test="${from eq 'remove' }">
+<script>
+	alert('삭제되었습니다.');
+	window.close();
+	window.opener.location.reload();
+</script>
+
+</c:if>
+
+
+<script></script>  
   

@@ -70,6 +70,7 @@
 	/>
 	<bean id="scheduleService" class="com.sbs.IdH.service.ScheduleServiceImpl"
 		p:scheduleDAO-ref="scheduleDAO"
+		p:projectDAO-ref="projectDAO"
 	/>
 	<bean id="budgetService" class="com.sbs.IdH.service.BudgetServiceImpl"
 		p:budgetDAO-ref="budgetDAO"

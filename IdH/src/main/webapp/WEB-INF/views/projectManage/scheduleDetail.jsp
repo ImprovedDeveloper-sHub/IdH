@@ -93,8 +93,8 @@ input {
 							<tr>
 								<td class="name-td">일정 번호</td>
 								<td class="table-td" colspan="3">${schedule.schedule_number}</td>
-								<td class="name-td">수준</td>
-								<td class="table-td">보통</td>
+								<td class="name-td">분류</td>
+								<td class="table-td">${schedule.schedule_type eq '1' ? '기획' : ''}${schedule.schedule_type eq '2' ? '설계' : ''}${schedule.schedule_type eq '3' ? '구현' : ''}${schedule.schedule_type eq '4' ? '테스트' : ''}</td>
 							</tr>
 							<tr>
 								<td class="name-td">등록자</td>
@@ -116,8 +116,8 @@ input {
 							</tr>
 
 							<tr>
-								<td class="name-td">프로젝트번호</td>
-								<td class="table-td">${schedule_project_number}</td>
+								<td class="name-td">프로젝트이름</td>
+								<td class="table-td">${schedule.schedule_project_name}</td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">등록일</td>
@@ -146,13 +146,6 @@ input {
 	</script>
 </c:if>
 
-<c:if test="${from eq 'delete' } ">
-<script>
-	alert('삭제되었습니다.');
-	window.close();
-	window.opener.location.reload();
-</script>
 
-</c:if>
 
 

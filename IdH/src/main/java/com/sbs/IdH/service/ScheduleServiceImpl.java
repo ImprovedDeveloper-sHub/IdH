@@ -7,13 +7,20 @@ import java.util.Map;
 import com.sbs.IdH.command.DateMaker;
 import com.sbs.IdH.command.PageMaker;
 import com.sbs.IdH.command.SearchCriteria;
+import com.sbs.IdH.dao.ProjectDAO;
 import com.sbs.IdH.dao.ScheduleDAO;
 import com.sbs.IdH.dto.ScheduleVO;
 
 public class ScheduleServiceImpl implements ScheduleService {
 
-	ScheduleDAO scheduleDAO;
+	private ScheduleDAO scheduleDAO;
 
+	private ProjectDAO projectDAO;
+	
+	public void setProjectDAO(ProjectDAO projectDAO) {
+		this.projectDAO = projectDAO;
+	}
+	
 	public void setScheduleDAO(ScheduleDAO scheduleDAO) {
 		this.scheduleDAO = scheduleDAO;
 	}
@@ -38,7 +45,9 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 	@Override
 	public ScheduleVO selectSchedule(int schedule_number) throws Exception {
-		return scheduleDAO.selectSchedule(schedule_number);
+		ScheduleVO schedule = scheduleDAO.selectSchedule(schedule_number);
+		schedule.setSchedule_project_name(projectDAO.selectProjectName(schedule.getSchedule_project_number()));
+		return schedule;
 	}
 
 	@Override
@@ -48,6 +57,10 @@ public class ScheduleServiceImpl implements ScheduleService {
 		cri.setPerPageNum(5);
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(scheduleDAO.selectSearchScheduleListCount(cri));
+		List<ScheduleVO> scheduleList = scheduleDAO.selectSearchScheduleList(cri);
+		for(ScheduleVO schedule: scheduleList) {
+			schedule.setSchedule_project_name(projectDAO.selectProjectName(schedule.getSchedule_project_number()));
+		}
 		dataMap.put("scheduleList", scheduleDAO.selectSearchScheduleList(cri));
 		dataMap.put("pageMaker",pageMaker);
 		return dataMap;

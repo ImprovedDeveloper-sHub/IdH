@@ -56,8 +56,8 @@ public class ChartController {
 	
 	@PostMapping("/budgetComparison")
 	@ResponseBody
-	public Map<String, Object> budgetComparison() throws Exception {
-		ChartVO chart = budgetService.selectChartForComparison(1, 2);
+	public Map<String, Object> budgetComparison(int project_comparison_num1, int project_comparison_num2) throws Exception {
+		ChartVO chart = budgetService.selectChartForComparison(project_comparison_num1, project_comparison_num2);
 		return chart.getResult();
 	}
 	

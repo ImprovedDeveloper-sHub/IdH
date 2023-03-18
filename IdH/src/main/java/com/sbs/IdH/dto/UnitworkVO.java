@@ -15,6 +15,7 @@ public class UnitworkVO {
 	private Date unitwork_enddate;
 	private Date unitwork_startdate;
 	
+	private String unitwork_project_name;
 	
 	public UnitworkVO() {}
 	public UnitworkVO(int unitwork_number, int unitwork_status, String unitwork_name, int unitwork_level,
@@ -98,6 +99,12 @@ public class UnitworkVO {
 	}
 	public void setUnitwork_startdate(Date unitwork_startdate) {
 		this.unitwork_startdate = unitwork_startdate;
+	}
+	public String getUnitwork_project_name() {
+		return unitwork_project_name;
+	}
+	public void setUnitwork_project_name(String unitwork_project_name) {
+		this.unitwork_project_name = unitwork_project_name;
 	}
 
 	

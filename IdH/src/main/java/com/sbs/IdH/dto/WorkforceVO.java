@@ -13,6 +13,17 @@ public class WorkforceVO {
 	private Date workforce_regdate;
 	private Date workforce_startdate;
 	private Date workforce_enddate;
+	
+	private String workforce_project_name;
+	
+	
+	
+	public String getWorkforce_project_name() {
+		return workforce_project_name;
+	}
+	public void setWorkforce_project_name(String workforce_project_name) {
+		this.workforce_project_name = workforce_project_name;
+	}
 	public int getWorkforce_number() {
 		return workforce_number;
 	}

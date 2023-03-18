@@ -106,7 +106,8 @@ body {
 
 
 <script>
-var url = "getCalendar";
+
+var url = "getCalendarByProject?project_number="+${param.project_number};
 
 window.onload = function(){
 	url = url,

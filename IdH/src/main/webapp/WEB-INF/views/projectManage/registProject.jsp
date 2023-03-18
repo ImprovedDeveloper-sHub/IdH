@@ -16,6 +16,10 @@ table input {
 	 border:solid black 1px;
 	 padding:5px 0;
 }
+
+ #projectDetailtable>th,td{
+ 	border: 1px solid #444444;
+ }
 </style>
 
 <div class="content row">
@@ -78,11 +82,59 @@ table input {
               </div>
 				</div>
 			<div class="col-4 content-util card">
-		<ul>
-			<li>
-				선택한제목
-			</li>
-		</ul>
+		<table id="businessDetailtable" style="width:370px; height:600px">
+						<thead class="businessDetailthead">
+							<tr>
+								<td class="name-td" style="width:15%;">분류</td>
+								<td class="name-td" colspan="3" style="width:35%;">세부사항</td>
+								<td class="name-td" style="width:15%;">분류</td>
+								<td class="name-td" style="width:35%;">세부사항</td>
+							</tr>
+						</thead>
+						<tbody class="businessDetailtbody">
+							<tr>
+								<td class="name-td">사업 이름</td>
+								<td class="table-td" colspan="3"></td>
+								<td class="name-td">수준</td>
+								<td class="table-td"></td>
+							</tr>
+							<tr>
+								<td class="name-td">등록자</td>
+								<td class="table-td" colspan="3"></td>
+								<td class="name-td">상태</td>
+								<td class="table-td" colspan="3"></td>
+							</tr>
+							
+							<tr>
+								<td class="name-td">시작날짜</td>
+								<td class="table-td" colspan="3"></td>
+								<td class="name-td">종료날짜</td>
+								<td class="table-td" colspan="3"></td>
+							</tr>
+							<tr style="height: 100px;">
+								<td class="name-td">일정</td>
+								<td class="table-td" colspan="5"></td>
+							</tr>
+							<tr style="height: 100px;">
+								<td class="name-td">예산</td>
+								<td class="table-td" colspan="5"></td>
+							</tr>
+							<tr style="height: 100px;">
+								<td class="name-td">인력</td>
+								<td class="table-td" colspan="5"></td>
+							</tr>
+							<tr style="height: 100px;">
+								<td class="name-td">단위업무</td>
+								<td class="table-td" colspan="5"></td>
+							</tr>
+							
+							
+							<tr style="height: 100px;">
+								<td class="name-td">내용</td>
+								<td class="table-td td-summernote" colspan="5"></td>
+							</tr>
+						</tbody>
+					</table>
 	</div>
 		
 	</div>
@@ -143,8 +195,9 @@ function regist_project_go(){
 		$(function() {
 		    $("#business_selector").on("change", function() {
 		        var v = $('#business_selector').val();
-		       alert("셀렉트값 : "+v);
+		       //alert("셀렉트값 : "+v);
 		       getPlan(v);
+		       getBusiness(v);
 		    });
 		});
 	};
@@ -158,7 +211,7 @@ function regist_project_go(){
 			url:"getPlan?business_number="+business_number,
 			type:"GET",
 			success: function(data){
-				console.log(JSON.stringify(data));
+				//console.log(JSON.stringify(data));
 				//alert(business_number);
 				//printPlan(data,$('.project_tr'),$('.budgetPlan)');
 				//printPlan(data,$('#budgetPlan'),$('#schedluePlan'),$('#workforcePlan'),$('#unitworkPlan'));
@@ -170,6 +223,25 @@ function regist_project_go(){
 		});	
 	}
 </script>
+
+
+
+<script>
+	function getBusiness(business_number){
+		$.ajax({
+			url:"getBusinessDetail?business_number="+business_number,
+			type:"GET",
+			success: function(data){
+				printPlan(data,$('#businessDetailtable'),$('#business-detail-template'));
+			}
+		});
+		
+		
+	}
+
+
+</script>
+
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
@@ -212,21 +284,85 @@ function regist_project_go(){
 		</td>
 </script>
 
-<script>
+<script type="text/x-handlebars-template"  id="business-detail-template" >
+		
+		<thead class="businessDetailthead">
+							<tr>
+								<td class="name-td" style="width:15%;">분류</td>
+								<td class="name-td" colspan="3" style="width:35%;">세부사항</td>
+								<td class="name-td" style="width:15%;">분류</td>
+								<td class="name-td" style="width:35%;">세부사항</td>
+							</tr>
+						</thead>
+						<tbody class="businessDetailtbody">
+							<tr>
+								<td class="name-td">사업 이름</td>
+								<td class="table-td" colspan="3">{{business.business_name}}</td>
+								<td class="name-td">수준</td>
+								<td class="table-td">{{business.business_status}}</td>
+							</tr>
+							<tr>
+								<td class="name-td">담당자</td>
+								<td class="table-td" colspan="3">{{business.business_member_id}}</td>
+								<td class="name-td">총원</td>
+								<td class="table-td" colspan="3">{{business.business_people}}</td>
+							</tr>
+							
+							<tr>
+								<td class="name-td">시작날짜</td>
+								<td class="table-td" colspan="3">{{prettifyDate business.business_begin}}</td>
+								<td class="name-td">종료날짜</td>
+								<td class="table-td" colspan="3">{{prettifyDate business.business_end}}</td>
+							</tr>
+							
+							<tr style="height: 50px;">
+								<td class="name-td">예산</td>
+								<td class="table-td" colspan="3">{{business.business_budget}}</td>
+								<td class="name-td">사용예산</td>
+								<td class="table-td" colspan="3">{{business.business_usebudget}}</td>
+							</tr>
+							<tr style="height: 50px;">
+								<td class="name-td">국가 지원 예산</td>
+								<td class="table-td" colspan="3">{{business.business_nationbudget}}</td>
+								<td class="name-td">회사 자체 예산</td>
+								<td class="table-td" colspan="3">{{business.business_companybudget}}</td>
+							</tr>
+							<tr style="height: 100px;">
+								<td class="name-td">일정</td>
+								<td class="table-td" colspan="5"></td>
+							</tr>
+							<tr style="height: 100px;">
+								<td class="name-td">인력</td>
+								<td class="table-td" colspan="5"></td>
+							</tr>
+							<tr style="height: 100px;">
+								<td class="name-td">단위업무</td>
+								<td class="table-td" colspan="5"></td>
+							</tr>
+							
+							
+							<tr style="height: 100px;">
+								<td class="name-td">내용</td>
+								<td class="table-td td-summernote" colspan="5">{{business.business_content}}</td>
+							</tr>
+						</tbody>
+</script>
 
+<script>
+Handlebars.registerHelper({
+	"prettifyDate":function(timeValue){ //Handlbars에 날짜출력함수 등록
+						var dateObj=new Date(timeValue);
+						var year=dateObj.getFullYear();
+						var month=dateObj.getMonth()+1;
+						var date=dateObj.getDate();
+						return year+"-"+month+"-"+date;
+					}
+	
+});
 
 
 </script>
 <script>
-function printPlan2(data,target_budget, target_schedule, target_workforce, target_unitwork){
-	//var planTemplate=Handlebars.compile($('#budget-plan-list-template').html());
-	//alert(JSON.stringify(data));
-	//var plan_html = planTemplate(data);
-	//delTarget.remove();
-	//alert(html);
-	//target_budget.html("").html(plan_html);
-	
-}
 
 function printPlan(data,target, templateObject){
 	var planTemplate=Handlebars.compile(templateObject.html());
@@ -237,16 +373,11 @@ function printPlan(data,target, templateObject){
 	target.html("").html(plan_html);
 }
 
-function printPlan1(data,target, templateObject){
-	var planTemplate2=Handlebars.compile(templateObject.html());
-	//alert(JSON.stringify(data));
-	var plan_html2 = planTemplate2(data);
-	//delTarget.remove();
-	//alert(html);
-	target.html("").html(plan_html2);
-}
+
 
 </script>
+
+
 
 
 
