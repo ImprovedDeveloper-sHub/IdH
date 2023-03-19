@@ -37,8 +37,10 @@
 					style="width: 80px" id="registBtn"
 					onclick="OpenWindow('registForm','글등록',680,555)">등록</button>
 			</div>
+			
 			<div id="table-content">
 				<div class="card-body table-responsive p-0">
+				<!-- <form method="get" action="form-action.html"> -->
 					<table class="table table-hover">
 						<thead class="text-left">
 							<tr>
@@ -57,12 +59,17 @@
 									<td colspan="5">데이터가 없습니다.</td>
 								</tr>
 							</c:if>
+							
 							<c:forEach items="${productProceedList }" var="product">
+							
 								<tr
 									onclick="OpenWindow('detail?product_number=${product.product_number }','상세보기',680,400);"
 									style="cursor: pointer;">
+									
+										
+					
 									<td
-										style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${product.product_number}</td>
+										style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><!-- <label><input type="checkbox" name="product_number" value=""> -->${product.product_number}<!-- </label> --></td>
 									<td
 										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${product.product_title}</td>
 									<td
@@ -82,11 +89,17 @@
 									<span>-</span>
 								</c:if>
 							</td>
+							  
 								</tr>
-
+									
+                          
 							</c:forEach>
+						
 						</tbody>
+						
 					</table>
+					<!-- </form> -->
+					<!-- <input type="submit" value="Submit"> <input type="reset" value="Reset"> -->
 				</div>
 			</div>
 		</div>
