@@ -108,6 +108,7 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
+						    <th>번호</th>
 							<th>협업 산출물</th>
 							<th>요청자</th>
 							<th></th>
@@ -122,9 +123,10 @@
 						<c:forEach items="${coworkList }" var="cowork">
 
                           <c:forEach items="${product_CoworkList}" var="product">     
-							<tr
-								onclick="OpenWindow('detail?cowork_number=${cowork.cowork_number}&from=list','상세보기',680,400);"
-								style="cursor: pointer;">
+							<tr>
+								
+								<td
+									style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${product.product_number}</td>
 								<td
 									style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${product.product_title}</td>
 								<td
@@ -132,8 +134,9 @@
 
 								<td class="text-right py-0 align-middle">
 									<div class="btn-group btn-group-sm">
-										<a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-										<a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>		
+										<div class="btn btn-info" onclick="OpenWindow('detail?product_number=${product.product_number}','상세보기',680,400);"
+								style="cursor: pointer;"><i class="fas fa-eye"></i></div>
+										<div class="btn btn-danger"  onclick="submit_go('remove','${product.product_number }');"><i class="fas fa-trash"></i></div>		
 										
 									</div>
 								</td>
@@ -258,3 +261,8 @@
 	window.opener.location.reload();
 </script>
 </c:if>
+<script>
+function submit_go(url,product_number ){	
+	location.href=url+"?product_number="+product_number;
+}
+</script>

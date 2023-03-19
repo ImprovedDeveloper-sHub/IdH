@@ -20,7 +20,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sbs.IdH.command.ProductModifyCommand;
 import com.sbs.IdH.command.ProductRegistCommand;
 import com.sbs.IdH.command.SearchCriteria;
-import com.sbs.IdH.dto.Co_AttachVO;
 import com.sbs.IdH.dto.CoworkVO;
 import com.sbs.IdH.dto.ProductVO;
 import com.sbs.IdH.dto.Product_AttachVO;
@@ -81,7 +80,7 @@ public class ProductController {
 		return mnv;
 	}
 	
-
+  
 	
 	
 
@@ -151,7 +150,7 @@ public class ProductController {
 		ProductVO product = null;
 
 		product = productService.selectProduct(product_number);
-
+		/* product=productService.selectProductEndList(product_number); */
 		// 파일명 재정의
 		if (product != null) {
 			List<Product_AttachVO> attachList = product.getAttachList();
@@ -168,6 +167,7 @@ public class ProductController {
 
 		return mnv;
 	}
+	
 	
 	  @GetMapping("/cowork_detail") public ModelAndView cowork_detail(int cowork_number, String
 	  from, RedirectAttributes rttr, ModelAndView mnv) throws Exception { String
@@ -201,6 +201,11 @@ public class ProductController {
 				}
 			}
 			// DB삭제
+			/*
+			 * Product_AttachVO deleteAttach = attachList.get(product_number);
+			 * 
+			 * productService.removeProduct_AttachByAno(deleteAttach.getAno());
+			 */
 			productService.removeProduct(product_number);
 			
 			rttr.addFlashAttribute("from", "remove");
