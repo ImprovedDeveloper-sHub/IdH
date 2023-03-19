@@ -13,5 +13,9 @@
 		  class="java.lang.String">
 		  <constructor-arg value="${uploadPath.attach.notice}"/>
 	</bean>
+		<bean id="fileUploadRequirePath"
+		  class="java.lang.String">
+		  <constructor-arg value="${uploadPath.attach.require}"/>
+	</bean>
 
 </beans>
