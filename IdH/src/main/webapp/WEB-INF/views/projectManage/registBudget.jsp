@@ -104,6 +104,10 @@ input {
 									</select></td>
 							</tr>
 							<tr>
+								<td class="name-td">제목</td>
+								<td colspan="5"><input type="text" name="budget_name" placeholder="제목을 입력하여 주세요." /></td>
+							</tr>
+							<tr>
 								<td class="name-td">예산 금액</td>
 								<td colspan="5"><input type="text" name="budget_price" placeholder="금액을 입력하여 주세요." /></td>
 								<!-- <td class="table-td" colspan="3"><input class="datepicker" name="budget_startdate" ></td>
@@ -111,10 +115,7 @@ input {
 								<td class="table-td" colspan="3"><input class="datepicker" name="budget_enddate"></td> -->
 								
 							</tr>
-							<tr>
-								<td class="name-td">제목</td>
-								<td colspan="5"><input type="text" name="budget_name" placeholder="제목을 입력하여 주세요." /></td>
-							</tr>
+							
 							<tr style="height: 100px;">
 								<td class="name-td">내용</td>
 								<td class="table-td td-summernote" colspan="5"><textarea class="summernote" rows="15" cols="40" style="display:none;" name="budget_detail"></textarea></td>
@@ -122,13 +123,13 @@ input {
 
 							<tr>
 								<td class="name-td">프로젝트명</td>
-								<td class="table-td"><select name="schedule_project_number" >
+								<td class="table-td"><select name="budget_project_number" >
 									<option value="1">미정</option>
 									</select></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
-								<td class="name-td">등록일</td>
-								<td class="table-td">2023.03.07.</td>
+								<td class="name-td"></td>
+								<td class="table-td"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -153,7 +154,7 @@ input {
 	
 	function regist_go(){
 		//var form = $('form[name="registSchdeulForm"]')[0];
-			var form = document.registSchdeulForm;
+			var form = document.registBudegetForm;
 			if(form.title.value==""){
 				alert("제목은 필수입니다.");
 				return;

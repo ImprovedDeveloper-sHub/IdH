@@ -41,7 +41,6 @@ public class DateMaker {
 		this.paramList = new ArrayList<Map<String,Object>>();
 	}
 
-
 	public List<Map<String, Object>> getParamList() {
 		return paramList;
 	}

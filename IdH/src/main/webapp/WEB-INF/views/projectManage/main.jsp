@@ -7,8 +7,8 @@
         <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
         <!--   <script>alert('${test}');</script> -->
  <style>
- #projectDetailtable>th,td{
- 	border: 1px solid #444444;
+ #projectDetailtable td{
+ 	border: 1px solid #444444 !important;
  }
  </style>       
         
@@ -24,7 +24,7 @@
          </div>
          <div id="test">
          </div>
-            <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse;">
+            <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse; margin:3px;">
                <div class="input-group input-group-sm" style="width: 270px">
                <select id="proceedingPerPageNum" name="perPageNum" style="display:none"><option value="5" selected></option></select>
                   <select class="form-control-sm" name="searchType" id="proceedingSearchType" style="hegith:30px; width:90px !important; border-color:#CED4DA !important;">
@@ -92,7 +92,7 @@
          <div class="card-header bg-info">
             <h3 class="card-title">종료 프로젝트</h3>
          </div>
-            <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse;">
+            <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse; margin:3px;">
                <div class="input-group input-group-sm" style="width: 270px">
                <select id="endPerPageNum" name="perPageNum" style="display:none"><option value="5" selected></option></select>
                   <select class="form-control-sm" name="searchType" id="endSearchType" style="hegith:30px; width:90px !important; border-color:#CED4DA !important;">
@@ -161,7 +161,7 @@
       
        <div class="card ">
           <div class="card-small-body row">
-            <div class="col">
+            <div class="col" style="margin:3px;">
             <input id="" type="button" class="btn btn-info btn-sm" onclick="" value="프로젝트 계획"></input>
                <input type="button" class="btn  btn-info btn-sm" id="" onclick="OpenWindow('<%=request.getContextPath()%>/calendar/main','등록',850,750);" value="전체일정"></input>
 
@@ -175,8 +175,8 @@
           <div class="card-header bg-info">
             <h3 class="card-title">프로젝트 현황</h3>
           </div>
-<div class="card-small-body row">
-		<div class="col">
+<div class="card-small-body row"  >
+		<div class="col" style="margin:3px;">
           <input type="button" class="btn  btn-info btn-sm" id="scheduleButton" onclick="OpenWindow('<%=request.getContextPath()%>/calendar/calByProject?project_number='+project_num,'등록',850,750);" value="프로젝트 일정"></input>
           
             <input type="button" class="btn  btn-info btn-sm" id="budgetButton" onclick="ajax_print_chart('budget','1');" value="예산현황"></input>
@@ -213,7 +213,7 @@
        
           <div class="col">
 		<div class="card card-info">
-				<div class="card-tools">
+				<div class="card-tools" >
 					<div class="input-group input-group-sm" style="width: 150px;">
 						<div class="input-group-append"></div>
 					</div>

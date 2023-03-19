@@ -81,7 +81,7 @@ input {
 			</div>
 			<div id="content">
 				<form enctype="multiaprt/form-data" role="form" method="post" action="modifyBudget" name="modifyBudgetForm">
-				<input  name="budget_number" value="${budget.budget_number }"/>
+				<input type="hidden" name="budget_number" value="${budget.budget_number }"/>
 				<div id="table-content">
 					<table>
 						<thead>
@@ -96,36 +96,31 @@ input {
 							<tr>
 								<td class="name-td">등록자</td>
 								<td class="table-td" colspan="3" ><input type="text" name="budget_member_id" value="${budget.budget_member_id}" readonly></td>
-								<td class="name-td">수준</td>
-								<td class="table-td"><select name ="budget_level">
-													<option value="1">기획</option>
-													<option value="2">설계</option>
-													<option value="3">구현</option>
-													<option value="4">테스트</option>
+								<td class="name-td">분류</td>
+								<td class="table-td"><select name ="budget_type">
+													<option value="1">인건비</option>
+													<option value="2">교통비</option>
+													<option value="3">비품비</option>
+													<option value="4">식대</option>
 									</select></td>
-							</tr>
-							<tr>
-								<td class="name-td">시작날짜</td>
-								<td class="table-td" colspan="3"><fmt:formatDate value="${budget.budget_startdate }" pattern ="yyyy-MM-dd"/></td>
-								<td class="name-td">종료날짜</td>
-								<td class="table-td" colspan="3"><input class="datepicker" name="budget_enddate" value="${budget.budget_enddate }"></td>
-								
 							</tr>
 							<tr>
 								<td class="name-td">제목</td>
 								<td colspan="5"><input type="text" name="budget_name" value=${budget.budget_name }
 									 /></td>
 							</tr>
+							<tr>
+								<td class="name-td">예산 금액</td>
+								<td colspan="5"><input type="text" name="budget_price" value="${budget.budget_price }"></td>
+							</tr>
+							
 							<tr style="height: 100px;">
 								<td class="name-td">내용</td>
 								<td class="table-td td-summernote" colspan="5"><textarea class="summernote" rows="15" cols="40" style="display:none;" name="budget_detail">${budget.budget_detail }</textarea></td>
 							</tr>
-
 							<tr>
 								<td class="name-td">프로젝트명</td>
-								<td class="table-td">${budget.budget_project_number }<select>
-													
-									</select></td>
+								<td class="table-td" >${budget.budget_project_name }</td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">등록일</td>

@@ -82,8 +82,6 @@ public class ProjectManageController {
 	
 	@GetMapping("/manage")
 	public ModelAndView manage(ModelAndView mnv, SearchCriteria cri, HttpServletRequest request) throws Exception {
-		
-	
 		mnv.addAllObjects(projectService.selectProjectList(cri));
 		mnv.addAllObjects(budgetService.selectBudgetList(cri));
 		mnv.addAllObjects(workforceService.selectWorkforceList(cri));
@@ -149,37 +147,9 @@ public class ProjectManageController {
 		return url;
 	}
 
-	@GetMapping("/getPlan")
-	@ResponseBody
-	public ResponseEntity<Map<String, Object>> getPlan(int business_number) throws Exception {
-		ResponseEntity<Map<String, Object>> entity = null;
-		HttpStatus status;
-		Map<String, Object> dataMap = null;
-		try {
-			dataMap = projectService.selectProjectPlanByBusiness_number(business_number);
-			status = HttpStatus.OK;
-		} catch (Exception e) {
-			status = HttpStatus.BAD_REQUEST;
-		}
-		entity = new ResponseEntity<Map<String, Object>>(dataMap, status);
-		return entity;
-	}
+	
 
-	@GetMapping("/getPlan2")
-	@ResponseBody
-	public ResponseEntity<Map<String, Object>> getPlan2(int business_number) throws Exception {
-		ResponseEntity<Map<String, Object>> entity = null;
-		HttpStatus status;
-		Map<String, Object> dataMap = null;
-		try {
-			dataMap = projectService.selectProjectPlanByBusiness_number(business_number);
-			status = HttpStatus.OK;
-		} catch (Exception e) {
-			status = HttpStatus.BAD_REQUEST;
-		}
-		entity = new ResponseEntity<Map<String, Object>>(dataMap, status);
-		return entity;
-	}
+
 
 	@GetMapping("/registBudgetForm")
 	public ModelAndView registbudgetForm(ModelAndView mnv) throws Exception {
@@ -461,4 +431,41 @@ public class ProjectManageController {
 
 		return entity;
 	}
+	
+	@GetMapping("/getPlan")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> getPlan(int business_number) throws Exception {
+		ResponseEntity<Map<String, Object>> entity = null;
+		HttpStatus status;
+		Map<String, Object> dataMap = null;
+		try {
+			dataMap = projectService.selectProjectManageListByBusiness_number(business_number);
+			status = HttpStatus.OK;
+		} catch (Exception e) {
+			status = HttpStatus.BAD_REQUEST;
+		}
+		entity = new ResponseEntity<Map<String, Object>>(dataMap, status);
+		return entity;
+	}
+	
+	
+	@GetMapping("/getManage")
+	@ResponseBody
+	public ResponseEntity<Map<String,Object>> getManage(int project_number) throws Exception{
+		
+		ResponseEntity <Map<String,Object>> responseEntity = null;
+		SearchCriteria cri = new SearchCriteria();
+		cri.setProject_number(project_number);
+		HttpStatus status = null;
+		Map<String,Object> dataMap = null;
+		try {
+			dataMap = projectService.selectProjectManageListByProjectNumber(1);
+			status = HttpStatus.OK;
+		}catch(Exception e) {
+			status = HttpStatus.BAD_REQUEST;
+		}
+		responseEntity = new ResponseEntity<Map<String,Object>>(dataMap,status);
+		return responseEntity;
+	}
+	
 }

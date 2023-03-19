@@ -130,54 +130,67 @@ public class ProjectServiceImpl implements ProjectService {
 		return dataMap;
 	}
 
-	@Override
-	public Map<String, Object> selectProjectPlanByBusiness_number2(int business_number) throws Exception {
-		List<Integer> project_numberList = projectDAO.selectProjectByBusinessNumber(business_number);
-
-		SearchCriteria cri = new SearchCriteria();
-		Map<String, Object> dataMap = new HashMap<String, Object>();
-		cri.setStatus(1);
-		List<List<BudgetVO>> budgetList = new ArrayList<List<BudgetVO>>();
-		List<List<UnitworkVO>> unitworkList = new ArrayList<List<UnitworkVO>>();
-		List<List<ScheduleVO>> scheduleList = new ArrayList<List<ScheduleVO>>();
-
-		for (int project_number : project_numberList) {
-			System.out.println(project_number);
-			cri.setProject_number(project_number);
-
-			List<BudgetVO> budgetLi = budgetDAO.selectSearchBudgetList(cri);
-			if (!budgetLi.isEmpty()) {
-				budgetList.add(budgetLi);
-			}
-			if (!unitworkDAO.selectSearchUnitworkList(cri).isEmpty()) {
-				unitworkList.add(unitworkDAO.selectSearchUnitworkList(cri));
-			}
-			if (!budgetDAO.selectSearchBudgetList(cri).isEmpty()) {
-				scheduleList.add(scheduleDAO.selectSearchScheduleList(cri));
-			}
-
-		}
-
-		dataMap.put("budgetList", budgetList);
-		dataMap.put("unitworkList", unitworkList);
-		dataMap.put("scheduleList", scheduleList);
-		// dataMap.put("workforceList", workforceDAO.selectSearchWorkforceList(cri));
-		return dataMap;
-	}
+	/*
+	 * @Override public Map<String, Object> selectProjectPlanByBusiness_number2(int
+	 * business_number) throws Exception { List<Integer> project_numberList =
+	 * projectDAO.selectProjectByBusinessNumber(business_number);
+	 * 
+	 * SearchCriteria cri = new SearchCriteria(); Map<String, Object> dataMap = new
+	 * HashMap<String, Object>(); cri.setStatus(1); List<List<BudgetVO>> budgetList
+	 * = new ArrayList<List<BudgetVO>>(); List<List<UnitworkVO>> unitworkList = new
+	 * ArrayList<List<UnitworkVO>>(); List<List<ScheduleVO>> scheduleList = new
+	 * ArrayList<List<ScheduleVO>>();
+	 * 
+	 * for (int project_number : project_numberList) {
+	 * System.out.println(project_number); cri.setProject_number(project_number);
+	 * 
+	 * List<BudgetVO> budgetLi = budgetDAO.selectSearchBudgetList(cri); if
+	 * (!budgetLi.isEmpty()) { budgetList.add(budgetLi); } if
+	 * (!unitworkDAO.selectSearchUnitworkList(cri).isEmpty()) {
+	 * unitworkList.add(unitworkDAO.selectSearchUnitworkList(cri)); } if
+	 * (!budgetDAO.selectSearchBudgetList(cri).isEmpty()) {
+	 * scheduleList.add(scheduleDAO.selectSearchScheduleList(cri)); }
+	 * 
+	 * }
+	 * 
+	 * dataMap.put("budgetList", budgetList); dataMap.put("unitworkList",
+	 * unitworkList); dataMap.put("scheduleList", scheduleList); //
+	 * dataMap.put("workforceList", workforceDAO.selectSearchWorkforceList(cri));
+	 * return dataMap; }
+	 */
 
 	@Override
-	public Map<String, Object> selectProjectPlanByBusiness_number(int business_number) throws Exception {
+	public Map<String, Object> selectProjectManageListByBusiness_number(int business_number) throws Exception {
 		SearchCriteria cri = new SearchCriteria();
 		cri.setBusiness_number(business_number);
 		cri.setStatus(1);
 		Map<String, Object> dataMap = new HashMap<String, Object>();
-		
 		List<UnitworkVO> unitworkList = unitworkDAO.selectSearchUnitworkList(cri);
 		List<ScheduleVO> scheduleList = scheduleDAO.selectSearchScheduleList(cri);
 		List<BudgetVO> budgetList = budgetDAO.selectSearchBudgetList(cri);
 		List<WorkforceVO> workforceList = workforceDAO.selectSearchWorkforceList(cri);
 		//List<RequireVO> requireList = requireDAO.selectSearchRequireList(cri);
 		
+		dataMap.put("budgetList", budgetList);
+		dataMap.put("unitworkList", unitworkList);
+		dataMap.put("scheduleList", scheduleList);
+		dataMap.put("workforceList", workforceList);
+		//dataMap.put("requireList", requireList);
+		// dataMap.put("workforceList", workforceDAO.selectSearchWorkforceList(cri));
+		return dataMap;
+	}
+	
+	
+	@Override
+	public Map<String, Object> selectProjectManageListByProjectNumber(int project_number) throws Exception {
+		SearchCriteria cri = new SearchCriteria();
+		cri.setProject_number(project_number);
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		List<UnitworkVO> unitworkList = unitworkDAO.selectSearchUnitworkList(cri);
+		List<ScheduleVO> scheduleList = scheduleDAO.selectSearchScheduleList(cri);
+		List<BudgetVO> budgetList = budgetDAO.selectSearchBudgetList(cri);
+		List<WorkforceVO> workforceList = workforceDAO.selectSearchWorkforceList(cri);
+		//List<RequireVO> requireList = requireDAO.selectSearchRequireList(cri);
 		dataMap.put("budgetList", budgetList);
 		dataMap.put("unitworkList", unitworkList);
 		dataMap.put("scheduleList", scheduleList);

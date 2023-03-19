@@ -63,7 +63,7 @@ table input {
 			</tr>
 			<tr>
 				<td id="title">내용</td>
-				<td id="content"><textarea name="project_discription" id="summernote" name="summernote" rows="5" cols="40"></textarea></td>
+				<td id="content"><textarea name="project_discription" id="summernote" name="summernote" rows="3" cols="40"></textarea></td>
 			</tr>
 		</table>
 		
@@ -238,7 +238,6 @@ function regist_project_go(){
 		
 		
 	}
-
 
 </script>
 

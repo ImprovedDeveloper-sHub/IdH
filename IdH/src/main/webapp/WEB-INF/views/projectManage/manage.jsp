@@ -31,11 +31,11 @@
 		<!--col-6시작-->
 		<div class="col-6">
 			<div id="content" class="card boarder-info-2">
-				<div class="card-header">
+				<div class="card-header bg-info">
 					<h3 class="card-title">일정관리</h3>
 				</div>
 				<div class="card-tools"
-					style="justify-content: space-between; display: flex; flex-direction: row-reverse;">
+					style="justify-content: space-between; display: flex; flex-direction: row-reverse; margin:3px;">
 					<div class="input-group input-group-sm" style="width: 270px">
 						<select name="perPageNum" style="display: none"><option
 								value="5" selected></option></select> <select class="form-control-sm"
@@ -112,11 +112,11 @@
 			</div>
 
 			<div id="content" class="card">
-				<div class="card-header">
+				<div class="card-header bg-info">
 					<h3 class="card-title">예산 관리</h3>
 				</div>
 				<div class="card-tools"
-					style="justify-content: space-between; display: flex; flex-direction: row-reverse;">
+					style="justify-content: space-between; display: flex; flex-direction: row-reverse;margin:3px;">
 					<div class="input-group input-group-sm" style="width: 270px">
 						<select id="searchPerPageNum" name="perPageNum"
 							style="display: none"><option value="5" selected></option></select>
@@ -188,11 +188,11 @@
 
 		<div class="col-6">
 			<div id="content" class="card">
-				<div class="card-header">
+				<div class="card-header bg-info">
 					<h3 class="card-title">인력 프로젝트</h3>
 				</div>
 				<div class="card-tools"
-					style="justify-content: space-between; display: flex; flex-direction: row-reverse;">
+					style="justify-content: space-between; display: flex; flex-direction: row-reverse;margin:3px;">
 					<div class="input-group input-group-sm" style="width: 270px">
 						<select name="perPageNum" style="display: none"><option
 								value="5" selected></option></select> <select class="form-control-sm"
@@ -262,11 +262,11 @@
 			</div>
 
 			<div id="content" class="card">
-				<div class="card-header">
+				<div class="card-header bg-info">
 					<h3 class="card-title">단위업무</h3>
 				</div>
 				<div class="card-tools"
-					style="justify-content: space-between; display: flex; flex-direction: row-reverse;">
+					style="justify-content: space-between; display: flex; flex-direction: row-reverse; margin:3px;">
 					<div class="input-group input-group-sm" style="width: 270px">
 						<select id="searchPerPageNum" name="perPageNum"
 							style="display: none"><option value="5" selected></option></select>
@@ -343,9 +343,6 @@
 
 		<div></div>
 		<br />
-		<!-- <div id="curve_chart" style="width: 900px; height: 500px"></div>
-	 <div id="Line_chart" style="width: 900px; height: 500px"></div>
-     <a class="2015-btn" href="#">2015</a> -->
 	</div>
 	<%@ include file="./ajax_list_js.jsp"%>
 	<%@ include file="/WEB-INF/module/pagination.jsp"%>
@@ -353,7 +350,46 @@
 
 
 <!--row종료-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+<script type="text/x-handlebars-template"  id="budget-plan-list-template" >
+</script>
 
+<script>
+	window.onload = function() {
+		//프로젝트 셀렉트
+		$(function() {
+		    $("#project_selector").on("change", function() {
+		        var project_number = $('#project_selector').val();
+		       //alert("셀렉트값 : "+project_number);
+		       $.ajax({
+		    	    url:"getManage?project_number="+ project_number,
+		    	    type:"GET",
+		    	    success:function(data){
+		    	    	/* alert(JSON.stringify(data));
+		    	    	console.log(data); */
+		    	    	console.log(JSON.stringify(data));
+		    	    },
+		       		error:function(error){
+		       			alert('error');
+		       		}
+		       })
+		    });
+		});
+	};
+</script>
+
+
+<script>
+
+function printPlan(data,target, templateObject){
+	var planTemplate=Handlebars.compile(templateObject.html());
+	//alert(JSON.stringify(data));
+	var plan_html = planTemplate(data);
+	//delTarget.remove();
+	//alert(html);
+	target.html("").html(plan_html);
+}
+</script>
 
 
 

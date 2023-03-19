@@ -102,9 +102,12 @@ input {
 								<td class="name-td">분류</td>
 								<td class="table-td" colspan="3">${budget.budget_status eq '1' ? '계획' : '진행중'}</td>
 							</tr>
+							<tr>
+								<td class="name-td">예산 금액</td>
+								<td class="table-td " colspan="5">${budget.budget_price}</td>
+							</tr>
 							
-							
-							<tr style="height: 300px;">
+							<tr style="height: 200px;">
 								<td class="name-td">내용</td>
 								<td class="table-td td-summernote" colspan="5">${budget.budget_detail}</td>
 							</tr>
@@ -123,11 +126,11 @@ input {
 			</div>
 			<div class="card-tools" style="margin-left:auto">
             <button type="button" id="regbtn" class="btn btn-info"
-               onclick="location.href='modifyScheduleForm?budget_number=${budget.budget_number}'">수정</button>
+               onclick="location.href='modifyBudgetForm?budget_number=${budget.budget_number}'">수정</button>
             <button type="button" id="close" class="btn btn-info"
                onclick="CloseWindow();">취소</button>
                <button type="button" id="regbtn" class="btn btn-info"
-               onclick="location.href='deleteSchedule?budget_number=${budget.budget_number}'">삭제</button>
+               onclick="location.href='deleteBudget?budget_number=${budget.budget_number}'">삭제</button>
 				</div>
 			</div>
 		</div>
