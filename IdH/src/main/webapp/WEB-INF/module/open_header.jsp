@@ -13,6 +13,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html lang="kor">
 <head>
 <style>
+p,span{
+margin:0 !important;
+padding:0 !important;
+}
 ul,li{
    list-sytle:none;
 }
@@ -25,8 +29,7 @@ body{
   margin:0;
   padding:0;
   overflow-x:hidden;
-  background-color:#EAEDF2 !important;
-	 
+  background-color:#F0FBFC !important;
 }
 table th{
 	font-size:10px;
@@ -40,14 +43,14 @@ table td{
 
 
 .card-header{
-	background-color:#16A2B8 !important;
-	color:white !important;
-	
+	background-color:#dfdfdf !important;
+	font-color:black !important;
+	font-weight:bold;
 }
 
 .card{
 	border:solid 2px #16A2B8 !important;
-	border-radius: 10px !important;
+	border-radius: 6.6px !important;
 }
 
 .card-title{
@@ -68,6 +71,41 @@ table td{
 
 td-summernote card{
 	boarder-radius:0px !important;
+}
+.card .btn-block{
+	width:60px !important;
+
+}
+
+.card{
+	border:solid 2px #16A2B8 !important;
+	border-radius: 6.6px !important;
+}
+
+.page-link{
+	font-size:3px !important;
+	padding : .5rem .75rem;
+	
+}
+
+.note-btn{
+	width:1.9rem !important;
+}
+
+.note-btn>i{
+	width:1rem;
+}
+
+.note-dropzone card-header{
+	background-color:none !important;
+}
+
+td-summernote card{
+	boarder-radius:0px !important;
+}
+.card .btn-block{
+	width:60px !important;
+
 }
 
 </style>

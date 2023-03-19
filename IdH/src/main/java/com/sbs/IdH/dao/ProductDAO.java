@@ -2,6 +2,7 @@ package com.sbs.IdH.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.ProductVO;
@@ -28,7 +29,8 @@ public interface ProductDAO {
  	
  	
      
-     
+     //추가
+ 	Map<String,Object> selectProductCountForChart(SearchCriteria cri)throws SQLException;
     
     
 	

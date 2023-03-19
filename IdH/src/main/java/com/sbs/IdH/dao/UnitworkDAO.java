@@ -24,7 +24,8 @@ public interface UnitworkDAO {
 	
 	void updateUnitwork(UnitworkVO unitwork) throws SQLException;
 
-	void updateUnitworkForProjectStart(UnitworkVO unitwork) throws SQLException;
+	
+	void updateUnitworkForRegistProject(UnitworkVO unitwork) throws SQLException;
 
 	void updateUnitworkForProjectEnd(UnitworkVO unitwork) throws SQLException;
 	

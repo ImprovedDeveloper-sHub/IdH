@@ -10,11 +10,11 @@
 <div class="row">
 	<div class="content-parts col-8">
 		<div id="content" class="card">
-			<div class="card-header">
+			<div class="card-header bg-info">
 				<h3 class="card-title">산출물연계진행</h3>
 			</div>
 			<div class="card-tools"
-				style="justify-content: space-between; display: flex; flex-direction: row-reverse;">
+				style="justify-content: space-between;margin:3px; display: flex; flex-direction: row-reverse;">
 				<div class="input-group input-group-sm" style="width: 270px">
 					<select class="form-control-sm" name="searchType" id="searchType"
 						style="hegith: 30px; width: 90px !important; border-color: #CED4DA !important;">
@@ -37,8 +37,10 @@
 					style="width: 80px" id="registBtn"
 					onclick="OpenWindow('registForm','글등록',680,555)">등록</button>
 			</div>
+			
 			<div id="table-content">
 				<div class="card-body table-responsive p-0">
+				<!-- <form method="get" action="form-action.html"> -->
 					<table class="table table-hover">
 						<thead class="text-left">
 							<tr>
@@ -57,12 +59,17 @@
 									<td colspan="5">데이터가 없습니다.</td>
 								</tr>
 							</c:if>
+							
 							<c:forEach items="${productProceedList }" var="product">
+							
 								<tr
 									onclick="OpenWindow('detail?product_number=${product.product_number }','상세보기',680,400);"
 									style="cursor: pointer;">
+									
+										
+					
 									<td
-										style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${product.product_number}</td>
+										style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><!-- <label><input type="checkbox" name="product_number" value=""> -->${product.product_number}<!-- </label> --></td>
 									<td
 										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${product.product_title}</td>
 									<td
@@ -82,11 +89,17 @@
 									<span>-</span>
 								</c:if>
 							</td>
+							  
 								</tr>
-
+									
+                          
 							</c:forEach>
+						
 						</tbody>
+						
 					</table>
+					<!-- </form> -->
+					<!-- <input type="submit" value="Submit"> <input type="reset" value="Reset"> -->
 				</div>
 			</div>
 		</div>
@@ -95,7 +108,7 @@
 	<div class="col-4">
 		<div class="card card-info">
 
-			<div class="card-header">
+			<div class="card-header bg-info">
 				<h3 class="card-title">협업요청목록</h3>
 				<div class="card-tools">
 					<button type="button" class="btn btn-tool"
@@ -108,6 +121,7 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
+						    <th>번호</th>
 							<th>협업 산출물</th>
 							<th>요청자</th>
 							<th></th>
@@ -122,9 +136,10 @@
 						<c:forEach items="${coworkList }" var="cowork">
 
                           <c:forEach items="${product_CoworkList}" var="product">     
-							<tr
-								onclick="OpenWindow('detail?cowork_number=${cowork.cowork_number}&from=list','상세보기',680,400);"
-								style="cursor: pointer;">
+							<tr>
+								
+								<td
+									style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${product.product_number}</td>
 								<td
 									style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${product.product_title}</td>
 								<td
@@ -132,8 +147,9 @@
 
 								<td class="text-right py-0 align-middle">
 									<div class="btn-group btn-group-sm">
-										<a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-										<a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>		
+										<div class="btn btn-info" onclick="OpenWindow('detail?product_number=${product.product_number}','상세보기',680,400);"
+								style="cursor: pointer;"><i class="fas fa-eye"></i></div>
+										<div class="btn btn-danger"  onclick="submit_go('remove','${product.product_number }');"><i class="fas fa-trash"></i></div>		
 										
 									</div>
 								</td>
@@ -244,4 +260,22 @@
 	<br />
 </div>
 
-
+<c:if test="${from eq 'regist' }">
+<script>
+	alert("정상 등록이 되었습니다.");
+	window.close();
+	window.opener.location.reload();
+</script>
+</c:if>
+<c:if test="${from eq 'remove' }">
+<script>
+	alert("정상적으로 삭제 되었습니다.");
+	window.close();
+	window.opener.location.reload();
+</script>
+</c:if>
+<script>
+function submit_go(url,product_number ){	
+	location.href=url+"?product_number="+product_number;
+}
+</script>

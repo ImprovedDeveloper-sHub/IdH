@@ -15,7 +15,7 @@
 </style>
 
 
-<div class="content-body" style="height: 550px;">
+<div class="content-body" style="height: 310px;">
 
 
 	<div class="content-parts row" style="height: 98%;">
@@ -36,12 +36,13 @@
 			</div>
 		</div>
 		<div class="col-10">
-			<div id="content" class="card" style="height: 98%;overflow:scroll;overflow-x:hidden;">
-				<div class="card-header">
+			<div id="content" class="card"
+				style="height: 98%; overflow: scroll; overflow-x: hidden;">
+				<div class="card-header bg-info">
 					<h3 class="card-title">받은 보고</h3>
 				</div>
 				<div class="card-tools"
-					style="justify-content: space-between; display: flex; flex-direction: row-reverse;">
+					style="justify-content: space-between; display: flex; flex-direction: row-reverse;margin:3px;">
 					<div class="input-group input-group-sm" style="width: 270px">
 						<select id="myIssuePerPageNum" name="perPageNum"
 							style="display: none"><option value="5" selected></option></select>
@@ -62,8 +63,7 @@
 							</button>
 						</div>
 					</div>
-					<button type="button" class="btn btn-block btn-info btn-sm"
-						style="width: 80px;">등록</button>
+
 				</div>
 				<div id="table-content">
 					<div class="card-body table-responsive p-0">
@@ -91,12 +91,14 @@
 											style="text-align: left; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_content}</td>
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
-												value="${workreport.workreport_regdate}" pattern="yyyy-MM-dd" /></td>
+												value="${workreport.workreport_regdate}"
+												pattern="yyyy-MM-dd" /></td>
 										<td
 											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_check}</td>
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
-												value="${workreport.workreport_enddate}" pattern="yyyy-MM-dd" /></td>
+												value="${workreport.workreport_enddate}"
+												pattern="yyyy-MM-dd" /></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -126,12 +128,13 @@
 			</div>
 		</div>
 		<div class="col-10">
-			<div id="content" class="card" style="height: 98%;overflow:scroll;overflow-x:hidden;">
-				<div class="card-header">
+			<div id="content" class="card"
+				style="height: 98%; overflow: scroll; overflow-x: hidden;">
+				<div class="card-header bg-info">
 					<h3 class="card-title">보낸 보고</h3>
 				</div>
 				<div class="card-tools"
-					style="justify-content: space-between; display: flex; flex-direction: row-reverse;">
+					style="justify-content: space-between; display: flex; flex-direction: row-reverse;margin:3px;">
 					<div class="input-group input-group-sm" style="width: 270px">
 						<select id="getterIssuePerPageNum" name="perPageNum"
 							style="display: none"><option value="5" selected></option></select>
@@ -153,7 +156,8 @@
 						</div>
 					</div>
 					<button type="button" class="btn btn-block btn-info btn-sm"
-						style="width: 80px;">등록</button>
+					style="width: 80px" id="registBtn"
+					onclick="OpenWindow('registForm','글등록',680,555)">등록</button>
 				</div>
 				<div id="table-content">
 					<div class="card-body table-responsive p-0">
@@ -181,12 +185,14 @@
 											style="text-align: left; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_content}</td>
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
-												value="${workreport.workreport_regdate}" pattern="yyyy-MM-dd" /></td>
+												value="${workreport.workreport_regdate}"
+												pattern="yyyy-MM-dd" /></td>
 										<td
 											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_check}</td>
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
-												value="${workreport.workreport_enddate}" pattern="yyyy-MM-dd" /></td>
+												value="${workreport.workreport_enddate}"
+												pattern="yyyy-MM-dd" /></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -197,3 +203,21 @@
 		</div>
 	</div>
 </div>
+
+<c:if test="${from eq 'regist' }">
+	<script>
+		alert("정상 등록이 되었습니다.");
+		window.close();
+		window.opener.location.reload();
+	</script>
+</c:if>
+<c:if test="${from eq 'remove' }">
+	<script>
+		alert("정상 삭제 되었습니다.");
+		window.close();
+		window.opener.location.reload();
+	</script>
+</c:if>
+
+
+

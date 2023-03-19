@@ -3,7 +3,7 @@
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="decorator"
-   uri="http://www.opensymphony.com/sitemesh/decorator"%>	
+	uri="http://www.opensymphony.com/sitemesh/decorator"%>
 
 <!DOCTYPE html>
 <!--
@@ -14,31 +14,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
 
 <style>
-.login-test {
-	margin: 0 auto;
-	width: 1340px;
+#singup:hover>a {
+	font-weight: bolder;
+}
+
+.login-section {
+	width: 400px;
+	position: absolute;
+	top: 51%;
+	left: 51%;
+	transform: translate(-50%, -50%);
+}
+
+.login-idh {
+	width: 99.5vw;
 	height: 100vh;
 }
 
-.login-form {
-	text-align: right;
-	max-width: 100%;
-	max-height: 100%;
-}
-
-.login {
-	width: 475px;
-	display: inline-block;
-	margin-top : 250px;
-	margin-right: 13px;
-}
-
-.backgroundimg {
-	background-image: url(<%=request.getContextPath()%>/resources/img/로그인화면1.jpg);
-	background-size: contain;
-	background-repeat: no-repeat;
+.back-img {
+	position: relative;
 	width: 100%;
 	height: 100%;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-image: url(<%=request.getContextPath()%>/resources/img/logo22.png);
+	background-position: center center;
 }
 
 ul, li {
@@ -50,14 +50,8 @@ a {
 }
 
 body {
-	margin: 0;
-	padding: 0;
-}
-
-.main-custom {
-	margin: 0 auto;
-	width: 1224px;
-	background-color: #eaedf2;
+	margin: 0 !important;
+	padding: 0 !important;
 }
 </style>
 <meta charset="utf-8">
@@ -78,52 +72,51 @@ body {
 
 </head>
 <body>
-
-	<div style="margin: 0 auto; width: 1340px; height: 100vh;">
-		<div class="backgroundimg">
-			<div class="login-form">
-				<div class="login">
-					<div>
+	<div class="login-idh">
+		<div class="login-form back-img">
+			<div class="login-section">
 
 
-						<form action="login" method="post">
-							<div class="card-body">
-								<div class="form-group row">
-									<label for="id" class="col-sm-3 col-form-label">아이디</label>
-									<div class="col-sm-8">
-										<input type="text" class="form-control" name="member_id"
-											placeholder="아이디를 입력하세요.">
-									</div>
-								</div>
-								<div class="form-group row">
-									<label for="pwd" class="col-sm-3 col-form-label">비밀번호</label>
-									<div class="col-sm-8">
-										<input type="password" class="form-control" name="member_pwd"
-											placeholder="패스워드를 입력하세요.">
-									</div>
-								</div>
+				<form action="login" method="post">
 
-							</div>
+					<div
+						style="position: absolute; left: 50%; transform: translate(-54%, -95%)">
+						<div class="test" style="width: 250px;">
+							<input type="text" class="form-control" name="member_id"
+								placeholder="아이디를 입력하세요.">
+						</div>
 
-							<div style="background: white;">
-							<div>
-								<button type="submit" class="btn btn-info"
-									style="background: #17A2B8; color: white; width: 440px; margin-right: 10px;">회원가입</button>
-									</div>
-									<br/> 
-									<div>
-								<button type="submit" class="btn btn-info float-right"
-									style="background: #17A2B8; width: 440px; margin-right: 10px; color: white;">로그인</button>
-							</div>
-							</div>
+						<br />
 
-						</form>
+						<div class="test" style="width: 250px;">
+							<input type="password" class="form-control" name="member_pwd"
+								placeholder="패스워드를 입력하세요.">
+						</div>
 					</div>
-				</div>
-			</div>
 
+
+
+
+
+					<div
+						style="position: absolute; left: 50%; transform: translate(-68%, 90%)"
+						id="singup">
+						<a href="#" style="color: black; border-bottom: solid 1px black;">회원가입</a>
+					</div>
+					<br />
+					<div
+						style="position: absolute; left: 50%; transform: translate(-55%, 150%);">
+						<button type="submit" class="btn btn-info"
+							style="background: #17A2B8; color: white; width: 300px;">로그인</button>
+					</div>
+
+
+				</form>
+			</div>
 		</div>
+
 	</div>
+
 
 
 	<!-- jQuery -->

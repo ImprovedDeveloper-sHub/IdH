@@ -95,13 +95,17 @@ input {
 							<tr>
 								<td class="name-td">등록자</td>
 								<td class="table-td" colspan="3" ><input type="text" name="budget_member_id" value="${loginUser.member_id}" readonly></td>
-								<td class="name-td">수준</td>
-								<td class="table-td"><select name ="budget_level">
-													<option value="1">기획</option>
-													<option value="2">설계</option>
-													<option value="3">구현</option>
-													<option value="4">테스트</option>
+								<td class="name-td">분류</td>
+								<td class="table-td"><select name ="budget_type">
+													<option value="1">인건비</option>
+													<option value="2">교통비</option>
+													<option value="3">비품비</option>
+													<option value="4">식대</option>
 									</select></td>
+							</tr>
+							<tr>
+								<td class="name-td">제목</td>
+								<td colspan="5"><input type="text" name="budget_name" placeholder="제목을 입력하여 주세요." /></td>
 							</tr>
 							<tr>
 								<td class="name-td">예산 금액</td>
@@ -111,10 +115,7 @@ input {
 								<td class="table-td" colspan="3"><input class="datepicker" name="budget_enddate"></td> -->
 								
 							</tr>
-							<tr>
-								<td class="name-td">제목</td>
-								<td colspan="5"><input type="text" name="budget_name" placeholder="제목을 입력하여 주세요." /></td>
-							</tr>
+							
 							<tr style="height: 100px;">
 								<td class="name-td">내용</td>
 								<td class="table-td td-summernote" colspan="5"><textarea class="summernote" rows="15" cols="40" style="display:none;" name="budget_detail"></textarea></td>
@@ -122,13 +123,13 @@ input {
 
 							<tr>
 								<td class="name-td">프로젝트명</td>
-								<td class="table-td"><select>
-													
+								<td class="table-td"><select name="budget_project_number" >
+									<option value="1">미정</option>
 									</select></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
-								<td class="name-td">등록일</td>
-								<td class="table-td">2023.03.07.</td>
+								<td class="name-td"></td>
+								<td class="table-td"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -153,7 +154,7 @@ input {
 	
 	function regist_go(){
 		//var form = $('form[name="registSchdeulForm"]')[0];
-			var form = document.registSchdeulForm;
+			var form = document.registBudegetForm;
 			if(form.title.value==""){
 				alert("제목은 필수입니다.");
 				return;

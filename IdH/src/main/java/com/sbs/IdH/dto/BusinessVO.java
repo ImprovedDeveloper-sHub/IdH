@@ -21,6 +21,16 @@ public class BusinessVO {
 	
 	private List<Business_attachVO> business_attachList;
 	
+	private int business_progress;
+	
+	public int getBusiness_progress() {
+		return business_progress;
+	}
+
+	public void setBusiness_progress(int business_progress) {
+		this.business_progress = business_progress;
+	}
+
 	public List<Business_attachVO> getBusiness_attachList() {
 		return business_attachList;
 	}

@@ -1,5 +1,6 @@
 package com.sbs.IdH.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.sbs.IdH.command.SearchCriteria;
@@ -17,5 +18,8 @@ public interface ScheduleService {
 	public Map<String,Object> selectScheduleList(SearchCriteria cri) throws Exception;
 
 	void modifySchedule(ScheduleVO schedule) throws Exception;
+
+	void updateScheduleForRegistProject(int schedule_number, int project_number)throws Exception;
 	
+	public List<Map<String,Object>> selectScheduleListForCalendar(SearchCriteria cri) throws Exception;
 }

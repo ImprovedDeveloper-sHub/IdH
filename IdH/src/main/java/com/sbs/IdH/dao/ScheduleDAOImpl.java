@@ -1,12 +1,16 @@
 package com.sbs.IdH.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.ScheduleVO;
+import com.sbs.IdH.dto.UnitworkVO;
 
 public class ScheduleDAOImpl implements ScheduleDAO{
 
@@ -18,7 +22,10 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 	
 	@Override
 	public List<ScheduleVO> selectSearchScheduleList(SearchCriteria cri) throws SQLException {
-		List<ScheduleVO> schduleList = session.selectList("Schedule-Mapper.selectScheduleList", cri);
+		int offset=cri.getStartRowNum();
+		int limit=cri.getPerPageNum();		
+		RowBounds rowBounds=new RowBounds(offset,limit);	
+		List<ScheduleVO> schduleList = session.selectList("Schedule-Mapper.selectScheduleList", cri, rowBounds);
 		return schduleList;
 	}
 
@@ -54,8 +61,9 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 	}
 
 	@Override
-	public void updateScheduleForProjectStart(ScheduleVO schdule) throws SQLException {
-		session.update("Schedule-Mapper.updateScheduleForProjectStart", schdule);		
+	public void updateScheduleForRegistProject(ScheduleVO schdule) throws SQLException {
+		session.update("Schedule-Mapper.updateSchedulePlanForProjectStart", schdule);		
+		
 	}
 
 	@Override
@@ -76,5 +84,13 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 		session.update("Schedule-Mapper.updateSchedule", schedule);
 		
 	}
-
+	
+	
+	@Override
+	public Map<String, Object> selectScheduleCountForChart(SearchCriteria cri) throws SQLException {
+		Map<String,Object> colMap = new HashMap<String, Object>();
+		int workforce_count = session.selectOne("Schedule-Mapper.selectSearchScheduleListCount", cri);
+		colMap.put("v",workforce_count);
+		return colMap;
+	}
 }

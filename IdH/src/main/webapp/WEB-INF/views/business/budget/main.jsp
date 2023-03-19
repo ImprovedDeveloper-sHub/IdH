@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
 
 
 
@@ -9,14 +15,14 @@
 
 <style>
 #content {
-	background: #eaedf2;
+	/* background: #eaedf2; */
 	position: relative;
 	z-index: 10;
 }
 
 #table-content {
 	background: #fff;
-	margin-top: 20px;
+	/* margin-top: 20px; */
 	box-shadow: #dcdee3 0px 0px 10px;
 }
 
@@ -30,7 +36,7 @@
 
 #table-content thead tr td {
 	color: #757e92;
-	font-size: 15px;
+	font-size: 12px;
 	text-transform: uppercase;
 	padding: 14px 10px;
 }
@@ -84,9 +90,9 @@
 <div class="row">
 
 	<!-- 사업 예산 전체 정보 -->
-	<div class="col-8">
+	<div class="col-7">
 		<div class="card card-info">
-			<div class="card-header">
+			<div class="card-header bg-info">
 				<h3 class="card-title">사업 예산 전체 정보</h3>
 				<div class="card-tools">
 					<div class="input-group input-group-sm" style="width: 150px;">
@@ -121,13 +127,11 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- 사업 예산 전체 정보 끝 -->
+		<!-- 사업 예산 전체 정보 끝 -->
 
-	<!-- 사업 예산 목록 -->
-	<div class="col-8">
+		<!-- 사업 예산 목록 -->
 		<div class="card card-info">
-			<div class="card-header">
+			<div class="card-header bg-info">
 				<h3 class="card-title">사업 예산 목록</h3>
 				<div class="card-tools">
 					<div class="input-group input-group-sm" style="width: 150px;">
@@ -136,101 +140,81 @@
 				</div>
 			</div>
 			<div id="content">
-				<div id="table-content">
-					<table cellspacing="0" cellpadding="0">
+				<div id="table-content" style="height: 401px;">
+					<table>
 						<thead>
-							<tr>
-								<td>사업 번호</td>
-								<td>사업명</td>
-								<td></td>
-								<td>총 예산</td>
-								<td></td>
-								<td>사용 예산</td>
+							<tr style="text-align: center;">
+								<td style="width: 20%;">사업 번호</td>
+								<td style="width: 30%;">사업명</td>
+								<td style="width: 25%;">총 예산</td>
+								<td style="width: 25%;">사용 예산</td>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td class="table-td">20230117</td>
-								<td class="table-td">[예정] 그룹웨어 시스템 개발 사업</td>
-								<td class="table-td"></td>
-								<td class="table-td">600,000,000(원)</td>
-								<td class="table-td"></td>
-								<td class="table-td">0(원)</td>
+							<c:if test="${empty businessList}">
+								<tr style="text-align: center;">
+									<td colspan="4">데이터가 없습니다.</td>
+								</tr>
+							</c:if>
+							<c:forEach items="${businessList}" var="business">
+							<tr onclick="location.href='detail?business_number=${business.business_number}'; "
+								style="cursor: pointer;">
+								<td class="table-td" style="border: 1px solid; border-color: silver; text-align: center;">${business.business_number}</td>
+								<td class="table-td" style="border: 1px solid; border-color: silver;">${business.business_name}</td>
+								<td class="table-td" style="border: 1px solid; border-color: silver; text-align: right;"><fmt:formatNumber
+										value="${business.business_budget}" pattern="#,###" /> 원</td>
+								<td class="table-td" style="border: 1px solid; border-color: silver; text-align: right;"><fmt:formatNumber
+										value="${business.business_usebudget}" pattern="#,###" /> 원</td>
 							</tr>
-							<tr>
-								<td class="table-td">20221201</td>
-								<td class="table-td">PMS 개발 사업</td>
-								<td class="table-td"></td>
-								<td class="table-td">1,500,000,000(원)</td>
-								<td class="table-td"></td>
-								<td class="table-td">650,000,000(원)</td>
-							</tr>
-							<tr>
-								<td class="table-td">20221001</td>
-								<td class="table-td">LMS 시스템 개발 사업</td>
-								<td class="table-td"></td>
-								<td class="table-td">30,000,000(원)</td>
-								<td class="table-td"></td>
-								<td class="table-td">25,000,000(원)</td>
-							</tr>
-							<tr>
-								<td class="table-td">20220425</td>
-								<td class="table-td">[종료] 화학 물질 관리 시스템</td>
-								<td class="table-td"></td>
-								<td class="table-td">150,000,000(원)</td>
-								<td class="table-td"></td>
-								<td class="table-td">150,000,000(원)</td>
-							</tr>
-							<tr>
-								<td class="table-td">20220102</td>
-								<td class="table-td">[종료] 영업 사원 관리 시스템</td>
-								<td class="table-td"></td>
-								<td class="table-td">20,000,000(원)</td>
-								<td class="table-td"></td>
-								<td class="table-td">20,000,000(원)</td>
-							</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
+		<!-- 사업 예산 목록 끝 -->
+
 	</div>
-	<!-- 사업 예산 목록 끝 -->
-	
+
 	<!-- 사업 예산 그래프 -->
-	<div id="columnchart_material" class="col-4" style="width: 250px; height: 300px;"></div>
+	<div class="col-5">
+		<div class="card card-info">
+			<div class="card-header bg-info">
+				<h3 class="card-title">사업 예산 소모 내역</h3>
+				<div class="card-tools"></div>
+			</div>
+			<div id="content">
+				<div id="table-content" style="height: 516px;">
+				
+					<div class="card-tools"
+						style="justify-content: space-between; display: flex; flex-direction: row-reverse;">
+						<div class="input-group input-group-sm" style="width: 350px; margin: 10px;">
+							<select class="form-control-sm" name="searchType" id="searchType"
+								style="hegith: 30px; width: 90px !important; border-color: #CED4DA !important;">
+								<option value="tcw" ${cri.searchType eq 'n' ? 'selected':'' }>전체</option>
+								<option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제목</option>
+								<option value="w" ${cri.searchType eq 'l' ? 'selected':'' }>수준</option>
+								<option value="c" ${cri.searchType eq 'c' ? 'selected':'' }>내용</option>
+							</select> <input type="text" name="table_search"
+								class="form-control float-right" placeholder="Search">
+							<div class="input-group-append">
+								<button type="submit" class="btn btn-default"
+									onclick="list_go(1)">
+									<i class="fas fa-search"></i>
+								</button>
+							</div>
+						</div>
+						<button type="button" class="btn btn-block btn-info btn-sm"
+							style="width: 80px; margin: 10px; text-align: center;" id="registBtn"
+							onclick="OpenWindow('registForm','글등록',680,555)">등록</button>
+							
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- 사업 예산 그래프 끝 -->
 
 </div>
-
-
-
-<script>
-
-google.charts.load('current', {'packages':['bar']});
-google.charts.setOnLoadCallback(drawChart);
- 
-function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-        ['Year', 'Sales', 'Expenses', 'Profit'],
-        ['2014', 1000, 400, 200],
-        ['2015', 1170, 460, 250],
-        ['2016', 660, 1120, 300],
-        ['2017', 1030, 540, 350]
-    ]);
- 
-    var options = {
-        chart: {
-        title: 'Company Performance',
-        subtitle: 'Sales, Expenses, and Profit: 2014-2017',
-        }
-    };
- 
-    var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
- 
-    chart.draw(data, google.charts.Bar.convertOptions(options));
-}
-
-</script>
 
 

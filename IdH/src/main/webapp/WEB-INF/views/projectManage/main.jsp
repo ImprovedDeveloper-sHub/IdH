@@ -6,17 +6,25 @@
        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
         <!--   <script>alert('${test}');</script> -->
-          
+ <style>
+ #projectDetailtable td{
+ 	border: 1px solid #444444 !important;
+ }
+ </style>       
+        
+        
  <div class= "content">
     <div class="row">
 
       <!--col-6시작-->
       <div class="col-6">
       	<div id="content" class="card">
-         <div class="card-header">
+         <div class="card-header bg-info">
             <h3 class="card-title">진행 프로젝트</h3>
          </div>
-            <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse;">
+         <div id="test">
+         </div>
+            <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse; margin:3px;">
                <div class="input-group input-group-sm" style="width: 270px">
                <select id="proceedingPerPageNum" name="perPageNum" style="display:none"><option value="5" selected></option></select>
                   <select class="form-control-sm" name="searchType" id="proceedingSearchType" style="hegith:30px; width:90px !important; border-color:#CED4DA !important;">
@@ -38,15 +46,15 @@
          
             </div>
          <div id="table-content">
-            <div  class="card-body table-responsive p-0">
-               <table  class="table table-hover">
+            <div  class="card-body table-responsive p-0" style="height:200px">
+               <table  class="table table-hover" >
                   <thead id="proceedingThead" class="proceedingThead" class="text-left">
 	                <tr>
-	                  <th style="width:20%">프로젝트 이름</th>
-	                  <th style="width:30%">프로젝트 상태</th>
-	                  <th style="width:20%">등록 날짜</th>
-	                  <th style="width:15%">요구사항</th>
-	                  <th style="width:15%">설명</th>
+	                  <th style="width:15%">사업 이름</th>
+	                  <th style="width:30%">프로젝트 이름</th>
+	                  <th style="width:20%; text-align:center;">시작 날짜</th>
+	                  <th style="width:20%; text-align:center;">예상 종료 날짜</th>
+	                  <th style="width:15%; text-align:center;">관련요구사항</th>
 	                </tr>
               	</thead>
               
@@ -55,39 +63,36 @@
 				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
 			 	 </c:if>
 			 	 <c:forEach items="${proceedingProjectList }" var="project">
-					 <tr onclick="setProjectNum(${project.project_number}); goPage('projectDetail')">
+					 <tr onclick="setProjectNum(${project.project_number},'getProjectDetail');">
+			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;">${project.project_business_name }</td>
 			                  <td style="text-align:left;max-width:20%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;">${project.project_name}</td>
-			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">${project.project_status}</td>
-			                  <td style="text-align:left;max-width: 20%; overflow: hidden; 
+			                  <td style="text-align:center;max-width: 20%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate value="${project.project_regdate}" pattern="yyyy-MM-dd"/></td>
-			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">test</td>
-			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;"> ${project.project_discription}</td>
+			                  <td style="text-align:center;max-width: 20%; overflow: hidden; 
+                                    white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate value="${project.project_enddate}" pattern="yyyy-MM-dd"/></td>
+			                  <td style="text-align:center;">요구사항</td>
+			                  
 	                </tr>
 			 	 </c:forEach>
-			 	 	
-			 	 	
 			 	 	
               </tbody>
               
                </table>
                
-               <div id="proceedingPaginationBox">
+               <div id="proceedingPaginationBox" class="card-tool">
                <%@ include file="/WEB-INF/views/projectManage/proceedingPagination.jsp" %></div>
             </div>
-            
             
          </div>
       </div>
       
       <div id="content" class="card">
-         <div class="card-header">
+         <div class="card-header bg-info">
             <h3 class="card-title">종료 프로젝트</h3>
          </div>
-            <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse;">
+            <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse; margin:3px;">
                <div class="input-group input-group-sm" style="width: 270px">
                <select id="endPerPageNum" name="perPageNum" style="display:none"><option value="5" selected></option></select>
                   <select class="form-control-sm" name="searchType" id="endSearchType" style="hegith:30px; width:90px !important; border-color:#CED4DA !important;">
@@ -97,25 +102,24 @@
                   <input type="text" name="keyword" id="endKeyword"
                      class="form-control float-right" placeholder="Search">
                   <div class="input-group-append">
-                  	<button type="submit" class="btn btn-default" onclick="search_go_ajax(0, $('#endPerPageNum'), $('#endSearchType'), $('#endKeyword'), '<%=request.getContextPath()%>/projectManage/getEnd', $('.endThead'),$('.endProjectLi'),$('#endProject-list-template'),$('#endPaginationBox'))">
+                  	<button type="submit" class="btn btn-default" onclick="search_go_ajax(0, $('#endPerPageNum'), $('#endSearchType'), $('#endKeyword'), '<%=request.getContextPath()%>/projectManage/getEnd', $('.endThead'),$('.endProjectLi'),$('#endProject-list-template'),$('#proceeding-end-template'),$('#endPaginationBox'),'end')">
                         <i class="fas fa-search"></i>
                      </button>
                   	
                    
                   </div>
                </div>
-         
             </div>
          <div id="table-content">
-            <div  class="card-body table-responsive p-0">
+            <div  class="card-body table-responsive p-0" style="height:200px">
                <table  class="table table-hover">
                   <thead class="endThead" class="text-left">
 	                <tr>
-	                  <th style="width:20%">프로젝트 이름</th>
-	                  <th style="width:30%">프로젝트 상태</th>
+	                  <th style="width:20%">사업 이름</th>
+	                  <th style="width:30%">프로젝트 이름</th>
 	                  <th style="width:20%">등록 날짜</th>
+	                  <th style="width:15%">예상 종료날짜</th>
 	                  <th style="width:15%">요구사항</th>
-	                  <th style="width:15%">설명</th>
 	                </tr>
               	</thead>
               
@@ -124,22 +128,20 @@
 				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
 			 	 </c:if>
 			 	 <c:forEach items="${endProjectList }" var="project">
-					 <tr onclick="setProjectNum(${project.project_number}); goPage('projectDetail')">
+					 <tr onclick="setProjectNum(${project.project_number},'getProjectDetail');">
 					 <td style="text-align:left;max-width:20%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">${project.project_name}</td>
+                                    white-space: nowrap; text-overflow: ellipsis;">${project.project_business_name}</td>
 			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">${project.project_status}</td>
+                                    white-space: nowrap; text-overflow: ellipsis;">${project.project_name}</td>
 			                  <td style="text-align:left;max-width: 20%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate value="${project.project_regdate}" pattern="yyyy-MM-dd"/></td>
 			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">요구사항</td>
+                                    white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate value="${project.project_enddate}" pattern="yyyy-MM-dd"/></td>
 			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;"> ${project.project_discription}</td>
+                                    white-space: nowrap; text-overflow: ellipsis;"> 요구사항</td>
 					 </tr>
 				</c:forEach>
-				
               </tbody>
-              
               
                </table>
                 <div id="endPaginationBox">
@@ -151,56 +153,49 @@
          </div>
       </div>
        
-
-   
-
-
         <!--col-6종료-->
       </div>
-
 
       <!--col-6시작-->
       <div class="col-6">
       
        <div class="card ">
-          <div class="card-body row">
-            <div class="col-6"><button type="button" class="btn btn-block btn-info btn-sm">프로젝트 계획</button>
-              </div>
-             <div class="col-6"> <input id="changeButton" type="button" class="btn btn-block btn-info btn-sm" onclick="changeButton()" value="프로젝트 비교"></input>
-</div>
+          <div class="card-small-body row">
+            <div class="col" style="margin:3px;">
+            <input id="" type="button" class="btn btn-info btn-sm" onclick="" value="프로젝트 계획"></input>
+               <input type="button" class="btn  btn-info btn-sm" id="" onclick="OpenWindow('<%=request.getContextPath()%>/calendar/main','등록',850,750);" value="전체일정"></input>
+
+              <input id="changeButton" type="button" class="btn btn-info btn-sm" onclick="returnButton()" value="프로젝트 현황"></input>
+              <input id="changeButton" type="button" class="btn btn-info btn-sm" onclick="changeButton()" value="프로젝트 비교"></input>
+          </div>
           </div>
         </div>
       
-		<div class="card ">
-          <div class="card-body row">
-            <div class="col-4"><input type="button" class="btn btn-block btn-info btn-sm" id="budgetButton"
-            onclick="ajax_print_chart('budget','1');" value="예산현황"></input>
-              <input type="button" class="btn btn-block btn-info btn-sm" id="workforceButton" onclick="ajax_print_chart('workforce');" value="인력현황"></input></div>
-             <div class="col-4"> <input type="button" class="btn btn-block btn-info btn-sm"  id="scheduleButton" onclick="ajax_print_chart('schedule');" value="일정현황"></input>
-              <input type="button" class="btn btn-block btn-info btn-sm" onclick="ajax_print_chart('issue');" id="issueButton" value="이슈현황"></input>   
-</div><div class="col-4"> <input type="button" class="btn btn-block btn-info btn-sm"  id="productButton" onclick="ajax_print_chart('product');" value="산출물현황"></input>
- <input type="button" class="btn btn-block btn-info btn-sm" id="unitworkButton" onclick="ajax_print_chart('unitwork');" value="단위업무현황"></input>
-
-</div>
-          </div>
-        </div>
-        
-
         <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">chart</h3>
+          <div class="card-header bg-info">
+            <h3 class="card-title">프로젝트 현황</h3>
           </div>
-
-          <div class="card-body">
+<div class="card-small-body row"  >
+		<div class="col" style="margin:3px;">
+          <input type="button" class="btn  btn-info btn-sm" id="scheduleButton" onclick="OpenWindow('<%=request.getContextPath()%>/calendar/calByProject?project_number='+project_num,'등록',850,750);" value="프로젝트 일정"></input>
+          
+            <input type="button" class="btn  btn-info btn-sm" id="budgetButton" onclick="ajax_print_chart('budget','1');" value="예산현황"></input>
+              <input type="button" class="btn  btn-info btn-sm" id="workforceButton" onclick="ajax_print_chart('workforce');" value="인력현황"></input>
+               <input type="button" class="btn  btn-info btn-sm" id="unitworkButton" onclick="ajax_print_chart('unitwork');" value="단위업무현황"></input>
+              <input type="button" class="btn  btn-info btn-sm" onclick="ajax_print_chart('issue');" id="issueButton" value="이슈현황"></input>
+				<input type="button" class="btn  btn-info btn-sm"  id="productButton" onclick="ajax_print_chart('product');" value="산출물현황"></input>
+        </div>
+        </div>
+          <div id="chartDiv" class="card-body">
             <div id="curve_chart"></div>
             <div id="budget_chart"></div>
-            <div id="schedule_chart"></div>
+            <div id="schedule"></div>
             <div id="issue_chart"></div>
             <div id="product_chart"></div>
             <div id="workforce_chart"></div>
             <div id="unitwork_chart"></div>
             <div id="budgetComparison_chart"></div>
-            <div id="scheduleComparison_chart"></div>
+           <!--  <div id="scheduleComparison_chart"></div> -->
             <div id="issueComparison_chart"></div>
             <div id="productComparison_chart"></div>
             <div id="workforceComparison_chart"></div>
@@ -208,56 +203,71 @@
           </div>
           
  
-        </div>
+        
 
 
        
 
 
         
-        <div class="row">
-          <div class="card col-6 card-info">
-            <div class="card-header ">
-            <h3 class="card-title ">종료 프로젝트</h3>
-           
-               <div class="card-body table-responsive p-0">
-            <table class="table table-hover ">
-              <thead>
-                <tr>
-                  <th>1</th>
-                  <th>2</th>
-                  <th>3</th>
-                  <th>4</th>
-                  <th>5</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>2</td>
-                  <td>3</td>
-                  <td><span class="tag tag-success">4</span></td>
-                  <td> 5</td>
-                </tr></tbody>
-              </table>
-              
-              
-              </div>
-            </div>
-          </div>
+       
+          <div class="col">
+		<div class="card card-info">
+				<div class="card-tools" >
+					<div class="input-group input-group-sm" style="width: 150px;">
+						<div class="input-group-append"></div>
+					</div>
+				</div>
+			<div id="content">
+				<div id="table-content">
+					<table id="projectDetailtable" style="width:570px; height:200px">
+						<thead class="projectDetailthead">
+							<tr>
+								<td class="name-td" style="width:15%;">분류</td>
+								<td class="name-td" colspan="3" style="width:35%;">세부사항</td>
+								<td class="name-td" style="width:15%;">분류</td>
+								<td class="name-td" style="width:35%;">세부사항</td>
+							</tr>
+						</thead>
+						<tbody class="projectDetailtbody">
+							<tr>
+								<td class="name-td">일정 번호</td>
+								<td class="table-td" colspan="3"></td>
+								<td class="name-td">수준</td>
+								<td class="table-td">보통</td>
+							</tr>
+							<tr>
+								<td class="name-td">등록자</td>
+								<td class="table-td" colspan="3"></td>
+								<td class="name-td">상태</td>
+								<td class="table-td" colspan="3"></td>
+							</tr>
+							
+							<tr>
+								<td class="name-td">시작날짜</td>
+								<td class="table-td" colspan="3"></td>
+								<td class="name-td">종료날짜</td>
+								<td class="table-td" colspan="3"></td>
+							</tr>
+							
+							<tr style="height: 100px;">
+								<td class="name-td">내용</td>
+								<td class="table-td td-summernote" colspan="5"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			</div>
+			</div>
+		</div>
           
-           <div class="card col-6 card-info">
-            <div class="card-header ">
-            <h3 class="card-title ">종료 프로젝트</h3>
            
-              <div class="card-body table-responsive p-0">
-            </div>
-              
-              
-              
-            </div>
-          </div>
-        </div>
+           
+           
+           
+           
+       
       </div>
 
 
@@ -291,36 +301,46 @@
   <script>
   
   function changeButton(){
-		$('#budgetButton').val('예산비교'); $('#budgetButton').attr('onclick',"ajax_print_chart('budgetComparison')");
-		$('#workforceButton').val('인력비교');$('#workforceButton').attr('onclick',"ajax_print_chart('workforceComparison')");
-		$('#scheduleButton').val('일정비교'); $('#scheduleButton').attr('onclick',"ajax_print_chart('scheduleComparison')")
-		$('#issueButton').val('이슈비교');$('#issueButton').attr('onclick',"ajax_print_chart('issueComparison')");
-		$('#productButton').val('산출물비교');$('#productButton').attr('onclick',"ajax_print_chart('productComparison')");
-		$('#unitworkButton').val('단위업무비교'); $('#unitworkButton').attr('onclick',"ajax_print_chart('unitworkComparison')")
-		$('#changeButton').val('프로젝트 현황');$('#changeButton').attr('onclick',"returnButton()");
+	  $('#budgetButton').val('예산비교');
+	  $('#workforceButton').val('인력비교');
+	  $('#issueButton').val('이슈비교');
+	  $('#productButton').val('산출물비교');
+	  $('#unitworkButton').val('단위업무비교');
+	  $('#changeButton').val('프로젝트 현황');
+	  
+	  
+	  	$('#budgetButton').attr('onclick',"ajax_print_comparison_chart('budgetComparison')");
+		$('#workforceButton').attr('onclick',"ajax_print_comparison_chart('workforceComparison')");
+		//$('#scheduleButton').val('일정비교'); $('#scheduleButton').attr('onclick',"ajax_print_chart('scheduleComparison')")
+		$('#issueButton').attr('onclick',"ajax_print_comparison_chart('issueComparison')");
+		$('#productButton').attr('onclick',"ajax_print_comparison_chart('productComparison')");
+		 $('#unitworkButton').attr('onclick',"ajax_print_comparison_chart('unitworkComparison')")
+		$('#changeButton').attr('onclick',"returnButton()");
 	}
 
 	
 	function returnButton(){
 		$('#budgetButton').val('예산현황'); $('#budgetButton').attr('onclick',"ajax_print_chart('budget')");
-		$('#workforceButton').val('인력현황');
-		$('#scheduleButton').val('일정현황');
-		$('#issueButton').val('이슈현황');
-		$('#productButton').val('산출물현황');
-		$('#unitworkButton').val('단위업무현황');
-		$('#changeButton').val('프로젝트 비교');$('#changeButton').attr('onclick',"changeButton()");
+		$('#workforceButton').val('인력현황'); $('#workforceButton').attr('onclick',"ajax_print_chart('workforce')");
+		//$('#scheduleButton').val('일정현황'); $('#scheduleButton').attr('onclick',"ajax_print_chart('schedule')");
+		$('#issueButton').val('이슈현황'); $('#issueButton').attr('onclick',"ajax_print_chart('issue')");
+		$('#productButton').val('산출물현황'); $('#productButton').attr('onclick',"ajax_print_chart('product')");
+		$('#unitworkButton').val('단위업무현황'); $('#unitworkButton').attr('onclick',"ajax_print_chart('uniwork')");
+		
+		/* $('#changeButton').val('프로젝트 비교');$('#changeButton').attr('onclick',"changeButton()"); */
 	}
 
-	function setProjectNum(setNum){
-		project_num = setNum
-		alert(project_num);
-	}
+	
+	
   
   var project_num = 1;
   var last_chart="curve_chart";
   var chart_type="";
   var chart_data="test";
   var data_table_test;
+  
+  var project_comparison_num1 = 1;
+  var project_comparison_num2 = 2;
   
   
   function ajax_print_chart(url){
@@ -345,6 +365,32 @@
 			},
 		})
   }
+  
+  
+  function ajax_print_comparison_chart(url){
+	  formData = new FormData();
+	  test = $.ajax({
+			url:"${request.ContextPath()}/IdH/"+url,//서버url
+			data: {
+				project_comparison_num1 : project_comparison_num1,
+				project_comparison_num2 : project_comparison_num2
+			},
+			method:"post",	//get post 보내는 방식
+			success:function(data){
+				//alert(url);
+				chart_data = JSON.stringify(data);
+				chart_type= url+"_chart";
+				table_print();
+			},	//서버에서 보내는 데이터
+			error:function(error){
+				alert('error')
+			},
+			complete:function(){
+				//alert('complete')
+			},
+		})
+  }
+  
   
   		
  
@@ -376,9 +422,32 @@
 	  google.charts.load('current', {packages: ['corechart', 'line']});
 	  google.charts.load('current', {'packages':['corechart']});
 	  google.charts.setOnLoadCallback(drawBasic);
+	  
+	  
   }
+  function go_ajax(url, target, delTarget, templateObject ) {
+	  	var jobForm=$('#jobForm');
+	  	//var jobForm = document.getElementById('#jobForm');
+	  	$.ajax({
+	  		url: url,
+	      	type: "GET",
+	      	success: function(data) {    		
+	      		//alert(JSON.stringify(data));
+	      		printData(data,target,delTarget,templateObject);
+	      	},
+	      	error:function(error){
+	      		AjaxErrorSecurityRedirectHandler(error.status);	
+	      	}
+	  	});
+	  }
   
   
+	  function setProjectNum(setNum,url){
+		  //alert(setNum);
+			project_num = setNum;
+			go_ajax(url+'?project_number='+project_num,$('.ProjectDetailthead'),$('.ProjectDetailtbody'),$('#projectDetail-template'));
+			$('#chartDiv').hidden;
+	  }
 
 
   function drawBasic() {
@@ -426,11 +495,22 @@
   
   <c:if test="${from eq 'regist' }">
   <script>
-	  	alert('test');
+	  	//alert('test');
 	  	window.close();
 	  	window.opener.location.reload();
   </script>
   
 </c:if>
-  
+
+<c:if test="${from eq 'remove' }">
+<script>
+	alert('삭제되었습니다.');
+	window.close();
+	window.opener.location.reload();
+</script>
+
+</c:if>
+
+
+<script></script>  
   

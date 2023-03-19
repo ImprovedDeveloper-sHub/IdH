@@ -42,6 +42,7 @@
 	max-width: 1100px;
 	margin: 0 auto;
 	background: white;
+	height: 500px;
 }
 
 .fc-header-toolbar {
@@ -63,7 +64,7 @@
 
 <div class="content">
 	<div class="row">
-		<div class="col-8">
+		<div class="col-5">
 			<div>
 				<div id="content" class="card">
 					<div class="card-header">
@@ -74,10 +75,9 @@
 						<div class="input-group input-group-sm" style="width: 270px">
 							<select class="form-control-sm" name="searchType" id="searchType"
 								style="hegith: 30px; width: 90px !important; border-color: #CED4DA !important;">
-								<option value="tcw" ${cri.searchType eq 'n' ? 'selected':'' }>전체</option>
 								<option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제목</option>
-								<option value="w" ${cri.searchType eq 'l' ? 'selected':'' }>수준</option>
-								<option value="c" ${cri.searchType eq 'd' ? 'selected':'' }>내용</option>
+								<option value="l" ${cri.searchType eq 'l' ? 'selected':'' }>수준</option>
+								<option value="d" ${cri.searchType eq 'd' ? 'selected':'' }>내용</option>
 							</select> <input type="text" name="table_search"
 								class="form-control float-right" placeholder="Search">
 							<div class="input-group-append">
@@ -98,38 +98,47 @@
 							<table class="table table-hover">
 								<thead class="text-left">
 									<tr>
-										<th style="width: 15%">요구사항번호</th>
-										<th style="width: 30%">제목</th>
-										<th style="width: 20%">중요도</th>
+										<th style="width: 20%">요구사항번호</th>
+										<th style="width: 20%">제목</th>
+										<th style="width: 10%">중요도</th>
 										<th style="width: 10%">출처</th>
-										<th style="width: 10%">등록일자</th>
-										<th style="width: 15%">등록자</th>
+										<th style="width: 20%">등록일자</th>
+										<th style="width: 20%">등록자</th>
 									</tr>
 								</thead>
 								<tbody class="text-left">
 									<c:if test="${empty requireList}">
 										<tr>
-											<td colspan="8">데이터가 없습니다.</td>
+											<td colspan="5">데이터가 없습니다.</td>
 										</tr>
 									</c:if>
 									<c:forEach items="${requireList }" var="require">
-										<tr onclick="OpenWindow('detail?require_number=${require.require_number}','상세보기',680,800);">
+										<tr
+											onclick="OpenWindow('detail?require_number=${require.require_number}','상세보기',680,800);">
 											<td
-												style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${require.require_number}</td>
+												style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${require.require_number}</td>
 											<td
-												style="text-align: left; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${require.require_title}</td>
+												style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${require.require_title}</td>
 											<td
-												style="text-align: left; max-width: 10%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${require.require_level }</td>
-											<c:forEach items="${require.attachList }" var="attach">
-												<td
-													style="text-align: left; max-width: 35%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${attach.ano}</td>
-											</c:forEach>
+												style="text-align: left; max-width: 10%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+
+												${require.require_level eq 1 ? '하':'' }
+												${require.require_level eq 2 ? '중':'' }
+												${require.require_level eq 3 ? '상':'' }</td>
+											<td
+												style="text-align: left; max-width: 10%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+												<c:if test="${!empty require.attachList }">
+													<i class="nav-icon fas fa-file"></i>
+												</c:if> <c:if test="${empty require.attachList }">
+													<span>-</span>
+												</c:if>
+											</td>
 											<td
 												style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
 													value="${require.require_regdate}" pattern="yyyy-MM-dd" /></td>
 											<td
-												style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-												${require.require_writer_id}</td>
+												style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+												${require.require_setter_id}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -181,12 +190,8 @@
 
 			</div>
 		</div>
- 		<!-- 드래그 박스 -->
-		<div id='external-events'>
-			<div id='external-events-list'></div>
-		</div> 
 		<!-- calendar 태그 -->
-		<div class="col-4">
+		<div class="col-7">
 			<div id='calendar-wrap'>
 				<div id='calendar1'></div>
 			</div>
@@ -202,44 +207,65 @@
 		location.href = url + "?pno=" + pno;
 	}
 </script>
-
+<c:if test="${from eq 'regist'}">
+	<script>
+		alert("등록 되었습니다.");
+		window.close();
+		window.opener.location.reload();
+	</script>
+</c:if>
 <script>
-	(function() {
-		$(function() {
-			// 드래그 박스 취득
-			var containerEl = $('#external-events-list')[0];
-			// 설정하기
-			new FullCalendar.Draggable(containerEl, {
-				itemSelector : '.fc-event',
-				eventData : function(eventEl) {
-					return {
-						title : eventEl.innerText.trim()
-					}
-				}
-			});
-			// calendar element 취득
-			var calendarEl = $('#calendar1')[0];
-			// full-calendar 생성하기
-			var calendar = new FullCalendar.Calendar(calendarEl, {
-				// 해더에 표시할 툴바
-				headerToolbar : {
-					left : 'prev,next today',
-					center : 'title',
-					right : 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-				},
-				initialDate : '2021-07-15', // 초기 날짜 설정 (설정하지 않으면 오늘 날짜가 보인다.)
-				locale : 'ko', // 한국어 설정
-				editable : true, // 수정 가능
-				droppable : true, // 드래그 가능
-				drop : function(arg) { // 드래그 엔 드롭 성공시
-					// 드래그 박스에서 아이템을 삭제한다.
-					arg.draggedEl.parentNode.removeChild(arg.draggedEl);
-				}
-			});
-			// 캘린더 랜더링
-			calendar.render();
+	window.onload = function() {
+		url = "getUnitworkCalender"
+		$.ajax({
+			type : 'get',
+			cache : false,
+			url : url,
+			dataType : 'json',
+			contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+			success : function(param) {
+				var events = [];
+				$.each(param, function(index, date) {
+					console.log(date);
+					events.push({
+						title : date.title,
+						start : date.start,
+						end : date.end
+					});
+				})
+				//alert(JSON.stringify(events));
+				JsonData = events;
+				//alert(JsonData);
+
+				// calendar element 취득
+				var calendarEl = $('#calendar1')[0];
+				// full-calendar 생성하기
+				var JsonData;
+				var calendar = new FullCalendar.Calendar(calendarEl, {
+					// 해더에 표시할 툴바
+					/* initialDate : '2023-03-13', // 초기 날짜 설정 (설정하지 않으면 오늘 날짜가 보인다.) */
+					locale : 'ko', // 한국어 설정
+					timeZone : 'Asia/Seoul',
+					editable : true, // 수정 가능
+					/* droppable: true,  // 드래그 가능
+					drop: function(arg) { // 드래그 엔 드롭 성공시
+					  // 드래그 박스에서 아이템을 삭제한다.
+					   manage_Schedule('regist');
+					  arg.draggedEl.parentNode.removeChild(arg.draggedEl);
+					}, */
+
+					events : JsonData
+
+				});
+				
+				// 캘린더 랜더링
+
+				calendar.render();
+			},
+
 		});
-	})();
+
+	}
 </script>
 
 

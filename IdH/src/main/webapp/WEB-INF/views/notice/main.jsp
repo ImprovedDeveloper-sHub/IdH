@@ -16,12 +16,12 @@
 <div class="row" style="width: 1200px; ">
 	<div class="content-parts col-12" style="height: 630px;">
 		<div id="content" class="card" style="height: 100%;">
-			<div class="card-header">
+			<div class="card-header bg-info">
 				<h3 class="card-title">공지 사항 목록</h3>
 			</div>
 			<div class="card-tools"
 				style="justify-content: space-between; display: flex; flex-direction: row-reverse;">
-				<div class="input-group input-group-sm" style="width: 400px">
+				<div class="input-group input-group-sm" style="width: 400px; margin: 10px;">
 					<select id="myNoticePerPageNum" name="perPageNum"
 						style="display: none"><option value="5" selected></option></select>
 					<select class="form-control-sm" name="searchType"
@@ -44,11 +44,11 @@
 					</div>
 				</div>
 				<button type="button" class="btn btn-block btn-info btn-sm"
-					style="width: 80px;" onclick="location.href='registForm';">등록</button>
+					style="width: 80px; margin: 10px;" onclick="location.href='registForm';">등록</button>
 			</div>
 			<div id="table-content">
 				<div class="card-body table-responsive p-0">
-					<table class="table table-hover" style="table-layout: fixed; width: 100%;">
+					<table class="table table-hover" style="table-layout: fixed; width: 100%; margin-top: 20px;">
 						<thead class="text-left myNoticeThead">
 
 							<tr>
@@ -67,7 +67,7 @@
 								</tr>
 							</c:if>
 							<c:forEach items="${noticeList}" var="notice">
-								<tr onclick="location.href='detail?notice_number=${notice.notice_number}';"style="cursor:pointer;">
+								<tr onclick="location.href='detail?notice_number=${notice.notice_number}'; "style="cursor:pointer;">
 									<td style="font-size: 15px; text-align: left; max-width: 10%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${notice.notice_number}</td>
 									<td style="font-size: 15px; text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${notice.notice_title}</td>
 									<td style="font-size: 15px; text-align: left; max-width: 35%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${notice.notice_content }</td>
@@ -93,5 +93,25 @@
 
 
 </script>
+
+<c:if test="${from eq 'regist' }">
+
+<script>
+   alert("정상 등록이 되었습니다.");
+   window.close();
+   window.opener.location.reload();
+</script>
+
+</c:if>
+
+<c:if test="${from eq 'remove' }">
+
+<script>
+   alert("정상적으로 삭제 되었습니다.");
+   window.close();
+   window.opener.location.reload();
+</script>
+
+</c:if>
 
 

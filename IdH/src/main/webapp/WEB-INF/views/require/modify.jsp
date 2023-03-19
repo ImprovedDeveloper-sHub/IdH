@@ -72,7 +72,7 @@ input {
 		</div>
 		<div id="content">
 			<div id="table-content">
-				<form enctype="multiaprt/form-data" role="form" method="post"
+				<form enctype="multipart/form-data" role="form" method="post"
 					action="regist" name="registForm">
 					<table>
 						<thead>
@@ -95,7 +95,7 @@ input {
 							</tr>
 							<tr>
 								<td class="name-td">발의자</td>
-								<td class="table-td">${require.require_writer_id }</td>
+								<td class="table-td">${require.require_setter_id }</td>
 									<td class="table-td"></td>
 									<td class="table-td"></td>
 								<td class="name-td">등록일</td>
@@ -116,7 +116,7 @@ input {
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">담당자</td>
-								<td colspan="5"><input type="text" placeholder="${require.require_member_id }" /></td>
+								<td colspan="5"><input type="text" placeholder="${require.require_getter_id }" /></td>
 							</tr>
 							<tr style="height: 100px;">
 								<td class="name-td">내용</td>
@@ -132,49 +132,28 @@ input {
 			</div>
 		</div>
 		<div class="card-tools" style="margin-left: auto">
-			<button type="button" id="regbtn" class="btn btn-info"
+			<button type="button" id="regbtn" class="btn btn-info" name="modifyForm"
 				onclick="submit_go('modifyForm','${require.require_number }');">수정</button>
 			<button type="button" id="close" class="btn btn-info"
 				onclick="CloseWindow();">닫기</button>
 		</div>
 	</div>
 </div>
+
+
 <script>
 	window.onload = function() {
 		summernote_go($('.summernote'),'<%=request.getContextPath()%>');
 	};
 </script>
+
+
 <script>
-function modify_submit(){
-	//alert("modify btn click");
-	var form = $('form [name="modifyForm"]');
-	
-	//유효성 체크
-	if($("input[name='title']").val()==""){
-		alert(input.name+"은 필수입니다.");
-		$("input[name='title']").focus();
-		return;
-	}
-	
-	//파일 첨부확인
-	var files = $('input[name="uploadFile"]');
-	for(var file of files){
-		console.log(file.name+" : "+file.value);
-		if(file.value==""){
-			alert("파일을 선택하세요.");
-			file.focus();
-			return false;
-		}
-	}	
-	
-	form.submit();
+function submit_go(url,require_number ){	
+	location.href=url+"?require_number="+require_number;
 }
-
-window.onload=function(){
-	summernote_go($('#content'),'<%=request.getContextPath()%>');
-}
-
 </script>
+
 
 <script>
 function removeFile_go(className){

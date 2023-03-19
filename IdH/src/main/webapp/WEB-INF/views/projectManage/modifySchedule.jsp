@@ -81,7 +81,7 @@ input {
 			</div>
 			<div id="content">
 				<form enctype="multiaprt/form-data" role="form" method="post" action="modifySchedule" name="modifyScheduleForm">
-				<input  name="schedule_number" value="${schedule.schedule_number }"/>
+				<input type="hidden" name="schedule_number" value="${schedule.schedule_number }"/>
 				<div id="table-content">
 					<table>
 						<thead>
@@ -96,7 +96,7 @@ input {
 							<tr>
 								<td class="name-td">등록자</td>
 								<td class="table-td" colspan="3" ><input type="text" name="schedule_member_id" value="${schedule.schedule_member_id}" readonly></td>
-								<td class="name-td">수준</td>
+								<td class="name-td">분류</td>
 								<td class="table-td"><select name ="schedule_level">
 													<option value="1">기획</option>
 													<option value="2">설계</option>

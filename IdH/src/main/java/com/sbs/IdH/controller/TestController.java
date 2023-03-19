@@ -13,10 +13,9 @@ public class TestController {
 //	public void main() throws Exception {
 //	}
 	
-	@GetMapping("/work/main2")
-	public void main2() throws Exception {
-	}
-
+	/*
+	 * @GetMapping("/work/main2") public void main2() throws Exception { }
+	 */
 	@GetMapping("/notice")
 	public void notice() throws Exception {
 	}

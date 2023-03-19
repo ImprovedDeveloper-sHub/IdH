@@ -118,4 +118,6 @@
 		where business_number = #{business_number}
 	</update>
 	
+	
+	
 </mapper>

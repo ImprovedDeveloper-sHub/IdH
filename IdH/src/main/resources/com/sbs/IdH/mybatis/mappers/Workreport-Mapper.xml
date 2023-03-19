@@ -21,9 +21,7 @@
 		<if test="member_id != null and memberStatus == 2">
 			and workreport_member_approver = #{member_id}
 		</if>
-		<if test="memberStatus != null and memberStatus != 0">
-			and workreport_memstatus = #{memberStatus}
-		</if>
+
 		<if test="type != null and type != 0">
 			and workreport_check = #{type}
 		</if>
@@ -55,9 +53,9 @@
 
 	<update id="insertWorkreport" parameterType="workreport">
 		insert into
-		workreport(workreport_number, workreport_project_number,workreport_member_id, workreport_check,
-		workreport_regdate, workreport_enddate,workreport_member_approver,workreport_title,workreport_memstatus)
-		values(#{workreport_number},#{workreport_project_number},#{workreport_member_id},#{workreport_check},sysdate,sysdate,#{workreport_member_approver},#{workreport_title},#{workreport_memstatus})
+		workreport(workreport_number, workreport_project_number,workreport_setter_id, workreport_check,
+		workreport_regdate, workreport_enddate,workreport_member_approver,workreport_title,workreport_memstatus,workreport_content)
+		values(#{workreport_number},#{workreport_project_number},#{workreport_setter_id},#{workreport_check},sysdate,sysdate,#{workreport_member_approver},#{workreport_title},#{workreport_memstatus},#{workreport_content})
 	</update>
 
 	<update id="updateWorkreport" parameterType="workreport">
@@ -79,6 +77,10 @@
 		where workreport_number is not null
 		<include refid="search" />
 	</select> -->
+	
+	<select id="selectWorkreportSeqNext" resultType="int">
+		select workreport_seq.nextval as workreport_number from dual
+	</select>
 </mapper>  
 
 

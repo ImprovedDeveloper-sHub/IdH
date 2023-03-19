@@ -80,7 +80,7 @@ public class ProductController {
 		return mnv;
 	}
 	
-
+  
 	
 	
 
@@ -150,7 +150,7 @@ public class ProductController {
 		ProductVO product = null;
 
 		product = productService.selectProduct(product_number);
-
+		/* product=productService.selectProductEndList(product_number); */
 		// 파일명 재정의
 		if (product != null) {
 			List<Product_AttachVO> attachList = product.getAttachList();
@@ -168,6 +168,7 @@ public class ProductController {
 		return mnv;
 	}
 	
+	
 	  @GetMapping("/cowork_detail") public ModelAndView cowork_detail(int cowork_number, String
 	  from, RedirectAttributes rttr, ModelAndView mnv) throws Exception { String
 	  url = "/product/cowork_detail";
@@ -184,49 +185,35 @@ public class ProductController {
 	  }
 	 
 
-	 @GetMapping("/remove")
-	public String remove(int product_number, RedirectAttributes rttr) throws Exception {
-		String url = "redirect:/product/main";
 
-		// 첨부파일 삭제
-		List<Product_AttachVO> attachList = productService.selectProduct(product_number).getAttachList();
-		if (attachList != null) {
-			for (Product_AttachVO attach : attachList) {
-				File target = new File(attach.getUploadPath(), attach.getFileName());
-				if (target.exists()) {
-					target.delete();
+	 @GetMapping("/remove")
+		public String remove(int product_number, RedirectAttributes rttr) throws Exception {
+			String url = "redirect:/product/main";
+
+			// 첨부파일 삭제
+			List<Product_AttachVO> attachList = productService.selectProduct(product_number).getAttachList();
+			if (attachList != null) {
+				for (Product_AttachVO attach : attachList) {
+					File target = new File(attach.getUploadPath(), attach.getFileName());
+					if (target.exists()) {
+						target.delete();
+					}
 				}
 			}
+			// DB삭제
+			/*
+			 * Product_AttachVO deleteAttach = attachList.get(product_number);
+			 * 
+			 * productService.removeProduct_AttachByAno(deleteAttach.getAno());
+			 */
+			productService.removeProduct(product_number);
+			
+			rttr.addFlashAttribute("from", "remove");
+			rttr.addAttribute("product_number", product_number);
+			
+			return url;
 		}
-		// DB삭제
-		productService.removeProduct(product_number);
-		
-		rttr.addFlashAttribute("from", "remove");
-		rttr.addAttribute("product_number", product_number);
-		
-		/*
-		 * coworkService.removeCowork(product_number);
-		 * 
-		 * rttr.addFlashAttribute("from", "remove"); rttr.addAttribute("cowork_number",
-		 * product_number);
-		 */
-		
-		return url;
-	}
-
-	/*
-	 * @GetMapping("/remove") public String remove(int cowork_number,
-	 * RedirectAttributes rttr) throws Exception { String url =
-	 * "redirect:/product/main";
-	 * 
-	 * 
-	 * // DB삭제 coworkService.removeCowork(cowork_number);
-	 * 
-	 * rttr.addFlashAttribute("from", "remove"); rttr.addAttribute("cowork_number",
-	 * cowork_number);
-	 * 
-	 * return url; }
-	 */
+	 
 	 @GetMapping("/modifyForm")
 		public ModelAndView modifyForm(ModelAndView mnv, int product_number,RedirectAttributes rttr) throws Exception {
 			String url = "/product/modify";
@@ -238,7 +225,7 @@ public class ProductController {
 		}
 	 @PostMapping(value="/modify", produces = "text/plain;charset=utf-8")
 		public String modifyPOST(ProductModifyCommand modifyReq,HttpServletRequest request,RedirectAttributes rttr) throws Exception {
-			String url = "redirect:/product/main";
+			String url = "redirect:/product/detail";
 			
 			// 파일 삭제
 			if (modifyReq.getDeleteFile() != null && modifyReq.getDeleteFile().length > 0) {

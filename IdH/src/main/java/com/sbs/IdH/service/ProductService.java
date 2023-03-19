@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Map;
 
 import com.sbs.IdH.command.SearchCriteria;
+import com.sbs.IdH.dto.ChartVO;
 import com.sbs.IdH.dto.ProductVO;
 import com.sbs.IdH.dto.Product_AttachVO;
 
@@ -45,5 +46,10 @@ public interface ProductService {
 
 		Map<String, Object> selectProduct_CoworkList(SearchCriteria cri) throws SQLException;
 	    
+		
+		//추가
+		public ChartVO selectChart(int project_number)throws Exception;
+
+		public ChartVO selectChartForComparison(int project_number, int project_number2)throws Exception;
 	    
 }

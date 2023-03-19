@@ -95,8 +95,9 @@ input {
 							<tr>
 								<td class="name-td">등록자</td>
 								<td class="table-td" colspan="3" ><input type="text" name="schedule_member_id" value="${loginUser.member_id}" readonly></td>
-								<td class="name-td">수준</td>
-								<td class="table-td"><select name ="schedule_level">
+								<td class="name-td">분류</td>
+								<td class="table-td">
+									<select name ="schedule_type">
 													<option value="1">기획</option>
 													<option value="2">설계</option>
 													<option value="3">구현</option>
@@ -121,8 +122,8 @@ input {
 
 							<tr>
 								<td class="name-td">프로젝트명</td>
-								<td class="table-td"><select>
-													
+								<td class="table-td"><select name="schedule_project_number" >
+									<option value="1">미정</option>
 									</select></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>

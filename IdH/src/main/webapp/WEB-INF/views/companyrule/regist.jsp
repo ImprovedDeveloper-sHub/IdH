@@ -1,6 +1,8 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <!-- CSS start -->
@@ -53,39 +55,42 @@ input {
 	color: #64697a;
 	border: none;
 }
+
 .fileUpload {
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
-  padding: 6px 12px;
-  margin-bottom: 0;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  border: 1px solid #357ebd;
-  border-radius: 4px;
-  color: #fff;
-  background: #428bca;
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	border: 1px solid #357ebd;
+	border-radius: 4px;
+	color: #fff;
+	background: #428bca;
 }
+
 .fileUpload input.upload {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 0;
-  padding: 0;
-  font-size: 20px;
-  cursor: pointer;
-  opacity: 0;
-  filter: alpha(opacity=0);
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity = 0);
 }
 </style>
 
 <!-- CSS end -->
+
 
 
 
@@ -101,7 +106,7 @@ input {
 		</div>
 		<div id="content">
 			<div id="table-content">
-				<form enctype="multiaprt/form-data" role="form" method="post"
+				<form enctype="multipart/form-data" role="form" method="post"
 					action="regist" name="registForm">
 					<table>
 						<thead>
@@ -115,50 +120,39 @@ input {
 						</thead>
 						<tbody>
 							<tr>
-								<td class="name-td">글번호</td>
-								<td class="table-td"><input type="text" readonly
-									placeholder="컴패니룰넘버" /></td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
-								<td class="name-td">작성자</td>
-								<td class="table-td"><input type="text" readonly
-									placeholder="user.id" /></td>
-							</tr>
-							<tr>
 								<td class="name-td">제목</td>
 								<td class="table-td"><input type="text"
-									placeholder="제목을 입력하세요" /></td>
+									name="companyrule_title" placeholder="제목을 입력하세요" /></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
-								<td class="name-td">등록일</td>
-								<td class="name-td"></td>
-
-								<td colspan="5"><input type="text" readonly
-									placeholder="오늘날짜들어갈것" /></td>
+								
+								
 							</tr>
-
-
-
-
-
-							<!-- 고쳐야할것 -->
-
+							
+							<tr>
+								<td class="name-td">등록자</td>
+								<td class="table-td"><input type="text" name="companyrule_member_id" readonly
+									value="${loginUser.member_id }" /></td>
+									<td class="table-td"></td>
+									<td class="table-td"></td>
+								<td class="name-td">등록일</td>
+								<td colspan="5"><input type="text" readonly
+									value='<fmt:formatDate value="<%=new Date() %>" pattern="yyyy-MM-dd"/>' /></td>
+									
+							</tr>
+						
 							<tr style="height: 100px;">
 								<td class="name-td">내용</td>
 								<td class="table-td td-summernote" colspan="5"><textarea
-										class="summernote" rows="15" cols="40"
+										class="summernote" rows="15" cols="40" name="companyrule_content"
 										style="display: none; width: 500px;"></textarea></td>
-							</tr>
-
-				
-
-
+						
 						</tbody>
 
 					</table>
 					<div class="fileUpload">
 						<span><i class="fa fa-plus-circle"></i> Add File</span> <input
-							type="file" class="upload" id="files" name="files" multiple />
+							type="file" class="" id="files" name="files" multiple />
 					</div>
 
 					<ul id="selectedFiles"></ul>
@@ -187,9 +181,9 @@ input {
 	   
 	   $("form[role='form']").submit();
 	    
-
-		
+ }
 </script>
+
 <script>
 $('input:file[multiple]').change(
 	      function(e){
@@ -200,9 +194,4 @@ $('input:file[multiple]').change(
 	        $('<span>').addClass('filesize').text('(' + filesize + 'kb)').appendTo($('#selectedFiles li:last'));
 	      }
 	    });
-
 </script>
-
-
-
-

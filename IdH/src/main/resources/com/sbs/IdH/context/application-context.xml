@@ -28,7 +28,9 @@
 
 	<bean id="issueService"
 		class="com.sbs.IdH.service.IssueServiceImpl" p:issueDAO-ref="issueDAO"
-		p:issue_AttachDAO-ref="issue_attachDAO" />
+		p:issue_AttachDAO-ref="issue_attachDAO" 
+		p:projectDAO-ref="projectDAO"
+		/>
 	<bean id="minutesService"
 		class="com.sbs.IdH.service.MinutesServiceImpl"
 		p:minutesDAO-ref="minutesDAO" />
@@ -56,6 +58,7 @@
 		p:scheduleDAO-ref="scheduleDAO"
 		p:workforceDAO-ref="workforceDAO"
 		p:unitworkDAO-ref="unitworkDAO"
+		p:businessDAO-ref="businessDAO"
 	/>
 	<bean id="unitworkService" class="com.sbs.IdH.service.UnitworkServiceImpl"
 		p:unitworkDAO-ref="unitworkDAO"
@@ -63,9 +66,11 @@
 	/>
 	<bean id="workforceService" class="com.sbs.IdH.service.WorkforceServiceImpl"
 		p:workforceDAO-ref="workforceDAO"
+		p:projectDAO-ref="projectDAO"
 	/>
 	<bean id="scheduleService" class="com.sbs.IdH.service.ScheduleServiceImpl"
 		p:scheduleDAO-ref="scheduleDAO"
+		p:projectDAO-ref="projectDAO"
 	/>
 	<bean id="budgetService" class="com.sbs.IdH.service.BudgetServiceImpl"
 		p:budgetDAO-ref="budgetDAO"
@@ -122,7 +127,9 @@
 		p:coworkDAO-ref="coworkDAO" />
 	<bean id="productService" class="com.sbs.IdH.service.ProductServiceImpl"
 		p:productDAO-ref="productDAO" 
-	    p:product_attachDAO-ref="product_attachDAO"/> 
+	    p:product_attachDAO-ref="product_attachDAO"
+	    p:projectDAO-ref="projectDAO"
+	    /> 
  	<bean id="companyruleService" class="com.sbs.IdH.service.CompanyruleServiceImpl"
 		p:companyruleDAO-ref="companyruleDAO" 
 		p:co_attachDAO-ref="co_attachDAO"/>

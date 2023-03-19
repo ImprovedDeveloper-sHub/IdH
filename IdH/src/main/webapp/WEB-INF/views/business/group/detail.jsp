@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 
@@ -14,7 +16,7 @@
 
 #table-content {
 	background: #fff;
-	margin-top: 20px;
+	/* margin-top: 20px; */
 	box-shadow: #dcdee3 0px 0px 10px;
 }
 
@@ -81,10 +83,11 @@
 
 <div class="row">
 
-	<!-- 사업 인원 상세 정보 -->
-	<div class="col-8">
+	<div class="col-12">
+	
+		<!-- 사업 인원 상세 정보 -->
 		<div class="card card-info">
-			<div class="card-header">
+			<div class="card-header bg-info">
 				<h3 class="card-title">사업 인원 상세 정보</h3>
 				<div class="card-tools">
 					<div class="input-group input-group-sm" style="width: 150px;">
@@ -97,119 +100,79 @@
 					<table>
 						<thead>
 							<tr>
-								<td class="name-td">분류</td>
-								<td class="name-td">세부사항</td>
-								<td class="name-td"></td>
-								<td class="name-td"></td>
-								<td class="name-td">분류</td>
-								<td class="name-td">세부사항</td>
+								<td class="name-td" style="width: 15%; text-align: center;">분류</td>
+								<td class="name-td" style="width: 35%; text-align: center;">세부사항</td>
+								<td class="name-td" style="width: 15%; text-align: center;">분류</td>
+								<td class="name-td" style="width: 35%; text-align: center;">세부사항</td>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td class="name-td">사업번호</td>
-								<td class="table-td">20221201</td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
-								<td class="name-td">팀장</td>
-								<td class="table-td">서승훈</td>
+								<td class="name-td" style="text-align: center;">사업번호</td>
+								<td class="table-td">${business.business_number}</td>
+								<td class="name-td" style="text-align: center;">팀장</td>
+								<td class="table-td">${business.business_member_id}</td>
 							</tr>
 							<tr>
-								<td class="name-td">사업명</td>
-								<td class="table-td">PMS 개발 사업</td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
-								<td class="name-td">투입인원</td>
-								<td class="table-td">13명</td>
+								<td class="name-td" style="text-align: center;">사업명</td>
+								<td class="table-td">${business.business_name}</td>
+								<td class="name-td" style="text-align: center;">투입인원</td>
+								<td class="table-td">${business.business_people}</td>
 							</tr>
 							<tr>
-								<td class="name-td">시작일자</td>
-								<td class="table-td">22.12.01.</td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
-								<td class="name-td">종료일자</td>
-								<td class="table-td">23.06.30.(*예정)</td>
+								<td class="name-td" style="text-align: center;">시작일자</td>
+								<td class="table-td"><fmt:formatDate
+										value="${business.business_begin}" pattern="yyyy-MM-dd" /></td>
+								<td class="name-td" style="text-align: center;">종료일자</td>
+								<td class="table-td"><fmt:formatDate
+										value="${business.business_end}" pattern="yyyy-MM-dd" /></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- 사업 인원 상세 정보 끝 -->
-
-	<!-- 인원 별 상세 현황 -->
-	<div class="col-8">
+		<!-- 사업 인원 상세 정보 끝 -->
+		
+		<!-- 인원 별 상세 현황 -->
 		<div class="card card-info">
-			<div class="card-header">
+			<div class="card-header bg-info">
 				<h3 class="card-title">인원 별 상세 현황</h3>
-				<div class="card-tools">
-					<div class="input-group input-group-sm" style="width: 150px;">
-						<div class="input-group-append"></div>
-					</div>
-				</div>
 			</div>
 			<div id="content">
 				<div id="table-content">
-					<table cellspacing="0" cellpadding="0">
+					<table style="height: 330px;">
 						<thead>
 							<tr>
-								<td>ID</td>
-								<td>성명</td>
-								<td>담당 업무</td>
-								<td>구현 기능</td>
-								<td></td>
-								<td></td>
+								<td style="width: 20%;">ID</td>
+								<td style="width: 15%;">성명</td>
+								<td style="width: 15%;">담당 업무</td>
+								<td style="width: 50%;">구현 기능</td>
 							</tr>
 						</thead>
 						<tbody>
+							<c:forEach items="${businessList}" var="business">
 							<tr>
-								<td class="table-td">ytur13</td>
-								<td class="table-td">서승훈</td>
-								<td class="table-td">PL</td>
-								<td class="table-td">프로젝트 관리 전반</td>
+								<td class="table-td">${business.business_member_id}</td>
+								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 							</tr>
-							<tr>
-								<td class="table-td">gjalsgh</td>
-								<td class="table-td">허민호</td>
-								<td class="table-td">BA</td>
-								<td class="table-td">공지사항 게시판</td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
-							</tr>
-							<tr>
-								<td class="table-td">joongwon</td>
-								<td class="table-td">최중원</td>
-								<td class="table-td">AA</td>
-								<td class="table-td">로그인, 회원가입</td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
-							</tr>
-							<tr>
-								<td class="table-td">cndjxkdwkd</td>
-								<td class="table-td">송창현</td>
-								<td class="table-td">DA</td>
-								<td class="table-td">DB 구성</td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
-							</tr>
-							<tr>
-								<td class="table-td">dkahffkd25</td>
-								<td class="table-td">권이혁</td>
-								<td class="table-td">TA</td>
-								<td class="table-td">사업 관리</td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
-							</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
+		<!-- 인원 별 상세 현황 끝 -->
+		
 	</div>
-	<!-- 인원 별 상세 현황 끝 -->
+	
+	<div class="card-tools" style="margin-left: 1025px">
+		<button type="button" id="modifyBtn" class="btn btn-info" onclick="location.href='modifyForm?business_number=${business.business_number}';">수정</button>
+	   	<button type="button" id="removeBtn" class="btn btn-info" onclick="location.href='modifyForm?business_number=${business.business_number}';">삭제</button>	
+	   	<button type="button" id="listBtn" class="btn btn-info" onclick="location.href='main';">목록</button>
+	</div>
 
 </div>
 

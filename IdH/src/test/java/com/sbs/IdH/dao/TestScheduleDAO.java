@@ -64,7 +64,7 @@ public class TestScheduleDAO {
   
    public void testupdateForProject() throws Exception{
 	   ScheduleVO schedule1 = scheduleDAO.selectSchedule(1);
-	   scheduleDAO.updateScheduleForProjectStart(schedule1);
+	   //scheduleDAO.updateScheduleForProjectStart(schedule1);
 	   schedule1 = scheduleDAO.selectSchedule(1);
 	   scheduleDAO.updateScheduleForProjectEnd(schedule1);
 	   schedule1 = scheduleDAO.selectSchedule(1);

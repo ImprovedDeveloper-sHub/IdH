@@ -24,7 +24,7 @@ public interface BudgetDAO {
 
 	void updateBudget(BudgetVO budget) throws SQLException;
 	
-	void updateBudgetForProjectStart(BudgetVO budget) throws SQLException;
+	void updateBudgetForRegistProject(BudgetVO budget) throws SQLException;
 
 	void updateBudgetForProjectEnd(BudgetVO budget) throws SQLException;
 	
@@ -32,5 +32,4 @@ public interface BudgetDAO {
 	
 	Map<String,Object> selectBudgetPriceForChart(SearchCriteria cri)throws SQLException;
 	
-
 }

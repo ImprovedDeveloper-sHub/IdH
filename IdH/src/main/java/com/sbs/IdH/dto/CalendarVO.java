@@ -30,6 +30,9 @@ public class CalendarVO {
 		this.start = start;
 		this.end = end;
 	}
+	public CalendarVO(ScheduleVO schedule) {
+		//schedule.getSchedule_startdate()
+	}
 	
 	
 	
