@@ -62,7 +62,7 @@ input {
 			</div>
 			<div id="content">
 				<div id="table-content">
-				<form enctype="multiaprt/form-data" role="form" method="post" action="regist" name="registForm">
+				<form enctype="multipart/form-data" role="form" method="post" action="modify" name="modifyForm">
 					<table>
 						<thead>
 							<tr>
@@ -76,30 +76,30 @@ input {
 						<tbody>
 							<tr>
 								<td class="name-td">글번호</td>
-								<td class="table-td"><input type="text" readonly placeholder="${product.product_number }"/></td>
+								<td class="table-td"><input type="text" name="product_number" readonly value="${product.product_number }"/></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">작성자</td>
-								<td class="table-td"><input type="text" readonly placeholder="${product.product_member_id }"/></td>
+								<td class="table-td"><input type="text" name="product_member_id" readonly value="${product.product_member_id }"/></td>
 							</tr>
 							<tr>
 								<td class="name-td">제목</td>
-								<td class="table-td"><input type="text" placeholder="${product.product_title }"></td>
+								<td class="table-td"><input type="text" name="product_title" placeholder="${product.product_title }"></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">등록일</td>
 								<td colspan="5"><fmt:formatDate
-												value="${product.product_regdate}"
+												value="${companyrule.companyrule_regdate}"
 												pattern="yyyy-MM-dd"/></td>
 							</tr>
 						
 							<tr style="height: 100px;">
 							<td class="name-td">내용</td>
-								<td class="table-td"><input type="text"  placeholder="${product.product_content }"/></td>
+								<td class="table-td"><input type="text" name="product_content" placeholder="${product.product_content }"/></td>
 							</tr>
 							<tr>
 							<td class="name-td">첨부파일</td>
-								<td class="table-td"><input type="text"  placeholder="${product.product_content }"/></td>
+								<td class="table-td"><input type="text" name="attachlist" placeholder="${product.attachList }"/></td>
 							</tr>
 							
 
@@ -109,39 +109,24 @@ input {
 				</div>
 			</div>
 			<div class="card-tools" style="margin-left:auto">
-			<button type="button" id="modifyBtn" class="btn btn-info" onclick="submit_go('modifyForm','${product.product_number }');">수정</button>						 				   
+			<button type="button" id="modifyBtn" class="btn btn-info" onclick="modify_submit();">수정</button>						 				   
 		    <button type="button" id="listBtn" class="btn btn-info" onclick="CloseWindow();">닫기</button>
 		</div>
 	</div>
 </div>
 
-<script>
-function regist_go(){
-	   
-	 
-	   
-	   $("form[role='form']").submit();
-	   
+
+
+<script>    
+function modify_submit(){
+	//alert("modify btn click");
+	var form = $('form[name="modifyForm"]');
 	
-</script>
+	form.submit();
 
-<script>
-function submit_go(url,product_number ){	
-	location.href=url+"?product_number="+product_number;
+
 }
-</script>
+</script> 
 
-<c:if test="${from eq 'modify'}" >
-	<script>
-		alert("정상적으로 수정되었습니다.");
-		window.opener.location.reload();
-	</script>
-</c:if>    
-<c:if test="${from eq 'remove'}" >
-	<script>
-		alert("삭제되었습니다.");
-		window.close();
-		window.opener.location.reload();
-	</script>
-</c:if> 
+
 

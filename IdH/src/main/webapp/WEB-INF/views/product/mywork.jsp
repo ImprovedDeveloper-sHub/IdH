@@ -100,11 +100,11 @@ tbody tr td {
 
 	<div class="content-parts col-6">
 		<div id="content" class="card">
-			<div class="card-header">
+			<div class="card-header bg-info">
 				<h3 class="card-title">산출물연계진행</h3>
 			</div>
 			<div class="card-tools"
-				style="justify-content: space-between; display: flex; flex-direction: row-reverse;">
+				style="justify-content: space-between;margin:3px;display: flex; flex-direction: row-reverse;">
 				<div class="input-group input-group-sm" style="width: 270px">
 					<select class="form-control-sm" name="searchType" id="searchType"
 						style="hegith: 30px; width: 90px !important; border-color: #CED4DA !important;">
@@ -149,7 +149,7 @@ tbody tr td {
 							</c:if>
 							<c:forEach items="${productMyProceedList }" var="product">
 								<tr
-									onclick="OpenWindow('product_detail?product_number=${product.product_number }&from=list','상세보기',680,400);"
+									onclick="OpenWindow('detail?product_number=${product.product_number }','상세보기',680,400);"
 									style="cursor: pointer;">
 									<td
 										style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${product.product_number}</td>
@@ -181,11 +181,11 @@ tbody tr td {
 
 	<div class="content-parts col-6">
 		<div id="content" class="card">
-			<div class="card-header">
-				<h3 class="card-title">산출물연계진행</h3>
+			<div class="card-header bg-info">
+				<h3 class="card-title">종료된 산출물</h3>
 			</div>
 			<div class="card-tools"
-				style="justify-content: space-between; display: flex; flex-direction: row-reverse;">
+				style="justify-content: space-between; margin:3px; display: flex; flex-direction: row-reverse;">
 				<div class="input-group input-group-sm" style="width: 270px">
 					<select class="form-control-sm" name="searchType" id="searchType"
 						style="hegith: 30px; width: 90px !important; border-color: #CED4DA !important;">
@@ -230,7 +230,7 @@ tbody tr td {
 							</c:if>
 							<c:forEach items="${productMyEndList }" var="product">
 								<tr
-									onclick="OpenWindow('product_detail?product_number=${product.product_number }&from=list','상세보기',680,400);"
+									onclick="OpenWindow('detail?product_number=${product.product_number }','상세보기',680,400);"
 									style="cursor: pointer;">
 									<td
 										style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${product.product_number}</td>
