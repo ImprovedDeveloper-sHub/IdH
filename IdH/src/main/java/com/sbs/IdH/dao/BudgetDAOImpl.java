@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.sbs.IdH.command.SearchCriteria;
@@ -20,7 +21,10 @@ public class BudgetDAOImpl implements BudgetDAO{
 	
 	@Override
 	public List<BudgetVO> selectSearchBudgetList(SearchCriteria cri) throws SQLException {
-		List<BudgetVO> budgetList = session.selectList("Budget-Mapper.selectBudgetList", cri);
+		int offset=cri.getStartRowNum();
+		int limit=cri.getPerPageNum();		
+		RowBounds rowBounds=new RowBounds(offset,limit);
+		List<BudgetVO> budgetList = session.selectList("Budget-Mapper.selectBudgetList", cri, rowBounds);
 		return budgetList;
 	}
 
@@ -44,8 +48,7 @@ public class BudgetDAOImpl implements BudgetDAO{
 	
 	@Override
 	public int selectBudgetSeqNext() throws SQLException {
-		session.update("Budget-Mapper.selectBudgetSeqNext");
-		return 0;
+		return session.selectOne("Budget-Mapper.selectBudgetSeqNext");
 	}
 
 	
@@ -61,10 +64,6 @@ public class BudgetDAOImpl implements BudgetDAO{
 		session.update("Budget-Mapper.updateBudget", budget);
 	}
 	
-	@Override
-	public void updateBudgetForProjectStart(BudgetVO budget) throws SQLException {
-		session.update("Budget-Mapper.updateBudgetForProjectStart", budget);		
-	}
 
 	@Override
 	public void updateBudgetForProjectEnd(BudgetVO budget) throws SQLException {
@@ -86,7 +85,10 @@ public class BudgetDAOImpl implements BudgetDAO{
 		return colMap;
 	}
 
-	
+	@Override
+	public void updateBudgetForRegistProject(BudgetVO budget) throws SQLException {
+		session.update("Budget-Mapper.updateBudgetPlanForProjectStart", budget);
+	}
 	
 	
 	

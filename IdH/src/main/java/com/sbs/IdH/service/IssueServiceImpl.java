@@ -1,6 +1,7 @@
-package com.sbs.IdH.service;
+package com.sbs.IdH.service; 
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,8 +13,12 @@ import com.sbs.IdH.command.PageMaker;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.IssueDAO;
 import com.sbs.IdH.dao.Issue_AttachDAO;
+import com.sbs.IdH.dao.ProjectDAO;
+import com.sbs.IdH.dto.ChartVO;
 import com.sbs.IdH.dto.IssueVO;
 import com.sbs.IdH.dto.Issue_AttachVO;
+import com.sbs.IdH.dto.MemberVO;
+
 
 public class IssueServiceImpl implements IssueService{
 
@@ -26,6 +31,14 @@ public class IssueServiceImpl implements IssueService{
 		this.issue_attachDAO = issue_attachDAO;
 	}
 
+	
+	private ProjectDAO projectDAO;
+	
+	public void setProjectDAO(ProjectDAO projectDAO) {
+		this.projectDAO = projectDAO;
+	}
+	
+	
 	@Override
 	public Map<String, Object> selectIssueList(SearchCriteria cri) throws SQLException {
 		List<IssueVO>issueList = issueDAO.selectSearchIssueList(cri);
@@ -70,8 +83,10 @@ public class IssueServiceImpl implements IssueService{
 
 	@Override
 	public void registIssue(IssueVO issue) throws SQLException {
-		issue.setIssue_number(2);
+		int issue_number = issueDAO.selectIssueSeqNext();
+		issue.setIssue_number(issue_number);
 		issueDAO.insertIssue(issue);
+		
 	}
 	
 
@@ -94,22 +109,35 @@ public class IssueServiceImpl implements IssueService{
 	}
 	
 	@Override
-	public Map<String, Object> selectMyIssueList(SearchCriteria cri,HttpServletRequest request) throws SQLException {
+	public Map<String, Object> selectMyIssueList(SearchCriteria cri, HttpServletRequest request) throws SQLException {
 		Map<String, Object> dataMap = new HashMap<String,Object>();
 		HttpSession session = request.getSession();
-		cri.setMemberId((String)session.getAttribute("loginUser"));
-		cri.setMemberStatus(1);
+		MemberVO member = (MemberVO) session.getAttribute("loginUser");
+		cri.setMember_id(member.getMember_id());
+		//cri.setMember_id("IdH");
+		cri.setMemberStatus(1);//내 리스트
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(issueDAO.selectIssueCriteriaTotalCount(cri));
+		dataMap.put("pageMaker",pageMaker);
 		dataMap.put("myIssueList", issueDAO.selectSearchIssueList(cri));
 		return dataMap;
 	}
 	
 	@Override
-	public Map<String, Object> selectGetterIssueList(SearchCriteria cri,HttpServletRequest request) throws SQLException {
+	public Map<String, Object> selectGetterIssueList(SearchCriteria cri, HttpServletRequest request) throws SQLException {
 		Map<String, Object> dataMap = new HashMap<String,Object>();
-		HttpSession session = request.getSession();
-		cri.setMemberId((String)session.getAttribute("loginUser"));
+		HttpSession session = request.getSession(); 
+		MemberVO member = (MemberVO)session.getAttribute("loginUser");
+//		SearchCriteria cri2 = cri.getNewCri(cri);
+		cri.setMember_id(member.getMember_id());
+		//cri.setMember_id("IdH");
 		cri.setMemberStatus(2);
-		dataMap.put("getterIssueList", issueDAO.selectSearchIssueListCount(cri));
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(issueDAO.selectIssueCriteriaTotalCount(cri));
+		dataMap.put("pageMaker",pageMaker);
+		dataMap.put("getterIssueList", issueDAO.selectSearchIssueList(cri));
 		return dataMap;
 	}
 
@@ -141,4 +169,91 @@ public class IssueServiceImpl implements IssueService{
 
 	}
 	
+	
+	@Override
+	public ChartVO selectChart(int project_number) throws Exception {
+
+		HashMap<String, Object> rowMap_c1 = new HashMap<String, Object>();
+		HashMap<String, Object> rowMap_c2 = new HashMap<String, Object>();
+		HashMap<String, Object> rowMap_c3 = new HashMap<String, Object>();
+		
+		SearchCriteria cri = new SearchCriteria();
+		cri.setProject_number(project_number);
+		//총이슈
+		List<Map<String,Object>> c0_list = new ArrayList<Map<String,Object>>();
+		HashMap<String, Object> c0_list_label = new HashMap<String, Object>();
+		c0_list_label.put("v", "총 이슈 개수");
+		c0_list.add(c0_list_label);
+		c0_list.add(issueDAO.selectIssueCountForChart(cri));
+		
+		//완료이슈
+		cri.setStatus(1);
+		List<Map<String,Object>> c1_list = new ArrayList<Map<String,Object>>();
+		HashMap<String, Object> c1_list_label = new HashMap<String, Object>();
+		c1_list_label.put("v", "완료이슈");
+		c1_list.add(c1_list_label);
+		c1_list.add(issueDAO.selectIssueCountForChart(cri));
+		
+		//미완료 이슈
+		cri.setType(2);
+		List<Map<String,Object>> c2_list = new ArrayList<Map<String,Object>>();
+		HashMap<String, Object> c2_list_label = new HashMap<String, Object>();
+		c2_list_label.put("v", "미완료 이슈");
+		c2_list.add(c2_list_label);
+		c2_list.add(issueDAO.selectIssueCountForChart(cri));
+		
+		
+		rowMap_c1.put("c", c0_list);
+		rowMap_c2.put("c", c1_list);
+		rowMap_c3.put("c", c2_list);
+		
+		ChartVO chart = new ChartVO();
+		chart.issueColSet();
+		chart.rowSet(rowMap_c1);
+		chart.rowSet(rowMap_c2);
+		chart.rowSet(rowMap_c3);
+		
+		chart.resultSet();
+		return chart;
+	}
+	
+	
+	@Override
+	public ChartVO selectChartForComparison(int project_number1, int project_number2) throws Exception {
+		
+		
+		  HashMap<String, Object> rowMap_c1 = new HashMap<String, Object>();
+		  HashMap<String, Object> rowMap_c2 = new HashMap<String, Object>();
+		  
+		  
+		  SearchCriteria cri = new SearchCriteria();
+		  cri.setProject_number(project_number1); 
+		  List<Map<String,Object>> c0_list = new ArrayList<Map<String,Object>>();
+		  HashMap<String, Object> c0_list_label = new HashMap<String, Object>();
+		  
+		  c0_list_label.put("v", projectDAO.selectProject(project_number1).getProject_name());
+		  c0_list.add(c0_list_label);
+		  c0_list.add(issueDAO.selectIssueCountForChart(cri));
+		  
+		  
+		  
+		  
+		  
+		  cri.setProject_number(project_number2);
+		  List<Map<String,Object>> c1_list = new ArrayList<Map<String,Object>>();
+		  HashMap<String, Object> c1_list_label = new HashMap<String, Object>();
+		  c1_list_label.put("v", projectDAO.selectProject(project_number2).getProject_name());
+		  c1_list.add(c1_list_label);
+		  c1_list.add(issueDAO.selectIssueCountForChart(cri));
+		  
+		  rowMap_c1.put("c", c0_list);
+		  rowMap_c2.put("c", c1_list);
+		  
+		  ChartVO chart = new ChartVO();
+		  chart.budgetColSet();
+		  chart.rowSet(rowMap_c1);
+		  chart.rowSet(rowMap_c2);
+		  chart.resultSet(); return chart;
+		 
+	}
 }

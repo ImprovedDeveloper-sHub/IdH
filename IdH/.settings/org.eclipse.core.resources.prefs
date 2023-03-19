@@ -1,2 +1,8 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
+encoding//src/main/webapp/WEB-INF/views/calendar/calByProject.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/calendar/main.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/calendar/main2.jsp=UTF-8
+=======
+encoding//src/main/webapp/WEB-INF/views/calendar/getUnitworkCalender.jsp=UTF-8
+>>>>>>> refs/remotes/origin/choi

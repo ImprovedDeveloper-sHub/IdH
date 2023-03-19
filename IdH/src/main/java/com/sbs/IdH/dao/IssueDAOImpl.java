@@ -1,7 +1,9 @@
 package com.sbs.IdH.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -79,5 +81,20 @@ public class IssueDAOImpl implements IssueDAO{
 		int total = session.selectOne("Issue-Mapper.selectSearchIssueCount");
 		return total;
 	}
+
+	@Override
+	public int selectIssueSeqNext() throws SQLException {
+		int issue_number = session.selectOne("Issue-Mapper.selectIssueSeqNext");
+		return issue_number;
+	}
+	
+	@Override
+	public Map<String, Object> selectIssueCountForChart(SearchCriteria cri) throws SQLException {
+		Map<String,Object> colMap = new HashMap<String, Object>();
+		int issue_count = session.selectOne("Issue-Mapper.selectSearchIssueListCount", cri);
+		colMap.put("v",issue_count);
+		return colMap;
+	}
+
 	
 }

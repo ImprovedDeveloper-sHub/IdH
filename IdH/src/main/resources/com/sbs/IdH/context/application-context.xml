@@ -6,35 +6,88 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	<context:component-scan base-package="com.sbs.IdH.service" />
-	<bean id="issueDAO" class="com.sbs.IdH.dao.IssueDAOImpl" p:session-ref="sqlSession"/>
-	<bean id="minutesDAO" class="com.sbs.IdH.dao.MinutesDAOImpl" p:session-ref="sqlSession"/>
-	<bean id="workDAO" class="com.sbs.IdH.dao.WorkDAOImpl" p:session-ref="sqlSession"/>
-	<bean id="issue_attachDAO" class="com.sbs.IdH.dao.Issue_AttachDAOImpl" p:session-ref="sqlSession"/>
-	
+
+	<context:component-scan
+		base-package="com.sbs.IdH.service" />
+
+	<bean id="fileUploadPath" class="java.lang.String">
+		<constructor-arg value="${uploadPath.pds}" />
+	</bean>
+
+	<bean id="issueDAO" class="com.sbs.IdH.dao.IssueDAOImpl"
+		p:session-ref="sqlSession" />
+	<bean id="minutesDAO" class="com.sbs.IdH.dao.MinutesDAOImpl"
+		p:session-ref="sqlSession" />
+	<bean id="workreportDAO" class="com.sbs.IdH.dao.WorkreportDAOImpl"
+		p:session-ref="sqlSession" />
+	<bean id="issue_attachDAO"
+		class="com.sbs.IdH.dao.Issue_AttachDAOImpl" p:session-ref="sqlSession" />
+	<bean id="workreport_attachDAO"
+		class="com.sbs.IdH.dao.Workreport_AttachDAOImpl"
+		p:session-ref="sqlSession" />
+
 	<bean id="issueService"
-		  class="com.sbs.IdH.service.IssueServiceImpl"
-		  p:issueDAO-ref="issueDAO"
-		  p:issue_AttachDAO-ref="issue_attachDAO" />
+		class="com.sbs.IdH.service.IssueServiceImpl" p:issueDAO-ref="issueDAO"
+		p:issue_AttachDAO-ref="issue_attachDAO" 
+		p:projectDAO-ref="projectDAO"
+		/>
 	<bean id="minutesService"
-		  class="com.sbs.IdH.service.MinutesServiceImpl"
-		  p:minutesDAO-ref="minutesDAO" />
-	<bean id="workService"
-		  class="com.sbs.IdH.service.WorkServiceImpl"
-		  p:workDAO-ref="workDAO" />
+		class="com.sbs.IdH.service.MinutesServiceImpl"
+		p:minutesDAO-ref="minutesDAO" />
+	<bean id="workreportService"
+		class="com.sbs.IdH.service.WorkreportServiceImpl"
+		p:workreportDAO-ref="workreportDAO"
+		p:workreport_attachDAO-ref="workreport_attachDAO" />
+	<bean id="menuService" class="com.sbs.IdH.service.MenuServiceImpl"
+		p:menuDAO-ref="menuDAO" />
 
 
-	
 	<!-- repository -->
-	
+
 	<bean id="workforceDAO" class="com.sbs.IdH.dao.WorkforceDAOImpl"
-		p:session-ref="sqlSession"
-	/>
+		p:session-ref="sqlSession" />
 	<bean id="budgetDAO" class="com.sbs.IdH.dao.BudgetDAOImpl"
-		p:session-ref="sqlSession"
-	/>
+		p:session-ref="sqlSession" />
 	<bean id="scheduleDAO" class="com.sbs.IdH.dao.ScheduleDAOImpl"
 		p:session-ref="sqlSession" />
+	
+	
+	<bean id="projectService" class="com.sbs.IdH.service.ProjectServiceImpl"
+		p:projectDAO-ref="projectDAO"
+		p:budgetDAO-ref="budgetDAO"
+		p:scheduleDAO-ref="scheduleDAO"
+		p:workforceDAO-ref="workforceDAO"
+		p:unitworkDAO-ref="unitworkDAO"
+		p:businessDAO-ref="businessDAO"
+	/>
+	<bean id="unitworkService" class="com.sbs.IdH.service.UnitworkServiceImpl"
+		p:unitworkDAO-ref="unitworkDAO"
+		p:projectDAO-ref="projectDAO"
+	/>
+	<bean id="workforceService" class="com.sbs.IdH.service.WorkforceServiceImpl"
+		p:workforceDAO-ref="workforceDAO"
+		p:projectDAO-ref="projectDAO"
+	/>
+	<bean id="scheduleService" class="com.sbs.IdH.service.ScheduleServiceImpl"
+		p:scheduleDAO-ref="scheduleDAO"
+		p:projectDAO-ref="projectDAO"
+	/>
+	<bean id="budgetService" class="com.sbs.IdH.service.BudgetServiceImpl"
+		p:budgetDAO-ref="budgetDAO"
+		p:projectDAO-ref="projectDAO"
+	/>
+	<!-- p:require_attachDAO-ref="require_attachDAO" -->
+	<bean id="requireService"
+		class="com.sbs.IdH.service.RequireServiceImpl"
+		p:requireDAO-ref="requireDAO"
+	 	p:require_attachDAO-ref="require_attachDAO"
+	/>  
+	<bean id="memberService" class="com.sbs.IdH.service.MemberServiceImpl"
+		p:memberDAO-ref="memberDAO"
+	/>  
+ 	<bean id="project_authorityService" class="com.sbs.IdH.service.Project_authorityServiceImpl"
+		p:project_authorityDAO-ref="project_authorityDAO"
+	/>  
 	
 	<bean id="projectDAO" class="com.sbs.IdH.dao.ProjectDAOImpl"
 		p:session-ref="sqlSession" />
@@ -55,40 +108,8 @@
 		p:session-ref="sqlSession" />
 	
 	
-	<bean id="projectService" class="com.sbs.IdH.service.ProjectServiceImpl"
-		p:projectDAO-ref="projectDAO"
-	/>
-	<bean id="unitworkService" class="com.sbs.IdH.service.UnitworkServiceImpl"
-		p:unitworkDAO-ref="unitworkDAO"
-		p:projectDAO-ref="projectDAO"
-	/>
-	<bean id="workforceService" class="com.sbs.IdH.service.WorkforceServiceImpl"
-		p:workforceDAO-ref="workforceDAO"
-	/>
-	<bean id="scheduleService" class="com.sbs.IdH.service.ScheduleServiceImpl"
-		p:scheduleDAO-ref="scheduleDAO"
-	/>
-	<bean id="budgetService" class="com.sbs.IdH.service.BudgetServiceImpl"
-		p:budgetDAO-ref="budgetDAO"
-		p:projectDAO-ref="projectDAO"
-	/>
-	<bean id="menuService" class="com.sbs.IdH.service.MenuServiceImpl"
-		p:menuDAO-ref="menuDAO"
-	/>
-	<!-- p:require_attachDAO-ref="require_attachDAO" -->
- 	<bean id="requireService" class="com.sbs.IdH.service.RequireServiceImpl"
-		p:requireDAO-ref="requireDAO"
-	 	p:require_attachDAO-ref="require_attachDAO"
-	/>  
-	<bean id="memberService" class="com.sbs.IdH.service.MemberServiceImpl"
-		p:memberDAO-ref="memberDAO"
-	/>  
- 	<bean id="project_authorityService" class="com.sbs.IdH.service.Project_authorityServiceImpl"
-		p:project_authorityDAO-ref="project_authorityDAO"
-	/>  
-		<bean id="fileUploadPath" class="java.lang.String">
-		<constructor-arg value="${uploadPath.pds}"/>
-	</bean>
+
+	
 	
 	<bean id="productDAO" class="com.sbs.IdH.dao.ProductDAOImpl"
 		p:session-ref="sqlSession" />
@@ -106,7 +127,9 @@
 		p:coworkDAO-ref="coworkDAO" />
 	<bean id="productService" class="com.sbs.IdH.service.ProductServiceImpl"
 		p:productDAO-ref="productDAO" 
-	    p:product_attachDAO-ref="product_attachDAO"/> 
+	    p:product_attachDAO-ref="product_attachDAO"
+	    p:projectDAO-ref="projectDAO"
+	    /> 
  	<bean id="companyruleService" class="com.sbs.IdH.service.CompanyruleServiceImpl"
 		p:companyruleDAO-ref="companyruleDAO" 
 		p:co_attachDAO-ref="co_attachDAO"/>
@@ -121,25 +144,22 @@
 	/>
 	
 	<bean id="business_attachDAO"
-		  class="com.sbs.IdH.dao.Business_attachDAOImpl"
-		  p:session-ref="sqlSession"
-	/>
-	
-	
-	
+		class="com.sbs.IdH.dao.Business_attachDAOImpl"
+		p:session-ref="sqlSession" />
+
+
+
 	<!-- Service -->
-	
+
 	<bean id="businessService"
-		  class="com.sbs.IdH.service.BusinessServiceImpl"
-		  p:businessDAO-ref="businessDAO"
-		  p:business_attachDAO-ref="business_attachDAO"
-	/>
-	
+		class="com.sbs.IdH.service.BusinessServiceImpl"
+		p:businessDAO-ref="businessDAO"
+		p:business_attachDAO-ref="business_attachDAO" />
+
 	<bean id="noticeService"
-		  class="com.sbs.IdH.service.NoticeServiceImpl"
-		  p:noticeDAO-ref="noticeDAO"
-	/>
-	
+		class="com.sbs.IdH.service.NoticeServiceImpl"
+		p:noticeDAO-ref="noticeDAO" />
+
 </beans>
 
 

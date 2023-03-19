@@ -1,8 +1,11 @@
 package com.sbs.IdH.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.sbs.IdH.command.SearchCriteria;
@@ -18,7 +21,10 @@ public class WorkforceDAOImpl implements WorkforceDAO{
 	
 	@Override
 	public List<WorkforceVO> selectSearchWorkforceList(SearchCriteria cri) throws SQLException {
-		List<WorkforceVO> workforceList = session.selectList("Workforce-Mapper.selectWorkforceList", cri);
+		int offset=cri.getStartRowNum();
+		int limit=cri.getPerPageNum();		
+		RowBounds rowBounds=new RowBounds(offset,limit);
+		List<WorkforceVO> workforceList = session.selectList("Workforce-Mapper.selectWorkforceList", cri, rowBounds);
 		return workforceList;
 	}
 
@@ -42,8 +48,7 @@ public class WorkforceDAOImpl implements WorkforceDAO{
 	
 	@Override
 	public int selectWorkforceSeqNext() throws SQLException {
-		session.update("Workforce-Mapper.selectWorkforceSeqNext");
-		return 0;
+		return session.selectOne("Workforce-Mapper.selectWorkforceSeqNext");
 	}
 
 	
@@ -55,10 +60,10 @@ public class WorkforceDAOImpl implements WorkforceDAO{
 	}
 
 	@Override
-	public void updateWorkforceForProjectStart(WorkforceVO workforce) throws SQLException {
-		session.update("Workforce-Mapper.updateWorkforceForProjectStart", workforce);		
+	public void updateWorkforceForRegistProject(WorkforceVO workforce) throws SQLException {
+		session.update("Workforce-Mapper.updateWorkforcePlanForProjectStart", workforce);		
+		
 	}
-
 	@Override
 	public void updateWorkforceForProjectEnd(WorkforceVO workforce) throws SQLException {
 		session.update("Workforce-Mapper.updateWorkforceForProjectEnd", workforce);
@@ -71,5 +76,14 @@ public class WorkforceDAOImpl implements WorkforceDAO{
 		session.update("Workforce-Mapper.deleteWorkforce", workforce_number);
 		
 	}
+	
+	@Override
+	public Map<String, Object> selectWorkforceCountForChart(SearchCriteria cri) throws SQLException {
+		Map<String,Object> colMap = new HashMap<String, Object>();
+		int workforce_count = session.selectOne("Workforce-Mapper.selectSearchWorkforceListCount", cri);
+		colMap.put("v",workforce_count);
+		return colMap;
+	}
+	
 
 }

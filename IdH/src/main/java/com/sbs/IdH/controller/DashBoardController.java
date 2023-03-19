@@ -8,13 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/dashBoard")
 public class DashBoardController {
 
-	
+	@GetMapping("main")
+	public void main() {}
 	
 	@GetMapping("/teamLeader")
-	public void test() {
-	
-		
-		
+	public void teamLeader() {
 	}
+	@GetMapping("/teamMember")
+	public void teamMember() {
+	}
+	
+	@GetMapping("/executives")
+	public void executives() {
+	}
+	
 	
 }

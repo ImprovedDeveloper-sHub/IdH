@@ -8,7 +8,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sbs.IdH.command.DateMaker;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.ScheduleVO;
 

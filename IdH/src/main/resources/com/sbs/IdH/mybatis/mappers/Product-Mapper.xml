@@ -38,6 +38,17 @@
 			product_content like '%'||#{keyword}||'%'						
 			)			
 		</if>
+		<if test="status != null">
+         and product_status = #{status}
+      </if>
+      <if test="project_number != null and project_number != 0 ">
+			and product_project_number =  #{project_number}
+		</if>
+	
+     <!--  <if test="member_id != null">
+         and product_member_id = #{member_id}
+      </if>
+		 -->
 	</sql>
 	
 
@@ -91,7 +102,6 @@
 		product
 		where product_number is not null  			  	
 		<include refid="search" />
-		order by product_number desc
 	</select>
 	<select id="selectProductSeqNext" resultType="int">
 		select product_seq.nextval as product_number from dual

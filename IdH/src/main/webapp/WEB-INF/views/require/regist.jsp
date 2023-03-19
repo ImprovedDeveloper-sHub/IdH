@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@page import="java.util.Date"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <!-- CSS start -->
@@ -71,7 +73,7 @@ input {
 		</div>
 		<div id="content">
 			<div id="table-content">
-				<form enctype="multiaprt/form-data" role="form" method="post"
+				<form enctype="multipart/form-data" role="form" method="post"
 					action="regist" name="registForm">
 					<table>
 						<thead>
@@ -85,70 +87,84 @@ input {
 						</thead>
 						<tbody>
 							<tr>
-								<td class="name-td">글번호</td>
+								<td class="name-td">제목</td>
+								<td class="table-td"><input type="text"
+									name="require_title" placeholder="제목을 입력하세요" /></td>
+								<td class="table-td"></td>
+								<td class="table-td"></td>
+
+							</tr>
+							<tr>
+								<td class="name-td">발의자</td>
 								<td class="table-td"><input type="text" readonly
-									placeholder="요구사항 번호" /></td>
+									placeholder="${loginUser.member_id } " value="${loginUser.member_id }" name="require_setter_id" /></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
+								
+							</tr>
+							<tr>
 								<td class="name-td">발의자</td>
 								<td class="table-td"><input type="text" readonly
 									placeholder="user.id" /></td>
-							</tr>
-							<tr>
-								<td class="name-td">제목</td>
-								<td class="table-td"><input type="text"
-									placeholder="제목을 입력하세요" /></td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
+									<td class="table-td"></td>
+									<td class="table-td"></td>
 								<td class="name-td">등록일</td>
 								<td colspan="5"><input type="text" readonly
-									placeholder="오늘날짜들어갈것" /></td>
+									placeholder="<fmt:formatDate value="<%=new Date()%>" pattern="yyyy-MM-dd"/>" /></td>
 							</tr>
 							<tr>
 								<td class="name-td">중요도</td>
-								<td class="table-td"><input type="text" placeholder="중요도" /></td>
+								<td class="table-td"><select class="table-td"
+									name="require_level">
+										<option value="1"
+											${require.require_number eq 1 ? 'selected':'하' }>하</option>
+										<option value="2"
+											${require.require_number eq 2 ? 'selected':'중' }>중</option>
+										<option value="3"
+											${require.require_number eq 3 ? 'selected':'상' }>상</option>
+								</select></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">관련사업</td>
-								<td colspan="5"><input type="text" readonly
-									placeholder="관련사업" /></td>
+								<td colspan="5">
+									<select		class="table-td" name="require_business_number">
+										<c:forEach items="${businessList}" var="business">
+											<option value="${business.business_number }">${business.business_name }</option>
+										</c:forEach>
+								</select></td>
 							</tr>
 							<tr>
 								<td class="name-td">프로젝트 팀</td>
 								<td class="table-td"><input type="text"
-									placeholder="프로젝트 팀" /></td>
+									name="require_project" placeholder="미정" /></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">담당자</td>
-								<td colspan="5"><input type="text" readonly
-									placeholder="담당자" /></td>
-							</tr>
-							<tr>
-								<td class="name-td">첨부파일</td>
-								<td class="table-td"><input type="text"
-									placeholder="첨부파일" /></td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
-								<td colspan="5">
+								<td colspan="5"><input type="text" name="require_getter_id"
+									 placeholder="담당자" /></td>
 							</tr>
 							<tr style="height: 100px;">
 								<td class="name-td">내용</td>
-								<td class="table-td td-summernote" colspan="5"><textarea
-										class="summernote" rows="15" cols="40"
+								<td class="table-td td-summernote" colspan="5"><textarea id="summernote"
+										class="summernote" rows="15" cols="40" name="require_detail"
 										style="display: none; width: 500px;"></textarea></td>
 							</tr>
 
 
 						</tbody>
 					</table>
+					<div class="fileUpload">
+						<span><i class="fa fa-plus-circle"></i> Add File</span> <input
+							type="file" class="upload" id="files" name="files" multiple />
+					</div>
+
+					<ul id="selectedFiles"></ul>
 				</form>
 			</div>
 		</div>
 		<div class="card-tools" style="margin-left: auto">
-			<button type="button" id="tempbtn" class="btn btn-info"
-				onclick="regist_go();">임시저장</button>
+			<!-- <button type="button" id="tempbtn" class="btn btn-info"
+				onclick="regist_go();">임시저장</button> -->
 			<button type="button" id="regbtn" class="btn btn-info"
 				onclick="regist_go();">등록</button>
 			<button type="button" id="close" class="btn btn-info"
@@ -161,13 +177,25 @@ input {
 		summernote_go($('.summernote'),'<%=request.getContextPath()%>');
 	};
 </script>
+
 <script>
-function regist_go(){
-	   
-	 
-	   
-	   $("form[role='form']").submit();
-	   
-	
+	function regist_go() {
+		$("form[role='form']").submit();
+
+	}
 </script>
 
+<script>
+	$('input:file[multiple]').change(
+			function(e) {
+				// console.log(e.currentTarget.files);
+				var numFiles = e.currentTarget.files.length;
+				for (i = 0; i < numFiles; i++) {
+					$('<li>').text(e.currentTarget.files[i].name).appendTo(
+							$('#selectedFiles'));
+					$('<span>').addClass('filesize').text(
+							'(' + filesize + 'kb)').appendTo(
+							$('#selectedFiles li:last'));
+				}
+			});
+</script>

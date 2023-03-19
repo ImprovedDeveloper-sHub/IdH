@@ -1,38 +1,48 @@
 package com.sbs.IdH.controller;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.sbs.IdH.command.RequireRegistCommand;
 import com.sbs.IdH.command.SearchCriteria;
-import com.sbs.IdH.dto.RequireVO;
-import com.sbs.IdH.dto.Require_attachVO;
-import com.sbs.IdH.service.RequireService;
-import com.sbs.IdH.utils.MakeFileName;
+import com.sbs.IdH.service.ProjectService;
+import com.sbs.IdH.service.UnitworkService;
 
 @RequestMapping("/project")
 @Controller
 public class ProjectController {
 
 	@Resource
-	private RequireService requireService;
+	private UnitworkService unitworkService;
+	@Resource
+	private ProjectService projectService;
 	
+	public void setProjectService(ProjectService projectService) {
+		this.projectService = projectService;
+	}
+
+	public void setUnitworkService(UnitworkService unitworkService) {
+		this.unitworkService = unitworkService;
+	}
+
 	@GetMapping("/main")
-	public void main() {}
-	
+	public ModelAndView main(ModelAndView mnv, SearchCriteria cri) throws Exception {
+
+		mnv.addAllObjects(unitworkService.selectUnitworkList(cri));
+
+		return mnv;
+
+	}
+
 	@GetMapping("/progress")
-	public void test() {}
-	
+	public ModelAndView progress(ModelAndView mnv, SearchCriteria cri) throws Exception {
+
+		mnv.addAllObjects(unitworkService.selectUnitworkList(cri));
+		mnv.addAllObjects(projectService.selectProjectUnitwork_level(cri));
+
+		return mnv;
+	}
 }

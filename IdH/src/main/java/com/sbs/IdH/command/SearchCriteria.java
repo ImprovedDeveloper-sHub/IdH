@@ -3,8 +3,8 @@ package com.sbs.IdH.command;
 
 public class SearchCriteria {
 	
-	private int page = 1;
-	private int perPageNum = 10;
+	private int page=1;
+	private int perPageNum=10;
 	private String searchType="";
 	private String keyword="";
 	private int project_number;
@@ -12,7 +12,7 @@ public class SearchCriteria {
 	private int status;
 	private int type;
 	private int startRowNum=0;
-	private String memberId="";
+	private String member_id;
 	private int memberStatus;
 	
 	
@@ -60,13 +60,13 @@ public class SearchCriteria {
 	public int getPage() {
 		return page;
 	}
-	public String getMemberId() {
-		return memberId;
+	public String getMember_id() {
+		return member_id;
 	}
 
 
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
 	}
 
 
@@ -110,7 +110,7 @@ public class SearchCriteria {
 
 
 	public SearchCriteria(int startRowNum, String keyword, int memberStatus, int page, int type, int perPageNum,
-			int status, int business_number, String searchType, String memberId, int project_number) {
+			int status, int business_number, String searchType, String member_id, int project_number) {
 		super();
 		this.startRowNum = startRowNum;
 		this.keyword = keyword;
@@ -121,7 +121,7 @@ public class SearchCriteria {
 		this.status = status;
 		this.business_number = business_number;
 		this.searchType = searchType;
-		this.memberId = memberId;
+		this.member_id = member_id;
 		this.project_number = project_number;
 		setStartRowNum();
 	}

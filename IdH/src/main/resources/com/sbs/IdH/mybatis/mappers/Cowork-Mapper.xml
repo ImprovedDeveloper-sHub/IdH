@@ -58,22 +58,27 @@
 		into 
 		cowork(cowork_number,cowork_regdate,cowork_enddate,cowork_content,cowork_status,cowork_member_id,cowork_product_number)
 		values
-		(#{cowork_number},sysdate,sysdate,#{cowork_content},#{cowork_status},#{cowork_member_id},#{cowork_product_number})
+		(#{cowork_number},sysdate,sysdate,#{cowork_content},#{cowork_status},#{cowork_member_id},#{cowork_product_number},)
 	</update>
 	<update id="updateCowork" parameterType="cowork">
 		update 
 		cowork
 		set 
-		cowork_content=#{cowork_content},cowork_status=#{cowork_status}, cowork_regdate=sysdate 
+		cowork_number=#{cowork_number},cowork_content=#{cowork_content},cowork_status=#{cowork_status}, cowork_regdate=sysdate 
 		where cowork_number=#{cowork_number}
 	</update>
-	<update id="increaseViewCnt" parameterType="int">
+	<!-- <select id="selectCoworkListByproduct_number"	resultType="cowork">
+		select *
+		from cowork
+		where cowork_product_number = #{cowork_product_number}
+	</select> -->
+	<!-- <update id="increaseViewCnt" parameterType="int">
 		update 
 		cowork 
 		set 
 		viewcnt=viewcnt+1 
 		where cowork_number=#{cowork_number}
-	</update>
+	</update> -->
 	<select id="selectSearchCoworkList" resultType="cowork">
 		select
 		*

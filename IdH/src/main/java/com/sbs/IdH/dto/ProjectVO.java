@@ -7,13 +7,13 @@ public class ProjectVO {
 	private int project_number;
 	private String project_name;
 	private Date project_regdate;
-	private Date proejct_enddate;
+	private Date project_enddate;
 	private int project_status;
 	private  int project_require_number;
 	private int project_business_number;
 	private String project_member_id;
 	private String project_discription;
-	
+	private String project_business_name;
 	
 	public int getProject_number() {
 		return project_number;
@@ -33,12 +33,7 @@ public class ProjectVO {
 	public void setProject_regdate(Date project_regdate) {
 		this.project_regdate = project_regdate;
 	}
-	public Date getProejct_enddate() {
-		return proejct_enddate;
-	}
-	public void setProejct_enddate(Date proejct_enddate) {
-		this.proejct_enddate = proejct_enddate;
-	}
+	
 	
 	
 	
@@ -74,20 +69,33 @@ public class ProjectVO {
 	}
 	
 	
+	public String getProject_business_name() {
+		return project_business_name;
+	}
+	public void setProject_business_name(String project_business_name) {
+		this.project_business_name = project_business_name;
+	}
 	public ProjectVO() {}
-	public ProjectVO(int project_number, String project_name, Date project_regdate, Date proejct_enddate,
+	public Date getProject_enddate() {
+		return project_enddate;
+	}
+	public void setProject_enddate(Date project_enddate) {
+		this.project_enddate = project_enddate;
+	}
+	public ProjectVO(int project_number, String project_name, Date project_regdate, Date project_enddate,
 			int project_status, int project_require_number, int project_business_number, String project_member_id,
-			String project_discription) {
+			String project_discription, String project_business_name) {
 		super();
 		this.project_number = project_number;
 		this.project_name = project_name;
 		this.project_regdate = project_regdate;
-		this.proejct_enddate = proejct_enddate;
+		this.project_enddate = project_enddate;
 		this.project_status = project_status;
 		this.project_require_number = project_require_number;
 		this.project_business_number = project_business_number;
 		this.project_member_id = project_member_id;
 		this.project_discription = project_discription;
+		this.project_business_name = project_business_name;
 	}
 	
 	

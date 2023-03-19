@@ -1,7 +1,9 @@
 package com.sbs.IdH.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -26,7 +28,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public void deleteProduct(int product_number) throws SQLException {
-		session.update("Product-Mapper.deleteProdcut", product_number);
+		session.update("Product-Mapper.deleteProduct", product_number);
 	}
 
 	@Override
@@ -67,4 +69,12 @@ public class ProductDAOImpl implements ProductDAO {
 		return  product_number;
 	}
 
+	@Override
+	public Map<String, Object> selectProductCountForChart(SearchCriteria cri) throws SQLException {
+		Map<String,Object> colMap = new HashMap<String, Object>();
+		int product_count = session.selectOne("Product-Mapper.selectSearchProductListCount", cri);
+		colMap.put("v",product_count);
+		return colMap;
+	}
+	
 }

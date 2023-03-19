@@ -1,9 +1,7 @@
 package com.sbs.IdH.dao;
 
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -16,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.NoticeVO;
-import com.sbs.IdH.service.BusinessService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:com/sbs/IdH/context/root-context.xml")

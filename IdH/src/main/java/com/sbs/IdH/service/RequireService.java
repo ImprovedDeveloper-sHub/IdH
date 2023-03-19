@@ -23,4 +23,8 @@ public interface RequireService {
 
 		void removeRequire_attach_Ano(int ano)throws SQLException;
 	
+		
+		
+		
+		
 }

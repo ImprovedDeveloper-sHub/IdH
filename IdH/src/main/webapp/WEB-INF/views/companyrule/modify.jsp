@@ -38,6 +38,10 @@
 	font-size: 13px;
 	color: #64697a;
 }
+p{
+margin:0 !important;
+padding:0 !important;
+}
 input {
 	width: 100%;
 	font-size: 13px;
@@ -62,7 +66,7 @@ input {
 			</div>
 			<div id="content">
 				<div id="table-content">
-				<form enctype="multiaprt/form-data" role="form" method="post" action="regist" name="registForm">
+				<form enctype="multipart/form-data" role="form" method="post" action="modify" name="modifyForm">
 					<table>
 						<thead>
 							<tr>
@@ -76,15 +80,15 @@ input {
 						<tbody>
 							<tr>
 								<td class="name-td">글번호</td>
-								<td class="table-td"><input type="text" readonly placeholder="${companyrule.companyrule_number }"/></td>
+								<td class="table-td"><input type="text" name="companyrule_number"readonly value="${companyrule.companyrule_number }"/></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">작성자</td>
-								<td class="table-td"><input type="text" readonly placeholder="${companyrule.companyrule_member_id }"/></td>
+								<td class="table-td"><input type="text" name="companyrule_member_id" value="${companyrule.companyrule_member_id }"/></td>
 							</tr>
 							<tr>
 								<td class="name-td">제목</td>
-								<td class="table-td"><input type="text" placeholder="${companyrule.companyrule_title }"></td>
+								<td class="table-td"><input type="text" name="companyrule_title" placeholder="${companyrule.companyrule_title }"></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">등록일</td>
@@ -95,11 +99,11 @@ input {
 						
 							<tr style="height: 100px;">
 							<td class="name-td">내용</td>
-								<td class="table-td"><input type="text"  placeholder="${companyrule.companyrule_content }"/></td>
+								<td class="table-td"><input type="text" name="companyrule_content" placeholder="${companyrule.companyrule_content }"/></td>
 							</tr>
 							<tr>
 							<td class="name-td">첨부파일</td>
-								<td class="table-td"><input type="text"  placeholder="${companyrule.companyrule_content }"/></td>
+								<td class="table-td"><input type="text"  placeholder="${companyrule.attachList }"/></td>
 							</tr>
 							
 
@@ -109,39 +113,42 @@ input {
 				</div>
 			</div>
 			<div class="card-tools" style="margin-left:auto">
-			<button type="button" id="modifyBtn" class="btn btn-info" onclick="submit_go('modifyForm','${companyrule.companyrule_number }');">수정</button>						 				   
+			<button type="button" id="modifyBtn" class="btn btn-info"  onclick="modify_submit();">수정</button>						 				   
 		    <button type="button" id="listBtn" class="btn btn-info" onclick="CloseWindow();">닫기</button>
 		</div>
 	</div>
 </div>
 
-<script>
-function regist_go(){
-	   
-	 
-	   
-	   $("form[role='form']").submit();
-	   
-	
-</script>
 
-<script>
+<!-- <script>    
+function modify_submit(){
+	//alert("modify btn click");
+	var form = $('form[name="modifyForm"]');
+	form.submit();
+} 
+</script>	-->
+
+<!-- <script>
 function submit_go(url,companyrule_number ){	
 	location.href=url+"?companyrule_number="+companyrule_number;
 }
-</script>
+</script> -->
+<script>    
+function modify_submit(){
+	//alert("modify btn click");
+	var form = $('form[name="modifyForm"]');
+	
+	form.submit();
 
+
+}
+</script> 
+<%-- 
 <c:if test="${from eq 'modify'}" >
 	<script>
 		alert("정상적으로 수정되었습니다.");
 		window.opener.location.reload();
 	</script>
-</c:if>    
-<c:if test="${from eq 'remove'}" >
-	<script>
-		alert("삭제되었습니다.");
-		window.close();
-		window.opener.location.reload();
-	</script>
-</c:if> 
+</c:if>    --%> 
+
 

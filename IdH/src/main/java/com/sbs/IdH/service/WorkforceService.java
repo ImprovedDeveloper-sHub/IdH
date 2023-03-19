@@ -3,6 +3,7 @@ package com.sbs.IdH.service;
 import java.util.Map;
 
 import com.sbs.IdH.command.SearchCriteria;
+import com.sbs.IdH.dto.ChartVO;
 import com.sbs.IdH.dto.WorkforceVO;
 
 public interface WorkforceService {
@@ -18,4 +19,10 @@ public interface WorkforceService {
 	
 	public Map<String,Object> selectWorkforceList(SearchCriteria cri) throws Exception;
 	
+	
+	public ChartVO selectChart(int project_number)throws Exception;
+
+	public ChartVO selectChartForComparison(int project_number, int project_number2)throws Exception;
+	
+	public void updateWorkforceForRegistProject(int workforce_number, int project_number)  throws Exception;
 }

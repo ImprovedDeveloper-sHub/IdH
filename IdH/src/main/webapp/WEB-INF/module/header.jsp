@@ -65,7 +65,7 @@ body{
 }
 
 .active{
-  color:white;
+ color:white;
   font-weight:bold;
 }
 
@@ -116,7 +116,7 @@ nav a:hover::before {
 }
 
 nav a:hover{
-   text-decoration:underline;
+	text-decoration:underline;
 }
 
 .active-tab::before {
@@ -149,6 +149,10 @@ table td{
    padding: 0.3rem !important;
 } */
 
+card-small-body{
+	padding:5px;
+}
+
 table th{
 	font-size:10px;
 	padding:0.5rem !important;
@@ -165,6 +169,8 @@ table td{
 	background-color:#16A2B8 !important;
 	font-weight:bold !important;
 }
+
+
 
 /* .card{
 	border:solid 2px #16A2B8 !important;
@@ -198,13 +204,13 @@ table td{
 <div class="main-custom">
   <div class="header-custom row">
     <div class="header-logo"style="width:6%;">
-      <div class="logo"><img src="<%=request.getContextPath()%>/resources/img/logo.jpg" style="width: 100%; height:100%; background-size: cover;"/></div>
+      <div class="logo"><img src="<%=request.getContextPath() %>/resources/img/logo.jpg"style="width: 100%;height:100%;background-size: cover;"/></div>
     </div>
     <!-- header종료 -->
    <div class="main-menu-custom"style="width:94%;">
-   		<c:forEach items="${menuList}" var="menu">
-	    	<div class="menu"><a href="javascript:subMenu_go('${menu.mcode}');goPage('<%=request.getContextPath() %>${menu.murl}','${menu.mcode}');" class="nav-link"><i class="fa-solid ${menu.micon}"></i>
-	    	${menu.mname}</a></div>
+   		<c:forEach items="${menuList }" var="menu">
+	    	<div class="menu"><a href="javascript:subMenu_go('${menu.mcode}');goPage('<%=request.getContextPath() %>${menu.murl }','${menu.mcode }');" class="nav-link"><i class="fa-solid ${menu.micon}"></i>
+	    	${menu.mname }</a></div>
     	  </c:forEach>
     <!-- 
       <div class="menu"><i class="fa-solid fa-border-all"></i>&nbsp대시보드</div>

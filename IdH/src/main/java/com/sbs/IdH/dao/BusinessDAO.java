@@ -26,4 +26,9 @@ public interface BusinessDAO {
 	
 	public void deleteBusiness(int business_number) throws SQLException;
 	
+	//추가
+	public List<BusinessVO> selectBusinessCriteriaNotRowBound(SearchCriteria cri) throws SQLException;
+	
+	public String selectBusinessName(int businessNumber) throws SQLException;
+
 }

@@ -5,11 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.sbs.IdH.command.DateMaker;
 import com.sbs.IdH.command.PageMaker;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.ProjectDAO;
 import com.sbs.IdH.dao.UnitworkDAO;
 import com.sbs.IdH.dto.ChartVO;
+import com.sbs.IdH.dto.ScheduleVO;
 import com.sbs.IdH.dto.UnitworkVO;
 
 public class UnitworkServiceImpl implements UnitworkService{
@@ -31,6 +33,13 @@ public class UnitworkServiceImpl implements UnitworkService{
 	public void registUnitwork(UnitworkVO unitwork) throws Exception {
 		unitworkDAO.insertUnitwork(unitwork);
 	}
+	
+	@Override
+	public void registUnitworkPlan(UnitworkVO unitwork) throws Exception {
+		unitwork.setUnitwork_status(1);
+		unitworkDAO.insertUnitwork(unitwork);
+	}
+	
 
 	@Override
 	public void modifyUnitwork(UnitworkVO unitwork) throws Exception {
@@ -48,11 +57,27 @@ public class UnitworkServiceImpl implements UnitworkService{
 		return unitworkDAO.selectUnitwork(unitwork_number);
 	}
 
+	
+	@Override
+	public void updateUnitworkForRegistProject(int unitwork_number, int project_number) throws Exception {
+		//1. 계획에 프로젝트 번호를 넣어준다.
+		UnitworkVO unitwork = unitworkDAO.selectUnitwork(unitwork_number);
+		unitwork.setUnitwork_project_number(project_number);
+		unitworkDAO.updateUnitworkForRegistProject(unitwork);
+		//2. 실제 프로젝트 진행중에 사용할 현황을 위한 단위업무를 등록한다.
+		unitwork.setUnitwork_number(unitworkDAO.selectUnitworkSeqNext());
+		unitwork.setUnitwork_status(2);
+		unitworkDAO.insertUnitwork(unitwork);
+	}
+	
+	
 	@Override
 	public Map<String, Object> selectUnitworkList(SearchCriteria cri) throws Exception {
 		Map<String, Object> dataMap = new HashMap<String,Object>();
+		cri.setPerPageNum(5);
 		dataMap.put("unitworkList", unitworkDAO.selectSearchUnitworkList(cri));
 		PageMaker pageMaker = new PageMaker();
+		
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(unitworkDAO.selectSearchUnitworkListCount(cri));
 		dataMap.put("pageMaker",pageMaker);
@@ -99,7 +124,7 @@ public class UnitworkServiceImpl implements UnitworkService{
 		rowMap_c3.put("c", c2_list);
 		
 		ChartVO chart = new ChartVO();
-		chart.budgetColSet();
+		chart.unitworkColSet();
 		chart.rowSet(rowMap_c1);
 		chart.rowSet(rowMap_c2);
 		chart.rowSet(rowMap_c3);
@@ -137,7 +162,7 @@ public class UnitworkServiceImpl implements UnitworkService{
 		
 		
 		ChartVO chart = new ChartVO();
-		chart.budgetColSet();
+		chart.unitworkColSet();
 		chart.rowSet(rowMap_c1);
 		chart.rowSet(rowMap_c2);
 		
@@ -145,5 +170,15 @@ public class UnitworkServiceImpl implements UnitworkService{
 		chart.resultSet();
 		return chart;
 	}
+	
+	@Override
+	   public List<Map<String,Object>> selectUnitworkListForCalendar(SearchCriteria cri) throws Exception {
+	      DateMaker dateMaker = new DateMaker();
+	      List<UnitworkVO> unitworkList = unitworkDAO.selectSearchUnitworkList(cri);
+	      for(UnitworkVO unitwork : unitworkList) {
+	         dateMaker.setParamUnitwork(unitwork);
+	      }
+	      return dateMaker.getParamList();
+	   }
 	
 }

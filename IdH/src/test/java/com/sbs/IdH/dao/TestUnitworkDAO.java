@@ -1,7 +1,6 @@
 package com.sbs.IdH.dao;
 
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -59,7 +58,7 @@ public class TestUnitworkDAO {
    
    public void testupdateForProject() throws Exception{
 	   UnitworkVO unitwork1 = unitworkDAO.selectUnitwork(1);
-	   unitworkDAO.updateUnitworkForProjectStart(unitwork1);
+	   //unitworkDAO.updateUnitworkForProjectStart(unitwork1);
 	   unitwork1 = unitworkDAO.selectUnitwork(1);
 	   unitworkDAO.updateUnitworkForProjectEnd(unitwork1);
 	   unitwork1 = unitworkDAO.selectUnitwork(1);

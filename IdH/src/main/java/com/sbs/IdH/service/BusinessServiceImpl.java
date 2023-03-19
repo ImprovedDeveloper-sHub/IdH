@@ -129,4 +129,15 @@ public class BusinessServiceImpl implements BusinessService {
 		
 	}
 	
+	//추가 시작
+	
+	@Override
+	public Map<String, Object> getBusinessListNotRowBound(SearchCriteria cri) throws SQLException {
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		dataMap.put("businessList",businessDAO.selectBusinessCriteriaNotRowBound(cri));
+		return dataMap;
+	}
+	
+	//추가 종료
+	
 }

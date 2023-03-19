@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Workreport-Mapper">
+
+	<sql id="search">
+		<if test="searchType == 'n'.toString() ">
+			and workreport_number like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 't'.toString() ">
+			and workreport_title like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'c'.toString() ">
+			and workreport_content like '%'||#{keyword}||'%'
+		</if>
+		<if test="member_id != null and memberStatus == 1">
+			and workreport_member_id = #{member_id}
+		</if>
+		<if test="member_id != null and memberStatus == 2">
+			and workreport_member_approver = #{member_id}
+		</if>
+
+		<if test="type != null and type != 0">
+			and workreport_check = #{type}
+		</if>
+	</sql>
+
+	<select id="selectSearchWorkreportList" resultType="workreport">
+		select
+		*
+		from workreport
+		where workreport_number is not null
+		<include refid="search" />
+		order by workreport_regdate desc
+	</select>
+
+	<select id="selectSearchWorkreportListCount" resultType="int">
+		select count(*)
+		from workreport
+		where workreport_number is not null
+		<include refid="search" />
+	</select>
+
+	<select id="selectWorkreportByWorkreport_Number" resultType="workreport">
+		select
+		*
+		from
+		workreport
+		where workreport_number=#{workreport_number}
+	</select>
+
+	<update id="insertWorkreport" parameterType="workreport">
+		insert into
+		workreport(workreport_number, workreport_project_number,workreport_setter_id, workreport_check,
+		workreport_regdate, workreport_enddate,workreport_member_approver,workreport_title,workreport_memstatus,workreport_content)
+		values(#{workreport_number},#{workreport_project_number},#{workreport_setter_id},#{workreport_check},sysdate,sysdate,#{workreport_member_approver},#{workreport_title},#{workreport_memstatus},#{workreport_content})
+	</update>
+
+	<update id="updateWorkreport" parameterType="workreport">
+		update workreport
+		set
+		workreport_project_number=#{workreport_project_number},workreport_check=#{workreport_check},workreport_member_approver=#{workreport_member_approver}
+		where workreport_number=#{workreport_number},workreport_title=#{workreport_title}
+	</update>
+
+	<update id="deleteWorkreport">
+		delete
+		from workreport
+		where workreport_number=#{workreport_number}
+	</update>
+	
+	<!-- <select id="selectSearchWorkreportListCount" resultType="int">
+		select count(*)
+		from issue
+		where workreport_number is not null
+		<include refid="search" />
+	</select> -->
+	
+	<select id="selectWorkreportSeqNext" resultType="int">
+		select workreport_seq.nextval as workreport_number from dual
+	</select>
+</mapper>  
+
+
+
+
+
