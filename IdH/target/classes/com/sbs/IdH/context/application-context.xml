@@ -58,6 +58,7 @@
 		p:scheduleDAO-ref="scheduleDAO"
 		p:workforceDAO-ref="workforceDAO"
 		p:unitworkDAO-ref="unitworkDAO"
+		p:businessDAO-ref="businessDAO"
 	/>
 	<bean id="unitworkService" class="com.sbs.IdH.service.UnitworkServiceImpl"
 		p:unitworkDAO-ref="unitworkDAO"
@@ -69,6 +70,7 @@
 	/>
 	<bean id="scheduleService" class="com.sbs.IdH.service.ScheduleServiceImpl"
 		p:scheduleDAO-ref="scheduleDAO"
+		p:projectDAO-ref="projectDAO"
 	/>
 	<bean id="budgetService" class="com.sbs.IdH.service.BudgetServiceImpl"
 		p:budgetDAO-ref="budgetDAO"
