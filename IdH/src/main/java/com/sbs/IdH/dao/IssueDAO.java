@@ -17,4 +17,5 @@ public interface IssueDAO{
 	public int selectNotGetterIssueCount();
 	public int selectGetterIssueCount();
 	public int selectIssueTotalCount();
+	int selectIssueSeqNext()throws SQLException;
 }

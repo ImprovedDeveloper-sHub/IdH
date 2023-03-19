@@ -52,7 +52,8 @@ public class WorkreportServiceImpl implements WorkreportService{
 
 	@Override
 	public void registWorkreport(WorkreportVO workreport) throws SQLException {
-		workreport.setWorkreport_number(2);
+		int workreport_number = workreportDAO.selectWorkreportSeqNext();
+		workreport.setWorkreport_number(workreport_number);
 		workreportDAO.insertWorkreport(workreport);
 	}
 	
@@ -90,10 +91,11 @@ public class WorkreportServiceImpl implements WorkreportService{
 	@Override
 	public Map<String, Object> selectGetterWorkreportList(SearchCriteria cri, HttpServletRequest request) throws SQLException {
 		Map<String, Object> dataMap = new HashMap<String,Object>();
+//		SearchCriteria cri2 = cri.getNewCri(cri);
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("loginUser");
 		cri.setMember_id(member.getMember_id());
-		cri.setMemberStatus(2);//구분자 할당받으면2입니다.
+		cri.setMemberStatus(2);//구분자 할당받으면2
 		
 		dataMap.put("getterWorkreportList", workreportDAO.selectSearchWorkreportList(cri));
 		return dataMap;
@@ -102,6 +104,7 @@ public class WorkreportServiceImpl implements WorkreportService{
 	@Override
 	public Map<String, Object> selectMyCheckList(SearchCriteria cri) throws SQLException {
 		Map<String,Object>dataMap = new HashMap<String,Object>();
+		int mytotal = workreportDAO.selectWorkreportCriteriaTotalCount(cri);
 		cri.setMemberStatus(1);//보낸것은 1
 		cri.setType(1);//승인
 		int myworkreportsuccess = workreportDAO.selectSearchWorkreportListCount(cri);
@@ -109,7 +112,6 @@ public class WorkreportServiceImpl implements WorkreportService{
 		cri.setType(2);//미승인
 		int myworkreportnow = workreportDAO.selectSearchWorkreportListCount(cri);
 		cri.setMemberStatus(1);
-		int mytotal = workreportDAO.selectWorkreportCriteriaTotalCount(cri);
 		
 		dataMap.put("mytotal",mytotal);
 		dataMap.put("myworkreportsuccess",myworkreportsuccess);
@@ -120,6 +122,8 @@ public class WorkreportServiceImpl implements WorkreportService{
 	@Override
 	public Map<String, Object> selectGetterCheckList(SearchCriteria cri) throws SQLException {
 		Map<String,Object>dataMap = new HashMap<String,Object>();
+//		SearchCriteria cri2 = cri.getNewCri(cri);
+		int gettertotal = workreportDAO.selectWorkreportCriteriaTotalCount(cri);
 		cri.setMemberStatus(2);//받은것은 2
 		cri.setType(1);//승인
 		int getterworkreportsuccess = workreportDAO.selectSearchWorkreportListCount(cri);
@@ -127,7 +131,6 @@ public class WorkreportServiceImpl implements WorkreportService{
 		cri.setType(2);//미승인
 		int getterworkreportnow = workreportDAO.selectSearchWorkreportListCount(cri);
 		cri.setMemberStatus(2);
-		int gettertotal = workreportDAO.selectWorkreportCriteriaTotalCount(cri);
 		
 		dataMap.put("gettertotal",gettertotal);
 		dataMap.put("getterworkreportsuccess",getterworkreportsuccess);

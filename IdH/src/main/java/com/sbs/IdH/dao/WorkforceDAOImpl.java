@@ -42,8 +42,7 @@ public class WorkforceDAOImpl implements WorkforceDAO{
 	
 	@Override
 	public int selectWorkforceSeqNext() throws SQLException {
-		session.update("Workforce-Mapper.selectWorkforceSeqNext");
-		return 0;
+		return session.selectOne("Workforce-Mapper.selectWorkforceSeqNext");
 	}
 
 	

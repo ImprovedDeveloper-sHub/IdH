@@ -42,8 +42,7 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 	
 	@Override
 	public int selectScheduleSeqNext() throws SQLException {
-		session.update("Schedule-Mapper.selectScheduleSeqNext");
-		return 0;
+		return session.selectOne("Schedule-Mapper.selectScheduleSeqNext");
 	}
 
 	
@@ -69,6 +68,12 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 	@Override
 	public void deleteSchedule(int schdule_number) throws SQLException {
 		session.update("Schedule-Mapper.deleteSchedule", schdule_number);
+		
+	}
+
+	@Override
+	public void updateSchedule(ScheduleVO schedule) throws SQLException {
+		session.update("Schedule-Mapper.updateSchedule", schedule);
 		
 	}
 

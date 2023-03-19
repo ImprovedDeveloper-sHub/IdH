@@ -11,7 +11,6 @@ import com.sbs.IdH.dao.BudgetDAO;
 import com.sbs.IdH.dao.ProjectDAO;
 import com.sbs.IdH.dto.BudgetVO;
 import com.sbs.IdH.dto.ChartVO;
-import com.sbs.IdH.dto.ProjectVO;
 
 public class BudgetServiceImpl implements BudgetService {
 
@@ -43,8 +42,12 @@ public class BudgetServiceImpl implements BudgetService {
 	}
 
 	@Override
-	public Map<String,Object> selectBudgetListByMemberId(int project_member_id) throws Exception {
-		return null;
+	public Map<String,Object> selectBudgetListByMemberId(String member_id) throws Exception {
+		Map<String,Object> dataMap = new HashMap<String,Object>();
+		SearchCriteria cri = new SearchCriteria();
+		cri.setMember_id(member_id);
+		dataMap.put("dataMap", budgetDAO.selectSearchBudgetList(cri));
+		return dataMap;
 	}
 
 	@Override
@@ -68,6 +71,10 @@ public class BudgetServiceImpl implements BudgetService {
 	public Map<String, Object> selectBudgetList(SearchCriteria cri) throws Exception {
 		Map<String,Object> dataMap = new HashMap<String,Object>();
 		List<BudgetVO> budgetList = budgetDAO.selectSearchBudgetList(cri);
+		for(BudgetVO budget : budgetList) {
+			int project_number = budget.getBudget_project_number();
+			budget.setBudget_project_name(projectDAO.selectProjectName(project_number));
+		}
 		dataMap.put("budgetList", budgetList);
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);

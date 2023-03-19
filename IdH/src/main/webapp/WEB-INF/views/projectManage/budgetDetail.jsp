@@ -124,8 +124,18 @@ input {
 								<td class="name-td">등록일</td>
 								<td class="table-td">2023.03.07.</td>
 							</tr>
+							
+						
 						</tbody>
 					</table>
+					
+				</div>
+			</div>
+			<div class="card-tools" style="margin-left:auto">
+            <button type="button" id="regbtn" class="btn btn-info"
+               onclick="location.href='modifyBudgetForm?budget_number=${budget.budget_number}'">수정</button>
+            <button type="button" id="close" class="btn btn-info"
+               onclick="CloseWindow();">취소</button>
 				</div>
 			</div>
 		</div>

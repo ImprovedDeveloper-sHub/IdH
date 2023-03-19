@@ -43,7 +43,7 @@ public class MemberController {
 	
 	@PostMapping("/login")
 	public String login(String member_id, String member_pwd, HttpSession session,RedirectAttributes rttr) throws Exception {
-		String url = "redirect:/member/main";
+		String url = "redirect:/index";
 		try {
 			memberService.login(member_id, member_pwd);
 			session.setAttribute("loginUser", memberService.selectMember(member_id));

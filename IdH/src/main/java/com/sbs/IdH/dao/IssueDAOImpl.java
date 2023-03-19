@@ -79,5 +79,11 @@ public class IssueDAOImpl implements IssueDAO{
 		int total = session.selectOne("Issue-Mapper.selectSearchIssueCount");
 		return total;
 	}
+
+	@Override
+	public int selectIssueSeqNext() throws SQLException {
+		int issue_number = session.selectOne("Issue-Mapper.selectIssueSeqNext");
+		return issue_number;
+	}
 	
 }

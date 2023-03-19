@@ -1,4 +1,4 @@
-package com.sbs.IdH.service;
+package com.sbs.IdH.service; 
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -15,6 +15,7 @@ import com.sbs.IdH.dao.Issue_AttachDAO;
 import com.sbs.IdH.dto.IssueVO;
 import com.sbs.IdH.dto.Issue_AttachVO;
 import com.sbs.IdH.dto.MemberVO;
+
 
 public class IssueServiceImpl implements IssueService{
 
@@ -71,8 +72,10 @@ public class IssueServiceImpl implements IssueService{
 
 	@Override
 	public void registIssue(IssueVO issue) throws SQLException {
-		issue.setIssue_number(2);
+		int issue_number = issueDAO.selectIssueSeqNext();
+		issue.setIssue_number(issue_number);
 		issueDAO.insertIssue(issue);
+		
 	}
 	
 
@@ -101,7 +104,11 @@ public class IssueServiceImpl implements IssueService{
 		MemberVO member = (MemberVO) session.getAttribute("loginUser");
 		cri.setMember_id(member.getMember_id());
 		//cri.setMember_id("IdH");
-		cri.setMemberStatus(1);
+		cri.setMemberStatus(1);//내 리스트
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(issueDAO.selectIssueCriteriaTotalCount(cri));
+		dataMap.put("pageMaker",pageMaker);
 		dataMap.put("myIssueList", issueDAO.selectSearchIssueList(cri));
 		return dataMap;
 	}
@@ -111,9 +118,14 @@ public class IssueServiceImpl implements IssueService{
 		Map<String, Object> dataMap = new HashMap<String,Object>();
 		HttpSession session = request.getSession(); 
 		MemberVO member = (MemberVO)session.getAttribute("loginUser");
+//		SearchCriteria cri2 = cri.getNewCri(cri);
 		cri.setMember_id(member.getMember_id());
 		//cri.setMember_id("IdH");
 		cri.setMemberStatus(2);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(issueDAO.selectIssueCriteriaTotalCount(cri));
+		dataMap.put("pageMaker",pageMaker);
 		dataMap.put("getterIssueList", issueDAO.selectSearchIssueList(cri));
 		return dataMap;
 	}

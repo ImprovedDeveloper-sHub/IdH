@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Cowork-Mapper">
+
+	<sql id="search">
+		<if test="searchType == 't'.toString()">
+			and cowork_number like '%'||#{keyword}||'%'			
+		</if>
+		<if test="searchType == 'w'.toString()">
+			and cowork_member_id like '%'||#{keyword}||'%'			
+		</if>
+		<if test="searchType == 'c'.toString()">
+			and cowork_content like '%'||#{keyword}||'%'			
+		</if>
+		<if test="searchType == 'tc'.toString()">
+			and (
+			cowork_number like '%'||#{keyword}||'%'
+			or
+			cowork_content like '%'||#{keyword}||'%'						
+			)			
+		</if>
+		<if test="searchType == 'cw'.toString()">
+			and (
+			cowork_member like '%'||#{keyword}||'%'
+			or
+			cowork_content like '%'||#{keyword}||'%'						
+			)			
+		</if>
+		<if test="searchType == 'tcw'.toString()">
+			and (
+			cowork_number like '%'||#{keyword}||'%'
+			or
+			cowork_member like '%'||#{keyword}||'%'
+			or
+			cowork_content like '%'||#{keyword}||'%'						
+			)			
+		</if>
+	</sql>
+	
+
+	<select id="selectCowork" resultType="cowork">
+		select
+		*
+		from cowork
+		where cowork_number=#{cowork_number}
+	</select>
+		
+		<update id="deleteCowork" parameterType="int">
+		delete 
+		from cowork 
+		where cowork_number=#{cowork_number}
+	</update>
+	<update id="insertCowork">
+		insert 
+		into 
+		cowork(cowork_number,cowork_regdate,cowork_enddate,cowork_content,cowork_status,cowork_member_id,cowork_product_number)
+		values
+		(#{cowork_number},sysdate,sysdate,#{cowork_content},#{cowork_status},#{cowork_member_id},#{cowork_product_number})
+	</update>
+	<update id="updateCowork" parameterType="cowork">
+		update 
+		cowork
+		set 
+		cowork_content=#{cowork_content},cowork_status=#{cowork_status}, cowork_regdate=sysdate 
+		where cowork_number=#{cowork_number}
+	</update>
+	<update id="increaseViewCnt" parameterType="int">
+		update 
+		cowork 
+		set 
+		viewcnt=viewcnt+1 
+		where cowork_number=#{cowork_number}
+	</update>
+	<select id="selectSearchCoworkList" resultType="cowork">
+		select
+		*
+		from
+		cowork
+		where cowork_number is not null  			  	
+		<include refid="search" />
+		order by cowork_number desc
+	</select>
+	<select id="selectSearchCoworkListCount"  resultType="int">
+		select
+		count(*)
+		from
+		cowork
+		where cowork_number is not null  			  	
+		<include refid="search" />
+		order by cowork_number desc
+	</select>
+	<select id="selectCoworkSeqNext" resultType="int">
+		select cowork_seq.nextval as cowork_number from dual
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+

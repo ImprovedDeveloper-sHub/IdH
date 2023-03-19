@@ -13,6 +13,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html lang="kor">
 <head>
 <style>
+p,span{
+  margin:0 !important;
+  padding:0 !important;
+}
 ul,li{
    list-sytle:none;
 }
@@ -29,7 +33,9 @@ body{
 .main-custom{
   margin:0 auto;
   width:1224px;
-  background-color:#eaedf2;
+  height:100vh !important;
+  background-color:#F0FBFC;
+  overflow:hidden;
 }
 
 .header-custom{
@@ -37,25 +43,24 @@ body{
 }
 
 .logo{
-  background-color:#dfdfdf;
-  width:100px;
-  height:60px;
+	margin-right:-5px;
+	height:60px;
 }
 .main-menu-custom{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  background-color:#B7C4CF;
-  
+  background-color:#16A2B8;
+  height:60px;
 }
 .menu{
   display:inline-block;
-  font-size:18px;
-  color:black;
+  font-size:16px;
+  color:white;
 }
 
 .menu:hover{
-  color:white;
+  color:black;
 }
 
 .row{
@@ -69,83 +74,108 @@ body{
 }
 
 .top-menu {
-  background: #fff;
+  background: #F0FBFC;
   width: 1204.5px;
   max-height: 56px;
   float: left;
-  margin-bottom :15px;
+  margin-bottom:2px !important;
+  text-align:center;
 }
 
 nav {
-   position: relative;
-   z-index: 1;
-   white-space: nowrap;
+  position: relative;
+  z-index: 1;
+  white-space: nowrap;
   float: left;
   position: relative;
 }
 
 nav a {
-   position: relative;
-   display: inline-block;
-   padding: 0.5em 3em 0.5em 1em;
-   color: #757c8f;
-   text-decoration: none;
-   margin: 0 -2px;
+  position: relative;
+  display: inline-block;
+  padding: 0.5em 3em 0.5em 1em;
+  color: #757c8f;
+  text-decoration: none;
+  margin: 0 -2px;
   position: relative;
   top: 0px;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
+  float:center;
 } 
 
 nav a:hover::before {
    content: ''; /* To generate the box */
-   position: absolute;
-   top: 0; right: 0; bottom: .5em; left: 0;
+   /* position: absolute;
+   top: 0; right: 0; bottom: .1em; left: 0;
    z-index: -1;
-   border-bottom: none;
+   border-bottom:solid 3px black;
    border-radius: 5px 2px 0 0;
-   background: #eaedf2;
+   background: #dfdfdf;
    box-shadow: 0 2px hsla(0,0%,100%,.5) inset;
    transform: perspective(6px) rotateX(1.9deg);
-   transform-origin: bottom left;
-   height: 60px;
-  margin-top: -15px;
+   transform-origin: bottom left; 
+   height: 35px;
+   margin-top: -5px; */
+}
+
+nav a:hover{
+	text-decoration:underline;
 }
 
 .active-tab::before {
    content: ''; /* To generate the box */
-   position: absolute;
-  
-   top: 0; right: 0; bottom: .5em; left: 0;
-   z-index: -10;
-   border-bottom: none;
-   border-radius: 5px 2px 0 0;
+   /* position: absolute;
+   top: 0; right: 0; bottom: .1em; left: 0;
+   border-bottom: solid 3px black;
+
    background: #eaedf2;
    box-shadow: 0 2px hsla(0,0%,100%,.5) inset;
    transform: perspective(6px) rotateX(1.9deg);
    transform-origin: bottom left;
-  box-shadow: inset 0px 0px 10px #dadce0;
-  height: 80px;
-  margin-top: -24px;
+   box-shadow: inset 0px 0px 10px #dadce0;
+   height: 80px;
+   margin-top: -24px; */
 }
 
 .active-tab {
-  color: #5e9cf7;
-  padding: 1.9em 4em 1.2em 1em;
-  margin-left: 1px
+  color: #F0FBFC;
+  
+  margin-left: 1px;
 }
-table th{
+
+/* table th{
    font-size:7px;
-   padding: 0.6rem !important;
+   padding: 0.3rem !important;
 }
 table td{
    font-size:10px;
-   padding: 0.6rem !important;
+   padding: 0.3rem !important;
+} */
+
+table th{
+	font-size:10px;
+	padding:0.5rem !important;
+	
+}
+table td{
+	font-size:9px;
+	padding:0.4rem !important;
 }
 
 
 
+.card-header{
+	background-color:#16A2B8 !important;
+	font-weight:bold !important;
+}
 
+/* .card{
+	border:solid 2px #16A2B8 !important;
+	border-top-radius: 0.5rem;
+	border-radius: 0.25rem;
+}
+ */
 
 
 </style>
@@ -160,6 +190,9 @@ table td{
    href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
 
  -->
+  
+ 
+ 
  <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/summernote/summernote-bs4.min.css">
  
  <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/dist/css/adminlte.min.css">
@@ -168,11 +201,11 @@ table td{
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 <div class="main-custom">
   <div class="header-custom row">
-    <div class="header-logo col-1">
-      <div class="logo"><img src="<%=request.getContextPath() %>/resources/img/IdH로고2.jpg"style="width: 100%;max-height: 100%;"/></div>
+    <div class="header-logo"style="width:6%;">
+      <div class="logo"><img src="<%=request.getContextPath() %>/resources/img/logo.jpg"style="width: 100%;height:100%;background-size: cover;"/></div>
     </div>
     <!-- header종료 -->
-   <div class="main-menu-custom col-11">
+   <div class="main-menu-custom"style="width:94%;">
    		<c:forEach items="${menuList }" var="menu">
 	    	<div class="menu"><a href="javascript:subMenu_go('${menu.mcode}');goPage('<%=request.getContextPath() %>${menu.murl }','${menu.mcode }');" class="nav-link"><i class="fa-solid ${menu.micon}"></i>
 	    	${menu.mname }</a></div>

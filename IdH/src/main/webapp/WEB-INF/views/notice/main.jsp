@@ -13,9 +13,9 @@
 
 
 
-<div class="row">
-	<div class="content-parts col-12">
-		<div id="content" class="card">
+<div class="row" style="width: 1200px; ">
+	<div class="content-parts col-12" style="height: 630px;">
+		<div id="content" class="card" style="height: 100%;">
 			<div class="card-header">
 				<h3 class="card-title">공지 사항 목록</h3>
 			</div>
@@ -44,7 +44,7 @@
 					</div>
 				</div>
 				<button type="button" class="btn btn-block btn-info btn-sm"
-					style="width: 80px;">등록</button>
+					style="width: 80px;" onclick="location.href='registForm';">등록</button>
 			</div>
 			<div id="table-content">
 				<div class="card-body table-responsive p-0">
@@ -67,7 +67,7 @@
 								</tr>
 							</c:if>
 							<c:forEach items="${noticeList}" var="notice">
-								<tr>
+								<tr onclick="location.href='detail?notice_number=${notice.notice_number}';"style="cursor:pointer;">
 									<td style="font-size: 15px; text-align: left; max-width: 10%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${notice.notice_number}</td>
 									<td style="font-size: 15px; text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${notice.notice_title}</td>
 									<td style="font-size: 15px; text-align: left; max-width: 35%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${notice.notice_content }</td>
@@ -85,3 +85,13 @@
 
 	</div>
 </div>
+
+
+
+<script>
+
+
+
+</script>
+
+

@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sbs.IdH.command.IssueModifyCommand;
 import com.sbs.IdH.command.IssueRegistCommand;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.IssueVO;
@@ -41,15 +42,14 @@ public class IssueController {
 	
 	@GetMapping("/main")
 	public ModelAndView main(SearchCriteria cri, ModelAndView mnv,HttpServletRequest request) throws Exception {
-		mnv.addAllObjects(issueService.selectIssueCheckList(cri));
 		mnv.addAllObjects(issueService.selectGetterIssueList(cri, request));
 		mnv.addAllObjects(issueService.selectMyIssueList(cri, request));
+		mnv.addAllObjects(issueService.selectIssueCheckList(cri));
 		return mnv;
 	}
 	
 	@GetMapping("/detail")
 	public ModelAndView detail(int issue_number, String from, 
-								RedirectAttributes rttr,
 							    ModelAndView mnv) throws Exception {
 		String url = "/issue/detail";
 
@@ -119,8 +119,11 @@ public class IssueController {
 		// DB
 		IssueVO issue = registReq.toIssueVO();
 		String XSStitle = (String) request.getAttribute("XSStitle");
-		if (XSStitle != null)
+		String XSScontent = (String) request.getAttribute("XSScontent");
+		if (XSStitle != null) {
 			issue.setIssue_title(XSStitle);
+			issue.setIssue_content(XSScontent);
+		}
 
 		issue.setAttachList(attachList);
 		issueService.registIssue(issue);
@@ -133,7 +136,7 @@ public class IssueController {
 	
 	@GetMapping("/remove")
 	public String remove(int issue_number, RedirectAttributes rttr) throws Exception {
-		String url = "redirect:/issue/detail";
+		String url = "redirect:/issue/main";
 
 		// 첨부파일 삭제
 		List<Issue_AttachVO> attachList = issueService.selectIssue(issue_number).getAttachList();
@@ -189,5 +192,92 @@ public class IssueController {
 		
 		return entity;
 	}
+	
+	@GetMapping("/modifyForm")
+	public ModelAndView modifyForm(ModelAndView mnv, int issue_number) throws Exception {
+		String url = "/issue/modify";
+		
+		mnv = detail(issue_number,"modify",mnv);
+		
+		mnv.setViewName(url);
+		return mnv;
+	}
+ @PostMapping(value="/modify", produces = "text/plain;charset=utf-8")
+	public String modifyPOST(IssueModifyCommand modifyReq,HttpServletRequest request,RedirectAttributes rttr) throws Exception {
+		String url = "redirect:/issue/detail";
+		
+		// 파일 삭제
+		if (modifyReq.getDeleteFile() != null && modifyReq.getDeleteFile().length > 0) {
+			for (int ano : modifyReq.getDeleteFile()) {				
+				Issue_AttachVO attach = issueService.selectIssue_AttachByAno(ano);
+				
+				File deleteFile = new File(attach.getUploadPath(), attach.getFileName());
+				
+				if (deleteFile.exists()) {
+					deleteFile.delete(); // File 삭제
+				}
+				issueService.removeIssue_AttachByAno(ano); // DB 삭제
+				
+			}
+		}
+	
+		//파일저장
+		List<Issue_AttachVO> attachList
+			= saveFileToIssue_Attaches(modifyReq.getUploadFile(), fileUploadPath);
+		
+		
+		IssueVO issue = modifyReq.toIssueVO();	
+		String XSStitle = (String)request.getAttribute("XSStitle");
+		String XSScontent = (String)request.getAttribute("XSScontent");
+		if(XSStitle !=null) {
+			issue.setIssue_title(XSStitle);
+			issue.setAttachList(attachList);
+			issue.setIssue_content(XSScontent);
+		}
+		
+		// DB 저장
+		issueService.modifyIssue(issue);
+
+		rttr.addFlashAttribute("from", "modify");
+		rttr.addAttribute("issue_number", issue.getIssue_number());
+		
+		return url;
+	}
+ 
+ 
+ @PostMapping("/getMy")
+ @ResponseBody
+ public ResponseEntity<Map<String, Object>> getMy(SearchCriteria cri, HttpServletRequest request) throws Exception {
+
+    ResponseEntity<Map<String, Object>> entity = null;
+    HttpStatus status;
+    Map<String, Object> dataMap = null;
+    try {
+       dataMap = issueService.selectMyIssueList(cri,request);
+       status = HttpStatus.OK;
+    } catch (Exception e) {
+       status = HttpStatus.BAD_REQUEST;
+    }
+    entity = new ResponseEntity<Map<String, Object>>(dataMap, status);
+
+    return entity;
+ }
+ @PostMapping("/getGetter")
+ @ResponseBody
+ public ResponseEntity<Map<String, Object>> getGetter(SearchCriteria cri, HttpServletRequest request) throws Exception {
+
+    ResponseEntity<Map<String, Object>> entity = null;
+    HttpStatus status;
+    Map<String, Object> dataMap = null;
+    try {
+       dataMap = issueService.selectGetterIssueList(cri,request);
+       status = HttpStatus.OK;
+    } catch (Exception e) {
+       status = HttpStatus.BAD_REQUEST;
+    }
+    entity = new ResponseEntity<Map<String, Object>>(dataMap, status);
+
+    return entity;
+ }
 	
 }

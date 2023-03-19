@@ -96,7 +96,7 @@ public class WorkreportVO {
 		this.workreport_enddate = workreport_enddate;
 	}
 
-	public String getWorkreport_member_approver() {
+	public String getWorkreport_approver_id() {
 		return workreport_member_approver;
 	}
 
