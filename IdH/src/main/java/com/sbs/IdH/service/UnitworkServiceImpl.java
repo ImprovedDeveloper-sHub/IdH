@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.sbs.IdH.command.DateMaker;
 import com.sbs.IdH.command.PageMaker;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.ProjectDAO;
@@ -169,5 +170,15 @@ public class UnitworkServiceImpl implements UnitworkService{
 		chart.resultSet();
 		return chart;
 	}
+	
+	@Override
+	   public List<Map<String,Object>> selectUnitworkListForCalendar(SearchCriteria cri) throws Exception {
+	      DateMaker dateMaker = new DateMaker();
+	      List<UnitworkVO> unitworkList = unitworkDAO.selectSearchUnitworkList(cri);
+	      for(UnitworkVO unitwork : unitworkList) {
+	         dateMaker.setParamUnitwork(unitwork);
+	      }
+	      return dateMaker.getParamList();
+	   }
 	
 }

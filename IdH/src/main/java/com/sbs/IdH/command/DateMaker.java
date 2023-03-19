@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sbs.IdH.dto.ScheduleVO;
+import com.sbs.IdH.dto.UnitworkVO;
 
 public class DateMaker {
 
@@ -31,9 +32,15 @@ public class DateMaker {
 		paramList.add(param);
 	}
 	
-	public void setParamString(String title, Date start, Date end) {
-		
-		
+	
+	public void setParamUnitwork(UnitworkVO unitwork){
+		Map <String, Object> param = new HashMap<String, Object>();
+		// SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		param.put("title", unitwork.getUnitwork_name());
+		param.put("start", format.format(unitwork.getUnitwork_regdate()));
+		param.put("end", format.format(unitwork.getUnitwork_enddate()));
+		paramList.add(param);
 	}
 	
 	

@@ -1,5 +1,6 @@
 package com.sbs.IdH.service;
 
+import java.sql.SQLException;
 import java.util.Map;
 
 import com.sbs.IdH.command.SearchCriteria;
@@ -28,4 +29,10 @@ public interface ProjectService {
 	
 	public Map<String,Object> selectProjectManageListByProjectNumber(int project_number) throws Exception;
 
+	
+	public Map<String,Object> selectProjectProgressByproject_number(int project_number) throws Exception;
+	
+	
+	public Map<String, Object> selectProjectUnitwork_level(SearchCriteria cri) throws SQLException;
+	
 }

@@ -13,9 +13,9 @@ public class RequireVO {
 	private String require_business;
 	private String require_project;
 	private String require_detail;
-	private String require_writer_id;
+	private String require_setter_id;
 	private int require_business_number;
-	private String require_member_id;
+	private String require_getter_id;
 	
 	private List<Require_attachVO> attachList;
 	
@@ -52,7 +52,7 @@ public class RequireVO {
 	public Date getRequire_regdate() {
 		return require_regdate;
 	}
-	public void setRequire_date(Date require_regdate) {
+	public void setRequire_regdate(Date require_regdate) {
 		this.require_regdate = require_regdate;
 	}
 	public String getRequire_business() {
@@ -73,11 +73,11 @@ public class RequireVO {
 	public void setRequire_detail(String require_detail) {
 		this.require_detail = require_detail;
 	}
-	public String getRequire_writer_id() {
-		return require_writer_id;
+	public String getRequire_setter_id() {
+		return require_setter_id;
 	}
-	public void setRequire_writer_id(String require_writer_id) {
-		this.require_writer_id = require_writer_id;
+	public void setRequire_setter_id(String require_setter_id) {
+		this.require_setter_id = require_setter_id;
 	}
 	public int getRequire_business_number() {
 		return require_business_number;
@@ -85,17 +85,18 @@ public class RequireVO {
 	public void setRequire_business_number(int require_business_number) {
 		this.require_business_number = require_business_number;
 	}
-	public String getRequire_member_id() {
-		return require_member_id;
+	public String getRequire_getter_id() {
+		return require_getter_id;
 	}
-	public void setRequire_member_id(String require_member_id) {
-		this.require_member_id = require_member_id;
+	public void setRequire_getter_id(String require_getter_id) {
+		this.require_getter_id = require_getter_id;
 	}
 	
 	public RequireVO() {}
 	public RequireVO(int require_number, int require_level, String require_title, String require_source,
 			Date require_regdate, String require_business, String require_project, String require_detail,
-			String require_writer_id, int require_business_number, String require_member_id) {
+			String require_setter_id, int require_business_number, String require_getter_id,
+			List<Require_attachVO> attachList) {
 		super();
 		this.require_number = require_number;
 		this.require_level = require_level;
@@ -105,12 +106,22 @@ public class RequireVO {
 		this.require_business = require_business;
 		this.require_project = require_project;
 		this.require_detail = require_detail;
-		this.require_writer_id = require_writer_id;
+		this.require_setter_id = require_setter_id;
 		this.require_business_number = require_business_number;
-		this.require_member_id = require_member_id;
+		this.require_getter_id = require_getter_id;
+		this.attachList = attachList;
+	}
+	@Override
+	public String toString() {
+		return "RequireVO [require_number=" + require_number + ", require_level=" + require_level + ", require_title="
+				+ require_title + ", require_source=" + require_source + ", require_regdate=" + require_regdate
+				+ ", require_business=" + require_business + ", require_project=" + require_project
+				+ ", require_detail=" + require_detail + ", require_setter_id=" + require_setter_id
+				+ ", require_business_number=" + require_business_number + ", require_getter_id=" + require_getter_id
+				+ ", attachList=" + attachList + "]";
 	}
 	
-
-
+	
+	
 
 }

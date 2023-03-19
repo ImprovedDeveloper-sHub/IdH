@@ -1,5 +1,6 @@
 package com.sbs.IdH.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.sbs.IdH.command.SearchCriteria;
@@ -27,4 +28,5 @@ public interface UnitworkService {
 	
 	public void updateUnitworkForRegistProject(int unitwork_number, int project_number)throws Exception;
 
+	 public List<Map<String,Object>> selectUnitworkListForCalendar(SearchCriteria cri) throws Exception;
 }

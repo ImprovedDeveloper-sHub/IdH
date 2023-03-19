@@ -12,12 +12,18 @@ public class ChartVO {
 	
 	HashMap<String, Object> colMap1;
 	HashMap<String, Object> colMap2;
+	HashMap<String, Object> colMap3;
+	HashMap<String, Object> colMap4;
+	HashMap<String, Object> colMap5;
 	
 	public ChartVO() {
 		cols = new ArrayList<HashMap<String, Object>>();
 		rows = new ArrayList<HashMap<String, Object>>();
 		colMap1 = new HashMap<String,Object>();
 		colMap2 = new HashMap<String,Object>();
+		colMap3 = new HashMap<String,Object>();
+		colMap4 = new HashMap<String,Object>();
+		colMap5 = new HashMap<String,Object>();
 		result = new HashMap<String, Object>();
 	}
 	
@@ -43,6 +49,24 @@ public class ChartVO {
 		colMap2.put("type","number");
 		cols.add(colMap1);
 		cols.add(colMap2);
+	}
+	
+	public void unitworkforProgressColSet() {
+		colMap1.put("label","진행률");
+		colMap1.put("type","string");
+		colMap2.put("label","진행중");
+		colMap2.put("type","number");
+		colMap3.put("label","지연");
+		colMap3.put("type","number");
+		colMap4.put("label","예정");
+		colMap4.put("type","number");
+		colMap5.put("label","완료");
+		colMap5.put("type","number");
+		cols.add(colMap1);
+		cols.add(colMap2);
+		cols.add(colMap3);
+		cols.add(colMap4);
+		cols.add(colMap5);
 	}
 	
 	public void unitworkColSet() {

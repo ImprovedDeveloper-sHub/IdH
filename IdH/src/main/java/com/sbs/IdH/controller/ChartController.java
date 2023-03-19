@@ -1,8 +1,5 @@
 package com.sbs.IdH.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -17,6 +14,7 @@ import com.sbs.IdH.dto.ChartVO;
 import com.sbs.IdH.service.BudgetService;
 import com.sbs.IdH.service.IssueService;
 import com.sbs.IdH.service.ProductService;
+import com.sbs.IdH.service.ProjectService;
 import com.sbs.IdH.service.ScheduleService;
 import com.sbs.IdH.service.UnitworkService;
 import com.sbs.IdH.service.WorkforceService;
@@ -37,8 +35,8 @@ public class ChartController {
 	private ScheduleService scheduleService;
 	@Resource(name="workforceService")
 	private WorkforceService workforceService;
-	
-	
+	@Resource(name="projectService")
+	private ProjectService projectService;
 	
 	@GetMapping("/subMenuTest")
 	public void subMenuTest() {}
