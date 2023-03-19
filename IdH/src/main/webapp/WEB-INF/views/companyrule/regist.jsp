@@ -53,35 +53,37 @@ input {
 	color: #64697a;
 	border: none;
 }
+
 .fileUpload {
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
-  padding: 6px 12px;
-  margin-bottom: 0;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  border: 1px solid #357ebd;
-  border-radius: 4px;
-  color: #fff;
-  background: #428bca;
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	border: 1px solid #357ebd;
+	border-radius: 4px;
+	color: #fff;
+	background: #428bca;
 }
+
 .fileUpload input.upload {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 0;
-  padding: 0;
-  font-size: 20px;
-  cursor: pointer;
-  opacity: 0;
-  filter: alpha(opacity=0);
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity = 0);
 }
 </style>
 
@@ -150,15 +152,22 @@ input {
 										style="display: none; width: 500px;"></textarea></td>
 							</tr>
 
-				
+
 
 
 						</tbody>
 
 					</table>
-					<div class="fileUpload">
-						<span><i class="fa fa-plus-circle"></i> Add File</span> <input
-							type="file" class="upload" id="files" name="files" multiple />
+					<div class="form-group">
+						<div class="card card-outline card-success">
+							<div class="card-header">
+								<h5 style="display: inline; line-height: 40px;">첨부파일 :</h5>
+								&nbsp;&nbsp;
+								<button class="btn btn-xs btn-primary" onclick="addFile_go();"
+									type="button" id="addFileBtn">Add File</button>
+							</div>
+							<div class="card-footer fileInput"></div>
+						</div>
 					</div>
 
 					<ul id="selectedFiles"></ul>
@@ -181,26 +190,54 @@ input {
 	};
 </script>
 <script>
- function regist_go(){
-	   
-	 
-	   
-	   $("form[role='form']").submit();
-	    
-
+function regist_go(){
+	
+	var inputs = $('input[name="uploadFile"]');
+	for(var input of inputs){
+		//console.log(input.name+" : "+input.value);
+		if(input.value==""){
+			alert("파일을 선택하세요.");
+			input.focus();
+			input.click();
+			return;
+		}
 		
-</script>
-<script>
-$('input:file[multiple]').change(
-	      function(e){
-	        // console.log(e.currentTarget.files);
-	        var numFiles = e.currentTarget.files.length;
-	        for (i=0;i<numFiles;i++){
-	        $('<li>').text(e.currentTarget.files[i].name).appendTo($('#selectedFiles'));
-	        $('<span>').addClass('filesize').text('(' + filesize + 'kb)').appendTo($('#selectedFiles li:last'));
-	      }
-	    });
+	}
+	$("form[role='form']").submit();
+}
+var dataNum=0;
 
+function addFile_go(){
+	//alert("add file btn");
+	
+	if($('input[name="uploadFile"]').length >=5){
+		alert("파일추가는 5개까지만 가능합니다.");
+		return;
+	}
+	
+	var div=$('<div>').addClass("inputRow").attr("data-no",dataNum);		
+	var input=$('<input>').attr({"type":"file","name":"uploadFile"}).css("display","inline");
+	div.append(input).append("<button onclick='remove_go("+dataNum+");' style='border:0;outline:0;' class='badge bg-red' type='button'>X</button>");		
+	$('.fileInput').append(div);
+	dataNum++;		
+}
+
+function remove_go(dataNum){
+	//alert(dataNum);
+	$('div[data-no="'+dataNum+'"]').remove();
+}
+
+window.onload=function(){
+	$('.fileInput').on('change',"input[name='uploadFile']",function(event){
+		//alert($(this).val());			
+		var input = $(this)[0];
+		//alert(input.files[0].size);
+		if(input.files[0].size > 1024*1024*40){
+			alert("첨부파일크기는 40MB 이하만 가능합니다.");
+			input.value="";				
+		}
+		
+	});	
 </script>
 
 

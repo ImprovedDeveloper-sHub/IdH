@@ -44,7 +44,7 @@
 										<td><a> ${unitwork.unitwork_name } </a></td>
 										<td>
 											<ul class="list-inline">
-												<li class="list-inline-item">${unitwork.unitwork_member_id }</li>
+												<li class="list-inline-item">${unitwork.unitwork_getter_id }</li>
 											</ul>
 										</td>
 										<td><fmt:formatDate pattern="yyyy-MM-dd"

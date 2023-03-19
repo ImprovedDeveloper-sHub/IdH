@@ -24,6 +24,9 @@
 		<if test="status != null and status != 0 ">
 			and unitwork_status =  #{status}
 		</if>
+		<if test="type != null and type != 0 ">
+			and unitwork_level =  #{type}
+		</if>
 	</sql>
 	
 	

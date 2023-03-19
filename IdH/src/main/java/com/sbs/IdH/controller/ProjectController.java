@@ -40,8 +40,8 @@ public class ProjectController {
 	@GetMapping("/progress")
 	public ModelAndView progress(ModelAndView mnv, SearchCriteria cri) throws Exception {
 
-		mnv.addAllObjects(projectService.selectProjectUnitwork_level(cri));
 		mnv.addAllObjects(unitworkService.selectUnitworkList(cri));
+		mnv.addAllObjects(projectService.selectProjectUnitwork_level(cri));
 
 		return mnv;
 	}

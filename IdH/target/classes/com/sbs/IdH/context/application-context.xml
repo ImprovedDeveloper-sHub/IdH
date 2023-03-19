@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	<context:component-scan base-package="com.sbs.IdH.service" />
-	<bean id="issueDAO" class="com.sbs.IdH.dao.IssueDAOImpl" p:session-ref="sqlSession"/>
+	<!-- <bean id="issueDAO" class="com.sbs.IdH.dao.IssueDAOImpl" p:session-ref="sqlSession"/>
 	<bean id="minutesDAO" class="com.sbs.IdH.dao.MinutesDAOImpl" p:session-ref="sqlSession"/>
 	<bean id="workDAO" class="com.sbs.IdH.dao.WorkDAOImpl" p:session-ref="sqlSession"/>
 	<bean id="work_attachDAO" class="com.sbs.IdH.dao.Work_AttachDAOImpl" p:session-ref="sqlSession"/>
@@ -23,7 +23,7 @@
 	<bean id="workService"
 		  class="com.sbs.IdH.service.WorkServiceImpl"
 		  p:workDAO-ref="workDAO" />
-
+ -->
 
 	
 	<!-- repository -->

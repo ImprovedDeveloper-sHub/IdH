@@ -43,12 +43,12 @@
 	<update id="insertRequire">
 		insert 
 		into 
-		require(require_number,require_level,require_title,require_source,require_regdate,
-		require_project,require_detail,require_setter_id,
+		require(require_number,require_level,require_title,require_regdate,
+		require_detail,require_setter_id,
 		require_business_number,require_getter_id)
 		values
-		(#{require_number},#{require_level},#{require_title},#{require_source},sysdate,
-		#{require_project},#{require_detail},#{require_setter_id},
+		(#{require_number},#{require_level},#{require_title},sysdate,
+		#{require_detail},#{require_setter_id},
 		#{require_business_number},#{require_getter_id})
 	</update>
 	<select id="selectRequireSeqNext" resultType="int">
@@ -66,10 +66,10 @@
 		require
 		set 
 		require_title=#{require_title}, require_detail=#{require_detail},
-		require_level=#{require_level},require_business=#{require_business},
-		require_project=#{require_project},require_member_id=#{require_member_id},
+		require_level=#{require_level},
+		require_project=#{require_project},require_setter_id=#{require_setter_id},
 		require_business_number=#{require_business_number},require_regdate=sysdate,
-		require_setter_id=#{require_setter_id}
+		require_getter_id=#{require_getter_id}
 		where require_number=#{require_number}
 	</update>
 	

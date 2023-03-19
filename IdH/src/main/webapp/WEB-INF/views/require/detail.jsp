@@ -53,7 +53,7 @@
 
 	<!-- 사업 일정 상세 정보 -->
 	<div class="col-8" >
-		<div class="card card-info" style="width: 680px; height: 800px;">
+		<div class="card card-info" style="width: 680px; height: 700px;">
 			<div class="card-header" >
 				<h3 class="card-title">요구사항 상세보기</h3>
 				<div class="card-tools">
@@ -117,9 +117,8 @@
 							</tr>
 							<tr style="height: 100px;">
 								<td class="name-td">내용</td>
-								<td class="table-td" colspan="5" style=" width: 500px; height: 500px;">
-								<textarea rows="15" cols="40"
-										style="display: none; width: 500px; height: 500px;">${require.require_detail }</textarea></td>
+								<td class="table-td" colspan="5" style=" width: 500px; height: 300px;">${require.require_detail }
+								</td>
 							</tr>
 
 

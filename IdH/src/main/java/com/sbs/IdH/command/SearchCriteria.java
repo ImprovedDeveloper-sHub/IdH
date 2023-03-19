@@ -12,7 +12,7 @@ public class SearchCriteria {
 	private int status;
 	private int type;
 	private int startRowNum=0;
-	private String member_id="";
+	private String member_id;
 	private int memberStatus;
 	
 	

@@ -3,6 +3,7 @@ package com.sbs.IdH.controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -20,10 +22,13 @@ import com.sbs.IdH.command.RequireModifyCommand;
 import com.sbs.IdH.command.RequireRegistCommand;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.Require_attachDAO;
+import com.sbs.IdH.dao.UnitworkDAO;
+import com.sbs.IdH.dto.MemberVO;
 import com.sbs.IdH.dto.RequireVO;
 import com.sbs.IdH.dto.Require_attachVO;
 import com.sbs.IdH.service.BusinessService;
 import com.sbs.IdH.service.RequireService;
+import com.sbs.IdH.service.UnitworkService;
 import com.sbs.IdH.utils.MakeFileName;
 
 @RequestMapping("/require")
@@ -36,6 +41,10 @@ public class RequireController {
 	private Require_attachDAO require_attachDAO;
 	@Resource
 	private BusinessService businessService;
+	@Resource
+	private UnitworkDAO unitworkDAO;
+	@Resource
+	private UnitworkService unitworkService;
 
 	@GetMapping("/main")
 	public ModelAndView main(ModelAndView mnv, SearchCriteria cri) throws Exception {
@@ -45,11 +54,33 @@ public class RequireController {
 		return mnv;
 	}
 
-	@RequestMapping("/registForm")
-	public String registForm() throws Exception {
+	@GetMapping("/getUnitworkCalender")
+	@ResponseBody
+	public List<Map<String, Object>> getUnitworkCalender(HttpServletRequest request) throws Exception {
+
+		SearchCriteria cri = new SearchCriteria();
+
+		/*
+		 * MemberVO member = (MemberVO) request.getSession().getAttribute("loginUser");
+		 * cri.setMember_id(member.getMember_id());
+		 */
+
+		return unitworkService.selectUnitworkListForCalendar(cri);
+
+	}
+
+	@GetMapping("/registForm")
+	public ModelAndView registForm(ModelAndView mnv, HttpServletRequest request) throws Exception {
 
 		String url = "require/regist";
-		return url;
+		SearchCriteria cri = new SearchCriteria();
+
+		MemberVO member = (MemberVO) request.getSession().getAttribute("loginUser");
+		cri.setMember_id(member.getMember_id());
+
+		mnv.addAllObjects(businessService.getBusinessList(cri));
+		mnv.setViewName(url);
+		return mnv;
 	}
 
 	@Resource(name = "fileUploadPath")
@@ -90,15 +121,17 @@ public class RequireController {
 		// DB
 		RequireVO require = registReq.toRequireVO();
 		String XSStitle = (String) request.getAttribute("XSStitle");
+		String XSSdetail = (String) request.getAttribute("XSSdetail");
 		if (XSStitle != null)
 			require.setRequire_title(XSStitle);
+		if (XSSdetail != null)
+			require.setRequire_detail(XSSdetail);
 
 		require.setAttachList(attachList);
 		requireService.registRequire(require);
 
 		// output
 		rttr.addFlashAttribute("from", "regist");
-
 		return url;
 	}
 
@@ -159,8 +192,8 @@ public class RequireController {
 	}
 
 	@PostMapping(value = "/modify", produces = "text/plain;charset=utf-8")
-	public String modifyPOST(RequireModifyCommand modifyReq, HttpServletRequest request,
-			RedirectAttributes rttr) throws Exception {
+	public String modifyPOST(RequireModifyCommand modifyReq, HttpServletRequest request, RedirectAttributes rttr)
+			throws Exception {
 		String url = "redirect:/require/detail";
 
 		// 파일 삭제

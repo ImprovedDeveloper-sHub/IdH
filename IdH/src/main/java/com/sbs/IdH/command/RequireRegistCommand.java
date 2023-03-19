@@ -11,6 +11,35 @@ public class RequireRegistCommand {
 	private String require_title;
 	private String require_detail;
 	private String require_setter_id;
+	private String require_getter_id;
+	private int require_business_number;
+	private int require_level;
+	
+	
+	public int getRequire_business_number() {
+		return require_business_number;
+	}
+
+
+
+	public void setRequire_business_number(int require_business_number) {
+		this.require_business_number = require_business_number;
+	}
+
+
+
+	public int getRequire_level() {
+		return require_level;
+	}
+
+
+
+	public void setRequire_level(int require_level) {
+		this.require_level = require_level;
+	}
+
+
+
 	private List<MultipartFile> uploadFile;
 	
 	
@@ -51,6 +80,18 @@ public class RequireRegistCommand {
 
 
 
+	public String getRequire_getter_id() {
+		return require_getter_id;
+	}
+
+
+
+	public void setRequire_getter_id(String require_getter_id) {
+		this.require_getter_id = require_getter_id;
+	}
+
+
+
 	public List<MultipartFile> getUploadFile() {
 		return uploadFile;
 	}
@@ -68,6 +109,9 @@ public class RequireRegistCommand {
 		require.setRequire_title(this.require_title);
 		require.setRequire_detail(this.require_detail);
 		require.setRequire_setter_id(this.require_setter_id);
+		require.setRequire_getter_id(this.require_getter_id);
+		require.setRequire_business_number(this.require_business_number);
+		require.setRequire_level(this.require_level);
 		
 		return require;
 	}

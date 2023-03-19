@@ -17,6 +17,10 @@
 		<if test="status != null and status != 0 ">
 			and project_status =  #{status}
 		</if>
+		<if test="type != null and type != 0 ">
+			and project_level =  #{type}
+		</if>
+		
 		
 		
 	</sql>

@@ -111,8 +111,17 @@ public class RequireVO {
 		this.require_getter_id = require_getter_id;
 		this.attachList = attachList;
 	}
-
+	@Override
+	public String toString() {
+		return "RequireVO [require_number=" + require_number + ", require_level=" + require_level + ", require_title="
+				+ require_title + ", require_source=" + require_source + ", require_regdate=" + require_regdate
+				+ ", require_business=" + require_business + ", require_project=" + require_project
+				+ ", require_detail=" + require_detail + ", require_setter_id=" + require_setter_id
+				+ ", require_business_number=" + require_business_number + ", require_getter_id=" + require_getter_id
+				+ ", attachList=" + attachList + "]";
+	}
 	
-
+	
+	
 
 }
