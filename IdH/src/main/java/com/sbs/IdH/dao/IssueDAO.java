@@ -32,5 +32,6 @@ public interface IssueDAO {
 	Map<String,Object> selectIssueCountForChart(SearchCriteria cri)throws SQLException;
 
 	
+	int selectIssueSeqNext()throws SQLException;
 	
 }

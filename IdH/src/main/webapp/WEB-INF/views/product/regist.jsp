@@ -80,6 +80,7 @@ input {
 							<tr>
 								
 								<td class="name-td">작성자</td>
+								<td class="name-td">글번호</td>
 								<td class="table-td"><input type="text"
 									name="product_member_id" readonly value="${loginUser.member_id }" /></td>
 							</tr>

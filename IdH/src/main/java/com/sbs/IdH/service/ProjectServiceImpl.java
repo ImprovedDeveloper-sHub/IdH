@@ -206,7 +206,7 @@ public class ProjectServiceImpl implements ProjectService {
 		// dataMap.put("workforceList", workforceDAO.selectSearchWorkforceList(cri));
 		return dataMap;
 	}
-	
+
 	@Override
 	public Map<String, Object> selectProjectProgressByproject_number(int project_number) throws Exception {
 		SearchCriteria cri = new SearchCriteria();

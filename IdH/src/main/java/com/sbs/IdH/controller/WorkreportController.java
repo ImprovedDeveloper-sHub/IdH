@@ -33,10 +33,13 @@ public class WorkreportController {
 	
 	@GetMapping("/main")
 	public ModelAndView main(SearchCriteria cri, ModelAndView mnv, HttpServletRequest request) throws Exception {
-		mnv.addAllObjects(workreportService.selectGetterWorkreportList(cri, request));
+//		SearchCriteria cri2 = cri.getNewCri(cri);
+//		SearchCriteria cri3 = cri.getNewCri(cri);
+//		SearchCriteria cri4 = cri.getNewCri(cri);
 		mnv.addAllObjects(workreportService.selectMyWorkreportList(cri, request));
-		mnv.addAllObjects(workreportService.selectGetterCheckList(cri));
+		mnv.addAllObjects(workreportService.selectGetterWorkreportList(cri, request));
 		mnv.addAllObjects(workreportService.selectMyCheckList(cri));
+		mnv.addAllObjects(workreportService.selectGetterCheckList(cri));
 		return mnv;
 	}
 

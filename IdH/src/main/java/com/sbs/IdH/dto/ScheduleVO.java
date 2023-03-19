@@ -60,7 +60,6 @@ public class ScheduleVO {
 	}
 	
 	
-	
 	public String getSchedule_name() {
 		return schedule_name;
 	}

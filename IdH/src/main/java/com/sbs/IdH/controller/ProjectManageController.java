@@ -47,7 +47,6 @@ public class ProjectManageController {
 	private WorkforceService workforceService;
 	@Resource
 	private BusinessService businessService;
-
 	public void setProjectService(ProjectService projectService) {
 		this.projectService = projectService;
 	}
@@ -157,7 +156,6 @@ public class ProjectManageController {
 		mnv.setViewName(url);
 		return mnv;
 	}
-
 	@PostMapping("/registBudget")
 	public String registBudget(RedirectAttributes rttr, BudgetVO budget) throws Exception {
 		budgetService.registBudget(budget);
@@ -188,7 +186,6 @@ public class ProjectManageController {
 	@GetMapping("/budgetDetail")
 	public ModelAndView budgetDetail(ModelAndView mnv, int budget_number) throws Exception {
 		mnv.addObject("budget", budgetService.selectBudget(budget_number));
-
 		return mnv;
 	}
 
@@ -239,7 +236,6 @@ public class ProjectManageController {
 	@GetMapping("/workforceDetail")
 	public ModelAndView workforceDetail(ModelAndView mnv, int workforce_number) throws Exception {
 		mnv.addObject("workforce", workforceService.selectWorkforce(workforce_number));
-
 		return mnv;
 	}
 

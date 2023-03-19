@@ -60,4 +60,9 @@ public class WorkreportDAOImpl implements WorkreportDAO{
 		int count = session.selectOne("Workreport-Mapper.selectSearchWorkreportListCount",cri);
 		return count;
 	}
+	@Override
+	public int selectWorkreportSeqNext() throws SQLException {
+		int workreport_number = session.selectOne("Workreport-Mapper.selectWorkreportSeqNext");
+		return workreport_number;
+	}
 }

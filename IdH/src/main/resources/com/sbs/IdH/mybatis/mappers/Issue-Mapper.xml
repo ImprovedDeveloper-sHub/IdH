@@ -6,7 +6,7 @@
 <mapper namespace="Issue-Mapper">
 
 	<sql id="search">
-		<if test="searchType == 'n'.toString() ">
+		<if test="searchType == 'tcw'.toString() ">
 			and issue_number like '%'||#{keyword}||'%'
 		</if>
 		<if test="searchType == 't'.toString() ">
@@ -18,9 +18,6 @@
 		<if test="searchType == 'l'.toString() ">
 			and issue_level like '%'||#{keyword}||'%'
 		</if>
-		<if test="project_number != null and project_number != 0 ">
-			and issue_project_number =  #{project_number}
-		</if>
 		<if test="member_id != null and memberStatus == 1">
 			and issue_setter_id = #{member_id}
 		</if>
@@ -31,12 +28,6 @@
 			and issue_status = #{status}
 		</if>
 	</sql>
-	
-	
-	
-	
-	
-	
 	
 	<select id="selectNotGetterIssueCount" resultType="int">
 		select count(*)
@@ -82,8 +73,8 @@
 	
 	<update id="insertIssue" parameterType="issue">
 		insert into 
-		issue(issue_number, issue_title, issue_content, issue_level, issue_regdate, issue_setter_id, issue_project_number, issue_getter_id)
-		values(#{issue_number},#{issue_title},#{issue_content},#{issue_level},sysdate,#{issue_setter_id},#{issue_project_number},#{issue_getter_id})
+		issue(issue_number, issue_title, issue_content, issue_level, issue_regdate, issue_setter_id, issue_project_number, issue_getter_id, issue_status)
+		values(#{issue_number},#{issue_title},#{issue_content},#{issue_level},sysdate,#{issue_setter_id},#{issue_project_number},#{issue_getter_id},#{issue_status})
 	</update>
 	
 	<update id="updateIssue" parameterType="issue">
@@ -98,6 +89,9 @@
 		from issue 
 		where issue_number=#{issue_number}
 	</update>
+	<select id="selectIssueSeqNext" resultType="int">
+		select issue_seq.nextval as issue_number from dual
+	</select>
 </mapper>  
 
 

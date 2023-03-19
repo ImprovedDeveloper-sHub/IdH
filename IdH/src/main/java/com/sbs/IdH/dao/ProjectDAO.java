@@ -34,5 +34,4 @@ public interface ProjectDAO {
 	List<Integer> selectProjectByBusinessNumber(int business_number)throws SQLException;
 	
 	String selectProjectName(int project_number)throws Exception;
-	
 }

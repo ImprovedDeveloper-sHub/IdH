@@ -36,6 +36,9 @@ public class WorkforceVO {
 	public void setWorkforce_status(int workforce_status) {
 		this.workforce_status = workforce_status;
 	}
+
+
+
 	public int getWorkforce_project_number() {
 		return workforce_project_number;
 	}
@@ -78,6 +81,10 @@ public class WorkforceVO {
 	public void setWorkforce_enddate(Date workforce_enddate) {
 		this.workforce_enddate = workforce_enddate;
 	}
+
+
+
+
 	
 	
 	public Date getWorkforce_startdate() {

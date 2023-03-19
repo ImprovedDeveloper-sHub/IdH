@@ -100,6 +100,14 @@ input {
 									placeholder="${loginUser.member_id } " value="${loginUser.member_id }" name="require_setter_id" /></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
+								
+							</tr>
+							<tr>
+								<td class="name-td">발의자</td>
+								<td class="table-td"><input type="text" readonly
+									placeholder="user.id" /></td>
+									<td class="table-td"></td>
+									<td class="table-td"></td>
 								<td class="name-td">등록일</td>
 								<td colspan="5"><input type="text" readonly
 									placeholder="<fmt:formatDate value="<%=new Date()%>" pattern="yyyy-MM-dd"/>" /></td>
