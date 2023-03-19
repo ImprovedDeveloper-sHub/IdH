@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 
@@ -14,7 +16,7 @@
 
 #table-content {
 	background: #fff;
-	margin-top: 20px;
+	/* margin-top: 20px; */
 	box-shadow: #dcdee3 0px 0px 10px;
 }
 
@@ -36,7 +38,7 @@
 #table-content tbody tr td {
 	padding: 14px 10px;
 	border-bottom: #eaecee solid 1px;
-	font-size: 15px;
+	font-size: 13px;
 }
 
 #table-content tbody tr:hover {
@@ -85,7 +87,7 @@
 	<!-- 사업 인원 전체 정보 -->
 	<div class="col-12">
 		<div class="card card-info">
-			<div class="card-header">
+			<div class="card-header bg-info">
 				<h3 class="card-title">사업 인원 현황</h3>
 				<div class="card-tools">
 					<div class="input-group input-group-sm" style="width: 150px;">
@@ -95,25 +97,23 @@
 			</div>
 			<div id="content">
 				<div id="table-content">
-					<table>
+					<table style="text-align: center;">
 						<thead>
 							<tr>
-								<td class="name-td" colspan="2"></td>
-								<td class="name-td" colspan="2">전체</td>
-								<td class="name-td" colspan="2">팀장</td>
-								<td class="name-td" colspan="2">팀원</td>
-								<td class="name-td" colspan="2">참여</td>
-								<td class="name-td" colspan="2">가용</td>
+								<td class="name-td" style="width: 20%;">전체</td>
+								<td class="name-td" style="width: 20%;">팀장</td>
+								<td class="name-td" style="width: 20%;">팀원</td>
+								<td class="name-td" style="width: 20%;">참여</td>
+								<td class="name-td" style="width: 20%;">가용</td>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td class="table-td" colspan="2"></td>
-								<td class="table-td" colspan="2">40명</td>
-								<td class="table-td" colspan="2">05명</td>
-								<td class="table-td" colspan="2">35명</td>
-								<td class="table-td" colspan="2">38명</td>
-								<td class="table-td" colspan="2">02명</td>
+								<td class="table-td"></td>
+								<td class="table-td"></td>
+								<td class="table-td"></td>
+								<td class="table-td"></td>
+								<td class="table-td"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -123,10 +123,36 @@
 	</div>
 	<!-- 사업 인원 전체 정보 끝 -->
 
+	<div class="card-tools"
+		style="justify-content: space-between; display: flex; flex-direction: row-reverse;">
+		
+		<div class="input-group input-group-sm"
+			style="width: 350px; margin: 10px; margin-left: 750px;">
+			<select class="form-control-sm" name="searchType" id="searchType"
+				style="hegith: 30px; width: 90px !important; border-color: #CED4DA !important;">
+				<option value="tcw" ${cri.searchType eq 'n' ? 'selected':'' }>전체</option>
+				<option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제목</option>
+				<option value="w" ${cri.searchType eq 'l' ? 'selected':'' }>수준</option>
+				<option value="c" ${cri.searchType eq 'c' ? 'selected':'' }>내용</option>
+			</select> <input type="text" name="table_search"
+				class="form-control float-right" placeholder="Search">
+				
+			<div class="input-group-append">
+				<button type="submit" class="btn btn-default" onclick="list_go(1)">
+					<i class="fas fa-search"></i>
+				</button>
+			</div>
+		</div>
+		<button type="button" class="btn btn-block btn-info btn-sm"
+			style="width: 80px; margin: 10px; text-align: center;" id="registBtn"
+			onclick="OpenWindow('registForm','글등록',680,555)">등록</button>
+
+	</div>
+
 	<!-- 사업 별 인원 현황 -->
 	<div class="col-12">
 		<div class="card card-info">
-			<div class="card-header">
+			<div class="card-header bg-info">
 				<h3 class="card-title">사업 별 인원 현황</h3>
 				<div class="card-tools">
 					<div class="input-group input-group-sm" style="width: 150px;">
@@ -136,58 +162,24 @@
 			</div>
 			<div id="content">
 				<div id="table-content">
-					<table cellspacing="0" cellpadding="0">
+					<table style="height: 348px;">
 						<thead>
 							<tr>
-								<td></td>
-								<td>ID</td>
-								<td>성명</td>
-								<td>담당 업무</td>
-								<td>구현 기능</td>
-								<td></td>
+								<td style="width: 25%; text-align: center;">사업번호</td>
+								<td style="width: 25%;">사업명</td>
+								<td style="width: 25%; text-align: center;">팀장</td>
+								<td style="width: 25%; text-align: center;">참여인원</td>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td class="table-td"></td>
-								<td class="table-td">ytur13</td>
-								<td class="table-td">서승훈</td>
-								<td class="table-td">PL</td>
-								<td class="table-td">프로젝트 관리 전반</td>
-								<td class="table-td"></td>
+							<c:forEach items="${businessList}" var="business">
+							<tr onclick="location.href='detail?business_number=${business.business_number}';" style="cursor: pointer;">
+								<td class="table-td" style="text-align: center;">${business.business_number}</td>
+								<td class="table-td">${business.business_name}</td>
+								<td class="table-td" style="text-align: center;">${business.business_member_id}</td>
+								<td class="table-td" style="text-align: center;">${business.business_people}</td>
 							</tr>
-							<tr>
-								<td class="table-td"></td>
-								<td class="table-td">gjalsgh</td>
-								<td class="table-td">허민호</td>
-								<td class="table-td">BA</td>
-								<td class="table-td">공지사항 게시판</td>
-								<td class="table-td"></td>
-							</tr>
-							<tr>
-								<td class="table-td"></td>
-								<td class="table-td">joongwon</td>
-								<td class="table-td">최중원</td>
-								<td class="table-td">AA</td>
-								<td class="table-td">로그인, 회원가입</td>
-								<td class="table-td"></td>
-							</tr>
-							<tr>
-								<td class="table-td"></td>
-								<td class="table-td">cndjxkdwkd</td>
-								<td class="table-td">송창현</td>
-								<td class="table-td">DA</td>
-								<td class="table-td">DB 구성</td>
-								<td class="table-td"></td>
-							</tr>
-							<tr>
-								<td class="table-td"></td>
-								<td class="table-td">dkahffkd25</td>
-								<td class="table-td">권이혁</td>
-								<td class="table-td">TA</td>
-								<td class="table-td">사업 관리</td>
-								<td class="table-td"></td>
-							</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>

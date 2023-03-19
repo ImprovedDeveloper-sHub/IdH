@@ -67,7 +67,13 @@ public class BusinessServiceImpl implements BusinessService {
 	@Override
 	public BusinessVO getBusiness(int business_number) throws SQLException {
 		
+//		Map<String, Object> dataMap = new HashMap<String, Object>();
+//		String businessMember = businessDAO.selectBusiness_number(business_number).getBusiness_member_id();
+		
 		BusinessVO business = businessDAO.selectBusiness_number(business_number);
+		
+//		dataMap.put(businessMember, businessMember);
+//		dataMap.put("business", business);
 		
 		return business;
 		

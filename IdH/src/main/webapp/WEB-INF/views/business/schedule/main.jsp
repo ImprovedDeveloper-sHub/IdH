@@ -74,7 +74,7 @@
 	<!-- 사업 일정 전체 조회 -->
 	<div class="col-6">
 		<div class="card card-info">
-			<div class="card-header">
+			<div class="card-header bg-info">
 				<h3 class="card-title">사업 일정 전체 조회</h3>
 				<div class="card-tools">
 					<div class="input-group input-group-sm" style="width: 150px;">
@@ -83,7 +83,7 @@
 				</div>
 			</div>
 			<div id="content">
-				<div id="table-content" style="height: 507px;">
+				<div id="table-content" style="height: 515px;">
 
 
 
@@ -108,8 +108,8 @@
 
 	<!-- 사업 일정 그래프 -->
 	<div class="col-6">
-		<div class="card card-info row-12" style="height: 550px;">
-			<div class="card-header">
+		<div class="card card-info" style="height: 557px;">
+			<div class="card-header bg-info">
 				<h3 class="card-title">사업 일정 진행도</h3>
 				<div class="card-tools">
 					<div class="input-group input-group-sm" style="width: 150px;">
@@ -119,43 +119,70 @@
 			</div>
 			<div id="content">
 				<div id="table-content" style="margin: 10px; padding: 10px;">
+				
+					<div class="card-tools"
+						style="justify-content: space-between; margin: 3px; display: flex; flex-direction: row-reverse;">
+						<div class="input-group input-group-sm" style="width: 350px">
+							<select class="form-control-sm" name="searchType" id="searchType"
+								style="hegith: 30px; width: 90px !important; border-color: #CED4DA !important;">
+								<option value="tcw" ${cri.searchType eq 'n' ? 'selected':'' }>전체</option>
+								<option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제목</option>
+								<option value="w" ${cri.searchType eq 'l' ? 'selected':'' }>수준</option>
+								<option value="c" ${cri.searchType eq 'c' ? 'selected':'' }>내용</option>
+							</select> <input type="text" name="table_search"
+								class="form-control float-right" placeholder="Search">
+							<div class="input-group-append">
 
-					<h3 class="card-title">전체 사업 진행률</h3>
-					<div class="card-tools" style="margin-top: 54px !important;">
-						<table class="table table-bordered">
+
+								<button type="submit" class="btn btn-default"
+									onclick="list_go(1)">
+									<i class="fas fa-search"></i>
+								</button>
+							</div>
+						</div>
+						<button type="button" class="btn btn-block btn-info btn-sm"
+							style="width: 80px" id="registBtn"
+							onclick="location.href='registForm';">등록</button>
+					</div>
+
+						<table class="table table-bordered" style="margin-top: 21px;">
 							<thead>
-								<tr>
-									<th style="width: 15%;">사업번호</th>
-									<th style="width: 45%;">사업명</th>
-									<th style="width: 25%">진행도</th>
-									<th style="width: 15%">진행률</th>
+								<tr style="text-align: center;">
+									<th style="width: 15%; font-size: 13px !important;">사업번호</th>
+									<th style="width: 45%; font-size: 13px !important;">사업명</th>
+									<th style="width: 25%; font-size: 13px !important;">진행도</th>
+									<th style="width: 15%; font-size: 13px !important;">진행률</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:if test="${empty businessList}">
-									<tr>
+									<tr style="text-align: center; font-size: 13px !important;">
 										<td colspan="5">데이터가 없습니다.</td>
 									</tr>
 								</c:if>
 								<c:forEach items="${businessList}" var="business">
-								<tr>
-									<td>${business.business_number}</td>
-									<td>${business.business_name}</td>
-									<td>
-										<div class="progress progress-xs">
-											<div class="progress-bar progress-bar-danger" style="width: ${business.business_progress}%"></div>
-										</div>
-									</td>
-									<td><span class="badge bg-danger">${business.business_progress}%</span></td>
-								</tr>
+									<tr
+										onclick="location.href='detail?business_number=${business.business_number}'; "
+										style="cursor: pointer;">
+										<td style="text-align: center; font-size: 13px !important;">${business.business_number}</td>
+										<td style="font-size: 13px !important;">${business.business_name}</td>
+										<td>
+											<div class="progress progress-xs">
+												<div class="progress-bar progress-bar-danger"
+													style="width: ${business.business_progress}%;"></div>
+											</div>
+										</td>
+										<td style="text-align: right; font-size: 13px !important;"><span
+											class="badge bg-teal">${business.business_progress}%</span></td>
+									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
-					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
 </div>
 
 <!-- 사업 일정 그래프 끝 -->
@@ -191,5 +218,24 @@
 	})();
 </script>
 
+<c:if test="${from eq 'regist' }">
+
+<script>
+   alert("정상 등록이 되었습니다.");
+   window.close();
+   window.opener.location.reload();
+</script>
+
+</c:if>
+
+<c:if test="${from eq 'remove' }">
+
+<script>
+   alert("정상적으로 삭제 되었습니다.");
+   window.close();
+   window.opener.location.reload();
+</script>
+
+</c:if>
 
 

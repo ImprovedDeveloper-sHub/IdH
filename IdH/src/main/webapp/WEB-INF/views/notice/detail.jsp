@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 
 <!-- My CSS start -->
 
 <style>
-
 #content {
 	background: #eaedf2;
 	position: relative;
@@ -77,7 +76,6 @@
 .btn-info {
 	text-align: right;
 }
-
 </style>
 
 <!-- My CSS end -->
@@ -109,7 +107,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							
+
 							<tr>
 								<td class="name-td">번호</td>
 								<td class="table-td">${notice.notice_number}</td>
@@ -120,7 +118,8 @@
 								<td class="name-td">작성자</td>
 								<td class="table-td">${notice.notice_member_id }</td>
 								<td class="name-td">등록일</td>
-								<td class="table-td"><fmt:formatDate value="${notice.notice_regdate}" pattern="yyyy-MM-dd" /></td>
+								<td class="table-td"><fmt:formatDate
+										value="${notice.notice_regdate}" pattern="yyyy-MM-dd" /></td>
 							</tr>
 							<tr>
 								<td class="name-td">제목</td>
@@ -140,17 +139,20 @@
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 							</tr>
-							
+
 						</tbody>
 					</table>
 				</div>
 			</div>
-			<div class="card-tools" style="margin-left:auto">
-				<button type="button" id="modifyBtn" class="btn btn-info" onclick="location.href='modifyForm?notice_number=${notice.notice_number}';">수정</button>						
-		    	<button type="button" id="removeBtn" class="btn btn-info" onclick="location.href='modifyForm?notice_number=${notice.notice_number}';">삭제</button>					   
-		    	<button type="button" id="listBtn" class="btn btn-info" onclick="location.href='main';">목록</button>
-			</div>
 		</div>
+	</div>
+	<div class="card-tools" style="margin-left: 1000px">
+		<button type="button" id="modifyBtn" class="btn btn-info"
+			onclick="location.href='modifyForm?notice_number=${notice.notice_number}';">수정</button>
+		<button type="button" id="removeBtn" class="btn btn-info"
+			onclick="location.href='modifyForm?notice_number=${notice.notice_number}';">삭제</button>
+		<button type="button" id="listBtn" class="btn btn-info"
+			onclick="location.href='main';">목록</button>
 	</div>
 	<!-- 공지 사항 상세 정보 끝 -->
 
