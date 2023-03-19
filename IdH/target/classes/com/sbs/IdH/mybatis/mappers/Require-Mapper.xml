@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Require-Mapper">
+	
+	<sql id="search">
+		<if test="searchType == 't'.toString()">
+			and require_title like '%'||#{keyword}||'%'			
+		</if>
+		<if test="searchType == 'w'.toString()">
+			and require_writer_id like '%'||#{keyword}||'%'			
+		</if>
+		<if test="searchType == 'd'.toString()">
+			and require_detail like '%'||#{keyword}||'%'			
+		</if>
+		<if test="searchType == 'td'.toString()">
+			and (
+			require_title like '%'||#{keyword}||'%'
+			or
+			require_detail like '%'||#{keyword}||'%'						
+			)			
+		</if>
+		<if test="searchType == 'cw'.toString()">
+			and (
+			require_writer_id like '%'||#{keyword}||'%'
+			or
+			require_detail like '%'||#{keyword}||'%'						
+			)			
+		</if>
+		<if test="searchType == 'tdw'.toString()">
+			and (
+			require_title like '%'||#{keyword}||'%'
+			or
+			require_writer_id like '%'||#{keyword}||'%'
+			or
+			require_detail like '%'||#{keyword}||'%'						
+			)			
+		</if>
+	</sql>
+	
+	<select id="selectSearchRequireList" resultType="require">
+		select
+		*
+		from
+		require
+		where require_number is not null  			  	
+		<include refid="search" />
+		order by require_number desc
+	</select>
+	<select id="selectSearchRequireListCount"  resultType="int">
+		select
+		count(*)
+		from
+		require
+		where require_number is not null  			  	
+		<include refid="search" />
+		order by require_number desc
+	</select>
+	
+	<update id="insertRequire">
+		insert 
+		into 
+		require(require_number,require_level,require_title,require_source,require_regdate,
+		require_business,require_project,require_detail,require_writer_id,
+		require_business_number,require_member_id)
+		values
+		(#{require_number},#{require_level},#{require_title},#{require_source},sysdate,
+		#{require_business},#{require_project},#{require_detail},#{require_writer_id},
+		#{require_business_number},#{require_member_id})
+	</update>
+	<select id="selectRequireSeqNext" resultType="int">
+		select require_seq.nextval as require_number from dual
+	</select>
+	
+	<select id="selectRequire"  resultType="require">
+		select * 
+		from require 
+		where require_number=#{require_number}
+	</select>
+	
+	<update id="updateRequire" parameterType="require">
+		update 
+		require
+		set 
+		require_title=#{require_title}, require_detail=#{require_detail},
+		require_level=#{require_level},require_business=#{require_business},
+		require_project=#{require_project},require_member_id=#{require_member_id},
+		require_business_number=#{require_business_number},require_regdate=sysdate,
+		require_writer_id=#{require_writer_id}
+		where require_number=#{require_number}
+	</update>
+	
+	<update id="deleteRequire" parameterType="int">
+		delete 
+		from require 
+		where require_number=#{require_number}
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+
