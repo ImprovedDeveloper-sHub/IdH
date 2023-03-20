@@ -95,7 +95,7 @@ input {
 						<tbody>
 							<tr>
 								<td class="name-td">등록자</td>
-								<td class="table-td" colspan="3" ><input type="text" name="schedule_member_id" value="${schedule.schedule_member_id}" readonly></td>
+								<td class="table-td" colspan="3" ><input type="text" name="schedule_member_id" value="${loginUser.member_id} " /></td>
 								<td class="name-td">분류</td>
 								<td class="table-td"><select name ="schedule_level">
 													<option value="1">기획</option>
@@ -108,7 +108,7 @@ input {
 								<td class="name-td">시작날짜</td>
 								<td class="table-td" colspan="3"><fmt:formatDate value="${schedule.schedule_startdate }" pattern ="yyyy-MM-dd"/></td>
 								<td class="name-td">종료날짜</td>
-								<td class="table-td" colspan="3"><input class="datepicker" name="schedule_enddate" value="${schedule.schedule_enddate }"></td>
+								<td class="table-td" colspan="3"><input class="datepicker" name="schedule_enddate" value="<fmt:formatDate value="${schedule.schedule_enddate }" pattern ="yyyy/MM/dd"/>"></td>
 								
 							</tr>
 							<tr>
@@ -128,8 +128,6 @@ input {
 									</select></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
-								<td class="name-td">등록일</td>
-								<td class="table-td">${schedule.schedule_regdate }</td>
 							</tr>
 						</tbody>
 					</table>
@@ -138,9 +136,9 @@ input {
 			</div>
 			<div class="card-tools" style="margin-left:auto">
             <button type="button" id="regbtn" class="btn btn-info"
-               onclick="modify_go();">등록</button>
+               onclick="modify_go();">수정</button>
             <button type="button" id="close" class="btn btn-info"
-               onclick="CloseWindow();">닫기</button>
+               onclick="CloseWindow();">취소</button>
 				</div>
 			</div>
 		</div>

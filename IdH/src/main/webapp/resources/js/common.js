@@ -29,7 +29,6 @@ function list_go(page,url){
 	jobForm.find("[name='keyword']")
 		.val($('div.input-group>input[name="keyword"]').val());
 	
-
 	jobForm.attr({action:url,method:'get'}).submit();
 }
 

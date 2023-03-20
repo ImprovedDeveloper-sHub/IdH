@@ -80,7 +80,7 @@ input {
 				</div>
 			</div>
 			<div id="content">
-				<form enctype="multiaprt/form-data" role="form" method="post" action="registBudget" name="registSchdeulForm">
+				<form enctype="multiaprt/form-data" role="form" method="post" action="registBudget" name="registBudgetForm">
 				<div id="table-content">
 					<table>
 						<thead>
@@ -94,7 +94,7 @@ input {
 						<tbody>
 							<tr>
 								<td class="name-td">등록자</td>
-								<td class="table-td" colspan="3" ><input type="text" name="budget_member_id" value="${loginUser.member_id}" readonly></td>
+								<td class="table-td" colspan="3" ><input id="budget_member_id" type="text" name="budget_member_id" value="${loginUser.member_id}" readonly></td>
 								<td class="name-td">분류</td>
 								<td class="table-td"><select name ="budget_type">
 													<option value="1">인건비</option>
@@ -105,7 +105,7 @@ input {
 							</tr>
 							<tr>
 								<td class="name-td">제목</td>
-								<td colspan="5"><input type="text" name="budget_name" placeholder="제목을 입력하여 주세요." /></td>
+								<td colspan="5"><input id="budget_name" type="text" name="budget_name" placeholder="제목을 입력하여 주세요." /></td>
 							</tr>
 							<tr>
 								<td class="name-td">예산 금액</td>
@@ -153,12 +153,12 @@ input {
 	};
 	
 	function regist_go(){
-		//var form = $('form[name="registSchdeulForm"]')[0];
-			var form = document.registBudegetForm;
-			if(form.title.value==""){
+		var form = $('form[name="registBudgetForm"]')[0];
+			//var form = document.registBudegetForm;
+			/* if(form.budget_name.value==""){
 				alert("제목은 필수입니다.");
 				return;
-			}
+			} */
 			
 			form.submit();
 		}

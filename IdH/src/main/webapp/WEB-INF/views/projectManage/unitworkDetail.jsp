@@ -128,6 +128,8 @@ input {
 				</div>
 			</div>
 			<div class="card-tools" style="margin-left:auto">
+			<button type="button" id="regbtn" class="btn btn-info"
+               onclick="location.href=''">업무 완료</button>
             <button type="button" id="regbtn" class="btn btn-info"
                onclick="location.href='modifyUnitworkForm?unitwork_number=${unitwork.unitwork_number}'">수정</button>
             <button type="button" id="close" class="btn btn-info"
@@ -146,7 +148,7 @@ input {
 	</script>
 </c:if>
 
-<c:if test="${from eq 'delete' } ">
+<c:if test="${from eq 'remove' } ">
 <script>
 	alert('삭제되었습니다.');
 	window.close();

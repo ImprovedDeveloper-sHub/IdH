@@ -23,6 +23,8 @@ public interface WorkforceDAO {
 
 	void insertWorkforce(WorkforceVO workforce) throws SQLException;
 
+	void updateWorkforce(WorkforceVO workforce) throws SQLException;
+	
 	void updateWorkforceForRegistProject(WorkforceVO workforce) throws SQLException;
 
 	void updateWorkforceForProjectEnd(WorkforceVO workforce) throws SQLException;

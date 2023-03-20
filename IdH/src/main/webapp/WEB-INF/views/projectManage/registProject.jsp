@@ -14,7 +14,7 @@ table input {
 }
 .content-list table input{
 	 border:solid black 1px;
-	 padding:5px 0;
+	 padding:1px 0;
 }
 
  #projectDetailtable>th,td{
@@ -63,7 +63,7 @@ table input {
 			</tr>
 			<tr>
 				<td id="title">내용</td>
-				<td id="content"><textarea name="project_discription" id="summernote" name="summernote" rows="3" cols="40"></textarea></td>
+				<td id="content"><textarea style="height:100px;" name="project_discription" id="summernote" name="summernote" rows="3" cols="40"></textarea></td>
 			</tr>
 		</table>
 		

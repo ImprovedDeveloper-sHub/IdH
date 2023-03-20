@@ -78,7 +78,7 @@
 	
 	<update id="updateUnitwork" parameterType="unitwork">
 		update unitwork 
-		set unitwork_number=#{unitwork_project_number}, unitwork_name=#{unitwork_name}, unitwork_detail=#{unitwork_detail}, unitwork_check=#{unitwork_check}
+		set unitwork_number=#{unitwork_project_number}, unitwork_name=#{unitwork_name}, unitwork_detail=#{unitwork_detail}, unitwork_level=#{unitwork_level}, unitwork_enddate =#{unitowork_enddate}
 		where unitwork_number=#{unitwork_number}
 	</update>
 	

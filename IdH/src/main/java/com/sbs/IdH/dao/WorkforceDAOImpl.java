@@ -85,5 +85,8 @@ public class WorkforceDAOImpl implements WorkforceDAO{
 		return colMap;
 	}
 	
+	public void updateWorkforce(WorkforceVO workforce) throws SQLException{
+		session.update("Workforce-Mapper.updateWorkforce", workforce);
+	}
 
 }

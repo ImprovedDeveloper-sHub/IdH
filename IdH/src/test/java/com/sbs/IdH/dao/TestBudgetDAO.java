@@ -21,6 +21,14 @@ public class TestBudgetDAO {
 
    @Autowired
    private BudgetDAO budgetDAO;
+   @Autowired
+   private IssueDAO issueDAO;
+   
+   
+   @Test
+   public void IssueTest() throws Exception{
+	   issueDAO.selectIssueSeqNext();
+   }
    
   
    public void testSelectBudget() throws Exception{

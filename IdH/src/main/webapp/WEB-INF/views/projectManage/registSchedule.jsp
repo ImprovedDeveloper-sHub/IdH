@@ -80,7 +80,7 @@ input {
 				</div>
 			</div>
 			<div id="content">
-				<form enctype="multiaprt/form-data" role="form" method="post" action="registSchedule" name="registSchdeulForm">
+				<form enctype="multiaprt/form-data" role="form" method="post" action="registSchedule" name="registSchdeuleForm">
 				<div id="table-content">
 					<table>
 						<thead>
@@ -125,10 +125,6 @@ input {
 								<td class="table-td"><select name="schedule_project_number" >
 									<option value="1">미정</option>
 									</select></td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
-								<td class="name-td">등록일</td>
-								<td class="table-td">2023.03.07.</td>
 							</tr>
 						</tbody>
 					</table>
@@ -153,7 +149,7 @@ input {
 	
 	function regist_go(){
 		//var form = $('form[name="registSchdeulForm"]')[0];
-			var form = document.registSchdeulForm;
+			var form = document.registSchdeuleForm;
 			if(form.title.value==""){
 				alert("제목은 필수입니다.");
 				return;

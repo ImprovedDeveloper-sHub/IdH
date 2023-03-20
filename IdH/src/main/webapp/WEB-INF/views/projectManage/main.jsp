@@ -18,7 +18,7 @@
 
       <!--col-6시작-->
       <div class="col-6">
-      	<div id="content" class="card">
+      	<div id="content" class="card" style="height:295px;">
          <div class="card-header bg-info">
             <h3 class="card-title">진행 프로젝트</h3>
          </div>
@@ -46,7 +46,7 @@
          
             </div>
          <div id="table-content">
-            <div  class="card-body table-responsive p-0" style="height:200px">
+            <div  class="card-body table-responsive p-0" style="height:250px">
                <table  class="table table-hover" >
                   <thead id="proceedingThead" class="proceedingThead" class="text-left">
 	                <tr>
@@ -88,7 +88,7 @@
          </div>
       </div>
       
-      <div id="content" class="card">
+      <div id="content" class="card" style="height:295px;">
          <div class="card-header bg-info">
             <h3 class="card-title">종료 프로젝트</h3>
          </div>

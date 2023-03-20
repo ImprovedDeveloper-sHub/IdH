@@ -34,6 +34,7 @@ public class WorkforceServiceImpl implements WorkforceService {
 
 	@Override
 	public void modifyWorkforce(WorkforceVO workforce) throws Exception {
+		workforceDAO.updateWorkforce(workforce);
 	}
 
 	@Override

@@ -101,8 +101,7 @@ input {
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">프로젝트명</td>
-								<td><input type="text" readonly name="issue_project_number"
-									value="1" /></td>
+								<td><input type="text" name="issue_project_number"	value="1" /></td>
 							</tr>
 
 							<tr>
