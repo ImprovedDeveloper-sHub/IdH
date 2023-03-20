@@ -176,6 +176,15 @@ public class SearchCriteria {
 	  
 	  public void setProject_number(int project_number) { this.project_number =
 	  project_number; }
+
+
+	@Override
+	public String toString() {
+		return "SearchCriteria [page=" + page + ", perPageNum=" + perPageNum + ", searchType=" + searchType
+				+ ", keyword=" + keyword + ", project_number=" + project_number + ", business_number=" + business_number
+				+ ", status=" + status + ", type=" + type + ", startRowNum=" + startRowNum + ", member_id=" + member_id
+				+ ", memberStatus=" + memberStatus + "]";
+	}
 	 
 
 	

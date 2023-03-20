@@ -1,6 +1,7 @@
 package com.sbs.IdH.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,8 +30,9 @@ public class ProjectController {
 	}
 
 	@GetMapping("/main")
-	public ModelAndView main(ModelAndView mnv, SearchCriteria cri) throws Exception {
+	public ModelAndView main(ModelAndView mnv, SearchCriteria cri, HttpServletRequest request) throws Exception {
 
+		
 		mnv.addAllObjects(unitworkService.selectUnitworkList(cri));
 
 		return mnv;

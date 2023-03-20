@@ -47,10 +47,14 @@ public class RequireController {
 	private UnitworkService unitworkService;
 
 	@GetMapping("/main")
-	public ModelAndView main(ModelAndView mnv, SearchCriteria cri) throws Exception {
-
+	public ModelAndView main(ModelAndView mnv, SearchCriteria cri ) throws Exception {
+		/*
+		 * SearchCriteria cri = new SearchCriteria(); cri.setKeyword(keyword);
+		 * cri.setSearchType(searchType); cri.setPage(1); cri.setPerPageNum(10);
+		 */
+		mnv.addObject("dataMap", requireService.selectRequireList(cri));
 		mnv.addAllObjects(requireService.selectRequireList(cri));
-
+		
 		return mnv;
 	}
 
@@ -196,6 +200,7 @@ public class RequireController {
 			throws Exception {
 		String url = "redirect:/require/detail";
 
+		
 		// 파일 삭제
 		if (modifyReq.getDeleteFile() != null && modifyReq.getDeleteFile().length > 0) {
 			for (int ano : modifyReq.getDeleteFile()) {

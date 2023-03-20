@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<c:set var="cri" value="${dataMap.pageMaker.cri }" />
+<c:set var="pageMaker" value="${dataMap.pageMaker }" /> 
 
 <style>
 #external-events {
@@ -78,12 +80,12 @@
 								<option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제목</option>
 								<option value="l" ${cri.searchType eq 'l' ? 'selected':'' }>수준</option>
 								<option value="d" ${cri.searchType eq 'd' ? 'selected':'' }>내용</option>
-							</select> <input type="text" name="table_search"
-								class="form-control float-right" placeholder="Search">
+							</select> <input type="text" name="keyword"
+								class="form-control float-right" placeholder="Search" value="${cri.keyword }">
 							<div class="input-group-append">
 
 
-								<button type="submit" class="btn btn-default"
+								<button type="button" class="btn btn-default" id="searchBtn" data-card-widget="search"
 									onclick="list_go(1)">
 									<i class="fas fa-search"></i>
 								</button>
@@ -144,38 +146,40 @@
 								</tbody>
 							</table>
 							<br />
-							<div class="col-3" style="margin: 0 auto;">
-								<nav aria-label="Navigation">
-									<ul class="pagination justify-content-center m-0">
-										<li class="page-item"><a class="page-link"
-											href="javascript:list_go(1);"> <i
-												class="fas fa-angle-double-left"></i>
-										</a></li>
-										<li class="page-item"><a class="page-link"
-											href="javascript:list_go(${pageMaker.prev ? pageMaker.startPage-1 : pageMaker.cri.page});">
-												<i class="fas fa-angle-left"></i>
-										</a></li>
-										<c:forEach var="pageNum" begin="${pageMaker.startPage }"
-											end="${pageMaker.endPage }">
+							<div class="card-footer">
+								<nav id="paginationNav" aria-label="Navigation">
+		<ul class="pagination justify-content-center m-0">
+			<li class="page-item">
+				<a class="page-link" href="javascript:list_go(1);">
+					<i class="fas fa-angle-double-left"></i>
+				</a>
+			</li>
+			<li class="page-item">
+				<a class="page-link" href="javascript:list_go(${pageMaker.prev ? pageMaker.startPage-1 : pageMaker.cri.page});">
+					<i class="fas fa-angle-left"></i>
+				</a>						
+			</li>
+			<c:forEach var="pageNum" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
+	
+			<li class="page-item ${pageMaker.cri.page == pageNum?'active':''}">
+				<a class="page-link" href="javascript:list_go(${pageNum});" >${pageNum }</a>
+			</li>
+			</c:forEach>
+			
+			<li class="page-item">
+				<a class="page-link" href="javascript:list_go(${pageMaker.next ? pageMaker.endPage+1 :pageMaker.cri.page});">
+					<i class="fas fa-angle-right" ></i>
+				</a>
+			</li>
+			
+			<li class="page-item">
+				<a class="page-link" href="javascript:list_go('${pageMaker.realEndPage}');">
+					<i class="fas fa-angle-double-right"></i>
+				</a>
+			</li>	
+		</ul>
+	</nav>
 
-											<li
-												class="page-item ${pageMaker.cri.page == pageNum?'active':''}">
-												<a class="page-link"
-												href="javascript:list_go('${pageNum}');">${pageNum }</a>
-											</li>
-										</c:forEach>
-
-										<li class="page-item"><a class="page-link"
-											href="javascript:list_go(${pageMaker.next ? pageMaker.endPage+1 :pageMaker.cri.page});">
-												<i class="fas fa-angle-right"></i>
-										</a></li>
-
-										<li class="page-item"><a class="page-link"
-											href="javascript:list_go('${pageMaker.realEndPage}');"> <i
-												class="fas fa-angle-double-right"></i>
-										</a></li>
-									</ul>
-								</nav>
 							</div>
 							<br />
 						</div>
@@ -198,6 +202,8 @@
 		</div>
 	</div>
 </div>
+
+
 <!--row종료-->
 </div>
 <!--content종료-->
@@ -257,7 +263,7 @@
 					events : JsonData
 
 				});
-				
+
 				// 캘린더 랜더링
 
 				calendar.render();

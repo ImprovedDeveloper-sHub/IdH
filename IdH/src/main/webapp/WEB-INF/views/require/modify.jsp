@@ -73,7 +73,7 @@ input {
 		<div id="content">
 			<div id="table-content">
 				<form enctype="multipart/form-data" role="form" method="post"
-					action="regist" name="registForm">
+					action="modify" name="modifyForm">
 					<table>
 						<thead>
 							<tr>
@@ -87,15 +87,16 @@ input {
 						<tbody>
 							<tr>
 								<td class="name-td">제목</td>
-								<td class="table-td">${require.require_title }<input type="text"
-									placeholder="제목을 입력하세요" /></td>
+								<td class="table-td"><input type="text"
+									placeholder="${require.require_title }" name="require_title"  /></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								
 							</tr>
 							<tr>
 								<td class="name-td">발의자</td>
-								<td class="table-td">${require.require_setter_id }</td>
+								<td class="table-td"><input type="text" readonly
+									placeholder="${loginUser.member_id } " value="${loginUser.member_id }" name="require_setter_id" /></td>
 									<td class="table-td"></td>
 									<td class="table-td"></td>
 								<td class="name-td">등록일</td>
@@ -103,24 +104,36 @@ input {
 							</tr>
 							<tr>
 								<td class="name-td">중요도</td>
-								<td class="table-td"><input type="text" placeholder="${require.require_level }" /></td>
+								<td class="table-td"><select class="table-td"
+									name="require_level">
+										<option value="1"
+											${require.require_number eq 1 ? 'selected':'하' }>하</option>
+										<option value="2"
+											${require.require_number eq 2 ? 'selected':'중' }>중</option>
+										<option value="3"
+											${require.require_number eq 3 ? 'selected':'상' }>상</option>
+								</select></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">관련사업</td>
-								<td colspan="5"><input type="text" placeholder="${require.require_business }" /></td>
+								<td colspan="5"><select	class="table-td" name="require_business_number">
+										<c:forEach items="${businessList}" var="business">
+											<option value="${business.business_number }">${business.business_name }</option>
+										</c:forEach>
+								</select></td>
 							</tr>
 							<tr>
 								<td class="name-td">프로젝트 팀</td>
-								<td class="table-td"><input type="text"
+								<td class="table-td"><input type="text" name="require_project"
 									placeholder="${require.require_project }" /></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">담당자</td>
-								<td colspan="5"><input type="text" placeholder="${require.require_getter_id }" /></td>
+								<td colspan="5"><input type="text" name="require_getter_id" placeholder="${require.require_getter_id }" /></td>
 							</tr>
 							<tr style="height: 100px;">
 								<td class="name-td">내용</td>
-								<td class="table-td td-summernote" colspan="5"><textarea
+								<td class="table-td td-summernote" colspan="5"><textarea name="require_detail"
 										class="summernote" rows="15" cols="40"
 										style="display: none; width: 500px;"></textarea></td>
 							</tr>
