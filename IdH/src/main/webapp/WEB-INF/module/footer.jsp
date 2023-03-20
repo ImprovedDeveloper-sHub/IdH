@@ -39,7 +39,7 @@
 			});
 			
 		}else{
-			$('.subMenuList').html("");		
+			$('#subMenuList').html("");
 		}
 	}
 	

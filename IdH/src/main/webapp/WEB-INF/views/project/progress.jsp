@@ -135,3 +135,10 @@
 		chart.draw(data, options);
 	}
 </script>
+
+
+<script>
+
+alert('${project_now_number}'+'번 프로젝트 //progress.jsp에 alert문.');
+
+</script>

@@ -30,7 +30,7 @@
 
 		<!--col-6시작-->
 		<div class="col-6">
-			<div id="content" class="card boarder-info-2">
+			<div id="schedule_content" class="card boarder-info-2">
 				<div class="card-header bg-info">
 					<h3 class="card-title">일정관리</h3>
 				</div>
@@ -111,7 +111,7 @@
 				</div>
 			</div>
 
-			<div id="content" class="card">
+			<div id="budget_content" class="card">
 				<div class="card-header bg-info">
 					<h3 class="card-title">예산 관리</h3>
 				</div>
@@ -187,7 +187,7 @@
 		</div>
 
 		<div class="col-6">
-			<div id="content" class="card">
+			<div id="workforce_content" class="card">
 				<div class="card-header bg-info">
 					<h3 class="card-title">인력 프로젝트</h3>
 				</div>
@@ -264,7 +264,7 @@
 				</div>
 			</div>
 
-			<div id="content" class="card">
+			<div id="unitwork_content" class="card">
 				<div class="card-header bg-info">
 					<h3 class="card-title">단위업무</h3>
 				</div>
@@ -365,12 +365,12 @@
 		        var project_number = $('#project_selector').val();
 		       //alert("셀렉트값 : "+project_number);
 		       $.ajax({
-		    	    url:"getManage?project_number="+ project_number,
+		    	    url:'scheduleList?project_number='+project_number,
 		    	    type:"GET",
 		    	    success:function(data){
 		    	    	/* alert(JSON.stringify(data));
 		    	    	console.log(data); */
-		    	    	console.log(JSON.stringify(data));
+		    	    	$('#schedule_content').html("").html(data);
 		    	    },
 		       		error:function(error){
 		       			alert('error');

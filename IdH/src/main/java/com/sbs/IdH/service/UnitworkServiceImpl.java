@@ -17,9 +17,9 @@ import com.sbs.IdH.dto.UnitworkVO;
 public class UnitworkServiceImpl implements UnitworkService{
 
 	
-	UnitworkDAO unitworkDAO;
+	private UnitworkDAO unitworkDAO;
 	
-	ProjectDAO projectDAO;
+	private ProjectDAO projectDAO;
 	
 	public void setProjectDAO(ProjectDAO projectDAO) {
 		this.projectDAO = projectDAO;

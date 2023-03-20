@@ -177,6 +177,22 @@ public class SearchCriteria {
 	  public void setProject_number(int project_number) { this.project_number =
 	  project_number; }
 	 
+	  
+	  public SearchCriteria newCri() {
+		  SearchCriteria newCri = new SearchCriteria();
+		  newCri.setBusiness_number(business_number);
+		  newCri.setKeyword(keyword);
+		  newCri.setMember_id(member_id);
+		  newCri.setMemberStatus(memberStatus);
+		  newCri.setPage(page);
+		  newCri.setPerPageNum(perPageNum);
+		  newCri.setSearchType(searchType);
+		  newCri.setStartRowNum(startRowNum);
+		  newCri.setStatus(memberStatus);
+		  newCri.setType(type);
+		  return newCri;
+		  
+	  }
 
 	
 }

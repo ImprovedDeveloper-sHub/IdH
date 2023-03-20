@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sbs.IdH.command.SearchCriteria;
+import com.sbs.IdH.dao.ScheduleDAO;
 import com.sbs.IdH.dto.BudgetVO;
 import com.sbs.IdH.dto.ProjectVO;
 import com.sbs.IdH.dto.ScheduleVO;
@@ -73,6 +74,7 @@ public class ProjectManageController {
 
 	@GetMapping("/main")
 	public ModelAndView projectManage(SearchCriteria cri, ModelAndView mnv) throws Exception {
+		cri.setPerPageNum(5);
 		mnv.addAllObjects(projectService.selectProceedingProject(cri));
 		mnv.addAllObjects(projectService.selectEndProject(cri));
 		mnv.setViewName("projectManage/main");
@@ -81,11 +83,16 @@ public class ProjectManageController {
 	
 	@GetMapping("/manage")
 	public ModelAndView manage(ModelAndView mnv, SearchCriteria cri, HttpServletRequest request) throws Exception {
+		
 		mnv.addAllObjects(projectService.selectProjectList(cri));
-		mnv.addAllObjects(budgetService.selectBudgetList(cri));
-		mnv.addAllObjects(workforceService.selectWorkforceList(cri));
-		mnv.addAllObjects(unitworkService.selectUnitworkList(cri));
-		mnv.addAllObjects(scheduleService.selectScheduleList(cri));
+		SearchCriteria cri2 = cri.newCri();
+		mnv.addAllObjects(budgetService.selectBudgetList(cri2));
+		SearchCriteria cri3 = cri.newCri();
+		mnv.addAllObjects(workforceService.selectWorkforceList(cri3));
+		SearchCriteria cri4 = cri.newCri();
+		mnv.addAllObjects(unitworkService.selectUnitworkList(cri4));
+		SearchCriteria cri5 = cri.newCri();
+		mnv.addAllObjects(scheduleService.selectScheduleList(cri5));
 		return mnv;
 	}
 
@@ -461,5 +468,20 @@ public class ProjectManageController {
 		responseEntity = new ResponseEntity<Map<String,Object>>(dataMap,status);
 		return responseEntity;
 	}
+	
+	@GetMapping("/scheduleList")
+	@ResponseBody
+	public ModelAndView test(ModelAndView mnv, int project_number) throws Exception{
+		
+		Map<String,Object> dataMap = null;
+		SearchCriteria cri = new SearchCriteria();
+		dataMap = scheduleService.selectScheduleList(cri);
+		mnv.addAllObjects(dataMap);
+		mnv.setViewName("projectManage/scheduleList");
+			
+		return mnv;
+	}
+	
+	
 	
 }
