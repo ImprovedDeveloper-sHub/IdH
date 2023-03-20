@@ -49,6 +49,12 @@ public class CompanyruleServiceImpl implements CompanyruleService {
 		int companyrule_number = companyruleDAO.selectCompanySeqNextValue();
 		companyrule.setCompanyrule_number(companyrule_number);
 		companyruleDAO.insertCompanyrule(companyrule);
+		if (companyrule.getAttachList() != null)
+	         for (Co_AttachVO attach :companyrule.getAttachList()) {
+	            attach.setCo_number(companyrule_number);
+	            attach.setCo_attach_attacher(companyrule.getCompanyrule_member_id());
+	            co_attachDAO.insertCo_Attach(attach);
+	         }
 
 	}
 

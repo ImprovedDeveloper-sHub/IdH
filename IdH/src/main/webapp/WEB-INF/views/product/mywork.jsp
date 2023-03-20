@@ -173,7 +173,7 @@ tbody tr td {
 							</c:if>
 							<c:forEach items="${productMyProceedList }" var="product">
 								<tr
-									onclick="OpenWindow('product_detail?product_number=${product.product_number }','상세보기',680,400);"
+									onclick="OpenWindow('detail?product_number=${product.product_number }','상세보기',680,400);"
 									style="cursor: pointer;">
 									<td
 										style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${product.product_number}</td>
@@ -252,7 +252,7 @@ tbody tr td {
 							</c:if>
 							<c:forEach items="${productMyEndList }" var="product">
 								<tr
-									onclick="OpenWindow('product_detail?product_number=${product.product_number }&from=list','상세보기',680,400);"
+									onclick="OpenWindow('detail?product_number=${product.product_number }&from=list','상세보기',680,400);"
 									style="cursor: pointer;">
 									<td
 										style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${product.product_number}</td>

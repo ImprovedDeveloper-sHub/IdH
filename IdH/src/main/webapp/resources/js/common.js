@@ -19,123 +19,122 @@ function CloseWindow(parentURL){
 
 
 function list_go(page,url){
-	if(!url) url="main";
-	
-	var jobForm=$('#jobForm');
-	jobForm.find("[name='page']").val(page);
-	jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
-	jobForm.find("[name='searchType']")
-		.val($('select[name="searchType"]').val());
-	jobForm.find("[name='keyword']")
-		.val($('div.input-group>input[name="keyword"]').val());
-	
+   if(!url) url="main";
+   var jobForm=$('#jobForm');
+   jobForm.find("[name='page']").val(page);
+   jobForm.find("[name='perPageNum']").val(10);
+   jobForm.find("[name='searchType']")
+      .val($('select[name="searchType"]').val());
+   jobForm.find("[name='keyword']")
+      .val($('div.input-group>input[name="keyword"]').val());
+   
 
-	jobForm.attr({action:url,method:'get'}).submit();
+   jobForm.attr({action:url,method:'get'}).submit();
 }
 
 /*function ajax_list_go(page,url,type){
-	if(!url) url="main";
-	
-	var jobForm=$('#jobForm');
-	jobForm.find("[name='page']").val(page);
-	jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
-	jobForm.find("[name='searchType']")
-		.val($('select[name="searchType"]').val());
-	jobForm.find("[name='keyword']")
-		.val($('div.input-group>input[name="keyword"]').val());
-	
-	jobForm.attr({action:url,method:'get'}).submit();
-	
-	$.ajax({
-		url: url,
-    	data: jobForm.serialize(),
-    	type: "POST",
-    	success: function(data) {    		
-    		//alert(JSON.stringify(data));
-    		printData(data,target,delTarget, templateObject);
-    		if(pagiTemplatObject){
-    			if(type=='proceeding') {
-    				printProceedingPagination(data,pagenationTarget,pagiTemplatObject);
-    			 }
-    			if(type=='end') { 
-				printEndPagination(data,pagenationTarget,pagiTemplatObject);
-			 }
-    		}
-	
-    	},
-    	error:function(error){
-    		alert('errortest');
-    		AjaxErrorSecurityRedirectHandler(error.status);	
-    	}
-	});
-	
+   if(!url) url="main";
+   
+   var jobForm=$('#jobForm');
+   jobForm.find("[name='page']").val(page);
+   jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
+   jobForm.find("[name='searchType']")
+      .val($('select[name="searchType"]').val());
+   jobForm.find("[name='keyword']")
+      .val($('div.input-group>input[name="keyword"]').val());
+   
+   jobForm.attr({action:url,method:'get'}).submit();
+   
+   $.ajax({
+      url: url,
+       data: jobForm.serialize(),
+       type: "POST",
+       success: function(data) {          
+          //alert(JSON.stringify(data));
+          printData(data,target,delTarget, templateObject);
+          if(pagiTemplatObject){
+             if(type=='proceeding') {
+                printProceedingPagination(data,pagenationTarget,pagiTemplatObject);
+              }
+             if(type=='end') { 
+            printEndPagination(data,pagenationTarget,pagiTemplatObject);
+          }
+          }
+   
+       },
+       error:function(error){
+          alert('errortest');
+          AjaxErrorSecurityRedirectHandler(error.status);   
+       }
+   });
+   
 }*/
 
 
 
 function search_go_ajax(page, perPageNum, searchType, keyword, url, target, delTarget, templateObject, pagiTemplatObject, pagenationTarget,type) {
-	
-	if(type=='proceeding')proceedingPage = page;
-	if(type=='end')endPage = page;
-	
-	//alert('test');
-	var jobForm=$('#jobForm');
-	//var jobForm = document.getElementById('#jobForm');
-	jobForm.find("[name='page']").val(page);
-	jobForm.find("[name='perPageNum']").val(perPageNum.val());
-	jobForm.find("[name='searchType']").val(searchType.val());
-	jobForm.find("[name='keyword']").val(keyword.val());
-	/*alert(page);
-	alert(perPageNum.val());
-	alert(searchType.val());
-	alert(keyword.val());*/
+   
+   if(type=='proceeding')proceedingPage = page;
+   if(type=='end')endPage = page;
+   
+   //alert('test');
+   var jobForm=$('#jobForm');
+   //var jobForm = document.getElementById('#jobForm');
+   jobForm.find("[name='page']").val(page);
+   jobForm.find("[name='perPageNum']").val(perPageNum.val());
+   jobForm.find("[name='searchType']").val(searchType.val());
+   jobForm.find("[name='keyword']").val(keyword.val());
+   /*alert(page);
+   alert(perPageNum.val());
+   alert(searchType.val());
+   alert(keyword.val());*/
 
-	//var formData = new FormData(jobForm);
-	
-	$.ajax({
-		url: url,
-    	data: jobForm.serialize(),
-    	type: "POST",
-    	success: function(data) {    		
-    		//alert(JSON.stringify(data));
-    		printData(data,target,delTarget, templateObject);
-    		if(pagiTemplatObject){
-    			if(type=='proceeding') {
-    				printProceedingPagination(data,pagenationTarget,pagiTemplatObject);
-    			 }
-    			if(type=='end') { 
-				printEndPagination(data,pagenationTarget,pagiTemplatObject);
-			 }
-    		}
-	
-    	},
-    	error:function(error){
-    		alert('errortest');
-    		AjaxErrorSecurityRedirectHandler(error.status);	
-    	}
-	});
+   //var formData = new FormData(jobForm);
+   
+   $.ajax({
+      url: url,
+       data: jobForm.serialize(),
+       type: "POST",
+       success: function(data) {          
+          //alert(JSON.stringify(data));
+          printData(data,target,delTarget, templateObject);
+          if(pagiTemplatObject){
+             if(type=='proceeding') {
+                printProceedingPagination(data,pagenationTarget,pagiTemplatObject);
+              }
+             if(type=='end') { 
+            printEndPagination(data,pagenationTarget,pagiTemplatObject);
+          }
+          }
+   
+       },
+       error:function(error){
+          alert('errortest');
+          AjaxErrorSecurityRedirectHandler(error.status);   
+       }
+   });
 }
 
 
 
 function go_ajax2(url, target, delTarget, templateObject ) {
-	alert('test');
-	var jobForm=$('#jobForm');
-	//var jobForm = document.getElementById('#jobForm');
-	jobForm.find("[name='page']").val(page);
-	jobForm.find("[name='perPageNum']").val(perPageNum.val());
-	jobForm.find("[name='searchType']").val(searchType.val());
-	jobForm.find("[name='keyword']").val(keyword.val());
-	$.ajax({
-		url: url,
-    	type: "GET",
-    	success: function(data) {    		
-    		printData(data,target,delTarget,templateObject);
-    	},
-    	error:function(error){
-    		AjaxErrorSecurityRedirectHandler(error.status);	
-    	}
-	});
+   alert('test');
+   var jobForm=$('#jobForm');
+   //var jobForm = document.getElementById('#jobForm');
+   jobForm.find("[name='page']").val(page);
+   jobForm.find("[name='perPageNum']").val(perPageNum.val());
+   jobForm.find("[name='searchType']").val(searchType.val());
+   jobForm.find("[name='keyword']").val(keyword.val());
+   $.ajax({
+      url: url,
+       type: "GET",
+       success: function(data) {          
+          printData(data,target,delTarget,templateObject);
+       },
+       error:function(error){
+          AjaxErrorSecurityRedirectHandler(error.status);   
+       }
+   });
 }
 
 
@@ -334,7 +333,6 @@ function AjaxErrorSecurityRedirectHandler(status) {
    }
 
 }
-
 
 
 

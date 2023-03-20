@@ -24,7 +24,7 @@
 		</if>
 		<if test="searchType == 'cw'.toString()">
 			and (
-			cowork_member like '%'||#{keyword}||'%'
+			cowork_member_id like '%'||#{keyword}||'%'
 			or
 			cowork_content like '%'||#{keyword}||'%'						
 			)			
@@ -33,7 +33,7 @@
 			and (
 			cowork_number like '%'||#{keyword}||'%'
 			or
-			cowork_member like '%'||#{keyword}||'%'
+			cowork_member_id like '%'||#{keyword}||'%'
 			or
 			cowork_content like '%'||#{keyword}||'%'						
 			)			

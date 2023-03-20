@@ -44,8 +44,8 @@ public class CompanyruleController {
 		this.productService = productService;
 	}
 
-	public void setFileUploadPath(String fileUploadPath) {
-		this.fileUploadPath = fileUploadPath;
+	public void fileUploadCompanyrulePath(String UploadPath) {
+		this.UploadPath = UploadPath;
 	}
 
 	@GetMapping("/main")
@@ -53,6 +53,8 @@ public class CompanyruleController {
 
 		mnv.addAllObjects(companyruleService.selectCompanyruleList(cri));
 		mnv.addAllObjects(productService.selectProductEndList(cri));
+		mnv.addObject("dataMap",companyruleService.selectCompanyruleList(cri));
+		mnv.addObject("dataMap",productService.selectProductEndList(cri)); 
 		return mnv;
 	}
 
@@ -63,8 +65,8 @@ public class CompanyruleController {
 		return url;
 	}
 
-	@Resource(name = "fileUploadPath")
-	private String fileUploadPath;
+	@Resource(name = "UploadPath")
+	private String UploadPath;
 
 	private List<Co_AttachVO> saveFileToAttaches(List<MultipartFile> multiFiles, String savePath) throws Exception {
 		List<Co_AttachVO> attachList = new ArrayList<Co_AttachVO>();
@@ -93,16 +95,17 @@ public class CompanyruleController {
 		String url = "redirect:/companyrule/main";
 
 		List<MultipartFile> multiFiles = registReq.getUploadFile();
-		String savePath = this.fileUploadPath;
+		String savePath = this.UploadPath;
 
 		List<Co_AttachVO> attachList = saveFileToAttaches(multiFiles, savePath);
 
 		// DB
 		CompanyruleVO companyrule = registReq.toCompanyruleVO();
 		String XSStitle = (String) request.getAttribute("XSStitle");
+		String XSScontent = (String) request.getAttribute("XSScontent");
 		if (XSStitle != null) {
 			companyrule.setCompanyrule_title(XSStitle);
-			companyrule.setCompanyrule_content(XSStitle);
+			companyrule.setCompanyrule_content(XSScontent);
 		}
 
 		companyrule.setCo_AttachList(attachList);
@@ -226,7 +229,7 @@ public class CompanyruleController {
 		}
 
 		// 파일저장
-		List<Co_AttachVO> attachList = saveFileToAttaches(modifyReq.getUploadFile(), fileUploadPath);
+		List<Co_AttachVO> attachList = saveFileToAttaches(modifyReq.getUploadFile(), UploadPath);
 
 		CompanyruleVO companyrule = modifyReq.toCompanyruleVO();
 		String XSStitle = (String) request.getAttribute("XSStitle");

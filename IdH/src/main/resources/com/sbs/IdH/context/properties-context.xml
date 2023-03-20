@@ -17,5 +17,15 @@
 		  class="java.lang.String">
 		  <constructor-arg value="${uploadPath.attach.require}"/>
 	</bean>
+	
+	 <bean id="UploadPath"
+		  class="java.lang.String">
+		  <constructor-arg value="${uploadPath.attach}"/>
+	</bean> 
+	<!-- 
+	<bean id="fileUploadProductPath"
+		  class="java.lang.String">
+		  <constructor-arg value="${uploadPath.attach.product}"/>
+	</bean> -->
 
 </beans>

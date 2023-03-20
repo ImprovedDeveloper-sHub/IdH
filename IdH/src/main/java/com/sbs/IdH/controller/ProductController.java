@@ -62,6 +62,8 @@ public class ProductController {
 		mnv.addAllObjects(coworkService.selectCoworkList(cri));
 		mnv.addAllObjects(productService.selectProduct_CoworkList(cri));
 		mnv.addAllObjects(issueService.selectIssueCheckList(cri));
+		mnv.addObject("dataMap",productService.selectProductProceedList(cri));
+		
 		return mnv;
 	}
 	@GetMapping("/end")

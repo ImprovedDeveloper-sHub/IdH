@@ -24,7 +24,7 @@
 		</if>
 		<if test="searchType == 'cw'.toString()">
 			and (
-			product_member like '%'||#{keyword}||'%'
+			product_member_id like '%'||#{keyword}||'%'
 			or
 			product_content like '%'||#{keyword}||'%'						
 			)			
@@ -33,7 +33,7 @@
 			and (
 			product_title like '%'||#{keyword}||'%'
 			or
-			product_member like '%'||#{keyword}||'%'
+			product_member_id like '%'||#{keyword}||'%'
 			or
 			product_content like '%'||#{keyword}||'%'						
 			)			
