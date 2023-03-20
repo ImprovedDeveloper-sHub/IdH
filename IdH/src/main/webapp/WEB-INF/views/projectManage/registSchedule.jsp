@@ -109,7 +109,6 @@ input {
 								<td class="table-td" colspan="3"><input class="datepicker" name="schedule_startdate" ></td>
 								<td class="name-td">종료날짜</td>
 								<td class="table-td" colspan="3"><input class="datepicker" name="schedule_enddate"></td>
-								
 							</tr>
 							<tr>
 								<td class="name-td">제목</td>
@@ -150,7 +149,7 @@ input {
 	function regist_go(){
 		//var form = $('form[name="registSchdeulForm"]')[0];
 			var form = document.registSchdeuleForm;
-			if(form.title.value==""){
+			if(form.schedule_name.value==""){
 				alert("제목은 필수입니다.");
 				return;
 			}
