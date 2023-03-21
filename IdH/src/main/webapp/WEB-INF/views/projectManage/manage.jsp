@@ -43,8 +43,8 @@
 							style="hegith: 30px; width: 90px !important; border-color: #CED4DA !important;">
 							<option value="n" ${cri.searchType eq 'n' ? 'selected':'' }>제목</option>
 							<option value="d" ${cri.searchType eq 'd' ? 'selected':'' }>내용</option>
-
-						</select> <input type="text" name="keyword"
+						</select> 
+						<input type="text" name="keyword"
 							class="form-control float-right" placeholder="Search">
 						<div class="input-group-append">
 							<button type="submit" class="btn btn-default"
@@ -354,115 +354,139 @@
 
 
 <!--row종료-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
-<script type="text/x-handlebars-template"  id="budget-plan-list-template" >
-</script>
+
 
 <script>
 	window.onload = function() {
 		//프로젝트 셀렉트
 		$(function() {
 		    $("#project_selector").on("change", function() {
-		        var project_number = $('#project_selector').val();
-		       //alert("셀렉트값 : "+project_number);
-		       print_scheduleList(project_number);
-		       print_budgetList(project_number);
-		       print_unitworkList(project_number);
-		       print_workforceList(project_number);
+		       var project_num = $('#project_selector').val();
+		       print_scheduleList(1,project_num);
+		       print_budgetList(1,project_num);
+		       print_unitworkList(1,project_num);
+		       print_workforceList(1,project_num);
 		    });
 		});
-	};
-</script>
+		
+		
+		
+		
+		
+		function print_budgetList(page,project_number){
+			var jobForm=$('#jobForm');
+			jobForm.find("[name='page']").val(page);
+			jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
+			jobForm.find("[name='searchType']")
+				.val($('select[name="searchType"]').val());
+			jobForm.find("[name='keyword']")
+				.val($('div.input-group>input[name="keyword"]').val());
+			jobForm.find("[name='project_number']").val(project_number);
+			$.ajax({
+			    url:'budgetList',
+			    data: jobForm.serialize(),
+			    type:"POST",
+			    success:function(data){
+			    	$('#budget_content').html("").html(data);
+			    },
+		   		error:function(error){
+		   			alert('error');
+		   		}
+		   })
+		}
 
+		function print_scheduleList(page,project_number){
+			var jobForm=$('#jobForm');
+			jobForm.find("[name='page']").val(page);
+			jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
+			jobForm.find("[name='searchType']")
+				.val($('select[name="searchType"]').val());
+			jobForm.find("[name='keyword']")
+				.val($('div.input-group>input[name="keyword"]').val());
+			jobForm.find("[name='project_number']").val(project_number);
+			$.ajax({
+			    url:'scheduleList',
+			    data: jobForm.serialize(),
+			    type:"POST",
+			    success:function(data){
+			    	$('#schedule_content').html("").html(data);
+			    },
+		   		error:function(error){
+		   			alert('error');
+		   		}
+		   })
+			
+		}
+
+		function print_unitworkList(page,project_number){
+			var jobForm=$('#jobForm');
+			jobForm.find("[name='page']").val(page);
+			jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
+			jobForm.find("[name='searchType']")
+				.val($('select[name="searchType"]').val());
+			jobForm.find("[name='keyword']")
+				.val($('div.input-group>input[name="keyword"]').val());
+			jobForm.find("[name='project_number']").val(project_number);
+			$.ajax({
+			    url:'unitworkList',
+			    data: jobForm.serialize(),
+			    type:"POST",
+			    success:function(data){
+			    	$('#unitwork_content').html("").html(data);
+			    },
+		   		error:function(error){
+		   			alert('error');
+		   		}
+		   })
+			
+		}
+
+		function print_workforceList(page,project_number){
+			var jobForm=$('#jobForm');
+			jobForm.find("[name='page']").val(page);
+			jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
+			jobForm.find("[name='searchType']")
+				.val($('select[name="searchType"]').val());
+			jobForm.find("[name='keyword']")
+				.val($('div.input-group>input[name="keyword"]').val());
+			jobForm.find("[name='project_number']").val(project_number);
+			
+			alert(jobForm.find("[name='project_number']").val());
+			
+			$.ajax({
+			    url:'workforceList',
+			    data: jobForm.serialize(),
+			    type:"POST",
+			    success:function(data){
+			    	$('#workforce_content').html("").html(data);
+			    },
+		   		error:function(error){
+		   			alert('error');
+		   		}
+		   })
+		}
+		
+		
+		
+		
+		
+		
+	}
+</script>
 
 
 <script>
-function print_budgetList(project_number){
-	$.ajax({
-	    url:'budgetList?project_number='+project_number,
-	    type:"GET",
-	    success:function(data){
-	    	/* alert(JSON.stringify(data));
-	    	console.log(data); */
-	    	$('#budget_content').html("").html(data);
-	    },
-   		error:function(error){
-   			alert('error');
-   		}
-   })
-	
-}
 
-function print_scheduleList(project_number){
-	$.ajax({
-	    url:'scheduleList?project_number='+project_number,
-	    type:"GET",
-	    success:function(data){
-	    	/* alert(JSON.stringify(data));
-	    	console.log(data); */
-	    	$('#schedule_content').html("").html(data);
-	    },
-   		error:function(error){
-   			alert('error');
-   		}
-   })
-	
-}
-
-
-function print_unitworkList(project_number){
-	$.ajax({
-	    url:'unitworkList?project_number='+project_number,
-	    type:"GET",
-	    success:function(data){
-	    	/* alert(JSON.stringify(data));
-	    	console.log(data); */
-	    	$('#unitwork_content').html("").html(data);
-	    },
-   		error:function(error){
-   			alert('error');
-   		}
-   })
-	
-}
-
-
-function print_workforceList(project_number){
-	$.ajax({
-	    url:'workforceList?project_number='+project_number,
-	    type:"GET",
-	    success:function(data){
-	    	/* alert(JSON.stringify(data));
-	    	console.log(data); */
-	    	$('#workforce_content').html("").html(data);
-	    },
-   		error:function(error){
-   			alert('error');
-   		}
-   })
-	
-}
 
 
 </script>
 
-<script>
-
-function printPlan(data,target, templateObject){
-	var planTemplate=Handlebars.compile(templateObject.html());
-	//alert(JSON.stringify(data));
-	var plan_html = planTemplate(data);
-	//delTarget.remove();
-	//alert(html);
-	target.html("").html(plan_html);
-}
-</script>
 
 
 
 
  
-  </script>
+
   
   <c:if test="${from eq 'regist' }">
   <script>

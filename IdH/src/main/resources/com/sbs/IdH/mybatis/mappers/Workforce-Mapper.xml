@@ -6,18 +6,7 @@
 <mapper namespace="Workforce-Mapper">
 	
 	<sql id="search">
-		<if test="searchType == 'i'.toString() ">
-			and id like '%'||#{keyword}||'%'
-		</if>
-		<if test="searchType == 'n'.toString() ">
-			and name like '%'||#{keyword}||'%'
-		</if>
-		<if test="searchType == 'p'.toString() ">
-			and phone like '%'||#{keyword}||'%'
-		</if>
-		<if test="searchType == 'e'.toString() ">
-			and email like '%'||#{keyword}||'%'
-		</if>
+		
 		<if test="member_id != null">
 			and workforce_member_id =  #{member_id}
 		</if>

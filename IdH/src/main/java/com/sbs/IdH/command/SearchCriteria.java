@@ -104,10 +104,6 @@ public class SearchCriteria {
 	}
 
 
-	
-
-	
-
 
 	public SearchCriteria(int startRowNum, String keyword, int memberStatus, int page, int type, int perPageNum,
 			int status, int business_number, String searchType, String member_id, int project_number) {
