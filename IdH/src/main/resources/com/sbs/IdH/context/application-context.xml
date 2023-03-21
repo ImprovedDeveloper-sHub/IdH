@@ -25,6 +25,9 @@
 	<bean id="workreport_attachDAO"
 		class="com.sbs.IdH.dao.Workreport_AttachDAOImpl"
 		p:session-ref="sqlSession" />
+	<bean id="replyDAO"
+		class="com.sbs.IdH.dao.ReplyDAOImpl"
+		p:session-ref="sqlSession" />
 
 	<bean id="issueService"
 		class="com.sbs.IdH.service.IssueServiceImpl" p:issueDAO-ref="issueDAO"
@@ -38,6 +41,8 @@
 		p:workreport_attachDAO-ref="workreport_attachDAO" />
 	<bean id="menuService" class="com.sbs.IdH.service.MenuServiceImpl"
 		p:menuDAO-ref="menuDAO" />
+	<bean id="replyService" class="com.sbs.IdH.service.ReplyServiceImpl"
+		p:replyDAO-ref="replyDAO" />
 
 
 

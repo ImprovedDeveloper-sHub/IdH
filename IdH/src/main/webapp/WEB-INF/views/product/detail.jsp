@@ -52,7 +52,7 @@ input {
 
 <div class="header"style="width:680px;height:400px;">
 		<div class="card card-info">
-			<div class="card-header">
+			<div class="card-header bg-info">
 				<h3 class="card-title">상세화면</h3>
 				<div class="card-tools">
 					<div class="input-group input-group-sm" style="width: 150px;">

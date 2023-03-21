@@ -12,6 +12,9 @@
 .work-th tbody td {
 	font-size: 30px;
 }
+.card{
+	overflow:hidden;
+}
 </style>
 
 
@@ -37,7 +40,7 @@
 		</div>
 		<div class="col-10">
 			<div id="content" class="card"
-				style="height: 98%; overflow: scroll; overflow-x: hidden;">
+				style="height: 98%;">
 				<div class="card-header bg-info">
 					<h3 class="card-title">받은 보고</h3>
 				</div>
@@ -74,7 +77,7 @@
 									<th style="width: 30%">내용</th>
 									<th style="width: 20%">작성일</th>
 									<th style="width: 15%">상태</th>
-									<th style="width: 15%">종료일</th>
+									<th style="width: 15%">승인자</th>
 								</tr>
 							</thead>
 							<tbody class="text-left myIssueTbody">
@@ -84,7 +87,8 @@
 									</tr>
 								</c:if>
 								<c:forEach items="${myWorkreportList }" var="workreport">
-									<tr>
+									<tr style="cursor:pointer;"onclick="javascript:OpenWindow('detail.do?from=main&workreport_number=${workreport.workreport_number}','상세보기',600,508);">
+									
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_title}</td>
 										<td
@@ -96,9 +100,8 @@
 										<td
 											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_check}</td>
 										<td
-											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
-												value="${workreport.workreport_enddate}"
-												pattern="yyyy-MM-dd" /></td>
+											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_setter}</td>
+										
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -129,7 +132,7 @@
 		</div>
 		<div class="col-10">
 			<div id="content" class="card"
-				style="height: 98%; overflow: scroll; overflow-x: hidden;">
+				style="height: 98%;">
 				<div class="card-header bg-info">
 					<h3 class="card-title">보낸 보고</h3>
 				</div>
@@ -168,7 +171,7 @@
 									<th style="width: 30%">내용</th>
 									<th style="width: 20%">작성일</th>
 									<th style="width: 15%">작성자</th>
-									<th style="width: 15%">수준</th>
+									<th style="width: 15%">결제여부</th>
 								</tr>
 							</thead>
 							<tbody class="text-left getterIssueTbody">
@@ -178,7 +181,7 @@
 									</tr>
 								</c:if>
 								<c:forEach items="${getterWorkreportList }" var="workreport">
-									<tr>
+									<tr style="cursor:pointer;"onclick="javascript:OpenWindow('detail.do?from=main&workreport_number=${workreport.workreport_number}','상세보기',600,508);">
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_title}</td>
 										<td
@@ -188,11 +191,9 @@
 												value="${workreport.workreport_regdate}"
 												pattern="yyyy-MM-dd" /></td>
 										<td
-											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_check}</td>
+											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_getter}</td>
 										<td
-											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
-												value="${workreport.workreport_enddate}"
-												pattern="yyyy-MM-dd" /></td>
+											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_check}</td>
 									</tr>
 								</c:forEach>
 							</tbody>

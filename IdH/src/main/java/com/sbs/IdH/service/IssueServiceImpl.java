@@ -12,6 +12,7 @@ import com.sbs.IdH.command.PageMaker;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.IssueDAO;
 import com.sbs.IdH.dao.Issue_AttachDAO;
+import com.sbs.IdH.dto.CompanyruleVO;
 import com.sbs.IdH.dto.IssueVO;
 import com.sbs.IdH.dto.Issue_AttachVO;
 import com.sbs.IdH.dto.MemberVO;
@@ -51,16 +52,19 @@ public class IssueServiceImpl implements IssueService{
 	@Override
 	public Map<String, Object> selectIssueCheckList(SearchCriteria cri) throws SQLException {
 		Map<String,Object>dataMap = new HashMap<String,Object>();
+		int total = issueDAO.selectIssueTotalCount();
 		
 		cri.setStatus(1);
 		int issuesuccess = issueDAO.selectSearchIssueListCount(cri);
+		//int issuesuccess = issuesuccessCount/total*100;
 		cri.setStatus(2);
 		int issuenow = issueDAO.selectSearchIssueListCount(cri);
+		//int issuenow = issuenowCount/total*100;
 		
 		int getter = issueDAO.selectGetterIssueCount();
+		//int getter = getterCount/total*100;
 		int notgetter = issueDAO.selectNotGetterIssueCount();
-		
-		int total = issueDAO.selectIssueTotalCount();
+		//int notgetter = notgetterCount/total*100;		
 		
 		dataMap.put("total",total);
 		dataMap.put("getter",getter);
@@ -75,7 +79,12 @@ public class IssueServiceImpl implements IssueService{
 		int issue_number = issueDAO.selectIssueSeqNext();
 		issue.setIssue_number(issue_number);
 		issueDAO.insertIssue(issue);
-		
+		if (issue.getAttachList() != null)
+			for (Issue_AttachVO attach : issue.getAttachList()) {
+				attach.setIssue_number(issue_number);
+				attach.setIssue_attach_attacher(issue.getIssue_setter_id());
+				issue_attachDAO.insertIssue_Attach(attach);
+			}
 	}
 	
 
@@ -105,11 +114,19 @@ public class IssueServiceImpl implements IssueService{
 		cri.setMember_id(member.getMember_id());
 		//cri.setMember_id("IdH");
 		cri.setMemberStatus(1);//내 리스트
+		
+		List<IssueVO>myissueList = issueDAO.selectSearchIssueList(cri);
+		if(myissueList != null) {
+			for(IssueVO issue : myissueList) {
+				addAttachList(issue);				
+			}
+		}
+		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(issueDAO.selectIssueCriteriaTotalCount(cri));
 		dataMap.put("pageMaker",pageMaker);
-		dataMap.put("myIssueList", issueDAO.selectSearchIssueList(cri));
+		dataMap.put("myIssueList", myissueList);
 		return dataMap;
 	}
 	
@@ -122,11 +139,19 @@ public class IssueServiceImpl implements IssueService{
 		cri.setMember_id(member.getMember_id());
 		//cri.setMember_id("IdH");
 		cri.setMemberStatus(2);
+		
+		List<IssueVO>getterIssueList = issueDAO.selectSearchIssueList(cri);
+		if(getterIssueList != null) {
+			for(IssueVO issue : getterIssueList) {
+				addAttachList(issue);				
+			}
+		}
+		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(issueDAO.selectIssueCriteriaTotalCount(cri));
 		dataMap.put("pageMaker",pageMaker);
-		dataMap.put("getterIssueList", issueDAO.selectSearchIssueList(cri));
+		dataMap.put("getterIssueList", getterIssueList);
 		return dataMap;
 	}
 

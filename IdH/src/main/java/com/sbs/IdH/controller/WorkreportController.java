@@ -100,7 +100,7 @@ public class WorkreportController {
 	}
 
 	@GetMapping("/detail")
-	public ModelAndView detail(int workreport_number, String from, RedirectAttributes rttr, ModelAndView mnv)
+	public ModelAndView detail(int workreport_number, String from, ModelAndView mnv)
 			throws Exception {
 		String url = "/workreport/detail";
 
@@ -152,7 +152,7 @@ public class WorkreportController {
 	public ModelAndView modifyForm(ModelAndView mnv, int workreport_number, RedirectAttributes rttr) throws Exception {
 		String url = "/workreport/modify";
 
-		mnv = detail(workreport_number, "modify", rttr, mnv);
+		mnv = detail(workreport_number, "modify", mnv);
 
 		mnv.setViewName(url);
 		return mnv;

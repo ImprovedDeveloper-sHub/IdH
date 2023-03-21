@@ -36,6 +36,9 @@
 		from issue_attach
 		where ano = #{ano}
 	</update>
+	<select id="selectIssue_AttachSeqNext" resultType="int">
+		select issue_attach_seq.nextval as ano from dual
+	</select>
 
 </mapper>  
 

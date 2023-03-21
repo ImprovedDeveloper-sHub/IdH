@@ -31,11 +31,11 @@
 			</thead>
 			<tbody style="height:100px;">
 				<tr>
-					<td>${issuesuccess }</td>
-					<td>${issuenow }</td>
-					<td>${getter }</td>
-					<td>${notgetter }</td>
-					<td>${total }</td>
+					<td>${issuesuccess }건</td>
+					<td>${issuenow }건</td>
+					<td>${getter }건</td>
+					<td>${notgetter }건</td>
+					<td>${total }건</td>
 				</tr>
 			</tbody>
 		</table>
@@ -73,21 +73,21 @@
 				</div>
 				<button type="button" class="btn btn-block btn-info btn-sm"
 					id="registBtn"
-					onclick="OpenWindow('registForm','글등록',680,555)">등록</button>
+					onclick="OpenWindow('registForm','글등록',660,605)">등록</button>
 			</div>
 			<div id="table-content">
-				<div class="card-body table-responsive p-0">
+				<div class="card-body table-responsive p-0" style="height:320px;">
 					<table class="table table-hover">
 						<thead class="text-left myThead">
 							<tr>
 								<th style="width: 20%">제목</th>
-								<th style="width: 30%">내용</th>
+								<th style="width: 20%">첨부파일</th>
 								<th style="width: 20%">작성일</th>
-								<th style="width: 15%">할당자</th>
-								<th style="width: 15%">수준</th>
+								<th style="width: 20%">할당자</th>
+								<th style="width: 20%">수준</th>
 							</tr>
 						</thead>
-						<tbody class="text-left myli">
+						<tbody class="text-left myli center">
 							<c:if test="${empty myIssueList}">
 								<tr>
 									<td colspan="5">데이터가 없습니다.</td>
@@ -95,28 +95,34 @@
 							</c:if>
 							<c:forEach items="${myIssueList }" var="issue">
 								<tr
-									onclick="javascript:OpenWindow('detail.do?from=main&issue_number=${issue.issue_number}','상세보기',600,508);">
+									onclick="javascript:OpenWindow('detail.do?from=main&issue_number=${issue.issue_number}','상세보기',600,508);" style="cursor:pointer;">
 
 									<td
 										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${issue.issue_title}</td>
+										<c:if test="${empty issue.attachList }">
 									<td
-										style="text-align: left; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${issue.issue_content}</td>
+										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">-</td>										
+										</c:if>
+										<c:if test="${!empty issue.attachList }">
+									<td
+										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><i class="fa-sharp fa-solid fa-folder" style="color:gold;"></i></td>										
+										</c:if>
 									<td
 										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
 											value="${issue.issue_regdate}" pattern="yyyy-MM-dd" /></td>
 									<td
-										style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${issue.issue_getter_id }</td>
+										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${issue.issue_getter_id }</td>
 									<td
-										style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
 										${issue.issue_level}</td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
+				</div>
 					<div id="myPaginationBox">
 						<%@include file="/WEB-INF/views/issue/myPagination.jsp" %>
 					</div>
-				</div>
 			</div>
 		</div>
 
@@ -155,7 +161,7 @@
 
 			</div>
 			<div id="table-content">
-				<div class="card-body table-responsive p-0">
+				<div class="card-body table-responsive p-0" style="height:320px;">
 					<table class="table table-hover">
 						<thead class="text-left getterThead">
 							<tr>
@@ -173,7 +179,7 @@
 								</tr>
 							</c:if>
 							<c:forEach items="${getterIssueList }" var="issue">
-								<tr onclick="javascript:OpenWindow('detail.do?from=main&issue_number=${issue.issue_number}','상세보기',600,508);">
+								<tr onclick="javascript:OpenWindow('detail.do?from=main&issue_number=${issue.issue_number}','상세보기',600,508);" style="cursor:pointer;">
 									<td
 										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${issue.issue_title}</td>
 									<td
@@ -190,10 +196,10 @@
 							</c:forEach>
 						</tbody>
 					</table>
+				</div>
 					<div id="getterPaginationBox">
 						<%@include file="/WEB-INF/views/issue/getterPagination.jsp" %>
 					</div>
-				</div>
 			</div>
 		</div>
 	</div>
