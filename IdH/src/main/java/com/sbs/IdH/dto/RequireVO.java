@@ -15,6 +15,7 @@ public class RequireVO {
 	private String require_detail;
 	private String require_setter_id;
 	private int require_business_number;
+	private String require_business_name;
 	private String require_getter_id;
 	
 	private List<Require_attachVO> attachList;
@@ -24,6 +25,12 @@ public class RequireVO {
 	}
 	public void setAttachList(List<Require_attachVO> attachList) {
 		this.attachList = attachList;
+	}
+	public String getRequire_business_name() {
+		return require_business_name;
+	}
+	public void setRequire_business_name(String require_business_name) {
+		this.require_business_name = require_business_name;
 	}
 	public int getRequire_number() {
 		return require_number;

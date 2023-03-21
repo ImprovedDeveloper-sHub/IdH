@@ -81,6 +81,7 @@
 		class="com.sbs.IdH.service.RequireServiceImpl"
 		p:requireDAO-ref="requireDAO"
 	 	p:require_attachDAO-ref="require_attachDAO"
+	 	p:businessDAO-ref="businessDAO"
 	/>  
 	<bean id="memberService" class="com.sbs.IdH.service.MemberServiceImpl"
 		p:memberDAO-ref="memberDAO"

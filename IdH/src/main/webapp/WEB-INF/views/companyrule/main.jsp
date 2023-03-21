@@ -195,7 +195,7 @@ padding:0 !important;
 
 <c:if test="${from eq 'regist' }">
 <script>
-	alert("정상 등록이 되었습니다.");
+	alert("정상적으로 등록 되었습니다.");
 	window.close();
 	window.opener.location.reload();
 </script>
@@ -207,7 +207,13 @@ padding:0 !important;
 	window.opener.location.reload();
 </script>
 </c:if>
-
+<c:if test="${from eq 'modify' }">
+<script>
+	alert("정상적으로 수정 되었습니다.");
+	window.close();
+	window.opener.location.reload();
+</script>
+</c:if>
 <!--content종료-->
 <!-- <script>
 function OpenWindow(){

@@ -135,10 +135,12 @@ input {
 								<td class="name-td">내용</td>
 								<td class="table-td td-summernote" colspan="5"><textarea name="require_detail"
 										class="summernote" rows="15" cols="40"
-										style="display: none; width: 500px;"></textarea></td>
+										style="display: none; width: 500px;">${require.require_detail }</textarea></td>
 							</tr>
 
-
+							<tr style="display:none;">
+							<td><input type="text" name="require_number" value="${require.require_number }" /></td>
+							</tr>
 						</tbody>
 					</table>
 				</form>
@@ -146,7 +148,7 @@ input {
 		</div>
 		<div class="card-tools" style="margin-left: auto">
 			<button type="button" id="regbtn" class="btn btn-info" name="modifyForm"
-				onclick="submit_go('modifyForm','${require.require_number }');">수정</button>
+				onclick="modify_go();">수정</button>
 			<button type="button" id="close" class="btn btn-info"
 				onclick="CloseWindow();">닫기</button>
 		</div>
@@ -162,9 +164,9 @@ input {
 
 
 <script>
-function submit_go(url,require_number ){	
-	location.href=url+"?require_number="+require_number;
-}
+	function modify_go(){
+		$("form[role='form']").submit();
+	}
 </script>
 
 

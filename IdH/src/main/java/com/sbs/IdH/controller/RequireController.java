@@ -155,7 +155,6 @@ public class RequireController {
 				}
 			}
 		}
-
 		mnv.addObject("require", require);
 		mnv.setViewName(url);
 
@@ -186,10 +185,16 @@ public class RequireController {
 	}
 
 	@GetMapping("/modifyForm")
-	public ModelAndView modifyForm(ModelAndView mnv, int require_number, RedirectAttributes rttr) throws Exception {
+	public ModelAndView modifyForm(ModelAndView mnv, int require_number, HttpServletRequest request) throws Exception {
 		String url = "/require/modify";
 
 		mnv = detail(require_number, "modify", mnv);
+		SearchCriteria cri = new SearchCriteria();
+
+		MemberVO member = (MemberVO) request.getSession().getAttribute("loginUser");
+		cri.setMember_id(member.getMember_id());
+
+		mnv.addAllObjects(businessService.getBusinessList(cri));
 
 		mnv.setViewName(url);
 		return mnv;

@@ -247,7 +247,9 @@
 				var calendarEl = $('#calendar1')[0];
 				// full-calendar 생성하기
 				var JsonData;
+				
 				var calendar = new FullCalendar.Calendar(calendarEl, {
+					
 					// 해더에 표시할 툴바
 					/* initialDate : '2023-03-13', // 초기 날짜 설정 (설정하지 않으면 오늘 날짜가 보인다.) */
 					locale : 'ko', // 한국어 설정

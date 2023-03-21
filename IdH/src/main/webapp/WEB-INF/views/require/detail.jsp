@@ -92,11 +92,13 @@
 							</tr>
 							<tr>
 								<td class="name-td">중요도</td>
-								<td class="table-td">${require.require_level }</td>
+								<td class="table-td">${require.require_level eq 1? '하' : ''}
+								${require.require_level eq 2? '중' : ''}
+								${require.require_level eq 3? '상' : ''}</td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">관련사업</td>
-								<td colspan="5">${require.require_business_number }</td>
+								<td colspan="5">${require.require_business_name }</td>
 							</tr>
 							<tr>
 								<td class="name-td">프로젝트 팀</td>
