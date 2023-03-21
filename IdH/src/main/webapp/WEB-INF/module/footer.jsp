@@ -8,7 +8,6 @@
 	<input type='hidden' name="perPageNum" value=""/>
 	<input type='hidden' name="searchType" value="" />
 	<input type='hidden' name="keyword" value="" />
-	<input type='hidden' name="type" value="" />
 	<input type='hidden' name="project_number" value="" />
 </form>
 

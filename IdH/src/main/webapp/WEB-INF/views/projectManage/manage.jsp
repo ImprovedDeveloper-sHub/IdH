@@ -357,125 +357,51 @@
 
 
 <script>
+
+
 	window.onload = function() {
 		//프로젝트 셀렉트
-		$(function() {
 		    $("#project_selector").on("change", function() {
 		       var project_num = $('#project_selector').val();
-		       print_scheduleList(1,project_num);
+		       alert(project_num);
 		       print_budgetList(1,project_num);
-		       print_unitworkList(1,project_num);
-		       print_workforceList(1,project_num);
 		    });
-		});
 		
 		
 		
 		
-		
-		function print_budgetList(page,project_number){
-			var jobForm=$('#jobForm');
-			jobForm.find("[name='page']").val(page);
-			jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
-			jobForm.find("[name='searchType']")
-				.val($('select[name="searchType"]').val());
-			jobForm.find("[name='keyword']")
-				.val($('div.input-group>input[name="keyword"]').val());
-			jobForm.find("[name='project_number']").val(project_number);
-			$.ajax({
-			    url:'budgetList',
-			    data: jobForm.serialize(),
-			    type:"POST",
-			    success:function(data){
-			    	$('#budget_content').html("").html(data);
-			    },
-		   		error:function(error){
-		   			alert('error');
-		   		}
-		   })
-		}
-
-		function print_scheduleList(page,project_number){
-			var jobForm=$('#jobForm');
-			jobForm.find("[name='page']").val(page);
-			jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
-			jobForm.find("[name='searchType']")
-				.val($('select[name="searchType"]').val());
-			jobForm.find("[name='keyword']")
-				.val($('div.input-group>input[name="keyword"]').val());
-			jobForm.find("[name='project_number']").val(project_number);
-			$.ajax({
-			    url:'scheduleList',
-			    data: jobForm.serialize(),
-			    type:"POST",
-			    success:function(data){
-			    	$('#schedule_content').html("").html(data);
-			    },
-		   		error:function(error){
-		   			alert('error');
-		   		}
-		   })
-			
-		}
-
-		function print_unitworkList(page,project_number){
-			var jobForm=$('#jobForm');
-			jobForm.find("[name='page']").val(page);
-			jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
-			jobForm.find("[name='searchType']")
-				.val($('select[name="searchType"]').val());
-			jobForm.find("[name='keyword']")
-				.val($('div.input-group>input[name="keyword"]').val());
-			jobForm.find("[name='project_number']").val(project_number);
-			$.ajax({
-			    url:'unitworkList',
-			    data: jobForm.serialize(),
-			    type:"POST",
-			    success:function(data){
-			    	$('#unitwork_content').html("").html(data);
-			    },
-		   		error:function(error){
-		   			alert('error');
-		   		}
-		   })
-			
-		}
-
-		function print_workforceList(page,project_number){
-			var jobForm=$('#jobForm');
-			jobForm.find("[name='page']").val(page);
-			jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
-			jobForm.find("[name='searchType']")
-				.val($('select[name="searchType"]').val());
-			jobForm.find("[name='keyword']")
-				.val($('div.input-group>input[name="keyword"]').val());
-			jobForm.find("[name='project_number']").val(project_number);
-			
-			alert(jobForm.find("[name='project_number']").val());
-			
-			$.ajax({
-			    url:'workforceList',
-			    data: jobForm.serialize(),
-			    type:"POST",
-			    success:function(data){
-			    	$('#workforce_content').html("").html(data);
-			    },
-		   		error:function(error){
-		   			alert('error');
-		   		}
-		   })
-		}
-		
-		
-		
-		
-		
-		
+		    function print_budgetList(page,project_num){
+		    	var jobForm=$('#jobForm');
+		    	//jobForm.find("[name='project_number']").val(project_num.trim());
+		    	console.log(jobForm.find("[name='project_number']").val());
+		    	jobForm.find("[name='page']").val('1');
+		    	jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
+		    	jobForm.find("[name='searchType']").val($('select[name="searchType"]').val());
+		    	jobForm.find("[name='keyword']").val('');
+		    	
+		    	
+		    	alert(jobForm.serialize());
+		    	$.ajax({
+		    	    url:'budgetList',
+		    	    data: jobForm.serialize(),
+		    	    type:"POST",
+		    	    success:function(data){
+		    	    	$('#budget_content').html("").html(data);
+		    	    },
+		       		error:function(error){
+		       			alert('error');
+		       		}
+		       })
+		    }
 	}
 </script>
 
 
 <script>
+
+
+
+
 
 
 

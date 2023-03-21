@@ -21,7 +21,20 @@ public class SearchCriteria {
 	public SearchCriteria() {}
 	
 	
-	  public SearchCriteria(int page, int perPageNum, String searchType, String keyword) { parseSearchCriteria(page,perPageNum,searchType,keyword); }
+	  public SearchCriteria(int page, int perPageNum, String searchType, String keyword, int project_number, int type) {
+		super();
+		this.page = page;
+		this.perPageNum = perPageNum;
+		this.searchType = searchType;
+		this.keyword = keyword;
+		this.project_number = project_number;
+		this.type = type;
+		setStartRowNum();
+	}
+
+
+	public SearchCriteria(int page, int perPageNum, String searchType, String keyword) { parseSearchCriteria(page,perPageNum,searchType,keyword); }
+	  
 	/* 이건 확인해봐야할 문제긴한데. 생성자로 가능하다? 받아오면서? 애초에 생성자로 값넣어주는건지.
 	 * 
 	 * public SearchCriteria(String page, String perPageNum, String searchType,
@@ -189,6 +202,23 @@ public class SearchCriteria {
 		  return newCri;
 		  
 	  }
+
+
+	public SearchCriteria(int page, int perPageNum, String searchType, String keyword, int project_number,
+			int business_number, int status, int type, int startRowNum, String member_id, int memberStatus) {
+		super();
+		this.page = page;
+		this.perPageNum = perPageNum;
+		this.searchType = searchType;
+		this.keyword = keyword;
+		this.project_number = project_number;
+		this.business_number = business_number;
+		this.status = status;
+		this.type = type;
+		this.startRowNum = startRowNum;
+		this.member_id = member_id;
+		this.memberStatus = memberStatus;
+	}
 
 	
 }

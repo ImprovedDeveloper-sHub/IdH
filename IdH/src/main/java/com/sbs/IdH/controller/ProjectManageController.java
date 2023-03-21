@@ -538,9 +538,16 @@ public class ProjectManageController {
 	@PostMapping("/budgetList")
 	@ResponseBody
 	public ModelAndView budgetList(ModelAndView mnv, SearchCriteria cri) throws Exception{
+		
+		return mnv;
+	}
+	
+	@GetMapping("/budgetList2")
+	@ResponseBody
+	public ModelAndView budgetList2(ModelAndView mnv) throws Exception{
 		Map<String,Object> dataMap = null;
-		//SearchCriteria cri = new SearchCriteria();
-		//cri.setProject_number(project_number);
+		SearchCriteria cri = new SearchCriteria();
+		cri.setProject_number(1);
 		dataMap = budgetService.selectBudgetList(cri);
 		mnv.addAllObjects(dataMap);
 		mnv.setViewName("projectManage/budgetList");
