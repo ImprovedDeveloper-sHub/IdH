@@ -2,8 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-<c:set var="cri" value="${dataMap.pageMaker.cri }" />
-<c:set var="pageMaker" value="${dataMap.pageMaker }" />    
+
     
 	<nav id="paginationNav" aria-label="Navigation">
 		<ul class="pagination justify-content-center m-0">

@@ -81,6 +81,7 @@ input {
 			</div>
 			<div id="content">
 				<form enctype="multiaprt/form-data" role="form" method="post" action="modifyBudget" name="modifyBudgetForm">
+				<input type="hidden" name="budget_status" value="2">
 				<input type="hidden" name="budget_number" value="${budget.budget_number }"/>
 				<div id="table-content">
 					<table>

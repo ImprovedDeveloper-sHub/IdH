@@ -71,7 +71,7 @@ input {
 	<!-- 사업 일정 상세 정보 -->
 	<div class="col">
 		<div class="card card-info">
-			<div class="card-header">
+			<div class="card-header bg-info">
 				<h3 class="card-title">인력등록</h3>
 				<div class="card-tools">
 					<div class="input-group input-group-sm" style="width: 150px;">
@@ -81,6 +81,7 @@ input {
 			</div>
 			<div id="content">
 				<form enctype="multiaprt/form-data" role="form" method="post" action="registWorkforce" name="registWorkforceForm">
+				<input type="hidden" name="workforce_status" value="2">
 				<div id="table-content">
 					<table>
 						<thead>
@@ -93,13 +94,15 @@ input {
 						</thead>
 						<tbody>
 							<tr>
-								<td class="name-td">등록자</td>
-								<td class="table-td" colspan="3" ><input id="workforce_member_id" type="text" name="workforce_member_id" value="${loginUser.member_id}" readonly></td>
+								<td class="name-td">인력 선택</td>
+								<td class="table-td" colspan="3" ><input id="workforce_member_id" type="text" name="workforce_member_id" value="" ></td>
 								<td class="name-td">분류</td>
 								<td class="table-td"><select name ="workforce_type">
-													<option value="1">보통</option>
-													<option value="2">위급</option>
-													<option value="3">위험</option>
+													<option value="2">PL</option>
+													<option value="3">DA</option>
+													<option value="4">TA</option>
+													<option value="5">AA</option>
+													<option value="6">BA</option>
 									</select></td>
 							</tr>
 							<tr>

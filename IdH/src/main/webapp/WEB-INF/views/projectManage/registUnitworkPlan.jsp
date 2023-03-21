@@ -72,16 +72,21 @@ input {
 	<div class="col">
 		<div class="card card-info">
 			<div class="card-header bg-info">
-				<h3 class="card-title">단위업무등록</h3>
 				<div class="card-tools">
-					<div class="input-group input-group-sm" style="width: 150px;">
-						<div class="input-group-append"></div>
+					<div class="input-group input-group-sm" style="width: 400px;">
+						<div class="input-group-append">
+						<input id="" type="button" class="btn btn-info btn-sm" onclick="location.href='<%=request.getContextPath()%>/projectManage/registSchedulePlanForm';" value="일정 계획"></input>
+						<input id="" type="button" class="btn btn-info btn-sm" onclick="location.href='<%=request.getContextPath()%>/projectManage/registBudgetPlanForm';" value="예산 계획"></input>
+						<input id="" type="button" class="btn btn-info btn-sm" onclick="location.href='<%=request.getContextPath()%>/projectManage/registWorkforcePlanForm';" value="인력 계획"></input>
+						<input id="" type="button" class="btn  btn-sm" onclick="location.href='<%=request.getContextPath()%>/projectManage/registUnitworkPlanForm';" value="단위업무 계획"></input>
+						</div>
+						
 					</div>
 				</div>
 			</div>
 			<div id="content">
 				<form enctype="multiaprt/form-data" role="form" method="post" action="registUnitwork" name="registSchdeulForm">
-				<input type="hidden" name="unitwork_status" value="2">
+				<input type="hidden" name="unitwork_status" value="1">
 				
 				<input type="hidden" name="unitwork_project_number" value="1">
 				<div id="table-content">

@@ -94,7 +94,7 @@ input {
 								<td class="name-td">이름</td>
 								<td class="table-td" colspan="3">${ workforce.workforce_member_id }</td>
 								<td class="name-td">수준</td>
-								<td class="table-td">${workforce.workforce_type eq '1' ? '보통' : ''}${workforce.workforce_type eq '2' ? '위급' : ''}${workforce.workforce_type eq '3' ? '위험' : ''}${workforce.workforce_type eq '4' ? ' ' : ''}</td>
+								<td class="table-td">${workforce.workforce_type eq '1' ? 'PM':''}${workforce.workforce_type eq '2' ? 'PL':''}${workforce.workforce_type eq '3' ? 'DA':''}${workforce.workforce_type eq '4' ? 'TA':''}${workforce.workforce_type eq '5' ? 'AA':''}${workforce.workforce_type eq '6' ? 'BA':''}</td>
 							</tr>
 							<tr>
 								<td class="name-td">등록자</td>

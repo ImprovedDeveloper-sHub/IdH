@@ -81,7 +81,7 @@
 		insert 
 		into 
 		budget(budget_number,budget_name,budget_type,budget_status,budget_detail,budget_price,budget_member_id,budget_regdate)
-		values(#{budget_number},#{budget_name},#{budget_type},1,#{budget_detail},#{budget_price},#{budget_member_id},sysdate)
+		values(#{budget_number},#{budget_name},#{budget_type},#{budget_status},#{budget_detail},#{budget_price},#{budget_member_id},sysdate)
 	</update>
 	
 	

@@ -29,6 +29,7 @@ public class WorkforceServiceImpl implements WorkforceService {
 
 	@Override
 	public void registWorkforce(WorkforceVO workforce) throws Exception {
+		workforce.setWorkforce_number(workforceDAO.selectWorkforceSeqNext());
 		workforceDAO.insertWorkforce(workforce);
 	}
 

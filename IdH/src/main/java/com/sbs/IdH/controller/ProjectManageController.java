@@ -163,6 +163,15 @@ public class ProjectManageController {
 		mnv.setViewName(url);
 		return mnv;
 	}
+	
+	
+	@GetMapping("/registBudgetPlanForm")
+	public ModelAndView registBudgetPlanForm(ModelAndView mnv) throws Exception {
+		String url = "/projectManage/registBudgetPlan";
+		mnv.setViewName(url);
+		return mnv;
+	}
+	
 	@PostMapping("/registBudget")
 	public String registBudget(RedirectAttributes rttr, BudgetVO budget) throws Exception {
 		budgetService.registBudget(budget);
@@ -208,6 +217,13 @@ public class ProjectManageController {
 	@GetMapping("/registWorkforceForm")
 	public ModelAndView registWorkforceForm(ModelAndView mnv) throws Exception {
 		String url = "/projectManage/registWorkforce";
+		mnv.setViewName(url);
+		return mnv;
+	}
+	
+	@GetMapping("/registWorkforcePlanForm")
+	public ModelAndView registWorkforcePlanForm(ModelAndView mnv) throws Exception {
+		String url = "/projectManage/registWorkforcePlan";
 		mnv.setViewName(url);
 		return mnv;
 	}
@@ -261,6 +277,13 @@ public class ProjectManageController {
 		mnv.setViewName(url);
 		return mnv;
 	}
+	
+	@GetMapping("/registUnitworkPlanForm")
+	public ModelAndView registUnitworkPlanForm(ModelAndView mnv) throws Exception {
+		String url = "/projectManage/registUnitworkPlan";
+		mnv.setViewName(url);
+		return mnv;
+	}
 
 	@PostMapping("/registUnitwork")
 	public String registUnitwork(RedirectAttributes rttr, UnitworkVO unitwork) throws Exception {
@@ -268,7 +291,6 @@ public class ProjectManageController {
 		// System.out.println(unitwork);
 		String url = "redirect:/projectManage/manage";
 		rttr.addFlashAttribute("from", "regist");
-
 		return url;
 	}
 
@@ -309,6 +331,13 @@ public class ProjectManageController {
 	@GetMapping("/registScheduleForm")
 	public ModelAndView registscheduleForm(ModelAndView mnv) throws Exception {
 		String url = "/projectManage/registSchedule";
+		mnv.setViewName(url);
+		return mnv;
+	}
+	
+	@GetMapping("/registSchedulePlanForm")
+	public ModelAndView registSchedulePlanForm(ModelAndView mnv) throws Exception {
+		String url = "/projectManage/registSchedulePlan";
 		mnv.setViewName(url);
 		return mnv;
 	}
@@ -471,16 +500,53 @@ public class ProjectManageController {
 	
 	@GetMapping("/scheduleList")
 	@ResponseBody
-	public ModelAndView test(ModelAndView mnv, int project_number) throws Exception{
+	public ModelAndView scheduleList(ModelAndView mnv, int project_number) throws Exception{
 		
 		Map<String,Object> dataMap = null;
 		SearchCriteria cri = new SearchCriteria();
+		cri.setProject_number(project_number);
 		dataMap = scheduleService.selectScheduleList(cri);
 		mnv.addAllObjects(dataMap);
 		mnv.setViewName("projectManage/scheduleList");
-			
 		return mnv;
 	}
+	
+	@GetMapping("/unitworkList")
+	@ResponseBody
+	public ModelAndView unitworkList(ModelAndView mnv, int project_number) throws Exception{
+		Map<String,Object> dataMap = null;
+		SearchCriteria cri = new SearchCriteria();
+		cri.setProject_number(project_number);
+		dataMap = unitworkService.selectUnitworkList(cri);
+		mnv.addAllObjects(dataMap);
+		mnv.setViewName("projectManage/unitworkList");
+		return mnv;
+	}
+	
+	@GetMapping("/workforceList")
+	@ResponseBody
+	public ModelAndView workforceList(ModelAndView mnv, int project_number) throws Exception{
+		Map<String,Object> dataMap = null;
+		SearchCriteria cri = new SearchCriteria();
+		cri.setProject_number(project_number);
+		dataMap = workforceService.selectWorkforceList(cri);
+		mnv.addAllObjects(dataMap);
+		mnv.setViewName("projectManage/workforceList");
+		return mnv;
+	}
+	
+	@GetMapping("/budgetList")
+	@ResponseBody
+	public ModelAndView budgetList(ModelAndView mnv, int project_number) throws Exception{
+		Map<String,Object> dataMap = null;
+		SearchCriteria cri = new SearchCriteria();
+		cri.setProject_number(project_number);
+		dataMap = budgetService.selectBudgetList(cri);
+		mnv.addAllObjects(dataMap);
+		mnv.setViewName("projectManage/budgetList");
+		return mnv;
+	}
+	
 	
 	
 	

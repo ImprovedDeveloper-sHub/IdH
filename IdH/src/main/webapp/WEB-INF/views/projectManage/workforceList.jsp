@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <!DOCTYPE html>
+
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+    
+
 <div class="card-header bg-info">
-					<h3 class="card-title">일정관리</h3>
+					<h3 class="card-title">인력 프로젝트</h3>
 				</div>
 				<div class="card-tools"
-					style="justify-content: space-between; display: flex; flex-direction: row-reverse; margin:3px;">
+					style="justify-content: space-between; display: flex; flex-direction: row-reverse;margin:3px;">
 					<div class="input-group input-group-sm" style="width: 270px">
 						<select name="perPageNum" style="display: none"><option
 								value="5" selected></option></select> <select class="form-control-sm"
@@ -30,55 +32,54 @@
 					</div>
 					<button type="button" class="btn btn-block btn-info btn-sm"
 						style="width: 80px;"
-						onclick="OpenWindow('registScheduleForm','등록',550,700);">등록</button>
-
+						onclick="OpenWindow('registWorkforceForm','등록',500,700);">등록</button>
 				</div>
 				<div id="table-content">
 					<div class="card-body table-responsive p-0">
 						<table class="table table-hover">
 							<thead class="proceedingThead" class="text-left">
 								<tr>
-									<th style="width: 15%">일정 상태</th>
-									<th style="width: 35%">일정 이름</th>
-									<th style="width: 15%">일정 구분</th>
-									<th style="width: 15%">프로젝트 명</th>
-									<th style="width: 25%">시작 날짜</th>
+									<th style="width: 15%">인력 상태</th>
+									<th style="width: 15%; text-align: center;" >이름</th>
+									<th style="width: 30%">인력 이름</th>
+									<th style="width: 15%">인력 구분</th>
+									<th style="width: 15%">시작 날짜</th>
 									<th style="width: 15%">종료 날짜</th>
 								</tr>
 							</thead>
 
-							<tbody class="proceedingProjectLi" class="text-left">
-								<c:if test="${empty scheduleList}">
+							<tbody class="workforceProjectLi" class="text-left">
+								<c:if test="${empty workforceList}">
 									<tr>
 										<td colspan="5">데이터가 없습니다.</td>
 									</tr>
 								</c:if>
-								<c:forEach items="${scheduleList }" var="schedule">
+								<c:forEach items="${workforceList }" var="workforce">
 									<tr
-										onclick="OpenWindow('scheduleDetail?schedule_number=${schedule.schedule_number}','스케줄',500,600);">
+										onclick="OpenWindow('workforceDetail?workforce_number=${workforce.workforce_number}','인력',580,480);">
 										<td
 											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
 											${schedule.schedule_status eq 1 ? '계획' : '진행'}</td>
 										<td
-											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${schedule.schedule_name}</td>
+											style="text-align: center; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workforce.workforce_member_id}</td>
 										<td
-											style="text-align: left; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${schedule.schedule_type eq '1' ? '기획' : ''}${schedule.schedule_type eq '2' ? '설계' : ''}${schedule.schedule_type eq '3' ? '구현' : ''}${schedule.schedule_type eq '4' ? '테스트' : ''}</td>
+											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workforce.workforce_name}</td>
 										<td
-											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-											${schedule.schedule_project_name}</td>
-										
+											style="text-align: left; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workforce.workforce_type eq '1' ? 'PM':''}${workforce.workforce_type eq '2' ? 'PL':''}${workforce.workforce_type eq '3' ? 'DA':''}${workforce.workforce_type eq '4' ? 'TA':''}${workforce.workforce_type eq '5' ? 'AA':''}${workforce.workforce_type eq '6' ? 'BA':''}</td>
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
-												value="${schedule.schedule_startdate}" pattern="yyyy-MM-dd" /></td>
+												value="${workforce.workforce_startdate}" pattern="yyyy-MM-dd" /></td>
 										<td
-											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
-												value="${schedule.schedule_enddate}" pattern="yyyy-MM-dd" /></td>
+											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
+												value="${workforce.workforce_enddate}" pattern="yyyy-MM-dd" /></td>
 									</tr>
 								</c:forEach>
 							</tbody>
 
 						</table>
-						
-						 <div><%@ include file="/WEB-INF/module/pagination.jsp" %></div>
+												<div><%@ include file="/WEB-INF/module/pagination.jsp" %></div>
 						
 					</div>
+
+
+				</div>

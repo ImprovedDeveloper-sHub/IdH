@@ -72,17 +72,21 @@ input {
 	<div class="col">
 		<div class="card card-info">
 			<div class="card-header bg-info">
-				<h3 class="card-title">예산등록</h3>
 				<div class="card-tools">
-					<div class="input-group input-group-sm" style="width: 150px;">
-						<div class="input-group-append"></div>
+					<div class="input-group input-group-sm" style="width: 400px;">
+						<div class="input-group-append">
+						<input id="" type="button" class="btn btn-info btn-sm" onclick="location.href='<%=request.getContextPath()%>/projectManage/registSchedulePlanForm';" value="일정 계획"></input>
+						<input id="" type="button" class="btn btn-info btn-sm" onclick="location.href='<%=request.getContextPath()%>/projectManage/registBudgetPlanForm';" value="예산 계획"></input>
+						<input id="" type="button" class="btn btn-sm" onclick="location.href='<%=request.getContextPath()%>/projectManage/registWorkforcePlanForm';" value="인력 계획"></input>
+						<input id="" type="button" class="btn btn-info btn-sm" onclick="location.href='<%=request.getContextPath()%>/projectManage/registUnitworkPlanForm';" value="단위업무 계획"></input>
+						</div>
+						
 					</div>
 				</div>
 			</div>
 			<div id="content">
-				<form enctype="multiaprt/form-data" role="form" method="post" action="registBudget" name="registBudgetForm">
-				<input type="hidden" name="budget_status" value="2">
-				
+				<form enctype="multiaprt/form-data" role="form" method="post" action="registWorkforce" name="registWorkforceForm">
+				<input type="hidden" name="workforce_status" value="1">
 				<div id="table-content">
 					<table>
 						<thead>
@@ -95,37 +99,36 @@ input {
 						</thead>
 						<tbody>
 							<tr>
-								<td class="name-td">등록자</td>
-								<td class="table-td" colspan="3" ><input id="budget_member_id" type="text" name="budget_member_id" value="${loginUser.member_id}" readonly></td>
+								<td class="name-td">인력 선택</td>
+								<td class="table-td" colspan="3" ><input id="workforce_member_id" type="text" name="workforce_member_id" value="" ></td>
 								<td class="name-td">분류</td>
-								<td class="table-td"><select name ="budget_type">
-													<option value="1">인건비</option>
-													<option value="2">교통비</option>
-													<option value="3">비품비</option>
-													<option value="4">식대</option>
+								<td class="table-td"><select name ="workforce_type">
+													<option value="2">PL</option>
+													<option value="3">DA</option>
+													<option value="4">TA</option>
+													<option value="5">AA</option>
+													<option value="6">BA</option>
 									</select></td>
 							</tr>
 							<tr>
 								<td class="name-td">제목</td>
-								<td colspan="5"><input id="budget_name" type="text" name="budget_name" placeholder="제목을 입력하여 주세요." /></td>
+								<td colspan="5"><input id="workforce_name" type="text" name="workforce_name" placeholder="제목을 입력하여 주세요." /></td>
 							</tr>
 							<tr>
-								<td class="name-td">예산 금액</td>
-								<td colspan="5"><input type="text" name="budget_price" placeholder="금액을 입력하여 주세요." /></td>
-								<!-- <td class="table-td" colspan="3"><input class="datepicker" name="budget_startdate" ></td>
+								<td class="name-td">시작날짜</td>
+								<td class="table-td" colspan="3"><input class="datepicker" name="workforce_startdate" ></td>
 								<td class="name-td">종료날짜</td>
-								<td class="table-td" colspan="3"><input class="datepicker" name="budget_enddate"></td> -->
+								<td class="table-td" colspan="3"><input class="datepicker" name="workforce_enddate"></td>
 								
 							</tr>
-							
 							<tr style="height: 100px;">
 								<td class="name-td">내용</td>
-								<td class="table-td td-summernote" colspan="5"><textarea class="summernote" rows="15" cols="40" style="display:none;" name="budget_detail"></textarea></td>
+								<td class="table-td td-summernote" colspan="5"><textarea class="summernote" rows="15" cols="40" style="display:none;" name="workforce_detail"></textarea></td>
 							</tr>
 
 							<tr>
 								<td class="name-td">프로젝트명</td>
-								<td class="table-td"><select name="budget_project_number" >
+								<td class="table-td"><select name="workforce_project_number" >
 									<option value="1">미정</option>
 									</select></td>
 								<td class="table-td"></td>
@@ -155,9 +158,9 @@ input {
 	};
 	
 	function regist_go(){
-		var form = $('form[name="registBudgetForm"]')[0];
+		var form = $('form[name="registWorkforceForm"]')[0];
 			//var form = document.registBudegetForm;
-			/* if(form.budget_name.value==""){
+			/* if(form.workforce_name.value==""){
 				alert("제목은 필수입니다.");
 				return;
 			} */

@@ -14,6 +14,10 @@
 			and project_discription like '%'||#{keyword}||'%'
 		</if>
 		
+		<if test="member_id != null">
+			and project_member_id =  #{member_id}
+		</if>
+		
 		<if test="status != null and status != 0 ">
 			and project_status =  #{status}
 		</if>

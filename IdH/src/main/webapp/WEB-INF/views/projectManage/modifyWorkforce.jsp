@@ -71,7 +71,7 @@ input {
 	<!-- 사업 일정 상세 정보 -->
 	<div class="col">
 		<div class="card card-info">
-			<div class="card-header">
+			<div class="card-header bg-info">
 				<h3 class="card-title">인력수정</h3>
 				<div class="card-tools">
 					<div class="input-group input-group-sm" style="width: 150px;">
@@ -81,6 +81,7 @@ input {
 			</div>
 			<div id="content">
 				<form enctype="multiaprt/form-data" role="form" method="post" action="modifyWorkforce" name="modifyWorkforceForm">
+				<input type="hidden" name="workforce_status" value="2">
 				<input type="hidden" name="workforce_number" value="${workforce.workforce_number }"/>
 				<div id="table-content">
 					<table>
@@ -98,9 +99,11 @@ input {
 								<td class="table-td" colspan="3" ><input type="text" name="workforce_member_id" value="${workforce.workforce_member_id}" readonly></td>
 								<td class="name-td">분류</td>
 								<td class="table-td"><select name ="workforce_type">
-													<option value="1">보통</option>
-													<option value="2">위급</option>
-													<option value="3">위험</option>
+													<option value="2" ${workforce.workforce_type eq 2 ? 'selected' : '' }>PL</option>
+													<option value="3" ${workforce.workforce_type eq 3 ? 'selected' : '' }>DA</option>
+													<option value="4" ${workforce.workforce_type eq 4 ? 'selected' : '' }>TA</option>
+													<option value="5" ${workforce.workforce_type eq 5 ? 'selected' : '' }>AA</option>
+													<option value="6" ${workforce.workforce_type eq 6 ? 'selected' : '' }>BA</option>
 									</select></td>
 							</tr>
 							<tr>
@@ -123,7 +126,6 @@ input {
 							<tr>
 								<td class="name-td">프로젝트명</td>
 								<td class="table-td">${workforce.workforce_project_number }<select>
-													
 									</select></td>
 							</tr>
 						</tbody>

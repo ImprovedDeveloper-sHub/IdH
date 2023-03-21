@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
- <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
   
+
 <!-- CSS start -->
 
 <style>
@@ -71,18 +71,22 @@ input {
 	<!-- 사업 일정 상세 정보 -->
 	<div class="col">
 		<div class="card card-info">
-			<div class="card-header">
-				<h3 class="card-title">일정수정</h3>
+			<div class="card-header bg-info">
 				<div class="card-tools">
-					<div class="input-group input-group-sm" style="width: 150px;">
-						<div class="input-group-append"></div>
+					<div class="input-group input-group-sm" style="width: 400px;">
+						<div class="input-group-append">
+						<input id="" type="button" class="btn btn-sm" onclick="location.href='<%=request.getContextPath()%>/projectManage/registSchedulePlanForm';" value="일정 계획"></input>
+						<input id="" type="button" class="btn btn-info btn-sm" onclick="location.href='<%=request.getContextPath()%>/projectManage/registBudgetPlanForm';" value="예산 계획"></input>
+						<input id="" type="button" class="btn btn-info btn-sm" onclick="location.href='<%=request.getContextPath()%>/projectManage/registWorkforcePlanForm';" value="인력 계획"></input>
+						<input id="" type="button" class="btn btn-info btn-sm" onclick="location.href='<%=request.getContextPath()%>/projectManage/registUnitworkPlanForm';" value="단위업무 계획"></input>
+						</div>
+						
 					</div>
 				</div>
 			</div>
 			<div id="content">
-				<form enctype="multiaprt/form-data" role="form" method="post" action="modifySchedule" name="modifyScheduleForm">
-				<input type="hidden" name="schedule_status" value="2">
-				<input type="hidden" name="schedule_number" value="${schedule.schedule_number }"/>
+				<form enctype="multiaprt/form-data" role="form" method="post" action="registSchedule" name="registSchdeuleForm">
+				<input type="hidden" name="schedule_status" value="1">
 				<div id="table-content">
 					<table>
 						<thead>
@@ -96,9 +100,10 @@ input {
 						<tbody>
 							<tr>
 								<td class="name-td">등록자</td>
-								<td class="table-td" colspan="3" ><input type="text" name="schedule_member_id" value="${loginUser.member_id} " /></td>
+								<td class="table-td" colspan="3" ><input type="text" name="schedule_member_id" value="${loginUser.member_id}" readonly></td>
 								<td class="name-td">분류</td>
-								<td class="table-td"><select name ="schedule_level">
+								<td class="table-td">
+									<select name ="schedule_type">
 													<option value="1">기획</option>
 													<option value="2">설계</option>
 													<option value="3">구현</option>
@@ -107,28 +112,24 @@ input {
 							</tr>
 							<tr>
 								<td class="name-td">시작날짜</td>
-								<td class="table-td" colspan="3"><fmt:formatDate value="${schedule.schedule_startdate }" pattern ="yyyy-MM-dd"/></td>
+								<td class="table-td" colspan="3"><input class="datepicker" name="schedule_startdate" ></td>
 								<td class="name-td">종료날짜</td>
-								<td class="table-td" colspan="3"><input class="datepicker" name="schedule_enddate" value="<fmt:formatDate value="${schedule.schedule_enddate }" pattern ="yyyy/MM/dd"/>"></td>
-								
+								<td class="table-td" colspan="3"><input class="datepicker" name="schedule_enddate"></td>
 							</tr>
 							<tr>
 								<td class="name-td">제목</td>
-								<td colspan="5"><input type="text" name="schedule_name" value=${schedule.schedule_name }
-									 /></td>
+								<td colspan="5"><input type="text" name="schedule_name" placeholder="제목을 입력하여 주세요." /></td>
 							</tr>
 							<tr style="height: 100px;">
 								<td class="name-td">내용</td>
-								<td class="table-td td-summernote" colspan="5"><textarea class="summernote" rows="15" cols="40" style="display:none;" name="schedule_detail">${schedule.schedule_detail }</textarea></td>
+								<td class="table-td td-summernote" colspan="5"><textarea class="summernote" rows="15" cols="40" style="display:none;" name="schedule_detail"></textarea></td>
 							</tr>
 
 							<tr>
 								<td class="name-td">프로젝트명</td>
-								<td class="table-td">${schedule.schedule_project_number }<select>
-													
+								<td class="table-td"><select name="schedule_project_number" >
+									<option value="1">미정</option>
 									</select></td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -137,29 +138,32 @@ input {
 			</div>
 			<div class="card-tools" style="margin-left:auto">
             <button type="button" id="regbtn" class="btn btn-info"
-               onclick="modify_go();">수정</button>
+               onclick="regist_go();">등록</button>
             <button type="button" id="close" class="btn btn-info"
-               onclick="CloseWindow();">취소</button>
+               onclick="CloseWindow();">닫기</button>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
+
 <script>
 	window.onload = function() {
 		summernote_go($('.summernote'),'<%=request.getContextPath()%>');
 		$('.datepicker').datepicker();
 	};
 	
-	function modify_go(){
+	function regist_go(){
 		//var form = $('form[name="registSchdeulForm"]')[0];
-			var form = document.modifyScheduleForm;
-			/* if(form.schedule_name.value==""){
+			var form = document.registSchdeuleForm;
+			if(form.schedule_name.value==""){
 				alert("제목은 필수입니다.");
 				return;
 			}
-			 */
+			
 			form.submit();
 		}
+	
+	
 </script>
+
 

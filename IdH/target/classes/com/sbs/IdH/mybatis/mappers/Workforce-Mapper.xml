@@ -71,7 +71,7 @@
 		insert 
 		into 
 		workforce(workforce_number,workforce_status,workforce_detail,workforce_name,workforce_project_number,workforce_member_id,workforce_regdate, workforce_startdate, workforce_enddate, workforce_type)
-		values(#{workforce_number},0,#{workforce_detail},#{workforce_name},#{workforce_project_number},#{workforce_member_id},sysdate, #{workforce_startdate},#{workforce_enddate}, #{workforce_type})
+		values(#{workforce_number},#{workforce_status},#{workforce_detail},#{workforce_name},#{workforce_project_number},#{workforce_member_id},sysdate, #{workforce_startdate},#{workforce_enddate}, #{workforce_type})
 	</update>
 	
 	

@@ -71,7 +71,7 @@ input {
 	<!-- 사업 일정 상세 정보 -->
 	<div class="col">
 		<div class="card card-info">
-			<div class="card-header">
+			<div class="card-header bg-info">
 				<h3 class="card-title">일정등록</h3>
 				<div class="card-tools">
 					<div class="input-group input-group-sm" style="width: 150px;">
@@ -81,6 +81,7 @@ input {
 			</div>
 			<div id="content">
 				<form enctype="multiaprt/form-data" role="form" method="post" action="registSchedule" name="registSchdeuleForm">
+				<input type="hidden" name="schedule_status" value="2">
 				<div id="table-content">
 					<table>
 						<thead>

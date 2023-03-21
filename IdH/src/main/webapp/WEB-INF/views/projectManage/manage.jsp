@@ -224,9 +224,9 @@
 									<th style="width: 15%">인력 상태</th>
 									<th style="width: 15%; text-align: center;" >이름</th>
 									<th style="width: 30%">인력 이름</th>
-									<th style="width: 10%">인력 구분</th>
-									<th style="width: 20%">인력 날짜</th>
-									<th style="width: 15%">요구사항</th>
+									<th style="width: 15%">인력 구분</th>
+									<th style="width: 15%">시작 날짜</th>
+									<th style="width: 15%">종료 날짜</th>
 								</tr>
 							</thead>
 
@@ -247,12 +247,13 @@
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workforce.workforce_name}</td>
 										<td
-											style="text-align: left; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workforce.workforce_type eq '1' ? '보통':''}</td>
+											style="text-align: left; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workforce.workforce_type eq '1' ? 'PM':''}${workforce.workforce_type eq '2' ? 'PL':''}${workforce.workforce_type eq '3' ? 'DA':''}${workforce.workforce_type eq '4' ? 'TA':''}${workforce.workforce_type eq '5' ? 'AA':''}${workforce.workforce_type eq '6' ? 'BA':''}</td>
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
-												value="${workforce.workforce_regdate}" pattern="yyyy-MM-dd" /></td>
+												value="${workforce.workforce_startdate}" pattern="yyyy-MM-dd" /></td>
 										<td
-											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">test</td>
+											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
+												value="${workforce.workforce_enddate}" pattern="yyyy-MM-dd" /></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -299,11 +300,11 @@
 						<table class="table table-hover">
 							<thead class="unitworkThead" class="text-left">
 								<tr>
-									<th style="width: 10%">업무 상태</th>
+									<th style="width: 15%">프로젝트 상태</th>
 									<th style="width: 20%">업무명</th>
-									<th style="width: 15%">업무난이도</th>
+									<th style="width: 15%">업무세부</th>
 									<th style="width: 10%">작성자</th>
-									<th style="width: 20%">시작날짜</th>
+									<th style="width: 15%">시작날짜</th>
 									<th style="width: 15%">종료날짜</th>
 								</tr>
 							</thead>
@@ -319,7 +320,7 @@
 										onclick="OpenWindow('unitworkDetail?unitwork_number=${unitwork.unitwork_number}','단위업무',580,600);">
 										<td>${unitwork.unitwork_status eq 1 ? '계획' : '진행'}</td>
 										<td>${unitwork.unitwork_name}</td>
-										<td>${unitwork.unitwork_level eq 1 ? '진행중' : ''}${unitwork.unitwork_level eq 2 ? '지연' : ''}${unitwork.unitwork_level eq 3 ? '예정' : ''}${unitwork.unitwork_level eq 4 ? '완료' : ''}</td>
+										<td>${unitwork.unitwork_level eq 1 ? '진행중' : ''}${unitwork.unitwork_level eq 2 ? '지연' : ''}${unitwork.unitwork_level eq 3 ? '예정' : ''}${unitwork.unitwork_level eq 4 ? '지연2' : ''}${unitwork.unitwork_level eq 5 ? '완료' : ''}</td>
 										<td>${unitwork.unitwork_setter_id}</td>
 										<td><fmt:formatDate pattern="yyyy-MM-dd"
 												value="${unitwork.unitwork_startdate}" /></td>
@@ -364,23 +365,86 @@
 		    $("#project_selector").on("change", function() {
 		        var project_number = $('#project_selector').val();
 		       //alert("셀렉트값 : "+project_number);
-		       $.ajax({
-		    	    url:'scheduleList?project_number='+project_number,
-		    	    type:"GET",
-		    	    success:function(data){
-		    	    	/* alert(JSON.stringify(data));
-		    	    	console.log(data); */
-		    	    	$('#schedule_content').html("").html(data);
-		    	    },
-		       		error:function(error){
-		       			alert('error');
-		       		}
-		       })
+		       print_scheduleList(project_number);
+		       print_budgetList(project_number);
+		       print_unitworkList(project_number);
+		       print_workforceList(project_number);
 		    });
 		});
 	};
 </script>
 
+
+
+<script>
+function print_budgetList(project_number){
+	$.ajax({
+	    url:'budgetList?project_number='+project_number,
+	    type:"GET",
+	    success:function(data){
+	    	/* alert(JSON.stringify(data));
+	    	console.log(data); */
+	    	$('#budget_content').html("").html(data);
+	    },
+   		error:function(error){
+   			alert('error');
+   		}
+   })
+	
+}
+
+function print_scheduleList(project_number){
+	$.ajax({
+	    url:'scheduleList?project_number='+project_number,
+	    type:"GET",
+	    success:function(data){
+	    	/* alert(JSON.stringify(data));
+	    	console.log(data); */
+	    	$('#schedule_content').html("").html(data);
+	    },
+   		error:function(error){
+   			alert('error');
+   		}
+   })
+	
+}
+
+
+function print_unitworkList(project_number){
+	$.ajax({
+	    url:'unitworkList?project_number='+project_number,
+	    type:"GET",
+	    success:function(data){
+	    	/* alert(JSON.stringify(data));
+	    	console.log(data); */
+	    	$('#unitwork_content').html("").html(data);
+	    },
+   		error:function(error){
+   			alert('error');
+   		}
+   })
+	
+}
+
+
+function print_workforceList(project_number){
+	$.ajax({
+	    url:'workforceList?project_number='+project_number,
+	    type:"GET",
+	    success:function(data){
+	    	/* alert(JSON.stringify(data));
+	    	console.log(data); */
+	    	$('#workforce_content').html("").html(data);
+	    },
+   		error:function(error){
+   			alert('error');
+   		}
+   })
+	
+}
+
+
+</script>
 
 <script>
 
