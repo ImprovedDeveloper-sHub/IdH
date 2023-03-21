@@ -4,13 +4,13 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Product_Attach-Mapper">
-	<select id="selectAttachByProduct_number" resultType="product_attach">
+	<select id="selectAttachByProduct_number" resultType="Product_attach">
 		select * 
 		from product_attach 
 		where product_number = #{product_number}
 	</select>	
 	
-	<select id="selectProduct_AttachByAno" resultType="product_attach">
+	<select id="selectProduct_AttachByAno" resultType="Product_attach">
 		select *
 		from product_attach
 		where ano=#{ano}

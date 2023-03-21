@@ -149,6 +149,12 @@ public class ProductServiceImpl implements ProductService {
 		int product_number = productDAO.selectProductSeqNextValue();
 		product.setProduct_number(product_number);
 		productDAO.insertProduct(product);
+		if (product.getAttachList() != null)
+	         for (Product_AttachVO attach :product.getAttachList()) {
+	            attach.setProduct_number(product_number);
+	            attach.setProduct_attach_attacher(product.getProduct_member_id());
+	            product_attachDAO.insertProduct_Attach(attach);
+	         }
 
 	}
 

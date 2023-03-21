@@ -96,14 +96,14 @@ input {
 							<tr style="height: 100px;">
 							<td class="name-td">내용</td>
 								<td class="table-td">${companyrule.companyrule_content }</td>
+								
 							</tr>
 							<!-- 첨부파일 -->
                              
 						</tbody>
 					</table>
+					
 					</form>
-										
-							
 						
 				</div>
 			</div>

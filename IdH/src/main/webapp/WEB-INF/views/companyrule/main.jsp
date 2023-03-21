@@ -18,10 +18,10 @@ padding:0 !important;
 <!--header row종료 -->
 
 
-<div class="row">
-	<div class=" col-6">
+<div class="row" >
+	<div class=" col-6" style="height: 630px;">
 		
-			<div id="content" class="card">
+			<div id="content" class="card" style="height:100%;">
 				<div class="card-header bg-info">
 					<h3 class="card-title">정책관리</h3>
 				</div>
@@ -54,16 +54,17 @@ padding:0 !important;
 				<div id="table-content">
 					<div class="card-body table-responsive p-0">
 						<table class="table table-hover"
-							style="table-layout: fixed; width: 100%;">
-							<thead class="text-left">
+							style="table-layout: fixed; width: 100%;" >
+							<thead class="text-left" >
 								<tr>
-									<th style="width: 15%">번호</th>
-									<th style="width: 20%">제목</th>
-									<th style="width: 15%">담당자</th>
-									<th style="width: 15%">등록일</th>
-									<th style="width: 35%">내용</th>
+								<th style="width: 10%">번호</th>
+								<th style="width: 15%">제목</th>
+								<th style="width: 10%">담당자</th>
+								<th style="width: 10%">등록일</th>
+								<th style="width: 35%">내용</th>
+								<th style="width: 20%">첨부파일</th>
 
-								</tr>
+							</tr>
 							</thead>
 							<tbody class="text-left">
 								<c:if test="${empty companyruleList}">
@@ -72,7 +73,7 @@ padding:0 !important;
 									</tr>
 								</c:if>
 								<c:forEach items="${companyruleList }" var="companyrule">
-									<tr
+									<tr 
 										onclick="OpenWindow('detail?companyrule_number=${companyrule.companyrule_number }&from=list','상세보기',680,400);"
 										style="cursor: pointer;">
 										<td
@@ -88,6 +89,13 @@ padding:0 !important;
 										<td
 											style="text-align: left; max-width: 35%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${companyrule.companyrule_content}</td>
 
+                                    <td>
+										<!-- 첨부파일 --> <c:if test="${!empty product.attachList }">
+											<i class="nav-icon fas fa-file"></i>
+										</c:if> <c:if test="${empty product.attachList }">
+											<span>-</span>
+										</c:if>
+									</td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -134,8 +142,8 @@ padding:0 !important;
 		</div>
 		
 		
-			<div class="col-6">
-				<div id="content" class="card">
+			<div class="col-6" style="height: 630px;">
+				<div id="content" class="card" style="height: 100%;">
 					<div class="card-header bg-info">
 						<h3 class="card-title">산출물관리</h3>
 					</div>

@@ -11,8 +11,8 @@
 
 
 <div class="row">
-	<div class="content-parts col-8">
-		<div id="content" class="card">
+	<div class="content-parts col-8" style="height: 630px;">
+		<div id="content" class="card" style="height: 100%;">
 			<div class="card-header bg-info">
 				<h3 class="card-title">산출물연계진행</h3>
 			</div>
