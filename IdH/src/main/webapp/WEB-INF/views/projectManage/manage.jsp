@@ -11,9 +11,9 @@
 <div class="content">
 
 	<div class="row">
-		<div class="card-tools"
+		<div class="card-tools col"
 			style="justify-content: space-between; display: flex; flex-direction: row-reverse;">
-			<div class="input-group input-group-sm" style="width: 270px">
+			<div class="input-group input-group-sm" style="width: 300px; padding:2px;">
 				<select class="form-control-sm" name="project_number" id="project_selector" style="hegith:30px; width:100% !important; border-color:#CED4DA !important;">
 							<option value="">전체 프로젝트</option>
 							<c:forEach items="${projectList}" var="project">
@@ -30,7 +30,7 @@
 
 		<!--col-6시작-->
 		<div class="col-6">
-			<div id="schedule_content" class="card boarder-info-2">
+			<div id="schedule_content" class="card boarder-info-2" style="height:280px;">
 				<div class="card-header bg-info">
 					<h3 class="card-title">일정관리</h3>
 				</div>
@@ -48,7 +48,7 @@
 							class="form-control float-right" placeholder="Search">
 						<div class="input-group-append">
 							<button type="submit" class="btn btn-default"
-								onclick="search_go_ajax(0, '<%=request.getContextPath()%>/projectManage/getProceeding', $('.proceedingThead'),$('#proceedingProject-list-template'))">
+								onclick="print_scheduleList(1,0)">
 								<i class="fas fa-search"></i>
 							</button>
 
@@ -105,13 +105,45 @@
 							</tbody>
 
 						</table>
+						<div><nav id="paginationNav" aria-label="Navigation">
+		<ul class="pagination justify-content-center m-0">
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_scheduleList(1);">
+					<i class="fas fa-angle-double-left"></i>
+				</a>
+			</li>
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_scheduleList(${pageMaker.prev ? pageMaker.startPage-1 : pageMaker.cri.page},${project_num});">
+					<i class="fas fa-angle-left"></i>
+				</a>						
+			</li>
+			<c:forEach var="pageNum" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
+	
+			<li class="page-item ${pageMaker.cri.page == pageNum?'active':''}">
+				<a class="page-link" href="javascript:print_scheduleList('${pageNum}',${project_num} );" >${pageNum }</a>
+			</li>
+			</c:forEach>
+			
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_scheduleList(${pageMaker.next ? pageMaker.endPage+1 :pageMaker.cri.page}, ${project_num});">
+					<i class="fas fa-angle-right" ></i>
+				</a>
+			</li>
+			
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_scheduleList('${pageMaker.realEndPage}',${project_num});">
+					<i class="fas fa-angle-double-right"></i>
+				</a>
+			</li>	
+		</ul>
+	</nav></div>
 					</div>
 
 
 				</div>
 			</div>
 
-			<div id="budget_content" class="card">
+			<div id="budget_content" class="card" style="height:280px;">
 				<div class="card-header bg-info">
 					<h3 class="card-title">예산 관리</h3>
 				</div>
@@ -129,7 +161,7 @@
 							class="form-control float-right" placeholder="Search">
 						<div class="input-group-append">
 							<button type="submit" class="btn btn-default"
-								onclick="search_go_ajax(0, '<%=request.getContextPath()%>/projectManage/getEnd', $('.endThead'),$('#endProject-list-template'))">
+								onclick="print_budgetList(1,0)">
 								<i class="fas fa-search"></i>
 							</button>
 
@@ -174,6 +206,44 @@
 							</tbody>
 
 						</table>
+						<div>
+						 		<nav id="paginationNav" aria-label="Navigation">
+		<ul class="pagination justify-content-center m-0">
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_budgetList(1,'${project_num}');">
+					<i class="fas fa-angle-double-left"></i>
+				</a>
+			</li>
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_budgetList(${pageMaker.prev ? pageMaker.startPage-1 : pageMaker.cri.page});">
+					<i class="fas fa-angle-left"></i>
+				</a>						
+			</li>
+			<c:forEach var="pageNum" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
+	
+			<li class="page-item ${pageMaker.cri.page == pageNum?'active':''}">
+				<a class="page-link" href="javascript:print_budgetList('${pageNum}','${project_num}');" >${pageNum }</a>
+			</li>
+			</c:forEach>
+			
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_budgetList(${pageMaker.next ? pageMaker.endPage+1 :pageMaker.cri.page},'${project_num}');">
+					<i class="fas fa-angle-right" ></i>
+				</a>
+			</li>
+			
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_budgetList('${pageMaker.realEndPage}','${project_num}');">
+					<i class="fas fa-angle-double-right"></i>
+				</a>
+			</li>	
+		</ul>
+	</nav>
+	
+						 
+						 
+						 
+						 </div>
 					</div>
 
 
@@ -187,7 +257,7 @@
 		</div>
 
 		<div class="col-6">
-			<div id="workforce_content" class="card">
+			<div id="workforce_content" class="card" style="height:280px;">
 				<div class="card-header bg-info">
 					<h3 class="card-title">인력 프로젝트</h3>
 				</div>
@@ -205,7 +275,7 @@
 							class="form-control float-right" placeholder="Search">
 						<div class="input-group-append">
 							<button type="submit" class="btn btn-default"
-								onclick="search_go_ajax(0, '<%=request.getContextPath()%>/projectManage/getProceeding', $('.proceedingThead'),$('#proceedingProject-list-template'))">
+								onclick="print_workforceList(1,0)">
 								<i class="fas fa-search"></i>
 							</button>
 
@@ -259,13 +329,45 @@
 							</tbody>
 
 						</table>
+						<div><nav id="paginationNav" aria-label="Navigation">
+		<ul class="pagination justify-content-center m-0">
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_workforceList(1);">
+					<i class="fas fa-angle-double-left"></i>
+				</a>
+			</li>
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_workforceList(${pageMaker.prev ? pageMaker.startPage-1 : pageMaker.cri.page},${project_num});">
+					<i class="fas fa-angle-left"></i>
+				</a>						
+			</li>
+			<c:forEach var="pageNum" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
+	
+			<li class="page-item ${pageMaker.cri.page == pageNum?'active':''}">
+				<a class="page-link" href="javascript:print_workforceList('${pageNum}',${project_num});" >${pageNum }</a>
+			</li>
+			</c:forEach>
+			
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_workforceList(${pageMaker.next ? pageMaker.endPage+1 :pageMaker.cri.page},${project_num});">
+					<i class="fas fa-angle-right" ></i>
+				</a>
+			</li>
+			
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_workforceList('${pageMaker.realEndPage},${project_num} ');">
+					<i class="fas fa-angle-double-right"></i>
+				</a>
+			</li>	
+		</ul>
+	</nav></div>
 					</div>
 
 
 				</div>
 			</div>
 
-			<div id="unitwork_content" class="card">
+			<div id="unitwork_content" class="card" style="height:280px;">
 				<div class="card-header bg-info">
 					<h3 class="card-title">단위업무</h3>
 				</div>
@@ -283,7 +385,7 @@
 							class="form-control float-right" placeholder="Search">
 						<div class="input-group-append">
 							<button type="submit" class="btn btn-default"
-								onclick="search_go_ajax(0, '<%=request.getContextPath()%>/projectManage/getEnd', $('.endThead'),$('#endProject-list-template'))">
+								onclick="print_unitworkList(1,0)">
 								<i class="fas fa-search"></i>
 							</button>
 
@@ -331,6 +433,43 @@
 							</tbody>
 
 						</table>
+						<div>
+								<nav id="paginationNav" aria-label="Navigation">
+		<ul class="pagination justify-content-center m-0">
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_unitworkList(1);">
+					<i class="fas fa-angle-double-left"></i>
+				</a>
+			</li>
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_unitworkList(${pageMaker.prev ? pageMaker.startPage-1 : pageMaker.cri.page},${project_num});">
+					<i class="fas fa-angle-left"></i>
+				</a>						
+			</li>
+			<c:forEach var="pageNum" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
+	
+			<li class="page-item ${pageMaker.cri.page == pageNum?'active':''}">
+				<a class="page-link" href="javascript:print_unitworkList('${pageNum}',${project_num});" >${pageNum }</a>
+			</li>
+			</c:forEach>
+			
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_unitworkList(${pageMaker.next ? pageMaker.endPage+1 :pageMaker.cri.page},${project_num});">
+					<i class="fas fa-angle-right" ></i>
+				</a>
+			</li>
+			
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_unitworkList('${pageMaker.realEndPage}',${project_num});">
+					<i class="fas fa-angle-double-right"></i>
+				</a>
+			</li>	
+		</ul>
+	</nav>
+	
+	
+
+						</div>
 					</div>
 
 
@@ -363,42 +502,121 @@
 		//프로젝트 셀렉트
 		    $("#project_selector").on("change", function() {
 		       var project_num = $('#project_selector').val();
-		       alert(project_num);
+		       //alert(project_num);
+		       if(!project_num){
+		    	   location.reload();
+		    	   return;
+		    	   }
+		       
+		       
+		       
 		       print_budgetList(1,project_num);
+		       print_scheduleList(1,project_num);
+		       print_unitworkList(1,project_num);
+		       print_workforceList(1,project_num);
 		    });
 		
 		
 		
 		
-		    function print_budgetList(page,project_num){
-		    	var jobForm=$('#jobForm');
-		    	//jobForm.find("[name='project_number']").val(project_num.trim());
-		    	console.log(jobForm.find("[name='project_number']").val());
-		    	jobForm.find("[name='page']").val('1');
-		    	jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
-		    	jobForm.find("[name='searchType']").val($('select[name="searchType"]').val());
-		    	jobForm.find("[name='keyword']").val('');
-		    	
-		    	
-		    	alert(jobForm.serialize());
-		    	$.ajax({
-		    	    url:'budgetList',
-		    	    data: jobForm.serialize(),
-		    	    type:"POST",
-		    	    success:function(data){
-		    	    	$('#budget_content').html("").html(data);
-		    	    },
-		       		error:function(error){
-		       			alert('error');
-		       		}
-		       })
-		    }
+		    
 	}
 </script>
 
 
 <script>
+function print_budgetList(page,project_num){
+	var jobForm=$('#manageForm');
+	
+	//jobForm.find("[name='project_number']").val(project_num.trim());
+	//console.log(jobForm.find("[name='project_number']").val());
+	jobForm.find("[name='page']").val(page);
+	jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
+	jobForm.find("[name='searchType']").val($('select[name="searchType"]').val());
+	jobForm.find("[name='keyword']").val('select[name="keyword"]');
+	jobForm.find("[name='project_number']").val(project_num);
+	$.ajax({
+	    url:'budgetList',
+	    data: jobForm.serialize(),
+	    type:"POST",
+	    success:function(data){
+	    	$('#budget_content').html("").html(data);
+	    },
+   		error:function(error){
+   			alert('error');
+   		}
+   })
+}
 
+
+function print_scheduleList(page,project_num){
+	var jobForm=$('#manageForm');
+	//jobForm.find("[name='project_number']").val(project_num.trim());
+	//console.log(jobForm.find("[name='project_number']").val());
+	jobForm.find("[name='page']").val(page);
+	jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
+	jobForm.find("[name='searchType']").val($('select[name="searchType"]').val());
+	jobForm.find("[name='keyword']").val('select[name="keyword"]');
+	jobForm.find("[name='project_number']").val(project_num);
+	$.ajax({
+	    url:'scheduleList',
+	    data: jobForm.serialize(),
+	    type:"POST",
+	    success:function(data){
+	    	$('#schedule_content').html("").html(data);
+	    },
+   		error:function(error){
+   			alert('error');
+   		}
+   })
+}
+
+
+function print_unitworkList(page,project_num){
+	var jobForm=$('#manageForm');
+	//jobForm.find("[name='project_number']").val(project_num.trim());
+	//console.log(jobForm.find("[name='project_number']").val());
+	jobForm.find("[name='page']").val(page);
+	jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
+	jobForm.find("[name='searchType']").val($('select[name="searchType"]').val());
+	jobForm.find("[name='keyword']").val('select[name="keyword"]');
+	jobForm.find("[name='project_number']").val(project_num);
+	$.ajax({
+	    url:'unitworkList',
+	    data: jobForm.serialize(),
+	    type:"POST",
+	    success:function(data){
+	    	$('#unitwork_content').html("").html(data);
+	    },
+   		error:function(error){
+   			alert('error');
+   		}
+   })
+}
+
+
+function print_workforceList(page,project_num){
+	var jobForm=$('#manageForm');
+	//jobForm.find("[name='project_number']").val(project_num.trim());
+	//console.log(jobForm.find("[name='project_number']").val());
+	jobForm.find("[name='page']").val(page);
+	jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
+	jobForm.find("[name='searchType']").val($('select[name="searchType"]').val());
+	jobForm.find("[name='keyword']").val('select[name="keyword"]');
+	jobForm.find("[name='project_number']").val(project_num);
+	$.ajax({
+	    url:'workforceList',
+	    data: jobForm.serialize(),
+	    type:"POST",
+	    success:function(data){
+	    	$('#workforce_content').html("").html(data);
+	    },
+   		error:function(error){
+   			
+   			alert('error');
+   		}
+   })
+}
 
 
 

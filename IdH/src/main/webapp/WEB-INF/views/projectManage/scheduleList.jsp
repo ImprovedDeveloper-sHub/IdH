@@ -21,7 +21,7 @@
 							class="form-control float-right" placeholder="Search">
 						<div class="input-group-append">
 							<button type="submit" class="btn btn-default"
-								onclick="search_go_ajax(0, '<%=request.getContextPath()%>/projectManage/getProceeding', $('.proceedingThead'),$('#proceedingProject-list-template'))">
+								onclick="print_scheduleList(1,0)">
 								<i class="fas fa-search"></i>
 							</button>
 
@@ -87,25 +87,25 @@
 				</a>
 			</li>
 			<li class="page-item">
-				<a class="page-link" href="javascript:print_scheduleList(${pageMaker.prev ? pageMaker.startPage-1 : pageMaker.cri.page});">
+				<a class="page-link" href="javascript:print_scheduleList(${pageMaker.prev ? pageMaker.startPage-1 : pageMaker.cri.page},${project_num});">
 					<i class="fas fa-angle-left"></i>
 				</a>						
 			</li>
 			<c:forEach var="pageNum" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
 	
 			<li class="page-item ${pageMaker.cri.page == pageNum?'active':''}">
-				<a class="page-link" href="javascript:print_scheduleList('${pageNum}');" >${pageNum }</a>
+				<a class="page-link" href="javascript:print_scheduleList('${pageNum}',${project_num} );" >${pageNum }</a>
 			</li>
 			</c:forEach>
 			
 			<li class="page-item">
-				<a class="page-link" href="javascript:print_scheduleList(${pageMaker.next ? pageMaker.endPage+1 :pageMaker.cri.page});">
+				<a class="page-link" href="javascript:print_scheduleList(${pageMaker.next ? pageMaker.endPage+1 :pageMaker.cri.page}, ${project_num});">
 					<i class="fas fa-angle-right" ></i>
 				</a>
 			</li>
 			
 			<li class="page-item">
-				<a class="page-link" href="javascript:print_scheduleList('${pageMaker.realEndPage}');">
+				<a class="page-link" href="javascript:print_scheduleList('${pageMaker.realEndPage}',${project_num});">
 					<i class="fas fa-angle-double-right"></i>
 				</a>
 			</li>	

@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
     
 <!DOCTYPE html>
+
 <div class="card-header bg-info">
 					<h3 class="card-title">예산 관리</h3>
 				</div>
@@ -21,7 +22,7 @@
 							class="form-control float-right" placeholder="Search">
 						<div class="input-group-append">
 							<button type="submit" class="btn btn-default"
-								onclick="search_go_ajax(0, '<%=request.getContextPath()%>/projectManage/getEnd', $('.endThead'),$('#endProject-list-template'))">
+								onclick="print_budgetList(1,0)">
 								<i class="fas fa-search"></i>
 							</button>
 
@@ -70,7 +71,7 @@
 						 		<nav id="paginationNav" aria-label="Navigation">
 		<ul class="pagination justify-content-center m-0">
 			<li class="page-item">
-				<a class="page-link" href="javascript:print_budgetList(1);">
+				<a class="page-link" href="javascript:print_budgetList(1,'${project_num}');">
 					<i class="fas fa-angle-double-left"></i>
 				</a>
 			</li>
@@ -82,18 +83,18 @@
 			<c:forEach var="pageNum" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
 	
 			<li class="page-item ${pageMaker.cri.page == pageNum?'active':''}">
-				<a class="page-link" href="javascript:print_budgetList('${pageNum}');" >${pageNum }</a>
+				<a class="page-link" href="javascript:print_budgetList('${pageNum}','${project_num}');" >${pageNum }</a>
 			</li>
 			</c:forEach>
 			
 			<li class="page-item">
-				<a class="page-link" href="javascript:print_budgetList(${pageMaker.next ? pageMaker.endPage+1 :pageMaker.cri.page});">
+				<a class="page-link" href="javascript:print_budgetList(${pageMaker.next ? pageMaker.endPage+1 :pageMaker.cri.page},'${project_num}');">
 					<i class="fas fa-angle-right" ></i>
 				</a>
 			</li>
 			
 			<li class="page-item">
-				<a class="page-link" href="javascript:print_budgetList('${pageMaker.realEndPage}');">
+				<a class="page-link" href="javascript:print_budgetList('${pageMaker.realEndPage}','${project_num}');">
 					<i class="fas fa-angle-double-right"></i>
 				</a>
 			</li>	
@@ -108,5 +109,6 @@
 
 
 				</div>
+			
 				
 				

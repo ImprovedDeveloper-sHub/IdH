@@ -93,6 +93,8 @@ public class ProjectManageController {
 		mnv.addAllObjects(unitworkService.selectUnitworkList(cri4));
 		SearchCriteria cri5 = cri.newCri();
 		mnv.addAllObjects(scheduleService.selectScheduleList(cri5));
+		
+		mnv.addObject("project_num", 0);
 		return mnv;
 	}
 
@@ -482,7 +484,6 @@ public class ProjectManageController {
 	@GetMapping("/getManage")
 	@ResponseBody
 	public ResponseEntity<Map<String,Object>> getManage(int project_number) throws Exception{
-		
 		ResponseEntity <Map<String,Object>> responseEntity = null;
 		SearchCriteria cri = new SearchCriteria();
 		cri.setProject_number(project_number);
@@ -501,11 +502,11 @@ public class ProjectManageController {
 	@PostMapping("/scheduleList")
 	@ResponseBody
 	public ModelAndView scheduleList(ModelAndView mnv, SearchCriteria cri) throws Exception{
-		
 		Map<String,Object> dataMap = null;
 		//SearchCriteria cri = new SearchCriteria();
 		//cri.setProject_number(project_number);
 		dataMap = scheduleService.selectScheduleList(cri);
+		mnv.addObject("project_num", cri.getProject_number());
 		mnv.addAllObjects(dataMap);
 		mnv.setViewName("projectManage/scheduleList");
 		return mnv;
@@ -518,6 +519,8 @@ public class ProjectManageController {
 		//SearchCriteria cri = new SearchCriteria();
 		//cri.setProject_number(project_number);
 		dataMap = unitworkService.selectUnitworkList(cri);
+		if(cri.getProject_number()!=0)
+		mnv.addObject("project_num", cri.getProject_number());
 		mnv.addAllObjects(dataMap);
 		mnv.setViewName("projectManage/unitworkList");
 		return mnv;
@@ -530,6 +533,7 @@ public class ProjectManageController {
 		//SearchCriteria cri = new SearchCriteria();
 		//cri.setProject_number(project_number);
 		dataMap = workforceService.selectWorkforceList(cri);
+		mnv.addObject("project_num", cri.getProject_number());
 		mnv.addAllObjects(dataMap);
 		mnv.setViewName("projectManage/workforceList");
 		return mnv;
@@ -538,21 +542,18 @@ public class ProjectManageController {
 	@PostMapping("/budgetList")
 	@ResponseBody
 	public ModelAndView budgetList(ModelAndView mnv, SearchCriteria cri) throws Exception{
+		Map<String,Object> dataMap = null;
+		dataMap = budgetService.selectBudgetList(cri);
+		mnv.addAllObjects(dataMap);
+		mnv.addObject("project_num", cri.getProject_number());
+		mnv.setViewName("projectManage/budgetList");
+		
+		
 		
 		return mnv;
 	}
 	
-	@GetMapping("/budgetList2")
-	@ResponseBody
-	public ModelAndView budgetList2(ModelAndView mnv) throws Exception{
-		Map<String,Object> dataMap = null;
-		SearchCriteria cri = new SearchCriteria();
-		cri.setProject_number(1);
-		dataMap = budgetService.selectBudgetList(cri);
-		mnv.addAllObjects(dataMap);
-		mnv.setViewName("projectManage/budgetList");
-		return mnv;
-	}
+	
 	
 	
 	

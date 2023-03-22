@@ -100,6 +100,11 @@ nav a {
   float:center;
 } 
 
+.page-link {
+   width: 30px;
+   height: 30px;
+}
+
 nav a:hover::before {
    content: ''; /* To generate the box */
    /* position: absolute;
