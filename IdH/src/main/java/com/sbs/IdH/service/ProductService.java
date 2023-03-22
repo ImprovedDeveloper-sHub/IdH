@@ -51,5 +51,8 @@ public interface ProductService {
 		public ChartVO selectChart(int project_number)throws Exception;
 
 		public ChartVO selectChartForComparison(int project_number, int project_number2)throws Exception;
+
+
+		void modifyProductStatus(ProductVO product) throws SQLException;
 	    
 }

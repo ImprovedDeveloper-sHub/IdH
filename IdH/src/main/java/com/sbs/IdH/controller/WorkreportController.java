@@ -50,8 +50,8 @@ public class WorkreportController {
 		return url;
 	}
 
-	@Resource(name = "fileUploadPath")
-	private String fileUploadPath;
+	@Resource(name = "UploadPath")
+	private String UploadPath;
 
 	private List<Workreport_AttachVO> saveFileToWorkreport_Attaches(List<MultipartFile> multiFiles, String savePath) throws Exception {
 		List<Workreport_AttachVO> attachList = new ArrayList<Workreport_AttachVO>();
@@ -80,7 +80,7 @@ public class WorkreportController {
 		String url = "redirect:/workreport/main";
 
 		List<MultipartFile> multiFiles = registReq.getUploadFile();
-		String savePath = this.fileUploadPath;
+		String savePath = this.UploadPath;
 
 		List<Workreport_AttachVO> attachList = saveFileToWorkreport_Attaches(multiFiles, savePath);
 
@@ -179,7 +179,7 @@ public class WorkreportController {
 		}
 
 		// 파일저장
-		List<Workreport_AttachVO> attachList = saveFileToWorkreport_Attaches(modifyReq.getUploadFile(), fileUploadPath);
+		List<Workreport_AttachVO> attachList = saveFileToWorkreport_Attaches(modifyReq.getUploadFile(), UploadPath);
 
 		WorkreportVO workreport = modifyReq.toWorkreportVO();
 		String XSStitle = (String) request.getAttribute("XSStitle");

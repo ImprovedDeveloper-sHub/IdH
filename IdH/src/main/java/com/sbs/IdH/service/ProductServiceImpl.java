@@ -182,6 +182,12 @@ public class ProductServiceImpl implements ProductService {
 
 		productDAO.updateProduct(product_number);
 	}
+	
+	@Override
+	public void modifyProductStatus(ProductVO product) throws SQLException {
+
+		productDAO.updateProductStatus(product);
+	}
 
 	@Override
 	public void removeProduct(int product_number) throws SQLException {

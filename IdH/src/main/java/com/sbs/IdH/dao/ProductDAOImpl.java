@@ -42,6 +42,11 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
+	public void updateProductStatus(ProductVO product) throws SQLException {
+		session.update("Product-Mapper.updateProductStatus", product);
+	}
+	
+	@Override
 	public void increaseViewCnt(int product_number) throws SQLException {
 		session.update("Product-Mapper.increaseViewCnt", product_number);
 	}

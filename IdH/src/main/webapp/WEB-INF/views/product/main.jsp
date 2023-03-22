@@ -43,7 +43,7 @@
 
 			<div id="table-content">
 				<div class="card-body table-responsive p-0">
-					<!-- <form method="get" action="form-action.html"> -->
+					<form method="get" action="form-action.html"> 
 					<table class="table table-hover">
 						<thead class="text-left">
 							<tr>
@@ -52,7 +52,8 @@
 								<th style="width: 10%">담당자</th>
 								<th style="width: 10%">등록일</th>
 								<th style="width: 35%">내용</th>
-								<th style="width: 20%">첨부파일</th>
+								<th style="width: 10%">첨부파일</th>
+								<th style="width: 10%"></th>
 
 							</tr>
 						</thead>
@@ -66,43 +67,55 @@
 							<c:forEach items="${productProceedList }" var="product">
 
 								<tr
-									onclick="OpenWindow('detail?product_number=${product.product_number }','상세보기',680,400);"
-									style="cursor: pointer;">
+									>
 
 
 
-									<td
+									<td onclick="OpenWindow('detail?product_number=${product.product_number }','상세보기',680,400);"
+									style="cursor: pointer;"
 										style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-										<!-- <label><input type="checkbox" name="product_number" value=""> -->${product.product_number}<!-- </label> -->
+										  ${product.product_number}
 									</td>
-									<td  
+									<td onclick="OpenWindow('detail?product_number=${product.product_number }','상세보기',680,400);"
+									style="cursor: pointer;"  
 										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${product.product_title}</td>
-									<td
+									<td onclick="OpenWindow('detail?product_number=${product.product_number }','상세보기',680,400);"
+									style="cursor: pointer;"
 										style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${product.product_member_id}</td>
-									<td
+									<td onclick="OpenWindow('detail?product_number=${product.product_number }','상세보기',680,400);"
+									style="cursor: pointer;"
 										style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
 											value="${product.product_regdate}" pattern="yyyy-MM-dd" /></td>
-									<td
-										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${product.product_content}</td>
+									<td onclick="OpenWindow('detail?product_number=${product.product_number }','상세보기',680,400);"
+									style="cursor: pointer;"
+										style="text-align: left; max-width: 10%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${product.product_content}</td>
 
-									<td>
+									<td onclick="OpenWindow('detail?product_number=${product.product_number }','상세보기',680,400);"
+									style="cursor: pointer;">
 										<!-- 첨부파일 --> <c:if test="${!empty product.attachList }">
 											<i class="nav-icon fas fa-file"></i>
 										</c:if> <c:if test="${empty product.attachList }">
 											<span>-</span>
 										</c:if>
 									</td>
-
+								
+									<td
+										style="text-align: left; max-width: 10%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><label><input type="checkbox" name="product" value="${product.product_number }"></label> </td>
 								</tr>
 
-
 							</c:forEach>
+
 
 						</tbody>
 
 					</table>
-					<!-- </form> -->
-					<!-- <input type="submit" value="Submit"> <input type="reset" value="Reset"> -->
+					</form> 
+					<div class="card-tools" style="margin-left:630;">
+            <button type="button" class="btn btn-info"
+               onclick="product_go('main','${cowork.coworkList }');">협업요청</button>
+            <button type="button" class="btn btn-info"
+               onclick="product_go('productEnd');">종료</button>
+         </div>
 				</div>
 				 <div class="card-footer">
 				<nav id="paginationNav" aria-label="Navigation">
@@ -143,6 +156,9 @@
 			</div>
 		</div>
 	</div>
+
+
+
 
 	<div class="col-4">
 		<div class="card card-info">
@@ -273,6 +289,11 @@
 	<br />
 </div>
 
+<form id="productForm" action="" method="POST">	
+	<input type="hidden" id=productparam name="productArrayParam">
+	<!-- <input type='hidden' name="status" value="" /> -->
+</form>
+
 <c:if test="${from eq 'regist' }">
 	<script>
 		alert("정상 등록이 되었습니다.");
@@ -288,7 +309,29 @@
 	</script>
 </c:if>
 <script>
-	function submit_go(url, product_number) {
-		location.href = url + "?product_number=" + product_number;
+	function product_go(url) {
+		alert('product_go');
+		var productArray = new Array();
+		$('input:checkbox[name=product]:checked').each(function(){
+			productArray.push(this.value);
+		})
+		$('#productparam').val(productArray);
+		$('#productForm').attr("action",url);
+	
+		$('#productForm').submit();
+		
 	}
 </script>
+<script>
+function cowork_go(url,product_number ){	
+	location.href=url+"?product_number="+product_number;
+}
+</script>
+<script>
+function end_go(url,product_number ){	
+	location.href=url+"?product_number="+product_number;
+}
+</script>
+
+
+

@@ -108,7 +108,7 @@ input {
 			</div>
 			
 			<div class="card-tools" style="margin-left:auto">
-			<button type="button" id="modifyBtn" class="btn btn-info" onclick="submit_go('modifyForm','${product.product_number }');">협업요청</button>
+			
 			<button type="button" id="modifyBtn" class="btn btn-info" onclick="submit_go('modifyForm','${product.product_number }');">수정</button>						
 		    <button type="button" id="removeBtn" class="btn btn-info" onclick="submit_go('remove','${product.product_number }');">삭제</button>					   
 		    <button type="button" id="listBtn" class="btn btn-info" onclick="CloseWindow();">닫기</button>
