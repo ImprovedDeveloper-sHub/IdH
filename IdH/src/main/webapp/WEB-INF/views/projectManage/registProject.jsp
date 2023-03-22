@@ -82,7 +82,7 @@ table input {
               </div>
 				</div>
 			<div class="col-4 content-util card">
-		<table id="businessDetailtable" style="width:370px; height:600px">
+		<table id="businessDetailtable" style="width:370px; height:500px">
 						<thead class="businessDetailthead">
 							<tr>
 								<td class="name-td" style="width:15%;">분류</td>
@@ -93,7 +93,7 @@ table input {
 						</thead>
 						<tbody class="businessDetailtbody">
 							<tr>
-								<td class="name-td">사업 이름</td>
+								<td class="name-td">사업이름</td>
 								<td class="table-td" colspan="3"></td>
 								<td class="name-td">수준</td>
 								<td class="table-td"></td>
@@ -111,25 +111,25 @@ table input {
 								<td class="name-td">종료날짜</td>
 								<td class="table-td" colspan="3"></td>
 							</tr>
-							<tr style="height: 100px;">
+							<tr style="height: 70px;">
 								<td class="name-td">일정</td>
-								<td class="table-td" colspan="5"></td>
+								<td class="table-td" colspan="5" id="scheduleBox"></td>
 							</tr>
-							<tr style="height: 100px;">
+							<tr style="height: 70px;">
 								<td class="name-td">예산</td>
-								<td class="table-td" colspan="5"></td>
+								<td class="table-td" colspan="5" id="budgetBox"></td>
 							</tr>
-							<tr style="height: 100px;">
+							<tr style="height: 70px;">
 								<td class="name-td">인력</td>
-								<td class="table-td" colspan="5"></td>
+								<td class="table-td" colspan="5" id="workforceBox"></td>
 							</tr>
-							<tr style="height: 100px;">
+							<tr style="height: 70px;">
 								<td class="name-td">단위업무</td>
-								<td class="table-td" colspan="5"></td>
+								<td class="table-td" colspan="5" id="unitworkBox"></td>
 							</tr>
 							
 							
-							<tr style="height: 100px;">
+							<tr style="height: 70px;">
 								<td class="name-td">내용</td>
 								<td class="table-td td-summernote" colspan="5"></td>
 							</tr>
@@ -235,21 +235,84 @@ function regist_project_go(){
 				printPlan(data,$('#businessDetailtable'),$('#business-detail-template'));
 			}
 		});
-		
-		
 	}
+</script>
 
+<script>
+	function getBudgetDetail(budget_number){
+		$.ajax({
+			url:"getBudgetDetail?budget_number="+budget_number,
+			type:"GET",
+			success: function(data){
+				printPlanDetail(data,$('#budgetBox'),$('#budget-detail-template'));
+			}
+		});
+	}
+	
+	function getScheduleDetail(schedule_number){
+		$.ajax({
+			url:"getScheduleDetail?schedule_number="+schedule_number,
+			type:"GET",
+			success: function(data){
+				printPlanDetail(data,$('#scheduleBox'),$('#schedule-detail-template'));
+			}
+		});
+	}
+	
+	function getWorkforceDetail(workforce_number){
+		$.ajax({
+			url:"getWorkforceDetail?workforce_number="+workforce_number,
+			type:"GET",
+			success: function(data){
+				printPlanDetail(data,$('#workforceBox'),$('#workforce-detail-template'));
+			}
+		});
+	}
+	
+	function getUnitworkDetail(unitwork_number){
+		$.ajax({
+			url:"getUnitworkDetail?unitwork_number="+unitwork_number,
+			type:"GET",
+			success: function(data){
+				//alert(JSON.stringify(data));
+				printPlanDetail(data,$('#unitworkBox'),$('#unitwork-detail-template'));
+			},
+			error:function(error){
+				alert('error');
+			}
+		});
+	}
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+
+<script type="text/x-handlebars-template"  id="unitwork-detail-template" >
+			{{unitwork_name}} : {{unitwork_detail}} ,&nbsp;&nbsp;&nbsp;
+</script>
+
+<script type="text/x-handlebars-template"  id="schedule-detail-template" >
+			{{schedule_name}} : {{schedule_detail}} ,&nbsp;&nbsp;&nbsp;    
+</script>
+
+<script type="text/x-handlebars-template"  id="workforce-detail-template" >
+			{{workforce_name}} : {{workforce_member_id}} ,&nbsp;&nbsp;&nbsp;    
+</script>
+
+<script type="text/x-handlebars-template"  id="budget-detail-template" >
+			{{budget_name}} : {{budget_detail}} ,&nbsp;&nbsp;&nbsp;    
 </script>
 
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+
+
+
 <script type="text/x-handlebars-template"  id="budget-plan-list-template" >
 		<td id="title">예산계획</td>
 		<td id="budget_content">
 		<label><input type="checkbox" id="budgetAll" onchange="{{selectCheckBox}}">예산 전체선택</label>
 		{{#each budgetList}}
-		<label><input name="budget" type="checkbox" class="budget_checkbox" id="{{budget_number}}" value="{{budget_number}}" >{{budget_name}}</label>
+		<label><input name="budget" type="checkbox" class="budget_checkbox" id="{{budget_number}}" value="{{budget_number}}" onclick="getBudgetDetail('{{budget_number}}')" >{{budget_name}}</label>
 		{{/each}}
 		</td>
 </script>
@@ -258,7 +321,7 @@ function regist_project_go(){
 		<td id="content">
 		<label><input type="checkbox" id="budgetAll" onchange="{{selectCheckBox}}">업무 전체선택</label>
 		{{#each unitworkList}}
-		<label><input name="unitwork" type="checkbox" id="{{unitwork_number}}" value="{{unitwork_number}}" >{{unitwork_name}}</label>
+		<label><input name="unitwork" type="checkbox" id="{{unitwork_number}}" value="{{unitwork_number}}" onclick="getUnitworkDetail('{{unitwork_number}}')">{{unitwork_name}}</label>
 		{{/each}}
 		</td>
 </script>
@@ -268,7 +331,7 @@ function regist_project_go(){
 		<td id="content">
 		<label><input type="checkbox" id="budgetAll" >일정 전체선택</label>
 		{{#each scheduleList}}
-		<label><input name="schedule" type="checkbox" id="{{schedule_number}}" value="{{schedule_number}}" >{{schedule_name}}</label>
+		<label><input name="schedule" type="checkbox" id="{{schedule_number}}" value="{{schedule_number}}" onclick="getScheduleDetail('{{schedule_number}}')">{{schedule_name}}</label>
 		{{/each}}
 		</td>
 </script>
@@ -278,7 +341,7 @@ function regist_project_go(){
 		<td id="content">
 		<label><input type="checkbox" id="budgetAll"  >인력 전체선택</label>
 		{{#each workforceList}}
-		<label><input name="workforce" type="checkbox" id="{{workforce_number}}" value="{{workforce_number}}">{{workforce_name}}</label>
+		<label><input name="workforce" type="checkbox" id="{{workforce_number}}" value="{{workforce_number}}" onclick="getWorkforceDetail('{{workforce_number}}')">{{workforce_name}}</label>
 		{{/each}}
 		</td>
 </script>
@@ -326,17 +389,21 @@ function regist_project_go(){
 								<td class="name-td">회사 자체 예산</td>
 								<td class="table-td" colspan="3">{{business.business_companybudget}}</td>
 							</tr>
-							<tr style="height: 100px;">
+							<tr style="height: 70px;">
+								<td class="name-td">예산</td>
+								<td class="table-td" colspan="5"  id="budgetBox"></td>
+							</tr>
+							<tr style="height: 70px;">
 								<td class="name-td">일정</td>
-								<td class="table-td" colspan="5"></td>
+								<td class="table-td" colspan="5"  id="scheduleBox"></td>
 							</tr>
-							<tr style="height: 100px;">
+							<tr style="height: 70px;">
 								<td class="name-td">인력</td>
-								<td class="table-td" colspan="5"></td>
+								<td class="table-td" colspan="5"  id="workforceBox"></td>
 							</tr>
-							<tr style="height: 100px;">
+							<tr style="height: 70px;">
 								<td class="name-td">단위업무</td>
-								<td class="table-td" colspan="5"></td>
+								<td class="table-td" colspan="5"  id="unitworkBox"></td>
 							</tr>
 							
 							
@@ -372,6 +439,16 @@ function printPlan(data,target, templateObject){
 	target.html("").html(plan_html);
 }
 
+
+function printPlanDetail(data,target, templateObject){
+	var planTemplate=Handlebars.compile(templateObject.html());
+	//alert(JSON.stringify(data));
+	var plan_html = planTemplate(data);
+	//delTarget.remove();
+	//alert(html);
+	target.prepend(plan_html);
+	
+}
 
 
 </script>

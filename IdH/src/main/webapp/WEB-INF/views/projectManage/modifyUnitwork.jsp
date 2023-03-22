@@ -97,7 +97,7 @@ input {
 							<tr>
 								<td class="name-td">등록자</td>
 								<td class="table-td" colspan="3" ><input type="text" name="unitwork_member_id" value="${unitwork.unitwork_setter_id}" readonly></td>
-								<td class="name-td">수준</td>
+								<td class="name-td">세부상태</td>
 								<td class="table-td"><select name ="unitwork_level">
 													<option value="1">진행</option>
 													<option value="2">지연</option>

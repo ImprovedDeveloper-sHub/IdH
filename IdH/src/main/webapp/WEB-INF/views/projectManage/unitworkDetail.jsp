@@ -94,7 +94,7 @@ input {
 								<td class="name-td">일정 번호</td>
 								<td class="table-td" colspan="3">${unitwork.unitwork_number}</td>
 								<td class="name-td">수준</td>
-								<td class="table-td">보통</td>
+								<td class="table-td">${unitwork.unitwork_level eq 1 ? '진행' : ''}${unitwork.unitwork_level eq 2 ? '지연' : ''}${unitwork.unitwork_level eq 3 ? '예정' : ''}${unitwork.unitwork_level eq 4 ? '지연2' : ''}${unitwork.unitwork_level eq 5 ? '완료' : ''}</td>
 							</tr>
 							<tr>
 								<td class="name-td">등록자</td>
@@ -129,7 +129,7 @@ input {
 			</div>
 			<div class="card-tools" style="margin-left:auto">
 			<button type="button" id="regbtn" class="btn btn-info"
-               onclick="location.href=''">업무 완료</button>
+               onclick="location.href='successUnitwork?unitwork_number=${unitwork.unitwork_number}'">업무 완료</button>
             <button type="button" id="regbtn" class="btn btn-info"
                onclick="location.href='modifyUnitworkForm?unitwork_number=${unitwork.unitwork_number}'">수정</button>
             <button type="button" id="close" class="btn btn-info"

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sbs.IdH.command.SearchCriteria;
-import com.sbs.IdH.dao.ScheduleDAO;
 import com.sbs.IdH.dto.BudgetVO;
 import com.sbs.IdH.dto.ProjectVO;
 import com.sbs.IdH.dto.ScheduleVO;
@@ -28,10 +28,15 @@ import com.sbs.IdH.dto.WorkforceVO;
 import com.sbs.IdH.service.BudgetService;
 import com.sbs.IdH.service.BusinessService;
 import com.sbs.IdH.service.ProjectService;
+import com.sbs.IdH.service.RequireService;
 import com.sbs.IdH.service.ScheduleService;
 import com.sbs.IdH.service.UnitworkService;
 import com.sbs.IdH.service.WorkforceService;
 
+/**
+ * @author seo
+ *
+ */
 @Controller
 @RequestMapping("projectManage")
 public class ProjectManageController {
@@ -48,6 +53,11 @@ public class ProjectManageController {
 	private WorkforceService workforceService;
 	@Resource
 	private BusinessService businessService;
+	@Resource
+	private RequireService requireService;
+	
+	
+	
 	public void setProjectService(ProjectService projectService) {
 		this.projectService = projectService;
 	}
@@ -72,6 +82,10 @@ public class ProjectManageController {
 		this.businessService = businessService;
 	}
 
+	public void setRequireService(RequireService requireService) {
+		this.requireService = requireService;
+	}
+	
 	@GetMapping("/main")
 	public ModelAndView projectManage(SearchCriteria cri, ModelAndView mnv) throws Exception {
 		cri.setPerPageNum(5);
@@ -112,8 +126,8 @@ public class ProjectManageController {
 	
 	@GetMapping("/endProjectForm")
 	public ModelAndView endProjectForm(ModelAndView mnv, HttpServletRequest request) throws Exception{
-		
-		mnv.addAllObjects(projectService.selectProceedingProject(new SearchCriteria()));
+		SearchCriteria cri = new SearchCriteria();
+		mnv.addAllObjects(projectService.selectProceedingProject(cri));
 		mnv.setViewName("projectManage/endProject");
 		
 		return mnv;
@@ -121,12 +135,17 @@ public class ProjectManageController {
 
 	
 	@GetMapping("/endProject")
-	public String endProject(int project_number)throws Exception{
+	public String endProject(int project_number, RedirectAttributes rttr)throws Exception{
+		String url = "redirect:/projectManage/main";
+
+		
+		projectService.endProject(project_number);
+		
+		rttr.addFlashAttribute("from", "end");
 		
 		
 		
-		
-		return null;
+		return url;
 		
 		
 	}
@@ -340,6 +359,19 @@ public class ProjectManageController {
 
 		return mnv;
 	}
+	
+	
+	@GetMapping("/successUnitwork")
+	public String successUnitwork(RedirectAttributes rttr, int unitwork_number) throws Exception {
+		String url = "redirect:/projectManage/unitworkDetail";
+		UnitworkVO unitwork = unitworkService.selectUnitwork(unitwork_number);
+		unitwork.setUnitwork_level(5);
+		unitworkService.modifyUnitwork(unitwork);
+		rttr.addFlashAttribute("from", "modify");
+		rttr.addAttribute("unitwork_number", unitwork_number);
+		return url;
+	}
+	
 
 	@GetMapping("/deleteUnitwork")
 	public String deleteUnitwork(RedirectAttributes rttr, int unitwork_number) throws Exception {
@@ -427,6 +459,25 @@ public class ProjectManageController {
 
 		return entity;
 	}
+	
+	@PostMapping("/getRequire")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> getRequire(SearchCriteria cri) throws Exception {
+		ResponseEntity<Map<String, Object>> entity = null;
+		HttpStatus status;
+		Map<String, Object> dataMap = null;
+		try {
+			dataMap = requireService.selectRequireList(cri);
+			status = HttpStatus.OK;
+		} catch (Exception e) {
+			status = HttpStatus.BAD_REQUEST;
+		}
+		entity = new ResponseEntity<Map<String, Object>>(dataMap, status);
+
+		return entity;
+	}
+	
+	
 
 	@PostMapping("/getEnd")
 	@ResponseBody
@@ -568,15 +619,38 @@ public class ProjectManageController {
 		mnv.addAllObjects(dataMap);
 		mnv.addObject("project_num", cri.getProject_number());
 		mnv.setViewName("projectManage/budgetList");
-		
-		
-		
 		return mnv;
 	}
 	
 	
 	
+	@GetMapping("/getUnitworkDetail")
+	@ResponseBody
+	public UnitworkVO getUnitworkDetail(Model model, int unitwork_number) throws Exception {
+		UnitworkVO unitwork = unitworkService.selectUnitwork(unitwork_number);
+		return unitwork;
+	}
 	
+	@GetMapping("/getWorkforceDetail")
+	@ResponseBody
+	public WorkforceVO getWorkforceDetail(Model model, int workforce_number) throws Exception {
+		WorkforceVO workforce = workforceService.selectWorkforce(workforce_number);
+		return workforce;
+	}
+	
+	@GetMapping("/getScheduleDetail")
+	@ResponseBody
+	public ScheduleVO getScheduleDetail(Model model, int schedule_number) throws Exception {
+		ScheduleVO schedule = scheduleService.selectSchedule(schedule_number);
+		return schedule;
+	}
+	
+	@GetMapping("/getBudgetDetail")
+	@ResponseBody
+	public BudgetVO getBudgetDetail(Model model, int budget_number) throws Exception {
+		BudgetVO budget = budgetService.selectBudget(budget_number);
+		return budget;
+	}
 	
 	
 }

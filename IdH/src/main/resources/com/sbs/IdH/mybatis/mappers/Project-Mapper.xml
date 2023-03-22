@@ -101,7 +101,7 @@
 		where project_number=#{project_number}
 	</update>
 	
-	<update id="updateProjectForProjectEnd" parameterType="project">
+	<update id="updateProjectForProjectEnd" >
 		update project 
 		set project_status=2
 		where project_number=#{project_number}

@@ -63,8 +63,8 @@ public class ProjectDAOImpl implements ProjectDAO {
 	}
 
 	@Override
-	public void updateProjectForProjectEnd(ProjectVO project) throws SQLException {
-		session.update("Project-Mapper.updateProjectForProjectEnd", project);
+	public void updateProjectForProjectEnd(int project_number) throws SQLException {
+		session.update("Project-Mapper.updateProjectForProjectEnd", project_number);
 
 	}
 

@@ -306,4 +306,9 @@ public class ProjectServiceImpl implements ProjectService {
 
 	}
 
+	@Override
+	public void endProject(int project_number) throws Exception {
+		projectDAO.updateProjectForProjectEnd(project_number);
+	}
+	
 }

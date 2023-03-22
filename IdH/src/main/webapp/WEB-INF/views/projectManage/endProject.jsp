@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   
 
 <!-- CSS start -->
 
 <style>
+card{
+	margin:0 !important;
+	padding:0 !important;
+}
+
 body{
 	width:100%;
 	height:100%;
@@ -67,52 +72,26 @@ input {
 
 
 <div class="row">
-
 	<!-- 사업 일정 상세 정보 -->
 	<div class="col">
 		<div class="card card-info">
 			<div class="card-header bg-info">
 				<h3 class="card-title">프로젝트 종료</h3>
-				<div class="card-tools">
-					<div class="input-group input-group-sm" style="width: 150px;">
-						<div class="input-group-append"></div>
+				
+			</div>
+			<div class="card-tools">
+					<div class="input-group" style="width: 300px;">
+						<select class="form-control-sm" name="project_number" id="project_selector" style="hegith:30px; width:100% !important; border-color:#CED4DA !important;">
+							<option value="">프로젝트를 선택해주세요.</option>
+							<c:forEach items="${proceedingProjectList}" var="project">
+								<option value="${project.project_number}">${project.project_name }</option>
+							</c:forEach>
+						</select>
 					</div>
 				</div>
-			</div>
-			<div id="content">
-				<form enctype="multiaprt/form-data" role="form" method="post" action="registSchedule" name="registSchdeuleForm">
-				<input type="hidden" name="schedule_status" value="2">
-				<div id="table-content">
-					<table>
-						<thead>
-							<tr>
-								<td class="name-td" style="width:15%;">분류</td>
-								<td class="name-td" colspan="3" style="width:35%;">세부사항</td>
-								<td class="name-td" style="width:15%;">분류</td>
-								<td class="name-td" style="width:35%;">세부사항</td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="name-td">등록자</td>
-								<td class="table-td" colspan="3" ><input type="text" name="schedule_member_id" value="${loginUser.member_id}" readonly></td>
-								<td class="name-td">분류</td>
-								<td class="table-td">
-									<select name ="schedule_type">
-													<option value="1">기획</option>
-													<option value="2">설계</option>
-													<option value="3">구현</option>
-													<option value="4">테스트</option>
-									</select></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				</form>
-			</div>
 			<div class="card-tools" style="margin-left:auto">
             <button type="button" id="regbtn" class="btn btn-info"
-               onclick="regist_go();">등록</button>
+               onclick="deleteProject();">종료</button>
             <button type="button" id="close" class="btn btn-info"
                onclick="CloseWindow();">닫기</button>
 				</div>
@@ -121,23 +100,9 @@ input {
 	</div>
 
 <script>
-	window.onload = function() {
-		summernote_go($('.summernote'),'<%=request.getContextPath()%>');
-		$('.datepicker').datepicker();
-	};
-	
-	function regist_go(){
-		//var form = $('form[name="registSchdeulForm"]')[0];
-			var form = document.registSchdeuleForm;
-			if(form.schedule_name.value==""){
-				alert("제목은 필수입니다.");
-				return;
-			}
-			
-			form.submit();
-		}
-	
-	
-</script>
+	function deleteProject(){
+		location.href='endProject?project_number='+$('#project_selector').val();
+	}
 
+</script>
 

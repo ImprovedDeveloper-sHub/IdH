@@ -113,8 +113,8 @@ public class ChartController {
 	
 	@PostMapping("/productComparison")
 	@ResponseBody
-	public Map<String, Object> productComparison() throws Exception {
-		ChartVO chart = productService.selectChartForComparison(1, 2);
+	public Map<String, Object> productComparison(int project_comparison_num1, int project_comparison_num2) throws Exception {
+		ChartVO chart = productService.selectChartForComparison(project_comparison_num1, project_comparison_num2);
 		return chart.getResult();
 	}
 	

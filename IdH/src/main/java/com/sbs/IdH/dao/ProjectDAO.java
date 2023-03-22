@@ -25,7 +25,7 @@ public interface ProjectDAO {
 
 	void updateProjectForProjectStart(ProjectVO project) throws SQLException;
 
-	void updateProjectForProjectEnd(ProjectVO project) throws SQLException;
+	void updateProjectForProjectEnd(int project_number) throws SQLException;
 	
 	
 	

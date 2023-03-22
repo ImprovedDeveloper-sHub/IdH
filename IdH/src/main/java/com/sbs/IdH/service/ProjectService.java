@@ -36,5 +36,7 @@ public interface ProjectService {
 	public Map<String, Object> selectProjectUnitwork_level(SearchCriteria cri) throws SQLException;
 
 	Map<String, Object> selectProceedingProjectManageListByBusiness_number(int business_number) throws Exception;
+
+	public void endProject(int project_number) throws Exception;
 	
 }

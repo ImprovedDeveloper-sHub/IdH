@@ -63,7 +63,7 @@
 				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
 			 	 </c:if>
 			 	 <c:forEach items="${proceedingProjectList }" var="project">
-					 <tr onclick="setProjectNum(${project.project_number},'getProjectDetail');">
+					 <tr onclick="setProjectNum(${project.project_number},'getProjectDetail'); change_comparison(${project.project_number });">
 			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;">${project.project_business_name }</td>
 			                  <td style="text-align:left;max-width:20%; overflow: hidden; 
@@ -117,7 +117,7 @@
 	                <tr>
 	                  <th style="width:20%">사업 이름</th>
 	                  <th style="width:30%">프로젝트 이름</th>
-	                  <th style="width:20%">등록 날짜</th>
+	                  <th style="width:20%">종료 날짜</th>
 	                  <th style="width:15%">예상 종료날짜</th>
 	                  <th style="width:15%">요구사항</th>
 	                </tr>
@@ -162,7 +162,7 @@
        <div class="card ">
           <div class="card-small-body row">
             <div class="col" style="margin:3px;">
-            <input type="button" class="btn  btn-info btn-sm" id="projectEndButton" onclick="OpenWindow('<%=request.getContextPath()%>/projectManage/endProjectForm','계획등록',500,190);"  value="프로젝트 종료">
+            <input type="button" class="btn  btn-info btn-sm" id="projectEndButton" onclick="OpenWindow('<%=request.getContextPath()%>/projectManage/endProjectForm','계획등록',350,150);"  value="프로젝트 종료">
             <input id="" type="button" class="btn btn-info btn-sm" onclick="OpenWindow('<%=request.getContextPath()%>/projectManage/registSchedulePlanForm','계획등록',500,700);" value="프로젝트 계획"></input>
                <input type="button" class="btn  btn-info btn-sm" id="" onclick="OpenWindow('<%=request.getContextPath()%>/calendar/main','일정',850,750);" value="전체일정"></input>
 
@@ -180,10 +180,10 @@
 		<div class="col" style="margin:3px;">
           <input type="button" class="btn  btn-info btn-sm" id="scheduleButton" onclick="OpenWindow('<%=request.getContextPath()%>/calendar/calByProject?project_number='+project_num,'등록',850,750);" value="프로젝트 일정"></input>
           
-            <input type="button" class="btn  btn-info btn-sm" id="budgetButton" onclick="ajax_print_chart('budget','1');" value="예산현황"></input>
+            <input type="button" class="btn  btn-info btn-sm" id="budgetButton" onclick="ajax_print_chart('budget');" value="예산현황"></input>
               <input type="button" class="btn  btn-info btn-sm" id="workforceButton" onclick="ajax_print_chart('workforce');" value="인력현황"></input>
                <input type="button" class="btn  btn-info btn-sm" id="unitworkButton" onclick="ajax_print_chart('unitwork');" value="단위업무현황"></input>
-              <input type="button" class="btn  btn-info btn-sm" onclick="ajax_print_chart('issue');" id="issueButton" value="이슈현황"></input>
+              <input type="button" class="btn  btn-info btn-sm"  id="issueButton" onclick="ajax_print_chart('issue');" value="이슈현황"></input>
 				<input type="button" class="btn  btn-info btn-sm"  id="productButton" onclick="ajax_print_chart('product');" value="산출물현황"></input>
         </div>
         </div>
@@ -290,7 +290,9 @@
     
     
 
-
+	<input id="project_comparison_num1" type="hidden" value="1">
+	<input id="project_comparison_num2" type="hidden" value="2">
+	
 
 
   
@@ -331,7 +333,7 @@
 	}
 
 	
-	
+
   
   var project_num = 1;
   var last_chart="curve_chart";
@@ -341,6 +343,20 @@
   
   var project_comparison_num1 = 1;
   var project_comparison_num2 = 2;
+  var project_comparison_check = 1;
+  
+  function change_comparison(project_number){
+		if(project_comparison_check == 1 ){
+			project_comparison_num1 = project_number;
+			project_comparison_check = 2;
+		}	
+		else if(project_comparison_check == 2 ){
+			project_comparison_num2 = project_number;
+			project_comparison_check = 1;
+		}
+		
+	}
+  
   
   
   function ajax_print_chart(url){
@@ -368,6 +384,8 @@
   
   
   function ajax_print_comparison_chart(url){
+	  //alert(project_comparison_num1);
+	  //alert(project_comparison_num2);
 	  formData = new FormData();
 	  test = $.ajax({
 			url:"${request.ContextPath()}/IdH/"+url,//서버url
@@ -505,6 +523,14 @@
 <c:if test="${from eq 'remove' }">
 <script>
 	alert('삭제되었습니다.');
+	window.close();
+	window.opener.location.reload();
+</script>
+
+</c:if>
+
+<c:if test="${from eq 'end' }">
+<script>
 	window.close();
 	window.opener.location.reload();
 </script>

@@ -404,7 +404,7 @@
 								<tr>
 									<th style="width: 15%">프로젝트 상태</th>
 									<th style="width: 20%">업무명</th>
-									<th style="width: 15%">업무세부</th>
+									<th style="width: 15%">세부 상태</th>
 									<th style="width: 10%">작성자</th>
 									<th style="width: 15%">시작날짜</th>
 									<th style="width: 15%">종료날짜</th>
@@ -422,7 +422,7 @@
 										onclick="OpenWindow('unitworkDetail?unitwork_number=${unitwork.unitwork_number}','단위업무',580,600);">
 										<td>${unitwork.unitwork_status eq 1 ? '계획' : '진행'}</td>
 										<td>${unitwork.unitwork_name}</td>
-										<td>${unitwork.unitwork_level eq 1 ? '진행중' : ''}${unitwork.unitwork_level eq 2 ? '지연' : ''}${unitwork.unitwork_level eq 3 ? '예정' : ''}${unitwork.unitwork_level eq 4 ? '지연2' : ''}${unitwork.unitwork_level eq 5 ? '완료' : ''}</td>
+										<td>${unitwork.unitwork_level eq 1 ? '진행' : ''}${unitwork.unitwork_level eq 2 ? '지연' : ''}${unitwork.unitwork_level eq 3 ? '예정' : ''}${unitwork.unitwork_level eq 4 ? '지연2' : ''}${unitwork.unitwork_level eq 5 ? '완료' : ''}</td>
 										<td>${unitwork.unitwork_setter_id}</td>
 										<td><fmt:formatDate pattern="yyyy-MM-dd"
 												value="${unitwork.unitwork_startdate}" /></td>
