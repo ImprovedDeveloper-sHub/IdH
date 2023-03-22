@@ -109,7 +109,28 @@ public class ProjectManageController {
 		mnv.setViewName(url);
 		return mnv;
 	}
+	
+	@GetMapping("/endProjectForm")
+	public ModelAndView endProjectForm(ModelAndView mnv, HttpServletRequest request) throws Exception{
+		
+		mnv.addAllObjects(projectService.selectProceedingProject(new SearchCriteria()));
+		mnv.setViewName("projectManage/endProject");
+		
+		return mnv;
+	}
 
+	
+	@GetMapping("/endProject")
+	public String endProject(int project_number)throws Exception{
+		
+		
+		
+		
+		return null;
+		
+		
+	}
+	
 
 
 	@PostMapping("/registProject")

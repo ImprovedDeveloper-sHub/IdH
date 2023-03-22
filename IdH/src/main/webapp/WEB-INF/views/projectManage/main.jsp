@@ -162,6 +162,7 @@
        <div class="card ">
           <div class="card-small-body row">
             <div class="col" style="margin:3px;">
+            <input type="button" class="btn  btn-info btn-sm" id="projectEndButton" onclick="OpenWindow('<%=request.getContextPath()%>/projectManage/endProjectForm','계획등록',500,190);"  value="프로젝트 종료">
             <input id="" type="button" class="btn btn-info btn-sm" onclick="OpenWindow('<%=request.getContextPath()%>/projectManage/registSchedulePlanForm','계획등록',500,700);" value="프로젝트 계획"></input>
                <input type="button" class="btn  btn-info btn-sm" id="" onclick="OpenWindow('<%=request.getContextPath()%>/calendar/main','일정',850,750);" value="전체일정"></input>
 
@@ -254,6 +255,7 @@
 								<td class="name-td">내용</td>
 								<td class="table-td td-summernote" colspan="5"></td>
 							</tr>
+							
 						</tbody>
 					</table>
 				</div>
@@ -311,7 +313,6 @@
 	  
 	  	$('#budgetButton').attr('onclick',"ajax_print_comparison_chart('budgetComparison')");
 		$('#workforceButton').attr('onclick',"ajax_print_comparison_chart('workforceComparison')");
-		//$('#scheduleButton').val('일정비교'); $('#scheduleButton').attr('onclick',"ajax_print_chart('scheduleComparison')")
 		$('#issueButton').attr('onclick',"ajax_print_comparison_chart('issueComparison')");
 		$('#productButton').attr('onclick',"ajax_print_comparison_chart('productComparison')");
 		 $('#unitworkButton').attr('onclick',"ajax_print_comparison_chart('unitworkComparison')")
@@ -322,7 +323,6 @@
 	function returnButton(){
 		$('#budgetButton').val('예산현황'); $('#budgetButton').attr('onclick',"ajax_print_chart('budget')");
 		$('#workforceButton').val('인력현황'); $('#workforceButton').attr('onclick',"ajax_print_chart('workforce')");
-		//$('#scheduleButton').val('일정현황'); $('#scheduleButton').attr('onclick',"ajax_print_chart('schedule')");
 		$('#issueButton').val('이슈현황'); $('#issueButton').attr('onclick',"ajax_print_chart('issue')");
 		$('#productButton').val('산출물현황'); $('#productButton').attr('onclick',"ajax_print_chart('product')");
 		$('#unitworkButton').val('단위업무현황'); $('#unitworkButton').attr('onclick',"ajax_print_chart('uniwork')");
@@ -395,7 +395,7 @@
   		
  
   var options = {
-          title: 'Company Performance',
+          title: '프로젝트 계획 - 진행',
           curveType: 'function',
           legend: { position: 'bottom' }
         };

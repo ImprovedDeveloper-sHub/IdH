@@ -67,7 +67,6 @@ public class IssueServiceImpl implements IssueService{
 		int issuesuccess = issueDAO.selectSearchIssueListCount(cri);
 		cri.setStatus(2);
 		int issuenow = issueDAO.selectSearchIssueListCount(cri);
-		
 		int getter = issueDAO.selectGetterIssueCount();
 		int notgetter = issueDAO.selectNotGetterIssueCount();
 		

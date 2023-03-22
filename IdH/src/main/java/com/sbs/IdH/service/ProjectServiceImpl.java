@@ -200,6 +200,29 @@ public class ProjectServiceImpl implements ProjectService {
 	
 	
 	@Override
+	public Map<String, Object> selectProceedingProjectManageListByBusiness_number(int business_number) throws Exception {
+		SearchCriteria cri = new SearchCriteria();
+		cri.setBusiness_number(business_number);
+		cri.setStatus(2);
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		List<UnitworkVO> unitworkList = unitworkDAO.selectSearchUnitworkList(cri);
+		List<ScheduleVO> scheduleList = scheduleDAO.selectSearchScheduleList(cri);
+		List<BudgetVO> budgetList = budgetDAO.selectSearchBudgetList(cri);
+		List<WorkforceVO> workforceList = workforceDAO.selectSearchWorkforceList(cri);
+		//List<RequireVO> requireList = requireDAO.selectSearchRequireList(cri);
+		
+		dataMap.put("budgetList", budgetList);
+		dataMap.put("unitworkList", unitworkList);
+		dataMap.put("scheduleList", scheduleList);
+		dataMap.put("workforceList", workforceList);
+		//dataMap.put("requireList", requireList);
+		// dataMap.put("workforceList", workforceDAO.selectSearchWorkforceList(cri));
+		return dataMap;
+	}
+	
+	
+	
+	@Override
 	public Map<String, Object> selectProjectManageListByProjectNumber(int project_number) throws Exception {
 		SearchCriteria cri = new SearchCriteria();
 		cri.setProject_number(project_number);
