@@ -310,7 +310,7 @@ function regist_project_go(){
 <script type="text/x-handlebars-template"  id="budget-plan-list-template" >
 		<td id="title">예산계획</td>
 		<td id="budget_content">
-		<label><input type="checkbox" id="budgetAll" onchange="{{selectCheckBox}}">예산 전체선택</label>
+		<label><input type="checkbox" id="budgetAll" onchange="checkAllBox('budget');">예산 전체선택</label>
 		{{#each budgetList}}
 		<label><input name="budget" type="checkbox" class="budget_checkbox" id="{{budget_number}}" value="{{budget_number}}" onclick="getBudgetDetail('{{budget_number}}')" >{{budget_name}}</label>
 		{{/each}}
@@ -319,7 +319,7 @@ function regist_project_go(){
 <script type="text/x-handlebars-template"  id="unitwork-plan-list-template" >
 		<td id="title">단위업무계획</td>
 		<td id="content">
-		<label><input type="checkbox" id="budgetAll" onchange="{{selectCheckBox}}">업무 전체선택</label>
+		<label><input type="checkbox" id="unitworkAll" onchange="checkAllBox('unitwork');">업무 전체선택</label>
 		{{#each unitworkList}}
 		<label><input name="unitwork" type="checkbox" id="{{unitwork_number}}" value="{{unitwork_number}}" onclick="getUnitworkDetail('{{unitwork_number}}')">{{unitwork_name}}</label>
 		{{/each}}
@@ -329,7 +329,7 @@ function regist_project_go(){
 <script type="text/x-handlebars-template"  id="schedule-plan-list-template" >
 		<td id="title">일정계획</td>
 		<td id="content">
-		<label><input type="checkbox" id="budgetAll" >일정 전체선택</label>
+		<label><input type="checkbox" id="scheduleAll" onchange="checkAllBox('schedule');">일정 전체선택</label>
 		{{#each scheduleList}}
 		<label><input name="schedule" type="checkbox" id="{{schedule_number}}" value="{{schedule_number}}" onclick="getScheduleDetail('{{schedule_number}}')">{{schedule_name}}</label>
 		{{/each}}
@@ -339,7 +339,7 @@ function regist_project_go(){
 <script type="text/x-handlebars-template"  id="workforce-plan-list-template" >
 		<td id="title">인력계획</td>
 		<td id="content">
-		<label><input type="checkbox" id="budgetAll"  >인력 전체선택</label>
+		<label><input type="checkbox" id="workforceAll" onchange="checkAllBox('workforce');" >인력 전체선택</label>
 		{{#each workforceList}}
 		<label><input name="workforce" type="checkbox" id="{{workforce_number}}" value="{{workforce_number}}" onclick="getWorkforceDetail('{{workforce_number}}')">{{workforce_name}}</label>
 		{{/each}}
@@ -453,7 +453,13 @@ function printPlanDetail(data,target, templateObject){
 
 </script>
 
+<script>
+ function checkAllBox(box_name){
+		 if($('input:checkbox[id='+box_name+'All]').is(":checked")) $('input[name='+box_name+']').prop("checked", true);
+			else $('input[name='+box_name+']').prop("checked", false);
+	 }
 
+</script>
 
 
 

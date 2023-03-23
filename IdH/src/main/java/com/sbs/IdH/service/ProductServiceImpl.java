@@ -223,7 +223,7 @@ public class ProductServiceImpl implements ProductService {
 		cri.setStatus(1);
 		List<Map<String, Object>> c1_list = new ArrayList<Map<String, Object>>();
 		HashMap<String, Object> c1_list_label = new HashMap<String, Object>();
-		c1_list_label.put("v", "상태1 산출물");
+		c1_list_label.put("v", "진행 중 산출물");
 		c1_list.add(c1_list_label);
 		c1_list.add(productDAO.selectProductCountForChart(cri));
 
@@ -231,11 +231,9 @@ public class ProductServiceImpl implements ProductService {
 		cri.setStatus(2);
 		List<Map<String, Object>> c2_list = new ArrayList<Map<String, Object>>();
 		HashMap<String, Object> c2_list_label = new HashMap<String, Object>();
-		c2_list_label.put("v", "상태2 산출물");
+		c2_list_label.put("v", "종료 산출물");
 		c2_list.add(c2_list_label);
 		c2_list.add(productDAO.selectProductCountForChart(cri));
-
-
 
 		rowMap_c1.put("c", c1_list);
 		rowMap_c2.put("c", c2_list);
