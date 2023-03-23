@@ -94,9 +94,11 @@ public class ProjectServiceImpl implements ProjectService {
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(projectDAO.selectSearchProjectListCount(cri));
+		List<ProjectVO> projectList = projectDAO.selectSearchProjectList(cri);
+		
 		
 		dataMap.put("pageMaker", pageMaker);
-		dataMap.put("projectList", projectDAO.selectSearchProjectList(cri));
+		dataMap.put("projectList", projectList);
 		return dataMap;
 	}
 
@@ -104,26 +106,35 @@ public class ProjectServiceImpl implements ProjectService {
 	public Map<String, Object> selectProceedingProject(SearchCriteria cri) throws Exception {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		cri.setStatus(1);
-		cri.setPerPageNum(5);
-		
 		List<ProjectVO> projectList = projectDAO.selectSearchProjectList(cri);
 		for(ProjectVO project : projectList) {
+			SearchCriteria newCri = new SearchCriteria(cri.getStartRowNum(),cri.getKeyword(),cri.getMemberStatus(),cri.getPage(),cri.getType(),cri.getPerPageNum(),cri.getStatus(),cri.getBusiness_number(),cri.getSearchType(),cri.getMember_id(),cri.getProject_number());
 			project.setProject_business_name(businessDAO.selectBusinessName(project.getProject_business_number()));
+			newCri.setProject_number(project.getProject_number());
+			int unitwork_total = unitworkDAO.selectSearchUnitworkListCount(newCri);
+			newCri.setType(5);
+			int unitwork_end = unitworkDAO.selectSearchUnitworkListCount(newCri);
+			if(unitwork_total != 0 && unitwork_end != 0) {
+				project.setProject_percent((int)((float)(unitwork_total-unitwork_end)/unitwork_total * 100));
+				//System.out.println((int)((float)unitwork_proceeding/(float)unitwork_total  * 100));
+			}
 		}
 		dataMap.put("proceedingProjectList",projectList);
-		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(projectDAO.selectSearchProjectListCount(cri));
 		dataMap.put("proceedingPageMaker", pageMaker);
 		return dataMap;
 	}
+	
+	
+	
+	
 
 	@Override
 	public Map<String, Object> selectEndProject(SearchCriteria cri) throws Exception {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		cri.setStatus(2);
-		cri.setPerPageNum(5);
 		List<ProjectVO> projectList = projectDAO.selectSearchProjectList(cri);
 		for(ProjectVO project : projectList) {
 			project.setProject_business_name(businessDAO.selectBusinessName(project.getProject_business_number()));

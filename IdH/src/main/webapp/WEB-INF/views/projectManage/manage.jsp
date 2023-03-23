@@ -30,7 +30,7 @@
 
 		<!--col-6시작-->
 		<div class="col-6">
-			<div id="content" class="card boarder-info-2">
+			<div id="schedule_content" class="card boarder-info-2">
 				<div class="card-header bg-info">
 					<h3 class="card-title">일정관리</h3>
 				</div>
@@ -57,7 +57,7 @@
 					</div>
 					<button type="button" class="btn btn-block btn-info btn-sm"
 						style="width: 80px;"
-						onclick="OpenWindow('registScheduleForm','등록',550,590);">등록</button>
+						onclick="OpenWindow('registScheduleForm','등록',550,700);">등록</button>
 
 				</div>
 				<div id="table-content">
@@ -65,8 +65,8 @@
 						<table class="table table-hover">
 							<thead class="proceedingThead" class="text-left">
 								<tr>
-									<th style="width: 10%">일정 상태</th>
-									<th style="width: 30%">일정 이름</th>
+									<th style="width: 15%">일정 상태</th>
+									<th style="width: 35%">일정 이름</th>
 									<th style="width: 15%">일정 구분</th>
 									<th style="width: 15%">프로젝트 명</th>
 									<th style="width: 25%">시작 날짜</th>
@@ -82,7 +82,7 @@
 								</c:if>
 								<c:forEach items="${scheduleList }" var="schedule">
 									<tr
-										onclick="OpenWindow('scheduleDetail?schedule_number=${schedule.schedule_number}','스케줄',500,550);">
+										onclick="OpenWindow('scheduleDetail?schedule_number=${schedule.schedule_number}','스케줄',500,600);">
 										<td
 											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
 											${schedule.schedule_status eq 1 ? '계획' : '진행'}</td>
@@ -111,7 +111,7 @@
 				</div>
 			</div>
 
-			<div id="content" class="card">
+			<div id="budget_content" class="card">
 				<div class="card-header bg-info">
 					<h3 class="card-title">예산 관리</h3>
 				</div>
@@ -138,7 +138,7 @@
 					</div>
 					<button type="button" class="btn btn-block btn-info btn-sm"
 						style="width: 80px;"
-						onclick="OpenWindow('registBudgetForm','등록',500,600);">등록</button>
+						onclick="OpenWindow('registBudgetForm','등록',500,700);">등록</button>
 
 				</div>
 				<div id="table-content">
@@ -149,8 +149,8 @@
 									<th style="width: 20%">예산 상태</th>
 									<th style="width: 30%">예산 이름</th>
 									<th style="width: 20%">예산 구분</th>
+									<th style="width: 15%">프로젝트 명</th>
 									<th style="width: 15%">예산 금액</th>
-									<th style="width: 15%">프로젝트 이름</th>
 								</tr>
 							</thead>
 
@@ -162,13 +162,13 @@
 								</c:if>
 								<c:forEach items="${budgetList }" var="budget">
 									<tr
-										onclick="OpenWindow('budgetDetail?budget_number=${budget.budget_number}','예산',500,600);">
+										onclick="OpenWindow('budgetDetail?budget_number=${budget.budget_number}','예산',500,500);">
 										<td>${budget.budget_status eq 1 ? '계획' : '진행'}</td>
 										<td>${budget.budget_name}</td>
 										 <td>${budget.budget_type eq '1' ? '인건비' : ''}${budget.budget_type eq '2' ? '교통비' : ''}${budget.budget_type eq '3' ? '비품비' : ''}${budget.budget_type eq '4' ? '식대' : ''}</td> 
+										<td>${budget.budget_project_name}</td>
 										<td><fmt:formatNumber value="${budget.budget_price}"
 												pattern="#,###" /></td>
-										<td>${budget.budget_project_name}</td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -187,7 +187,7 @@
 		</div>
 
 		<div class="col-6">
-			<div id="content" class="card">
+			<div id="workforce_content" class="card">
 				<div class="card-header bg-info">
 					<h3 class="card-title">인력 프로젝트</h3>
 				</div>
@@ -214,18 +214,19 @@
 					</div>
 					<button type="button" class="btn btn-block btn-info btn-sm"
 						style="width: 80px;"
-						onclick="OpenWindow('registWorkforceForm','등록',500,600);">등록</button>
+						onclick="OpenWindow('registWorkforceForm','등록',500,700);">등록</button>
 				</div>
 				<div id="table-content">
 					<div class="card-body table-responsive p-0">
 						<table class="table table-hover">
 							<thead class="proceedingThead" class="text-left">
 								<tr>
-									<th style="width: 20%">인력 이름</th>
-									<th style="width: 30%">인력 상태</th>
+									<th style="width: 15%">인력 상태</th>
+									<th style="width: 15%; text-align: center;" >이름</th>
+									<th style="width: 30%">인력 이름</th>
+									<th style="width: 10%">인력 구분</th>
 									<th style="width: 20%">인력 날짜</th>
 									<th style="width: 15%">요구사항</th>
-									<th style="width: 15%">설명</th>
 								</tr>
 							</thead>
 
@@ -237,19 +238,21 @@
 								</c:if>
 								<c:forEach items="${workforceList }" var="workforce">
 									<tr
-										onclick="OpenWindow('workforceDetail?workforce_number=${workforce.workforce_number}','인력',580,800);">
+										onclick="OpenWindow('workforceDetail?workforce_number=${workforce.workforce_number}','인력',580,480);">
+										<td
+											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+											${schedule.schedule_status eq 1 ? '계획' : '진행'}</td>
+										<td
+											style="text-align: center; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workforce.workforce_member_id}</td>
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workforce.workforce_name}</td>
 										<td
-											style="text-align: left; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workforce.workforce_status}</td>
+											style="text-align: left; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workforce.workforce_type eq '1' ? '보통':''}</td>
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
 												value="${workforce.workforce_regdate}" pattern="yyyy-MM-dd" /></td>
 										<td
 											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">test</td>
-										<td
-											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-											${workforce.workforce_detail}</td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -261,7 +264,7 @@
 				</div>
 			</div>
 
-			<div id="content" class="card">
+			<div id="unitwork_content" class="card">
 				<div class="card-header bg-info">
 					<h3 class="card-title">단위업무</h3>
 				</div>
@@ -288,7 +291,7 @@
 					</div>
 					<button type="button" class="btn btn-block btn-info btn-sm"
 						style="width: 80px;"
-						onclick="OpenWindow('registUnitworkForm','등록',500,600);">등록</button>
+						onclick="OpenWindow('registUnitworkForm','등록',500,700);">등록</button>
 				</div>
 
 				<div id="table-content">
@@ -296,12 +299,12 @@
 						<table class="table table-hover">
 							<thead class="unitworkThead" class="text-left">
 								<tr>
+									<th style="width: 10%">업무 상태</th>
 									<th style="width: 20%">업무명</th>
-									<th style="width: 15%">상태</th>
-									<th style="width: 15%">작성자</th>
+									<th style="width: 15%">업무난이도</th>
+									<th style="width: 10%">작성자</th>
 									<th style="width: 20%">시작날짜</th>
 									<th style="width: 15%">종료날짜</th>
-									<th style="width: 15%">설명</th>
 								</tr>
 							</thead>
 
@@ -313,15 +316,15 @@
 								</c:if>
 								<c:forEach items="${unitworkList }" var="unitwork">
 									<tr
-										onclick="OpenWindow('unitworkDetail?unitwork_number=${unitwork.unitwork_number}','단위업무',580,800);">
+										onclick="OpenWindow('unitworkDetail?unitwork_number=${unitwork.unitwork_number}','단위업무',580,600);">
+										<td>${unitwork.unitwork_status eq 1 ? '계획' : '진행'}</td>
 										<td>${unitwork.unitwork_name}</td>
-										<td>${unitwork.unitwork_level}</td>
+										<td>${unitwork.unitwork_level eq 1 ? '진행중' : ''}${unitwork.unitwork_level eq 2 ? '지연' : ''}${unitwork.unitwork_level eq 3 ? '예정' : ''}${unitwork.unitwork_level eq 4 ? '완료' : ''}</td>
 										<td>${unitwork.unitwork_setter_id}</td>
 										<td><fmt:formatDate pattern="yyyy-MM-dd"
 												value="${unitwork.unitwork_startdate}" /></td>
 										<td><fmt:formatDate pattern="yyyy-MM-dd"
 												value="${unitwork.unitwork_enddate}" /></td>
-										<td>${unitwork.unitwork_detail}</td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -345,7 +348,7 @@
 		<br />
 	</div>
 	<%@ include file="./ajax_list_js.jsp"%>
-	<%@ include file="/WEB-INF/module/pagination.jsp"%>
+	
 </div>
 
 
@@ -362,12 +365,12 @@
 		        var project_number = $('#project_selector').val();
 		       //alert("셀렉트값 : "+project_number);
 		       $.ajax({
-		    	    url:"getManage?project_number="+ project_number,
+		    	    url:'scheduleList?project_number='+project_number,
 		    	    type:"GET",
 		    	    success:function(data){
 		    	    	/* alert(JSON.stringify(data));
 		    	    	console.log(data); */
-		    	    	console.log(JSON.stringify(data));
+		    	    	$('#schedule_content').html("").html(data);
 		    	    },
 		       		error:function(error){
 		       			alert('error');
@@ -394,6 +397,26 @@ function printPlan(data,target, templateObject){
 
 
 
+ 
+  </script>
+  
+  <c:if test="${from eq 'regist' }">
+  <script>
+	  	//alert('test');
+	  	window.close();
+	  	window.opener.location.reload();
+  </script>
+  
+</c:if>
+
+<c:if test="${from eq 'delete' }">
+<script>
+	alert('삭제되었습니다.');
+	window.close();
+	window.opener.location.reload();
+</script>
+
+</c:if>
 
 
 

@@ -185,6 +185,23 @@ public class SearchCriteria {
 				+ ", status=" + status + ", type=" + type + ", startRowNum=" + startRowNum + ", member_id=" + member_id
 				+ ", memberStatus=" + memberStatus + "]";
 	}
+	
+	 
+	  public SearchCriteria newCri() {
+		  SearchCriteria newCri = new SearchCriteria();
+		  newCri.setBusiness_number(business_number);
+		  newCri.setKeyword(keyword);
+		  newCri.setMember_id(member_id);
+		  newCri.setMemberStatus(memberStatus);
+		  newCri.setPage(page);
+		  newCri.setPerPageNum(perPageNum);
+		  newCri.setSearchType(searchType);
+		  newCri.setStartRowNum(startRowNum);
+		  newCri.setStatus(memberStatus);
+		  newCri.setType(type);
+		  return newCri;
+		  
+	  }
 	 
 
 	

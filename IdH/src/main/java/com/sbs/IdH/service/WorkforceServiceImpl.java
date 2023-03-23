@@ -10,8 +10,6 @@ import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.ProjectDAO;
 import com.sbs.IdH.dao.WorkforceDAO;
 import com.sbs.IdH.dto.ChartVO;
-import com.sbs.IdH.dto.ScheduleVO;
-import com.sbs.IdH.dto.UnitworkVO;
 import com.sbs.IdH.dto.WorkforceVO;
 
 public class WorkforceServiceImpl implements WorkforceService {

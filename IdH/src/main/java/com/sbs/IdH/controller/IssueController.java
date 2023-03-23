@@ -82,8 +82,8 @@ public class IssueController {
 		return url;
 	}
 	
-	@Resource(name = "fileUploadPath")
-	private String fileUploadPath;
+	@Resource(name = "UploadPath")
+	private String UploadPath;
 	
 	private List<Issue_AttachVO> saveFileToIssue_Attaches(List<MultipartFile> multiFiles, String savePath) throws Exception {
 		List<Issue_AttachVO> attachList = new ArrayList<Issue_AttachVO>();
@@ -112,7 +112,7 @@ public class IssueController {
 		String url = "redirect:/issue/main";
 
 		List<MultipartFile> multiFiles = registReq.getUploadFile();
-		String savePath = this.fileUploadPath;
+		String savePath = this.UploadPath;
 
 		List<Issue_AttachVO> attachList = saveFileToIssue_Attaches(multiFiles, savePath);
 
@@ -223,7 +223,7 @@ public class IssueController {
 	
 		//파일저장
 		List<Issue_AttachVO> attachList
-			= saveFileToIssue_Attaches(modifyReq.getUploadFile(), fileUploadPath);
+			= saveFileToIssue_Attaches(modifyReq.getUploadFile(), UploadPath);
 		
 		
 		IssueVO issue = modifyReq.toIssueVO();	

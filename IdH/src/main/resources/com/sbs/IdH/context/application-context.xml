@@ -9,10 +9,11 @@
 
 	<context:component-scan
 		base-package="com.sbs.IdH.service" />
-
-	<bean id="fileUploadPath" class="java.lang.String">
-		<constructor-arg value="${uploadPath.pds}" />
-	</bean>
+		
+	<bean id="UploadPath"
+		  class="java.lang.String">
+		  <constructor-arg value="${uploadPath.attach}"/>
+	</bean>	
 
 	<bean id="issueDAO" class="com.sbs.IdH.dao.IssueDAOImpl"
 		p:session-ref="sqlSession" />
@@ -144,6 +145,11 @@
 		  p:session-ref="sqlSession"
 	/>
 	
+	<bean id="notice_attachDAO"
+		  class="com.sbs.IdH.dao.Notice_attachDAOImpl"
+		  p:session-ref="sqlSession"
+	/>
+	
 	<bean id="business_attachDAO"
 		class="com.sbs.IdH.dao.Business_attachDAOImpl"
 		p:session-ref="sqlSession" />
@@ -159,7 +165,8 @@
 
 	<bean id="noticeService"
 		class="com.sbs.IdH.service.NoticeServiceImpl"
-		p:noticeDAO-ref="noticeDAO" />
+		p:noticeDAO-ref="noticeDAO"
+		p:notice_attachDAO-ref="notice_attachDAO" />
 
 </beans>
 

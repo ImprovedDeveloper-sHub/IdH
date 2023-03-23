@@ -9,13 +9,9 @@
 	<context:property-placeholder file-encoding="UTF-8" 
 								  location="classpath:com/sbs/IdH/properties/*.properties" />
 	
-	<bean id="fileUploadNoticePath"
+	<bean id="UploadPath"
 		  class="java.lang.String">
-		  <constructor-arg value="${uploadPath.attach.notice}"/>
-	</bean>
-		<bean id="fileUploadRequirePath"
-		  class="java.lang.String">
-		  <constructor-arg value="${uploadPath.attach.require}"/>
+		  <constructor-arg value="${uploadPath.attach}"/>
 	</bean>
 
 </beans>

@@ -14,6 +14,7 @@ public class ProjectVO {
 	private String project_member_id;
 	private String project_discription;
 	private String project_business_name;
+	private int project_percent;
 	
 	public int getProject_number() {
 		return project_number;
@@ -37,6 +38,12 @@ public class ProjectVO {
 	
 	
 	
+	public int getProject_percent() {
+		return project_percent;
+	}
+	public void setProject_percent(int project_percent) {
+		this.project_percent = project_percent;
+	}
 	public int getProject_status() {
 		return project_status;
 	}

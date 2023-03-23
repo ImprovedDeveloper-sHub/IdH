@@ -101,7 +101,7 @@ body {
 					<div
 						style="position: absolute; left: 50%; transform: translate(-68%, 90%)"
 						id="singup">
-						<a href="#" style="color: black; border-bottom: solid 1px black;">회원가입</a>
+						<a href="<%=request.getContextPath() %>/member/regist" style="color: black; border-bottom: solid 1px black;">회원가입</a>
 					</div>
 					<br />
 					<div

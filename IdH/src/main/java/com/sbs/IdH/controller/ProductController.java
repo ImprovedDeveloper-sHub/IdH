@@ -48,8 +48,8 @@ public class ProductController {
 		this.coworkService = coworkService;
 	}
 
-	public void setFileUploadPath(String fileUploadPath) {
-		this.fileUploadPath = fileUploadPath;
+	public void setUploadPath(String UploadPath) {
+		this.UploadPath = UploadPath;
 	}
 
 
@@ -91,8 +91,8 @@ public class ProductController {
 		return url;
 	}
 
-	@Resource(name = "fileUploadPath")
-	private String fileUploadPath;
+	@Resource(name = "UploadPath")
+	private String UploadPath;
 
 	private List<Product_AttachVO> saveFileToAttaches(List<MultipartFile> multiFiles, String savePath)
 			throws Exception {
@@ -122,7 +122,7 @@ public class ProductController {
 		String url = "redirect:/product/main";
 
 		List<MultipartFile> multiFiles = registReq.getUploadFile();
-		String savePath = this.fileUploadPath;
+		String savePath = this.UploadPath;
 
 		List<Product_AttachVO> attachList = saveFileToAttaches(multiFiles, savePath);
 
@@ -244,7 +244,7 @@ public class ProductController {
 		
 			//파일저장
 			List<Product_AttachVO> attachList 
-				= saveFileToAttaches(modifyReq.getUploadFile(), fileUploadPath);
+				= saveFileToAttaches(modifyReq.getUploadFile(), UploadPath);
 			
 			
 			ProductVO product = modifyReq.toProductVO();	

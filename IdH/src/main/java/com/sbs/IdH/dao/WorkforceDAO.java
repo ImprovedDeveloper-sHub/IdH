@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.sbs.IdH.command.SearchCriteria;
-import com.sbs.IdH.dto.UnitworkVO;
 import com.sbs.IdH.dto.WorkforceVO;
 
 public interface WorkforceDAO {

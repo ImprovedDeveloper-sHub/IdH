@@ -73,6 +73,7 @@ public class ProjectManageController {
 
 	@GetMapping("/main")
 	public ModelAndView projectManage(SearchCriteria cri, ModelAndView mnv) throws Exception {
+		cri.setPerPageNum(5);
 		mnv.addAllObjects(projectService.selectProceedingProject(cri));
 		mnv.addAllObjects(projectService.selectEndProject(cri));
 		mnv.setViewName("projectManage/main");
@@ -81,11 +82,16 @@ public class ProjectManageController {
 	
 	@GetMapping("/manage")
 	public ModelAndView manage(ModelAndView mnv, SearchCriteria cri, HttpServletRequest request) throws Exception {
+		
 		mnv.addAllObjects(projectService.selectProjectList(cri));
-		mnv.addAllObjects(budgetService.selectBudgetList(cri));
-		mnv.addAllObjects(workforceService.selectWorkforceList(cri));
-		mnv.addAllObjects(unitworkService.selectUnitworkList(cri));
-		mnv.addAllObjects(scheduleService.selectScheduleList(cri));
+		SearchCriteria cri2 = cri.newCri();
+		mnv.addAllObjects(budgetService.selectBudgetList(cri2));
+		SearchCriteria cri3 = cri.newCri();
+		mnv.addAllObjects(workforceService.selectWorkforceList(cri3));
+		SearchCriteria cri4 = cri.newCri();
+		mnv.addAllObjects(unitworkService.selectUnitworkList(cri4));
+		SearchCriteria cri5 = cri.newCri();
+		mnv.addAllObjects(scheduleService.selectScheduleList(cri5));
 		return mnv;
 	}
 
@@ -162,7 +168,6 @@ public class ProjectManageController {
 		// System.out.println(budget);
 		String url = "redirect:/projectManage/main";
 		rttr.addFlashAttribute("from", "regist");
-
 		return url;
 	}
 
@@ -191,7 +196,7 @@ public class ProjectManageController {
 
 	@GetMapping("/deleteBudget")
 	public String deleteBudget(RedirectAttributes rttr, int budget_number) throws Exception {
-		String url = "redirect:/projectManage/budgetDetail";
+		String url = "redirect:/projectManage/manage";
 		budgetService.removeBudget(budget_number);
 		rttr.addFlashAttribute("from", "delete");
 		rttr.addAttribute("budget_number", budget_number);
@@ -210,7 +215,7 @@ public class ProjectManageController {
 	public String registWorkforce(RedirectAttributes rttr, WorkforceVO workforce) throws Exception {
 		workforceService.registWorkforce(workforce);
 		// System.out.println(workforce);
-		String url = "redirect:/projectManage/main";
+		String url = "redirect:/projectManage/manage";
 		rttr.addFlashAttribute("from", "regist");
 
 		return url;
@@ -241,7 +246,7 @@ public class ProjectManageController {
 
 	@GetMapping("/deleteWorkforce")
 	public String deleteWorkforce(RedirectAttributes rttr, int workforce_number) throws Exception {
-		String url = "redirect:/projectManage/workforceDetail";
+		String url = "redirect:/projectManage/manage";
 		workforceService.removeWorkforce(workforce_number);
 		rttr.addFlashAttribute("from", "delete");
 		rttr.addAttribute("workforce_number", workforce_number);
@@ -260,7 +265,7 @@ public class ProjectManageController {
 	public String registUnitwork(RedirectAttributes rttr, UnitworkVO unitwork) throws Exception {
 		unitworkService.registUnitwork(unitwork);
 		// System.out.println(unitwork);
-		String url = "redirect:/projectManage/main";
+		String url = "redirect:/projectManage/manage";
 		rttr.addFlashAttribute("from", "regist");
 
 		return url;
@@ -292,7 +297,7 @@ public class ProjectManageController {
 
 	@GetMapping("/deleteUnitwork")
 	public String deleteUnitwork(RedirectAttributes rttr, int unitwork_number) throws Exception {
-		String url = "redirect:/projectManage/unitworkDetail";
+		String url = "redirect:/projectManage/manage";
 		unitworkService.removeUnitwork(unitwork_number);
 		rttr.addFlashAttribute("from", "delete");
 		rttr.addAttribute("unitwork_number", unitwork_number);
@@ -311,7 +316,7 @@ public class ProjectManageController {
 	public String registSchedule(RedirectAttributes rttr, ScheduleVO schedule) throws Exception {
 		scheduleService.registSchedule(schedule);
 		// System.out.println(schedule);
-		String url = "redirect:/projectManage/main";
+		String url = "redirect:/projectManage/manage";
 		rttr.addFlashAttribute("from", "regist");
 
 		return url;
@@ -343,9 +348,9 @@ public class ProjectManageController {
 
 	@GetMapping("/deleteSchedule")
 	public String deleteSchedule(RedirectAttributes rttr, int schedule_number) throws Exception {
-		String url = "redirect:/projectManage/main";
+		String url = "redirect:/projectManage/manage";
 		scheduleService.removeSchedule(schedule_number);
-		rttr.addFlashAttribute("from", "remove");
+		rttr.addFlashAttribute("from", "delete");
 		rttr.addAttribute("schedule_number", schedule_number);
 
 		return url;
@@ -356,7 +361,6 @@ public class ProjectManageController {
 	@PostMapping("/getProceeding")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> getProceeding(SearchCriteria cri) throws Exception {
-
 		ResponseEntity<Map<String, Object>> entity = null;
 		HttpStatus status;
 		Map<String, Object> dataMap = null;
@@ -463,5 +467,20 @@ public class ProjectManageController {
 		responseEntity = new ResponseEntity<Map<String,Object>>(dataMap,status);
 		return responseEntity;
 	}
+	
+	@GetMapping("/scheduleList")
+	@ResponseBody
+	public ModelAndView test(ModelAndView mnv, int project_number) throws Exception{
+		
+		Map<String,Object> dataMap = null;
+		SearchCriteria cri = new SearchCriteria();
+		dataMap = scheduleService.selectScheduleList(cri);
+		mnv.addAllObjects(dataMap);
+		mnv.setViewName("projectManage/scheduleList");
+			
+		return mnv;
+	}
+	
+	
 	
 }

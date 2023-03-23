@@ -8,9 +8,9 @@
 <!-- CSS start -->
 
 <style>
-#upload{
-   width:97%;
-   font-size:12px;
+#upload {
+	width: 97%;
+	font-size: 12px;
 }
 
 #content {
@@ -66,10 +66,10 @@ input {
 
 
 
-<div class="header" style="width: 680px; height: 555px;">
+<div class="header" style="width: 1200px; height: 98%;">
 	<div class="card card-info">
 		<div class="card-header">
-			<h3 class="card-title">요구사항등록</h3>
+			<h3 class="card-title">공지사항 등록</h3>
 			<div class="card-tools">
 				<div class="input-group input-group-sm" style="width: 150px;">
 					<div class="input-group-append"></div>
@@ -93,8 +93,8 @@ input {
 						<tbody>
 							<tr>
 								<td class="name-td">제목</td>
-								<td class="table-td"><input type="text"
-									name="require_title" placeholder="제목을 입력하세요" /></td>
+								<td class="table-td"><input type="text" name="notice_title"
+									placeholder="제목을 입력하세요" /></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 
@@ -103,49 +103,18 @@ input {
 								<td class="name-td">발의자</td>
 								<td class="table-td"><input type="text" readonly
 									placeholder="${loginUser.member_id } "
-									value="${loginUser.member_id }" name="require_setter_id" /></td>
+									value="${loginUser.member_id }" name="notice_member_id" /></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">등록일</td>
 								<td colspan="5"><input type="text" readonly
 									placeholder="<fmt:formatDate value="<%=new Date()%>" pattern="yyyy-MM-dd"/>" /></td>
 							</tr>
-							<tr>
-								<td class="name-td">중요도</td>
-								<td class="table-td"><select class="table-td"
-									name="require_level">
-										<option value="1"
-											${require.require_level eq 1 ? 'selected':'하' }>하</option>
-										<option value="2"
-											${require.require_level eq 2 ? 'selected':'중' }>중</option>
-										<option value="3"
-											${require.require_level eq 3 ? 'selected':'상' }>상</option>
-								</select></td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
-								<td class="name-td">관련사업</td>
-								<td colspan="5"><select class="table-td"
-									name="require_business_number">
-										<c:forEach items="${businessList}" var="business">
-											<option value="${business.business_number }">${business.business_name }</option>
-										</c:forEach>
-								</select></td>
-							</tr>
-							<tr>
-								<td class="name-td">프로젝트 팀</td>
-								<td class="table-td"><input type="text"
-									name="require_project" placeholder="미정" /></td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
-								<td class="name-td">담당자</td>
-								<td colspan="5"><input type="text" name="require_getter_id"
-									placeholder="담당자" /></td>
-							</tr>
 							<tr style="height: 100px;">
 								<td class="name-td">내용</td>
 								<td class="table-td td-summernote" colspan="5"><textarea
 										id="summernote" class="summernote" rows="15" cols="40"
-										name="require_detail" style="display: none; width: 500px;"></textarea></td>
+										name="notice_content" style="display: none; width: 500px;"></textarea></td>
 							</tr>
 
 
@@ -181,24 +150,33 @@ input {
 </script>
 
 <script>
-var dataNum=0;
+	var dataNum = 0;
 
-function addFile_go(){
-	   //alert("add file btn");
-	   
-	   if($('input[name="uploadFile"]').length >=5){
-	      alert("파일추가는 5개까지만 가능합니다.");
-	      return;
-	   }
-	   
-	   var div=$('<div>').addClass("inputRow").attr("data-no",dataNum);      
-	   var input=$('<input>').attr({"type":"file","name":"uploadFile","id":"upload"}).css("display","inline");
-	   div.append(input).append("<button onclick='remove_go("+dataNum+");' style='border:0;outline:0;' class='badge bg-red' type='button'>X</button>");      
-	   $('.fileInput').append(div);
-	   dataNum++;      
+	function addFile_go() {
+		//alert("add file btn");
+
+		if ($('input[name="uploadFile"]').length >= 5) {
+			alert("파일추가는 5개까지만 가능합니다.");
+			return;
+		}
+
+		var div = $('<div>').addClass("inputRow").attr("data-no", dataNum);
+		var input = $('<input>').attr({
+			"type" : "file",
+			"name" : "uploadFile",
+			"id" : "upload"
+		}).css("display", "inline");
+		div
+				.append(input)
+				.append(
+						"<button onclick='remove_go("
+								+ dataNum
+								+ ");' style='border:0;outline:0;' class='badge bg-red' type='button'>X</button>");
+		$('.fileInput').append(div);
+		dataNum++;
 	}
-	function remove_go(dataNum){
-	   //alert(dataNum);
-	   $('div[data-no="'+dataNum+'"]').remove();
+	function remove_go(dataNum) {
+		//alert(dataNum);
+		$('div[data-no="' + dataNum + '"]').remove();
 	}
 </script>

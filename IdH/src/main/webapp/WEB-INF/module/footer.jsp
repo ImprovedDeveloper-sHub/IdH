@@ -5,7 +5,7 @@
   
 <form id="jobForm">	
 	<input type='hidden' name="page" value="" />
-	<input type='hidden' name="perPageNum" value="10"/>
+	<input type='hidden' name="perPageNum" value=""/>
 	<input type='hidden' name="searchType" value="" />
 	<input type='hidden' name="keyword" value="" />
 	<input type='hidden' name="type" value="" />
@@ -39,7 +39,7 @@
 			});
 			
 		}else{
-			$('.subMenuList').html("");		
+			$('#subMenuList').html("");
 		}
 	}
 	
@@ -65,10 +65,9 @@
 		    
 		    renewURL = renewURL.substring(0, renewURL.indexOf("mCode")-1);
 		    
-		    if (mCode != 'M000000') {
+		   
 		        renewURL += "?mCode="+mCode;
-		    }
-		    
+		   
 		    
 		    //페이지를 리로드하지 않고 페이지 주소만 변경할 때 사용
 		    history.pushState(mCode, null, renewURL);

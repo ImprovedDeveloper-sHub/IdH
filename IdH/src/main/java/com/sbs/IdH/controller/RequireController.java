@@ -87,8 +87,8 @@ public class RequireController {
 		return mnv;
 	}
 
-	@Resource(name = "fileUploadPath")
-	private String fileUploadPath;
+	@Resource(name = "UploadPath")
+	private String UploadPath;
 
 	private List<Require_attachVO> saveFileToAttaches(List<MultipartFile> multiFiles, String savePath)
 			throws Exception {
@@ -118,7 +118,7 @@ public class RequireController {
 		String url = "redirect:/require/main";
 
 		List<MultipartFile> multiFiles = registReq.getUploadFile();
-		String savePath = this.fileUploadPath;
+		String savePath = this.UploadPath;
 
 		List<Require_attachVO> attachList = saveFileToAttaches(multiFiles, savePath);
 
@@ -222,7 +222,7 @@ public class RequireController {
 		}
 
 		// 파일저장
-		List<Require_attachVO> attachList = saveFileToAttaches(modifyReq.getUploadFile(), fileUploadPath);
+		List<Require_attachVO> attachList = saveFileToAttaches(modifyReq.getUploadFile(), UploadPath);
 
 		RequireVO require = modifyReq.toRequireVO();
 		String XSStitle = (String) request.getAttribute("XSStitle");
