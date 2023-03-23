@@ -68,31 +68,4 @@ public class Notice_attachVO {
 		this.notice_attach_attacher = notice_attach_attacher;
 	}
 
-	@Override
-	public String toString() {
-		return "Notice_attach [ano=" + ano + ", uploadpath=" + uploadpath + ", filename=" + filename + ", filetype="
-				+ filetype + ", regdate=" + regdate + ", notice_number=" + notice_number
-				+ ", notice_attach_attacher=" + notice_attach_attacher + "]";
-	}
-	
-	/*
-	 * public Notice_attachVO(int ano, String uploadpath, String filename, String
-	 * filetype, Date regdate, int notice_number, String notice_attach_attacher) {
-	 * super(); this.ano = ano; this.uploadpath = uploadpath; this.filename =
-	 * filename; this.filetype = filetype; this.regdate = regdate;
-	 * this.notice_number = notice_number; this.notice_attach_attacher =
-	 * notice_attach_attacher; }
-	 * 
-	 * public Notice_attachVO testNotice_attachSample() {
-	 * 
-	 * Calendar cal = Calendar.getInstance(); cal.set(2199, 13, 31);
-	 * 
-	 * Notice_attachVO testNotice_attach = new Notice_attachVO(9, "첨부경로", "첨부예시",
-	 * "첨부형식", new Date(cal.getTimeInMillis()), 999, "IdH");
-	 * 
-	 * return testNotice_attach;
-	 * 
-	 * }
-	 */
-
 }

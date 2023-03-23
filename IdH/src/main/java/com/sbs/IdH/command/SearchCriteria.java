@@ -185,8 +185,17 @@ public class SearchCriteria {
 	  
 	  public void setProject_number(int project_number) { this.project_number =
 	  project_number; }
+
+
+	@Override
+	public String toString() {
+		return "SearchCriteria [page=" + page + ", perPageNum=" + perPageNum + ", searchType=" + searchType
+				+ ", keyword=" + keyword + ", project_number=" + project_number + ", business_number=" + business_number
+				+ ", status=" + status + ", type=" + type + ", startRowNum=" + startRowNum + ", member_id=" + member_id
+				+ ", memberStatus=" + memberStatus + "]";
+	}
+	
 	 
-	  
 	  public SearchCriteria newCri() {
 		  SearchCriteria newCri = new SearchCriteria();
 		  newCri.setBusiness_number(business_number);
@@ -202,7 +211,7 @@ public class SearchCriteria {
 		  return newCri;
 		  
 	  }
-
+	 
 
 	public SearchCriteria(int page, int perPageNum, String searchType, String keyword, int project_number,
 			int business_number, int status, int type, int startRowNum, String member_id, int memberStatus) {

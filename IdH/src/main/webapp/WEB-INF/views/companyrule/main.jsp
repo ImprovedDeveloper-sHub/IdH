@@ -278,11 +278,19 @@ p, span {
 
 
 <c:if test="${from eq 'regist' }">
+<<<<<<< HEAD
 	<script>
 		alert("정상 등록이 되었습니다.");
 		window.close();
 		window.opener.location.reload();
 	</script>
+=======
+<script>
+	alert("정상적으로 등록 되었습니다.");
+	window.close();
+	window.opener.location.reload();
+</script>
+>>>>>>> refs/remotes/origin/choi
 </c:if>
 <c:if test="${from eq 'remove' }">
 	<script>
@@ -291,7 +299,13 @@ p, span {
 		window.opener.location.reload();
 	</script>
 </c:if>
-
+<c:if test="${from eq 'modify' }">
+<script>
+	alert("정상적으로 수정 되었습니다.");
+	window.close();
+	window.opener.location.reload();
+</script>
+</c:if>
 <!--content종료-->
 <!-- <script>
 function OpenWindow(){

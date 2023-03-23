@@ -11,7 +11,6 @@ import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.ProjectDAO;
 import com.sbs.IdH.dao.UnitworkDAO;
 import com.sbs.IdH.dto.ChartVO;
-import com.sbs.IdH.dto.ScheduleVO;
 import com.sbs.IdH.dto.UnitworkVO;
 
 public class UnitworkServiceImpl implements UnitworkService{

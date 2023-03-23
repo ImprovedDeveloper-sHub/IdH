@@ -14,6 +14,7 @@ import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.MemberVO;
 import com.sbs.IdH.service.ProjectService;
 import com.sbs.IdH.service.UnitworkService;
+import com.sbs.IdH.service.WorkforceService;
 
 @RequestMapping("/project")
 @Controller
@@ -23,6 +24,8 @@ public class ProjectController {
 	private UnitworkService unitworkService;
 	@Resource
 	private ProjectService projectService;
+	@Resource
+	private WorkforceService workforceService;
 	
 	public void setProjectService(ProjectService projectService) {
 		this.projectService = projectService;
@@ -38,6 +41,9 @@ public class ProjectController {
 		//mnv.addAllObjects(unitworkService.selectUnitworkList(cri));
 		MemberVO member =(MemberVO)request.getSession().getAttribute("loginUser");
 		cri.setMember_id((member.getMember_id()));
+		
+		
+		
 		mnv.addAllObjects(projectService.selectProceedingProject(cri));
 		
 		
@@ -45,15 +51,6 @@ public class ProjectController {
 
 	}
 
-	@GetMapping("/progress")
-	public ModelAndView progress(ModelAndView mnv, SearchCriteria cri) throws Exception {
-
-		mnv.addAllObjects(unitworkService.selectUnitworkList(cri));
-		mnv.addAllObjects(projectService.selectProjectUnitwork_level(cri));
-
-		return mnv;
-	}
-	
 	@GetMapping("/selectProject")
 	public String selectProject(RedirectAttributes rttr, HttpServletRequest request, int project_number)throws Exception{
 		String url="redirect:progress";
@@ -64,6 +61,20 @@ public class ProjectController {
 		return url;
 	}
 	
+	@GetMapping("/progress")
+	public ModelAndView progress(ModelAndView mnv, SearchCriteria cri, HttpServletRequest request) throws Exception {
+		
+		int project_number = (int)request.getSession().getAttribute("project_now_number");
+		cri.setProject_number(project_number);
+		
+		
+		mnv.addAllObjects(unitworkService.selectUnitworkList(cri));
+		mnv.addAllObjects(projectService.selectProjectUnitwork_level(cri));
+		
+		return mnv;
+	}
+	
+
 	
 	
 }

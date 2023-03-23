@@ -7,12 +7,8 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 
-	<context:component-scan
-		base-package="com.sbs.IdH.service" />
-
-	<bean id="UploadPath" class="java.lang.String">
-		<constructor-arg value="${uploadPath.attach}" />
-	</bean>
+	<context:component-scan base-package="com.sbs.IdH.service" />
+	
 
 	<bean id="issueDAO" class="com.sbs.IdH.dao.IssueDAOImpl"
 		p:session-ref="sqlSession" />
@@ -71,14 +67,16 @@
 	<bean id="requireService"
 		class="com.sbs.IdH.service.RequireServiceImpl"
 		p:requireDAO-ref="requireDAO"
-		p:require_attachDAO-ref="require_attachDAO" />
-	<bean id="memberService"
-		class="com.sbs.IdH.service.MemberServiceImpl"
-		p:memberDAO-ref="memberDAO" />
-	<bean id="project_authorityService"
-		class="com.sbs.IdH.service.Project_authorityServiceImpl"
-		p:project_authorityDAO-ref="project_authorityDAO" />
-
+	 	p:require_attachDAO-ref="require_attachDAO"
+	 	p:businessDAO-ref="businessDAO"
+	/>  
+	<bean id="memberService" class="com.sbs.IdH.service.MemberServiceImpl"
+		p:memberDAO-ref="memberDAO"
+	/>  
+ 	<bean id="project_authorityService" class="com.sbs.IdH.service.Project_authorityServiceImpl"
+		p:project_authorityDAO-ref="project_authorityDAO"
+	/>  
+	
 	<bean id="projectDAO" class="com.sbs.IdH.dao.ProjectDAOImpl"
 		p:session-ref="sqlSession" />
 
@@ -131,7 +129,10 @@
 
 	<bean id="noticeDAO" class="com.sbs.IdH.dao.NoticeDAOImpl"
 		p:session-ref="sqlSession" />
-
+<bean id="notice_attachDAO"
+		  class="com.sbs.IdH.dao.Notice_attachDAOImpl"
+		  p:session-ref="sqlSession"
+	/>
 	<bean id="business_attachDAO"
 		class="com.sbs.IdH.dao.Business_attachDAOImpl"
 		p:session-ref="sqlSession" />
@@ -154,7 +155,8 @@
 
 	<bean id="noticeService"
 		class="com.sbs.IdH.service.NoticeServiceImpl"
-		p:noticeDAO-ref="noticeDAO" />
+		p:noticeDAO-ref="noticeDAO"
+		p:notice_attachDAO-ref="notice_attachDAO" />
 
 
 	<bean id="replyDAO" class="com.sbs.IdH.dao.ReplyDAOImpl"

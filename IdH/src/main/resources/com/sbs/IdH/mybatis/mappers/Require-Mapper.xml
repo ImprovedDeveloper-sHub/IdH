@@ -71,8 +71,7 @@
 		require_title=#{require_title}, require_detail=#{require_detail},
 		require_level=#{require_level},
 		require_project=#{require_project},require_setter_id=#{require_setter_id},
-		require_business_number=#{require_business_number},require_regdate=sysdate,
-		require_getter_id=#{require_getter_id}
+		require_business_number=#{require_business_number}
 		where require_number=#{require_number}
 	</update>
 	

@@ -55,6 +55,5 @@ public class Require_attachVO {
 		this.require_attach_attacher = require_attach_attacher;
 	}
 	
-	
 
 }

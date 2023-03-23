@@ -106,9 +106,7 @@ public class DashBoardController {
 	@GetMapping("/getProjectCalendar")
 	@ResponseBody
 	public List<Map<String, Object>> getProjectCalendar() throws Exception{
-		
 		SearchCriteria cri = new SearchCriteria();
-		
 		return projectService.selectProjectListForCalendar(cri);
 	}
 	

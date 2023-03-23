@@ -19,7 +19,7 @@
 			<c:forEach var="pageNum" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
 	
 			<li class="page-item ${pageMaker.cri.page == pageNum?'active':''}">
-				<a class="page-link" href="javascript:list_go('${pageNum}');" >${pageNum }</a>
+				<a class="page-link" href="javascript:list_go(${pageNum}');" >${pageNum }</a>
 			</li>
 			</c:forEach>
 			
@@ -36,11 +36,6 @@
 			</li>	
 		</ul>
 	</nav>
-	
-	
-
-
-
 
 
 	

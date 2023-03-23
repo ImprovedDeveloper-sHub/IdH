@@ -93,13 +93,21 @@ public class ProjectManageController {
 		
 		mnv.addAllObjects(projectService.selectProjectStatusForChart(cri2));
 		
-		
 		cri.setPerPageNum(5);
 		mnv.addAllObjects(projectService.selectProceedingProject(cri));
 		mnv.addAllObjects(projectService.selectEndProject(cri));
 		mnv.setViewName("projectManage/main");
 		return mnv;
 	}
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	
 	@GetMapping("/manage")
 	public ModelAndView manage(ModelAndView mnv, SearchCriteria cri, HttpServletRequest request) throws Exception {

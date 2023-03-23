@@ -32,12 +32,9 @@
 	color: #757e92;
 	font-size: 10px;
 	text-transform: uppercase;
-	padding: 14px 10px;
 }
 
 #table-content tbody tr td {
-	font-size: 15px;
-	padding: 14px 10px;
 	border-bottom: #eaecee solid 1px;
 }
 
@@ -54,27 +51,6 @@
 .table-td {
 	font-size: 13px;
 	color: #64697a;
-}
-
-.date-td {
-	text-align: right;
-	font-size: 9px;
-}
-
-.checked {
-	background: #fefaf2;
-}
-
-#credit {
-	color: #76838c;
-	width: 300px;
-	margin: 0 auto;
-	font-size: 12px;
-	text-align: center;
-}
-
-.btn-info {
-	text-align: right;
 }
 </style>
 
@@ -133,12 +109,19 @@
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 							</tr>
-							<tr>
-								<td class="name-td">첨부파일</td>
-								<td class="table-td" style="height: auto;">${notice.notice_attachList}</td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
-							</tr>
+							<c:forEach items="${notice.notice_attachList }" var="attach">
+								<tr>
+									<td class="name-td">첨부파일</td>
+									<td class="table-td">${attach.filename }</td>
+									<td class="table-td"><fmt:formatDate
+											value="${attach.regdate }" pattern="yyyy-MM-dd" /></td>
+									<td class="table-td" class="attach-box"
+										style="cursor: pointer;"
+										onclick="location.href='<%=request.getContextPath()%>/notice/getFile?ano=${attach.ano}';">
+										<i class="fa-solid fa-download"></i>
+									</td>
+								</tr>
+							</c:forEach>
 
 						</tbody>
 					</table>
@@ -146,16 +129,32 @@
 			</div>
 		</div>
 	</div>
-	<div class="card-tools" style="margin-left: 1000px">
-		<button type="button" id="modifyBtn" class="btn btn-info"
-			onclick="location.href='modifyForm?notice_number=${notice.notice_number}';">수정</button>
+	<div class="card-tools" style="margin-left: auto">
 		<button type="button" id="removeBtn" class="btn btn-info"
-			onclick="location.href='modifyForm?notice_number=${notice.notice_number}';">삭제</button>
+			onclick="submit_go('remove','${notice.notice_number }');">삭제</button>
 		<button type="button" id="listBtn" class="btn btn-info"
-			onclick="location.href='main';">목록</button>
+			onclick="location.href='main';">목록</button>&nbsp;&nbsp;
 	</div>
 	<!-- 공지 사항 상세 정보 끝 -->
 
 </div>
 
+
+<script>
+	function submit_go(url, notice_number) {
+		location.href = url + "?notice_number=" + notice_number;
+	}
+</script>
+<c:if test="${from eq 'modify'}">
+	<script>
+		alert("정상적으로 수정되었습니다.");
+		window.opener.location.reload();
+	</script>
+</c:if>
+<c:if test="${from eq 'remove'}">
+	<script>
+		alert("삭제되었습니다.");
+		window.location.reload();
+	</script>
+</c:if>
 

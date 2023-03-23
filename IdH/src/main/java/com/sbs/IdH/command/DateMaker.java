@@ -42,6 +42,7 @@ public class DateMaker {
 		param.put("title", unitwork.getUnitwork_name());
 		param.put("start", format.format(unitwork.getUnitwork_regdate()));
 		param.put("end", format.format(unitwork.getUnitwork_enddate()));
+		param.put("url", unitwork.getUnitwork_number());
 		paramList.add(param);
 	}
 	

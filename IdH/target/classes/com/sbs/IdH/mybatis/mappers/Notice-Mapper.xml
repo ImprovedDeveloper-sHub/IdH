@@ -15,20 +15,6 @@
 		<if test="searchType == 'c'.toString()">
 			and notice_content like '%'||#{keyword}||'%'
 		</if>
-		<if test="searchType == 'tc'.toString()">
-			and (
-			notice_title like '%'||#{keyword}||'%'
-			or
-			notice_content like '%'||#{keyword}||'%'
-			)
-		</if>
-		<if test="searchType == 'cw'.toString()">
-			and (
-			notice_member_id like '%'||#{keyword}||'%'
-			or
-			notice_content like '%'||#{keyword}||'%'
-			)
-		</if>
 		<if test="searchType == 'tcw'.toString()">
 			and (
 			notice_title like '%'||#{keyword}||'%'
@@ -85,8 +71,7 @@
 	</select>
 	
 	<select id="selectNoticeSequenceNextValue" resultType="int">
-		select notice_seq.nextVal
-		from dual
+		select notice_seq.nextval as notice_number from dual
 	</select>
 	
 	<update id="increaseViewCount" parameterType="int">
@@ -98,7 +83,7 @@
 	<update id="insertNotice" parameterType="notice">
 		insert into
 		notice(notice_number, notice_title, notice_member_id, notice_content)
-		values(#{notice_number}, #{notice_title}, #{notice_member_id}, #{notice_content})
+		values(#{notice_number}, #{notice_title}, #{notice_member_id},#{notice_content})
 	</update>
 	
 	<update id="updateNotice" parameterType="notice">

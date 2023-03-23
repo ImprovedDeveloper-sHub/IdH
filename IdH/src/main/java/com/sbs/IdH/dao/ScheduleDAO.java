@@ -6,7 +6,6 @@ import java.util.Map;
 
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.ScheduleVO;
-import com.sbs.IdH.dto.UnitworkVO;
 
 public interface ScheduleDAO {
 

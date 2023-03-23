@@ -628,6 +628,26 @@ function print_workforceList(page,project_num){
 
 
 
+ 
+  </script>
+  
+  <c:if test="${from eq 'regist' }">
+  <script>
+	  	//alert('test');
+	  	window.close();
+	  	window.opener.location.reload();
+  </script>
+  
+</c:if>
+
+<c:if test="${from eq 'delete' }">
+<script>
+	alert('삭제되었습니다.');
+	window.close();
+	window.opener.location.reload();
+</script>
+
+</c:if>
 
  
 

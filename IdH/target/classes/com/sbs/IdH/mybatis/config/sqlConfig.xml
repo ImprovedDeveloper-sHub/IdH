@@ -25,8 +25,9 @@
 		<typeAlias type="com.sbs.IdH.dto.BusinessVO" alias="business" />
 		<typeAlias type="com.sbs.IdH.dto.BusinessgroupVO" alias="businessgroup" />
 		<typeAlias type="com.sbs.IdH.dto.NoticeVO" alias="notice" />
+		<typeAlias type="com.sbs.IdH.dto.Notice_attachVO" alias="notice_attach" />
 		<typeAlias type="com.sbs.IdH.dto.Business_attachVO" alias="business_attach" />
-	<typeAlias type="com.sbs.IdH.dto.IssueVO"  alias="issue"/>
+		<typeAlias type="com.sbs.IdH.dto.IssueVO"  alias="issue"/>
 		<typeAlias type="com.sbs.IdH.dto.MinutesVO"  alias="minutes"/>
 		<typeAlias type="com.sbs.IdH.dto.Issue_AttachVO"  alias="issue_attach"/>
 		<typeAlias type="com.sbs.IdH.dto.Require_attachVO"  alias="require_attach"/>

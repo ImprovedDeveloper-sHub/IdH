@@ -20,10 +20,9 @@ function CloseWindow(parentURL){
 
 function list_go(page,url){
 	if(!url) url="main";
-	
 	var jobForm=$('#jobForm');
 	jobForm.find("[name='page']").val(page);
-	jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
+	jobForm.find("[name='perPageNum']").val(10);
 	jobForm.find("[name='searchType']")
 		.val($('select[name="searchType"]').val());
 	jobForm.find("[name='keyword']")

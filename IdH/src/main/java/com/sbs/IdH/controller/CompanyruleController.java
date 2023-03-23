@@ -31,25 +31,25 @@ import com.sbs.IdH.utils.MakeFileName;
 @Controller
 public class CompanyruleController {
 
-	@Resource
-	private CompanyruleService companyruleService;
-	@Resource
-	private ProductService productService;
+   @Resource
+   private CompanyruleService companyruleService;
+   @Resource
+   private ProductService productService;
 
-	public void setCompanyruleService(CompanyruleService companyruleService) {
-		this.companyruleService = companyruleService;
-	}
+   public void setCompanyruleService(CompanyruleService companyruleService) {
+      this.companyruleService = companyruleService;
+   }
 
-	public void setProductService(ProductService productService) {
-		this.productService = productService;
-	}
+   public void setProductService(ProductService productService) {
+      this.productService = productService;
+   }
 
 	public void fileUploadCompanyrulePath(String UploadPath) {
 		this.UploadPath = UploadPath;
 	}
 
-	@GetMapping("/main")
-	public ModelAndView companyrule(SearchCriteria cri, ModelAndView mnv) throws Exception {
+   @GetMapping("/main")
+   public ModelAndView companyrule(SearchCriteria cri, ModelAndView mnv) throws Exception {
 
 		mnv.addAllObjects(companyruleService.selectCompanyruleList(cri));
 		mnv.addAllObjects(productService.selectProductEndList(cri));
@@ -75,46 +75,46 @@ public class CompanyruleController {
 	 }
 	
 
-	@RequestMapping("/registForm")
-	public String registForm() throws Exception {
+   @RequestMapping("/registForm")
+   public String registForm() throws Exception {
 
-		String url = "companyrule/regist";
-		return url;
-	}
+      String url = "companyrule/regist";
+      return url;
+   }
 
 	@Resource(name = "UploadPath")
 	private String UploadPath;
 
-	private List<Co_AttachVO> saveFileToAttaches(List<MultipartFile> multiFiles, String savePath) throws Exception {
-		List<Co_AttachVO> attachList = new ArrayList<Co_AttachVO>();
-		// 저장 -> attachVO -> list.add
-		if (multiFiles != null) {
-			for (MultipartFile multi : multiFiles) {
-				String fileName = MakeFileName.toUUIDFileName(multi.getOriginalFilename(), "$$");
-				File target = new File(savePath, fileName);
-				target.mkdirs();
-				multi.transferTo(target);
+   private List<Co_AttachVO> saveFileToAttaches(List<MultipartFile> multiFiles, String savePath) throws Exception {
+      List<Co_AttachVO> attachList = new ArrayList<Co_AttachVO>();
+      // 저장 -> attachVO -> list.add
+      if (multiFiles != null) {
+         for (MultipartFile multi : multiFiles) {
+            String fileName = MakeFileName.toUUIDFileName(multi.getOriginalFilename(), "$$");
+            File target = new File(savePath, fileName);
+            target.mkdirs();
+            multi.transferTo(target);
 
-				Co_AttachVO attach = new Co_AttachVO();
-				attach.setUploadPath(savePath);
-				attach.setFileName(fileName);
-				attach.setFileType(fileName.substring(fileName.lastIndexOf('.') + 1).toUpperCase());
+            Co_AttachVO attach = new Co_AttachVO();
+            attach.setUploadPath(savePath);
+            attach.setFileName(fileName);
+            attach.setFileType(fileName.substring(fileName.lastIndexOf('.') + 1).toUpperCase());
 
-				attachList.add(attach);
-			}
-		}
-		return attachList;
-	}
+            attachList.add(attach);
+         }
+      }
+      return attachList;
+   }
 
-	@PostMapping(value = "/regist", produces = "text/plain;charset=utf-8")
-	public String regist(CompanyruleRegistCommand registReq, HttpServletRequest request, RedirectAttributes rttr)
-			throws Exception {
-		String url = "redirect:/companyrule/main";
+   @PostMapping(value = "/regist", produces = "text/plain;charset=utf-8")
+   public String regist(CompanyruleRegistCommand registReq, HttpServletRequest request, RedirectAttributes rttr)
+         throws Exception {
+      String url = "redirect:/companyrule/main";
 
 		List<MultipartFile> multiFiles = registReq.getUploadFile();
 		String savePath = this.UploadPath;
 
-		List<Co_AttachVO> attachList = saveFileToAttaches(multiFiles, savePath);
+      List<Co_AttachVO> attachList = saveFileToAttaches(multiFiles, savePath);
 
 		// DB
 		CompanyruleVO companyrule = registReq.toCompanyruleVO();
@@ -125,154 +125,153 @@ public class CompanyruleController {
 			companyrule.setCompanyrule_content(XSScontent);
 		}
 
-		companyrule.setCo_AttachList(attachList);
-		companyruleService.registCompanyrule(companyrule);
+      companyrule.setCo_AttachList(attachList);
+      companyruleService.registCompanyrule(companyrule);
 
-		// output
-		rttr.addFlashAttribute("from", "regist");
+      // output
+      rttr.addFlashAttribute("from", "regist");
 
-		return url;
-	}
+      return url;
+   }
 
-	@GetMapping("/detail")
-	public ModelAndView detail(int companyrule_number, String from, ModelAndView mnv) throws Exception {
-		String url = "/companyrule/detail";
+   @GetMapping("/detail")
+   public ModelAndView detail(int companyrule_number, String from, ModelAndView mnv) throws Exception {
+      String url = "/companyrule/detail";
 
-		
-		CompanyruleVO companyrule = null;
+      
+      CompanyruleVO companyrule = null;
 
-		companyrule = companyruleService.selectCompanyrule(companyrule_number);
+      companyrule = companyruleService.selectCompanyrule(companyrule_number);
 
-		// 파일명 재정의
-		if (companyrule != null) {
-			List<Co_AttachVO> attachList = companyrule.getAttachList();
-			if (attachList != null) {
-				for (Co_AttachVO attach : attachList) {
-					String fileName = attach.getFileName().split("\\$\\$")[1];
-					attach.setFileName(fileName);
-				}
-			}
-		}
+      // 파일명 재정의
+      if (companyrule != null) {
+         List<Co_AttachVO> attachList = companyrule.getAttachList();
+         if (attachList != null) {
+            for (Co_AttachVO attach : attachList) {
+               String fileName = attach.getFileName().split("\\$\\$")[1];
+               attach.setFileName(fileName);
+            }
+         }
+      }
 
-		mnv.addObject("companyrule", companyrule);
+      mnv.addObject("companyrule", companyrule);
 
-		mnv.setViewName(url);
+      mnv.setViewName(url);
 
-		return mnv;
-	}
-	@GetMapping("/product_detail")
-	public ModelAndView productdetail(String from, ModelAndView mnv,int product_number) throws Exception {
-		String url = "companyrule/product_detail";
+      return mnv;
+   }
+   @GetMapping("/product_detail")
+   public ModelAndView productdetail(String from, ModelAndView mnv,int product_number) throws Exception {
+      String url = "companyrule/product_detail";
 
-		
-		ProductVO product = null;
+      
+      ProductVO product = null;
 
-		product = productService.selectProduct(product_number);
+      product = productService.selectProduct(product_number);
 
-		// 파일명 재정의
-		if (product != null) {
-			List<Product_AttachVO> attachList =product.getAttachList();
-			if (attachList != null) {
-				for (Product_AttachVO attach : attachList) {
-					String fileName = attach.getFileName().split("\\$\\$")[1];
-					attach.setFileName(fileName);
-				}
-			}
-		}
+      // 파일명 재정의
+      if (product != null) {
+         List<Product_AttachVO> attachList =product.getAttachList();
+         if (attachList != null) {
+            for (Product_AttachVO attach : attachList) {
+               String fileName = attach.getFileName().split("\\$\\$")[1];
+               attach.setFileName(fileName);
+            }
+         }
+      }
 
-		mnv.addObject("product", product);
+      mnv.addObject("product", product);
 
-		mnv.setViewName(url);
+      mnv.setViewName(url);
 
-		return mnv;
-	}
-
-
-	
-		
+      return mnv;
+   }
 
 
-	@GetMapping("/remove")
-	public String remove(int companyrule_number, RedirectAttributes rttr) throws Exception {
-		String url = "redirect:/companyrule/main";
+   
+      
 
-		// 첨부파일 삭제
-		List<Co_AttachVO> attachList = companyruleService.selectCompanyrule(companyrule_number).getAttachList();
-		if (attachList != null) {
-			for (Co_AttachVO attach : attachList) {
-				File target = new File(attach.getUploadPath(), attach.getFileName());
-				if (target.exists()) {
-					target.delete();
-				}
-			}
-		}
-		// DB삭제
-		companyruleService.removeCompanyrule(companyrule_number);
 
-		rttr.addFlashAttribute("from", "remove");
-		rttr.addAttribute("companyrule_number", companyrule_number);
+   @GetMapping("/remove")
+   public String remove(int companyrule_number, RedirectAttributes rttr) throws Exception {
+      String url = "redirect:/companyrule/main";
 
-		return url;
-	}
+      // 첨부파일 삭제
+      List<Co_AttachVO> attachList = companyruleService.selectCompanyrule(companyrule_number).getAttachList();
+      if (attachList != null) {
+         for (Co_AttachVO attach : attachList) {
+            File target = new File(attach.getUploadPath(), attach.getFileName());
+            if (target.exists()) {
+               target.delete();
+            }
+         }
+      }
+      // DB삭제
+      companyruleService.removeCompanyrule(companyrule_number);
 
-	@GetMapping("/modifyForm")
-	public ModelAndView modifyForm(ModelAndView mnv, int companyrule_number) throws Exception {
-		String url = "companyrule/modify";
+      rttr.addFlashAttribute("from", "remove");
+      rttr.addAttribute("companyrule_number", companyrule_number);
+      return url;
+   }
 
-		mnv = detail(companyrule_number, "modify", mnv);
+   @GetMapping("/modifyForm")
+   public ModelAndView modifyForm(ModelAndView mnv, int companyrule_number) throws Exception {
+      String url = "companyrule/modify";
 
-		mnv.setViewName(url);
-		return mnv;
-	}
+      mnv = detail(companyrule_number, "modify", mnv);
 
-	@PostMapping(value = "/modify", produces = "text/plain;charset=utf-8")
-	public String modifyPOST(CompanyruleModifyCommand modifyReq, HttpServletRequest request, RedirectAttributes rttr)
-			throws Exception {
-		String url = "redirect:/companyrule/detail";
+      mnv.setViewName(url);
+      return mnv;
+   }
 
-		// 파일 삭제
-		if (modifyReq.getDeleteFile() != null && modifyReq.getDeleteFile().length > 0) {
-			for (int ano : modifyReq.getDeleteFile()) {
-				Co_AttachVO attach = companyruleService.selectCo_AttachByAno(ano);
+   @PostMapping(value = "/modify", produces = "text/plain;charset=utf-8")
+   public String modifyPOST(CompanyruleModifyCommand modifyReq, HttpServletRequest request, RedirectAttributes rttr)
+         throws Exception {
+      String url = "redirect:/companyrule/detail";
 
-				File deleteFile = new File(attach.getUploadPath(), attach.getFileName());
+      // 파일 삭제
+      if (modifyReq.getDeleteFile() != null && modifyReq.getDeleteFile().length > 0) {
+         for (int ano : modifyReq.getDeleteFile()) {
+            Co_AttachVO attach = companyruleService.selectCo_AttachByAno(ano);
 
-				if (deleteFile.exists()) {
-					deleteFile.delete(); // File 삭제
-				}
-				companyruleService.removeCo_AttachByAno(ano); // DB 삭제
+            File deleteFile = new File(attach.getUploadPath(), attach.getFileName());
 
-			}
-		}
+            if (deleteFile.exists()) {
+               deleteFile.delete(); // File 삭제
+            }
+            companyruleService.removeCo_AttachByAno(ano); // DB 삭제
+
+         }
+      }
 
 		// 파일저장
 		List<Co_AttachVO> attachList = saveFileToAttaches(modifyReq.getUploadFile(), UploadPath);
 
-		CompanyruleVO companyrule = modifyReq.toCompanyruleVO();
-		String XSStitle = (String) request.getAttribute("XSStitle");
-		if (XSStitle != null)
-			companyrule.setCompanyrule_title(XSStitle);
-		companyrule.setCo_AttachList(attachList);
+      CompanyruleVO companyrule = modifyReq.toCompanyruleVO();
+      String XSStitle = (String) request.getAttribute("XSStitle");
+      if (XSStitle != null)
+         companyrule.setCompanyrule_title(XSStitle);
+      companyrule.setCo_AttachList(attachList);
 
-		// DB 저장
-		companyruleService.modifyCompanyrule(companyrule);
+      // DB 저장
+      companyruleService.modifyCompanyrule(companyrule);
 
-		rttr.addFlashAttribute("from", "modify");
-		rttr.addAttribute("companyrule_number", companyrule.getCompanyrule_number());
+      rttr.addFlashAttribute("from", "modify");
+      rttr.addAttribute("companyrule_number", companyrule.getCompanyrule_number());
 
-		return url;
-	}
+      return url;
+   }
 
-	@GetMapping("/getFile")
-	public String getFile(int ano, Model model) throws Exception {
+   @GetMapping("/getFile")
+   public String getFile(int ano, Model model) throws Exception {
 
-		String url = "downloadFile"; // bean name
+      String url = "downloadFile"; // bean name
 
-		Co_AttachVO attach = companyruleService.selectCo_AttachByAno(ano);
+      Co_AttachVO attach = companyruleService.selectCo_AttachByAno(ano);
 
-		model.addAttribute("savedPath", attach.getUploadPath());
-		model.addAttribute("fileName", attach.getFileName());
+      model.addAttribute("savedPath", attach.getUploadPath());
+      model.addAttribute("fileName", attach.getFileName());
 
-		return url;
-	}
+      return url;
+   }
 }

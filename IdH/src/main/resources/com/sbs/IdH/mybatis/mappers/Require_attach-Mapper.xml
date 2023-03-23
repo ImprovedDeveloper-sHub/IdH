@@ -19,8 +19,8 @@
 	
 	<update id="insertRequire_attach">
 		insert into
-		attach (ano, uploadpath, filename, filetype, regdate, require_number, require_attach_attacher)
-		values (require_attach_seq.nextval, #{uploadPath}, #{fileName}, #{fileType}, sysdate, #{require_number}, #{require_attach_attacher})
+		require_attach (ano, uploadpath, filename, filetype, regdate, require_number, require_attach_attacher)
+		values (require_attach_seq.nextval, #{uploadpath}, #{filename}, #{filetype}, sysdate, #{require_number}, #{require_attach_attacher})
 	</update>
 	
 	<update id="deleteRequire_attach">
