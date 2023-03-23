@@ -5,10 +5,6 @@
 <!-- CSS start -->
 
 <style>
-#upload{
-   width:97%;
-   font-size:12px;
-}
 #content {
 	background: #eaedf2;
 	position: relative;
@@ -42,10 +38,6 @@
 	font-size: 13px;
 	color: #64697a;
 }
-p{
-margin:0 !important;
-padding:0 !important;
-}
 input {
 	width: 100%;
 	font-size: 13px;
@@ -61,7 +53,7 @@ input {
 <div class="header"style="width:680px;height:400px;">
 		<div class="card card-info">
 			<div class="card-header">
-				<h3 class="card-title">수정화면</h3>
+				<h3 class="card-title">상세화면</h3>
 				<div class="card-tools">
 					<div class="input-group input-group-sm" style="width: 150px;">
 						<div class="input-group-append"></div>
@@ -70,7 +62,7 @@ input {
 			</div>
 			<div id="content">
 				<div id="table-content">
-				<form enctype="multipart/form-data" role="form" method="post" action="modify" name="modifyForm">
+				<form enctype="multiaprt/form-data" role="form" method="post" action="regist" name="registForm">
 					<table>
 						<thead>
 							<tr>
@@ -84,99 +76,72 @@ input {
 						<tbody>
 							<tr>
 								<td class="name-td">글번호</td>
-								<td class="table-td"><input type="text" name="companyrule_number"readonly value="${companyrule.companyrule_number }"/></td>
+								<td class="table-td">${product.product_number }</td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
-								<td class="name-td">작성자</td>
-								<td class="table-td"><input type="text" name="companyrule_member_id" value="${companyrule.companyrule_member_id }"/></td>
+								<td class="name-td">담당자</td>
+								<td class="table-td">${product.product_member_id }</td>
 							</tr>
 							<tr>
 								<td class="name-td">제목</td>
-								<td class="table-td"><input type="text" name="companyrule_title" placeholder="${companyrule.companyrule_title }"></td>
+								<td class="table-td">${product.product_title }</td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">등록일</td>
 								<td colspan="5"><fmt:formatDate
-												value="${companyrule.companyrule_regdate}"
+												value="${product.product_regdate}"
 												pattern="yyyy-MM-dd"/></td>
 							</tr>
 						
 							<tr style="height: 100px;">
 							<td class="name-td">내용</td>
-								<td class="table-td"><input type="text" name="companyrule_content" placeholder="${companyrule.companyrule_content }"/></td>
+								<td class="table-td">${product.product_content }</td>
 							</tr>
-						
-							
 
 						</tbody>
+					</table>
+					</form>
+										
 							
 						
-					</table>
-					<button class="btn btn-xs btn-info" onclick="addFile_go();" 
-                  type="button" id="addFileBtn">파일첨부</button>
-                  
-               <div class="card-footer fileInput"></div>
-					</form>
 				</div>
 			</div>
+			
 			<div class="card-tools" style="margin-left:auto">
-			<button type="button" id="modifyBtn" class="btn btn-info"  onclick="modify_submit();">수정</button>						 				   
+		
+			<button type="button" id="modifyBtn" class="btn btn-info" onclick="submit_go('modifyForm','${product.product_number }');">수정</button>						
+		    <button type="button" id="removeBtn" class="btn btn-info" onclick="submit_go('remove','${product.product_number }');">삭제</button>					   
 		    <button type="button" id="listBtn" class="btn btn-info" onclick="CloseWindow();">닫기</button>
 		</div>
+		</div>
 	</div>
-</div>
 
-
-<!-- <script>    
-function modify_submit(){
-	//alert("modify btn click");
-	var form = $('form[name="modifyForm"]');
-	form.submit();
-} 
-</script>	-->
-
-<!-- <script>
-function submit_go(url,companyrule_number ){	
-	location.href=url+"?companyrule_number="+companyrule_number;
-}
-</script> -->
-<script>    
-function modify_submit(){
-	//alert("modify btn click");
-	var form = $('form[name="modifyForm"]');
+<script>
+function regist_go(){
+	   
+	 
+	   
+	   $("form[role='form']").submit();
+	   
 	
-	form.submit();
+</script>
 
-
+<script>
+function submit_go(url,product_number ){	
+	location.href=url+"?product_number="+product_number;
 }
-</script> 
-<%-- 
+</script>
+
 <c:if test="${from eq 'modify'}" >
 	<script>
 		alert("정상적으로 수정되었습니다.");
 		window.opener.location.reload();
 	</script>
-</c:if>    --%> 
-<script>
-var dataNum=0;
-
-function addFile_go(){
-   //alert("add file btn");
-   
-   if($('input[name="uploadFile"]').length >=5){
-      alert("파일추가는 5개까지만 가능합니다.");
-      return;
-   }
-   
-   var div=$('<div>').addClass("inputRow").attr("data-no",dataNum);      
-   var input=$('<input>').attr({"type":"file","name":"uploadFile","id":"upload"}).css("display","inline");
-   div.append(input).append("<button onclick='remove_go("+dataNum+");' style='border:0;outline:0;' class='badge bg-red' type='button'>X</button>");      
-   $('.fileInput').append(div);
-   dataNum++;      
-}
-function remove_go(dataNum){
-   //alert(dataNum);
-   $('div[data-no="'+dataNum+'"]').remove();
-}
-</script>
-
+</c:if>    
+<c:if test="${from eq 'remove'}" >
+	<script>
+		alert("삭제되었습니다.");
+		window.close();
+		window.opener.location.reload();
+	</script>
+</c:if> 

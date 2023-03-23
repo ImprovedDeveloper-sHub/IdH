@@ -35,211 +35,221 @@ import com.sbs.IdH.utils.MakeFileName;
 @Controller
 public class RequireController {
 
-	@Resource
-	private RequireService requireService;
-	@Resource
-	private Require_attachDAO require_attachDAO;
-	@Resource
-	private BusinessService businessService;
-	@Resource
-	private UnitworkDAO unitworkDAO;
-	@Resource
-	private UnitworkService unitworkService;
+   @Resource
+   private RequireService requireService;
+   @Resource
+   private Require_attachDAO require_attachDAO;
+   @Resource
+   private BusinessService businessService;
+   @Resource
+   private UnitworkDAO unitworkDAO;
+   @Resource
+   private UnitworkService unitworkService;
 
-	@GetMapping("/main")
-	public ModelAndView main(ModelAndView mnv, SearchCriteria cri) throws Exception {
+   @GetMapping("/main")
+   public ModelAndView main(ModelAndView mnv, SearchCriteria cri ) throws Exception {
+      /*
+       * SearchCriteria cri = new SearchCriteria(); cri.setKeyword(keyword);
+       * cri.setSearchType(searchType); cri.setPage(1); cri.setPerPageNum(10);
+       */
+      mnv.addObject("dataMap", requireService.selectRequireList(cri));
+      mnv.addAllObjects(requireService.selectRequireList(cri));
+      
+      return mnv;
+   }
 
-		mnv.addAllObjects(requireService.selectRequireList(cri));
+   @GetMapping("/getUnitworkCalender")
+   @ResponseBody
+   public List<Map<String, Object>> getUnitworkCalender(HttpServletRequest request) throws Exception {
 
-		return mnv;
-	}
+      SearchCriteria cri = new SearchCriteria();
 
-	@GetMapping("/getUnitworkCalender")
-	@ResponseBody
-	public List<Map<String, Object>> getUnitworkCalender(HttpServletRequest request) throws Exception {
+      /*
+       * MemberVO member = (MemberVO) request.getSession().getAttribute("loginUser");
+       * cri.setMember_id(member.getMember_id());
+       */
 
-		SearchCriteria cri = new SearchCriteria();
+      return unitworkService.selectUnitworkListForCalendar(cri);
 
-		/*
-		 * MemberVO member = (MemberVO) request.getSession().getAttribute("loginUser");
-		 * cri.setMember_id(member.getMember_id());
-		 */
+   }
 
-		return unitworkService.selectUnitworkListForCalendar(cri);
+   @GetMapping("/registForm")
+   public ModelAndView registForm(ModelAndView mnv, HttpServletRequest request) throws Exception {
 
-	}
+      String url = "require/regist";
+      SearchCriteria cri = new SearchCriteria();
 
-	@GetMapping("/registForm")
-	public ModelAndView registForm(ModelAndView mnv, HttpServletRequest request) throws Exception {
+      MemberVO member = (MemberVO) request.getSession().getAttribute("loginUser");
+      cri.setMember_id(member.getMember_id());
 
-		String url = "require/regist";
-		SearchCriteria cri = new SearchCriteria();
+      mnv.addAllObjects(businessService.getBusinessList(cri));
+      mnv.setViewName(url);
+      return mnv;
+   }
 
-		MemberVO member = (MemberVO) request.getSession().getAttribute("loginUser");
-		cri.setMember_id(member.getMember_id());
+   @Resource(name = "UploadPath")
+   private String UploadPath;
 
-		mnv.addAllObjects(businessService.getBusinessList(cri));
-		mnv.setViewName(url);
-		return mnv;
-	}
+   private List<Require_attachVO> saveFileToAttaches(List<MultipartFile> multiFiles, String savePath)
+         throws Exception {
+      List<Require_attachVO> attachList = new ArrayList<Require_attachVO>();
+      // 저장 -> attachVO -> list.add
+      if (multiFiles != null) {
+         for (MultipartFile multi : multiFiles) {
+            String fileName = MakeFileName.toUUIDFileName(multi.getOriginalFilename(), "$$");
+            File target = new File(savePath, fileName);
+            target.mkdirs();
+            multi.transferTo(target);
 
-	@Resource(name = "fileUploadPath")
-	private String fileUploadPath;
+            Require_attachVO attach = new Require_attachVO();
+            attach.setUploadpath(savePath);
+            attach.setFilename(fileName);
+            attach.setFiletype(fileName.substring(fileName.lastIndexOf('.') + 1).toUpperCase());
 
-	private List<Require_attachVO> saveFileToAttaches(List<MultipartFile> multiFiles, String savePath)
-			throws Exception {
-		List<Require_attachVO> attachList = new ArrayList<Require_attachVO>();
-		// 저장 -> attachVO -> list.add
-		if (multiFiles != null) {
-			for (MultipartFile multi : multiFiles) {
-				String fileName = MakeFileName.toUUIDFileName(multi.getOriginalFilename(), "$$");
-				File target = new File(savePath, fileName);
-				target.mkdirs();
-				multi.transferTo(target);
+            attachList.add(attach);
+         }
+      }
+      return attachList;
+   }
 
-				Require_attachVO attach = new Require_attachVO();
-				attach.setUploadpath(savePath);
-				attach.setFilename(fileName);
-				attach.setFiletype(fileName.substring(fileName.lastIndexOf('.') + 1).toUpperCase());
+   @PostMapping(value = "/regist", produces = "text/plain;charset=utf-8")
+   public String regist(RequireRegistCommand registReq, HttpServletRequest request, RedirectAttributes rttr)
+         throws Exception {
+      String url = "redirect:/require/main";
 
-				attachList.add(attach);
-			}
-		}
-		return attachList;
-	}
+      List<MultipartFile> multiFiles = registReq.getUploadFile();
+      String savePath = this.UploadPath;
 
-	@PostMapping(value = "/regist", produces = "text/plain;charset=utf-8")
-	public String regist(RequireRegistCommand registReq, HttpServletRequest request, RedirectAttributes rttr)
-			throws Exception {
-		String url = "redirect:/require/main";
+      List<Require_attachVO> attachList = saveFileToAttaches(multiFiles, savePath);
 
-		List<MultipartFile> multiFiles = registReq.getUploadFile();
-		String savePath = this.fileUploadPath;
+      // DB
+      RequireVO require = registReq.toRequireVO();
+      String XSStitle = (String) request.getAttribute("XSStitle");
+      String XSSdetail = (String) request.getAttribute("XSSdetail");
+      if (XSStitle != null)
+         require.setRequire_title(XSStitle);
+      if (XSSdetail != null)
+         require.setRequire_detail(XSSdetail);
 
-		List<Require_attachVO> attachList = saveFileToAttaches(multiFiles, savePath);
+      require.setAttachList(attachList);
+      requireService.registRequire(require);
 
-		// DB
-		RequireVO require = registReq.toRequireVO();
-		String XSStitle = (String) request.getAttribute("XSStitle");
-		String XSSdetail = (String) request.getAttribute("XSSdetail");
-		if (XSStitle != null)
-			require.setRequire_title(XSStitle);
-		if (XSSdetail != null)
-			require.setRequire_detail(XSSdetail);
+      // output
+      rttr.addFlashAttribute("from", "regist");
+      return url;
+   }
 
-		require.setAttachList(attachList);
-		requireService.registRequire(require);
+   @GetMapping("/detail")
+   public ModelAndView detail(int require_number, String from, ModelAndView mnv) throws Exception {
+      String url = "/require/detail";
 
-		// output
-		rttr.addFlashAttribute("from", "regist");
-		return url;
-	}
+      RequireVO require = requireService.selectRequire(require_number);
 
-	@GetMapping("/detail")
-	public ModelAndView detail(int require_number, String from, ModelAndView mnv) throws Exception {
-		String url = "/require/detail";
+      // 파일명 재정의
+      if (require != null) {
+         List<Require_attachVO> attachList = require.getAttachList();
+         if (attachList != null) {
+            for (Require_attachVO attach : attachList) {
+               String fileName = attach.getFilename().split("\\$\\$")[1];
+               attach.setFilename(fileName);
+            }
+         }
+      }
+      mnv.addObject("require", require);
+      mnv.setViewName(url);
 
-		RequireVO require = requireService.selectRequire(require_number);
+      return mnv;
+   }
 
-		// 파일명 재정의
-		if (require != null) {
-			List<Require_attachVO> attachList = require.getAttachList();
-			if (attachList != null) {
-				for (Require_attachVO attach : attachList) {
-					String fileName = attach.getFilename().split("\\$\\$")[1];
-					attach.setFilename(fileName);
-				}
-			}
-		}
+   @GetMapping("/remove")
+   public String remove(int require_number, RedirectAttributes rttr) throws Exception {
+      String url = "redirect:/require/detail";
 
-		mnv.addObject("require", require);
-		mnv.setViewName(url);
+      // 첨부파일 삭제
+      List<Require_attachVO> attachList = requireService.selectRequire(require_number).getAttachList();
+      if (attachList != null) {
+         for (Require_attachVO attach : attachList) {
+            File target = new File(attach.getUploadpath(), attach.getFilename());
+            if (target.exists()) {
+               target.delete();
+            }
+         }
+      }
+      // DB삭제
+      requireService.removeRequire(require_number);
 
-		return mnv;
-	}
+      rttr.addFlashAttribute("from", "remove");
+      rttr.addAttribute("require_number", require_number);
 
-	@GetMapping("/remove")
-	public String remove(int require_number, RedirectAttributes rttr) throws Exception {
-		String url = "redirect:/require/detail";
+      return url;
+   }
 
-		// 첨부파일 삭제
-		List<Require_attachVO> attachList = requireService.selectRequire(require_number).getAttachList();
-		if (attachList != null) {
-			for (Require_attachVO attach : attachList) {
-				File target = new File(attach.getUploadpath(), attach.getFilename());
-				if (target.exists()) {
-					target.delete();
-				}
-			}
-		}
-		// DB삭제
-		requireService.removeRequire(require_number);
+   @GetMapping("/modifyForm")
+   public ModelAndView modifyForm(ModelAndView mnv, int require_number, HttpServletRequest request) throws Exception {
+      String url = "/require/modify";
 
-		rttr.addFlashAttribute("from", "remove");
-		rttr.addAttribute("require_number", require_number);
+      mnv = detail(require_number, "modify", mnv);
+      SearchCriteria cri = new SearchCriteria();
 
-		return url;
-	}
+      MemberVO member = (MemberVO) request.getSession().getAttribute("loginUser");
+      cri.setMember_id(member.getMember_id());
 
-	@GetMapping("/modifyForm")
-	public ModelAndView modifyForm(ModelAndView mnv, int require_number, RedirectAttributes rttr) throws Exception {
-		String url = "/require/modify";
+      mnv.addAllObjects(businessService.getBusinessList(cri));
 
-		mnv = detail(require_number, "modify", mnv);
+      mnv.setViewName(url);
+      return mnv;
+   }
 
-		mnv.setViewName(url);
-		return mnv;
-	}
+   @PostMapping(value = "/modify", produces = "text/plain;charset=utf-8")
+   public String modifyPOST(RequireModifyCommand modifyReq, HttpServletRequest request, RedirectAttributes rttr)
+         throws Exception {
+      String url = "redirect:/require/detail";
 
-	@PostMapping(value = "/modify", produces = "text/plain;charset=utf-8")
-	public String modifyPOST(RequireModifyCommand modifyReq, HttpServletRequest request, RedirectAttributes rttr)
-			throws Exception {
-		String url = "redirect:/require/detail";
+      
+      // 파일 삭제
+      if (modifyReq.getDeleteFile() != null && modifyReq.getDeleteFile().length > 0) {
+         for (int ano : modifyReq.getDeleteFile()) {
+            Require_attachVO attach = requireService.getRequire_attachByAno(ano);
 
-		// 파일 삭제
-		if (modifyReq.getDeleteFile() != null && modifyReq.getDeleteFile().length > 0) {
-			for (int ano : modifyReq.getDeleteFile()) {
-				Require_attachVO attach = requireService.getRequire_attachByAno(ano);
+            File deleteFile = new File(attach.getUploadpath(), attach.getFilename());
 
-				File deleteFile = new File(attach.getUploadpath(), attach.getFilename());
+            if (deleteFile.exists()) {
+               deleteFile.delete(); // File 삭제
+            }
+            requireService.removeRequire_attach_Ano(ano); // DB 삭제
 
-				if (deleteFile.exists()) {
-					deleteFile.delete(); // File 삭제
-				}
-				requireService.removeRequire_attach_Ano(ano); // DB 삭제
+         }
+      }
 
-			}
-		}
+      // 파일저장
+      List<Require_attachVO> attachList = saveFileToAttaches(modifyReq.getUploadFile(), UploadPath);
 
-		// 파일저장
-		List<Require_attachVO> attachList = saveFileToAttaches(modifyReq.getUploadFile(), fileUploadPath);
+      RequireVO require = modifyReq.toRequireVO();
+      String XSStitle = (String) request.getAttribute("XSStitle");
+      if (XSStitle != null)
+         require.setRequire_title(XSStitle);
+      require.setAttachList(attachList);
 
-		RequireVO require = modifyReq.toRequireVO();
-		String XSStitle = (String) request.getAttribute("XSStitle");
-		if (XSStitle != null)
-			require.setRequire_title(XSStitle);
-		require.setAttachList(attachList);
+      // DB 저장
+      requireService.modifyRequire(require);
 
-		// DB 저장
-		requireService.modifyRequire(require);
+      rttr.addFlashAttribute("from", "modify");
+      rttr.addAttribute("require_number", require.getRequire_number());
 
-		rttr.addFlashAttribute("from", "modify");
-		rttr.addAttribute("require_number", require.getRequire_number());
+      return url;
+   }
 
-		return url;
-	}
+   @GetMapping("/getFile")
+   public String getFile(int ano, Model model) throws Exception {
 
-	@GetMapping("/getFile")
-	public String getFile(int ano, Model model) throws Exception {
+      String url = "downloadFile"; // bean name
 
-		String url = "downloadFile"; // bean name
+      Require_attachVO attach = requireService.getRequire_attachByAno(ano);
 
-		Require_attachVO attach = requireService.getRequire_attachByAno(ano);
+      model.addAttribute("savedPath", attach.getUploadpath());
+      model.addAttribute("fileName", attach.getFilename());
 
-		model.addAttribute("savedPath", attach.getUploadpath());
-		model.addAttribute("fileName", attach.getFilename());
-
-		return url;
-	}
+      return url;
+   }
 
 }

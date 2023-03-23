@@ -22,7 +22,7 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public ProductVO selectProduct(int product_number) throws SQLException {
 		ProductVO product = session.selectOne("Product-Mapper.selectProduct", product_number);
-
+		
 		return product;
 	}
 
@@ -41,6 +41,11 @@ public class ProductDAOImpl implements ProductDAO {
 		session.update("Product-Mapper.updateProduct", product);
 	}
 
+	@Override
+	public void updateProductStatus(ProductVO product) throws SQLException {
+		session.update("Product-Mapper.updateProductStatus", product);
+	}
+	
 	@Override
 	public void increaseViewCnt(int product_number) throws SQLException {
 		session.update("Product-Mapper.increaseViewCnt", product_number);

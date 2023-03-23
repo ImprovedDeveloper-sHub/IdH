@@ -67,4 +67,9 @@ public class CoworkDAOImpl implements CoworkDAO {
 		return  cowork_number;
 	}
 
+	@Override
+	public void updateCoworkStatus(CoworkVO cowork) throws SQLException {
+		session.update("Cowork-Mapper.updateProductStatus", cowork);
+	}
+
 }

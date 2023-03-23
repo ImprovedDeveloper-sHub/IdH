@@ -3,6 +3,7 @@ package com.sbs.IdH.controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -48,8 +50,8 @@ public class ProductController {
 		this.coworkService = coworkService;
 	}
 
-	public void setFileUploadPath(String fileUploadPath) {
-		this.fileUploadPath = fileUploadPath;
+	public void setUploadPath(String UploadPath) {
+		this.UploadPath = UploadPath;
 	}
 
 
@@ -62,8 +64,45 @@ public class ProductController {
 		mnv.addAllObjects(coworkService.selectCoworkList(cri));
 		mnv.addAllObjects(productService.selectProduct_CoworkList(cri));
 		mnv.addAllObjects(issueService.selectIssueCheckList(cri));
+		mnv.addObject("dataMap",productService.selectProductProceedList(cri));
+		
 		return mnv;
 	}
+
+	
+	  @PostMapping("/coworkMain") 
+	  public String coworkMain(@RequestParam HashMap<String, Object> dataMap) throws Exception { 
+		  String url = "redirect:/product/main"; 
+		  String coworkParamStr = dataMap.get("coworkArrayParam").toString();
+	  
+		  String[] product_array = coworkParamStr.split(",");
+			for (String product_number : product_array) {
+				ProductVO product = productService.selectProduct(Integer.parseInt(product_number));
+				product.setProduct_status(3);
+				productService.modifyProductStatus(product);
+			}
+	  
+	  
+	  return url; }
+	 
+	@PostMapping("/productEnd")
+	public String productEnd(@RequestParam HashMap<String, Object> dataMap) throws Exception {
+		String url = "redirect:/companyrule/main";
+		String productParamStr = dataMap.get("productArrayParam").toString();
+		
+		String[] product_array = productParamStr.split(",");
+		for (String product_number : product_array) {
+			ProductVO product = productService.selectProduct(Integer.parseInt(product_number));
+			product.setProduct_status(2);
+			productService.modifyProductStatus(product);
+		}
+		
+		
+		return url;
+	}
+	
+	
+	
 	@GetMapping("/end")
 	public ModelAndView end(SearchCriteria cri, ModelAndView mnv) throws Exception {
 
@@ -72,10 +111,11 @@ public class ProductController {
 		return mnv;
 	}
 	@GetMapping("/mywork")
-	public ModelAndView mywork(SearchCriteria cri, ModelAndView mnv) throws Exception {
+	public ModelAndView mywork(SearchCriteria cri, ModelAndView mnv, HttpServletRequest request) throws Exception {
 
-		mnv.addAllObjects(productService.selectProductMyProceedList(cri));
-		mnv.addAllObjects(productService.selectProductMyEndList(cri));
+		
+		mnv.addAllObjects(productService.selectProductMyProceedList(cri, request));
+		mnv.addAllObjects(productService.selectProductMyEndList(cri, request));
 		
 		return mnv;
 	}
@@ -91,11 +131,10 @@ public class ProductController {
 		return url;
 	}
 
-	@Resource(name = "fileUploadPath")
-	private String fileUploadPath;
+	@Resource(name = "UploadPath")
+	private String UploadPath;
 
-	private List<Product_AttachVO> saveFileToAttaches(List<MultipartFile> multiFiles, String savePath)
-			throws Exception {
+	private List<Product_AttachVO> saveFileToAttaches(List<MultipartFile> multiFiles, String savePath) throws Exception {
 		List<Product_AttachVO> attachList = new ArrayList<Product_AttachVO>();
 		// 저장 -> attachVO -> list.add
 		if (multiFiles != null) {
@@ -115,14 +154,14 @@ public class ProductController {
 		}
 		return attachList;
 	}
-
+	
 	@PostMapping(value = "/regist", produces = "text/plain;charset=utf-8")
 	public String regist(ProductRegistCommand registReq, HttpServletRequest request, RedirectAttributes rttr)
 			throws Exception {
 		String url = "redirect:/product/main";
 
 		List<MultipartFile> multiFiles = registReq.getUploadFile();
-		String savePath = this.fileUploadPath;
+		String savePath = this.UploadPath;
 
 		List<Product_AttachVO> attachList = saveFileToAttaches(multiFiles, savePath);
 
@@ -150,6 +189,7 @@ public class ProductController {
 		ProductVO product = null;
 
 		product = productService.selectProduct(product_number);
+		
 		/* product=productService.selectProductEndList(product_number); */
 		// 파일명 재정의
 		if (product != null) {
@@ -177,6 +217,15 @@ public class ProductController {
 	  
 	  cowork = coworkService.selectCowork(cowork_number);
 	  
+	  if (cowork != null) {
+			List<Product_AttachVO> attachList = cowork.getAttachList();
+			if (attachList != null) {
+				for (Product_AttachVO attach : attachList) {
+					String fileName = attach.getFileName().split("\\$\\$")[1];
+					attach.setFileName(fileName);
+				}
+			}
+		}
 	
 	  
 	  mnv.addObject("cowork", cowork); mnv.setViewName(url);
@@ -244,7 +293,7 @@ public class ProductController {
 		
 			//파일저장
 			List<Product_AttachVO> attachList 
-				= saveFileToAttaches(modifyReq.getUploadFile(), fileUploadPath);
+				= saveFileToAttaches(modifyReq.getUploadFile(), UploadPath);
 			
 			
 			ProductVO product = modifyReq.toProductVO();	
@@ -273,4 +322,12 @@ public class ProductController {
 		
 			return url;
 		}
+	 @PostMapping("/getMyproceed")
+	 public ModelAndView getMyproceed(ModelAndView mnv,SearchCriteria cri, HttpServletRequest request)throws Exception{
+	    mnv.addAllObjects(productService.selectProductMyProceedList(cri,request));
+	    mnv.setViewName("/product/getMyproceed");
+	    
+	    
+	    return mnv;
+	}
 }

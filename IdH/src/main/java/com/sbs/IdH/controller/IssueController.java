@@ -31,51 +31,51 @@ import com.sbs.IdH.utils.MakeFileName;
 @Controller
 @RequestMapping("/issue")
 public class IssueController {
-	
-	@Resource(name="issueService")
-	private IssueService issueService;
-	
-	@GetMapping("/test")
-	public void test()throws Exception {}
-	
-	
-	
-	
-	@GetMapping("/main")
-	public ModelAndView main(SearchCriteria cri, ModelAndView mnv,HttpServletRequest request) throws Exception {
-		mnv.addAllObjects(issueService.selectGetterIssueList(cri, request));
-		mnv.addAllObjects(issueService.selectMyIssueList(cri, request));
-		mnv.addAllObjects(issueService.selectIssueCheckList(cri));
-		return mnv;
-	}
-	
-	@GetMapping("/detail")
-	public ModelAndView detail(int issue_number, String from, 
-							    ModelAndView mnv) throws Exception {
-		String url = "/issue/detail";
+   
+   @Resource(name="issueService")
+   private IssueService issueService;
+   
+   @GetMapping("/test")
+   public void test()throws Exception {}
+   
+   
+   
+   
+   @GetMapping("/main")
+   public ModelAndView main(SearchCriteria cri, ModelAndView mnv,HttpServletRequest request) throws Exception {
+      mnv.addAllObjects(issueService.selectGetterIssueList(cri, request));
+      mnv.addAllObjects(issueService.selectMyIssueList(cri, request));
+      mnv.addAllObjects(issueService.selectIssueCheckList(cri));
+      return mnv;
+   }
+   
+   @GetMapping("/detail")
+   public ModelAndView detail(int issue_number, String from, 
+                         ModelAndView mnv) throws Exception {
+      String url = "/issue/detail";
 
-		IssueVO issue = null;
-		
-		
-		issue = issueService.selectIssue(issue_number);
-		
-		
-		// 파일명 재정의
-		if (issue != null) {
-			List<Issue_AttachVO> attachList = issue.getAttachList();
-			if (attachList != null) {
-				for (Issue_AttachVO attach : attachList) {
-					String fileName = attach.getFileName().split("\\$\\$")[1];
-					attach.setFileName(fileName);
-				}
-			}
-		}
-		
-		mnv.addObject("issue", issue);
-		mnv.setViewName(url);
+      IssueVO issue = null;
+      
+      
+      issue = issueService.selectIssue(issue_number);
+      
+      
+      // 파일명 재정의
+      if (issue != null) {
+         List<Issue_AttachVO> attachList = issue.getAttachList();
+         if (attachList != null) {
+            for (Issue_AttachVO attach : attachList) {
+               String fileName = attach.getFileName().split("\\$\\$")[1];
+               attach.setFileName(fileName);
+            }
+         }
+      }
+      
+      mnv.addObject("issue", issue);
+      mnv.setViewName(url);
 
-		return mnv;
-	}
+      return mnv;
+   }
 
 	@GetMapping("/registForm")
 	public String registForm() throws Exception {
@@ -96,113 +96,113 @@ public class IssueController {
 				target.mkdirs();
 				multi.transferTo(target);
 
-				Issue_AttachVO attach = new Issue_AttachVO();
-				attach.setUploadPath(savePath);
-				attach.setFileName(fileName);
-				attach.setFileType(fileName.substring(fileName.lastIndexOf('.') + 1).toUpperCase());
+            Issue_AttachVO attach = new Issue_AttachVO();
+            attach.setUploadPath(savePath);
+            attach.setFileName(fileName);
+            attach.setFileType(fileName.substring(fileName.lastIndexOf('.') + 1).toUpperCase());
 
-				attachList.add(attach);
-			}
-		}
-		return attachList;
-	}
-	
-	@PostMapping(value = "/regist", produces = "text/plain;charset=utf-8")
-	public String regist(IssueRegistCommand registReq, HttpServletRequest request, RedirectAttributes rttr)
-			throws Exception {
-		String url = "redirect:/issue/main";
+            attachList.add(attach);
+         }
+      }
+      return attachList;
+   }
+   
+   @PostMapping(value = "/regist", produces = "text/plain;charset=utf-8")
+   public String regist(IssueRegistCommand registReq, HttpServletRequest request, RedirectAttributes rttr)
+         throws Exception {
+      String url = "redirect:/issue/main";
 
 		List<MultipartFile> multiFiles = registReq.getUploadFile();
 		String savePath = this.UploadPath;
 
-		List<Issue_AttachVO> attachList = saveFileToIssue_Attaches(multiFiles, savePath);
+      List<Issue_AttachVO> attachList = saveFileToIssue_Attaches(multiFiles, savePath);
 
-		// DB
-		IssueVO issue = registReq.toIssueVO();
-		String XSStitle = (String) request.getAttribute("XSStitle");
-		String XSScontent = (String) request.getAttribute("XSScontent");
-		if (XSStitle != null) {
-			issue.setIssue_title(XSStitle);
-			issue.setIssue_content(XSScontent);
-		}
+      // DB
+      IssueVO issue = registReq.toIssueVO();
+      String XSStitle = (String) request.getAttribute("XSStitle");
+      String XSScontent = (String) request.getAttribute("XSScontent");
+      if (XSStitle != null) {
+         issue.setIssue_title(XSStitle);
+         issue.setIssue_content(XSScontent);
+      }
 
-		issue.setAttachList(attachList);
-		issueService.registIssue(issue);
+      issue.setAttachList(attachList);
+      issueService.registIssue(issue);
 
-		// output
-		rttr.addFlashAttribute("from", "regist");
+      // output
+      rttr.addFlashAttribute("from", "regist");
 
-		return url;
-	}
-	
-	@GetMapping("/remove")
-	public String remove(int issue_number, RedirectAttributes rttr) throws Exception {
-		String url = "redirect:/issue/main";
+      return url;
+   }
+   
+   @GetMapping("/remove")
+   public String remove(int issue_number, RedirectAttributes rttr) throws Exception {
+      String url = "redirect:/issue/main";
 
-		// 첨부파일 삭제
-		List<Issue_AttachVO> attachList = issueService.selectIssue(issue_number).getAttachList();
-		if (attachList != null) {
-			for (Issue_AttachVO attach : attachList) {
-				File target = new File(attach.getUploadPath(), attach.getFileName());
-				if (target.exists()) {
-					target.delete();
-				}
-			}
-		}
-		// DB삭제
-		issueService.removeIssue(issue_number);
-		
-		rttr.addFlashAttribute("from", "remove");
-		rttr.addAttribute("issue_number", issue_number);
-		
-		return url;
-	}
-	
-	@PostMapping("/getMyIssueList")
-	@ResponseBody
-	public ResponseEntity<Map<String,Object>> getMyIssueList(SearchCriteria cri,HttpServletRequest request) throws Exception{
-		
-		ResponseEntity<Map<String,Object>> entity =null;
-		HttpStatus status;
-		Map<String, Object> dataMap = null;
-		try {
-			dataMap = issueService.selectMyIssueList(cri, request);
-			status = HttpStatus.OK;
-		}catch (Exception e) {
-			status = HttpStatus.BAD_REQUEST;
-		}
-		entity = new ResponseEntity<Map<String,Object>>(dataMap, status);
-		
-		return entity;
-	}
-	
-	@PostMapping("/getGetterIssueList")
-	@ResponseBody
-	public ResponseEntity<Map<String,Object>> getGetterIssueList(SearchCriteria cri,HttpServletRequest request) throws Exception{
-		
-		ResponseEntity<Map<String,Object>> entity =null;
-		HttpStatus status;
-		Map<String, Object> dataMap = null;
-		try {
-			dataMap = issueService.selectGetterIssueList(cri, request);
-			status = HttpStatus.OK;
-		}catch (Exception e) {
-			status = HttpStatus.BAD_REQUEST;
-		}
-		entity = new ResponseEntity<Map<String,Object>>(dataMap, status);
-		
-		return entity;
-	}
-	
-	@GetMapping("/modifyForm")
-	public ModelAndView modifyForm(ModelAndView mnv, int issue_number) throws Exception {
-		String url = "/issue/modify";
-		
-		mnv = detail(issue_number,"modify",mnv);
-		
-		mnv.setViewName(url);
-		return mnv;
-	}
+      // 첨부파일 삭제
+      List<Issue_AttachVO> attachList = issueService.selectIssue(issue_number).getAttachList();
+      if (attachList != null) {
+         for (Issue_AttachVO attach : attachList) {
+            File target = new File(attach.getUploadPath(), attach.getFileName());
+            if (target.exists()) {
+               target.delete();
+            }
+         }
+      }
+      // DB삭제
+      issueService.removeIssue(issue_number);
+      
+      rttr.addFlashAttribute("from", "remove");
+      rttr.addAttribute("issue_number", issue_number);
+      
+      return url;
+   }
+   
+   @PostMapping("/getMyIssueList")
+   @ResponseBody
+   public ResponseEntity<Map<String,Object>> getMyIssueList(SearchCriteria cri,HttpServletRequest request) throws Exception{
+      
+      ResponseEntity<Map<String,Object>> entity =null;
+      HttpStatus status;
+      Map<String, Object> dataMap = null;
+      try {
+         dataMap = issueService.selectMyIssueList(cri, request);
+         status = HttpStatus.OK;
+      }catch (Exception e) {
+         status = HttpStatus.BAD_REQUEST;
+      }
+      entity = new ResponseEntity<Map<String,Object>>(dataMap, status);
+      
+      return entity;
+   }
+   
+   @PostMapping("/getGetterIssueList")
+   @ResponseBody
+   public ResponseEntity<Map<String,Object>> getGetterIssueList(SearchCriteria cri,HttpServletRequest request) throws Exception{
+      
+      ResponseEntity<Map<String,Object>> entity =null;
+      HttpStatus status;
+      Map<String, Object> dataMap = null;
+      try {
+         dataMap = issueService.selectGetterIssueList(cri, request);
+         status = HttpStatus.OK;
+      }catch (Exception e) {
+         status = HttpStatus.BAD_REQUEST;
+      }
+      entity = new ResponseEntity<Map<String,Object>>(dataMap, status);
+      
+      return entity;
+   }
+   
+   @GetMapping("/modifyForm")
+   public ModelAndView modifyForm(ModelAndView mnv, int issue_number) throws Exception {
+      String url = "/issue/modify";
+      
+      mnv = detail(issue_number,"modify",mnv);
+      
+      mnv.setViewName(url);
+      return mnv;
+   }
  @PostMapping(value="/modify", produces = "text/plain;charset=utf-8")
 	public String modifyPOST(IssueModifyCommand modifyReq,HttpServletRequest request,RedirectAttributes rttr) throws Exception {
 		String url = "redirect:/issue/detail";
@@ -239,11 +239,11 @@ public class IssueController {
 		// DB 저장
 		issueService.modifyIssue(issue);
 
-		rttr.addFlashAttribute("from", "modify");
-		rttr.addAttribute("issue_number", issue.getIssue_number());
-		
-		return url;
-	}
+      rttr.addFlashAttribute("from", "modify");
+      rttr.addAttribute("issue_number", issue.getIssue_number());
+      
+      return url;
+   }
  
  
  
@@ -279,5 +279,5 @@ public class IssueController {
 	 
 	 return mnv;
  }
-	
+   
 }

@@ -6,32 +6,35 @@
 <mapper namespace="Co_Attach-Mapper">
 	<select id="selectAttachByCo_number" resultType="Co_attach">
 		select * 
-		from Co_attach 
-		where Co_number = #{Co_number}
+		from co_attach 
+		where co_number = #{co_number}
 	</select>	
 	
 	<select id="selectCo_AttachByAno" resultType="Co_attach">
 		select *
-		from Co_attach
+		from co_attach
 		where ano=#{ano}
 	</select>
 	
 	<update id="insertCo_Attach">
 		insert into 
-		Co_attach (ano, uploadpath, filename, filetype, Co_number, Co_attach_attacher)
-		values (Co_attach_seq.nextval, #{uploadPath}, #{fileName},#{fileType}, 
-				#{Co_number},#{Co_attach_attacher} )
+		Co_attach (ano, uploadpath, filename, filetype, co_number, co_attach_attacher)
+		values (co_attach_seq.nextval, #{uploadPath}, #{fileName},#{fileType}, 
+				#{co_number},#{co_attach_attacher} )
 	</update>
 	
 	<update id="deleteCo_Attach">
-		delete from Co_attach where ano = #{ano}
+		delete from co_attach where ano = #{ano}
 	</update>
 	
 	<update id="deleteAllCo_Attach">
 		delete 
-		from Co_attach 
+		from co_attach 
 		where ano = #{ano}
 	</update>
+	<!-- <select id="selectCo_AttachSeqNext" resultType="int">
+		select co_attach_seq.nextval as ano from dual
+	</select> -->
 </mapper>
 
 

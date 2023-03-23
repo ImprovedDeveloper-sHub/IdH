@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.CoworkVO;
+import com.sbs.IdH.dto.Product_AttachVO;
 
 public interface CoworkService {
 	// 리스트조회
@@ -24,7 +25,11 @@ public interface CoworkService {
 
 			// 글삭제
 			void removeCowork(int cowork_number) throws SQLException;
+			
+			Product_AttachVO selectProduct_AttachByAno(int ano)throws SQLException;
 
+			void modifyCoworkStatus(CoworkVO cowork) throws SQLException;
+			
 	}
 
 

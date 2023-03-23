@@ -8,13 +8,19 @@ import java.util.Map;
 import com.sbs.IdH.command.PageMaker;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.CoworkDAO;
+import com.sbs.IdH.dao.Product_AttachDAO;
 import com.sbs.IdH.dto.CoworkVO;
+import com.sbs.IdH.dto.Product_AttachVO;
 
 
 public class CoworkServiceImpl implements CoworkService{
 	
 	private CoworkDAO coworkDAO;
+	private Product_AttachDAO product_attachDAO;
 	
+	public void setProduct_attachDAO(Product_AttachDAO product_attachDAO) {
+		this.product_attachDAO = product_attachDAO;
+	}
 
 	public void setCoworkDAO(CoworkDAO coworkDAO) {
 		this.coworkDAO = coworkDAO;
@@ -61,21 +67,43 @@ public class CoworkServiceImpl implements CoworkService{
 	@Override
 	public CoworkVO selectCowork(int cowork_number) throws SQLException {
 		CoworkVO cowork = coworkDAO.selectCowork(cowork_number);
-
 		
+	
 		
 		return cowork;
 	}
+
+	
+
+	
+
+	
 
 	@Override
 	public void modifyCowork(CoworkVO cowork) throws SQLException {
 		coworkDAO.updateCowork(cowork);
 		}
+	
+	@Override
+	public Product_AttachVO selectProduct_AttachByAno(int ano) throws SQLException {
+		Product_AttachVO product_attach = product_attachDAO.selectProduct_AttachByAno(ano);
+
+		return product_attach;
+
+	}
 
 	@Override
 	public void removeCowork(int cowork_number) throws SQLException {
 		coworkDAO.deleteCowork(cowork_number);
 	}
+
+	@Override
+	public void modifyCoworkStatus(CoworkVO cowork) throws SQLException {
+		coworkDAO.updateCoworkStatus(cowork);
+	}
+
+	
+	
 
 
 }

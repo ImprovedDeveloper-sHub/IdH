@@ -27,6 +27,7 @@ public class CompanyruleServiceImpl implements CompanyruleService {
 	@Override
 	public Map<String, Object> selectCompanyruleList(SearchCriteria cri) throws SQLException {
 		
+		cri.setPerPageNum(17);
 		List<CompanyruleVO> companyruleList = companyruleDAO.selectCompanyruleCriteria(cri);
 		if (companyruleList != null)
 			for (CompanyruleVO companyrule : companyruleList)
@@ -49,6 +50,12 @@ public class CompanyruleServiceImpl implements CompanyruleService {
 		int companyrule_number = companyruleDAO.selectCompanySeqNextValue();
 		companyrule.setCompanyrule_number(companyrule_number);
 		companyruleDAO.insertCompanyrule(companyrule);
+		if (companyrule.getAttachList() != null)
+	         for (Co_AttachVO attach :companyrule.getAttachList()) {
+	            attach.setCo_number(companyrule_number);
+	            attach.setCo_attach_attacher(companyrule.getCompanyrule_member_id());
+	            co_attachDAO.insertCo_Attach(attach);
+	         }
 
 	}
 
@@ -56,7 +63,7 @@ public class CompanyruleServiceImpl implements CompanyruleService {
 	@Override
 	public CompanyruleVO selectCompanyrule(int companyrule_number) throws SQLException {
 		CompanyruleVO companyrule = companyruleDAO.selectCompanyrule(companyrule_number);
-
+		addAttachList(companyrule);
 		return companyrule;
 	}
 
