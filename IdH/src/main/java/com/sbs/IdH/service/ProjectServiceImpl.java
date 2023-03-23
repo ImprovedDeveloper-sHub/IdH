@@ -347,6 +347,18 @@ public class ProjectServiceImpl implements ProjectService {
 		return dataMap;
 	}
 	
-	
+	@Override
+	public Map<String, Object> selectListByGetterId(String member_id) throws Exception {
+		List<WorkforceVO> workforceList = workforceDAO.selectWorkforceListByMemberId(member_id);
+		Map<String,Object> dataMap = new HashMap<String,Object>();
+		List<ProjectVO> projectList = new ArrayList<ProjectVO>();
+		
+		for(WorkforceVO workforce : workforceList) {
+			projectList.add(projectDAO.selectProject(workforce.getWorkforce_project_number()));
+		}
+		
+		dataMap.put("projectList", projectList);
+		return dataMap;
+	}
 	
 }

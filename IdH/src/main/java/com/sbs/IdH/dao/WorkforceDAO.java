@@ -33,5 +33,7 @@ public interface WorkforceDAO {
 	Map<String,Object> selectWorkforceCountForChart(SearchCriteria cri)throws SQLException;
 	
 	public int selectWorkforceCount(SearchCriteria cri) throws SQLException;
+
+	List<WorkforceVO> selectWorkforceListByMemberId(String member_id) throws SQLException;
 	
 }

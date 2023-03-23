@@ -91,8 +91,8 @@
 	<update id="insertProject" parameterType="project">
 		insert 
 		into 
-		project(project_number,project_name,project_status,project_discription,project_business_number,project_member_id,project_regdate)
-		values(#{project_number},#{project_name},1,#{project_discription},#{project_business_number},#{project_member_id},sysdate)
+		project(project_number,project_name,project_status,project_discription,project_business_number,project_member_id,project_regdate,project_enddate)
+		values(#{project_number},#{project_name},1,#{project_discription},#{project_business_number},#{project_member_id},sysdate,#{project_enddate})
 	</update>
 	
 	<update id="updateProjectForProjectStart" parameterType="project">

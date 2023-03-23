@@ -145,7 +145,6 @@
 						<thead>
 							<tr>
 								<td style="width: 20%; text-align: center;">ID</td>
-								<td style="width: 15%; text-align: center;">성명</td>
 								<td style="width: 15%; text-align: center;">담당 업무</td>
 								<td style="width: 50%; text-align: center;">구현 기능</td>
 							</tr>
@@ -154,7 +153,6 @@
 							<c:forEach items="${workforceList}" var="workforce">
 							<tr>
 								<td class="table-td">${workforce.workforce_member_id}</td>
-								<td class="table-td">${workforce.workforce_name}</td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 							</tr>

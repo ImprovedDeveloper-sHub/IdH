@@ -1,5 +1,7 @@
 package com.sbs.IdH.controller;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -43,9 +45,14 @@ public class ProjectController {
 		cri.setMember_id((member.getMember_id()));
 		
 		
+		System.out.println((member.getMember_id()));
+		
+		Map<String,Object> dataMap = projectService.selectListByGetterId(member.getMember_id());
+		
+		
 		
 		mnv.addAllObjects(projectService.selectProceedingProject(cri));
-		
+		mnv.addAllObjects(dataMap);
 		
 		return mnv;
 

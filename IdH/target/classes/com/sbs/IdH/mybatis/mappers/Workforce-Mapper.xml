@@ -38,6 +38,15 @@
 	</select>
 	
 	
+	
+
+	<select id="selectProceedingWorkforceByMemberId"  resultType="workforce">
+		select *
+		from workforce
+		where workforce_member_id =#{member_id} and workforce_status = 2
+	</select>
+	
+	
 	<select id="selectSearchWorkforceListCount" resultType="int">
 		select count(*)
 		from workforce

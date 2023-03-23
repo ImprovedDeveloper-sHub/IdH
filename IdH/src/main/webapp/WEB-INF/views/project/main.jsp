@@ -52,11 +52,8 @@ body {
                      history.back();
                   </script>
                </c:if>
-
                <c:forEach items="${proceedingProjectList}" var="project">
-
                   <div class="col-3">
-
                      <div class="card"
                         onclick="select_project('${project.project_number}')">
                         <div>
@@ -82,6 +79,38 @@ body {
                      </div>
                   </div>
                </c:forEach>
+
+				<c:forEach items="${projectList}" var="project">
+                  <div class="col-3">
+                     <div class="card"
+                        onclick="select_project('${project.project_number}')">
+                        <div>
+                           <div class="image">
+                           <div style="text-align: center;"><img src="<%=request.getContextPath() %>/resources/img/프로젝트 이미지.jpg"style="width: 100px;height:100px;background-size: cover;"></div>
+                              
+                           </div>
+                           <div class="card-inner">
+                              <div class="header">
+                                 <span class="info-box-text">${project.project_name} </span> <span
+                                    class="info-box-number"></span>
+                                 <div class="progress">
+                                    <div class="progress-bar"
+                                       style="width: ${project.project_percent}%"></div>
+                                 </div>
+                              </div>
+                              <div class="content">
+                                 <span class="progress-description">
+                                    ${project.project_percent}% 진행중 </span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </c:forEach>
+
+
+
+
 
 
 

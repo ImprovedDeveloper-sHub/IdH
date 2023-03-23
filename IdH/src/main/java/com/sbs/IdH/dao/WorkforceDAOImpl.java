@@ -96,4 +96,11 @@ public class WorkforceDAOImpl implements WorkforceDAO{
 		int workforce_count = session.selectOne("Workforce-Mapper.selectSearchWorkforceListCount", cri);
 		return workforce_count;
 	}
+	
+	@Override
+	public List<WorkforceVO> selectWorkforceListByMemberId(String member_id) throws SQLException {
+		List<WorkforceVO> workforceList = session.selectList("Workforce-Mapper.selectProceedingWorkforceByMemberId", member_id);
+		return workforceList;
+	}
+	
 }

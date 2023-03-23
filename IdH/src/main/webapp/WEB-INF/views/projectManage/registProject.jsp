@@ -33,8 +33,7 @@ table td {
 	<div class="col-8 content-list card">
 		<form role="form" method="post" action="registProject"
 			name="registProjectForm">
-			<input name="project_member_id" type="hidden"
-				value="${loginUser.member_id}">
+			<input name="project_member_id" type="hidden" value="${loginUser.member_id}">
 			<table style="width: 100%;">
 				<tr id=business_tr>
 					<td id="title">사업</td>
@@ -56,10 +55,10 @@ table td {
 				<tr>
 					<td class="name-td">시작날짜</td>
 					<td class="table-td"><input class="datepicker"
-						name="workforce_startdate"></td>
+						name="project_startdate"></td>
 					<td class="name-td">종료날짜</td>
 					<td class="table-td" ><input class="datepicker"
-						name="workforce_enddate"></td>
+						name="project_enddate"></td>
 				</tr>
 
 				<tr id="reqiure">

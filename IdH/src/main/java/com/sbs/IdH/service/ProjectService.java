@@ -43,5 +43,9 @@ public interface ProjectService {
 	List<Map<String, Object>> selectProjectListForCalendar(SearchCriteria cri) throws Exception;
 
 	Map<String, Object> selectProjectStatusForChart(SearchCriteria cri) throws Exception;
+
+	
+	public Map<String,Object> selectListByGetterId(String member_id) throws Exception;
+	
 	
 }
