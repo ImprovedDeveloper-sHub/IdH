@@ -7,7 +7,7 @@ import com.sbs.IdH.dto.MenuVO;
 public interface MenuService {
 	
 
-	List<MenuVO> getMainMenuList()throws Exception;
+	List<MenuVO> getMainMenuList(int rank)throws Exception;
 	
 	List<MenuVO> getSubMenuList(String mCode)throws Exception;
 	

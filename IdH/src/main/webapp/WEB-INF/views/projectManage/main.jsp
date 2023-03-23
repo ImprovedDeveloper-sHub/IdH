@@ -14,7 +14,7 @@
         
         
  <div class= "content">
-    <div class="row">
+    <div class="row" style="height:98%;">
 
       <!--col-6시작-->
       <div class="col-6">

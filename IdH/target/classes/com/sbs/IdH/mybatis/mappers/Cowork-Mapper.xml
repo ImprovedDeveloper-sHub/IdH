@@ -24,7 +24,7 @@
 		</if>
 		<if test="searchType == 'cw'.toString()">
 			and (
-			cowork_member like '%'||#{keyword}||'%'
+			cowork_member_id like '%'||#{keyword}||'%'
 			or
 			cowork_content like '%'||#{keyword}||'%'						
 			)			
@@ -33,7 +33,7 @@
 			and (
 			cowork_number like '%'||#{keyword}||'%'
 			or
-			cowork_member like '%'||#{keyword}||'%'
+			cowork_member_id like '%'||#{keyword}||'%'
 			or
 			cowork_content like '%'||#{keyword}||'%'						
 			)			
@@ -65,6 +65,13 @@
 		cowork
 		set 
 		cowork_number=#{cowork_number},cowork_content=#{cowork_content},cowork_status=#{cowork_status}, cowork_regdate=sysdate 
+		where cowork_number=#{cowork_number}
+	</update>
+	<update id="updateCoworkStatus" parameterType="cowork">
+		update 
+		cowork
+		set 
+		cowork_status=#{cowork_status}
 		where cowork_number=#{cowork_number}
 	</update>
 	<!-- <select id="selectCoworkListByproduct_number"	resultType="cowork">

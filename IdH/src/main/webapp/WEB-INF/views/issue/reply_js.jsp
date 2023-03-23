@@ -10,7 +10,7 @@
 	<div class="timeline-item" >
   		<span class="time">
     		<i class="fa fa-clock"></i>{{prettifyDate regdate}}
-	 		<a class="btn btn-primary btn-xs {{rno}}-a" id="modifyReplyBtn" 
+	 		<a class="btn btn-info btn-xs {{rno}}-a" id="modifyReplyBtn" 
 				data-rno={{rno}} data-replyer={{replyer}}
 				onclick="replyModifyModal_go('{{rno}}');"
 				style="display:{{visibleByLoginCheck replyer}};"
@@ -24,35 +24,6 @@
 
 {{/each}}	
 </script>
-<script type="text/x-handlebars-template"  id="reply-pagination-template" >
-<li class="paginate_button page-item">
-	<a href="{{goPage 1}}" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">
-		<i class='fas fa-angle-double-left'></i>
-	</a>
-</li>
-<li class="paginate_button page-item">
-	<a href="{{#if prev}}{{goPage prevPageNum}}{{else}}{{goPage cri.page}}{{/if}}" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">
-		<i class='fas fa-angle-left'></i>
-	</a>
-</li>
-{{#each pageNum}}
-<li class="paginate_button page-item {{signActive this}} ">
-	<a href="{{goPage this}}" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">{{this}}</a>
-</li>
-{{/each}}
-
-<li class="paginate_button page-item ">
-	<a href="{{#if next}}{{goPage nextPageNum}}{{else}}{{goPage cri.page}}{{/if}}" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">
-		<i class='fas fa-angle-right'></i>
-	</a>
-</li>
-<li class="paginate_button page-item">
-	<a href="{{goPage realEndPage}}" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">
-		<i class='fas fa-angle-double-right'></i>
-	</a>
-</li>	
-</script>
-
 
 
 

@@ -215,7 +215,7 @@ ul, li {
 						<div class="timeline">
 							<!-- timeline time label -->
 							<div class="time-label" id="repliesDiv">
-								<span class="bg-green">Replies List </span>							
+								<span class="bg-info">대안 </span>							
 							</div>
 							
 							
@@ -227,10 +227,10 @@ ul, li {
 						</div>
 					</div>
 					<div class="card-footer">
-						<label for="newReplyText">Reply Text</label>
+						<label for="newReplyText">대안 제시</label>
 						<input class="form-control" type="text"	placeholder="REPLY TEXT" id="newReplyText"/>						
 						<br/>
-						<button type="button" class="btn btn-primary" id="replyAddBtn" onclick="replyRegist_go();">ADD REPLY</button>
+						<button type="button" class="btn btn-info" id="replyAddBtn" onclick="replyRegist_go();">ADD REPLY</button>
 					</div>				
 				</div>			
 				
@@ -254,8 +254,8 @@ ul, li {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-info" id="replyModBtn" onclick="replyModify_go();">Modify</button>
-        <button type="button" class="btn btn-danger" id="replyDelBtn" onclick="replyRemove_go();">DELETE</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-info" id="replyDelBtn" onclick="replyRemove_go();">DELETE</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

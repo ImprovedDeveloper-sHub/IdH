@@ -6,17 +6,23 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	<context:property-placeholder file-encoding="UTF-8" 
-								  location="classpath:com/sbs/IdH/properties/*.properties" />
-	
-	<bean id="fileUploadNoticePath"
-		  class="java.lang.String">
-		  <constructor-arg value="${uploadPath.attach.notice}"/>
+	<context:property-placeholder
+		file-encoding="UTF-8"
+		location="classpath:com/sbs/IdH/properties/*.properties" />
+
+
+
+	<bean class="java.lang.String" id="fileUploadNoticePath">
+
+		<constructor-arg value="${uploadPath.attach.notice}" />
+
 	</bean>
 		
 		<bean id="UploadPath"
 		  class="java.lang.String">
 		  <constructor-arg value="${uploadPath.attach}"/>
 	</bean>
+	<!-- <bean id="fileUploadProductPath" class="java.lang.String"> <constructor-arg 
+		value="${uploadPath.attach.product}"/> </bean> -->
 
 </beans>
