@@ -66,6 +66,18 @@ public class DateMaker {
 	}
 	
 	
+	  public void setParamBusinessSchedule(BusinessVO business){
+	      Map <String, Object> param = new HashMap<String, Object>();
+	      // SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	      SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	      param.put("title", business.getBusiness_name());
+	      param.put("start", format.format(business.getBusiness_begin()));
+	      param.put("end", format.format(business.getBusiness_end()));
+	      paramList.add(param);
+	   }
+	   
+
+	
 	public DateMaker() {
 		this.paramList = new ArrayList<Map<String,Object>>();
 	}

@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 
-<!-- CSS start -->
+<!-- My CSS start -->
 
 <style>
+
 #content {
 	background: #eaedf2;
 	position: relative;
@@ -16,7 +17,7 @@
 
 #table-content {
 	background: #fff;
-	/* margin-top: 20px; */
+	margin-top: 20px;
 	box-shadow: #dcdee3 0px 0px 10px;
 }
 
@@ -32,10 +33,17 @@
 	color: #757e92;
 	font-size: 10px;
 	text-transform: uppercase;
+	padding: 14px 10px;
 }
 
 #table-content tbody tr td {
+	font-size: 15px;
+	padding: 14px 10px;
 	border-bottom: #eaecee solid 1px;
+}
+
+#table-content tbody tr:hover {
+	background: #fefaf2;
 }
 
 .name-td {
@@ -49,25 +57,40 @@
 	color: #64697a;
 }
 
-input {
-	width: 100%;
-	font-size: 13px;
-	color: #64697a;
-	border:none;
+.date-td {
+	text-align: right;
+	font-size: 9px;
 }
+
+.checked {
+	background: #fefaf2;
+}
+
+#credit {
+	color: #76838c;
+	width: 300px;
+	margin: 0 auto;
+	font-size: 12px;
+	text-align: center;
+}
+
+.btn-info {
+	text-align: right;
+}
+
 </style>
 
-<!-- CSS end -->
+<!-- My CSS end -->
 
 
 
 <div class="row">
 
-	<!-- 사업 일정 상세 정보 -->
+	<!-- 공지 사항 상세 정보 -->
 	<div class="col-12">
 		<div class="card card-info">
-			<div class="card-header bg-info">
-				<h3 class="card-title">사업 등록</h3>
+			<div class="card-header">
+				<h3 class="card-title">사업 정보 수정</h3>
 				<div class="card-tools">
 					<div class="input-group input-group-sm" style="width: 150px;">
 						<div class="input-group-append"></div>
@@ -76,7 +99,7 @@ input {
 			</div>
 			<div id="content">
 				<div id="table-content">
-					<form enctype="multipart/form-data" role="form" method="post" action="regist" name="registForm">
+					<form enctype="multipart/form-data" role="form" method="post" action="modify" name="modifyForm">
 					<table>
 						<thead style="text-align: center;">
 							<tr>
@@ -89,38 +112,38 @@ input {
 						<tbody>
 							<tr>
 								<td class="name-td" style="text-align: center;">사업번호</td>
-								<td class="table-td" colspan="3"></td>
+								<td class="table-td" colspan="3"><input name="business_number" type="hidden" value="${business.business_number}" />${business.business_number}</td>
 								<td class="name-td" style="text-align: center;">사업등록자</td>
 								<td class="table-td"><input name="business_member_id" type="hidden" value="${loginUser.member_id}" />${loginUser.member_id}</td>
 							</tr>
 							<tr>
 								<td class="name-td" style="text-align: center;">사업명</td>
-								<td class="table-td" colspan="3"><input name="business_name" type="text" placeholder="사업 이름을 입력하세요." /></td>
+								<td class="table-td" colspan="3"><input name="business_name" type="hidden" value="${business.business_name}" />${business.business_name}</td>
 								<td class="name-td" style="text-align: center;">투입인원</td>
-								<td class="table-td"><input name="business_people" type="text" placeholder="투입 인원을 숫자로만 입력하세요." /></td>
+								<td class="table-td"><input name="business_people" type="text" value="${business.business_people}" /></td>
 							</tr>
 							<tr>
 								<td class="name-td" style="text-align: center;">시작일자</td>
-								<td class="table-td" colspan="3"><input class="datepicker" name="business_begin" /></td>
+								<td class="table-td" colspan="3"><input class="datepicker" name="business_begin" value="<fmt:formatDate value="${business.business_begin}" pattern="yyyy/MM/dd"></fmt:formatDate>" /></td>
 								<td class="name-td" style="text-align: center;">종료일자</td>
-								<td class="table-td"><input class="datepicker" name="business_end" /></td>
+								<td class="table-td"><input class="datepicker" name="business_end" value="<fmt:formatDate value="${business.business_begin}" pattern="yyyy/MM/dd"></fmt:formatDate>" /></td>
 							</tr>
 							<tr style="height: 200px;">
 								<td class="name-td" style="text-align: center;">내용</td>
-								<td class="table-td td-summernote" colspan="5"><textarea name="business_content" class="summernote" rows="15" cols="40" style="display:none; width:500px;"></textarea></td>
+								<td class="table-td td-summernote" colspan="5"><textarea name="business_content" class="summernote" rows="15" cols="40" style="display:none; width:500px;">${business.business_content}</textarea></td>
 							</tr>
 
 							<tr>
 								<td class="name-td" style="text-align: center;">총예산</td>
-								<td class="table-td" colspan="3"><input name="business_budget" type="text" placeholder="총 예산을 숫자로만 입력하세요." /></td>
+								<td class="table-td" colspan="3"><input name="business_budget" type="text" value="${business.business_budget}" /></td>
 								<td class="name-td" style="text-align: center;">사용예산</td>
-								<td class="table-td" colspan="2"></td>
+								<td class="table-td" colspan="2">${business.business_usebudget}</td>
 							</tr>
 							<tr>
 								<td class="name-td" style="text-align: center;">국가지원예산</td>
-								<td class="table-td" colspan="3"><input name="business_nationbudget" type="text" placeholder="국가 지원 예산을 숫자로만 입력하세요." /></td>
+								<td class="table-td" colspan="3"><input name="business_nationbudget" type="text" value="${business.business_nationbudget}" /></td>
 								<td class="name-td" style="text-align: center;">회사자체예산</td>
-								<td class="table-td" colspan="2"><input name="business_companybudget" type="text" placeholder="회사 자체 예산을 숫자로만 입력하세요." /></td>
+								<td class="table-td" colspan="2"><input name="business_companybudget" type="text" value="${business.business_companybudget}" /></td>
 							</tr>
 						</tbody>
 					</table>
@@ -128,14 +151,21 @@ input {
 				</div>
 			</div>
 			<div class="card-tools" style="margin-left:auto">
-            <button type="button" id="regbtn" class="btn btn-info"
-               onclick="regist_go();">등록</button>
-            <button type="button" id="close" class="btn btn-info"
-               onclick="location.href='main';">취소</button>
-         	</div>
+				<button type="button" id="modifyBtn" class="btn btn-info" onclick="modify_go();">수정</button>
+		    	<button type="button" id="listBtn" class="btn btn-info" onclick="location.href='detail?business_number=${business.business_number}';">취소</button>
+			</div>
 		</div>
 	</div>
+	<!-- 공지 사항 상세 정보 끝 -->
+
 </div>
+
+<script>
+	window.onload = function() {
+		summernote_go($('.summernote'),'<%=request.getContextPath()%>');
+	};
+	
+</script>
 
 <script>
 
@@ -148,8 +178,12 @@ input {
 
 <script>
 
-function regist_go(){
-	   $("form[role='form']").submit();
-}
+function modify_go(){
+	
+	$("form[role='form']").submit();
 
+}
+	   
 </script>
+
+

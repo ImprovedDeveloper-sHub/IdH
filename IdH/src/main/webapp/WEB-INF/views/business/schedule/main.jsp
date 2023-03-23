@@ -125,17 +125,17 @@
 						<div class="input-group input-group-sm" style="width: 350px">
 							<select class="form-control-sm" name="searchType" id="searchType"
 								style="hegith: 30px; width: 90px !important; border-color: #CED4DA !important;">
-								<option value="tcw" ${cri.searchType eq 'n' ? 'selected':'' }>전체</option>
+								<option value="tcw" ${cri.searchType eq 'tcw' ? 'selected':'' }>전체</option>
 								<option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제목</option>
-								<option value="w" ${cri.searchType eq 'l' ? 'selected':'' }>수준</option>
+								<option value="w" ${cri.searchType eq 'w' ? 'selected':'' }>등록자</option>
 								<option value="c" ${cri.searchType eq 'c' ? 'selected':'' }>내용</option>
-							</select> <input type="text" name="table_search"
-								class="form-control float-right" placeholder="Search">
+							</select>
+							<input type="text" name="keyword" class="form-control float-right" value="<c:if test="">${cri.keyword}</c:if>">
 							<div class="input-group-append">
 
 
 								<button type="submit" class="btn btn-default"
-									onclick="list_go(1)">
+									onclick="pageList_go(1)">
 									<i class="fas fa-search"></i>
 								</button>
 							</div>
@@ -180,6 +180,38 @@
 						</table>
 				</div>
 			</div>
+			<nav id="paginationNav" aria-label="Navigation">
+		<ul class="pagination justify-content-center m-0">
+			<li class="page-item">
+				<a class="page-link" href="javascript:pageList_go(1);">
+					<i class="fas fa-angle-double-left"></i>
+				</a>
+			</li>
+			<li class="page-item">
+				<a class="page-link" href="javascript:pageList_go(${pageMaker.prev ? pageMaker.startPage-1 : pageMaker.cri.page});">
+					<i class="fas fa-angle-left"></i>
+				</a>						
+			</li>
+			<c:forEach var="pageNum" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
+	
+			<li class="page-item ${pageMaker.cri.page == pageNum?'active':''}">
+				<a class="page-link" href="javascript:pageList_go('${pageNum}');" >${pageNum }</a>
+			</li>
+			</c:forEach>
+			
+			<li class="page-item">
+				<a class="page-link" href="javascript:pageList_go(${pageMaker.next ? pageMaker.endPage+1 :pageMaker.cri.page});">
+					<i class="fas fa-angle-right" ></i>
+				</a>
+			</li>
+			
+			<li class="page-item">
+				<a class="page-link" href="javascript:pageList_go('${pageMaker.realEndPage}');">
+					<i class="fas fa-angle-double-right"></i>
+				</a>
+			</li>	
+		</ul>
+	</nav>
 		</div>
 	</div>
 
@@ -203,7 +235,7 @@
 					center : 'title',
 					right : 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
 				},
-				initialDate : '2021-07-15', // 초기 날짜 설정 (설정하지 않으면 오늘 날짜가 보인다.)
+				initialDate : , // 초기 날짜 설정 (설정하지 않으면 오늘 날짜가 보인다.)
 				locale : 'ko', // 한국어 설정
 				editable : true, // 수정 가능
 				droppable : true, // 드래그 가능
@@ -222,7 +254,6 @@
 
 <script>
    alert("정상 등록이 되었습니다.");
-   window.close();
    window.opener.location.reload();
 </script>
 
@@ -232,10 +263,88 @@
 
 <script>
    alert("정상적으로 삭제 되었습니다.");
-   window.close();
    window.opener.location.reload();
 </script>
 
 </c:if>
+
+<script>
+
+window.onload = function(){
+	url = "getCalendar"
+	$.ajax({
+		type : 'get',
+		cache : false,
+		url : url,
+		dataType : 'json',
+		contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+		success : function(param) {
+			var events = [];
+			$.each(param, function(index, date) {
+								//console.log(date);
+								events.push({
+												title : date.title,
+												start : date.start,
+												end : date.end
+												 });
+							})
+						
+			//alert(JSON.stringify(events));
+			JsonData = events;
+			//alert(JsonData);
+			
+			
+					// calendar element 취득
+					var calendarEl = $('#calendar1')[0];
+					// full-calendar 생성하기
+					var JsonData;
+					var url = "getCalendar2";
+									
+					var calendar = new FullCalendar.Calendar(calendarEl,
+							{
+								// 해더에 표시할 툴바
+								/* initialDate : '2023-03-13', // 초기 날짜 설정 (설정하지 않으면 오늘 날짜가 보인다.) */
+								locale : 'ko', // 한국어 설정
+								timeZone : 'Asia/Seoul',
+								// editable : true, // 수정 가능
+								/* droppable: true,  // 드래그 가능
+								drop: function(arg) { // 드래그 엔 드롭 성공시
+								  // 드래그 박스에서 아이템을 삭제한다.
+								   manage_Schedule('regist');
+								  arg.draggedEl.parentNode.removeChild(arg.draggedEl);
+								}, */
+
+								events : JsonData
+
+
+							});
+					// 캘린더 랜더링
+
+					calendar.render();
+		}
+	
+});
+	
+}
+</script>
+
+<script>
+
+function pageList_go(page,url){
+	if(!url) url="main";
+	
+	var jobForm=$('#jobForm');
+	jobForm.find("[name='page']").val(page);
+	jobForm.find("[name='perPageNum']").val(10);
+	jobForm.find("[name='searchType']")
+		.val($('select[name="searchType"]').val());
+	jobForm.find("[name='keyword']")
+		.val($('div.input-group>input[name="keyword"]').val());
+	
+
+	jobForm.attr({action:url,method:'get'}).submit();
+}
+
+</script>
 
 

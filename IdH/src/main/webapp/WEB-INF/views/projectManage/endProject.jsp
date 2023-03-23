@@ -14,7 +14,8 @@ card{
 
 body{
 	width:100%;
-	height:100%;
+	height:150px;
+	overflow:hidden;
 }
 
 #content {
@@ -71,11 +72,11 @@ input {
 
 
 
-<div class="row">
+<div class="row" >
 	<!-- 사업 일정 상세 정보 -->
 	<div class="col">
-		<div class="card card-info">
-			<div class="card-header bg-info">
+		<div class="card card-info" style="height:148px;">
+			<div class="card-header bg-info" >
 				<h3 class="card-title">프로젝트 종료</h3>
 				
 			</div>
@@ -89,7 +90,7 @@ input {
 						</select>
 					</div>
 				</div>
-			<div class="card-tools" style="margin-left:auto">
+			<div class="card-tools" style="margin-top:40px; margin-left:auto">
             <button type="button" id="regbtn" class="btn btn-info"
                onclick="deleteProject();">종료</button>
             <button type="button" id="close" class="btn btn-info"

@@ -8,6 +8,7 @@
 <!-- My CSS start -->
 
 <style>
+
 #content {
 	background: #eaedf2;
 	position: relative;
@@ -16,7 +17,7 @@
 
 #table-content {
 	background: #fff;
-	/* margin-top: 20px; */
+	margin-top: 20px;
 	box-shadow: #dcdee3 0px 0px 10px;
 }
 
@@ -36,6 +37,7 @@
 }
 
 #table-content tbody tr td {
+	font-size: 15px;
 	padding: 14px 10px;
 	border-bottom: #eaecee solid 1px;
 }
@@ -75,6 +77,7 @@
 .btn-info {
 	text-align: right;
 }
+
 </style>
 
 <!-- My CSS end -->
@@ -88,7 +91,7 @@
 		<!-- 사업 인원 상세 정보 -->
 		<div class="card card-info">
 			<div class="card-header bg-info">
-				<h3 class="card-title">사업 인원 상세 정보</h3>
+				<h3 class="card-title">사업 인원 정보 수정</h3>
 				<div class="card-tools">
 					<div class="input-group input-group-sm" style="width: 150px;">
 						<div class="input-group-append"></div>
@@ -117,7 +120,7 @@
 								<td class="name-td" style="text-align: center;">사업명</td>
 								<td class="table-td">${business.business_name}</td>
 								<td class="name-td" style="text-align: center;">투입인원</td>
-								<td class="table-td">${business.business_people} 명</td>
+								<td class="table-td">${business.business_people}</td>
 							</tr>
 							<tr>
 								<td class="name-td" style="text-align: center;">시작일자</td>
@@ -151,10 +154,10 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${workforceList}" var="workforce">
+							<c:forEach items="${businessgroupList}" var="businessgroup">
 							<tr>
-								<td class="table-td">${workforce.workforce_member_id}</td>
-								<td class="table-td">${workforce.workforce_name}</td>
+								<td class="table-td"><input name="businessgroup_member_id" type="text" placeholder="${businessgroup.businessgroup_member_id}" /></td>
+								<td class="table-td">${businessgroup.businessgroup_name}</td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 							</tr>
@@ -167,12 +170,41 @@
 		<!-- 인원 별 상세 현황 끝 -->
 		
 	</div>
-	
-	<div class="card-tool"" style="margin-left: 1140px">
-		<%-- <button type="button" id="modifyBtn" class="btn btn-info" onclick="location.href='modifyForm?business_number=${business.business_number}';">수정</button> --%>
-	   	<button type="button" id="listBtn" class="btn btn-info" onclick="location.href='main';">목록</button>
+		
+	<div class="card-tools" style="margin-left: 1083px;">
+		<button type="button" id="modifyBtn" class="btn btn-info" onclick="modify_go();">수정</button>
+		<button type="button" id="listBtn" class="btn btn-info" onclick="location.href='detail?business_number=${business.business_number}';">취소</button>
 	</div>
-
+	
 </div>
+
+
+
+<script>
+
+	window.onload = function() {
+		summernote_go($('.summernote'),'<%=request.getContextPath()%>');
+	};
+	
+</script>
+
+<script>
+
+	window.onload = function() {
+		summernote_go($('.summernote'),'<%=request.getContextPath()%>');
+		$('.datepicker').datepicker();
+	};
+	
+</script>
+
+<script>
+
+function modify_go(){
+	
+	$("form[role='form']").submit();
+
+}
+	   
+</script>
 
 

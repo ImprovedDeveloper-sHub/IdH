@@ -5,10 +5,12 @@
 <script type="text/x-handlebars-template"  id="reply-list-template" >
 {{#each .}}
 <div class="replyLi" >
+	<div class="user-block">
+    </div>	
 	<div class="timeline-item" >
   		<span class="time">
     		<i class="fa fa-clock"></i>{{prettifyDate regdate}}
-	 		<a class="btn btn-info btn-xs {{rno}}-a" id="modifyReplyBtn" 
+	 		<a class="btn btn-primary btn-xs {{rno}}-a" id="modifyReplyBtn" 
 				data-rno={{rno}} data-replyer={{replyer}}
 				onclick="replyModifyModal_go('{{rno}}');"
 				style="display:{{visibleByLoginCheck replyer}};"
@@ -22,7 +24,34 @@
 
 {{/each}}	
 </script>
+<script type="text/x-handlebars-template"  id="reply-pagination-template" >
+<li class="paginate_button page-item">
+	<a href="{{goPage 1}}" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">
+		<i class='fas fa-angle-double-left'></i>
+	</a>
+</li>
+<li class="paginate_button page-item">
+	<a href="{{#if prev}}{{goPage prevPageNum}}{{else}}{{goPage cri.page}}{{/if}}" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">
+		<i class='fas fa-angle-left'></i>
+	</a>
+</li>
+{{#each pageNum}}
+<li class="paginate_button page-item {{signActive this}} ">
+	<a href="{{goPage this}}" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">{{this}}</a>
+</li>
+{{/each}}
 
+<li class="paginate_button page-item ">
+	<a href="{{#if next}}{{goPage nextPageNum}}{{else}}{{goPage cri.page}}{{/if}}" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">
+		<i class='fas fa-angle-right'></i>
+	</a>
+</li>
+<li class="paginate_button page-item">
+	<a href="{{goPage realEndPage}}" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">
+		<i class='fas fa-angle-double-right'></i>
+	</a>
+</li>	
+</script>
 
 
 
@@ -30,7 +59,7 @@
 <script>
 var replyPage=1;
 window.onload=function(){
-	getPage("<%=request.getContextPath()%>/reply/list?issue_number=${issue.issue_number}&page="+replyPage);
+	getPage("<%=request.getContextPath()%>/reply/list.do?issue_number=${issue.issue_number}&page="+replyPage);
 }
 
 function getPage(pageInfo,page){
@@ -81,7 +110,7 @@ Handlebars.registerHelper({
 		if(pageNum == replyPage) return 'active';
 	},
 	"goPage":function(pageNum){
-		return 'javascript:getPage("<%=request.getContextPath()%>/reply/list?issue_number=${issue.issue_number}&page='+pageNum+'",'+pageNum+');';
+		return 'javascript:getPage("<%=request.getContextPath()%>/reply/list.do?issue_number=${issue.issue_number}&page='+pageNum+'",'+pageNum+');';
 	}
 });
 </script>
@@ -98,14 +127,14 @@ function replyRegist_go(){
 	}
 	
 	$.ajax({
-		url:"<%=request.getContextPath()%>/reply/regist",
+		url:"<%=request.getContextPath()%>/reply/regist.do",
 		type:"post",
 		data:JSON.stringify(data),		
 		contentType:'application/json',
 		success:function(data){
-			alert('댓글이 등록되었습니다.');
+			alert('댓글이 등록되었습니다.\n마지막페이지로 이동합니다.');
 			replyPage=data; //페이지이동
-			getPage("<%=request.getContextPath()%>/reply/list?issue_number="+${issue.issue_number}+"&page="+data);
+			getPage("<%=request.getContextPath()%>/reply/list.do?issue_number="+${issue.issue_number}+"&page="+data); //리스트 출력
 			$('#newReplyText').val("");	
 		},
 		error:function(error){
@@ -139,13 +168,13 @@ function replyModify_go(){
 	//console.log(sendData);
 	
 	$.ajax({
-		url:"<%=request.getContextPath()%>/reply/modify",
+		url:"<%=request.getContextPath()%>/reply/modify.do",
 		type:"post",
 		data:JSON.stringify(sendData),
 		contentType:"application/json",
 		success:function(result){
 			alert("수정되었습니다.");			
-			getPage("<%=request.getContextPath()%>/reply/list?issue_number=${issue.issue_number}&page="
+			getPage("<%=request.getContextPath()%>/reply/list.do?issue_number=${issue.issue_number}&page="
 					+replyPage);
 		},
 		error:function(error){
@@ -163,12 +192,12 @@ function replyRemove_go(){
 	
 	//alert(rno);
 	$.ajax({
-		url:"<%=request.getContextPath()%>/reply/remove?rno="+rno+"&page="
+		url:"<%=request.getContextPath()%>/reply/remove.do?rno="+rno+"&page="
 				+replyPage+"&issue_number=${issue.issue_number}",
 		type:"get",
 		success:function(page){
 			alert("삭제되었습니다.");
-			getPage("<%=request.getContextPath()%>/reply/list?issue_number=${issue.issue_number}&page="+page);
+			getPage("<%=request.getContextPath()%>/reply/list.do?issue_number=${issue.issue_number}&page="+page);
 			replyPage=page;
 		},
 		error:function(error){

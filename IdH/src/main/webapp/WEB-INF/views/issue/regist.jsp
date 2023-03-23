@@ -133,6 +133,7 @@ table input {
 							</tr>
 						</tbody>
 					</table>
+					<input type="hidden" name="issue_status" value="2">
 					<button class="btn btn-xs btn-info" onclick="addFile_go();"
 						type="button" id="addFileBtn">파일첨부</button>
 					<div class="card-footer fileInput"></div>

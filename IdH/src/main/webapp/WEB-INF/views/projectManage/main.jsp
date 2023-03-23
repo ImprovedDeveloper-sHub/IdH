@@ -162,7 +162,7 @@
        <div class="card ">
           <div class="card-small-body row">
             <div class="col" style="margin:3px;">
-            <input type="button" class="btn  btn-info btn-sm" id="projectEndButton" onclick="OpenWindow('<%=request.getContextPath()%>/projectManage/endProjectForm','계획등록',350,150);"  value="프로젝트 종료">
+            <input type="button" class="btn  btn-info btn-sm" id="projectEndButton" onclick="OpenWindow('<%=request.getContextPath()%>/projectManage/endProjectForm','계획등록',350,140);"  value="프로젝트 종료">
             <input id="" type="button" class="btn btn-info btn-sm" onclick="OpenWindow('<%=request.getContextPath()%>/projectManage/registSchedulePlanForm','계획등록',500,700);" value="프로젝트 계획"></input>
                <input type="button" class="btn  btn-info btn-sm" id="" onclick="OpenWindow('<%=request.getContextPath()%>/calendar/main','일정',850,750);" value="전체일정"></input>
 

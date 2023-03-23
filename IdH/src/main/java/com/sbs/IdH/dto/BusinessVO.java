@@ -23,6 +23,16 @@ public class BusinessVO {
 	
 	private int business_progress;
 	
+	private List<String> business_workforce_member_id;
+	
+	public List<String> getBusiness_workforce_member_id() {
+		return business_workforce_member_id;
+	}
+
+	public void setBusiness_workforce_member_id(List<String> business_workforce_member_id) {
+		this.business_workforce_member_id = business_workforce_member_id;
+	}
+
 	public int getBusiness_progress() {
 		return business_progress;
 	}

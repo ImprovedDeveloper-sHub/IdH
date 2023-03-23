@@ -135,23 +135,23 @@
 							</tr>
 							<tr>
 								<td class="name-td" style="text-align: center;">인건비</td>
-								<td class="table-td" colspan="3"></td>
+								<td class="table-td" colspan="3">${budget.human_budget} 원</td>
 							</tr>
 							<tr>
 								<td class="name-td" style="text-align: center;">비품비</td>
-								<td class="table-td" colspan="3"></td>
+								<td class="table-td" colspan="3">${budget.fixtures_budget} 원</td>
 							</tr>
 							<tr>
 								<td class="name-td" style="text-align: center;">교통비</td>
-								<td class="table-td" colspan="3"></td>
+								<td class="table-td" colspan="3">${ budget.transportation_budget} 원</td>
 							</tr>
 							<tr>
 								<td class="name-td" style="text-align: center;">식대</td>
-								<td class="table-td" colspan="3"></td>
+								<td class="table-td" colspan="3">${budget.meal_budget } 원</td>
 							</tr>
 							<tr>
 								<td class="name-td" style="text-align: center;">잔여예산</td>
-								<td class="table-td" colspan="3"></td>
+								<td class="table-td" colspan="3"><fmt:formatNumber value="${business.business_budget - budget.use_total}" pattern="#,###"></fmt:formatNumber> 원</td>
 							</tr>
 						</tbody>
 					</table>
@@ -226,9 +226,8 @@
 	</div>
 	<!-- 사업 예산 세부 그래프 끝 -->	
 	
-	<div class="card-tools" style="margin-left: 1025px">
+	<div class="card-tools" style="margin-left: 1083px">
 		<button type="button" id="modifyBtn" class="btn btn-info" onclick="location.href='modifyForm?business_number=${business.business_number}';">수정</button>
-	   	<button type="button" id="removeBtn" class="btn btn-info" onclick="location.href='modifyForm?business_number=${business.business_number}';">삭제</button>	
 	   	<button type="button" id="listBtn" class="btn btn-info" onclick="location.href='main';">목록</button>
 	</div>
 	

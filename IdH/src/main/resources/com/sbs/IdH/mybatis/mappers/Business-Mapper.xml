@@ -7,42 +7,28 @@
 
 	<sql id="search">
 		<if test="searchType == 't'.toString()">
-			and title like '%'||#{keyword}||'%'
+			and business_name like '%'||#{keyword}||'%'
 		</if>
 		<if test="searchType == 'w'.toString()">
-			and writer like '%'||#{keyword}||'%'
+			and business_member_id like '%'||#{keyword}||'%'
 		</if>
 		<if test="searchType == 'c'.toString()">
-			and content like '%'||#{keyword}||'%'
-		</if>
-		<if test="searchType == 'tc'.toString()">
-			and (
-			title like '%'||#{keyword}||'%'
-			or
-			content like '%'||#{keyword}||'%'
-			)
-		</if>
-		<if test="searchType == 'cw'.toString()">
-			and (
-			writer like '%'||#{keyword}||'%'
-			or
-			content like '%'||#{keyword}||'%'
-			)
+			and business_content like '%'||#{keyword}||'%'
 		</if>
 		<if test="searchType == 'tcw'.toString()">
 			and (
-			title like '%'||#{keyword}||'%'
+			business_name like '%'||#{keyword}||'%'
 			or
-			writer like '%'||#{keyword}||'%'
+			business_member_id like '%'||#{keyword}||'%'
 			or
-			content like '%'||#{keyword}||'%'
+			business_content like '%'||#{keyword}||'%'
 			)
 		</if>
 		
 		<!-- 추가 -->
-		<if test="status != null and status != 0 ">
+		<!-- <if test="status != null and status != 0 ">
 			and business_status =  #{status}
-		</if>
+		</if> -->
 		<if test="member_id != null ">
 			and business_member_id = #{member_id}
 		</if>
@@ -102,14 +88,23 @@
 		insert
 		into
 		business(business_number, business_name, business_people, business_begin, business_end, business_content, business_budget, business_nationbudget, business_companybudget, business_usebudget, business_member_id)
-		values(#{business_number}, #{business_name}, #{business_people}, sysdate, #{business_end}, #{business_content}, #{business_budget}, #{business_nationbudget}, #{business_companybudget}, #{business_usebudget}, #{business_member_id})
+		values(#{business_number}, #{business_name}, #{business_people}, #{business_begin}, #{business_end}, #{business_content}, #{business_budget}, #{business_nationbudget}, #{business_companybudget}, #{business_usebudget}, #{business_member_id})
 	</update>
 	
 	<update id="updateBusiness" parameterType="business">
 		update
 		business
 		set
-		business_name = #{business_name}, business_people = #{business_people}, business_end = #{business_end}, business_content = #{business_content}, business_budget = #{business_budget}, business_nationbudget = #{business_nationbudget}, business_companybudget = #{business_companybudget}, business_usebudget = #{business_usebudget} 
+		business_people = #{business_people}, business_begin = #{business_begin}, business_end = #{business_end}, business_content = #{business_content}, business_budget = #{business_budget}, business_nationbudget = #{business_nationbudget}, business_companybudget = #{business_companybudget}, business_usebudget = #{business_usebudget} 
+		where business_number = #{business_number}
+	</update>
+	
+	<update id="updateBusiness_budget" parameterType="business">
+		update
+		business
+		set
+		business_budget = #{business_budget}, business_usebudget = #{business_usebudget}, business_nationbudget = #{business_nationbudget}, business_companybudget = #{business_companybudget}
+		where business_number = #{business_number}
 	</update>
 	
 	<update id="deleteBusiness" parameterType="int">

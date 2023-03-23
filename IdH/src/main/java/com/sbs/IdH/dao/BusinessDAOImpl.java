@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.BusinessVO;
+import com.sbs.IdH.dto.BusinessgroupVO;
 
 public class BusinessDAOImpl implements BusinessDAO {
 	
@@ -84,6 +85,13 @@ public class BusinessDAOImpl implements BusinessDAO {
 	}
 	
 	@Override
+	public void updateBusiness_budget(BusinessVO business) throws SQLException {
+		
+		session.update("Business-Mapper.updateBusiness_budget", business);
+		
+	}
+	
+	@Override
 	public void deleteBusiness(int business_number) throws SQLException {
 		
 		session.update("Business-Mapper.deleteBusiness", business_number);
@@ -103,7 +111,15 @@ public class BusinessDAOImpl implements BusinessDAO {
 		BusinessVO business = session.selectOne("Business-Mapper.selectBusiness_number", businessNumber);
 		return business.getBusiness_name();
 	}
-	
+
+	@Override
+	public BusinessgroupVO selectBusinessgroup_number(int businessgroup_number) {
+		
+		session.update("Businessgroup-Mapper.updateBusinessgroup", businessgroup_number);
+		
+		return null;
+		
+	}
 	
 	
 }
