@@ -1,219 +1,238 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- fullcalendar CDN -->
+<link
+	href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css'
+	rel='stylesheet' />
+<script
+	src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
+<!-- fullcalendar 언어 CDN -->
+<script
+	src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
+<!--Load the AJAX API-->
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+
 <style>
-thead {
-  background: #f2f3f5;
-}
-thead tr td {
-  color: #757e92;
-  text-transform: uppercase;
-  padding: 14px 5px;
-  font-weight:bold;
-  color:black;
-}
-tbody tr td {
-  padding: 14px 5px;
-  border-bottom: #eaecee solid 1px;
+#calendar1 {
+	width: 100%;
+	height: 88vh;
 }
 
-.issue-content{
-  height:600px;
+a {
+	color: inherit;
+	text-decoration: none;
 }
 
-
-.issue-content{
-  text-align:center;
-}
-.content-header{
-  text-align:center;
-  overflow-y:hidden;
-  height:150px;
-  margin-top:25px;
-}
-.issue-th>tbody td{
-  font-size:2.5rem;
-}
-.content-parts{
-  margin-top:25px;
-}
-#table-content tbody tr:hover {
-  background: #fefaf2;
+#calendar button {
+	width: 80px;
 }
 </style>
 
-<div class="row content-main">
-	<div class="content-body col-6 card"></div>
+<div class="content">
 
+	<div class="col-md-12">
 
-	<div class="content-body col-6 card">
+		<div class="row" style="padding-top: 10px;">
 
-		<div class="form-group" data-select2-id="29">
-			<label>D-day</label> <select
-				class="form-control select2 select2-hidden-accessible"
-				style="width: 100%;" data-select2-id="1" tabindex="-1"
-				aria-hidden="true">
-				<option selected="selected" data-select2-id="3">Project</option>
-				<option data-select2-id="34">Project1</option>
-				<option data-select2-id="35">Project2</option>
-				<option data-select2-id="36">Project3</option>
-				<option data-select2-id="37">Project4</option>
-				<option data-select2-id="38">Project5</option>
-				<option data-select2-id="39">Project6</option>
-			</select><span
-				class="select2 select2-container select2-container--default select2-container--below select2-container--focus"
-				dir="ltr" data-select2-id="2" style="width: 100%;"><span
-				class="selection"></span><span class="dropdown-wrapper"
-				aria-hidden="true"></span></span>
-		</div>
+			<!-- 캘린더 -->
+			<div class="col-md-8">
+				<div class="card" style="height: 95vh;">
 
-
-
-		<div class="col-md-12 col-12">
-			<div class="info-box bg-gradient-warning">
-				<span class="info-box-icon"><i class="far fa-calendar-alt"></i></span>
-				<div class="info-box-content">
-					<span class="info-box-text">Events</span> <span
-						class="info-box-number">41,410</span>
-					<div class="progress">
-						<div class="progress-bar" style="width: 70%"></div>
+					<div class="card-header"
+						style="background: none; border: 1px solid gray;">
+						<h3 class="card-title" style="color: black;">프로젝트 일정</h3>
 					</div>
-					<span class="progress-description"> 70% Increase in 30 Days
-					</span>
+
+					<div id="calendar1">
+						<!-- class="fc fc-media-screen fc-direction-ltr fc-theme-standard">
+						<div class="fc-header-toolbar fc-toolbar fc-toolbar-ltr">
+							<div class="fc-toolbar-chunk"></div>
+							<div class="fc-toolbar-chunk">
+								<div class="fc-button-group">
+									<button class="fc-today-button fc-button fc-button-primary"
+										type="button" disabled="">오늘</button>
+									&nbsp;&nbsp;
+									<button class="fc-prev-button fc-button fc-button-primary"
+										type="button" aria-label="prev">
+										<span class="fc-icon fc-icon-chevron-left"></span>
+									</button>
+									<button class="fc-next-button fc-button fc-button-primary"
+										type="button" aria-label="next">
+										<span class="fc-icon fc-icon-chevron-right"></span>
+									</button>
+								</div>
+							</div>
+						</div> -->
+					</div>
 				</div>
 			</div>
+
+			<div class="col-md-4">
+
+				<div class="card card-row card-primar" style="height: 30vh;">
+
+					<div class="card-header"
+						style="background: none; border: 1px solid gray;">
+						<h3 class="card-title" style="color: black;">납기일</h3>
+					</div>
+
+
+				</div>
+
+				<div class="card card-row card-primar" style="height: 30vh;">
+
+					<div class="card-header"
+						style="background: none; border: 1px solid gray;">
+						<h3 class="card-title" style="color: black;">내 이슈</h3>
+					</div>
+
+					<div id="table-content" style="overflow:auto; ">
+
+						<table class="table table-hover table-head-fixed">
+						
+							<thead class="text-left myThead ">
+								<tr>
+									<th style="width: 20%">제목</th>
+									<th style="width: 30%">내용</th>
+									<th style="width: 20%">작성일</th>
+									<th style="width: 15%">할당자</th>
+									<th style="width: 15%">수준</th>
+								</tr>
+							</thead>
+							
+							<tbody class="text-left myli">
+								<c:if test="${empty myIssueList}">
+									<tr>
+										<td colspan="5">데이터가 없습니다.</td>
+									</tr>
+								</c:if>
+								<c:forEach items="${myIssueList }" var="issue">
+									<tr
+										onclick="javascript:OpenWindow('<%=request.getContextPath()%>/issue/detail.do?from=main&issue_number=${issue.issue_number}','상세보기',600,508);">
+
+										<td
+											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${issue.issue_title}</td>
+										<td
+											style="text-align: left; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${issue.issue_content}</td>
+										<td
+											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
+												value="${issue.issue_regdate}" pattern="yyyy-MM-dd" /></td>
+										<td
+											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${issue.issue_getter_id }</td>
+										<td
+											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+											${issue.issue_level}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+							
+						</table>
+
+					</div>
+
+				</div>
+
+				<div class="card card-row card-primar" style="height: 30vh;">
+
+					<div class="card-header"
+						style="background: none; border: 1px solid gray;">
+						<h3 class="card-title" style="color: black;">내 작업</h3>
+					</div>
+
+
+				</div>
+
+			</div>
+
 		</div>
+		<!-- E:row -->
+
 	</div>
+	<!-- E:col-md-12 -->
 
-
-	<div class="content-parts col-6">
-		<div id="content" class="card">
-         <div class="card-header">
-            <h3 class="card-title">진행 프로젝트</h3>
-         </div>
-            <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse;">
-               <div class="input-group input-group-sm" style="width: 270px">
-                  <select class="form-control-sm" name="searchType" id="searchType" style="hegith:30px; width:90px !important; border-color:#CED4DA !important;">
-							<option value="tcw"  ${cri.searchType eq 'tcw' ? 'selected':'' }>전 체</option>
-							<option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제 목</option>
-							<option value="w" ${cri.searchType eq 'w' ? 'selected':'' }>작성자</option>
-							<option value="c" ${cri.searchType eq 'c' ? 'selected':'' }>내 용</option>
-						</select>
-                  <input type="text" name="table_search"
-                     class="form-control float-right" placeholder="Search">
-                  <div class="input-group-append">
-                  	
-                  	
-                     <button type="submit" class="btn btn-default" onclick="list_go(1)">
-                        <i class="fas fa-search"></i>
-                     </button>
-                  </div>
-               </div>
-         <button type="button" class="btn btn-block btn-info btn-sm"
-            style="width: 80px;">등록</button>
-            </div>
-         <div id="table-content">
-            <div class="card-body table-responsive p-0">
-               <table class="table table-hover">
-                  <thead class="text-left">
-                <tr>
-                  <th style="width:20%">프로젝트 이름</th>
-                  <th style="width:30%">프로젝트 상태</th>
-                  <th style="width:20%">등록 날짜</th>
-                  <th style="width:15%">요구사항</th>
-                  <th style="width:15%">설명</th>
-                </tr>
-              </thead>
-              <tbody class="text-left">
-              	<c:if test="${empty issueList}">
-				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
-			 	 </c:if>
-			 	 <c:forEach items="${issueList }" var="project">
-					 <tr>
-			                  <td style="text-align:left;max-width:20%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">${issue_name}</td>
-			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">${issue_status}</td>
-			                  <td style="text-align:left;max-width: 20%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">${issue_regdate}</td>
-			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">test</td>
-			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;"> ${issue_discription}</td>
-	                </tr>
-			 	 </c:forEach>
-                
-                
-              </tbody>
-               </table>
-            </div>
-         </div>
-      </div>
-	</div>
-
-
-	<div class="content-parts col-6">
-		<div id="content" class="card">
-         <div class="card-header">
-            <h3 class="card-title">진행 프로젝트</h3>
-         </div>
-            <div class="card-tools"style="justify-content:space-between;display:flex;flex-direction:row-reverse;">
-               <div class="input-group input-group-sm" style="width: 270px">
-                  <select class="form-control-sm" name="searchType" id="searchType" style="hegith:30px; width:90px !important; border-color:#CED4DA !important;">
-							<option value="tcw"  ${cri.searchType eq 'tcw' ? 'selected':'' }>전 체</option>
-							<option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제 목</option>
-							<option value="w" ${cri.searchType eq 'w' ? 'selected':'' }>작성자</option>
-							<option value="c" ${cri.searchType eq 'c' ? 'selected':'' }>내 용</option>
-						</select>
-                  <input type="text" name="table_search"
-                     class="form-control float-right" placeholder="Search">
-                  <div class="input-group-append">
-                  	
-                  	
-                     <button type="submit" class="btn btn-default" onclick="list_go(1)">
-                        <i class="fas fa-search"></i>
-                     </button>
-                  </div>
-               </div>
-         <button type="button" class="btn btn-block btn-info btn-sm"
-            style="width: 80px;">등록</button>
-            </div>
-         <div id="table-content">
-            <div class="card-body table-responsive p-0">
-               <table class="table table-hover">
-                  <thead class="text-left">
-                <tr>
-                  <th style="width:20%">프로젝트 이름</th>
-                  <th style="width:30%">프로젝트 상태</th>
-                  <th style="width:20%">등록 날짜</th>
-                  <th style="width:15%">요구사항</th>
-                  <th style="width:15%">설명</th>
-                </tr>
-              </thead>
-              <tbody class="text-left">
-              	<c:if test="${empty issueList}">
-				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
-			 	 </c:if>
-			 	 <c:forEach items="${issueList }" var="project">
-					 <tr>
-			                  <td style="text-align:left;max-width:20%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">${issue_name}</td>
-			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">${issue_status}</td>
-			                  <td style="text-align:left;max-width: 20%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">${issue_regdate}</td>
-			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;">test</td>
-			                  <td style="text-align:left;max-width: 15%; overflow: hidden; 
-                                    white-space: nowrap; text-overflow: ellipsis;"> ${issue_discription}</td>
-	                </tr>
-			 	 </c:forEach>
-                
-                
-              </tbody>
-               </table>
-            </div>
-         </div>
-      </div>
-	</div>
 </div>
+<!-- E:content -->
+
+
+
+<!-- <script>
+	document.addEventListener('DOMContentLoaded', function() {
+		var calendarEl = document.getElementById('calendar');
+
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			headerToolbar : {
+				left : 'title'
+			},
+
+			selectable : true,
+			nowIndicator : true,
+			dayMaxEvents : true,
+			locale : 'ko',
+			selectMirror : true
+
+		});
+		calendar.render();
+	});
+</script> -->
+
+<script>
+	window.onload = function() {
+		url = "getProjectCalendar"
+		$.ajax({
+			type : 'get',
+			cache : false,
+			url : url,
+			dataType : 'json',
+			contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+			success : function(param) {
+				var events = [];
+				$.each(param, function(index, date) {
+					//console.log(date);
+					events.push({
+						title : date.title,
+						start : date.start,
+						end : date.end
+					});
+				})
+
+				//alert(JSON.stringify(events));
+				JsonData = events;
+				//alert(JsonData);
+
+				// calendar element 취득
+				var calendarEl = $('#calendar1')[0];
+				// full-calendar 생성하기
+				var JsonData;
+
+				var calendar = new FullCalendar.Calendar(calendarEl, {
+					// 해더에 표시할 툴바
+					/* initialDate : '2023-03-13', // 초기 날짜 설정 (설정하지 않으면 오늘 날짜가 보인다.) */
+					locale : 'ko', // 한국어 설정
+					timeZone : 'Asia/Seoul',
+					//editable : true, // 수정 가능
+					/* droppable: true,  // 드래그 가능
+					drop: function(arg) { // 드래그 엔 드롭 성공시
+					  // 드래그 박스에서 아이템을 삭제한다.
+					   manage_Schedule('regist');
+					  arg.draggedEl.parentNode.removeChild(arg.draggedEl);
+					}, */
+
+					events : JsonData
+
+				});
+				// 캘린더 랜더링
+
+				calendar.render();
+			},
+
+		});
+
+	}
+</script>

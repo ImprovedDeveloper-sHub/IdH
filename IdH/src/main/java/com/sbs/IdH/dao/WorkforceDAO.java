@@ -32,4 +32,7 @@ public interface WorkforceDAO {
 	void deleteWorkforce(int workforce_number) throws SQLException;
 	
 	Map<String,Object> selectWorkforceCountForChart(SearchCriteria cri)throws SQLException;
+	
+	public int selectWorkforceCount(SearchCriteria cri) throws SQLException;
+	
 }

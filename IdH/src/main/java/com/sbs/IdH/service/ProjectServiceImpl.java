@@ -1,10 +1,12 @@
 package com.sbs.IdH.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.sbs.IdH.command.DateMaker;
 import com.sbs.IdH.command.PageMaker;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.BudgetDAO;
@@ -310,5 +312,41 @@ public class ProjectServiceImpl implements ProjectService {
 	public void endProject(int project_number) throws Exception {
 		projectDAO.updateProjectForProjectEnd(project_number);
 	}
+	
+	
+	//추가
+	@Override
+	public List<Map<String, Object>> selectProjectListForCalendar(SearchCriteria cri) throws Exception {
+		DateMaker dateMaker = new DateMaker();
+		List<ProjectVO> projectList = projectDAO.selectProjectCriteriaNotRowBound(cri);
+		for (ProjectVO project : projectList) {
+			dateMaker.setParamProject(project);
+		}
+		return dateMaker.getParamList();
+	}
+	
+	
+	@Override
+	public Map<String,Object> selectProjectStatusForChart(SearchCriteria cri) throws Exception{
+		
+		Map<String, Object> dataMap = new HashMap<String,Object>();
+		
+		
+		cri.setStatus(1);
+		dataMap.put("workforce_plan",workforceDAO.selectWorkforceCount(cri));
+		dataMap.put("budget_plan",  budgetDAO.selectBudgetCount(cri));
+		dataMap.put("unitwork_plan",  unitworkDAO.selectUnitworkCount(cri));
+		
+		
+		
+		cri.setStatus(2);
+		dataMap.put("workforce_current",workforceDAO.selectWorkforceCount(cri));
+		dataMap.put("budget_current",  budgetDAO.selectBudgetCount(cri));
+		dataMap.put("schedule_current",  unitworkDAO.selectUnitworkCount(cri));
+
+		return dataMap;
+	}
+	
+	
 	
 }

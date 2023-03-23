@@ -89,4 +89,11 @@ public class WorkforceDAOImpl implements WorkforceDAO{
 		session.update("Workforce-Mapper.updateWorkforce", workforce);
 	}
 
+	
+	
+	@Override
+	public int selectWorkforceCount(SearchCriteria cri) throws SQLException {
+		int workforce_count = session.selectOne("Workforce-Mapper.selectSearchWorkforceListCount", cri);
+		return workforce_count;
+	}
 }

@@ -88,4 +88,12 @@ public class ProjectDAOImpl implements ProjectDAO {
 	}
 
 
+
+	
+	@Override
+	public List<ProjectVO> selectProjectCriteriaNotRowBound(SearchCriteria cri) throws SQLException {
+		List<ProjectVO> projectList = session.selectList("Project-Mapper.selectProjectList", cri);	
+		return projectList;
+	}
+	
 }

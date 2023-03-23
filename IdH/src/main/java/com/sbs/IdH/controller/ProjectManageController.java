@@ -87,7 +87,13 @@ public class ProjectManageController {
 	}
 	
 	@GetMapping("/main")
-	public ModelAndView projectManage(SearchCriteria cri, ModelAndView mnv) throws Exception {
+	public ModelAndView main(SearchCriteria cri, ModelAndView mnv) throws Exception {
+		
+		SearchCriteria cri2 = cri.newCri();
+		
+		mnv.addAllObjects(projectService.selectProjectStatusForChart(cri2));
+		
+		
 		cri.setPerPageNum(5);
 		mnv.addAllObjects(projectService.selectProceedingProject(cri));
 		mnv.addAllObjects(projectService.selectEndProject(cri));

@@ -92,5 +92,10 @@ public class BudgetDAOImpl implements BudgetDAO{
 	
 	
 	
+	@Override
+	public int selectBudgetCount(SearchCriteria cri) throws SQLException {
+		int budget_count = session.selectOne("Budget-Mapper.selectSearchBudgetListCount", cri);
+		return budget_count;
+	}
 
 }

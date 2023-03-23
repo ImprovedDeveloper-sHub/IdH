@@ -221,7 +221,7 @@
 				</div>
 			<div id="content">
 				<div id="table-content">
-					<table id="projectDetailtable" style="width:570px; height:200px">
+					<table id="projectDetailtable" style="width:570px; height:230px">
 						<thead class="projectDetailthead">
 							<tr>
 								<td class="name-td" style="width:15%;">분류</td>
@@ -413,7 +413,6 @@
   		
  
   var options = {
-          title: '프로젝트 계획 - 진행',
           curveType: 'function',
           legend: { position: 'bottom' }
         };
@@ -428,7 +427,6 @@
 		  document.getElementById(chart_type).style.display="block";
 		  last_chart=chart_type;
           var options = {
-            title: 'Company Performance',
             curveType: 'function',
             legend: { position: 'bottom' }
           };
@@ -469,20 +467,20 @@
 
 
   function drawBasic() {
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+        var chart = new google.visualization.ColumnChart(document.getElementById('curve_chart'));
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
         	
         	 var data = google.visualization.arrayToDataTable([
-       	      ['Year', '프로젝트계획', '프로젝트현황'],
-       	      ['2000',  1000,      400],
-       	      ['2005',  1170,      460],
-       	      ['2006',  660,       1120],
-       	      ['2007',  1030,      540]
+       	      ['종류', '프로젝트계획', '프로젝트현황'],
+       	      ['일정',  66, 72],
+       	   ['예산',  ${budget_plan},  ${budget_current}],
+    	      ['업무',  2, 3],
+    	      ['인력', ${workforce_plan}, ${workforce_current} ]
        	    ]);
         	
           var options = {
-            title: 'Company Performance',
+            title: '전체 프로젝트 계획 - 현황 (%)',
             curveType: 'function',
             legend: { position: 'bottom' }
           };

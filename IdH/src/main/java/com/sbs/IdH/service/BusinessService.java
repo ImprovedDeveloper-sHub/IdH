@@ -1,6 +1,7 @@
 package com.sbs.IdH.service;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 import com.sbs.IdH.command.SearchCriteria;
@@ -27,5 +28,7 @@ public interface BusinessService {
 	
 	//추가
 	public Map<String, Object> getBusinessListNotRowBound(SearchCriteria cri) throws SQLException;
+
+	List<Map<String, Object>> selectBusinessListForCalendar(SearchCriteria cri) throws Exception;
 	
 }
