@@ -88,6 +88,7 @@ public class IssueDAOImpl implements IssueDAO{
 		return issue_number;
 	}
 	
+	
 	@Override
 	public Map<String, Object> selectIssueCountForChart(SearchCriteria cri) throws SQLException {
 		Map<String,Object> colMap = new HashMap<String, Object>();
@@ -95,6 +96,4 @@ public class IssueDAOImpl implements IssueDAO{
 		colMap.put("v",issue_count);
 		return colMap;
 	}
-
-	
 }

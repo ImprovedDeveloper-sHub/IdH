@@ -47,13 +47,12 @@
 	color: #64697a;
 }
 
-table input {
+input {
 	width: 100%;
 	font-size: 13px;
 	color: #64697a;
 	border: none;
 }
-
 #upload{
 	width:97%;
 	font-size:12px;
@@ -64,10 +63,10 @@ table input {
 
 
 
-<div class="header" style="width: 660px; height: 555px;">
+<div class="header" style="width: 680px; height: 555px;">
 	<div class="card card-info">
 		<div class="card-header bg-info">
-			<h3 class="card-title">이슈등록</h3>
+			<h3 class="card-title">업무보고</h3>
 			<div class="card-tools">
 				<div class="input-group input-group-sm" style="width: 150px;">
 					<div class="input-group-append"></div>
@@ -90,46 +89,37 @@ table input {
 						</thead>
 						<tbody>
 							<tr>
-								<td class="name-td">할당자</td>
+								<td class="name-td">승인자</td>
 								<td class="table-td"><input type="text"
-									name="issue_getter_id" placeholder="할당자를 입력하세요." /></td>
+									name="workreport_getter" placeholder="승인자를 입력하세요." /></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">작성자</td>
 								<td class="table-td"><input type="text" readonly
-									name="issue_setter_id" value="${loginUser.member_id}" /></td>
-							</tr>
-							<tr>
-								<td class="name-td">수준</td>
-								<td>
-									<select class="table-td"
-                          					 name="issue_level" style="width:100%;">
-                              			<option value="1" ${issue.issue_number eq 1 ? 'selected':'하' }>하</option>
-                              			<option value="2" ${issue.issue_number eq 2 ? 'selected':'중' }>중</option>
-                              			<option value="3" ${issue.issue_number eq 3 ? 'selected':'상' }>상</option>
-                       				</select>
-                        		</td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
-								<td class="name-td">프로젝트명</td>
-								<td><input type="text" readonly name="issue_project_number"
-									value="1" /></td>
+									name="workreport_setter" value="${loginUser.member_id}" /></td>
 							</tr>
 
 							<tr>
 								<td class="name-td">제목</td>
-								<td class="table-td"><input type="text" name="issue_title"
-									placeholder="제목을 입력하세요." /></td>
+								<td class="table-td"><input type="text"
+									name="workreport_title" placeholder="제목을 입력하세요." /></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
+								<td class="name-td">프로젝트명</td>
+								<td class="table-td"><input type="text" readonly
+									name="workreport_project_number" value="1" /></td>
 							</tr>
 							<tr style="height: 100px;">
 								<td class="name-td">내용</td>
 								<td class="table-td td-summernote" colspan="5"><textarea
-										name="issue_content" class="summernote" rows="15" cols="40"
-										style="display: none; width: 500px;"></textarea></td>
+										name="workreport_content" class="summernote" rows="15"
+										cols="40" style="display: none; width: 500px;"></textarea></td>
+							</tr>
+							<tr>
+								<td style="display: none;"><input type="text"
+									name="workreport_check" value="1" /></td>
+								<td style="display: none;"><input type="text"
+									name="workreport_memstatus" value="1" /></td>
 							</tr>
 						</tbody>
 					</table>
@@ -182,4 +172,3 @@ function remove_go(dataNum){
 	$('div[data-no="'+dataNum+'"]').remove();
 }
 </script>
-

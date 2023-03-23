@@ -6,8 +6,8 @@
 <mapper namespace="Workreport-Mapper">
 
 	<sql id="search">
-		<if test="searchType == 'n'.toString() ">
-			and workreport_number like '%'||#{keyword}||'%'
+		<if test="searchType == 'tcw'.toString() ">
+			and workreport_title || workreport_content like '%'||#{keyword}||'%'
 		</if>
 		<if test="searchType == 't'.toString() ">
 			and workreport_title like '%'||#{keyword}||'%'
@@ -16,10 +16,10 @@
 			and workreport_content like '%'||#{keyword}||'%'
 		</if>
 		<if test="member_id != null and memberStatus == 1">
-			and workreport_member_id = #{member_id}
+			and workreport_setter = #{member_id}
 		</if>
 		<if test="member_id != null and memberStatus == 2">
-			and workreport_member_approver = #{member_id}
+			and workreport_getter = #{member_id}
 		</if>
 
 		<if test="type != null and type != 0">
@@ -53,16 +53,16 @@
 
 	<update id="insertWorkreport" parameterType="workreport">
 		insert into
-		workreport(workreport_number, workreport_project_number,workreport_setter_id, workreport_check,
-		workreport_regdate, workreport_enddate,workreport_member_approver,workreport_title,workreport_memstatus,workreport_content)
-		values(#{workreport_number},#{workreport_project_number},#{workreport_setter_id},#{workreport_check},sysdate,sysdate,#{workreport_member_approver},#{workreport_title},#{workreport_memstatus},#{workreport_content})
+		workreport(workreport_number, workreport_project_number,workreport_setter, workreport_check,
+		workreport_regdate, workreport_getter,workreport_title,workreport_memstatus,workreport_content)
+		values(#{workreport_number},#{workreport_project_number},#{workreport_setter},#{workreport_check},sysdate,#{workreport_getter},#{workreport_title},#{workreport_memstatus},#{workreport_content})
 	</update>
 
 	<update id="updateWorkreport" parameterType="workreport">
 		update workreport
 		set
-		workreport_project_number=#{workreport_project_number},workreport_check=#{workreport_check},workreport_member_approver=#{workreport_member_approver}
-		where workreport_number=#{workreport_number},workreport_title=#{workreport_title}
+		workreport_project_number=#{workreport_project_number},workreport_check=#{workreport_check},workreport_getter=#{workreport_getter},workreport_title=#{workreport_title},workreport_content=#{workreport_content}
+		where workreport_number=#{workreport_number}
 	</update>
 
 	<update id="deleteWorkreport">

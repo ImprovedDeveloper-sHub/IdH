@@ -160,6 +160,18 @@
 		class="com.sbs.IdH.service.NoticeServiceImpl"
 		p:noticeDAO-ref="noticeDAO" />
 
+
+	<bean id="replyDAO"
+		class="com.sbs.IdH.dao.ReplyDAOImpl"
+		p:session-ref="sqlSession"
+	/>
+
+	<bean id="replyService"
+		class="com.sbs.IdH.service.ReplyServiceImpl"
+		p:replyDAO-ref="replyDAO"
+	/>
+
+
 </beans>
 
 

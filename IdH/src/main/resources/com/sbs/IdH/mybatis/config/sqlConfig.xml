@@ -32,6 +32,8 @@
 		<typeAlias type="com.sbs.IdH.dto.Require_attachVO"  alias="require_attach"/>
 		<typeAlias type="com.sbs.IdH.dto.WorkreportVO"  alias="workreport"/>
 		<typeAlias type="com.sbs.IdH.dto.Workreport_AttachVO"  alias="workreport_attach"/>
+		<typeAlias type="com.sbs.IdH.dto.ReplyVO"  alias="reply"/>
+		
 	</typeAliases>
 	
 	

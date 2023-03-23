@@ -12,6 +12,9 @@
 .work-th tbody td {
 	font-size: 30px;
 }
+.card{
+	overflow:hidden;
+}
 </style>
 
 
@@ -36,28 +39,27 @@
 			</div>
 		</div>
 		<div class="col-10">
-			<div id="content" class="card"
-				style="height: 98%; overflow: scroll; overflow-x: hidden;">
+			<div id="myworkreport-content" class="card"
+				style="height: 98%;">
 				<div class="card-header bg-info">
 					<h3 class="card-title">받은 보고</h3>
 				</div>
 				<div class="card-tools"
 					style="justify-content: space-between; display: flex; flex-direction: row-reverse;margin:3px;">
 					<div class="input-group input-group-sm" style="width: 270px">
-						<select id="myIssuePerPageNum" name="perPageNum"
+						<select id="myPerPageNum" name="myPerPageNum"
 							style="display: none"><option value="5" selected></option></select>
-						<select class="form-control-sm" name="searchType"
-							id="myIssueSearchType"
+						<select class="form-control-sm" name="mySearchType"
+							id="mySearchType"
 							style="hegith: 30px; width: 90px !important; border-color: #CED4DA !important;">
-							<option value="tcw" ${cri.searchType eq 'n' ? 'selected':'' }>전체</option>
+							<option value="tcw" ${cri.searchType eq 'tcw' ? 'selected':'' }>전체</option>
 							<option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제목</option>
-							<option value="w" ${cri.searchType eq 'l' ? 'selected':'' }>수준</option>
 							<option value="c" ${cri.searchType eq 'c' ? 'selected':'' }>내용</option>
-						</select> <input id="myIssueKeyword" type="text" name="keyword"
+						</select> <input id="myKeyword" type="text" name="myKeyword"
 							class="form-control float-right" placeholder="Search">
 						<div class="input-group-append">
 							<button type="submit" class="btn btn-default"
-								onclick="search_go_ajax(0, $('#myIssuePerPageNum'), $('#myIssueSearchType'), $('#myIssueKeyword'),'<%=request.getContextPath()%>/work/getMyIssue', $('.myIssueThead'), $('.myIssueTbody') ,$('#searchMyIssue'))">
+								onclick="print_myworkreportlist(1)">
 								<i class="fas fa-search"></i>
 
 							</button>
@@ -68,27 +70,34 @@
 				<div id="table-content">
 					<div class="card-body table-responsive p-0">
 						<table class="table table-hover">
-							<thead class="text-left myIssueThead">
+							<thead class="text-left myWorkreportThead">
 								<tr>
 									<th style="width: 20%">제목</th>
-									<th style="width: 30%">내용</th>
+									<th style="width: 30%">첨부파일</th>
 									<th style="width: 20%">작성일</th>
 									<th style="width: 15%">상태</th>
-									<th style="width: 15%">종료일</th>
+									<th style="width: 15%">승인자</th>
 								</tr>
 							</thead>
-							<tbody class="text-left myIssueTbody">
+							<tbody class="text-left myWorkreportTbody">
 								<c:if test="${empty myWorkreportList}">
 									<tr>
 										<td colspan="5">데이터가 없습니다.</td>
 									</tr>
 								</c:if>
 								<c:forEach items="${myWorkreportList }" var="workreport">
-									<tr>
+									<tr style="cursor:pointer;"onclick="javascript:OpenWindow('detail.do?from=main&workreport_number=${workreport.workreport_number}','상세보기',600,508);">
+									
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_title}</td>
-										<td
-											style="text-align: left; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_content}</td>
+										<c:if test="${empty workreport.attachList }">
+									<td
+										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">-</td>										
+										</c:if>
+										<c:if test="${!empty workreport.attachList }">
+									<td
+										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><i class="fa-sharp fa-solid fa-folder" style="color:gold;"></i></td>										
+										</c:if>
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
 												value="${workreport.workreport_regdate}"
@@ -96,15 +105,46 @@
 										<td
 											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_check}</td>
 										<td
-											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
-												value="${workreport.workreport_enddate}"
-												pattern="yyyy-MM-dd" /></td>
+											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_setter}</td>
+										
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
 					</div>
 				</div>
+				<div><nav id="paginationNav" aria-label="Navigation">
+      <ul class="pagination justify-content-center m-0">
+         <li class="page-item">
+            <a class="page-link" href="javascript:print_myworkreportlist(1);">
+               <i class="fas fa-angle-double-left"></i>
+            </a>
+         </li>
+         <li class="page-item">
+            <a class="page-link" href="javascript:print_myworkreportlist(${pageMaker.prev ? pageMaker.startPage-1 : pageMaker.cri.page});">
+               <i class="fas fa-angle-left"></i>
+            </a>                  
+         </li>
+         <c:forEach var="pageNum" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
+   
+         <li class="page-item ${pageMaker.cri.page == pageNum?'active':''}">
+            <a class="page-link" href="javascript:print_myworkreportlist('${pageNum}');" >${pageNum }</a>
+         </li>
+         </c:forEach>
+         
+         <li class="page-item">
+            <a class="page-link" href="javascript:print_myworkreportlist(${pageMaker.next ? pageMaker.endPage+1 :pageMaker.cri.page});">
+               <i class="fas fa-angle-right" ></i>
+            </a>
+         </li>
+         
+         <li class="page-item">
+            <a class="page-link" href="javascript:print_myworkreportlist('${pageMaker.realEndPage}');">
+               <i class="fas fa-angle-double-right"></i>
+            </a>
+         </li>   
+      </ul>
+   </nav></div>
 			</div>
 
 		</div>
@@ -128,28 +168,27 @@
 			</div>
 		</div>
 		<div class="col-10">
-			<div id="content" class="card"
-				style="height: 98%; overflow: scroll; overflow-x: hidden;">
+			<div id="getterworkreport-content" class="card"
+				style="height: 98%;">
 				<div class="card-header bg-info">
 					<h3 class="card-title">보낸 보고</h3>
 				</div>
 				<div class="card-tools"
 					style="justify-content: space-between; display: flex; flex-direction: row-reverse;margin:3px;">
 					<div class="input-group input-group-sm" style="width: 270px">
-						<select id="getterIssuePerPageNum" name="perPageNum"
+						<select id="getterPerPageNum" name="getterPerPageNum"
 							style="display: none"><option value="5" selected></option></select>
-						<select class="form-control-sm" name="searchType"
-							id="getterIssueSearchType"
+						<select class="form-control-sm" name="getterSearchType"
+							id="getterSearchType"
 							style="hegith: 30px; width: 90px !important; border-color: #CED4DA !important;">
 							<option value="tcw" ${cri.searchType eq 'tcw' ? 'selected':'' }>전체</option>
 							<option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제목</option>
-							<option value="w" ${cri.searchType eq 'w' ? 'selected':'' }>작성자</option>
 							<option value="c" ${cri.searchType eq 'c' ? 'selected':'' }>내용</option>
-						</select> <input id="getterIssueKeyword" type="text" name="keyword"
+						</select> <input id="getterKeyword" type="text" name="getterKeyword"
 							class="form-control float-right" placeholder="Search">
 						<div class="input-group-append">
 							<button type="submit" class="btn btn-default"
-								onclick="search_go_ajax(0, $('#getterIssuePerPageNum'), $('#getterIssueSearchType'), $('#getterIssueKeyword'),'<%=request.getContextPath()%>/work/getMyIssueList', $('.myIssueThead'), $('.myIssueTbody') ,$('#searchGetterIssue'))">
+								onclick="print_getterworkreportlist(1)">
 								<i class="fas fa-search"></i>
 
 							</button>
@@ -162,43 +201,79 @@
 				<div id="table-content">
 					<div class="card-body table-responsive p-0">
 						<table class="table table-hover">
-							<thead class="text-left getterIssueThead">
+							<thead class="text-left getterWorkreportThead">
 								<tr>
 									<th style="width: 20%">제목</th>
-									<th style="width: 30%">내용</th>
+									<th style="width: 30%">첨부파일</th>
 									<th style="width: 20%">작성일</th>
 									<th style="width: 15%">작성자</th>
-									<th style="width: 15%">수준</th>
+									<th style="width: 15%">결제여부</th>
 								</tr>
 							</thead>
-							<tbody class="text-left getterIssueTbody">
+							<tbody class="text-left getterWorkreportTbody">
 								<c:if test="${empty getterWorkreportList}">
 									<tr>
 										<td colspan="5">데이터가 없습니다.</td>
 									</tr>
 								</c:if>
 								<c:forEach items="${getterWorkreportList }" var="workreport">
-									<tr>
+									<tr style="cursor:pointer;"onclick="javascript:OpenWindow('detail.do?from=main&workreport_number=${workreport.workreport_number}','상세보기',600,508);">
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_title}</td>
-										<td
-											style="text-align: left; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_content}</td>
+										<c:if test="${empty workreport.attachList }">
+									<td
+										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">-</td>										
+										</c:if>
+										<c:if test="${!empty workreport.attachList }">
+									<td
+										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><i class="fa-sharp fa-solid fa-folder" style="color:gold;"></i></td>										
+										</c:if>
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
 												value="${workreport.workreport_regdate}"
 												pattern="yyyy-MM-dd" /></td>
 										<td
-											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_check}</td>
+											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_getter}</td>
 										<td
-											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
-												value="${workreport.workreport_enddate}"
-												pattern="yyyy-MM-dd" /></td>
+											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_check}</td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
 					</div>
 				</div>
+				<div><nav id="paginationNav" aria-label="Navigation">
+      <ul class="pagination justify-content-center m-0">
+         <li class="page-item">
+            <a class="page-link" href="javascript:print_getterworkreportlist(1);">
+               <i class="fas fa-angle-double-left"></i>
+            </a>
+         </li>
+         <li class="page-item">
+            <a class="page-link" href="javascript:print_getterworkreportlist(${pageMaker.prev ? pageMaker.startPage-1 : pageMaker.cri.page});">
+               <i class="fas fa-angle-left"></i>
+            </a>                  
+         </li>
+         <c:forEach var="pageNum" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
+   
+         <li class="page-item ${pageMaker.cri.page == pageNum?'active':''}">
+            <a class="page-link" href="javascript:print_getterworkreportlist('${pageNum}');" >${pageNum }</a>
+         </li>
+         </c:forEach>
+         
+         <li class="page-item">
+            <a class="page-link" href="javascript:print_getterworkreportlist(${pageMaker.next ? pageMaker.endPage+1 :pageMaker.cri.page});">
+               <i class="fas fa-angle-right" ></i>
+            </a>
+         </li>
+         
+         <li class="page-item">
+            <a class="page-link" href="javascript:print_getterworkreportlist('${pageMaker.realEndPage}');">
+               <i class="fas fa-angle-double-right"></i>
+            </a>
+         </li>   
+      </ul>
+   </nav></div>
 			</div>
 		</div>
 	</div>
@@ -219,5 +294,49 @@
 	</script>
 </c:if>
 
-
+<script>
+	function print_myworkreportlist(page){
+		var jobForm=$('#jobForm');
+		jobForm.find("[name='page']").val(page);
+		jobForm.find("[name='perPageNum']").val($('select[name="myPerPageNum"]').val());
+		jobForm.find("[name='searchType']")
+			.val($('select[name="mySearchType"]').val());
+		jobForm.find("[name='keyword']")
+			.val($('div.input-group>input[name="myKeyword"]').val());
+		alert(jobForm.serialize());
+		$.ajax({
+			url:'getMyworkreportlist',
+			type:"POST",
+			data:jobForm.serialize(),
+			success:function(data){
+				$('#myworkreport-content').html("").html(data);
+			},
+			error:function(error){
+				alert('error');
+			}
+		});
+	}
+</script>
+<script>
+	function print_getterworkreportlist(page){
+		var jobForm=$('#jobForm');
+		jobForm.find("[name='page']").val(page);
+		jobForm.find("[name='perPageNum']").val($('select[name="getterPerPageNum"]').val());
+		jobForm.find("[name='searchType']")
+			.val($('select[name="getterSearchType"]').val());
+		jobForm.find("[name='keyword']")
+			.val($('div.input-group>input[name="getterKeyword"]').val());
+		$.ajax({
+			url:'getGetterworkreportlist',
+			type:"POST",
+			data:jobForm.serialize(),
+			success:function(data){
+				$('#getterworkreport-content').html("").html(data);
+			},
+			error:function(error){
+				alert('error');
+			}
+		});
+	}
+</script>
 

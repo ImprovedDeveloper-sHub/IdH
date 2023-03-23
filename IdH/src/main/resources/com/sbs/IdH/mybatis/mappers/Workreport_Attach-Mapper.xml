@@ -8,7 +8,7 @@
 		resultType="workreport_attach">
 		select *
 		from workreport_attach
-		where Workreport_number = #{Workreport_number}
+		where workreport_number = #{workreport_number}
 	</select>
 
 	<select id="selectWorkreport_AttachByAno"
@@ -20,11 +20,11 @@
 
 	<update id="insertWorkreport_Attach">
 		insert into
-		Workreport_attach (ano, uploadpath, filename, filetype, Workreport_number,
-		Workreport_attach_attacher)
+		workreport_attach (ano, uploadpath, filename, filetype, workreport_number,
+		workreport_attach_attacher)
 		values (workreport_attach_seq.nextval,
 		#{uploadPath}, #{fileName},#{fileType},
-		#{Workreport_number},#{Workreport_attach_attacher} )
+		#{workreport_number},#{workreport_attach_attacher} )
 	</update>
 
 	<update id="deleteWorkreport_Attach">
@@ -36,6 +36,9 @@
 		from workreport_attach
 		where ano = #{ano}
 	</update>
+	<select id="selectIssue_AttachSeqNext" resultType="int">
+		select issue_attach_seq.nextval as ano from dual
+	</select>
 
 </mapper>  
 

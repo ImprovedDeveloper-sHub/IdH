@@ -121,6 +121,14 @@ td-summernote card{
  <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/summernote/summernote-bs4.min.css">
  
  <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/dist/css/adminlte.min.css">
+
+
+<!-- 테일윈드 -->
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/jquery-ui/jquery-ui.min.css"  />
+<!-- 추가JQ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
 <!-- 폰트어썸 -->
 <link rel="stylesheet"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">

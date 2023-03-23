@@ -26,11 +26,6 @@ public class IssueServiceImpl implements IssueService{
 	public void setIssueDAO(IssueDAO issueDAO) {
 		this.issueDAO = issueDAO;
 	}
-	private Issue_AttachDAO issue_attachDAO;
-	public void setIssue_AttachDAO(Issue_AttachDAO issue_attachDAO) {
-		this.issue_attachDAO = issue_attachDAO;
-	}
-
 	
 	private ProjectDAO projectDAO;
 	
@@ -38,7 +33,11 @@ public class IssueServiceImpl implements IssueService{
 		this.projectDAO = projectDAO;
 	}
 	
-	
+	private Issue_AttachDAO issue_attachDAO;
+	public void setIssue_AttachDAO(Issue_AttachDAO issue_attachDAO) {
+		this.issue_attachDAO = issue_attachDAO;
+	}
+
 	@Override
 	public Map<String, Object> selectIssueList(SearchCriteria cri) throws SQLException {
 		List<IssueVO>issueList = issueDAO.selectSearchIssueList(cri);
@@ -62,15 +61,19 @@ public class IssueServiceImpl implements IssueService{
 	@Override
 	public Map<String, Object> selectIssueCheckList(SearchCriteria cri) throws SQLException {
 		Map<String,Object>dataMap = new HashMap<String,Object>();
+		int total = issueDAO.selectIssueTotalCount();
 		
 		cri.setStatus(1);
 		int issuesuccess = issueDAO.selectSearchIssueListCount(cri);
+		//int issuesuccess = issuesuccessCount/total*100;
 		cri.setStatus(2);
 		int issuenow = issueDAO.selectSearchIssueListCount(cri);
-		int getter = issueDAO.selectGetterIssueCount();
-		int notgetter = issueDAO.selectNotGetterIssueCount();
+		//int issuenow = issuenowCount/total*100;
 		
-		int total = issueDAO.selectIssueTotalCount();
+		int getter = issueDAO.selectGetterIssueCount();
+		//int getter = getterCount/total*100;
+		int notgetter = issueDAO.selectNotGetterIssueCount();
+		//int notgetter = notgetterCount/total*100;		
 		
 		dataMap.put("total",total);
 		dataMap.put("getter",getter);
@@ -85,13 +88,20 @@ public class IssueServiceImpl implements IssueService{
 		int issue_number = issueDAO.selectIssueSeqNext();
 		issue.setIssue_number(issue_number);
 		issueDAO.insertIssue(issue);
-		
+		if (issue.getAttachList() != null)
+			for (Issue_AttachVO attach : issue.getAttachList()) {
+				attach.setIssue_number(issue_number);
+				attach.setIssue_attach_attacher(issue.getIssue_setter_id());
+				issue_attachDAO.insertIssue_Attach(attach);
+			}
 	}
 	
 
 	@Override
 	public IssueVO selectIssue(int issue_number) throws SQLException {
+		
 		IssueVO issue = issueDAO.selectIssueByIssue_Number(issue_number);
+		addAttachList(issue);
 		return issue;
 	}
 
@@ -115,11 +125,19 @@ public class IssueServiceImpl implements IssueService{
 		cri.setMember_id(member.getMember_id());
 		//cri.setMember_id("IdH");
 		cri.setMemberStatus(1);//내 리스트
+		
+		List<IssueVO>myissueList = issueDAO.selectSearchIssueList(cri);
+		if(myissueList != null) {
+			for(IssueVO issue : myissueList) {
+				addAttachList(issue);				
+			}
+		}
+		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(issueDAO.selectIssueCriteriaTotalCount(cri));
 		dataMap.put("pageMaker",pageMaker);
-		dataMap.put("myIssueList", issueDAO.selectSearchIssueList(cri));
+		dataMap.put("myIssueList", myissueList);
 		return dataMap;
 	}
 	
@@ -132,11 +150,19 @@ public class IssueServiceImpl implements IssueService{
 		cri.setMember_id(member.getMember_id());
 		//cri.setMember_id("IdH");
 		cri.setMemberStatus(2);
+		
+		List<IssueVO>getterIssueList = issueDAO.selectSearchIssueList(cri);
+		if(getterIssueList != null) {
+			for(IssueVO issue : getterIssueList) {
+				addAttachList(issue);				
+			}
+		}
+		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(issueDAO.selectIssueCriteriaTotalCount(cri));
 		dataMap.put("pageMaker",pageMaker);
-		dataMap.put("getterIssueList", issueDAO.selectSearchIssueList(cri));
+		dataMap.put("getterIssueList", getterIssueList);
 		return dataMap;
 	}
 
@@ -168,6 +194,12 @@ public class IssueServiceImpl implements IssueService{
 
 	}
 	
+	@Override
+	public Issue_AttachVO getAttachByAno(int ano) throws SQLException {
+		Issue_AttachVO attach = issue_attachDAO.selectIssue_AttachByAno(ano);
+
+		return attach;
+	}
 	
 	@Override
 	public ChartVO selectChart(int project_number) throws Exception {
@@ -255,4 +287,5 @@ public class IssueServiceImpl implements IssueService{
 		  chart.resultSet(); return chart;
 		 
 	}
+	
 }
