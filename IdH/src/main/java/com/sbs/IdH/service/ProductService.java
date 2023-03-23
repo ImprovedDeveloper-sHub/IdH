@@ -3,6 +3,8 @@ package com.sbs.IdH.service;
 import java.sql.SQLException;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.ChartVO;
 import com.sbs.IdH.dto.ProductVO;
@@ -38,10 +40,10 @@ public interface ProductService {
 		Map<String, Object> selectProductEndList(SearchCriteria cri) throws SQLException;
 
 
-		Map<String, Object> selectProductMyProceedList(SearchCriteria cri) throws SQLException;
+		Map<String, Object> selectProductMyProceedList(SearchCriteria cri,HttpServletRequest request) throws SQLException;
 
 
-		Map<String, Object> selectProductMyEndList(SearchCriteria cri) throws SQLException;
+		Map<String, Object> selectProductMyEndList(SearchCriteria cri,HttpServletRequest request) throws SQLException;
 
 
 		Map<String, Object> selectProduct_CoworkList(SearchCriteria cri) throws SQLException;

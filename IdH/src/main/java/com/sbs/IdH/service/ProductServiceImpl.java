@@ -6,12 +6,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import com.sbs.IdH.command.PageMaker;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.ProductDAO;
 import com.sbs.IdH.dao.Product_AttachDAO;
 import com.sbs.IdH.dao.ProjectDAO;
 import com.sbs.IdH.dto.ChartVO;
+import com.sbs.IdH.dto.MemberVO;
 import com.sbs.IdH.dto.ProductVO;
 import com.sbs.IdH.dto.Product_AttachVO;
 
@@ -99,9 +103,14 @@ public class ProductServiceImpl implements ProductService {
 
 	}
 	@Override
-	public Map<String, Object> selectProductMyProceedList(SearchCriteria cri) throws SQLException {
-
-		cri.setMember_id("loginUser");
+	public Map<String, Object> selectProductMyProceedList(SearchCriteria cri,HttpServletRequest request) throws SQLException {
+        
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		HttpSession session= request.getSession();
+		MemberVO member=(MemberVO)session.getAttribute("loginUser");
+				
+		
+		cri.setMember_id(member.getMember_id());
 		cri.setStatus(1);
 		cri.setPerPageNum(7);
 		List<ProductVO> productMyProceedList = productDAO.selectProductCriteria(cri);
@@ -113,7 +122,6 @@ public class ProductServiceImpl implements ProductService {
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(productDAO.selectProductCriteriaTotalCount(cri));
 
-		Map<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("productMyProceedList", productMyProceedList);
 		dataMap.put("pageMaker", pageMaker);
 
@@ -121,9 +129,14 @@ public class ProductServiceImpl implements ProductService {
 
 	}
 	@Override
-	public Map<String, Object> selectProductMyEndList(SearchCriteria cri) throws SQLException {
+	public Map<String, Object> selectProductMyEndList(SearchCriteria cri,HttpServletRequest request) throws SQLException {
 
-		cri.setMember_id("loginUser");
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		HttpSession session= request.getSession();
+		MemberVO member=(MemberVO)session.getAttribute("loginUser");
+				
+		
+		cri.setMember_id(member.getMember_id());
 		cri.setStatus(2);
 		cri.setPerPageNum(7);
 		List<ProductVO> productMyEndList = productDAO.selectProductCriteria(cri);
@@ -135,7 +148,6 @@ public class ProductServiceImpl implements ProductService {
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(productDAO.selectProductCriteriaTotalCount(cri));
 
-		Map<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("productMyEndList", productMyEndList);
 		dataMap.put("pageMaker", pageMaker);
 

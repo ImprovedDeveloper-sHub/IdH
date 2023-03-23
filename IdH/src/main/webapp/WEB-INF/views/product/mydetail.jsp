@@ -79,7 +79,7 @@ input {
 								<td class="table-td">${product.product_number }</td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
-								<td class="name-td">작성자</td>
+								<td class="name-td">담당자</td>
 								<td class="table-td">${product.product_member_id }</td>
 							</tr>
 							<tr>

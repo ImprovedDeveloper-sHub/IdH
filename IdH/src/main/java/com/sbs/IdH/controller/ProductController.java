@@ -111,10 +111,11 @@ public class ProductController {
 		return mnv;
 	}
 	@GetMapping("/mywork")
-	public ModelAndView mywork(SearchCriteria cri, ModelAndView mnv) throws Exception {
+	public ModelAndView mywork(SearchCriteria cri, ModelAndView mnv, HttpServletRequest request) throws Exception {
 
-		mnv.addAllObjects(productService.selectProductMyProceedList(cri));
-		mnv.addAllObjects(productService.selectProductMyEndList(cri));
+		
+		mnv.addAllObjects(productService.selectProductMyProceedList(cri, request));
+		mnv.addAllObjects(productService.selectProductMyEndList(cri, request));
 		
 		return mnv;
 	}
@@ -322,8 +323,8 @@ public class ProductController {
 			return url;
 		}
 	 @PostMapping("/getMyproceed")
-	 public ModelAndView getMyproceed(ModelAndView mnv,SearchCriteria cri)throws Exception{
-	    mnv.addAllObjects(productService.selectProductMyProceedList(cri));
+	 public ModelAndView getMyproceed(ModelAndView mnv,SearchCriteria cri, HttpServletRequest request)throws Exception{
+	    mnv.addAllObjects(productService.selectProductMyProceedList(cri,request));
 	    mnv.setViewName("/product/getMyproceed");
 	    
 	    

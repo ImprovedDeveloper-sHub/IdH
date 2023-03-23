@@ -135,8 +135,8 @@ tbody tr td {
 				style="justify-content: space-between; margin: 3px; display: flex; flex-direction: row-reverse;">
 				<div class="input-group input-group-sm" style="width: 270px">
 				<select id="myproceedPerPageNum"
-						name="myproceedPerPageNum" style="display: none"><option
-							value="7" selected></option></select>
+						name="myproceedPerPageNum" style="display: none">
+						<option	value="7" selected></option></select>
 					<select class="form-control-sm" name="myproceedSearchType" id="myproceedSearchType"
 						style="hegith: 30px; width: 90px !important; border-color: #CED4DA !important;">
 						
