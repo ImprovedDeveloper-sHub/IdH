@@ -8,6 +8,11 @@
 <!-- CSS start -->
 
 <style>
+
+#upload{
+   width:97%;
+   font-size:12px;
+}
 #content {
 	background: #eaedf2;
 	position: relative;
@@ -195,7 +200,7 @@ function addFile_go(){
    }
    
    var div=$('<div>').addClass("inputRow").attr("data-no",dataNum);      
-   var input=$('<input>').attr({"type":"file","name":"uploadFile"}).css("display","inline");
+   var input=$('<input>').attr({"type":"file","name":"uploadFile","id":"upload"}).css("display","inline");
    div.append(input).append("<button onclick='remove_go("+dataNum+");' style='border:0;outline:0;' class='badge bg-red' type='button'>X</button>");      
    $('.fileInput').append(div);
    dataNum++;      

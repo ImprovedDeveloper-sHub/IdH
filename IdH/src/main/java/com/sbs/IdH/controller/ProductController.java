@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -69,7 +68,23 @@ public class ProductController {
 		
 		return mnv;
 	}
+
 	
+	  @PostMapping("/coworkMain") 
+	  public String coworkMain(@RequestParam HashMap<String, Object> dataMap) throws Exception { 
+		  String url = "redirect:/product/main"; 
+		  String coworkParamStr = dataMap.get("coworkArrayParam").toString();
+	  
+		  String[] product_array = coworkParamStr.split(",");
+			for (String product_number : product_array) {
+				ProductVO product = productService.selectProduct(Integer.parseInt(product_number));
+				product.setProduct_status(3);
+				productService.modifyProductStatus(product);
+			}
+	  
+	  
+	  return url; }
+	 
 	@PostMapping("/productEnd")
 	public String productEnd(@RequestParam HashMap<String, Object> dataMap) throws Exception {
 		String url = "redirect:/companyrule/main";
@@ -173,6 +188,7 @@ public class ProductController {
 		ProductVO product = null;
 
 		product = productService.selectProduct(product_number);
+		
 		/* product=productService.selectProductEndList(product_number); */
 		// 파일명 재정의
 		if (product != null) {
@@ -200,6 +216,15 @@ public class ProductController {
 	  
 	  cowork = coworkService.selectCowork(cowork_number);
 	  
+	  if (cowork != null) {
+			List<Product_AttachVO> attachList = cowork.getAttachList();
+			if (attachList != null) {
+				for (Product_AttachVO attach : attachList) {
+					String fileName = attach.getFileName().split("\\$\\$")[1];
+					attach.setFileName(fileName);
+				}
+			}
+		}
 	
 	  
 	  mnv.addObject("cowork", cowork); mnv.setViewName(url);
@@ -296,4 +321,12 @@ public class ProductController {
 		
 			return url;
 		}
+	 @PostMapping("/getMyproceed")
+	 public ModelAndView getMyproceed(ModelAndView mnv,SearchCriteria cri)throws Exception{
+	    mnv.addAllObjects(productService.selectProductMyProceedList(cri));
+	    mnv.setViewName("/product/getMyproceed");
+	    
+	    
+	    return mnv;
+	}
 }

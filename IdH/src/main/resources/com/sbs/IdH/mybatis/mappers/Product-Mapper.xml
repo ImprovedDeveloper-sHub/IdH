@@ -15,29 +15,7 @@
 		<if test="searchType == 'c'.toString()">
 			and product_content like '%'||#{keyword}||'%'			
 		</if>
-		<if test="searchType == 'tc'.toString()">
-			and (
-			product_title like '%'||#{keyword}||'%'
-			or
-			product_content like '%'||#{keyword}||'%'						
-			)			
-		</if>
-		<if test="searchType == 'cw'.toString()">
-			and (
-			product_member_id like '%'||#{keyword}||'%'
-			or
-			product_content like '%'||#{keyword}||'%'						
-			)			
-		</if>
-		<if test="searchType == 'tcw'.toString()">
-			and (
-			product_title like '%'||#{keyword}||'%'
-			or
-			product_member_id like '%'||#{keyword}||'%'
-			or
-			product_content like '%'||#{keyword}||'%'						
-			)			
-		</if>
+		
 		<if test="status != null">
          and product_status = #{status}
       </if>

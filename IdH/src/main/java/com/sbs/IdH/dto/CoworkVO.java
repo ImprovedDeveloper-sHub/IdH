@@ -1,6 +1,7 @@
 package com.sbs.IdH.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class CoworkVO {
 	
@@ -11,8 +12,16 @@ public class CoworkVO {
 	private int cowork_status;
 	private String cowork_member_id;
 	private int cowork_product_number;
+    private List<Product_AttachVO> attachList;
 
-	
+    
+    
+    public List<Product_AttachVO> getAttachList() {
+		return attachList;
+	}
+	public void setProduct_AttachList(List<Product_AttachVO> attachList) {
+		this.attachList = attachList;
+	}
 	public int getCowork_number() {
 		return cowork_number;
 	}
@@ -67,6 +76,9 @@ public class CoworkVO {
 		this.cowork_member_id = cowork_member_id;
 		this.cowork_product_number = cowork_product_number;
 	}
+	
+	
+	
 
 	
 

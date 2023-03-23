@@ -57,6 +57,23 @@ public class CompanyruleController {
 		mnv.addObject("dataMap",productService.selectProductEndList(cri)); 
 		return mnv;
 	}
+	@PostMapping("/getCompanyrulelistpg")
+	 public ModelAndView getCompanyrulelistpg(ModelAndView mnv,SearchCriteria cri)throws Exception{
+	    mnv.addAllObjects(companyruleService.selectCompanyruleList(cri));
+	    mnv.setViewName("/companyrule/getCompanyrulelistpg");
+	    
+	    
+	    return mnv;
+	 }
+	@PostMapping("/getProduct_detaillistpg")
+	 public ModelAndView getProduct_detaillistpg(ModelAndView mnv,SearchCriteria cri)throws Exception{
+	    mnv.addAllObjects(productService.selectProductEndList(cri));
+	    mnv.setViewName("/companyrule/getProduct_detaillistpg");
+	    
+	    
+	    return mnv;
+	 }
+	
 
 	@RequestMapping("/registForm")
 	public String registForm() throws Exception {

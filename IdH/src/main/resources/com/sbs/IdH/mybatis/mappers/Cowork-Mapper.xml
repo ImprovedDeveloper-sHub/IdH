@@ -67,6 +67,13 @@
 		cowork_number=#{cowork_number},cowork_content=#{cowork_content},cowork_status=#{cowork_status}, cowork_regdate=sysdate 
 		where cowork_number=#{cowork_number}
 	</update>
+	<update id="updateCoworkStatus" parameterType="cowork">
+		update 
+		cowork
+		set 
+		cowork_status=#{cowork_status}
+		where cowork_number=#{cowork_number}
+	</update>
 	<!-- <select id="selectCoworkListByproduct_number"	resultType="cowork">
 		select *
 		from cowork

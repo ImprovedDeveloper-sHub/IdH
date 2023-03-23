@@ -93,7 +93,7 @@
 									<td onclick="OpenWindow('detail?product_number=${product.product_number }','상세보기',680,400);"
 									style="cursor: pointer;">
 										<!-- 첨부파일 --> <c:if test="${!empty product.attachList }">
-											<i class="nav-icon fas fa-file"></i>
+											<i class="fa-sharp fa-solid fa-folder" style="color:gold;"></i>
 										</c:if> <c:if test="${empty product.attachList }">
 											<span>-</span>
 										</c:if>
@@ -112,7 +112,7 @@
 					</form> 
 					<div class="card-tools" style="margin-left:630;">
             <button type="button" class="btn btn-info"
-               onclick="product_go('main','${cowork.coworkList }');">협업요청</button>
+               onclick="cowork_go('coworkMain');">협업요청</button>
             <button type="button" class="btn btn-info"
                onclick="product_go('productEnd');">종료</button>
          </div>
@@ -293,6 +293,11 @@
 	<input type="hidden" id=productparam name="productArrayParam">
 	<!-- <input type='hidden' name="status" value="" /> -->
 </form>
+<form id="coworkForm" action="" method="POST">	
+	<input type="hidden" id=coworkparam name="coworkArrayParam">
+	<!-- <input type='hidden' name="status" value="" /> -->
+</form>
+
 
 <c:if test="${from eq 'regist' }">
 	<script>
@@ -323,15 +328,25 @@
 	}
 </script>
 <script>
-function cowork_go(url,product_number ){	
-	location.href=url+"?product_number="+product_number;
-}
+	function cowork_go(url) {
+		alert('cowork_go');
+		var coworkArray = new Array();
+		$('input:checkbox[name=product]:checked').each(function(){
+			coworkArray.push(this.value);
+		})
+		$('#coworkparam').val(coworkArray);
+		$('#coworkForm').attr("action",url);
+	
+		$('#coworkForm').submit();
+		
+	}
 </script>
 <script>
-function end_go(url,product_number ){	
+function submit_go(url,product_number ){	
 	location.href=url+"?product_number="+product_number;
 }
 </script>
+
 
 
 

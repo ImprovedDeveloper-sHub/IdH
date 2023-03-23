@@ -32,7 +32,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 	@Override
 	public Map<String, Object> selectProductProceedList(SearchCriteria cri) throws SQLException {
-
+        cri.setPerPageNum(10);
 		cri.setStatus(1);
 		List<ProductVO> productProceedList = productDAO.selectProductCriteria(cri);
 		if (productProceedList != null)
@@ -79,9 +79,9 @@ public class ProductServiceImpl implements ProductService {
 	}
 	@Override
 	public Map<String, Object> selectProductEndList(SearchCriteria cri) throws SQLException {
-
+        cri.setPerPageNum(17);
 		cri.setStatus(2);
-		cri.setPerPageNum(10);
+		
 		List<ProductVO> productEndList = productDAO.selectProductCriteria(cri);
 		if (productEndList != null)
 			for (ProductVO product : productEndList)
@@ -172,7 +172,7 @@ public class ProductServiceImpl implements ProductService {
 	public ProductVO selectProduct(int product_number) throws SQLException {
 
 		ProductVO product = productDAO.selectProduct(product_number);
-
+		addAttachList(product);
 		return product;
 
 	}
