@@ -90,7 +90,9 @@ public class IssueServiceImpl implements IssueService{
 
 	@Override
 	public IssueVO selectIssue(int issue_number) throws SQLException {
+		
 		IssueVO issue = issueDAO.selectIssueByIssue_Number(issue_number);
+		addAttachList(issue);
 		return issue;
 	}
 
@@ -181,6 +183,13 @@ public class IssueServiceImpl implements IssueService{
 
 		issue_attachDAO.deleteIssue_Attach(ano);
 
+	}
+	
+	@Override
+	public Issue_AttachVO getAttachByAno(int ano) throws SQLException {
+		Issue_AttachVO attach = issue_attachDAO.selectIssue_AttachByAno(ano);
+
+		return attach;
 	}
 	
 }

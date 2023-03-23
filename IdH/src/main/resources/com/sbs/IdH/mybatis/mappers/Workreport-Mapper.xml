@@ -6,8 +6,8 @@
 <mapper namespace="Workreport-Mapper">
 
 	<sql id="search">
-		<if test="searchType == 'n'.toString() ">
-			and workreport_number like '%'||#{keyword}||'%'
+		<if test="searchType == 'tcw'.toString() ">
+			and workreport_title || workreport_content like '%'||#{keyword}||'%'
 		</if>
 		<if test="searchType == 't'.toString() ">
 			and workreport_title like '%'||#{keyword}||'%'
@@ -61,8 +61,8 @@
 	<update id="updateWorkreport" parameterType="workreport">
 		update workreport
 		set
-		workreport_project_number=#{workreport_project_number},workreport_check=#{workreport_check},workreport_getter=#{workreport_getter}
-		where workreport_number=#{workreport_number},workreport_title=#{workreport_title}
+		workreport_project_number=#{workreport_project_number},workreport_check=#{workreport_check},workreport_getter=#{workreport_getter},workreport_title=#{workreport_title},workreport_content=#{workreport_content}
+		where workreport_number=#{workreport_number}
 	</update>
 
 	<update id="deleteWorkreport">

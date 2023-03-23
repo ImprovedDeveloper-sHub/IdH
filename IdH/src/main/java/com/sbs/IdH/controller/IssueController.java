@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -245,39 +246,38 @@ public class IssueController {
 	}
  
  
- @PostMapping("/getMy")
- @ResponseBody
- public ResponseEntity<Map<String, Object>> getMy(SearchCriteria cri, HttpServletRequest request) throws Exception {
+ 
+ 
+ @GetMapping("/getFile")
+	public String getFile(int ano,Model model) throws Exception {
+		
+		String url="downloadFile"; //bean name
+		
+		Issue_AttachVO attach = issueService.getAttachByAno(ano);
+		
 
-    ResponseEntity<Map<String, Object>> entity = null;
-    HttpStatus status;
-    Map<String, Object> dataMap = null;
-    try {
-       dataMap = issueService.selectMyIssueList(cri,request);
-       status = HttpStatus.OK;
-    } catch (Exception e) {
-       status = HttpStatus.BAD_REQUEST;
-    }
-    entity = new ResponseEntity<Map<String, Object>>(dataMap, status);
-
-    return entity;
+		model.addAttribute("savedPath", attach.getUploadPath());
+		model.addAttribute("fileName", attach.getFileName());		
+	
+		return url;
+	}
+ 
+ @PostMapping("/getMyissuelist")
+ public ModelAndView getMyissuelist(ModelAndView mnv,SearchCriteria cri,HttpServletRequest request)throws Exception{
+	 mnv.addAllObjects(issueService.selectMyIssueList(cri, request));
+	 mnv.setViewName("/issue/getMyissuelist");
+	 
+	 
+	 return mnv;
  }
- @PostMapping("/getGetter")
- @ResponseBody
- public ResponseEntity<Map<String, Object>> getGetter(SearchCriteria cri, HttpServletRequest request) throws Exception {
-
-    ResponseEntity<Map<String, Object>> entity = null;
-    HttpStatus status;
-    Map<String, Object> dataMap = null;
-    try {
-       dataMap = issueService.selectGetterIssueList(cri,request);
-       status = HttpStatus.OK;
-    } catch (Exception e) {
-       status = HttpStatus.BAD_REQUEST;
-    }
-    entity = new ResponseEntity<Map<String, Object>>(dataMap, status);
-
-    return entity;
+ 
+ @PostMapping("/getGetterissuelist")
+ public ModelAndView getGetterissuelist(ModelAndView mnv,SearchCriteria cri,HttpServletRequest request)throws Exception{
+	 mnv.addAllObjects(issueService.selectGetterIssueList(cri, request));
+	 mnv.setViewName("/issue/getGetterissuelist");
+	 
+	 
+	 return mnv;
  }
 	
 }

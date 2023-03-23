@@ -90,3 +90,12 @@ td-summernote card{
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
   
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/jquery-ui/jquery-ui.min.css"  />
+<!-- 테일윈드 -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link
+rel="stylesheet" 
+href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+/>
+
+

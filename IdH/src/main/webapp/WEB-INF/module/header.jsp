@@ -199,6 +199,7 @@ table td{
 <!-- 폰트어썸 -->
 <link rel="stylesheet"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <div class="main-custom">
   <div class="header-custom row">
     <div class="header-logo"style="width:6%;">

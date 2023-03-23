@@ -29,4 +29,6 @@ public interface IssueService {
 	Issue_AttachVO selectIssue_AttachByAno(int ano) throws SQLException;
 
 	void removeIssue_AttachByAno(int ano) throws SQLException;
+
+	Issue_AttachVO getAttachByAno(int ano) throws SQLException;
 }

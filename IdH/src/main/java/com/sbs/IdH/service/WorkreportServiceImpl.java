@@ -12,6 +12,7 @@ import com.sbs.IdH.command.PageMaker;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.WorkreportDAO;
 import com.sbs.IdH.dao.Workreport_AttachDAO;
+import com.sbs.IdH.dto.Issue_AttachVO;
 import com.sbs.IdH.dto.MemberVO;
 import com.sbs.IdH.dto.WorkreportVO;
 import com.sbs.IdH.dto.Workreport_AttachVO;
@@ -55,12 +56,19 @@ public class WorkreportServiceImpl implements WorkreportService{
 		int workreport_number = workreportDAO.selectWorkreportSeqNext();
 		workreport.setWorkreport_number(workreport_number);
 		workreportDAO.insertWorkreport(workreport);
+		if (workreport.getAttachList() != null)
+			for (Workreport_AttachVO attach : workreport.getAttachList()) {
+				attach.setWorkreport_number(workreport_number);
+				attach.setWorkreport_attach_attacher(workreport.getWorkreport_setter());
+				workreport_attachDAO.insertWorkreport_Attach(attach);
+			}
 	}
 	
 
 	@Override
 	public WorkreportVO selectWorkreport(int workreport_number) throws SQLException {
 		WorkreportVO workreport = workreportDAO.selectWorkreportByWorkreport_Number(workreport_number);
+		addAttachList(workreport);
 		return workreport;
 	}
 
@@ -78,13 +86,24 @@ public class WorkreportServiceImpl implements WorkreportService{
 	
 	@Override
 	public Map<String, Object> selectMyWorkreportList(SearchCriteria cri, HttpServletRequest request) throws SQLException {
-		Map<String, Object> dataMap = new HashMap<String,Object>();
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("loginUser");
 		cri.setMember_id(member.getMember_id());
 		cri.setMemberStatus(1);
 		
+		List<WorkreportVO>workreportList = workreportDAO.selectSearchWorkreportList(cri);
+		if(workreportList != null) {
+			for(WorkreportVO workreport : workreportList) {
+				addAttachList(workreport);				
+			}
+		}
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(workreportDAO.selectWorkreportCriteriaTotalCount(cri));
+		
+		Map<String, Object> dataMap = new HashMap<String,Object>();
 		dataMap.put("myWorkreportList", workreportDAO.selectSearchWorkreportList(cri));
+		dataMap.put("pageMaker",pageMaker);
 		return dataMap;
 	}
 	
@@ -97,7 +116,19 @@ public class WorkreportServiceImpl implements WorkreportService{
 		cri.setMember_id(member.getMember_id());
 		cri.setMemberStatus(2);//구분자 할당받으면2
 		
+		List<WorkreportVO>workreportList = workreportDAO.selectSearchWorkreportList(cri);
+		if(workreportList != null) {
+			for(WorkreportVO workreport : workreportList) {
+				addAttachList(workreport);				
+			}
+		}
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(workreportDAO.selectWorkreportCriteriaTotalCount(cri));
+		
 		dataMap.put("getterWorkreportList", workreportDAO.selectSearchWorkreportList(cri));
+		dataMap.put("pageMaker",pageMaker);
 		return dataMap;
 	}
 	

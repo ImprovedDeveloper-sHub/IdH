@@ -62,7 +62,7 @@ public class WorkreportDAOImpl implements WorkreportDAO{
 	}
 	@Override
 	public int selectWorkreportSeqNext() throws SQLException {
-		int workreport_number = session.selectOne("Workreport-Mapper.selectWorkreportSeqNext");
-		return workreport_number;
+		int ano = session.selectOne("Workreport-Mapper.selectWorkreportSeqNext");
+		return ano;
 	}
 }

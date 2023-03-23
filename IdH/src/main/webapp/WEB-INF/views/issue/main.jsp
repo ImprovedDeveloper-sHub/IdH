@@ -45,7 +45,7 @@
 
 <div class="content-body row">
 	<div class="content-parts col-6" style="height:455px;">
-		<div id="content" class="card" style="height:98%;">
+		<div id="myissue-content" class="card" style="height:98%;">
 			<div class="card-header bg-info">
 				<h3 class="card-title">내 이슈</h3>
 			</div>
@@ -53,20 +53,19 @@
 				style="justify-content: space-between; display: flex; flex-direction: row-reverse; margin:3px;">
 				<div class="input-group input-group-sm"
 					style="width: 270px;">
-					<select id="myPerPageNum" name="perPageNum"
-						style="display: none"><option value="5" selected></option></select>
-					<select class="form-control-sm" name="searchType"
+					<select id="myPerPageNum" name="myPerPageNum"
+						style="display: none"><option value="10" selected></option></select>
+					<select class="form-control-sm" name="mySearchType"
 						id="mySearchType"
 						style="hegith: 30px; width: 90px !important; border-color: #CED4DA !important;">
-						<option value="tcw" ${cri.searchType eq 'tcw' ? 'selected':'' }>전
-							체</option>
+						<option value="tcw" ${cri.searchType eq 'tcw' ? 'selected':'' }>전체</option>
 						<option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제목</option>
 						<option value="w" ${cri.searchType eq 'l' ? 'selected':'' }>수준</option>
 						<option value="c" ${cri.searchType eq 'c' ? 'selected':'' }>내용</option>
-					</select> <input id="myKeyword" type="text" name="keyword"
+					</select> <input id="myKeyword" type="text" name="myKeyword"
 						class="form-control float-right" placeholder="Search" value="">
 					<div class="input-group-append">
-						<button type="submit" class="btn btn-default" onclick="search_go_ajax(1, $('#myPerPageNum'), $('#mySearchType'), $('#myKeyword'), '<%=request.getContextPath()%>/issue/getMy', $('.myThead'),$('.myli'),$('#my-list-template'),$('#my-pagination-template'),$('#myPaginationBox'),'my')">
+						<button type="submit" class="btn btn-default" onclick="print_myissuelist(1)">
 							<i class="fas fa-search"></i>
 						</button>
 					</div>
@@ -80,11 +79,11 @@
 					<table class="table table-hover">
 						<thead class="text-left myThead">
 							<tr>
-								<th style="width: 20%">제목</th>
-								<th style="width: 20%">첨부파일</th>
-								<th style="width: 20%">작성일</th>
-								<th style="width: 20%">할당자</th>
-								<th style="width: 20%">수준</th>
+								<th style="width: 10%">수준</th>
+								<th style="width: 30%">제목</th>
+								<th style="width: 25%">작성일</th>
+								<th style="width: 25%">작성자</th>
+								<th style="width: 10%">첨부파일</th>
 							</tr>
 						</thead>
 						<tbody class="text-left myli center">
@@ -95,10 +94,18 @@
 							</c:if>
 							<c:forEach items="${myIssueList }" var="issue">
 								<tr
-									onclick="javascript:OpenWindow('detail.do?from=main&issue_number=${issue.issue_number}','상세보기',600,508);" style="cursor:pointer;">
+									onclick="javascript:OpenWindow('detail.do?from=main&issue_number=${issue.issue_number}','상세보기',600,550);" style="cursor:pointer;">
 
 									<td
+										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+										${issue.issue_level}</td>
+									<td
 										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${issue.issue_title}</td>
+									<td
+										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
+											value="${issue.issue_regdate}" pattern="yyyy-MM-dd" /></td>
+									<td
+										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${issue.issue_getter_id }</td>
 										<c:if test="${empty issue.attachList }">
 									<td
 										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">-</td>										
@@ -107,22 +114,43 @@
 									<td
 										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><i class="fa-sharp fa-solid fa-folder" style="color:gold;"></i></td>										
 										</c:if>
-									<td
-										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
-											value="${issue.issue_regdate}" pattern="yyyy-MM-dd" /></td>
-									<td
-										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${issue.issue_getter_id }</td>
-									<td
-										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-										${issue.issue_level}</td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
 				</div>
-					<div id="myPaginationBox">
-						<%@include file="/WEB-INF/views/issue/myPagination.jsp" %>
-					</div>
+					<div><nav id="paginationNav" aria-label="Navigation">
+      <ul class="pagination justify-content-center m-0">
+         <li class="page-item">
+            <a class="page-link" href="javascript:print_myissuelist(1);">
+               <i class="fas fa-angle-double-left"></i>
+            </a>
+         </li>
+         <li class="page-item">
+            <a class="page-link" href="javascript:print_myissuelist(${pageMaker.prev ? pageMaker.startPage-1 : pageMaker.cri.page});">
+               <i class="fas fa-angle-left"></i>
+            </a>                  
+         </li>
+         <c:forEach var="pageNum" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
+   
+         <li class="page-item ${pageMaker.cri.page == pageNum?'active':''}">
+            <a class="page-link" href="javascript:print_myissuelist('${pageNum}');" >${pageNum }</a>
+         </li>
+         </c:forEach>
+         
+         <li class="page-item">
+            <a class="page-link" href="javascript:print_myissuelist(${pageMaker.next ? pageMaker.endPage+1 :pageMaker.cri.page});">
+               <i class="fas fa-angle-right" ></i>
+            </a>
+         </li>
+         
+         <li class="page-item">
+            <a class="page-link" href="javascript:print_myissuelist('${pageMaker.realEndPage}');">
+               <i class="fas fa-angle-double-right"></i>
+            </a>
+         </li>   
+      </ul>
+   </nav></div>
 			</div>
 		</div>
 
@@ -130,29 +158,26 @@
 
 
 	<div class="content-parts col-6" style="height:455px;">
-		<div id="content" class="card" style="height:98%;">
+		<div id="getterissue-content" class="card" style="height:98%;">
 			<div class="card-header bg-info">
 				<h3 class="card-title">할당된 이슈</h3>
 			</div>
 			<div class="card-tools"
 				style="justify-content: space-between; display: flex; flex-direction: row-reverse; margin: 3px;">
 				<div class="input-group input-group-sm" style="width: 270px">
-					<select id="getterPerPageNum" name="perPageNum"
-						style="display: none"><option value="5" selected></option></select>
-					<select class="form-control-sm" name="searchType"
+					<select id="getterPerPageNum" name="getterPerPageNum"
+						style="display: none"><option value="10" selected></option></select>
+					<select class="form-control-sm" name="getterSearchType"
 						id="getterSearchType"
 						style="hegith: 30px; width: 90px !important; border-color: #CED4DA !important;">
-						<option value="tcw" ${cri.searchType eq 'tcw' ? 'selected':'' }>전
-							체</option>
-						<option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제
-							목</option>
-						<option value="w" ${cri.searchType eq 'w' ? 'selected':'' }>작성자</option>
-						<option value="c" ${cri.searchType eq 'c' ? 'selected':'' }>내
-							용</option>
-					</select> <input id="getterKeyword" type="text" name="keyword"
+						<option value="tcw" ${cri.searchType eq 'tcw' ? 'selected':'' }>전체</option>
+						<option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제목</option>
+						<option value="w" ${cri.searchType eq 'l' ? 'selected':'' }>수준</option>
+						<option value="c" ${cri.searchType eq 'c' ? 'selected':'' }>내용</option>
+					</select> <input id="getterKeyword" type="text" name="getterKeyword"
 						class="form-control float-right" placeholder="Search" value="">
 					<div class="input-group-append">
-						<button type="submit" class="btn btn-default" onclick="search_go_ajax(1, $('#getterPerPageNum'), $('#getterSearchType'), $('#getterKeyword'), '<%=request.getContextPath()%>/issue/getGetter', $('.getterThead'),$('.getterli'),$('#getter-list-template'),$('#getter-pagination-template'),$('#getterPaginationBox'),'getter')">
+						<button type="submit" class="btn btn-default" onclick="print_getterissuelist(1)">
 							<i class="fas fa-search"></i>
 						</button>
 					</div>
@@ -165,11 +190,11 @@
 					<table class="table table-hover">
 						<thead class="text-left getterThead">
 							<tr>
-								<th style="width: 20%">제목</th>
-								<th style="width: 30%">내용</th>
-								<th style="width: 20%">작성일</th>
-								<th style="width: 15%">작성자</th>
-								<th style="width: 15%">수준</th>
+								<th style="width: 10%">수준</th>
+								<th style="width: 30%">제목</th>
+								<th style="width: 25%">작성일</th>
+								<th style="width: 25%">작성자</th>
+								<th style="width: 10%">첨부파일</th>
 							</tr>
 						</thead>
 						<tbody class="text-left getterli">
@@ -179,32 +204,68 @@
 								</tr>
 							</c:if>
 							<c:forEach items="${getterIssueList }" var="issue">
-								<tr onclick="javascript:OpenWindow('detail.do?from=main&issue_number=${issue.issue_number}','상세보기',600,508);" style="cursor:pointer;">
+								<tr
+									onclick="javascript:OpenWindow('detail.do?from=main&issue_number=${issue.issue_number}','상세보기',600,550);" style="cursor:pointer;">
+
+									<td
+										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+										${issue.issue_level}</td>
 									<td
 										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${issue.issue_title}</td>
-									<td
-										style="text-align: left; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${issue.issue_content}</td>
 									<td
 										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
 											value="${issue.issue_regdate}" pattern="yyyy-MM-dd" /></td>
 									<td
-										style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${issue.issue_setter_id }</td>
+										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${issue.issue_setter_id }</td>
+										<c:if test="${empty issue.attachList }">
 									<td
-										style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-										${issue.issue_level}</td>
+										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">-</td>										
+										</c:if>
+										<c:if test="${!empty issue.attachList }">
+									<td
+										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><i class="fa-sharp fa-solid fa-folder" style="color:gold;"></i></td>										
+										</c:if>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
 				</div>
-					<div id="getterPaginationBox">
-						<%@include file="/WEB-INF/views/issue/getterPagination.jsp" %>
-					</div>
+					<div><nav id="paginationNav" aria-label="Navigation">
+      <ul class="pagination justify-content-center m-0">
+         <li class="page-item">
+            <a class="page-link" href="javascript:print_getterissuelist(1);">
+               <i class="fas fa-angle-double-left"></i>
+            </a>
+         </li>
+         <li class="page-item">
+            <a class="page-link" href="javascript:print_getterissuelist(${pageMaker.prev ? pageMaker.startPage-1 : pageMaker.cri.page});">
+               <i class="fas fa-angle-left"></i>
+            </a>                  
+         </li>
+         <c:forEach var="pageNum" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
+   
+         <li class="page-item ${pageMaker.cri.page == pageNum?'active':''}">
+            <a class="page-link" href="javascript:print_getterissuelist('${pageNum}');" >${pageNum }</a>
+         </li>
+         </c:forEach>
+         
+         <li class="page-item">
+            <a class="page-link" href="javascript:print_getterissuelist(${pageMaker.next ? pageMaker.endPage+1 :pageMaker.cri.page});">
+               <i class="fas fa-angle-right" ></i>
+            </a>
+         </li>
+         
+         <li class="page-item">
+            <a class="page-link" href="javascript:print_getterissuelist('${pageMaker.realEndPage}');">
+               <i class="fas fa-angle-double-right"></i>
+            </a>
+         </li>   
+      </ul>
+   </nav></div>
 			</div>
 		</div>
 	</div>
 </div>
-<%@ include file="./ajax_list_js.jsp" %>
 <c:if test="${from eq 'regist' }">
 	<script>
 		alert("정상 등록이 되었습니다.");
@@ -223,6 +284,51 @@
 	var myPage;
 </script>
 
+<script>
+	function print_myissuelist(page){
+		var jobForm=$('#jobForm');
+		jobForm.find("[name='page']").val(page);
+		jobForm.find("[name='perPageNum']").val($('select[name="myPerPageNum"]').val());
+		jobForm.find("[name='searchType']")
+			.val($('select[name="mySearchType"]').val());
+		jobForm.find("[name='keyword']")
+			.val($('div.input-group>input[name="myKeyword"]').val());
+		$.ajax({
+			url:'getMyissuelist',
+			type:"POST",
+			data:jobForm.serialize(),
+			success:function(data){
+				$('#myissue-content').html("").html(data);
+			},
+			error:function(error){
+				alert('error');
+			}
+		});
+	}
+</script>
+
+<script>
+	function print_getterissuelist(page){
+		var jobForm=$('#jobForm');
+		jobForm.find("[name='page']").val(page);
+		jobForm.find("[name='perPageNum']").val($('select[name="getterPerPageNum"]').val());
+		jobForm.find("[name='searchType']")
+			.val($('select[name="getterSearchType"]').val());
+		jobForm.find("[name='keyword']")
+			.val($('div.input-group>input[name="getterKeyword"]').val());
+		$.ajax({
+			url:'getGetterissuelist',
+			type:"POST",
+			data:jobForm.serialize(),
+			success:function(data){
+				$('#getterissue-content').html("").html(data);
+			},
+			error:function(error){
+				alert('error');
+			}
+		});
+	}
+</script>
 
 
 
