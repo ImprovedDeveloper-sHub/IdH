@@ -9,9 +9,9 @@ import com.sbs.IdH.dto.BusinessgroupVO;
 
 public interface BusinessgroupDAO {
 	
-	public List<BusinessVO> selectSearchBusinessList(SearchCriteria cri) throws SQLException;
+	public List<BusinessVO> selectSearchBusinessgroupList(SearchCriteria cri) throws SQLException;
 	
-	public int selectSearchBusinessListCount(SearchCriteria cri) throws SQLException;
+	public int selectSearchBusinessgroupListCount(SearchCriteria cri) throws SQLException;
 	
 	public BusinessgroupVO selectBusinessgroup_number(int businessgroup_number) throws SQLException;
 	

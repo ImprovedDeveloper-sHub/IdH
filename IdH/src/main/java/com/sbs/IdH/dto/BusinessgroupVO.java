@@ -2,7 +2,9 @@ package com.sbs.IdH.dto;
 
 public class BusinessgroupVO {
 	
-	private int businessgroup_number;
+	BusinessVO business = new BusinessVO();
+	
+	private int businessgroup_number = business.getBusiness_number();
 	private String businessgroup_member_id;
 	
 	public int getBusinessgroup_number() {

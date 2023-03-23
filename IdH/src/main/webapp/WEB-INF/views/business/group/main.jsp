@@ -143,9 +143,9 @@
 				</button>
 			</div>
 		</div>
-		<button type="button" class="btn btn-block btn-info btn-sm"
+		<!-- <button type="button" class="btn btn-block btn-info btn-sm"
 			style="width: 80px; margin: 10px; text-align: center;" id="registBtn"
-			onclick="OpenWindow('registForm','글등록',680,555)">등록</button>
+			onclick="OpenWindow('registForm','글등록',680,555)">등록</button> -->
 
 	</div>
 
@@ -167,7 +167,7 @@
 							<tr>
 								<td style="width: 25%; text-align: center;">사업번호</td>
 								<td style="width: 25%;">사업명</td>
-								<td style="width: 25%; text-align: center;">팀장</td>
+								<td style="width: 25%; text-align: center;">등록자</td>
 								<td style="width: 25%; text-align: center;">참여인원</td>
 							</tr>
 						</thead>

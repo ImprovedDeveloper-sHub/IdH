@@ -59,6 +59,13 @@
 	</select>
 	
 	
+	
+	<select id="selectSearchBudgetPrice"	resultType="int">
+		select budget_price
+		from budget
+		<include refid="search" />
+	</select>
+	
 	<select id="selectSearchBudgetListCount" resultType="int">
 		select count(*)
 		from budget

@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.sbs.IdH.dto.BusinessVO;
 import com.sbs.IdH.dto.ScheduleVO;
 import com.sbs.IdH.dto.UnitworkVO;
 
@@ -43,6 +44,15 @@ public class DateMaker {
 		paramList.add(param);
 	}
 	
+	public void setParamBusinessSchedule(BusinessVO business){
+		Map <String, Object> param = new HashMap<String, Object>();
+		// SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		param.put("title", business.getBusiness_name());
+		param.put("start", format.format(business.getBusiness_begin()));
+		param.put("end", format.format(business.getBusiness_end()));
+		paramList.add(param);
+	}
 	
 	public DateMaker() {
 		this.paramList = new ArrayList<Map<String,Object>>();
@@ -55,7 +65,6 @@ public class DateMaker {
 	public void setParamList(List<Map<String, Object>> paramList) {
 		this.paramList = paramList;
 	}
-	
 	
 	
 	

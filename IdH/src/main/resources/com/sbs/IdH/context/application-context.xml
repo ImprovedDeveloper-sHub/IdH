@@ -138,6 +138,11 @@
 		  p:session-ref="sqlSession"
 	/>
 	
+	<bean id="businessgroupDAO"
+		  class="com.sbs.IdH.dao.BusinessgroupDAOImpl"
+		  p:session-ref="sqlSession"
+	/>
+	
 	<bean id="noticeDAO"
 		  class="com.sbs.IdH.dao.NoticeDAOImpl"
 		  p:session-ref="sqlSession"
@@ -154,7 +159,11 @@
 	<bean id="businessService"
 		class="com.sbs.IdH.service.BusinessServiceImpl"
 		p:businessDAO-ref="businessDAO"
-		p:business_attachDAO-ref="business_attachDAO" />
+		p:business_attachDAO-ref="business_attachDAO"
+		p:businessgroupDAO-ref="businessgroupDAO"
+		p:workforceDAO-ref="workforceDAO"
+		p:budgetDAO-ref="budgetDAO"
+		p:projectDAO-ref="projectDAO" />
 
 	<bean id="noticeService"
 		class="com.sbs.IdH.service.NoticeServiceImpl"

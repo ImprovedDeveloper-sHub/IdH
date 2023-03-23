@@ -91,6 +91,10 @@ public class BudgetDAOImpl implements BudgetDAO{
 	}
 	
 	
+	public int selectBudgetByType(SearchCriteria cri) throws SQLException{
+		int price = session.selectOne("Budget-Mapper.selectSearchBudgetPrice", cri);
+		return price;
+	}
 	
 
 }

@@ -119,7 +119,7 @@
 								<td class="name-td">사업명</td>
 								<td class="table-td" colspan="3">${business.business_name}</td>
 								<td class="name-td">투입인원</td>
-								<td class="table-td">${business.business_people}</td>
+								<td class="table-td">${business.business_people} 명</td>
 							</tr>
 							<tr>
 								<td class="name-td">시작일자</td>

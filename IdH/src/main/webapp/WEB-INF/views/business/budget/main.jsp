@@ -8,6 +8,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 
 
@@ -163,6 +164,7 @@
 								<td class="table-td" style="border: 1px solid; border-color: silver;">${business.business_name}</td>
 								<td class="table-td" style="border: 1px solid; border-color: silver; text-align: right;"><fmt:formatNumber
 										value="${business.business_budget}" pattern="#,###" /> 원</td>
+								
 								<td class="table-td" style="border: 1px solid; border-color: silver; text-align: right;"><fmt:formatNumber
 										value="${business.business_usebudget}" pattern="#,###" /> 원</td>
 							</tr>
@@ -204,11 +206,9 @@
 								</button>
 							</div>
 						</div>
-						<button type="button" class="btn btn-block btn-info btn-sm"
-							style="width: 80px; margin: 10px; text-align: center;" id="registBtn"
-							onclick="OpenWindow('registForm','글등록',680,555)">등록</button>
-							
+						
 					</div>
+							<!-- <div style="margin-left: 70px;"><div id="columnchart_material" style="width: 400px; height: 450px;"></div></div> -->
 				</div>
 			</div>
 		</div>
@@ -216,5 +216,33 @@
 	<!-- 사업 예산 그래프 끝 -->
 
 </div>
+
+<!-- 
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['', 'Sales'],
+          ['2014', 1000],
+          ['2015', 1170],
+          ['2016', 660],
+          ['2017', 1030]
+        ]);
+
+        var options = {
+          chart: {
+            title: '',
+            subtitle: '',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+</script>
+ -->
 
 

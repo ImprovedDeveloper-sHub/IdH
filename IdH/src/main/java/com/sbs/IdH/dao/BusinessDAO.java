@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dto.BusinessVO;
+import com.sbs.IdH.dto.BusinessgroupVO;
 
 public interface BusinessDAO {
 	
@@ -24,11 +25,15 @@ public interface BusinessDAO {
 	
 	public void updateBusiness(BusinessVO business) throws SQLException;
 	
+	public void updateBusiness_budget(BusinessVO business) throws SQLException;
+	
 	public void deleteBusiness(int business_number) throws SQLException;
 	
 	//추가
 	public List<BusinessVO> selectBusinessCriteriaNotRowBound(SearchCriteria cri) throws SQLException;
 	
 	public String selectBusinessName(int businessNumber) throws SQLException;
+
+	public BusinessgroupVO selectBusinessgroup_number(int businessgroup_number);
 
 }

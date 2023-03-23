@@ -19,7 +19,7 @@ public class BusinessgroupDAOImpl implements BusinessgroupDAO {
 	}
 	
 	@Override
-	public List<BusinessVO> selectSearchBusinessList(SearchCriteria cri) throws SQLException {
+	public List<BusinessVO> selectSearchBusinessgroupList(SearchCriteria cri) throws SQLException {
 		
 		int startRow = cri.getStartRowNum();
 		int endRow = startRow + cri.getPerPageNum() - 1;
@@ -31,16 +31,16 @@ public class BusinessgroupDAOImpl implements BusinessgroupDAO {
 		dataParam.put("searchType", cri.getSearchType());
 		dataParam.put("keyword", cri.getKeyword());
 
-		List<BusinessVO> businessList = session.selectList("Business-Mapper.selectSearchBusinessList", dataParam);
+		List<BusinessVO> businessList = session.selectList("Businessgroup-Mapper.selectSearchBusinessList", dataParam);
 
 		return businessList;
 		
 	}
 
 	@Override
-	public int selectSearchBusinessListCount(SearchCriteria cri) throws SQLException {
+	public int selectSearchBusinessgroupListCount(SearchCriteria cri) throws SQLException {
 		
-		int count = session.selectOne("Business-Mapper.selectSearchBusinessListCount", cri);
+		int count = session.selectOne("Businessgroup-Mapper.selectSearchBusinessgroupListCount", cri);
 		
 		return count;
 		
