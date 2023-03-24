@@ -21,4 +21,5 @@ public interface WorkreportService {
     void removeWorkreport_AttachByAno(int ano)throws SQLException;
 	Map<String, Object> selectMyCheckList(SearchCriteria cri) throws SQLException;
 	Map<String, Object> selectGetterCheckList(SearchCriteria cri) throws SQLException;
+	void modifyWorkreportCheck(WorkreportVO workreport) throws SQLException;
 }

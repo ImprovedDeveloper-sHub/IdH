@@ -116,7 +116,7 @@ public class IssueServiceImpl implements IssueService{
 		cri.setMember_id(member.getMember_id());
 		//cri.setMember_id("IdH");
 		cri.setMemberStatus(1);//내 리스트
-		
+		cri.setPerPageNum(10);
 		List<IssueVO>myissueList = issueDAO.selectSearchIssueList(cri);
 		if(myissueList != null) {
 			for(IssueVO issue : myissueList) {
@@ -141,7 +141,7 @@ public class IssueServiceImpl implements IssueService{
 		cri.setMember_id(member.getMember_id());
 		//cri.setMember_id("IdH");
 		cri.setMemberStatus(2);
-		
+		cri.setPerPageNum(10);
 		List<IssueVO>getterIssueList = issueDAO.selectSearchIssueList(cri);
 		if(getterIssueList != null) {
 			for(IssueVO issue : getterIssueList) {

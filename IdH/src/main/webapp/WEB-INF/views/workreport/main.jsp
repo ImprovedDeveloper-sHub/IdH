@@ -15,6 +15,7 @@
 .card{
 	overflow:hidden;
 }
+
 </style>
 
 
@@ -65,7 +66,9 @@
 							</button>
 						</div>
 					</div>
-
+					<button type="button" class="btn btn-block btn-info btn-sm"
+					style="width: 80px"
+               onclick="workreport_go('workreportEnd');">결제</button>
 				</div>
 				<div id="table-content">
 					<div class="card-body table-responsive p-0">
@@ -73,10 +76,11 @@
 							<thead class="text-left myWorkreportThead">
 								<tr>
 									<th style="width: 20%">제목</th>
-									<th style="width: 30%">첨부파일</th>
+									<th style="width: 20%">첨부파일</th>
 									<th style="width: 20%">작성일</th>
 									<th style="width: 15%">상태</th>
 									<th style="width: 15%">승인자</th>
+									<th style="width: 10%">승인자</th>
 								</tr>
 							</thead>
 							<tbody class="text-left myWorkreportTbody">
@@ -86,28 +90,30 @@
 									</tr>
 								</c:if>
 								<c:forEach items="${myWorkreportList }" var="workreport">
-									<tr style="cursor:pointer;"onclick="javascript:OpenWindow('detail.do?from=main&workreport_number=${workreport.workreport_number}','상세보기',600,508);">
+									<tr>
 									
 										<td
-											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_title}</td>
+											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"onclick="javascript:OpenWindow('detail.do?from=main&workreport_number=${workreport.workreport_number}','상세보기',600,508);">${workreport.workreport_title}</td>
 										<c:if test="${empty workreport.attachList }">
 									<td
-										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">-</td>										
+										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"onclick="javascript:OpenWindow('detail.do?from=main&workreport_number=${workreport.workreport_number}','상세보기',600,508);">-</td>										
 										</c:if>
 										<c:if test="${!empty workreport.attachList }">
 									<td
-										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><i class="fa-sharp fa-solid fa-folder" style="color:gold;"></i></td>										
+										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"onclick="javascript:OpenWindow('detail.do?from=main&workreport_number=${workreport.workreport_number}','상세보기',600,508);"><i class="fa-sharp fa-solid fa-folder" style="color:gold;"></i></td>										
 										</c:if>
 										<td
-											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
+											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"onclick="javascript:OpenWindow('detail.do?from=main&workreport_number=${workreport.workreport_number}','상세보기',600,508);"><fmt:formatDate
 												value="${workreport.workreport_regdate}"
 												pattern="yyyy-MM-dd" /></td>
 										<td
-											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_check}</td>
+											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"onclick="javascript:OpenWindow('detail.do?from=main&workreport_number=${workreport.workreport_number}','상세보기',600,508);">${workreport.workreport_check}</td>
 										<td
-											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_setter}</td>
-										
+											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"onclick="javascript:OpenWindow('detail.do?from=main&workreport_number=${workreport.workreport_number}','상세보기',600,508);">${workreport.workreport_setter}</td>
+										<td
+                              style="text-align: left; max-width: 10%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><input type="checkbox" name="workreport" value="${workreport.workreport_number }"></td>
 									</tr>
+									
 								</c:forEach>
 							</tbody>
 						</table>
@@ -279,6 +285,14 @@
 	</div>
 </div>
 
+
+<form id="workreportForm" action="" method="POST">   
+   <input type="hidden" id=workreportparam name="workreportparam">
+   <!-- <input type='hidden' name="status" value="" /> -->
+</form>
+
+
+
 <c:if test="${from eq 'regist' }">
 	<script>
 		alert("정상 등록이 되었습니다.");
@@ -339,4 +353,20 @@
 		});
 	}
 </script>
+
+<script>
+   function workreport_go(url) {
+      alert(url);
+      var workreportArray = new Array();
+      $('input:checkbox[name=workreport]:checked').each(function(){
+    	  workreportArray.push(this.value);
+      });
+      $('#workreportparam').val(workreportArray);
+      $('#workreportForm').attr("action",url);
+   
+      $('#workreportForm').submit();
+      
+   }
+</script>
+
 

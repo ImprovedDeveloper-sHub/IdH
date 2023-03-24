@@ -15,5 +15,6 @@ public interface WorkreportDAO {
 	public void deleteWorkreport(int work_number);
 	public int selectWorkreportCriteriaTotalCount(SearchCriteria cri);
 	public int selectWorkreportSeqNext() throws SQLException;
+	void updateWorkreportCheck(WorkreportVO workreport) throws SQLException;
 
 }

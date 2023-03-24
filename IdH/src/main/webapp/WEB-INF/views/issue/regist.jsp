@@ -182,4 +182,23 @@ function remove_go(dataNum){
 	$('div[data-no="'+dataNum+'"]').remove();
 }
 </script>
-
+<script>
+function regist_go(){
+	   
+	   if(!$('input[name="issue_getter_id"]').val()){
+	       alert("할당자는 필수입니다.");
+	       return;
+	   }
+	   if($('input[name="issue_title"]').val()){
+	       alert("제목은 필수입니다.");
+	       return;
+	   }
+	   if(!$('input[name="issue_content"]').val()){
+	      alert("내용은 필수입니다.");
+	      return;
+	    }
+	    
+	   var form = $('form[role="form"]');
+	   form.submit();
+	}
+</script>

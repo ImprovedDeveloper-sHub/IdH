@@ -89,8 +89,8 @@ public class WorkreportServiceImpl implements WorkreportService{
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("loginUser");
 		cri.setMember_id(member.getMember_id());
-		cri.setMemberStatus(1);
-		
+		cri.setMemberStatus(2);
+		cri.setPerPageNum(5);
 		List<WorkreportVO>workreportList = workreportDAO.selectSearchWorkreportList(cri);
 		if(workreportList != null) {
 			for(WorkreportVO workreport : workreportList) {
@@ -114,8 +114,8 @@ public class WorkreportServiceImpl implements WorkreportService{
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("loginUser");
 		cri.setMember_id(member.getMember_id());
-		cri.setMemberStatus(2);//구분자 할당받으면2
-		
+		cri.setMemberStatus(1);//구분자 할당받으면2
+		cri.setPerPageNum(5);
 		List<WorkreportVO>workreportList = workreportDAO.selectSearchWorkreportList(cri);
 		if(workreportList != null) {
 			for(WorkreportVO workreport : workreportList) {
@@ -198,5 +198,10 @@ public class WorkreportServiceImpl implements WorkreportService{
 
 	}
 	
+	@Override
+	   public void modifyWorkreportCheck(WorkreportVO workreport) throws SQLException {
+
+		workreportDAO.updateWorkreportCheck(workreport);
+	   }
 	
 }

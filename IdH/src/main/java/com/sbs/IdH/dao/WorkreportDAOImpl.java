@@ -65,4 +65,9 @@ public class WorkreportDAOImpl implements WorkreportDAO{
 		int ano = session.selectOne("Workreport-Mapper.selectWorkreportSeqNext");
 		return ano;
 	}
+	
+	@Override
+	   public void updateWorkreportCheck(WorkreportVO workreport) throws SQLException {
+	      session.update("Workreport-Mapper.updateWorkreportCheck", workreport);
+	   }
 }

@@ -2,6 +2,7 @@ package com.sbs.IdH.controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -229,5 +231,22 @@ public class WorkreportController {
 		 
 		 return mnv;
 	 }
+	 
+	 @PostMapping("/workreportEnd")
+	   public String workreportEnd(@RequestParam HashMap<String, Object> dataMap) throws Exception {
+	      String url = "redirect:/workreport/main";
+	      String workreportParamStr = dataMap.get("workreportparam").toString();
+	      
+	      String[] workreport_array = workreportParamStr.split(",");
+	      for (String workreport_number : workreport_array) {
+	    	  WorkreportVO workreport = workreportService.selectWorkreport(Integer.parseInt(workreport_number));
+	    	  workreport.setWorkreport_check(2);
+	    	  workreportService.modifyWorkreportCheck(workreport);
+	      }
+	      
+	      
+	      return url;
+	   }
+	   
 
 }
