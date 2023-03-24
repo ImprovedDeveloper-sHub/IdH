@@ -4,7 +4,7 @@
 <script type="text/x-handlebars-template"  id="proceedingProject-list-template" >
 <tbody class="proceedingProjectLi" class="text-left">
 {{#each proceedingProjectList}}
-					 <tr onclick="setProjectNum({{project_number}},'getProjectDetail');">
+					 <tr class="{{project_number}}" onclick="setProjectNum({{project_number}},'getProjectDetail'); addActive({{project_number}});">
 			                  <td style="text-align:left;max-width:20%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;">{{project_business_name}}</td>
 			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 

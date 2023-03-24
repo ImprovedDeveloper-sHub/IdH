@@ -78,8 +78,8 @@
 
 
 		<div class="col-5">
-			<div  style="height:800px !important;">
-				<div id="content" class="card" >
+			<div  >
+				<div id="content" class="card" style="height:500px !important;">
 					<div class="card-header">
 						<h3 class="card-title">요구사항</h3>
 					</div>

@@ -41,19 +41,23 @@ body {
 <div style="margin: 0 auto;">
    <div class="content">
       <div class="row">
-
-         <div id="projectLi" class="col-12">
-            <br /> <br />
+		
+		
+		
+		
+         <div id="projectLi" class="col-6">
+			
+			<h3>생성 프로젝트</h3>
             <div class="row">
 
-               <c:if test="${empty proceedingProjectList}">
+               <c:if test="${empty proceedingProjectList and empty projectList}">
                   <script>
                      alert('프로젝트가 존재하지않습니다.');
                      history.back();
                   </script>
                </c:if>
                <c:forEach items="${proceedingProjectList}" var="project">
-                  <div class="col-3">
+                  <div class="col-6">
                      <div class="card"
                         onclick="select_project('${project.project_number}')">
                         <div>
@@ -82,33 +86,7 @@ body {
 
 				
 
-				<c:forEach items="${projectList}" var="project">
-                  <div class="col-3">
-                     <div class="card"
-                        onclick="select_project('${project.project_number}')">
-                        <div>
-                           <div class="image">
-                           <div style="text-align: center;"><img src="<%=request.getContextPath() %>/resources/img/프로젝트 이미지.jpg"style="width: 100px;height:100px;background-size: cover;"></div>
-                              
-                           </div>
-                           <div class="card-inner">
-                              <div class="header">
-                                 <span class="info-box-text">${project.project_name} </span> <span
-                                    class="info-box-number"></span>
-                                 <div class="progress">
-                                    <div class="progress-bar"
-                                       style="width: ${project.project_percent}%"></div>
-                                 </div>
-                              </div>
-                              <div class="content">
-                                 <span class="progress-description">
-                                    ${project.project_percent}% 진행중 </span>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </c:forEach>
+				
 
 
 
@@ -121,6 +99,45 @@ body {
 
             </div>
          </div>
+         
+         <div id="projectLi" class="col-6">
+         
+         <h3>참여 프로젝트</h3>
+         	 <div class="row">
+         	 			<c:forEach items="${projectList}" var="project">
+                  <div class="col-6">
+                     <div class="card"
+                        onclick="select_project('${project.project_number}')">
+                        <div>
+                           <div class="image">
+                           <div style="text-align: center;"><img src="<%=request.getContextPath() %>/resources/img/프로젝트 이미지.jpg"style="width: 100px;height:100px;background-size: cover;"></div>
+                              
+                           </div>
+                           <div class="card-inner">
+                              <div class="header">
+                                 <span class="info-box-text">${project.project_name} </span> <span
+                                    class="info-box-number"></span>
+                                 <div class="progress">
+                                    <div class="progress-bar"
+                                       style="width: ${project.project_percent}%"></div>
+                                 </div>
+                              </div>
+                              <div class="content">
+                                 <span class="progress-description">
+                                    ${project.project_percent}% 진행중 </span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </c:forEach>
+         	 
+         	 </div>
+         
+         </div>
+         
+         
+         
       </div>
    </div>
 </div>

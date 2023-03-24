@@ -89,8 +89,8 @@ public class WorkreportServiceImpl implements WorkreportService{
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("loginUser");
 		cri.setMember_id(member.getMember_id());
-		cri.setMemberStatus(1);
-		
+		cri.setMemberStatus(2);
+		cri.setPerPageNum(5);
 		List<WorkreportVO>workreportList = workreportDAO.selectSearchWorkreportList(cri);
 		if(workreportList != null) {
 			for(WorkreportVO workreport : workreportList) {
@@ -114,8 +114,8 @@ public class WorkreportServiceImpl implements WorkreportService{
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("loginUser");
 		cri.setMember_id(member.getMember_id());
-		cri.setMemberStatus(2);//구분자 할당받으면2
-		
+		cri.setMemberStatus(1);//구분자 할당받으면2
+		cri.setPerPageNum(5);
 		List<WorkreportVO>workreportList = workreportDAO.selectSearchWorkreportList(cri);
 		if(workreportList != null) {
 			for(WorkreportVO workreport : workreportList) {
@@ -133,9 +133,11 @@ public class WorkreportServiceImpl implements WorkreportService{
 	}
 	
 	@Override
-	public Map<String, Object> selectMyCheckList(SearchCriteria cri) throws SQLException {
+	public Map<String, Object> selectMyCheckList(SearchCriteria cri,HttpServletRequest request) throws SQLException {
 		Map<String,Object>dataMap = new HashMap<String,Object>();
-		int mytotal = workreportDAO.selectWorkreportCriteriaTotalCount(cri);
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("loginUser");
+		cri.setMember_id(member.getMember_id());
 		cri.setMemberStatus(1);//보낸것은 1
 		cri.setType(1);//승인
 		int myworkreportsuccess = workreportDAO.selectSearchWorkreportListCount(cri);
@@ -143,18 +145,21 @@ public class WorkreportServiceImpl implements WorkreportService{
 		cri.setType(2);//미승인
 		int myworkreportnow = workreportDAO.selectSearchWorkreportListCount(cri);
 		cri.setMemberStatus(1);
+		//int mytotal = workreportDAO.selectWorkreportCriteriaTotalCount(cri);
 		
-		dataMap.put("mytotal",mytotal);
+		//dataMap.put("mytotal",mytotal);
 		dataMap.put("myworkreportsuccess",myworkreportsuccess);
 		dataMap.put("myworkreportnow",myworkreportnow);
 		return dataMap;
 	}
 	
 	@Override
-	public Map<String, Object> selectGetterCheckList(SearchCriteria cri) throws SQLException {
+	public Map<String, Object> selectGetterCheckList(SearchCriteria cri,HttpServletRequest request) throws SQLException {
 		Map<String,Object>dataMap = new HashMap<String,Object>();
 //		SearchCriteria cri2 = cri.getNewCri(cri);
-		int gettertotal = workreportDAO.selectWorkreportCriteriaTotalCount(cri);
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("loginUser");
+		cri.setMember_id(member.getMember_id());
 		cri.setMemberStatus(2);//받은것은 2
 		cri.setType(1);//승인
 		int getterworkreportsuccess = workreportDAO.selectSearchWorkreportListCount(cri);
@@ -162,8 +167,9 @@ public class WorkreportServiceImpl implements WorkreportService{
 		cri.setType(2);//미승인
 		int getterworkreportnow = workreportDAO.selectSearchWorkreportListCount(cri);
 		cri.setMemberStatus(2);
+		//int gettertotal = workreportDAO.selectWorkreportCriteriaTotalCount(cri);
 		
-		dataMap.put("gettertotal",gettertotal);
+		//dataMap.put("gettertotal",gettertotal);
 		dataMap.put("getterworkreportsuccess",getterworkreportsuccess);
 		dataMap.put("getterworkreportnow",getterworkreportnow);
 		return dataMap;
@@ -198,5 +204,10 @@ public class WorkreportServiceImpl implements WorkreportService{
 
 	}
 	
+	@Override
+	   public void modifyWorkreportCheck(WorkreportVO workreport) throws SQLException {
+
+		workreportDAO.updateWorkreportCheck(workreport);
+	   }
 	
 }

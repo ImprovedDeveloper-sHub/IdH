@@ -66,7 +66,7 @@
 							<thead class="proceedingThead" class="text-left">
 								<tr>
 									<th style="width: 15%">일정 상태</th>
-									<th style="width: 35%">일정 이름</th>
+									<th style="width: 30%">일정 이름</th>
 									<th style="width: 15%">일정 구분</th>
 									<th style="width: 15%">프로젝트 명</th>
 									<th style="width: 25%">시작 날짜</th>
@@ -178,10 +178,10 @@
 						<table class="table table-hover">
 							<thead class="endThead" class="text-left">
 								<tr>
-									<th style="width: 20%">예산 상태</th>
+									<th style="width: 15%">예산 상태</th>
 									<th style="width: 30%">예산 이름</th>
 									<th style="width: 20%">예산 구분</th>
-									<th style="width: 15%">프로젝트 명</th>
+									<th style="width: 20%">프로젝트 명</th>
 									<th style="width: 15%">예산 금액</th>
 								</tr>
 							</thead>

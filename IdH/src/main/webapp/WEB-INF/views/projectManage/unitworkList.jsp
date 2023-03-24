@@ -55,7 +55,7 @@
 								</c:if>
 								<c:forEach items="${unitworkList }" var="unitwork">
 									<tr
-										onclick="OpenWindow('unitworkDetail?unitwork_number=${unitwork.unitwork_number}','단위업무',580,600);">
+										onclick="OpenWindow('unitworkDetail?unitwork_number=${unitwork.unitwork_number}','단위업무',580,543);">
 										<td>${unitwork.unitwork_status eq 1 ? '계획' : '진행'}</td>
 										<td>${unitwork.unitwork_name}</td>
 										<td>${unitwork.unitwork_level eq 1 ? '진행중' : ''}${unitwork.unitwork_level eq 2 ? '지연' : ''}${unitwork.unitwork_level eq 3 ? '예정' : ''}${unitwork.unitwork_level eq 4 ? '지연2' : ''}${unitwork.unitwork_level eq 5 ? '완료' : ''}</td>

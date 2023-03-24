@@ -8,14 +8,17 @@ import java.util.Map;
 import com.sbs.IdH.command.PageMaker;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.ProjectDAO;
+import com.sbs.IdH.dao.TimeDAO;
 import com.sbs.IdH.dao.WorkforceDAO;
 import com.sbs.IdH.dto.ChartVO;
+import com.sbs.IdH.dto.TimeVO;
 import com.sbs.IdH.dto.WorkforceVO;
 
 public class WorkforceServiceImpl implements WorkforceService {
 
 	private WorkforceDAO workforceDAO;
 	private ProjectDAO projectDAO;
+	private TimeDAO timeDAO;
 	
 	public void setProjectDAO(ProjectDAO projectDAO) {
 		this.projectDAO = projectDAO;
@@ -25,9 +28,20 @@ public class WorkforceServiceImpl implements WorkforceService {
 		this.workforceDAO = workforceDAO;
 	}
 
+	public void setTimeDAO(TimeDAO timeDAO) {
+		this.timeDAO = timeDAO;
+	}
+	
 	@Override
 	public void registWorkforce(WorkforceVO workforce) throws Exception {
 		workforce.setWorkforce_number(workforceDAO.selectWorkforceSeqNext());
+		
+		if(workforce.getWorkforce_status()==2) {
+			TimeVO time = new TimeVO(workforce.getWorkforce_name(), 1, workforce.getWorkforce_member_id(), "", "할당");
+			time.setTime_number(timeDAO.selectTimeSequenceNextValue());
+			timeDAO.insertTime(time);
+		}
+		
 		workforceDAO.insertWorkforce(workforce);
 	}
 

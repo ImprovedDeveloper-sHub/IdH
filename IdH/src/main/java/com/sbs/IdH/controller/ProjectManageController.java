@@ -273,6 +273,8 @@ public class ProjectManageController {
 	@GetMapping("/registWorkforceForm")
 	public ModelAndView registWorkforceForm(ModelAndView mnv) throws Exception {
 		String url = "/projectManage/registWorkforce";
+		SearchCriteria cri = new SearchCriteria();
+		mnv.addAllObjects(projectService.selectProjectList(cri));
 		mnv.setViewName(url);
 		return mnv;
 	}

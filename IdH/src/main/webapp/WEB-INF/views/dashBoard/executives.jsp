@@ -155,6 +155,55 @@ a {
 					</div>
 
 
+						
+				<div id="table-content">
+					<div class="card-body table-responsive p-0">
+						<table class="table table-hover">
+							<thead class="text-left myWorkreportThead">
+								<tr>
+									<th style="width: 20%">제목</th>
+									<th style="width: 30%">첨부파일</th>
+									<th style="width: 20%">작성일</th>
+									<th style="width: 15%">상태</th>
+									<th style="width: 15%">승인자</th>
+								</tr>
+							</thead>
+							<tbody class="text-left myWorkreportTbody">
+								<c:if test="${empty myWorkreportList}">
+									<tr>
+										<td colspan="5">데이터가 없습니다.</td>
+									</tr>
+								</c:if>
+								<c:forEach items="${myWorkreportList }" var="workreport">
+									<tr style="cursor:pointer;"onclick="javascript:OpenWindow('detail.do?from=main&workreport_number=${workreport.workreport_number}','상세보기',600,508);">
+									
+										<td
+											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_title}</td>
+										<c:if test="${empty workreport.attachList }">
+									<td
+										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">-</td>										
+										</c:if>
+										<c:if test="${!empty workreport.attachList }">
+									<td
+										style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><i class="fa-sharp fa-solid fa-folder" style="color:gold;"></i></td>										
+										</c:if>
+										<td
+											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
+												value="${workreport.workreport_regdate}"
+												pattern="yyyy-MM-dd" /></td>
+										<td
+											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_check}</td>
+										<td
+											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workreport.workreport_setter}</td>
+										
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+
 				</div>
 
 				<div class="card card-row card-primar" style="height: 30vh;">
@@ -350,3 +399,4 @@ a {
 		chart.draw(data, options);
 	}
 </script>
+

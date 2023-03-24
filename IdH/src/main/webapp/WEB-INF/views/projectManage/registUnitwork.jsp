@@ -82,8 +82,6 @@ input {
 			<div id="content">
 				<form enctype="multiaprt/form-data" role="form" method="post" action="registUnitwork" name="registSchdeulForm">
 				<input type="hidden" name="unitwork_status" value="2">
-				
-				<input type="hidden" name="unitwork_project_number" value="1">
 				<div id="table-content">
 					<table>
 						<thead>
@@ -127,11 +125,15 @@ input {
 
 							<tr>
 								<td class="name-td">프로젝트명</td>
-								<td class="table-td"><select name="unitwork_project_number">
+								<td class="table-td">
+									
+									<select name="unitwork_project_number">
 											<c:forEach items="${projectList}" var="project">
 												<option value="${project.project_number}">${project.project_name}</option>
 											</c:forEach>
-									</select></td>
+									</select>
+									
+								</td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">등록일</td>

@@ -14,15 +14,22 @@ import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.IssueDAO;
 import com.sbs.IdH.dao.Issue_AttachDAO;
 import com.sbs.IdH.dao.ProjectDAO;
+import com.sbs.IdH.dao.TimeDAO;
 import com.sbs.IdH.dto.ChartVO;
 import com.sbs.IdH.dto.IssueVO;
 import com.sbs.IdH.dto.Issue_AttachVO;
 import com.sbs.IdH.dto.MemberVO;
+import com.sbs.IdH.dto.TimeVO;
 
 
 public class IssueServiceImpl implements IssueService{
 
 	private IssueDAO issueDAO;
+	private TimeDAO timeDAO;
+	
+	public void setTimeDAO(TimeDAO timeDAO) {
+		this.timeDAO = timeDAO;
+	}
 	public void setIssueDAO(IssueDAO issueDAO) {
 		this.issueDAO = issueDAO;
 	}
@@ -94,6 +101,10 @@ public class IssueServiceImpl implements IssueService{
 				attach.setIssue_attach_attacher(issue.getIssue_setter_id());
 				issue_attachDAO.insertIssue_Attach(attach);
 			}
+		
+		TimeVO time = new TimeVO(issue.getIssue_title(), 2, issue.getIssue_setter_id(), issue.getIssue_getter_id(), "등록");
+		time.setTime_number(timeDAO.selectTimeSequenceNextValue());
+		timeDAO.insertTime(time);
 	}
 	
 

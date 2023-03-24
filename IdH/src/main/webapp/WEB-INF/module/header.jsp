@@ -39,8 +39,8 @@ body{
 }
 
 .logo{
-	margin-right:-5px;
-	height:60px;
+   margin-right:-5px;
+   height:60px;
 }
 .main-menu-custom{
   display:flex;
@@ -121,7 +121,7 @@ nav a:hover::before {
 }
 
 nav a:hover{
-	text-decoration:underline;
+   text-decoration:underline;
 }
 
 .active-tab::before {
@@ -155,35 +155,38 @@ table td{
 } */
 
 card-small-body{
-	padding:5px;
+   padding:5px;
 }
 
 table th{
-	font-size:10px;
-	padding:0.5rem !important;
-	
+   font-size:10px;
+   padding:0.5rem !important;
+   
 }
 table td{
-	font-size:9px;
-	padding:0.4rem !important;
+   font-size:9px;
+   padding:0.4rem !important;
 }
 
 
 
 .card-header{
-	background-color:#16A2B8 !important;
-	font-weight:bold !important;
+   background-color:#16A2B8 !important;
+   font-weight:bold !important;
 }
 
 
 
 /* .card{
-	border:solid 2px #16A2B8 !important;
-	border-top-radius: 0.5rem;
-	border-radius: 0.25rem;
+   border:solid 2px #16A2B8 !important;
+   border-top-radius: 0.5rem;
+   border-radius: 0.25rem;
 }
  */
 
+.idhs{
+   color:black !important;
+}
 
 </style>
 <meta charset="utf-8">
@@ -199,7 +202,7 @@ table td{
  -->
   
  
- 
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
  <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/summernote/summernote-bs4.min.css">
  
  <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/dist/css/adminlte.min.css">
@@ -213,10 +216,10 @@ table td{
     </div>
     <!-- header종료 -->
    <div class="main-menu-custom"style="width:80%;">
-   		<c:forEach items="${menuList }" var="menu">
-	    	<div class="menu"><a href="javascript:subMenu_go('${menu.mcode}');goPage('<%=request.getContextPath() %>${menu.murl }','${menu.mcode }');" class="nav-link"><i class="fa-solid ${menu.micon}"></i>
-	    	${menu.mname }</a></div>
-    	  </c:forEach>
+         <c:forEach items="${menuList }" var="menu">
+          <div class="menu"><a href="javascript:subMenu_go('${menu.mcode}');goPage('<%=request.getContextPath() %>${menu.murl }','${menu.mcode }');anr('${menu.mcode }');" class="nav-link ${menu.mcode }"><i class="fa-solid ${menu.micon}"></i>
+          ${menu.mname }</a></div>
+         </c:forEach>
     <!-- 
       <div class="menu"><i class="fa-solid fa-border-all"></i>&nbsp대시보드</div>
       <div class="menu"><i class="fa-solid fa-globe"></i>&nbsp사업관리</div>
@@ -240,26 +243,26 @@ table td{
               <span class="hidden lg:block"></span>
               <span class="hidden lg:block">로그아웃&nbsp;</span>
               </a>
-			</c:if>    
-			<c:if test="${empty loginUser}">
-				<a href="member/login" class="h-full flex items-center hover:underline px-[10px]">
+         </c:if>    
+         <c:if test="${empty loginUser}">
+            <a href="member/login" class="h-full flex items-center hover:underline px-[10px]">
               <span><i class="fas fa-sign-in-alt"></i></span>
               <span class="hidden lg:block"></span>
               <span class="hidden lg:block">로그인</span>
             </a>
-			</c:if>     
-			 
+         </c:if>     
+          
             </div>
           
-			
-			         
+         
+                  
             
          </div>
     
     <!--main-menu종료 -->
     <div class="col-12 sub-menu">
       <div id="subMenuLi" class="top-menu">
-      	
+         
         <nav id="subMenuList" class="subMenu left">
           
         </nav>

@@ -15,12 +15,14 @@ import com.sbs.IdH.dao.ProjectDAO;
 import com.sbs.IdH.dao.Project_authorityDAO;
 import com.sbs.IdH.dao.RequireDAO;
 import com.sbs.IdH.dao.ScheduleDAO;
+import com.sbs.IdH.dao.TimeDAO;
 import com.sbs.IdH.dao.UnitworkDAO;
 import com.sbs.IdH.dao.WorkforceDAO;
 import com.sbs.IdH.dto.BudgetVO;
 import com.sbs.IdH.dto.ProjectVO;
 import com.sbs.IdH.dto.Project_authorityVO;
 import com.sbs.IdH.dto.ScheduleVO;
+import com.sbs.IdH.dto.TimeVO;
 import com.sbs.IdH.dto.UnitworkVO;
 import com.sbs.IdH.dto.WorkforceVO;
 
@@ -33,9 +35,13 @@ public class ProjectServiceImpl implements ProjectService {
 	private ScheduleDAO scheduleDAO;
 	private RequireDAO requireDAO;
 	private BusinessDAO businessDAO;
-	Project_authorityDAO project_authorityDAO;
+	private Project_authorityDAO project_authorityDAO;
+	private TimeDAO timeDAO;
 	
 	
+	public void setTimeDAO(TimeDAO timeDAO) {
+		this.timeDAO = timeDAO;
+	}
 	public void setProject_authorityDAO(Project_authorityDAO project_authorityDAO) {
 		this.project_authorityDAO = project_authorityDAO;
 	}
@@ -70,6 +76,10 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public void registProject(ProjectVO project) throws Exception {
 		project.setProject_number(projectDAO.selectProjectSeqNext());
+		TimeVO time = new TimeVO(project.getProject_name(), 1, project.getProject_member_id(), "", "등록");
+		
+		time.setTime_number(timeDAO.selectTimeSequenceNextValue());
+		timeDAO.insertTime(time);
 		projectDAO.insertProject(project);
 	}
 
@@ -97,6 +107,8 @@ public class ProjectServiceImpl implements ProjectService {
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(projectDAO.selectSearchProjectListCount(cri));
 		List<ProjectVO> projectList = projectDAO.selectSearchProjectList(cri);
+		
+		
 		
 		
 		dataMap.put("pageMaker", pageMaker);

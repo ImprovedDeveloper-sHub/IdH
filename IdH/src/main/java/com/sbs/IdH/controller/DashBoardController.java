@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,7 +19,9 @@ import com.sbs.IdH.service.BusinessService;
 import com.sbs.IdH.service.IssueService;
 import com.sbs.IdH.service.MemberService;
 import com.sbs.IdH.service.ProjectService;
+import com.sbs.IdH.service.ScheduleService;
 import com.sbs.IdH.service.UnitworkService;
+import com.sbs.IdH.service.WorkreportService;
 
 @Controller
 @RequestMapping("/dashBoard")
@@ -44,6 +47,12 @@ public class DashBoardController {
 	
 	@Resource(name = "unitworkService")
 	private UnitworkService unitworkService;
+	
+	@Resource(name = "scheduleService")
+	private ScheduleService scheduleService;
+	
+	@Resource(name = "workreportService")
+	private WorkreportService workreportService;
 	
 	@GetMapping("/main")
 	public void main() {}
@@ -73,6 +82,7 @@ public class DashBoardController {
 		//프로젝트 진행현황
 		mnv.addAllObjects(unitworkService.selectUnitworkList(cri));
 		mnv.addAllObjects(projectService.selectProjectUnitwork_level(cri));
+		mnv.addAllObjects(scheduleService.selectScheduleList(cri));
 		//이슈
 		mnv.addAllObjects(issueService.selectIssueCheckList(cri));
 		//세부계획
@@ -125,5 +135,14 @@ public class DashBoardController {
 		
 		return mnv;
 	}
+	
+	@PostMapping("/getMyworkreportlist")
+	 public ModelAndView getMyworkreportlist(ModelAndView mnv,SearchCriteria cri,HttpServletRequest request)throws Exception{
+		 mnv.addAllObjects(workreportService.selectMyWorkreportList(cri, request));
+		 mnv.setViewName("/dashBoard/getMyworkreportlist");
+		 
+		 
+		 return mnv;
+	 }
 	
 }

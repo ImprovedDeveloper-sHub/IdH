@@ -60,18 +60,26 @@ tbody tr td {
 <div class="row" style="justify-content: center;height:630px;">
 	<div class="timeline-card card"style="width:1195px;height:30%;">
 		<div id="content" style="height: 200px;font-size:10px;">
+			
+			<c:forEach items="${ timeList}" var="time">
 			<div class="timeline"style="margin:7px 0 !important;">
 				<div>
 					<i class="fas fa-paper-plane bg-yellow"></i>
 					<div class="timeline-item">
-						<span class="time"><i class="fas fa-clock"></i>23-03-24</span>
+						<span class="time"><i class="fas fa-clock"></i><fmt:formatDate pattern="yyyy-MM-dd" value="${time.time_regdate}"/></span>
 						<div class="timeline-header" style="padding:5px;font-size:12px;">
-							<a href="#">프로젝트</a>
+							<a href="#">${time.time_type eq 1 ? '프로젝트' : ''}${time.time_type eq 2 ? '이슈' : ''}${time.time_type eq 3 ? '업무보고' : ''}</a>
 						</div>
-						<div class="timeline-body">성과관리 기능제작 프로젝트가 등록되었습니다.</div>
+						<div class="timeline-body">${time.time_name} ${time.time_type eq 1 ? '프로젝트' : ''}${time.time_type eq 2 ? '이슈' : ''}${time.time_type eq 3 ? '업무보고' : ''}가 ${time.time_work}되었습니다.</div>
 					</div>
 				</div>
 			</div>
+			</c:forEach>
+			
+			
+			
+			
+			
 			<div class="timeline"style="margin:5px 0 !important;">
 				<div>
 					<i class="fas fa-paper-plane bg-yellow"></i>

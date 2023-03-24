@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
   
 
 <!-- CSS start -->
@@ -123,8 +123,10 @@ input {
 
 							<tr>
 								<td class="name-td">프로젝트명</td>
-								<td class="table-td"><select name="workforce_project_number" >
-									<option value="1">미정</option>
+								<td class="table-td"><select name="workforce_project_number">
+											<c:forEach items="${projectList}" var="project">
+												<option value="${project.project_number}">${project.project_name}</option>
+											</c:forEach>
 									</select></td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>

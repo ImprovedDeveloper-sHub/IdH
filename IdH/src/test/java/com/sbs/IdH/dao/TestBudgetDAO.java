@@ -23,9 +23,18 @@ public class TestBudgetDAO {
    private BudgetDAO budgetDAO;
    @Autowired
    private IssueDAO issueDAO;
+   @Autowired
+   private TimeDAO timeDAO;
+   
    
    
    @Test
+   public void TimeTest() throws Exception{
+	   System.out.println(timeDAO.selectTimeSequenceNextValue());;
+   }
+   
+   
+  
    public void IssueTest() throws Exception{
 	   issueDAO.selectIssueSeqNext();
    }
@@ -85,7 +94,7 @@ public class TestBudgetDAO {
 	   BudgetVO budget2 = budgetDAO.selectBudget(1);
    }
    
-   @Test
+
    public void testSumBudgetPrice() throws Exception{
 	   SearchCriteria cri = new SearchCriteria();
 	  cri.setProject_number(1);

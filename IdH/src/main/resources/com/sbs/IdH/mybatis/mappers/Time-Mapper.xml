@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Time-Mapper">
+	
+	
+	
+	<select id="selectTimeList"	resultType="time">
+		select *
+		from timetable
+		where time_setter_id = #{setter_id}
+		order by time_regdate desc
+	</select>
+	
+	
+	<select id="selectTimeSeqNextValue" resultType="int" >
+		select time_seq.nextval from dual
+	</select>
+	
+	
+	
+	
+	<update id="insertTime" parameterType="time">
+		insert 
+		into 
+		timetable(time_number,time_name,time_type,time_setter_id,time_regdate, time_work)
+		values(#{time_number},#{time_name},#{time_type},#{time_setter_id},sysdate , #{time_work})
+	</update>
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+

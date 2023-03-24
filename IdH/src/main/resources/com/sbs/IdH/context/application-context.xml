@@ -24,7 +24,9 @@
 
 	<bean id="issueService"
 		class="com.sbs.IdH.service.IssueServiceImpl" p:issueDAO-ref="issueDAO"
-		p:issue_AttachDAO-ref="issue_attachDAO" p:projectDAO-ref="projectDAO" />
+		p:issue_AttachDAO-ref="issue_attachDAO" p:projectDAO-ref="projectDAO" 
+		p:timeDAO-ref="timeDAO"
+		/>
 	<bean id="minutesService"
 		class="com.sbs.IdH.service.MinutesServiceImpl"
 		p:minutesDAO-ref="minutesDAO" />
@@ -35,7 +37,7 @@
 	<bean id="menuService" class="com.sbs.IdH.service.MenuServiceImpl"
 		p:menuDAO-ref="menuDAO" />
 
-
+	
 	<!-- repository -->
 
 	<bean id="workforceDAO" class="com.sbs.IdH.dao.WorkforceDAOImpl"
@@ -46,17 +48,31 @@
 		p:session-ref="sqlSession" />
 
 
+	<bean id="timeDAO" class="com.sbs.IdH.dao.TimeDAOImpl"
+		p:session-ref="sqlSession" />
+
+	
+	
+
 	<bean id="projectService"
 		class="com.sbs.IdH.service.ProjectServiceImpl"
 		p:projectDAO-ref="projectDAO" p:budgetDAO-ref="budgetDAO"
 		p:scheduleDAO-ref="scheduleDAO" p:workforceDAO-ref="workforceDAO"
-		p:unitworkDAO-ref="unitworkDAO" p:businessDAO-ref="businessDAO" />
+		p:unitworkDAO-ref="unitworkDAO" p:businessDAO-ref="businessDAO" 
+		p:timeDAO-ref="timeDAO"
+		/>
+		
+		<bean id="timeService" class="com.sbs.IdH.service.TimeServiceImpl"
+		p:timeDAO-ref="timeDAO"/>
+		
 	<bean id="unitworkService"
 		class="com.sbs.IdH.service.UnitworkServiceImpl"
 		p:unitworkDAO-ref="unitworkDAO" p:projectDAO-ref="projectDAO" />
 	<bean id="workforceService"
 		class="com.sbs.IdH.service.WorkforceServiceImpl"
-		p:workforceDAO-ref="workforceDAO" p:projectDAO-ref="projectDAO" />
+		p:workforceDAO-ref="workforceDAO" p:projectDAO-ref="projectDAO" 
+		p:timeDAO-ref="timeDAO"
+		/>
 	<bean id="scheduleService"
 		class="com.sbs.IdH.service.ScheduleServiceImpl"
 		p:scheduleDAO-ref="scheduleDAO" p:projectDAO-ref="projectDAO" />
@@ -95,7 +111,7 @@
 		class="com.sbs.IdH.dao.Require_attachDAOImpl"
 		p:session-ref="sqlSession" />
 
-
+	
 
 
 

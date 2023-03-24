@@ -2,16 +2,19 @@ package com.sbs.IdH.controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -19,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.command.WorkreportModifyCommand;
 import com.sbs.IdH.command.WorkreportRegistCommand;
+import com.sbs.IdH.dto.MemberVO;
 import com.sbs.IdH.dto.WorkreportVO;
 import com.sbs.IdH.dto.Workreport_AttachVO;
 import com.sbs.IdH.service.WorkreportService;
@@ -36,13 +40,23 @@ public class WorkreportController {
 //		SearchCriteria cri2 = cri.getNewCri(cri);
 //		SearchCriteria cri3 = cri.getNewCri(cri);
 //		SearchCriteria cri4 = cri.getNewCri(cri);
-		mnv.addAllObjects(workreportService.selectMyWorkreportList(cri, request));
-		SearchCriteria cri2 = cri.newCri();
-		mnv.addAllObjects(workreportService.selectGetterWorkreportList(cri2, request));
+		String url = "/workreport/main";
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("loginUser");
+		if(member.getMember_rank()==1) {
+			url = "/workreport/main2";
+
+		}else {
+			SearchCriteria cri2 = cri.newCri();
+			mnv.addAllObjects(workreportService.selectGetterWorkreportList(cri2, request));
+			SearchCriteria cri4 = cri.newCri();
+			mnv.addAllObjects(workreportService.selectGetterCheckList(cri4,request));	
+		}
+		SearchCriteria cri5 = cri.newCri();
+		mnv.addAllObjects(workreportService.selectMyWorkreportList(cri5, request));
 		SearchCriteria cri3 = cri.newCri();
-		mnv.addAllObjects(workreportService.selectMyCheckList(cri3));
-		SearchCriteria cri4 = cri.newCri();
-		mnv.addAllObjects(workreportService.selectGetterCheckList(cri4));
+		mnv.addAllObjects(workreportService.selectMyCheckList(cri3,request));
+		mnv.setViewName(url);
 		return mnv;
 	}
 
@@ -229,5 +243,38 @@ public class WorkreportController {
 		 
 		 return mnv;
 	 }
+	 
+	 @PostMapping("/workreportEnd")
+	   public String workreportEnd(@RequestParam HashMap<String, Object> dataMap) throws Exception {
+	      String url = "redirect:/workreport/main";
+	      String workreportParamStr = dataMap.get("workreportparam").toString();
+	      
+	      String[] workreport_array = workreportParamStr.split(",");
+	      for (String workreport_number : workreport_array) {
+	    	  WorkreportVO workreport = workreportService.selectWorkreport(Integer.parseInt(workreport_number));
+	    	  workreport.setWorkreport_check(2);
+	    	  workreportService.modifyWorkreportCheck(workreport);
+	      }
+	      
+	      
+	      return url;
+	   }
+	 
+	 @PostMapping("/workreportEnd2")
+	   public String workreportEnd2(@RequestParam HashMap<String, Object> dataMap) throws Exception {
+	      String url = "redirect:/workreport/main";
+	      String workreportParamStr = dataMap.get("workreportparam").toString();
+	      
+	      String[] workreport_array = workreportParamStr.split(",");
+	      for (String workreport_number : workreport_array) {
+	    	  WorkreportVO workreport = workreportService.selectWorkreport(Integer.parseInt(workreport_number));
+	    	  workreport.setWorkreport_check(2);
+	    	  workreportService.modifyWorkreportCheck(workreport);
+	      }
+	      
+	      
+	      return url;
+	   }
+	   
 
 }

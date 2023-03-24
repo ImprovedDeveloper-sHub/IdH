@@ -28,6 +28,7 @@ import com.sbs.IdH.dto.Product_AttachVO;
 import com.sbs.IdH.service.CoworkService;
 import com.sbs.IdH.service.IssueService;
 import com.sbs.IdH.service.ProductService;
+import com.sbs.IdH.service.TimeService;
 import com.sbs.IdH.utils.MakeFileName;
 
 @RequestMapping("/product")
@@ -42,6 +43,13 @@ public class ProductController {
     @Resource
     private IssueService issueService;
     
+    @Resource
+    private TimeService timeService;
+    
+    public void setTimeService(TimeService timeService) {
+		this.timeService = timeService;
+	}
+    
 	public void setProductService(ProductService productService) {
 		this.productService = productService;
 	}
@@ -54,7 +62,7 @@ public class ProductController {
 		this.UploadPath = UploadPath;
 	}
 
-
+	
 
 
 	@GetMapping("/main")
@@ -116,7 +124,7 @@ public class ProductController {
 		
 		mnv.addAllObjects(productService.selectProductMyProceedList(cri, request));
 		mnv.addAllObjects(productService.selectProductMyEndList(cri, request));
-		
+		mnv.addAllObjects(timeService.selectTimeList(request));
 		return mnv;
 	}
 	

@@ -10,6 +10,10 @@
  #projectDetailtable td{
  	border: 1px solid #444444 !important;
  }
+ 
+.active{
+ 	background-color:#16A2B8;
+ }
  </style>       
         
         
@@ -63,7 +67,7 @@
 				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
 			 	 </c:if>
 			 	 <c:forEach items="${proceedingProjectList }" var="project">
-					 <tr onclick="setProjectNum(${project.project_number},'getProjectDetail'); change_comparison(${project.project_number });">
+					 <tr class="${project.project_number}"  onclick="setProjectNum(${project.project_number},'getProjectDetail'); change_comparison(${project.project_number }); addActive(${project.project_number })">
 			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;">${project.project_business_name }</td>
 			                  <td style="text-align:left;max-width:20%; overflow: hidden; 
@@ -128,7 +132,8 @@
 				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
 			 	 </c:if>
 			 	 <c:forEach items="${endProjectList }" var="project">
-					 <tr onclick="setProjectNum(${project.project_number},'getProjectDetail');">
+			 	 					
+					 <tr onclick="setProjectNum(${project.project_number},'getProjectDetail'); addActive(${project.project_number})">
 					 <td style="text-align:left;max-width:20%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;">${project.project_business_name}</td>
 			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
@@ -317,7 +322,12 @@
 		$('#workforceButton').attr('onclick',"ajax_print_comparison_chart('workforceComparison')");
 		$('#issueButton').attr('onclick',"ajax_print_comparison_chart('issueComparison')");
 		$('#productButton').attr('onclick',"ajax_print_comparison_chart('productComparison')");
-		 $('#unitworkButton').attr('onclick',"ajax_print_comparison_chart('unitworkComparison')")
+		$('#unitworkButton').attr('onclick',"ajax_print_comparison_chart('unitworkComparison')")
+		 
+		 
+		 $('tbody tr').attr('onclick', '').unbind('click');
+		//$('tbody tr').attr('onclick', 'alert("test") ' );
+		
 		$('#changeButton').attr('onclick',"returnButton()");
 	}
 
@@ -345,19 +355,27 @@
   var project_comparison_num2 = 2;
   var project_comparison_check = 1;
   
+  
+  //
   function change_comparison(project_number){
 		if(project_comparison_check == 1 ){
 			project_comparison_num1 = project_number;
+			$('proccedingTr-'+project_number).addClass();
+			//$('proccedingTr-'+project_comparison_num2).removeClass();
 			project_comparison_check = 2;
 		}	
 		else if(project_comparison_check == 2 ){
 			project_comparison_num2 = project_number;
 			project_comparison_check = 1;
+			$('proccedingTr-'+project_number).addClass();
 		}
 		
 	}
   
-  
+  function addActive(num){
+	 $('tr').removeClass('active');
+	  $("."+num).addClass('active');
+  }
   
   function ajax_print_chart(url){
 	  formData = new FormData();

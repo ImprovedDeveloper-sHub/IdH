@@ -69,7 +69,7 @@ input {
 
 	<!-- 사업 일정 상세 정보 -->
 	<div class="col">
-		<div class="card card-info">
+		<div class="card card-info" style="padding:0 !important; margin:0 !important;">
 			<div class="card-header">
 				<h3 class="card-title">${unitwork.unitwork_name}</h3>
 				<div class="card-tools">

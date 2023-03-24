@@ -172,3 +172,25 @@ function remove_go(dataNum){
 	$('div[data-no="'+dataNum+'"]').remove();
 }
 </script>
+
+<script>
+function regist_go(){
+	   
+	   if(!$('input[name="workreport_getter"]').val()){
+	       alert("승인자는 필수입니다.");
+	       return;
+	   }
+	   if($('input[name="workreport_title"]').val()){
+	       alert("제목은 필수입니다.");
+	       return;
+	   }
+	   if(!$('input[name="workreport_content"]').val()){
+	      alert("내용은 필수입니다.");
+	      return;
+	    }
+	    
+	   var form = $('form[role="form"]');
+	   form.submit();
+	}
+</script>
+

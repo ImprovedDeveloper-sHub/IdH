@@ -104,7 +104,52 @@ a {
 						style="background: none; border: 1px solid gray;">
 						<h3 class="card-title" style="color: black;">세부계획</h3>
 					</div>
+					
+				<div id="table-content">
+					<div class="card-body table-responsive p-0">
+						<table class="table table-hover">
+							<thead class="proceedingThead" class="text-left">
+								<tr>
+									<th style="width: 15%">일정 상태</th>
+									<th style="width: 35%">일정 이름</th>
+									<th style="width: 25%">시작 날짜</th>
+									<th style="width: 15%">종료 날짜</th>
+								</tr>
+							</thead>
 
+							<tbody class="proceedingProjectLi" class="text-left">
+								<c:if test="${empty scheduleList}">
+									<tr>
+										<td colspan="5">일정이 없습니다.</td>
+									</tr>
+								</c:if>
+								<c:forEach items="${scheduleList }" var="schedule">
+									<tr
+										onclick="OpenWindow('scheduleDetail?schedule_number=${schedule.schedule_number}','스케줄',500,600);">
+										<td
+											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+											${schedule.schedule_status eq 1 ? '계획' : '진행'}</td>
+										<td
+											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${schedule.schedule_name}</td>
+										<td
+											style="text-align: left; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${schedule.schedule_type eq '1' ? '기획' : ''}${schedule.schedule_type eq '2' ? '설계' : ''}${schedule.schedule_type eq '3' ? '구현' : ''}${schedule.schedule_type eq '4' ? '테스트' : ''}</td>
+										<td
+											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+											${schedule.schedule_project_name}</td>
+										
+										<td
+											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
+												value="${schedule.schedule_startdate}" pattern="yyyy-MM-dd" /></td>
+										<td
+											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
+												value="${schedule.schedule_enddate}" pattern="yyyy-MM-dd" /></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+
+						</table>
+						
+					
 
 				</div>
 

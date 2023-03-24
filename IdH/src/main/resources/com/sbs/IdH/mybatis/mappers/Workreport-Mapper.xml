@@ -81,6 +81,14 @@
 	<select id="selectWorkreportSeqNext" resultType="int">
 		select workreport_seq.nextval as workreport_number from dual
 	</select>
+	
+	<update id="updateWorkreportCheck" parameterType="workreport">
+      update 
+      workreport
+      set 
+      workreport_check=#{workreport_check}
+      where workreport_number=#{workreport_number}
+   </update>
 </mapper>  
 
 
