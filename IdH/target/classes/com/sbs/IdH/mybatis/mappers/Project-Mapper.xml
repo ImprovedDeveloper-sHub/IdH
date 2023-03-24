@@ -18,8 +18,14 @@
 			and project_status =  #{status}
 		</if>
 		
-		
 	</sql>
+	
+	<select id="selectProjectNumberBybusinessNumber" resultType="int">
+		select project_number
+		from project
+		where project_business_number = #{business_number}
+	</select>
+	
 	
 	
 	<select id="selectProjectList"	resultType="project">
@@ -29,6 +35,15 @@
 		<include refid="search" />
 		order by project_regdate desc
 	</select>
+	
+	<select id="selectProjectName"	resultType="String">
+		select project_name
+		from project
+		where project_number =#{project_number}
+	</select>
+	
+	
+	
 	
 	<select id="selectProjectListByBusinessNumber"	resultType="project">
 		select *
@@ -73,7 +88,7 @@
 		insert 
 		into 
 		project(project_number,project_name,project_status,project_discription,project_business_number,project_member_id,project_regdate)
-		values(#{project_number},#{project_name},0,#{project_discription},#{project_business_number},#{project_member_id},sysdate)
+		values(#{project_number},#{project_name},1,#{project_discription},#{project_business_number},#{project_member_id},sysdate)
 	</update>
 	
 	<update id="updateProjectForProjectStart" parameterType="project">

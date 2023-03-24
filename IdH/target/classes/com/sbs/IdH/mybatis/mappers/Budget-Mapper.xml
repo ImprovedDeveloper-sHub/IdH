@@ -18,6 +18,10 @@
 		<if test="searchType == 'e'.toString() ">
 			and email like '%'||#{keyword}||'%'
 		</if>
+		<if test="member_id != null">
+			and budget_member_id =  #{member_id}
+		</if>
+		
 		<if test="project_number != null and project_number != 0 ">
 			and budget_project_number =  #{project_number}
 		</if>
@@ -55,6 +59,13 @@
 	</select>
 	
 	
+	
+	<select id="selectSearchBudgetPrice"	resultType="int">
+		select budget_price
+		from budget
+		<include refid="search" />
+	</select>
+	
 	<select id="selectSearchBudgetListCount" resultType="int">
 		select count(*)
 		from budget
@@ -76,8 +87,8 @@
 	<update id="insertBudget" parameterType="budget">
 		insert 
 		into 
-		budget(budget_number,budget_status,budget_detail,budget_price,budget_project_number,budget_member_id,budget_regdate)
-		values(#{budget_number},0,#{budget_detail},#{budget_price},#{budget_project_number},#{budget_member_id},sysdate)
+		budget(budget_number,budget_name,budget_type,budget_status,budget_detail,budget_price,budget_member_id,budget_regdate)
+		values(#{budget_number},#{budget_name},#{budget_type},1,#{budget_detail},#{budget_price},#{budget_member_id},sysdate)
 	</update>
 	
 	
@@ -89,15 +100,16 @@
 	</update>
 	
 	
-	<update id="updateBudgetForProjectStart" parameterType="budget">
+	<update id="updateBudgetPlanForProjectStart" parameterType="budget">
 		update budget 
-		set budget_project_number=#{budget_project_number}, budget_status=1
+		set budget_project_number=#{budget_project_number}
 		where budget_number=#{budget_number}
 	</update>
 	
+	
 	<update id="updateBudgetForProjectEnd" parameterType="budget">
 		update budget 
-		set budget_status=2
+		set budget_status=3
 		where budget_number=#{budget_number}
 	</update>
 	

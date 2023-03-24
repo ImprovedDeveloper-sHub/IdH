@@ -40,7 +40,7 @@
 		</if>
 	</sql>
 	
-	<select id="selectSearchbusinessList" resultType="business">
+	<select id="selectSearchBusinessgroupList" resultType="businessgroup">
 		select *
 		from(
 		    select rownum as rnum,SearchbusinessResult.*
@@ -58,7 +58,7 @@
 		 ]]>
 	</select>
 	
-	<select id="selectSearchbusinessListCount" resultType="int">
+	<select id="selectSearchBusinessgroupListCount" resultType="int">
 		select
 		count(*)
 		from business
@@ -93,6 +93,7 @@
 		businessgroup
 		set
 		businessgroup_name = #{businessgroup_number}, businessgroup_people = #{businessgroup_people}
+		where businessgroup_number = #{businessgroup_number}
 	</update>
 	
 	<update id="deletBusinessgroup" parameterType="businessgroup">

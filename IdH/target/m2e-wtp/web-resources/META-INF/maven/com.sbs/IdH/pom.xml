@@ -28,6 +28,9 @@
 		<jackson.databind-version>2.13.3</jackson.databind-version>
 		<log4jdbc.remix-version>0.2.7</log4jdbc.remix-version>
 		<org.aspectjweaver-version>1.9.6</org.aspectjweaver-version>
+		<commons-codec-version>1.9</commons-codec-version>
+      <de.taimos.totp-version>1.0</de.taimos.totp-version>
+      <google.zxing.javase-version>3.2.1</google.zxing.javase-version>
 		
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
@@ -200,6 +203,29 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+
+	<!-- GoogleOTP -->
+      <dependency>
+          <groupId>de.taimos</groupId>
+          <artifactId>totp</artifactId>
+          <version>${de.taimos.totp-version}</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+      <dependency>
+         <groupId>commons-codec</groupId>
+         <artifactId>commons-codec</artifactId>
+         <version>${commons-codec-version}</version>
+      </dependency>
+      
+      <dependency>
+          <groupId>com.google.zxing</groupId>
+          <artifactId>javase</artifactId>
+          <version>${google.zxing.javase-version}</version>
+      </dependency>   
+
+
+
+
 
 		<!-- Test -->
 		<dependency>

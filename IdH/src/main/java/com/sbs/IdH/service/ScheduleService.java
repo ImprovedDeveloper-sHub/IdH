@@ -22,4 +22,5 @@ public interface ScheduleService {
 	void updateScheduleForRegistProject(int schedule_number, int project_number)throws Exception;
 	
 	public List<Map<String,Object>> selectScheduleListForCalendar(SearchCriteria cri) throws Exception;
+
 }

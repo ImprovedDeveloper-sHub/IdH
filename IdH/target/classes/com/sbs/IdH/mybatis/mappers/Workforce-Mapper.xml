@@ -18,6 +18,19 @@
 		<if test="searchType == 'e'.toString() ">
 			and email like '%'||#{keyword}||'%'
 		</if>
+		<if test="member_id != null">
+			and workforce_member_id =  #{member_id}
+		</if>
+		
+		<if test="project_number != null and project_number != 0 ">
+			and workforce_project_number =  #{project_number}
+		</if>
+		<if test="status != null and status != 0">
+			and workforce_status = #{status}
+		</if>
+		<if test="type != null and type != 0">
+			and workforce_type = #{type}
+		</if>
 	</sql>
 	
 	
@@ -57,13 +70,13 @@
 	<update id="insertWorkforce" parameterType="workforce">
 		insert 
 		into 
-		workforce(workforce_number,workforce_status,workforce_detail,workforce_project_number,workforce_member_id,workforce_regdate)
-		values(#{workforce_number},0,#{workforce_detail},#{workforce_project_number},#{workforce_member_id},sysdate)
+		workforce(workforce_number,workforce_status,workforce_detail,workforce_name,workforce_project_number,workforce_member_id,workforce_regdate, workforce_startdate, workforce_enddate, workforce_type)
+		values(#{workforce_number},0,#{workforce_detail},#{workforce_name},#{workforce_project_number},#{workforce_member_id},sysdate, #{workforce_startdate},#{workforce_enddate}, #{workforce_type})
 	</update>
 	
-	<update id="updateWorkforceForProjectStart" parameterType="workforce">
+	<update id="updateWorkforcePlanForProjectStart" parameterType="workforce">
 		update workforce 
-		set workforce_project_number=#{workforce_project_number}, workforce_status=1
+		set workforce_project_number=#{workforce_project_number}
 		where workforce_number=#{workforce_number}
 	</update>
 	
