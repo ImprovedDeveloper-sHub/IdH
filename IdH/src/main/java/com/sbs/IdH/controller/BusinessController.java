@@ -66,6 +66,9 @@ public class BusinessController {
 	@Resource(name="fileUploadBusinessPath")
 	private String fileUploadBusinessPath;
 	
+	@Resource(name="UploadPath")
+	private String UploadPath;
+	
 	@GetMapping("/schedule/main")
 	public ModelAndView scheduleMain(ModelAndView mnv, SearchCriteria cri) throws SQLException {
 		
@@ -102,7 +105,7 @@ public class BusinessController {
 		String url = "redirect:/business/schedule/main";
 		
 		List<MultipartFile> multiFiles = businessreg.getBusiness_attachList();
-		String savePath = this.fileUploadBusinessPath;
+		String savePath = this.UploadPath;
 		
 		List<Business_attachVO> attachList = saveFiletoattaches(multiFiles, savePath);
 		
@@ -198,7 +201,7 @@ public class BusinessController {
 			}
 		}
 
-		List<Business_attachVO> attachList = saveFiletoattaches(multiFiles, fileUploadBusinessPath);
+		List<Business_attachVO> attachList = saveFiletoattaches(multiFiles, UploadPath);
 
 		BusinessVO business = businessmod.toBusinessVO();
 		

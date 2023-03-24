@@ -319,4 +319,14 @@ public class BusinessServiceImpl implements BusinessService {
 		return dataMap;
 	}
 	
+	@Override
+	public List<Map<String, Object>> selectBusinessListForCalendar(SearchCriteria cri) throws Exception {
+		DateMaker dateMaker = new DateMaker();
+		List<BusinessVO> businessList = businessDAO.selectBusinessCriteriaNotRowBound(cri);
+		for (BusinessVO business : businessList) {
+			dateMaker.setParamBusiness(business);
+		}
+		return dateMaker.getParamList();
+	}
+	
 }

@@ -15,5 +15,6 @@ public interface Co_AttachDAO {
 	public void deleteCo_Attach(int ano) throws SQLException;
 
 	public void deleteAllCo_Attach(int co_number)throws SQLException;
-	
+	 
+	//public int selectCo_AttachSeqNextValue() throws SQLException ;
 }

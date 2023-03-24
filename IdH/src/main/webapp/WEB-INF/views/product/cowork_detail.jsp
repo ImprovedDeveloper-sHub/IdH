@@ -97,7 +97,21 @@ input {
 							<td class="name-td">내용</td>
 								<td class="table-td">${product.product_content }</td>
 							</tr>
-
+   <c:forEach items="${product.attachList }" var="attach">
+                        <tr>
+                           <td class="name-td">첨부파일</td>
+                           <td class="table-td">${attach.fileName }</td>
+                           <td class="table-td"></td>
+                           <td class="table-td"></td>
+                           <td class="table-td"><fmt:formatDate
+                                 value="${attach.regDate }" pattern="yyyy-MM-dd" /></td>
+                           <td class="table-td" class="attach-box"
+                              style="cursor: pointer;"
+                              onclick="location.href='<%=request.getContextPath()%>/product/getFile?ano=${attach.ano }';">
+                              <i class="fa-solid fa-download"></i>
+                           </td>
+                        </tr>
+                     </c:forEach>
 						</tbody>
 					</table>
 					</form>

@@ -7,7 +7,7 @@
 
 	<sql id="search">
 		<if test="searchType == 'tcw'.toString() ">
-			and issue_number like '%'||#{keyword}||'%'
+			and issue_title || issue_content || issue_setter_id || issue_getter_id like '%'||#{keyword}||'%'
 		</if>
 		<if test="searchType == 't'.toString() ">
 			and issue_title like '%'||#{keyword}||'%'

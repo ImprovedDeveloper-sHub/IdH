@@ -13,9 +13,22 @@ public class RequireRegistCommand {
 	private String require_setter_id;
 	private String require_getter_id;
 	private int require_business_number;
+	private String require_project;
 	private int require_level;
 	
 	
+	public String getRequire_project() {
+		return require_project;
+	}
+
+
+
+	public void setRequire_project(String require_project) {
+		this.require_project = require_project;
+	}
+
+
+
 	public int getRequire_business_number() {
 		return require_business_number;
 	}
@@ -112,6 +125,7 @@ public class RequireRegistCommand {
 		require.setRequire_getter_id(this.require_getter_id);
 		require.setRequire_business_number(this.require_business_number);
 		require.setRequire_level(this.require_level);
+		require.setRequire_project(this.require_project);
 		
 		return require;
 	}

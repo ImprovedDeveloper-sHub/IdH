@@ -37,9 +37,12 @@ public class WorkreportController {
 //		SearchCriteria cri3 = cri.getNewCri(cri);
 //		SearchCriteria cri4 = cri.getNewCri(cri);
 		mnv.addAllObjects(workreportService.selectMyWorkreportList(cri, request));
-		mnv.addAllObjects(workreportService.selectGetterWorkreportList(cri, request));
-		mnv.addAllObjects(workreportService.selectMyCheckList(cri));
-		mnv.addAllObjects(workreportService.selectGetterCheckList(cri));
+		SearchCriteria cri2 = cri.newCri();
+		mnv.addAllObjects(workreportService.selectGetterWorkreportList(cri2, request));
+		SearchCriteria cri3 = cri.newCri();
+		mnv.addAllObjects(workreportService.selectMyCheckList(cri3));
+		SearchCriteria cri4 = cri.newCri();
+		mnv.addAllObjects(workreportService.selectGetterCheckList(cri4));
 		return mnv;
 	}
 
@@ -50,8 +53,8 @@ public class WorkreportController {
 		return url;
 	}
 
-	@Resource(name = "fileUploadPath")
-	private String fileUploadPath;
+	@Resource(name = "UploadPath")
+	private String UploadPath;
 
 	private List<Workreport_AttachVO> saveFileToWorkreport_Attaches(List<MultipartFile> multiFiles, String savePath) throws Exception {
 		List<Workreport_AttachVO> attachList = new ArrayList<Workreport_AttachVO>();
@@ -80,7 +83,7 @@ public class WorkreportController {
 		String url = "redirect:/workreport/main";
 
 		List<MultipartFile> multiFiles = registReq.getUploadFile();
-		String savePath = this.fileUploadPath;
+		String savePath = this.UploadPath;
 
 		List<Workreport_AttachVO> attachList = saveFileToWorkreport_Attaches(multiFiles, savePath);
 
@@ -100,7 +103,7 @@ public class WorkreportController {
 	}
 
 	@GetMapping("/detail")
-	public ModelAndView detail(int workreport_number, String from, RedirectAttributes rttr, ModelAndView mnv)
+	public ModelAndView detail(int workreport_number, String from, ModelAndView mnv)
 			throws Exception {
 		String url = "/workreport/detail";
 
@@ -152,7 +155,7 @@ public class WorkreportController {
 	public ModelAndView modifyForm(ModelAndView mnv, int workreport_number, RedirectAttributes rttr) throws Exception {
 		String url = "/workreport/modify";
 
-		mnv = detail(workreport_number, "modify", rttr, mnv);
+		mnv = detail(workreport_number, "modify", mnv);
 
 		mnv.setViewName(url);
 		return mnv;
@@ -161,7 +164,7 @@ public class WorkreportController {
 	@PostMapping(value = "/modify", produces = "text/plain;charset=utf-8")
 	public String modifyPOST(WorkreportModifyCommand modifyReq, HttpServletRequest request, RedirectAttributes rttr)
 			throws Exception {
-		String url = "redirect:/workreport/main";
+		String url = "redirect:/workreport/detail";
 
 		// 파일 삭제
 		if (modifyReq.getDeleteFile() != null && modifyReq.getDeleteFile().length > 0) {
@@ -179,13 +182,14 @@ public class WorkreportController {
 		}
 
 		// 파일저장
-		List<Workreport_AttachVO> attachList = saveFileToWorkreport_Attaches(modifyReq.getUploadFile(), fileUploadPath);
+		List<Workreport_AttachVO> attachList = saveFileToWorkreport_Attaches(modifyReq.getUploadFile(), UploadPath);
 
 		WorkreportVO workreport = modifyReq.toWorkreportVO();
 		String XSStitle = (String) request.getAttribute("XSStitle");
-		if (XSStitle != null)
+		if (XSStitle != null) {
 			workreport.setWorkreport_title(XSStitle);
-		workreport.setAttachList(attachList);
+			workreport.setAttachList(attachList);			
+		}
 
 		// DB 저장
 		workreportService.modifyWorkreport(workreport);
@@ -208,5 +212,22 @@ public class WorkreportController {
 
 		return url;
 	}
+	
+	 @PostMapping("/getMyworkreportlist")
+	 public ModelAndView getMyworkreportlist(ModelAndView mnv,SearchCriteria cri,HttpServletRequest request)throws Exception{
+		 mnv.addAllObjects(workreportService.selectMyWorkreportList(cri, request));
+		 mnv.setViewName("/workreport/getMyworkreportlist");
+		 
+		 
+		 return mnv;
+	 }
+	 @PostMapping("/getGetterworkreportlist")
+	 public ModelAndView getGetterworkreportlist(ModelAndView mnv,SearchCriteria cri,HttpServletRequest request)throws Exception{
+		 mnv.addAllObjects(workreportService.selectGetterWorkreportList(cri, request));
+		 mnv.setViewName("/workreport/getGetterworkreportlist");
+		 
+		 
+		 return mnv;
+	 }
 
 }

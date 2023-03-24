@@ -11,9 +11,9 @@
 <div class="content">
 
 	<div class="row">
-		<div class="card-tools"
+		<div class="card-tools col"
 			style="justify-content: space-between; display: flex; flex-direction: row-reverse;">
-			<div class="input-group input-group-sm" style="width: 270px">
+			<div class="input-group input-group-sm" style="width: 300px; padding:2px;">
 				<select class="form-control-sm" name="project_number" id="project_selector" style="hegith:30px; width:100% !important; border-color:#CED4DA !important;">
 							<option value="">전체 프로젝트</option>
 							<c:forEach items="${projectList}" var="project">
@@ -30,7 +30,7 @@
 
 		<!--col-6시작-->
 		<div class="col-6">
-			<div id="content" class="card boarder-info-2">
+			<div id="schedule_content" class="card boarder-info-2" style="height:280px;">
 				<div class="card-header bg-info">
 					<h3 class="card-title">일정관리</h3>
 				</div>
@@ -43,12 +43,12 @@
 							style="hegith: 30px; width: 90px !important; border-color: #CED4DA !important;">
 							<option value="n" ${cri.searchType eq 'n' ? 'selected':'' }>제목</option>
 							<option value="d" ${cri.searchType eq 'd' ? 'selected':'' }>내용</option>
-
-						</select> <input type="text" name="keyword"
+						</select> 
+						<input type="text" name="keyword"
 							class="form-control float-right" placeholder="Search">
 						<div class="input-group-append">
 							<button type="submit" class="btn btn-default"
-								onclick="search_go_ajax(0, '<%=request.getContextPath()%>/projectManage/getProceeding', $('.proceedingThead'),$('#proceedingProject-list-template'))">
+								onclick="print_scheduleList(1,0)">
 								<i class="fas fa-search"></i>
 							</button>
 
@@ -57,7 +57,7 @@
 					</div>
 					<button type="button" class="btn btn-block btn-info btn-sm"
 						style="width: 80px;"
-						onclick="OpenWindow('registScheduleForm','등록',550,590);">등록</button>
+						onclick="OpenWindow('registScheduleForm','등록',550,700);">등록</button>
 
 				</div>
 				<div id="table-content">
@@ -65,8 +65,8 @@
 						<table class="table table-hover">
 							<thead class="proceedingThead" class="text-left">
 								<tr>
-									<th style="width: 10%">일정 상태</th>
-									<th style="width: 30%">일정 이름</th>
+									<th style="width: 15%">일정 상태</th>
+									<th style="width: 35%">일정 이름</th>
 									<th style="width: 15%">일정 구분</th>
 									<th style="width: 15%">프로젝트 명</th>
 									<th style="width: 25%">시작 날짜</th>
@@ -82,7 +82,7 @@
 								</c:if>
 								<c:forEach items="${scheduleList }" var="schedule">
 									<tr
-										onclick="OpenWindow('scheduleDetail?schedule_number=${schedule.schedule_number}','스케줄',500,550);">
+										onclick="OpenWindow('scheduleDetail?schedule_number=${schedule.schedule_number}','스케줄',500,600);">
 										<td
 											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
 											${schedule.schedule_status eq 1 ? '계획' : '진행'}</td>
@@ -105,13 +105,45 @@
 							</tbody>
 
 						</table>
+						<div><nav id="paginationNav" aria-label="Navigation">
+		<ul class="pagination justify-content-center m-0">
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_scheduleList(1);">
+					<i class="fas fa-angle-double-left"></i>
+				</a>
+			</li>
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_scheduleList(${pageMaker.prev ? pageMaker.startPage-1 : pageMaker.cri.page},${project_num});">
+					<i class="fas fa-angle-left"></i>
+				</a>						
+			</li>
+			<c:forEach var="pageNum" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
+	
+			<li class="page-item ${pageMaker.cri.page == pageNum?'active':''}">
+				<a class="page-link" href="javascript:print_scheduleList('${pageNum}',${project_num} );" >${pageNum }</a>
+			</li>
+			</c:forEach>
+			
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_scheduleList(${pageMaker.next ? pageMaker.endPage+1 :pageMaker.cri.page}, ${project_num});">
+					<i class="fas fa-angle-right" ></i>
+				</a>
+			</li>
+			
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_scheduleList('${pageMaker.realEndPage}',${project_num});">
+					<i class="fas fa-angle-double-right"></i>
+				</a>
+			</li>	
+		</ul>
+	</nav></div>
 					</div>
 
 
 				</div>
 			</div>
 
-			<div id="content" class="card">
+			<div id="budget_content" class="card" style="height:280px;">
 				<div class="card-header bg-info">
 					<h3 class="card-title">예산 관리</h3>
 				</div>
@@ -129,7 +161,7 @@
 							class="form-control float-right" placeholder="Search">
 						<div class="input-group-append">
 							<button type="submit" class="btn btn-default"
-								onclick="search_go_ajax(0, '<%=request.getContextPath()%>/projectManage/getEnd', $('.endThead'),$('#endProject-list-template'))">
+								onclick="print_budgetList(1,0)">
 								<i class="fas fa-search"></i>
 							</button>
 
@@ -138,7 +170,7 @@
 					</div>
 					<button type="button" class="btn btn-block btn-info btn-sm"
 						style="width: 80px;"
-						onclick="OpenWindow('registBudgetForm','등록',500,600);">등록</button>
+						onclick="OpenWindow('registBudgetForm','등록',500,700);">등록</button>
 
 				</div>
 				<div id="table-content">
@@ -149,8 +181,8 @@
 									<th style="width: 20%">예산 상태</th>
 									<th style="width: 30%">예산 이름</th>
 									<th style="width: 20%">예산 구분</th>
+									<th style="width: 15%">프로젝트 명</th>
 									<th style="width: 15%">예산 금액</th>
-									<th style="width: 15%">프로젝트 이름</th>
 								</tr>
 							</thead>
 
@@ -162,18 +194,56 @@
 								</c:if>
 								<c:forEach items="${budgetList }" var="budget">
 									<tr
-										onclick="OpenWindow('budgetDetail?budget_number=${budget.budget_number}','예산',500,600);">
+										onclick="OpenWindow('budgetDetail?budget_number=${budget.budget_number}','예산',500,500);">
 										<td>${budget.budget_status eq 1 ? '계획' : '진행'}</td>
 										<td>${budget.budget_name}</td>
 										 <td>${budget.budget_type eq '1' ? '인건비' : ''}${budget.budget_type eq '2' ? '교통비' : ''}${budget.budget_type eq '3' ? '비품비' : ''}${budget.budget_type eq '4' ? '식대' : ''}</td> 
+										<td>${budget.budget_project_name}</td>
 										<td><fmt:formatNumber value="${budget.budget_price}"
 												pattern="#,###" /></td>
-										<td>${budget.budget_project_name}</td>
 									</tr>
 								</c:forEach>
 							</tbody>
 
 						</table>
+						<div>
+						 		<nav id="paginationNav" aria-label="Navigation">
+		<ul class="pagination justify-content-center m-0">
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_budgetList(1,'${project_num}');">
+					<i class="fas fa-angle-double-left"></i>
+				</a>
+			</li>
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_budgetList(${pageMaker.prev ? pageMaker.startPage-1 : pageMaker.cri.page});">
+					<i class="fas fa-angle-left"></i>
+				</a>						
+			</li>
+			<c:forEach var="pageNum" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
+	
+			<li class="page-item ${pageMaker.cri.page == pageNum?'active':''}">
+				<a class="page-link" href="javascript:print_budgetList('${pageNum}','${project_num}');" >${pageNum }</a>
+			</li>
+			</c:forEach>
+			
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_budgetList(${pageMaker.next ? pageMaker.endPage+1 :pageMaker.cri.page},'${project_num}');">
+					<i class="fas fa-angle-right" ></i>
+				</a>
+			</li>
+			
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_budgetList('${pageMaker.realEndPage}','${project_num}');">
+					<i class="fas fa-angle-double-right"></i>
+				</a>
+			</li>	
+		</ul>
+	</nav>
+	
+						 
+						 
+						 
+						 </div>
 					</div>
 
 
@@ -187,7 +257,7 @@
 		</div>
 
 		<div class="col-6">
-			<div id="content" class="card">
+			<div id="workforce_content" class="card" style="height:280px;">
 				<div class="card-header bg-info">
 					<h3 class="card-title">인력 프로젝트</h3>
 				</div>
@@ -205,7 +275,7 @@
 							class="form-control float-right" placeholder="Search">
 						<div class="input-group-append">
 							<button type="submit" class="btn btn-default"
-								onclick="search_go_ajax(0, '<%=request.getContextPath()%>/projectManage/getProceeding', $('.proceedingThead'),$('#proceedingProject-list-template'))">
+								onclick="print_workforceList(1,0)">
 								<i class="fas fa-search"></i>
 							</button>
 
@@ -214,18 +284,19 @@
 					</div>
 					<button type="button" class="btn btn-block btn-info btn-sm"
 						style="width: 80px;"
-						onclick="OpenWindow('registWorkforceForm','등록',500,600);">등록</button>
+						onclick="OpenWindow('registWorkforceForm','등록',500,700);">등록</button>
 				</div>
 				<div id="table-content">
 					<div class="card-body table-responsive p-0">
 						<table class="table table-hover">
 							<thead class="proceedingThead" class="text-left">
 								<tr>
-									<th style="width: 20%">인력 이름</th>
-									<th style="width: 30%">인력 상태</th>
-									<th style="width: 20%">인력 날짜</th>
-									<th style="width: 15%">요구사항</th>
-									<th style="width: 15%">설명</th>
+									<th style="width: 15%">인력 상태</th>
+									<th style="width: 15%; text-align: center;" >이름</th>
+									<th style="width: 30%">인력 이름</th>
+									<th style="width: 15%">인력 구분</th>
+									<th style="width: 15%">시작 날짜</th>
+									<th style="width: 15%">종료 날짜</th>
 								</tr>
 							</thead>
 
@@ -237,31 +308,66 @@
 								</c:if>
 								<c:forEach items="${workforceList }" var="workforce">
 									<tr
-										onclick="OpenWindow('workforceDetail?workforce_number=${workforce.workforce_number}','인력',580,800);">
+										onclick="OpenWindow('workforceDetail?workforce_number=${workforce.workforce_number}','인력',580,480);">
+										<td
+											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+											${schedule.schedule_status eq 1 ? '계획' : '진행'}</td>
+										<td
+											style="text-align: center; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workforce.workforce_member_id}</td>
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workforce.workforce_name}</td>
 										<td
-											style="text-align: left; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workforce.workforce_status}</td>
+											style="text-align: left; max-width: 30%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${workforce.workforce_type eq '1' ? 'PM':''}${workforce.workforce_type eq '2' ? 'PL':''}${workforce.workforce_type eq '3' ? 'DA':''}${workforce.workforce_type eq '4' ? 'TA':''}${workforce.workforce_type eq '5' ? 'AA':''}${workforce.workforce_type eq '6' ? 'BA':''}</td>
 										<td
 											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
-												value="${workforce.workforce_regdate}" pattern="yyyy-MM-dd" /></td>
+												value="${workforce.workforce_startdate}" pattern="yyyy-MM-dd" /></td>
 										<td
-											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">test</td>
-										<td
-											style="text-align: left; max-width: 15%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-											${workforce.workforce_detail}</td>
+											style="text-align: left; max-width: 20%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
+												value="${workforce.workforce_enddate}" pattern="yyyy-MM-dd" /></td>
 									</tr>
 								</c:forEach>
 							</tbody>
 
 						</table>
+						<div><nav id="paginationNav" aria-label="Navigation">
+		<ul class="pagination justify-content-center m-0">
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_workforceList(1);">
+					<i class="fas fa-angle-double-left"></i>
+				</a>
+			</li>
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_workforceList(${pageMaker.prev ? pageMaker.startPage-1 : pageMaker.cri.page},${project_num});">
+					<i class="fas fa-angle-left"></i>
+				</a>						
+			</li>
+			<c:forEach var="pageNum" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
+	
+			<li class="page-item ${pageMaker.cri.page == pageNum?'active':''}">
+				<a class="page-link" href="javascript:print_workforceList('${pageNum}',${project_num});" >${pageNum }</a>
+			</li>
+			</c:forEach>
+			
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_workforceList(${pageMaker.next ? pageMaker.endPage+1 :pageMaker.cri.page},${project_num});">
+					<i class="fas fa-angle-right" ></i>
+				</a>
+			</li>
+			
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_workforceList('${pageMaker.realEndPage},${project_num} ');">
+					<i class="fas fa-angle-double-right"></i>
+				</a>
+			</li>	
+		</ul>
+	</nav></div>
 					</div>
 
 
 				</div>
 			</div>
 
-			<div id="content" class="card">
+			<div id="unitwork_content" class="card" style="height:280px;">
 				<div class="card-header bg-info">
 					<h3 class="card-title">단위업무</h3>
 				</div>
@@ -279,7 +385,7 @@
 							class="form-control float-right" placeholder="Search">
 						<div class="input-group-append">
 							<button type="submit" class="btn btn-default"
-								onclick="search_go_ajax(0, '<%=request.getContextPath()%>/projectManage/getEnd', $('.endThead'),$('#endProject-list-template'))">
+								onclick="print_unitworkList(1,0)">
 								<i class="fas fa-search"></i>
 							</button>
 
@@ -288,7 +394,7 @@
 					</div>
 					<button type="button" class="btn btn-block btn-info btn-sm"
 						style="width: 80px;"
-						onclick="OpenWindow('registUnitworkForm','등록',500,600);">등록</button>
+						onclick="OpenWindow('registUnitworkForm','등록',500,700);">등록</button>
 				</div>
 
 				<div id="table-content">
@@ -296,12 +402,12 @@
 						<table class="table table-hover">
 							<thead class="unitworkThead" class="text-left">
 								<tr>
+									<th style="width: 15%">프로젝트 상태</th>
 									<th style="width: 20%">업무명</th>
-									<th style="width: 15%">상태</th>
-									<th style="width: 15%">작성자</th>
-									<th style="width: 20%">시작날짜</th>
+									<th style="width: 15%">세부 상태</th>
+									<th style="width: 10%">작성자</th>
+									<th style="width: 15%">시작날짜</th>
 									<th style="width: 15%">종료날짜</th>
-									<th style="width: 15%">설명</th>
 								</tr>
 							</thead>
 
@@ -313,20 +419,57 @@
 								</c:if>
 								<c:forEach items="${unitworkList }" var="unitwork">
 									<tr
-										onclick="OpenWindow('unitworkDetail?unitwork_number=${unitwork.unitwork_number}','단위업무',580,800);">
+										onclick="OpenWindow('unitworkDetail?unitwork_number=${unitwork.unitwork_number}','단위업무',580,600);">
+										<td>${unitwork.unitwork_status eq 1 ? '계획' : '진행'}</td>
 										<td>${unitwork.unitwork_name}</td>
-										<td>${unitwork.unitwork_level}</td>
+										<td>${unitwork.unitwork_level eq 1 ? '진행' : ''}${unitwork.unitwork_level eq 2 ? '지연' : ''}${unitwork.unitwork_level eq 3 ? '예정' : ''}${unitwork.unitwork_level eq 4 ? '지연2' : ''}${unitwork.unitwork_level eq 5 ? '완료' : ''}</td>
 										<td>${unitwork.unitwork_setter_id}</td>
 										<td><fmt:formatDate pattern="yyyy-MM-dd"
 												value="${unitwork.unitwork_startdate}" /></td>
 										<td><fmt:formatDate pattern="yyyy-MM-dd"
 												value="${unitwork.unitwork_enddate}" /></td>
-										<td>${unitwork.unitwork_detail}</td>
 									</tr>
 								</c:forEach>
 							</tbody>
 
 						</table>
+						<div>
+								<nav id="paginationNav" aria-label="Navigation">
+		<ul class="pagination justify-content-center m-0">
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_unitworkList(1);">
+					<i class="fas fa-angle-double-left"></i>
+				</a>
+			</li>
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_unitworkList(${pageMaker.prev ? pageMaker.startPage-1 : pageMaker.cri.page},${project_num});">
+					<i class="fas fa-angle-left"></i>
+				</a>						
+			</li>
+			<c:forEach var="pageNum" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
+	
+			<li class="page-item ${pageMaker.cri.page == pageNum?'active':''}">
+				<a class="page-link" href="javascript:print_unitworkList('${pageNum}',${project_num});" >${pageNum }</a>
+			</li>
+			</c:forEach>
+			
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_unitworkList(${pageMaker.next ? pageMaker.endPage+1 :pageMaker.cri.page},${project_num});">
+					<i class="fas fa-angle-right" ></i>
+				</a>
+			</li>
+			
+			<li class="page-item">
+				<a class="page-link" href="javascript:print_unitworkList('${pageMaker.realEndPage}',${project_num});">
+					<i class="fas fa-angle-double-right"></i>
+				</a>
+			</li>	
+		</ul>
+	</nav>
+	
+	
+
+						</div>
 					</div>
 
 
@@ -345,55 +488,187 @@
 		<br />
 	</div>
 	<%@ include file="./ajax_list_js.jsp"%>
-	<%@ include file="/WEB-INF/module/pagination.jsp"%>
+	
 </div>
 
 
 <!--row종료-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
-<script type="text/x-handlebars-template"  id="budget-plan-list-template" >
-</script>
+
 
 <script>
+
+
 	window.onload = function() {
 		//프로젝트 셀렉트
-		$(function() {
 		    $("#project_selector").on("change", function() {
-		        var project_number = $('#project_selector').val();
-		       //alert("셀렉트값 : "+project_number);
-		       $.ajax({
-		    	    url:"getManage?project_number="+ project_number,
-		    	    type:"GET",
-		    	    success:function(data){
-		    	    	/* alert(JSON.stringify(data));
-		    	    	console.log(data); */
-		    	    	console.log(JSON.stringify(data));
-		    	    },
-		       		error:function(error){
-		       			alert('error');
-		       		}
-		       })
+		       var project_num = $('#project_selector').val();
+		       //alert(project_num);
+		       if(!project_num){
+		    	   location.reload();
+		    	   return;
+		    	   }
+		       
+		       
+		       
+		       print_budgetList(1,project_num);
+		       print_scheduleList(1,project_num);
+		       print_unitworkList(1,project_num);
+		       print_workforceList(1,project_num);
 		    });
-		});
-	};
+		
+		
+		
+		
+		    
+	}
 </script>
 
 
 <script>
-
-function printPlan(data,target, templateObject){
-	var planTemplate=Handlebars.compile(templateObject.html());
-	//alert(JSON.stringify(data));
-	var plan_html = planTemplate(data);
-	//delTarget.remove();
-	//alert(html);
-	target.html("").html(plan_html);
+function print_budgetList(page,project_num){
+	var jobForm=$('#manageForm');
+	
+	//jobForm.find("[name='project_number']").val(project_num.trim());
+	//console.log(jobForm.find("[name='project_number']").val());
+	jobForm.find("[name='page']").val(page);
+	jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
+	jobForm.find("[name='searchType']").val($('select[name="searchType"]').val());
+	jobForm.find("[name='keyword']").val('select[name="keyword"]');
+	jobForm.find("[name='project_number']").val(project_num);
+	$.ajax({
+	    url:'budgetList',
+	    data: jobForm.serialize(),
+	    type:"POST",
+	    success:function(data){
+	    	$('#budget_content').html("").html(data);
+	    },
+   		error:function(error){
+   			alert('error');
+   		}
+   })
 }
+
+
+function print_scheduleList(page,project_num){
+	var jobForm=$('#manageForm');
+	//jobForm.find("[name='project_number']").val(project_num.trim());
+	//console.log(jobForm.find("[name='project_number']").val());
+	jobForm.find("[name='page']").val(page);
+	jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
+	jobForm.find("[name='searchType']").val($('select[name="searchType"]').val());
+	jobForm.find("[name='keyword']").val('select[name="keyword"]');
+	jobForm.find("[name='project_number']").val(project_num);
+	$.ajax({
+	    url:'scheduleList',
+	    data: jobForm.serialize(),
+	    type:"POST",
+	    success:function(data){
+	    	$('#schedule_content').html("").html(data);
+	    },
+   		error:function(error){
+   			alert('error');
+   		}
+   })
+}
+
+
+function print_unitworkList(page,project_num){
+	var jobForm=$('#manageForm');
+	//jobForm.find("[name='project_number']").val(project_num.trim());
+	//console.log(jobForm.find("[name='project_number']").val());
+	jobForm.find("[name='page']").val(page);
+	jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
+	jobForm.find("[name='searchType']").val($('select[name="searchType"]').val());
+	jobForm.find("[name='keyword']").val('select[name="keyword"]');
+	jobForm.find("[name='project_number']").val(project_num);
+	$.ajax({
+	    url:'unitworkList',
+	    data: jobForm.serialize(),
+	    type:"POST",
+	    success:function(data){
+	    	$('#unitwork_content').html("").html(data);
+	    },
+   		error:function(error){
+   			alert('error');
+   		}
+   })
+}
+
+
+function print_workforceList(page,project_num){
+	var jobForm=$('#manageForm');
+	//jobForm.find("[name='project_number']").val(project_num.trim());
+	//console.log(jobForm.find("[name='project_number']").val());
+	jobForm.find("[name='page']").val(page);
+	jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
+	jobForm.find("[name='searchType']").val($('select[name="searchType"]').val());
+	jobForm.find("[name='keyword']").val('select[name="keyword"]');
+	jobForm.find("[name='project_number']").val(project_num);
+	$.ajax({
+	    url:'workforceList',
+	    data: jobForm.serialize(),
+	    type:"POST",
+	    success:function(data){
+	    	$('#workforce_content').html("").html(data);
+	    },
+   		error:function(error){
+   			
+   			alert('error');
+   		}
+   })
+}
+
+
+
+
+
+
 </script>
 
 
 
 
+ 
+  </script>
+  
+  <c:if test="${from eq 'regist' }">
+  <script>
+	  	//alert('test');
+	  	window.close();
+	  	window.opener.location.reload();
+  </script>
+  
+</c:if>
+
+<c:if test="${from eq 'delete' }">
+<script>
+	alert('삭제되었습니다.');
+	window.close();
+	window.opener.location.reload();
+</script>
+
+</c:if>
+
+ 
+
+  
+  <c:if test="${from eq 'regist' }">
+  <script>
+	  	//alert('test');
+	  	window.close();
+	  	window.opener.location.reload();
+  </script>
+  
+</c:if>
+
+<c:if test="${from eq 'delete' }">
+<script>
+	alert('삭제되었습니다.');
+	window.close();
+	window.opener.location.reload();
+</script>
+
+</c:if>
 
 
 

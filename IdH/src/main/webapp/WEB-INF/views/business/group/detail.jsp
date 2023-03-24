@@ -168,7 +168,7 @@
 		
 	</div>
 	
-	<div class="card-tool"" style="margin-left: 1140px">
+	<div class="card-tool" style="margin-left: 1140px">
 		<%-- <button type="button" id="modifyBtn" class="btn btn-info" onclick="location.href='modifyForm?business_number=${business.business_number}';">수정</button> --%>
 	   	<button type="button" id="listBtn" class="btn btn-info" onclick="location.href='main';">목록</button>
 	</div>

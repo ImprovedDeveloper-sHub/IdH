@@ -47,6 +47,42 @@
 	font-size: 13px;
 	color: #64697a;
 }
+
+ul, li {
+	list-style: none;
+}
+
+.faq-box {
+	border: 2px solid black;
+	background-color: #343434;;
+	color: white;
+	padding: 5px 0;
+	font-size:14px;
+}
+
+.faq-box__question {
+	cursor: pointer;
+}
+
+.faq-box__question::after {
+	content: "[+]";
+	float: right;
+}
+
+
+.faq-box>ul>li.hover>.faq-box__question::after {
+	content: "[-]";
+}
+
+.faq-box__answer {
+	display: none;
+	background-color: #565656;
+	border-radius: 10px;
+}
+
+.faq-box>ul>li.hover>.faq-box__answer {
+	display: block;
+}
 </style>
 
 <!-- CSS end -->
@@ -55,7 +91,7 @@
 	<!-- 사업 일정 상세 정보 -->
 	<div class="col-12" style="height: 100%;">
 		<div class="card card-info">
-			<div class="card-header">
+			<div class="card-header bg-info">
 				<h3 class="card-title">이슈등록</h3>
 				<div class="card-tools">
 					<div class="input-group input-group-sm" style="width: 150px;">
@@ -63,8 +99,8 @@
 					</div>
 				</div>
 			</div>
-			<div id="content">
-				<div id="table-content">
+			<div id="content" style="margin: 0 !important;">
+				<div id="table-content" style="margin: 0 !important;">
 					<table>
 						<thead>
 							<tr>
@@ -81,7 +117,15 @@
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">수준</td>
-								<td class="table-td">${issue.issue_level }</td>
+								<c:if test="${issue.issue_level eq 1 }">
+									<td class="table-td">하</td>
+								</c:if>
+								<c:if test="${issue.issue_level eq 2 }">
+									<td class="table-td">중</td>
+								</c:if>
+								<c:if test="${issue.issue_level eq 3 }">
+									<td class="table-td">상</td>
+								</c:if>
 							</tr>
 							<tr>
 								<td class="name-td">등록자</td>
@@ -106,7 +150,7 @@
 							</tr>
 							<tr style="height: 130px;">
 								<td class="name-td">내용</td>
-								<td class="table-td" colspan="5" style="height: 250px;">${issue.issue_title }</td>
+								<td class="table-td" colspan="5" style="height: 250px;">${issue.issue_content }</td>
 							</tr>
 
 							<tr>
@@ -118,10 +162,35 @@
 								<td class="table-td"><fmt:formatDate
 										value="${issue.issue_regdate}" pattern="yyyy-MM-dd" /></td>
 							</tr>
+							<c:forEach items="${issue.attachList }" var="attach">
+								<tr>
+									<td class="name-td">첨부파일</td>
+									<td class="table-td">${attach.fileName }</td>
+									<td class="table-td"></td>
+									<td class="table-td"></td>
+									<td class="table-td"><fmt:formatDate
+											value="${attach.regDate }" pattern="yyyy-MM-dd" /></td>
+									<td class="table-td" class="attach-box"
+										style="cursor: pointer;"
+										onclick="location.href='<%=request.getContextPath()%>/issue/getFile?ano=${attach.ano }';">
+										<i class="fa-solid fa-download"></i>
+									</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
+
+
+
+
+
+
 				</div>
 			</div>
+
+
+
+
 			<div class="card-tools" style="margin-left: auto">
 				<button type="button" id="modifyBtn" class="btn btn-info"
 					onclick="submit_go('modifyForm','${issue.issue_number }');">수정</button>
@@ -130,9 +199,95 @@
 				<button type="button" id="listBtn" class="btn btn-info"
 					onclick="CloseWindow();">닫기</button>
 			</div>
+
 		</div>
 	</div>
 </div>
+
+  <!-- Reply content -->
+    <section class="content container-fluid">
+    	<!-- reply component start --> 
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card card-info">					
+					<div class="card-body">
+						<!-- The time line -->
+						<div class="timeline">
+							<!-- timeline time label -->
+							<div class="time-label" id="repliesDiv">
+								<span class="bg-info">대안 </span>							
+							</div>
+							
+							
+						</div>
+						<div class='text-center'>
+							<ul id="pagination" class="pagination justify-content-center m-0" >
+								
+							</ul>
+						</div>
+					</div>
+					<div class="card-footer">
+						<label for="newReplyText">대안 제시</label>
+						<input class="form-control" type="text"	placeholder="REPLY TEXT" id="newReplyText"/>						
+						<br/>
+						<button type="button" class="btn btn-info" id="replyAddBtn" onclick="replyRegist_go();">ADD REPLY</button>
+					</div>				
+				</div>			
+				
+			</div><!-- end col-md-12 -->
+		</div><!-- end row -->
+    </section>
+  </div>
+  <!-- /.content-wrapper -->
+
+<!-- Modal -->
+<div id="modifyModal" class="modal modal-default fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" style="display:none;"></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>        
+      </div>
+      <div class="modal-body" data-rno>
+        <p><input type="text" id="replytext" class="form-control"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" id="replyModBtn" onclick="replyModify_go();">Modify</button>
+        <button type="button" class="btn btn-info" id="replyDelBtn" onclick="replyRemove_go();">DELETE</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<form role="form">
+	<input type="hidden" name="bno" value="${issue.issue_number }" />
+</form>
+
+<script>
+	function modify_go() {
+		var formObj = $("form[role='form']");
+		formObj.attr({
+			'action' : 'modifyForm.do',
+			'method' : 'get'
+		});
+		formObj.submit();
+	}
+	function remove_go() {
+		var formObj = $("form[role='form']");
+		var answer = confirm("정말 삭제하시겠습니까?");
+		if (answer) {
+			formObj.attr("action", "remove");
+			formObj.attr("method", "post");
+			formObj.submit();
+		}
+	}
+</script>
+
+
+
 <script>
 	function submit_go(url, issue_number) {
 		location.href = url + "?issue_number=" + issue_number;
@@ -146,5 +301,54 @@
 	</script>
 </c:if>
 
+
+<script>
+	function FaqBox__init() {
+		$('.faq-box > ul > li')
+				.click(
+						function() {
+							let $this = $(this);
+
+							$this.siblings('.hover')
+									.find(' > .faq-box__answer').stop()
+									.slideUp(300); // 추가
+							$this.siblings('.hover').removeClass('hover');
+
+							if ($this.hasClass('hover')) {
+								$this.find(' > .faq-box__answer').stop()
+										.slideUp(300); // 추가
+								$this.removeClass('hover');
+							} else {
+								$this.find(' > .faq-box__answer').stop()
+										.slideDown(300); // 추가
+								$this.addClass('hover');
+							}
+						});
+
+		$('.faq-box__answer').click(function() {
+			return false;
+		});
+	}
+
+	FaqBox__init();
+</script>
+
+
+
+<!-- <script>
+	function change(li){
+		li.siblings('.hover').removeClass('hover');
+
+		if (li.hasClass('hover')) {
+			li.removeClass('hover');
+		} else {
+			li.addClass('hover');
+		}
+		
+	}
+</script> -->
+
+
+<%@ include file="./reply_js.jsp"%>
 
 

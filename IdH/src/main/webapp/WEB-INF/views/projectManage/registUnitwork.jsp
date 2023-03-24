@@ -71,7 +71,7 @@ input {
 	<!-- 사업 단위업무 상세 정보 -->
 	<div class="col">
 		<div class="card card-info">
-			<div class="card-header">
+			<div class="card-header bg-info">
 				<h3 class="card-title">단위업무등록</h3>
 				<div class="card-tools">
 					<div class="input-group input-group-sm" style="width: 150px;">
@@ -81,6 +81,9 @@ input {
 			</div>
 			<div id="content">
 				<form enctype="multiaprt/form-data" role="form" method="post" action="registUnitwork" name="registSchdeulForm">
+				<input type="hidden" name="unitwork_status" value="2">
+				
+				<input type="hidden" name="unitwork_project_number" value="1">
 				<div id="table-content">
 					<table>
 						<thead>
@@ -94,14 +97,10 @@ input {
 						<tbody>
 							<tr>
 								<td class="name-td">등록자</td>
-								<td class="table-td" colspan="3" ><input type="text" name="unitwork_member_id" value="${loginUser.member_id}" readonly></td>
-								<td class="name-td">타입</td>
-								<td class="table-td"><select name ="unitwork_level">
-													<option value="1">기획</option>
-													<option value="2">설계</option>
-													<option value="3">구현</option>
-													<option value="4">테스트</option>
-									</select></td>
+								<td class="table-td" colspan="3" ><input type="text" name="unitwork_setter_id" value="${loginUser.member_id}" readonly></td>
+								<td class="name-td">할당자</td>
+								<td class="table-td" colspan="3" ><input type="text" name="unitwork_getter_id" value=""></td>
+								
 							</tr>
 							<tr>
 								<td class="name-td">시작날짜</td>
@@ -112,7 +111,14 @@ input {
 							</tr>
 							<tr>
 								<td class="name-td">제목</td>
-								<td colspan="5"><input type="text" name="unitwork_name" placeholder="제목을 입력하여 주세요." /></td>
+								<td colspan="3"><input type="text" name="unitwork_name" placeholder="제목을 입력하여 주세요." /></td>
+								<td class="name-td">타입</td>
+								<td class="table-td"><select name ="unitwork_level">
+													<option value="1">진행중</option>
+													<option value="2">지연</option>
+													<option value="3">예정</option>
+													<option value="4">완료</option>
+									</select></td>
 							</tr>
 							<tr style="height: 100px;">
 								<td class="name-td">내용</td>

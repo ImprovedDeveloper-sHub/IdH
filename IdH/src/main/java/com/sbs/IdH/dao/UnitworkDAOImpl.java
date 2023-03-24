@@ -90,5 +90,11 @@ public class UnitworkDAOImpl implements UnitworkDAO{
 		colMap.put("v",unitwork_count);
 		return colMap;
 	}
+	
+	@Override
+	public int selectUnitworkCount(SearchCriteria cri) throws SQLException {
+		int unitwork_count = session.selectOne("Unitwork-Mapper.selectSearchUnitworkListCount", cri);
+		return unitwork_count;
+	}
 
 }

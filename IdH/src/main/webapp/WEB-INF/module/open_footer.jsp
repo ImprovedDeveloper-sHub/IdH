@@ -8,13 +8,23 @@
 
 
 <form id="jobForm">	
-	<input type='hidden' name="page" value="" />
+	<input type='hidden' name="page" value="1" />
 	<input type='hidden' name="perPageNum" value="10"/>
 	<input type='hidden' name="searchType" value="" />
 	<input type='hidden' name="keyword" value="" />
 	<!-- <input type='hidden' name="status" value="" /> -->
 </form>
 <!-- REQUIRED SCRIPTS -->
+
+
+<form id="manageForm">	
+	<input type='hidden' name="page" value="1" />
+	<input type='hidden' name="perPageNum" value="10"/>
+	<input type='hidden' name="searchType" value="" />
+	<input type='hidden' name="keyword" value="" />
+	<input type='hidden' name="project_number" value="" />
+	<!-- <input type='hidden' name="status" value="" /> -->
+</form>
 
 
 <!-- jQuery -->

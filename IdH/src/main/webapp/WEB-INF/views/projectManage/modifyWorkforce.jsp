@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
+  
 <!-- CSS start -->
 
 <style>
@@ -10,6 +11,7 @@ body{
 	width:100%;
 	height:100%;
 }
+
 #content {
 	background: #eaedf2;
 	position: relative;
@@ -69,8 +71,8 @@ input {
 	<!-- 사업 일정 상세 정보 -->
 	<div class="col">
 		<div class="card card-info">
-			<div class="card-header">
-				<h3 class="card-title">이슈등록</h3>
+			<div class="card-header bg-info">
+				<h3 class="card-title">인력수정</h3>
 				<div class="card-tools">
 					<div class="input-group input-group-sm" style="width: 150px;">
 						<div class="input-group-append"></div>
@@ -78,6 +80,9 @@ input {
 				</div>
 			</div>
 			<div id="content">
+				<form enctype="multiaprt/form-data" role="form" method="post" action="modifyWorkforce" name="modifyWorkforceForm">
+				<input type="hidden" name="workforce_status" value="2">
+				<input type="hidden" name="workforce_number" value="${workforce.workforce_number }"/>
 				<div id="table-content">
 					<table>
 						<thead>
@@ -90,42 +95,49 @@ input {
 						</thead>
 						<tbody>
 							<tr>
-								<td class="name-td">글번호</td>
-								<td class="table-td">1</td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
-								<td class="name-td">수준</td>
-								<td class="table-td">보통</td>
-							</tr>
-							<tr>
 								<td class="name-td">등록자</td>
-								<td class="table-td">허민호</td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
-								<td class="name-td">할당자</td>
-								<td colspan="5"><input type="text"
-									placeholder="할당자를 입력하세요." /></td>
+								<td class="table-td" colspan="3" ><input type="text" name="workforce_member_id" value="${workforce.workforce_member_id}" readonly></td>
+								<td class="name-td">분류</td>
+								<td class="table-td"><select name ="workforce_type">
+													<option value="2" ${workforce.workforce_type eq 2 ? 'selected' : '' }>PL</option>
+													<option value="3" ${workforce.workforce_type eq 3 ? 'selected' : '' }>DA</option>
+													<option value="4" ${workforce.workforce_type eq 4 ? 'selected' : '' }>TA</option>
+													<option value="5" ${workforce.workforce_type eq 5 ? 'selected' : '' }>AA</option>
+													<option value="6" ${workforce.workforce_type eq 6 ? 'selected' : '' }>BA</option>
+									</select></td>
 							</tr>
 							<tr>
 								<td class="name-td">제목</td>
-								<td colspan="5"><input type="text"
-									placeholder="제목을 입력하여 주세요." /></td>
+								<td colspan="5"><input type="text" name="workforce_name" value=${workforce.workforce_name }
+									 /></td>
+							</tr>
+							<tr>
+								<td class="name-td">시작날짜</td>
+								<td class="table-td" colspan="3"><fmt:formatDate value="${workforce.workforce_startdate }" pattern ="yyyy-MM-dd"/></td>
+								<td class="name-td">종료날짜</td>
+								<td class="table-td" colspan="3"><input class="datepicker" name="workforce_enddate" value="<fmt:formatDate value="${workforce.workforce_enddate }" pattern ="yyyy/MM/dd"/>"></td>
+								
 							</tr>
 							<tr style="height: 100px;">
 								<td class="name-td">내용</td>
-								<td class="table-td td-summernote" colspan="5"><textarea class="summernote" rows="15" cols="40" style="display:none;"></textarea></td>
+								<td class="table-td td-summernote" colspan="5"><textarea class="summernote" rows="15" cols="40" style="display:none;" name="workforce_detail">${workforce.workforce_detail }</textarea></td>
 							</tr>
 
 							<tr>
 								<td class="name-td">프로젝트명</td>
-								<td class="table-td">스타벅스</td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
-								<td class="name-td">등록일</td>
-								<td class="table-td">2023.03.07.</td>
+								<td class="table-td">${workforce.workforce_project_number }<select>
+									</select></td>
 							</tr>
 						</tbody>
 					</table>
+				</div>
+				</form>
+			</div>
+			<div class="card-tools" style="margin-left:auto">
+            <button type="button" id="regbtn" class="btn btn-info"
+               onclick="modify_go();">수정</button>
+            <button type="button" id="close" class="btn btn-info"
+               onclick="CloseWindow();">취소</button>
 				</div>
 			</div>
 		</div>
@@ -134,5 +146,18 @@ input {
 <script>
 	window.onload = function() {
 		summernote_go($('.summernote'),'<%=request.getContextPath()%>');
+		$('.datepicker').datepicker();
 	};
+	
+	function modify_go(){
+		//var form = $('form[name="registSchdeulForm"]')[0];
+			var form = document.modifyWorkforceForm;
+			/* if(form.workforce_name.value==""){
+				alert("제목은 필수입니다.");
+				return;
+			}
+			 */
+			form.submit();
+		}
 </script>
+

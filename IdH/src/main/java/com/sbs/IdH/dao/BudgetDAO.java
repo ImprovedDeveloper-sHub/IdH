@@ -31,5 +31,7 @@ public interface BudgetDAO {
 	void deleteBudget(int budget_number) throws SQLException;
 	
 	Map<String,Object> selectBudgetPriceForChart(SearchCriteria cri)throws SQLException;
+
+	int selectBudgetCount(SearchCriteria cri) throws SQLException;
 	
 }

@@ -40,4 +40,13 @@ public class Issue_AttachDAOImpl implements Issue_AttachDAO{
 	public void deleteAllIssue_Attach(int issue_number) throws SQLException {
 		session.update("Issue_Attach-Mapper.deleteAllIssue_Attach",issue_number);		
 	}
+
+	@Override
+	public int selectIssue_AttachSeqNext() throws SQLException {
+		int ano = session.selectOne("Issue_Attach-Mapper.selectIssue_AttachSeqNext");
+		return ano;
+		
+	}
+	
+	
 }

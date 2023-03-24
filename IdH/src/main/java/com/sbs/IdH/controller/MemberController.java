@@ -51,7 +51,7 @@ public class MemberController {
 			url = "redirect:/loginForm";
 			
 			rttr.addFlashAttribute("message",e.getMessage());
-			rttr.addFlashAttribute("member_id", member_id);
+			//rttr.addFlashAttribute("member_id", member_id);
 		} 
 		return url;
 	}

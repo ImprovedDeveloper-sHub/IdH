@@ -32,4 +32,6 @@ public interface UnitworkDAO {
 	void deleteUnitwork(int unitwork_number) throws SQLException;
 	
 	Map<String,Object> selectUnitworkCountForChart(SearchCriteria cri)throws SQLException;
+
+	int selectUnitworkCount(SearchCriteria cri) throws SQLException;
 }

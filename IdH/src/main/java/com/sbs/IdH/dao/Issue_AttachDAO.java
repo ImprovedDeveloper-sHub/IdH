@@ -14,4 +14,6 @@ public interface Issue_AttachDAO {
 	public void deleteIssue_Attach(int ano) throws SQLException;
 
 	public void deleteAllIssue_Attach(int issue_number)throws SQLException;
+	
+	public int selectIssue_AttachSeqNext()throws SQLException;
 }

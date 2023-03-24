@@ -19,6 +19,13 @@ public class MenuDAOImpl implements MenuDAO{
 		List<MenuVO> menuList = session.selectList("Menu-Mapper.selectMainMenu");
 		return menuList;
 	}
+	
+	@Override
+	public List<MenuVO> selectMainMenuForExecutives() throws SQLException {
+		List<MenuVO> menuList = session.selectList("Menu-Mapper.selectMainMenuForExecutives");
+		return menuList;
+	}
+	
 
 	@Override
 	public List<MenuVO> selectSubMenu(String mCode) throws SQLException {

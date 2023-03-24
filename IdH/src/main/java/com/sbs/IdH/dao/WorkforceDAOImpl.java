@@ -85,5 +85,22 @@ public class WorkforceDAOImpl implements WorkforceDAO{
 		return colMap;
 	}
 	
+	public void updateWorkforce(WorkforceVO workforce) throws SQLException{
+		session.update("Workforce-Mapper.updateWorkforce", workforce);
+	}
 
+	
+	
+	@Override
+	public int selectWorkforceCount(SearchCriteria cri) throws SQLException {
+		int workforce_count = session.selectOne("Workforce-Mapper.selectSearchWorkforceListCount", cri);
+		return workforce_count;
+	}
+	
+	@Override
+	public List<WorkforceVO> selectWorkforceListByMemberId(String member_id) throws SQLException {
+		List<WorkforceVO> workforceList = session.selectList("Workforce-Mapper.selectProceedingWorkforceByMemberId", member_id);
+		return workforceList;
+	}
+	
 }

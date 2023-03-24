@@ -63,8 +63,8 @@ public class ProjectDAOImpl implements ProjectDAO {
 	}
 
 	@Override
-	public void updateProjectForProjectEnd(ProjectVO project) throws SQLException {
-		session.update("Project-Mapper.updateProjectForProjectEnd", project);
+	public void updateProjectForProjectEnd(int project_number) throws SQLException {
+		session.update("Project-Mapper.updateProjectForProjectEnd", project_number);
 
 	}
 
@@ -90,4 +90,12 @@ public class ProjectDAOImpl implements ProjectDAO {
 	}
 
 
+
+	
+	@Override
+	public List<ProjectVO> selectProjectCriteriaNotRowBound(SearchCriteria cri) throws SQLException {
+		List<ProjectVO> projectList = session.selectList("Project-Mapper.selectProjectList", cri);	
+		return projectList;
+	}
+	
 }

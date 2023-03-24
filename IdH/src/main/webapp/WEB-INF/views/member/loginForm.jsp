@@ -58,8 +58,8 @@
 						</div>
 
 						<div class="card-footer">
-							<button type="submit" class="btn btn-info"
-								style="background: #17A2B8; color: white;">회원가입</button>
+							<!-- <button type="submit" class="btn btn-info"
+								style="background: #17A2B8; color: white;">회원가입</button> -->
 							<button type="submit" class="btn btn-info float-right"
 								style="background: #17A2B8; color: white;">로그인</button>
 						</div>

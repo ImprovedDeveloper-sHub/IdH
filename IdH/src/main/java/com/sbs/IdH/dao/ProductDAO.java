@@ -31,6 +31,8 @@ public interface ProductDAO {
      
      //추가
  	Map<String,Object> selectProductCountForChart(SearchCriteria cri)throws SQLException;
+
+	void updateProductStatus(ProductVO product) throws SQLException;
     
     
 	

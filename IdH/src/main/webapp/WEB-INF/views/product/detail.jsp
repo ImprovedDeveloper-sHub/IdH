@@ -79,7 +79,7 @@ input {
 								<td class="table-td">${product.product_number }</td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
-								<td class="name-td">작성자</td>
+								<td class="name-td">담당자</td>
 								<td class="table-td">${product.product_member_id }</td>
 							</tr>
 							<tr>
@@ -97,7 +97,21 @@ input {
 							<td class="name-td">내용</td>
 								<td class="table-td">${product.product_content }</td>
 							</tr>
-
+   <c:forEach items="${product.attachList }" var="attach">
+                        <tr>
+                           <td class="name-td">첨부파일</td>
+                           <td class="table-td">${attach.fileName }</td>
+                           <td class="table-td"></td>
+                           <td class="table-td"></td>
+                           <td class="table-td"><fmt:formatDate
+                                 value="${attach.regDate }" pattern="yyyy-MM-dd" /></td>
+                           <td class="table-td" class="attach-box"
+                              style="cursor: pointer;"
+                              onclick="location.href='<%=request.getContextPath()%>/product/getFile?ano=${attach.ano }';">
+                              <i class="fa-solid fa-download"></i>
+                           </td>
+                        </tr>
+                     </c:forEach>
 						</tbody>
 					</table>
 					</form>
@@ -108,7 +122,7 @@ input {
 			</div>
 			
 			<div class="card-tools" style="margin-left:auto">
-			<button type="button" id="modifyBtn" class="btn btn-info" onclick="submit_go('modifyForm','${product.product_number }');">협업요청</button>
+			
 			<button type="button" id="modifyBtn" class="btn btn-info" onclick="submit_go('modifyForm','${product.product_number }');">수정</button>						
 		    <button type="button" id="removeBtn" class="btn btn-info" onclick="submit_go('remove','${product.product_number }');">삭제</button>					   
 		    <button type="button" id="listBtn" class="btn btn-info" onclick="CloseWindow();">닫기</button>

@@ -3,6 +3,8 @@ package com.sbs.IdH.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sbs.IdH.dto.MemberVO;
 import com.sbs.IdH.dto.MenuVO;
 import com.sbs.IdH.service.MenuService;
 
@@ -24,9 +27,13 @@ public class MenuController {
 	
 	
 	@GetMapping("/index")
-	public String index(@RequestParam(defaultValue = "M000000") String mCode, Model model) throws Exception {
+	public String index(@RequestParam(defaultValue = "M000000") String mCode, Model model, HttpServletRequest request) throws Exception {
 		String url = "/common/indexPage";
-		List<MenuVO> menuList = menuService.getMainMenuList();
+		
+		HttpSession session = request.getSession();
+		MemberVO member =(MemberVO)session.getAttribute("loginUser");
+		int rank = member.getMember_rank();
+		List<MenuVO> menuList = menuService.getMainMenuList(rank);
 		MenuVO menu = menuService.getMenuByMcode(mCode);
 		model.addAttribute("menuList", menuList);
 		model.addAttribute("menu", menu);

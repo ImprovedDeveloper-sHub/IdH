@@ -14,11 +14,11 @@
         
         
  <div class= "content">
-    <div class="row">
+    <div class="row" style="height:98%;">
 
       <!--col-6시작-->
       <div class="col-6">
-      	<div id="content" class="card">
+      	<div id="content" class="card" style="height:295px;">
          <div class="card-header bg-info">
             <h3 class="card-title">진행 프로젝트</h3>
          </div>
@@ -46,7 +46,7 @@
          
             </div>
          <div id="table-content">
-            <div  class="card-body table-responsive p-0" style="height:200px">
+            <div  class="card-body table-responsive p-0" style="height:250px">
                <table  class="table table-hover" >
                   <thead id="proceedingThead" class="proceedingThead" class="text-left">
 	                <tr>
@@ -63,7 +63,7 @@
 				  <tr><td colspan="5">데이터가 없습니다.</td></tr>
 			 	 </c:if>
 			 	 <c:forEach items="${proceedingProjectList }" var="project">
-					 <tr onclick="setProjectNum(${project.project_number},'getProjectDetail');">
+					 <tr onclick="setProjectNum(${project.project_number},'getProjectDetail'); change_comparison(${project.project_number });">
 			                  <td style="text-align:left;max-width: 30%; overflow: hidden; 
                                     white-space: nowrap; text-overflow: ellipsis;">${project.project_business_name }</td>
 			                  <td style="text-align:left;max-width:20%; overflow: hidden; 
@@ -88,7 +88,7 @@
          </div>
       </div>
       
-      <div id="content" class="card">
+      <div id="content" class="card" style="height:295px;">
          <div class="card-header bg-info">
             <h3 class="card-title">종료 프로젝트</h3>
          </div>
@@ -117,7 +117,7 @@
 	                <tr>
 	                  <th style="width:20%">사업 이름</th>
 	                  <th style="width:30%">프로젝트 이름</th>
-	                  <th style="width:20%">등록 날짜</th>
+	                  <th style="width:20%">종료 날짜</th>
 	                  <th style="width:15%">예상 종료날짜</th>
 	                  <th style="width:15%">요구사항</th>
 	                </tr>
@@ -162,8 +162,9 @@
        <div class="card ">
           <div class="card-small-body row">
             <div class="col" style="margin:3px;">
-            <input id="" type="button" class="btn btn-info btn-sm" onclick="" value="프로젝트 계획"></input>
-               <input type="button" class="btn  btn-info btn-sm" id="" onclick="OpenWindow('<%=request.getContextPath()%>/calendar/main','등록',850,750);" value="전체일정"></input>
+            <input type="button" class="btn  btn-info btn-sm" id="projectEndButton" onclick="OpenWindow('<%=request.getContextPath()%>/projectManage/endProjectForm','계획등록',350,140);"  value="프로젝트 종료">
+            <input id="" type="button" class="btn btn-info btn-sm" onclick="OpenWindow('<%=request.getContextPath()%>/projectManage/registSchedulePlanForm','계획등록',500,700);" value="프로젝트 계획"></input>
+               <input type="button" class="btn  btn-info btn-sm" id="" onclick="OpenWindow('<%=request.getContextPath()%>/calendar/main','일정',850,750);" value="전체일정"></input>
 
               <input id="changeButton" type="button" class="btn btn-info btn-sm" onclick="returnButton()" value="프로젝트 현황"></input>
               <input id="changeButton" type="button" class="btn btn-info btn-sm" onclick="changeButton()" value="프로젝트 비교"></input>
@@ -179,10 +180,10 @@
 		<div class="col" style="margin:3px;">
           <input type="button" class="btn  btn-info btn-sm" id="scheduleButton" onclick="OpenWindow('<%=request.getContextPath()%>/calendar/calByProject?project_number='+project_num,'등록',850,750);" value="프로젝트 일정"></input>
           
-            <input type="button" class="btn  btn-info btn-sm" id="budgetButton" onclick="ajax_print_chart('budget','1');" value="예산현황"></input>
+            <input type="button" class="btn  btn-info btn-sm" id="budgetButton" onclick="ajax_print_chart('budget');" value="예산현황"></input>
               <input type="button" class="btn  btn-info btn-sm" id="workforceButton" onclick="ajax_print_chart('workforce');" value="인력현황"></input>
                <input type="button" class="btn  btn-info btn-sm" id="unitworkButton" onclick="ajax_print_chart('unitwork');" value="단위업무현황"></input>
-              <input type="button" class="btn  btn-info btn-sm" onclick="ajax_print_chart('issue');" id="issueButton" value="이슈현황"></input>
+              <input type="button" class="btn  btn-info btn-sm"  id="issueButton" onclick="ajax_print_chart('issue');" value="이슈현황"></input>
 				<input type="button" class="btn  btn-info btn-sm"  id="productButton" onclick="ajax_print_chart('product');" value="산출물현황"></input>
         </div>
         </div>
@@ -220,7 +221,7 @@
 				</div>
 			<div id="content">
 				<div id="table-content">
-					<table id="projectDetailtable" style="width:570px; height:200px">
+					<table id="projectDetailtable" style="width:570px; height:230px">
 						<thead class="projectDetailthead">
 							<tr>
 								<td class="name-td" style="width:15%;">분류</td>
@@ -254,6 +255,7 @@
 								<td class="name-td">내용</td>
 								<td class="table-td td-summernote" colspan="5"></td>
 							</tr>
+							
 						</tbody>
 					</table>
 				</div>
@@ -288,7 +290,9 @@
     
     
 
-
+	<input id="project_comparison_num1" type="hidden" value="1">
+	<input id="project_comparison_num2" type="hidden" value="2">
+	
 
 
   
@@ -311,7 +315,6 @@
 	  
 	  	$('#budgetButton').attr('onclick',"ajax_print_comparison_chart('budgetComparison')");
 		$('#workforceButton').attr('onclick',"ajax_print_comparison_chart('workforceComparison')");
-		//$('#scheduleButton').val('일정비교'); $('#scheduleButton').attr('onclick',"ajax_print_chart('scheduleComparison')")
 		$('#issueButton').attr('onclick',"ajax_print_comparison_chart('issueComparison')");
 		$('#productButton').attr('onclick',"ajax_print_comparison_chart('productComparison')");
 		 $('#unitworkButton').attr('onclick',"ajax_print_comparison_chart('unitworkComparison')")
@@ -322,7 +325,6 @@
 	function returnButton(){
 		$('#budgetButton').val('예산현황'); $('#budgetButton').attr('onclick',"ajax_print_chart('budget')");
 		$('#workforceButton').val('인력현황'); $('#workforceButton').attr('onclick',"ajax_print_chart('workforce')");
-		//$('#scheduleButton').val('일정현황'); $('#scheduleButton').attr('onclick',"ajax_print_chart('schedule')");
 		$('#issueButton').val('이슈현황'); $('#issueButton').attr('onclick',"ajax_print_chart('issue')");
 		$('#productButton').val('산출물현황'); $('#productButton').attr('onclick',"ajax_print_chart('product')");
 		$('#unitworkButton').val('단위업무현황'); $('#unitworkButton').attr('onclick',"ajax_print_chart('uniwork')");
@@ -331,7 +333,7 @@
 	}
 
 	
-	
+
   
   var project_num = 1;
   var last_chart="curve_chart";
@@ -341,6 +343,20 @@
   
   var project_comparison_num1 = 1;
   var project_comparison_num2 = 2;
+  var project_comparison_check = 1;
+  
+  function change_comparison(project_number){
+		if(project_comparison_check == 1 ){
+			project_comparison_num1 = project_number;
+			project_comparison_check = 2;
+		}	
+		else if(project_comparison_check == 2 ){
+			project_comparison_num2 = project_number;
+			project_comparison_check = 1;
+		}
+		
+	}
+  
   
   
   function ajax_print_chart(url){
@@ -368,6 +384,8 @@
   
   
   function ajax_print_comparison_chart(url){
+	  //alert(project_comparison_num1);
+	  //alert(project_comparison_num2);
 	  formData = new FormData();
 	  test = $.ajax({
 			url:"${request.ContextPath()}/IdH/"+url,//서버url
@@ -395,7 +413,6 @@
   		
  
   var options = {
-          title: 'Company Performance',
           curveType: 'function',
           legend: { position: 'bottom' }
         };
@@ -410,7 +427,6 @@
 		  document.getElementById(chart_type).style.display="block";
 		  last_chart=chart_type;
           var options = {
-            title: 'Company Performance',
             curveType: 'function',
             legend: { position: 'bottom' }
           };
@@ -451,20 +467,20 @@
 
 
   function drawBasic() {
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+        var chart = new google.visualization.ColumnChart(document.getElementById('curve_chart'));
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
         	
         	 var data = google.visualization.arrayToDataTable([
-       	      ['Year', '프로젝트계획', '프로젝트현황'],
-       	      ['2000',  1000,      400],
-       	      ['2005',  1170,      460],
-       	      ['2006',  660,       1120],
-       	      ['2007',  1030,      540]
+       	      ['종류', '프로젝트계획', '프로젝트현황'],
+       	      ['일정',  66, 72],
+       	   ['예산',  ${budget_plan},  ${budget_current}],
+    	      ['업무',  2, 3],
+    	      ['인력', ${workforce_plan}, ${workforce_current} ]
        	    ]);
         	
           var options = {
-            title: 'Company Performance',
+            title: '전체 프로젝트 계획 - 현황 (%)',
             curveType: 'function',
             legend: { position: 'bottom' }
           };
@@ -505,6 +521,14 @@
 <c:if test="${from eq 'remove' }">
 <script>
 	alert('삭제되었습니다.');
+	window.close();
+	window.opener.location.reload();
+</script>
+
+</c:if>
+
+<c:if test="${from eq 'end' }">
+<script>
 	window.close();
 	window.opener.location.reload();
 </script>

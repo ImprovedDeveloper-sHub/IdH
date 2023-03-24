@@ -41,6 +41,14 @@ public class Product_AttachDAOImpl implements Product_AttachDAO{
 	public void deleteAllProduct_Attach(int product_number) throws SQLException {
 		session.update("Product_Attach-Mapper.deleteAllProduct_Attach",product_number);		
 	}
+
+	/*
+	 * @Override public List<Product_AttachVO> selectAttachesByCowork_number(int
+	 * cowork_number) throws SQLException { List<Product_AttachVO>
+	 * attachList=session.selectList(
+	 * "Product_Attach-Mapper.selectAttachByCowork_number",cowork_number); return
+	 * attachList; }
+	 */
 	
 
 }

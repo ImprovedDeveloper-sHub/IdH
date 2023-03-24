@@ -43,4 +43,11 @@ public class Co_AttachDAOImpl implements Co_AttachDAO{
 		session.update("Co_Attach-Mapper.deleteAllCo_Attach",co_number);		
 	}
 
+
+	//@Override
+	//public int selectCo_AttachSeqNextValue() throws SQLException {
+	//	int ano=session.selectOne("Co_Attach-Mapper.selectCo_AttachSeqNext");
+	//	return  ano;
+	//}
+
 }

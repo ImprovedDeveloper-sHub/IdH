@@ -6,18 +6,7 @@
 <mapper namespace="Workforce-Mapper">
 	
 	<sql id="search">
-		<if test="searchType == 'i'.toString() ">
-			and id like '%'||#{keyword}||'%'
-		</if>
-		<if test="searchType == 'n'.toString() ">
-			and name like '%'||#{keyword}||'%'
-		</if>
-		<if test="searchType == 'p'.toString() ">
-			and phone like '%'||#{keyword}||'%'
-		</if>
-		<if test="searchType == 'e'.toString() ">
-			and email like '%'||#{keyword}||'%'
-		</if>
+		
 		<if test="member_id != null">
 			and workforce_member_id =  #{member_id}
 		</if>
@@ -49,6 +38,15 @@
 	</select>
 	
 	
+	
+
+	<select id="selectProceedingWorkforceByMemberId"  resultType="workforce">
+		select *
+		from workforce
+		where workforce_member_id =#{member_id} and workforce_status = 2
+	</select>
+	
+	
 	<select id="selectSearchWorkforceListCount" resultType="int">
 		select count(*)
 		from workforce
@@ -71,8 +69,18 @@
 		insert 
 		into 
 		workforce(workforce_number,workforce_status,workforce_detail,workforce_name,workforce_project_number,workforce_member_id,workforce_regdate, workforce_startdate, workforce_enddate, workforce_type)
-		values(#{workforce_number},0,#{workforce_detail},#{workforce_name},#{workforce_project_number},#{workforce_member_id},sysdate, #{workforce_startdate},#{workforce_enddate}, #{workforce_type})
+		values(#{workforce_number},#{workforce_status},#{workforce_detail},#{workforce_name},#{workforce_project_number},#{workforce_member_id},sysdate, #{workforce_startdate},#{workforce_enddate}, #{workforce_type})
 	</update>
+	
+	
+	<update id="updateWorkforce" parameterType="workforce">
+		update workforce 
+		set workforce_project_number=#{workforce_project_number}, workforce_detail=#{workforce_detail}, workforce_member_id=#{workforce_member_id}, workforce_enddate =#{workforce_enddate}
+		where workforce_number=#{workforce_number}
+	</update>
+	
+	
+	
 	
 	<update id="updateWorkforcePlanForProjectStart" parameterType="workforce">
 		update workforce 

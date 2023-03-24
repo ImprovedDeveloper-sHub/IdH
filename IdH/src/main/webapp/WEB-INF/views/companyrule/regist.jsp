@@ -8,6 +8,11 @@
 <!-- CSS start -->
 
 <style>
+
+#upload{
+   width:97%;
+   font-size:12px;
+}
 #content {
 	background: #eaedf2;
 	position: relative;
@@ -150,12 +155,11 @@ input {
 						</tbody>
 
 					</table>
-					<div class="fileUpload">
-						<span><i class="fa fa-plus-circle"></i> Add File</span> <input
-							type="file" class="" id="files" name="files" multiple />
-					</div>
+				<button class="btn btn-xs btn-info" onclick="addFile_go();"
+                  type="button" id="addFileBtn">파일첨부</button>
+               <div class="card-footer fileInput"></div>
 
-					<ul id="selectedFiles"></ul>
+				
 
 				</form>
 			</div>
@@ -185,13 +189,24 @@ input {
 </script>
 
 <script>
-$('input:file[multiple]').change(
-	      function(e){
-	        // console.log(e.currentTarget.files);
-	        var numFiles = e.currentTarget.files.length;
-	        for (i=0;i<numFiles;i++){
-	        $('<li>').text(e.currentTarget.files[i].name).appendTo($('#selectedFiles'));
-	        $('<span>').addClass('filesize').text('(' + filesize + 'kb)').appendTo($('#selectedFiles li:last'));
-	      }
-	    });
+var dataNum=0;
+
+function addFile_go(){
+   //alert("add file btn");
+   
+   if($('input[name="uploadFile"]').length >=5){
+      alert("파일추가는 5개까지만 가능합니다.");
+      return;
+   }
+   
+   var div=$('<div>').addClass("inputRow").attr("data-no",dataNum);      
+   var input=$('<input>').attr({"type":"file","name":"uploadFile","id":"upload"}).css("display","inline");
+   div.append(input).append("<button onclick='remove_go("+dataNum+");' style='border:0;outline:0;' class='badge bg-red' type='button'>X</button>");      
+   $('.fileInput').append(div);
+   dataNum++;      
+}
+function remove_go(dataNum){
+   //alert(dataNum);
+   $('div[data-no="'+dataNum+'"]').remove();
+}
 </script>

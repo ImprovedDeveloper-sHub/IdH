@@ -14,7 +14,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
 <style>
 ul,li{
-   list-sytle:none;
+   list-sytle:none !important;
 }
 
 a{
@@ -99,6 +99,11 @@ nav a {
   font-weight: 600;
   float:center;
 } 
+
+.page-link {
+   width: 30px;
+   height: 30px;
+}
 
 nav a:hover::before {
    content: ''; /* To generate the box */
@@ -207,7 +212,7 @@ table td{
       <div class="logo"><img src="<%=request.getContextPath() %>/resources/img/logo.jpg"style="width: 100%;height:100%;background-size: cover;"/></div>
     </div>
     <!-- header종료 -->
-   <div class="main-menu-custom"style="width:94%;">
+   <div class="main-menu-custom"style="width:80%;">
    		<c:forEach items="${menuList }" var="menu">
 	    	<div class="menu"><a href="javascript:subMenu_go('${menu.mcode}');goPage('<%=request.getContextPath() %>${menu.murl }','${menu.mcode }');" class="nav-link"><i class="fa-solid ${menu.micon}"></i>
 	    	${menu.mname }</a></div>
@@ -224,7 +229,32 @@ table td{
        -->
     </div>
     
-   
+   <div class="bg-info">
+            <div class="h-full flex items-center hover:underline px-[10px]">
+              <span><i class="fas fa-user-plus"></i></span>
+              <span class="hidden lg:block"></span>
+              <span class="hidden lg:block">${loginUser.member_id}&nbsp;&nbsp;&nbsp; </span>
+              <c:if test="${!empty loginUser}">
+              <a href="member/logout" class="h-full flex items-center hover:underline px-[10px]">
+              <span><i class="fas fa-sign-in-alt"></i></span>
+              <span class="hidden lg:block"></span>
+              <span class="hidden lg:block">로그아웃&nbsp;</span>
+              </a>
+			</c:if>    
+			<c:if test="${empty loginUser}">
+				<a href="member/login" class="h-full flex items-center hover:underline px-[10px]">
+              <span><i class="fas fa-sign-in-alt"></i></span>
+              <span class="hidden lg:block"></span>
+              <span class="hidden lg:block">로그인</span>
+            </a>
+			</c:if>     
+			 
+            </div>
+          
+			
+			         
+            
+         </div>
     
     <!--main-menu종료 -->
     <div class="col-12 sub-menu">

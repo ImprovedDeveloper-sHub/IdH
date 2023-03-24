@@ -15,9 +15,14 @@ public class MenuServiceImpl implements MenuService{
 	}
 	
 	@Override
-	public List<MenuVO> getMainMenuList() throws Exception {
+	public List<MenuVO> getMainMenuList(int rank) throws Exception {
 		List<MenuVO> menuList = null;
-		menuList = menuDAO.selectMainMenu();
+		if(rank==1) {
+			menuList = menuDAO.selectMainMenuForExecutives();
+		}else{
+			menuList = menuDAO.selectMainMenu();
+		}
+		
 		return menuList;
 	}
 

@@ -30,12 +30,10 @@ public interface IssueService {
 	Issue_AttachVO selectIssue_AttachByAno(int ano) throws SQLException;
 
 	void removeIssue_AttachByAno(int ano) throws SQLException;
-	
-	
-	//추가
-	public ChartVO selectChart(int project_number)throws Exception;
 
-	public ChartVO selectChartForComparison(int project_number, int project_number2)throws Exception;
-	
-	
+	Issue_AttachVO getAttachByAno(int ano) throws SQLException;
+
+	ChartVO selectChart(int project_number) throws Exception;
+
+	ChartVO selectChartForComparison(int project_number1, int project_number2) throws Exception;
 }

@@ -47,11 +47,16 @@
 	color: #64697a;
 }
 
-input {
+table input {
 	width: 100%;
 	font-size: 13px;
 	color: #64697a;
 	border: none;
+}
+
+#upload{
+	width:97%;
+	font-size:12px;
 }
 </style>
 
@@ -59,9 +64,9 @@ input {
 
 
 
-<div class="header" style="width: 680px; height: 555px;">
+<div class="header" style="width: 660px; height: 555px;">
 	<div class="card card-info">
-		<div class="card-header">
+		<div class="card-header bg-info">
 			<h3 class="card-title">이슈등록</h3>
 			<div class="card-tools">
 				<div class="input-group input-group-sm" style="width: 150px;">
@@ -96,8 +101,14 @@ input {
 							</tr>
 							<tr>
 								<td class="name-td">수준</td>
-								<td><input type="text" name="issue_level"
-									placeholder="수준을 입력하세요." /></td>
+								<td>
+									<select class="table-td"
+                          					 name="issue_level" style="width:100%;">
+                              			<option value="1" ${issue.issue_number eq 1 ? 'selected':'하' }>하</option>
+                              			<option value="2" ${issue.issue_number eq 2 ? 'selected':'중' }>중</option>
+                              			<option value="3" ${issue.issue_number eq 3 ? 'selected':'상' }>상</option>
+                       				</select>
+                        		</td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">프로젝트명</td>
@@ -122,6 +133,10 @@ input {
 							</tr>
 						</tbody>
 					</table>
+					<input type="hidden" name="issue_status" value="2">
+					<button class="btn btn-xs btn-info" onclick="addFile_go();"
+						type="button" id="addFileBtn">파일첨부</button>
+					<div class="card-footer fileInput"></div>
 				</form>
 			</div>
 		</div>
@@ -144,5 +159,28 @@ input {
 		$("form[role='form']").submit();
 
 	}
+</script>
+
+<script>
+var dataNum=0;
+
+function addFile_go(){
+	//alert("add file btn");
+	
+	if($('input[name="uploadFile"]').length >=5){
+		alert("파일추가는 5개까지만 가능합니다.");
+		return;
+	}
+	
+	var div=$('<div>').addClass("inputRow").attr("data-no",dataNum);		
+	var input=$('<input>').attr({"type":"file","name":"uploadFile","id":"upload"}).css("display","inline");
+	div.append(input).append("<button onclick='remove_go("+dataNum+");' style='border:0;outline:0;' class='badge bg-red' type='button'>X</button>");		
+	$('.fileInput').append(div);
+	dataNum++;		
+}
+function remove_go(dataNum){
+	//alert(dataNum);
+	$('div[data-no="'+dataNum+'"]').remove();
+}
 </script>
 

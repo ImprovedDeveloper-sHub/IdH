@@ -15,29 +15,7 @@
 		<if test="searchType == 'c'.toString()">
 			and companyrule_content like '%'||#{keyword}||'%'			
 		</if>
-		<if test="searchType == 'tc'.toString()">
-			and (
-			companyrule_title like '%'||#{keyword}||'%'
-			or
-			companyrule_content like '%'||#{keyword}||'%'						
-			)			
-		</if>
-		<if test="searchType == 'cw'.toString()">
-			and (
-			companyrule_member like '%'||#{keyword}||'%'
-			or
-			companyrule_content like '%'||#{keyword}||'%'						
-			)			
-		</if>
-		<if test="searchType == 'tcw'.toString()">
-			and (
-			companyrule_title like '%'||#{keyword}||'%'
-			or
-			companyrule_member like '%'||#{keyword}||'%'
-			or
-			companyrule_content like '%'||#{keyword}||'%'						
-			)			
-		</if>
+	
 	</sql>
 	
 

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sbs.IdH.dto.BusinessVO;
+import com.sbs.IdH.dto.ProjectVO;
 import com.sbs.IdH.dto.ScheduleVO;
 import com.sbs.IdH.dto.UnitworkVO;
 
@@ -41,6 +42,7 @@ public class DateMaker {
 		param.put("title", unitwork.getUnitwork_name());
 		param.put("start", format.format(unitwork.getUnitwork_regdate()));
 		param.put("end", format.format(unitwork.getUnitwork_enddate()));
+		param.put("url", unitwork.getUnitwork_number());
 		paramList.add(param);
 	}
 	
@@ -53,6 +55,26 @@ public class DateMaker {
 		param.put("end", format.format(business.getBusiness_end()));
 		paramList.add(param);
 	}
+	public void setParamBusiness(BusinessVO bussiness) {
+		Map <String, Object> param = new HashMap<String, Object>();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		param.put("title", bussiness.getBusiness_name());
+		param.put("start", format.format(bussiness.getBusiness_begin()));
+		param.put("end", format.format(bussiness.getBusiness_end()));
+		paramList.add(param);
+		
+	}
+	
+	public void setParamProject(ProjectVO project) {
+		Map <String, Object> param = new HashMap<String, Object>();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		param.put("title", project.getProject_name());
+		param.put("start", format.format(project.getProject_regdate()));
+		param.put("end", format.format(project.getProject_enddate()));
+		
+		paramList.add(param);
+	}
+	
 	
 	public DateMaker() {
 		this.paramList = new ArrayList<Map<String,Object>>();

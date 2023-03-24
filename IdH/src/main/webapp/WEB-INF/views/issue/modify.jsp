@@ -55,7 +55,7 @@
 	<!-- 사업 일정 상세 정보 -->
 	<div class="col-12" style="height: 100%;">
 		<div class="card card-info">
-			<div class="card-header">
+			<div class="card-header bg-info">
 				<h3 class="card-title">이슈등록</h3>
 				<div class="card-tools">
 					<div class="input-group input-group-sm" style="width: 150px;">
@@ -84,14 +84,20 @@
 									<td class="table-td"></td>
 									<td class="table-td"></td>
 									<td class="name-td">수준</td>
-									<td class="table-td"><input type="text" name="issue_level"
-										readonly value="${issue.issue_level }" /></td>
+									<td class="table-td">
+										<select class="table-td"
+                          					 	name="issue_level" style="width:100%;">
+                              				<option value="1" ${issue.issue_number eq 1 ? 'selected':'하' }>하</option>
+                              				<option value="2" ${issue.issue_number eq 2 ? 'selected':'중' }>중</option>
+                              				<option value="3" ${issue.issue_number eq 3 ? 'selected':'상' }>상</option>
+                       					</select>
+                       				</td>
 								</tr>
 								<tr>
 									<td class="name-td">등록자</td>
 									<td class="table-td"><input type="text"
 										name="issue_setter_id" readonly
-										value="${loginUser.member_id }" /></td>
+										value="${issue.issue_setter_id}" /></td>
 									<td class="table-td"></td>
 									<td class="table-td"></td>
 									<td class="name-td">할당자</td>
@@ -108,7 +114,7 @@
 								<tr>
 									<td class="name-td">제목</td>
 									<td class="table-td"><input type="text" name="issue_title"
-										placeholder="${issue.issue_title }" /></td>
+										value="${issue.issue_title }" /></td>
 									<td></td>
 									<td></td>
 									<td></td>
@@ -116,9 +122,10 @@
 								</tr>
 								<tr style="height: 130px;">
 									<td class="name-td">내용</td>
-									<td class="table-td" colspan="5" style="height: 250px;"><input
-										type="text" name="issue_content"
-										placeholder="${issue.issue_content }" /></td>
+									<td class="table-td" colspan="5" style="height: 210px;"><input
+										type="text" name="issue_content"/><textarea
+										name="issue_content" class="summernote" rows="15" cols="40"
+										style="display: none; width: 500px;">${issue.issue_content }</textarea></td>
 								</tr>
 
 								<tr>
@@ -156,6 +163,10 @@
 </script>
 
 
-
+<script>
+	window.onload = function() {
+		summernote_go($('.summernote'),'<%=request.getContextPath()%>');
+	};
+</script>
 
 

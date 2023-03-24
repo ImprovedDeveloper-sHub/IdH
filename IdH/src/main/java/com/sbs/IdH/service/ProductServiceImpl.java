@@ -6,12 +6,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import com.sbs.IdH.command.PageMaker;
 import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.ProductDAO;
 import com.sbs.IdH.dao.Product_AttachDAO;
 import com.sbs.IdH.dao.ProjectDAO;
 import com.sbs.IdH.dto.ChartVO;
+import com.sbs.IdH.dto.MemberVO;
 import com.sbs.IdH.dto.ProductVO;
 import com.sbs.IdH.dto.Product_AttachVO;
 
@@ -32,7 +36,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 	@Override
 	public Map<String, Object> selectProductProceedList(SearchCriteria cri) throws SQLException {
-
+        cri.setPerPageNum(10);
 		cri.setStatus(1);
 		List<ProductVO> productProceedList = productDAO.selectProductCriteria(cri);
 		if (productProceedList != null)
@@ -79,9 +83,9 @@ public class ProductServiceImpl implements ProductService {
 	}
 	@Override
 	public Map<String, Object> selectProductEndList(SearchCriteria cri) throws SQLException {
-
+        cri.setPerPageNum(17);
 		cri.setStatus(2);
-		cri.setPerPageNum(10);
+		
 		List<ProductVO> productEndList = productDAO.selectProductCriteria(cri);
 		if (productEndList != null)
 			for (ProductVO product : productEndList)
@@ -99,9 +103,14 @@ public class ProductServiceImpl implements ProductService {
 
 	}
 	@Override
-	public Map<String, Object> selectProductMyProceedList(SearchCriteria cri) throws SQLException {
-
-		cri.setMember_id("loginUser");
+	public Map<String, Object> selectProductMyProceedList(SearchCriteria cri,HttpServletRequest request) throws SQLException {
+        
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		HttpSession session= request.getSession();
+		MemberVO member=(MemberVO)session.getAttribute("loginUser");
+				
+		
+		cri.setMember_id(member.getMember_id());
 		cri.setStatus(1);
 		cri.setPerPageNum(7);
 		List<ProductVO> productMyProceedList = productDAO.selectProductCriteria(cri);
@@ -113,7 +122,6 @@ public class ProductServiceImpl implements ProductService {
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(productDAO.selectProductCriteriaTotalCount(cri));
 
-		Map<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("productMyProceedList", productMyProceedList);
 		dataMap.put("pageMaker", pageMaker);
 
@@ -121,9 +129,14 @@ public class ProductServiceImpl implements ProductService {
 
 	}
 	@Override
-	public Map<String, Object> selectProductMyEndList(SearchCriteria cri) throws SQLException {
+	public Map<String, Object> selectProductMyEndList(SearchCriteria cri,HttpServletRequest request) throws SQLException {
 
-		cri.setMember_id("loginUser");
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		HttpSession session= request.getSession();
+		MemberVO member=(MemberVO)session.getAttribute("loginUser");
+				
+		
+		cri.setMember_id(member.getMember_id());
 		cri.setStatus(2);
 		cri.setPerPageNum(7);
 		List<ProductVO> productMyEndList = productDAO.selectProductCriteria(cri);
@@ -135,7 +148,6 @@ public class ProductServiceImpl implements ProductService {
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(productDAO.selectProductCriteriaTotalCount(cri));
 
-		Map<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("productMyEndList", productMyEndList);
 		dataMap.put("pageMaker", pageMaker);
 
@@ -149,6 +161,12 @@ public class ProductServiceImpl implements ProductService {
 		int product_number = productDAO.selectProductSeqNextValue();
 		product.setProduct_number(product_number);
 		productDAO.insertProduct(product);
+		if (product.getAttachList() != null)
+	         for (Product_AttachVO attach :product.getAttachList()) {
+	            attach.setProduct_number(product_number);
+	            attach.setProduct_attach_attacher(product.getProduct_member_id());
+	            product_attachDAO.insertProduct_Attach(attach);
+	         }
 
 	}
 
@@ -166,7 +184,7 @@ public class ProductServiceImpl implements ProductService {
 	public ProductVO selectProduct(int product_number) throws SQLException {
 
 		ProductVO product = productDAO.selectProduct(product_number);
-
+		addAttachList(product);
 		return product;
 
 	}
@@ -175,6 +193,12 @@ public class ProductServiceImpl implements ProductService {
 	public void modifyProduct(ProductVO product_number) throws SQLException {
 
 		productDAO.updateProduct(product_number);
+	}
+	
+	@Override
+	public void modifyProductStatus(ProductVO product) throws SQLException {
+
+		productDAO.updateProductStatus(product);
 	}
 
 	@Override
@@ -223,7 +247,7 @@ public class ProductServiceImpl implements ProductService {
 		cri.setStatus(1);
 		List<Map<String, Object>> c1_list = new ArrayList<Map<String, Object>>();
 		HashMap<String, Object> c1_list_label = new HashMap<String, Object>();
-		c1_list_label.put("v", "상태1 산출물");
+		c1_list_label.put("v", "진행 중 산출물");
 		c1_list.add(c1_list_label);
 		c1_list.add(productDAO.selectProductCountForChart(cri));
 
@@ -231,11 +255,9 @@ public class ProductServiceImpl implements ProductService {
 		cri.setStatus(2);
 		List<Map<String, Object>> c2_list = new ArrayList<Map<String, Object>>();
 		HashMap<String, Object> c2_list_label = new HashMap<String, Object>();
-		c2_list_label.put("v", "상태2 산출물");
+		c2_list_label.put("v", "종료 산출물");
 		c2_list.add(c2_list_label);
 		c2_list.add(productDAO.selectProductCountForChart(cri));
-
-
 
 		rowMap_c1.put("c", c1_list);
 		rowMap_c2.put("c", c2_list);

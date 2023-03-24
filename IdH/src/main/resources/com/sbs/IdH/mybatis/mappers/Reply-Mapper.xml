@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Reply-Mapper">
+		
+	<select id="selectReplySeqNextValue" resultType="int" >
+		select reply_seq.nextval
+		from dual		
+	</select>
+	
+	<select id="selectReplyList" resultType="reply">
+		select *
+		from reply
+		where issue_number=#{issue_number}
+		order by rno asc
+	</select>
+	<select id="countReply" resultType="int">
+		select count(issue_number) 
+		from reply
+		where issue_number=#{issue_number}
+	</select>
+	
+	<update id="insertReply" >
+		insert into reply(rno,issue_number,replytext,replyer,regdate)
+		values(#{rno},#{issue_number},#{replytext},#{replyer},sysdate)
+	</update>
+	
+	<update id="updateReply" parameterType="reply">
+		update reply 
+		set 
+		replytext=#{replytext},
+		updatedate=sysdate
+		where rno=#{rno}		
+	</update>
+	
+	<update id="deleteReply" parameterType="int">
+		delete from reply
+		where rno=#{rno}		
+	</update>	
+</mapper>  
+
+
+
+
+

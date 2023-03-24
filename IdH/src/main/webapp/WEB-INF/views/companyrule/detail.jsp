@@ -96,15 +96,30 @@ input {
 							<tr style="height: 100px;">
 							<td class="name-td">내용</td>
 								<td class="table-td">${companyrule.companyrule_content }</td>
+								
 							</tr>
 							<!-- 첨부파일 -->
-                             
+                             <c:forEach items="${companyrule.attachList }" var="attach">
+                        <tr>
+                           <td class="name-td">첨부파일</td>
+                           <td class="table-td">${attach.fileName }</td>
+                           <td class="table-td"></td>
+                           <td class="table-td"></td>
+                           <td class="table-td"><fmt:formatDate
+                                 value="${attach.regDate }" pattern="yyyy-MM-dd" /></td>
+                           <td class="table-td" class="attach-box"
+                              style="cursor: pointer;"
+                              onclick="location.href='<%=request.getContextPath()%>/companyrule/getFile?ano=${attach.ano }';">
+                              <i class="fa-solid fa-download"></i>
+                           </td>
+                        </tr>
+                     </c:forEach>
 						</tbody>
-					</table>
-					</form>
-										
-							
 						
+					</table>
+					
+					</form>
+					
 				</div>
 			</div>
 			
@@ -130,5 +145,8 @@ function submit_go(url,companyrule_number ){
 		window.opener.location.reload();
 	</script>
 </c:if>    
+<!-- <script>
+alert(${companyrule.attachList});
 
+</script> -->
 

@@ -132,13 +132,6 @@ input {
                onclick="location.href='modifyBudgetForm?budget_number=${budget.budget_number}'">수정</button>
             <button type="button" id="close" class="btn btn-info"
                onclick="CloseWindow();">취소</button>
-				</div>
-			</div>
-			<div class="card-tools" style="margin-left:auto">
-            <button type="button" id="regbtn" class="btn btn-info"
-               onclick="location.href='modifyBudgetForm?budget_number=${budget.budget_number}'">수정</button>
-            <button type="button" id="close" class="btn btn-info"
-               onclick="CloseWindow();">취소</button>
                <button type="button" id="regbtn" class="btn btn-info"
                onclick="location.href='deleteBudget?budget_number=${budget.budget_number}'">삭제</button>
 				</div>
@@ -150,6 +143,7 @@ input {
 	<script>
 		alert("수정되었습니다.");
 		window.opener.location.reload();
+		
 	</script>
 </c:if>
 

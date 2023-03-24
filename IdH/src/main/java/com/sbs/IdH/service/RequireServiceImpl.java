@@ -7,8 +7,10 @@ import java.util.Map;
 
 import com.sbs.IdH.command.PageMaker;
 import com.sbs.IdH.command.SearchCriteria;
+import com.sbs.IdH.dao.BusinessDAO;
 import com.sbs.IdH.dao.RequireDAO;
 import com.sbs.IdH.dao.Require_attachDAO;
+import com.sbs.IdH.dto.BusinessVO;
 import com.sbs.IdH.dto.RequireVO;
 import com.sbs.IdH.dto.Require_attachVO;
 
@@ -18,6 +20,11 @@ public class RequireServiceImpl implements RequireService {
 	private Require_attachDAO require_attachDAO;
 	public void setRequireDAO(RequireDAO requireDAO) {
 		this.requireDAO = requireDAO;
+	}
+	private BusinessDAO businessDAO;
+
+	public void setBusinessDAO(BusinessDAO businessDAO) {
+		this.businessDAO = businessDAO;
 	}
 
 	public void setRequire_attachDAO(Require_attachDAO require_attachDAO) {
@@ -64,6 +71,9 @@ public class RequireServiceImpl implements RequireService {
 	@Override
 	public RequireVO selectRequire(int require_number) throws SQLException {
 		RequireVO require = requireDAO.selectRequire(require_number);
+		BusinessVO business = businessDAO.selectBusiness_number(require.getRequire_business_number());
+		
+		require.setRequire_business_name(business.getBusiness_name());
 		addAttachList(require);
 
 		return require;

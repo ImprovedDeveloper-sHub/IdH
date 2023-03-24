@@ -10,8 +10,6 @@ import com.sbs.IdH.command.SearchCriteria;
 import com.sbs.IdH.dao.ProjectDAO;
 import com.sbs.IdH.dao.WorkforceDAO;
 import com.sbs.IdH.dto.ChartVO;
-import com.sbs.IdH.dto.ScheduleVO;
-import com.sbs.IdH.dto.UnitworkVO;
 import com.sbs.IdH.dto.WorkforceVO;
 
 public class WorkforceServiceImpl implements WorkforceService {
@@ -29,11 +27,13 @@ public class WorkforceServiceImpl implements WorkforceService {
 
 	@Override
 	public void registWorkforce(WorkforceVO workforce) throws Exception {
+		workforce.setWorkforce_number(workforceDAO.selectWorkforceSeqNext());
 		workforceDAO.insertWorkforce(workforce);
 	}
 
 	@Override
 	public void modifyWorkforce(WorkforceVO workforce) throws Exception {
+		workforceDAO.updateWorkforce(workforce);
 	}
 
 	@Override
@@ -190,5 +190,8 @@ public class WorkforceServiceImpl implements WorkforceService {
 		return chart;
 
 	}
+	
+	
+	
 
 }

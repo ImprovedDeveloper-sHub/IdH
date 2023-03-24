@@ -10,7 +10,7 @@ import com.sbs.IdH.dto.Require_attachVO;
 public interface RequireService {
 
 		Map<String, Object> selectRequireList(SearchCriteria cri) throws SQLException;
-
+		
 		void registRequire(RequireVO require) throws SQLException;
 
 		RequireVO selectRequire(int require_number) throws SQLException;

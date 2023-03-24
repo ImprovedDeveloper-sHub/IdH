@@ -43,7 +43,7 @@ public interface BusinessService {
 	List<Map<String, Object>> selectBusinessScheduleListForCalendar(SearchCriteria cri) throws Exception;
 
 	Map<String, Object> selectBusinessBudgetList(int buinsess_number) throws SQLException;
-	
-	
+
+	List<Map<String, Object>> selectBusinessListForCalendar(SearchCriteria cri) throws Exception;
 	
 }

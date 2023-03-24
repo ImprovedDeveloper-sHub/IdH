@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
- <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
   
 <!-- CSS start -->
 
@@ -81,6 +81,7 @@ input {
 			</div>
 			<div id="content">
 				<form enctype="multiaprt/form-data" role="form" method="post" action="modifyBudget" name="modifyBudgetForm">
+				<input type="hidden" name="budget_status" value="2">
 				<input type="hidden" name="budget_number" value="${budget.budget_number }"/>
 				<div id="table-content">
 					<table>
@@ -120,11 +121,11 @@ input {
 							</tr>
 							<tr>
 								<td class="name-td">프로젝트명</td>
-								<td class="table-td" >${budget.budget_project_name }</td>
+								<td class="table-td" ><input type="hidden" value="${budget.budget_project_number}">${budget.budget_project_name }</td>
 								<td class="table-td"></td>
 								<td class="table-td"></td>
 								<td class="name-td">등록일</td>
-								<td class="table-td">${budget.budget_regdate }</td>
+								<td class="table-td"><fmt:formatDate pattern="yyyy-MM-dd" value="${budget.budget_regdate }"/></td>
 							</tr>
 						</tbody>
 					</table>
@@ -133,9 +134,9 @@ input {
 			</div>
 			<div class="card-tools" style="margin-left:auto">
             <button type="button" id="regbtn" class="btn btn-info"
-               onclick="modify_go();">등록</button>
+               onclick="modify_go();">수정</button>
             <button type="button" id="close" class="btn btn-info"
-               onclick="CloseWindow();">닫기</button>
+               onclick="CloseWindow();">취소</button>
 				</div>
 			</div>
 		</div>
