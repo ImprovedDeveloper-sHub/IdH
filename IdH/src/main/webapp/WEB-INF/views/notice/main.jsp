@@ -24,8 +24,6 @@
 				style="justify-content: space-between; display: flex; flex-direction: row-reverse;">
 				<div class="input-group input-group-sm"
 					style="width: 400px; margin: 10px;">
-					<select id="myNoticePerPageNum" name="perPageNum"
-						style="display: none"><option value="10" selected></option></select>
 					<select class="form-control-sm" name="searchType"
 						id="myNoticeSearchType"
 						style="hegith: 30px; width: 90px !important; border-color: #CED4DA !important;">
