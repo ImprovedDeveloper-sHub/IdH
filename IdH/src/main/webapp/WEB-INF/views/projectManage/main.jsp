@@ -14,11 +14,11 @@
         
         
  <div class= "content">
-    <div class="row" style="height:98%;">
+    <div class="row" style="height:96%;">
 
       <!--col-6시작-->
       <div class="col-6">
-      	<div id="content" class="card" style="height:295px;">
+      	<div id="content" class="card" style="height:290px;">
          <div class="card-header bg-info">
             <h3 class="card-title">진행 프로젝트</h3>
          </div>
@@ -221,7 +221,7 @@
 				</div>
 			<div id="content">
 				<div id="table-content">
-					<table id="projectDetailtable" style="width:570px; height:230px">
+					<table id="projectDetailtable" style="width:570px; height:220px">
 						<thead class="projectDetailthead">
 							<tr>
 								<td class="name-td" style="width:15%;">분류</td>
@@ -251,7 +251,7 @@
 								<td class="table-td" colspan="3"></td>
 							</tr>
 							
-							<tr style="height: 100px;">
+							<tr style="height: 90px;">
 								<td class="name-td">내용</td>
 								<td class="table-td td-summernote" colspan="5"></td>
 							</tr>

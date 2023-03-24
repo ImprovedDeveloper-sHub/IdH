@@ -30,12 +30,14 @@ public class UnitworkServiceImpl implements UnitworkService{
 	
 	@Override
 	public void registUnitwork(UnitworkVO unitwork) throws Exception {
+		unitwork.setUnitwork_number(unitworkDAO.selectUnitworkSeqNext());
 		unitworkDAO.insertUnitwork(unitwork);
 	}
 	
 	@Override
 	public void registUnitworkPlan(UnitworkVO unitwork) throws Exception {
 		unitwork.setUnitwork_status(1);
+		unitwork.setUnitwork_number(unitworkDAO.selectUnitworkSeqNext());
 		unitworkDAO.insertUnitwork(unitwork);
 	}
 	

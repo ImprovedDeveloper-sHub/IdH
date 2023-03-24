@@ -64,11 +64,11 @@ tbody tr td {
 				<div>
 					<i class="fas fa-paper-plane bg-yellow"></i>
 					<div class="timeline-item">
-						<span class="time"><i class="fas fa-clock"></i>23-02-23</span>
+						<span class="time"><i class="fas fa-clock"></i>23-03-24</span>
 						<div class="timeline-header" style="padding:5px;font-size:12px;">
-							<a href="#">공지사항</a>
+							<a href="#">프로젝트</a>
 						</div>
-						<div class="timeline-body">새로운 글이 등록되었습니다.</div>
+						<div class="timeline-body">성과관리 기능제작 프로젝트가 등록되었습니다.</div>
 					</div>
 				</div>
 			</div>
@@ -76,7 +76,7 @@ tbody tr td {
 				<div>
 					<i class="fas fa-paper-plane bg-yellow"></i>
 					<div class="timeline-item">
-						<span class="time"><i class="fas fa-clock"></i>23-02-22</span>
+						<span class="time"><i class="fas fa-clock"></i>23-03-20</span>
 						<h6 class="timeline-header" style="padding:5px;font-size:12px;">
 							<a href="#">이슈관리</a>
 						</h6>

@@ -80,6 +80,8 @@ body {
                   </div>
                </c:forEach>
 
+				
+
 				<c:forEach items="${projectList}" var="project">
                   <div class="col-3">
                      <div class="card"
@@ -110,8 +112,7 @@ body {
 
 
 
-
-
+				
 
 
 

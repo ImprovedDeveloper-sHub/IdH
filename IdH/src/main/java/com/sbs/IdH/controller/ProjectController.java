@@ -45,8 +45,6 @@ public class ProjectController {
 		cri.setMember_id((member.getMember_id()));
 		
 		
-		System.out.println((member.getMember_id()));
-		
 		Map<String,Object> dataMap = projectService.selectListByGetterId(member.getMember_id());
 		
 		

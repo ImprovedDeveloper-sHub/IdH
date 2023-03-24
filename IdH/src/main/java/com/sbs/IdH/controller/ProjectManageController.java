@@ -330,6 +330,8 @@ public class ProjectManageController {
 	@GetMapping("/registUnitworkForm")
 	public ModelAndView registunitworkForm(ModelAndView mnv) throws Exception {
 		String url = "/projectManage/registUnitwork";
+		SearchCriteria cri = new SearchCriteria();
+		mnv.addAllObjects(projectService.selectProjectList(cri));
 		mnv.setViewName(url);
 		return mnv;
 	}
