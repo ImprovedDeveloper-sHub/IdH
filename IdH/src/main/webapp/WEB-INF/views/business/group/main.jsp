@@ -100,20 +100,18 @@
 					<table style="text-align: center;">
 						<thead>
 							<tr>
-								<td class="name-td" style="width: 20%;">전체</td>
-								<td class="name-td" style="width: 20%;">팀장</td>
-								<td class="name-td" style="width: 20%;">팀원</td>
-								<td class="name-td" style="width: 20%;">참여</td>
-								<td class="name-td" style="width: 20%;">가용</td>
+								<td class="name-td" style="width: 25%;">전체</td>
+								<td class="name-td" style="width: 25%;">임원</td>
+								<td class="name-td" style="width: 25%;">팀장</td>
+								<td class="name-td" style="width: 25%;">팀원</td>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
-								<td class="table-td"></td>
+								<td class="table-td">${total}</td>
+								<td class="table-td">${excutieves} </td>
+								<td class="table-td">${teamLeader}</td>
+								<td class="table-td">${teamMember}</td>
 							</tr>
 						</tbody>
 					</table>

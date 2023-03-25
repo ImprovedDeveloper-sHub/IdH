@@ -27,6 +27,7 @@ import com.sbs.IdH.dto.Business_attachVO;
 import com.sbs.IdH.dto.BusinessgroupVO;
 import com.sbs.IdH.service.BudgetService;
 import com.sbs.IdH.service.BusinessService;
+import com.sbs.IdH.service.MemberService;
 import com.sbs.IdH.service.ProjectService;
 import com.sbs.IdH.service.WorkforceService;
 import com.sbs.IdH.utils.MakeFileName;
@@ -63,8 +64,15 @@ public class BusinessController {
 		this.workforceService = workforceService;
 	}
 	
+	@Resource(name="memberService")
+	private MemberService memberService;
+	
 	@Resource(name="UploadPath")
 	private String UploadPath;
+	
+	public void setMemberService(MemberService memberService) {
+		this.memberService = memberService;
+	}
 	
 	@GetMapping("/schedule/main")
 	public ModelAndView scheduleMain(ModelAndView mnv, SearchCriteria cri) throws SQLException {
@@ -248,7 +256,6 @@ public class BusinessController {
 	
 	@GetMapping("/budget/main")
 	public ModelAndView budgetMain(ModelAndView mnv, SearchCriteria cri) throws SQLException {
-		
 		mnv.addAllObjects(businessService.getBusinessList(cri));
 		
 		return mnv;
@@ -298,7 +305,7 @@ public class BusinessController {
 	
 	@GetMapping("/group/main")
 	public ModelAndView groupMain(ModelAndView mnv, SearchCriteria cri) throws Exception {
-		
+		mnv.addAllObjects(memberService.selectMemberCountList(cri));
 		mnv.addAllObjects(businessService.getBusinessList(cri));
 		
 		return mnv;

@@ -20,6 +20,8 @@ public interface MemberService {
 
 		public void removeMember(String member_id) throws Exception;
 		
-		void login(String member_id, String member_pwd) throws NotFoundIdException, InvalidPasswordException, SQLException; 
+		public void login(String member_id, String member_pwd) throws NotFoundIdException, InvalidPasswordException, SQLException;
+
+		public Map<String, Object> selectMemberCountList(SearchCriteria cri) throws Exception; 
 
 }

@@ -68,7 +68,28 @@ public class MemberServiceImpl implements MemberService {
 		if (member == null)	throw new NotFoundIdException();
 		if (!member_pwd.equals(member.getMember_pwd())) throw new InvalidPasswordException();
 		
-		
 	}
+	
+	@Override
+	public Map<String, Object> selectMemberCountList(SearchCriteria cri)throws Exception{
+		
+		 Map<String, Object> dataMap = new HashMap<String,Object>();
+		 
+		 int total = memberDAO.selectSearchMemberListCount(cri);
+		 cri.setType(1);
+		 int excutieves = memberDAO.selectSearchMemberListCount(cri);
+		 cri.setType(2);
+		 int teamLeader = memberDAO.selectSearchMemberListCount(cri);
+		 cri.setType(3);
+		 int teamMember = memberDAO.selectSearchMemberListCount(cri);
+		 
+		 
+		 dataMap.put("total",total);
+		 dataMap.put("excutieves",excutieves);
+		 dataMap.put("teamLeader",teamLeader);
+		 dataMap.put("teamMember",teamMember);
+		 return dataMap;
+	}
+	
 
 }

@@ -5,17 +5,8 @@
 
 <mapper namespace="Member-Mapper">
 	<sql id="search">
-		<if test="searchType == 'i'.toString() ">
-			and member_id like '%'||#{keyword}||'%'
-		</if>
-		<if test="searchType == 'n'.toString() ">
-			and member_name like '%'||#{keyword}||'%'
-		</if>
-		<if test="searchType == 'p'.toString() ">
-			and member_phone like '%'||#{keyword}||'%'
-		</if>
-		<if test="searchType == 'e'.toString() ">
-			and member_mail like '%'||#{keyword}||'%'
+		<if test="type != null and type != 0 ">
+			and member_rank =  #{type}
 		</if>
 	</sql>
 	

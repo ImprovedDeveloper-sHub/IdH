@@ -8,6 +8,11 @@ table input {
 	font-size: 13px;
 	color: #64697a;
 	border: none;
+	outline:none;
+}
+
+table input:focus {
+	 {outline:none;}
 }
 
 .content-list #title {
@@ -26,6 +31,7 @@ table input {
 table td {
 	padding: 0.5px !important;
 }
+
 </style>
 
 <div class="content row">
@@ -63,8 +69,12 @@ table td {
 
 				<tr id="reqiure">
 					<td id="title">요구사항</td>
-					<td id="content" colspan="3"><input type="text" placeholder="사업을 선택해주세요."
-						disabled /></td>
+					<td id="content" colspan="3"><select class="form-control-sm"
+						name="project_business_number" id="business_selector"
+						style="hegith: 30px; width: 100% !important; border-color: #CED4DA !important;">
+							<option>-</option>
+						
+					</select></td>
 				</tr>
 				<tr id="schedulePlan">
 					<td id="title">예상일정</td>

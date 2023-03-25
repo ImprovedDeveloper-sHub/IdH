@@ -40,11 +40,12 @@ public interface BusinessService {
 
 	public Map<String, Object> getBusinessgroupListForModify(SearchCriteria cri) throws SQLException;
 
-	List<Map<String, Object>> selectBusinessScheduleListForCalendar(SearchCriteria cri) throws Exception;
+	public List<Map<String, Object>> selectBusinessScheduleListForCalendar(SearchCriteria cri) throws Exception;
 
-	Map<String, Object> selectBusinessBudgetList(int buinsess_number) throws SQLException;
+	public Map<String, Object> selectBusinessBudgetList(int buinsess_number) throws SQLException;
 
-	List<Map<String, Object>> selectBusinessListForCalendar(SearchCriteria cri) throws Exception;
+	public List<Map<String, Object>> selectBusinessListForCalendar(SearchCriteria cri) throws Exception;
+
 	
 	
 	

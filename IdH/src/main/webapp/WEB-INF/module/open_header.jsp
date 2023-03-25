@@ -113,6 +113,10 @@ td-summernote card{
    width: 30px;
    height: 30px;
 }
+
+
+input:focus {outline:none;}
+
 </style>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">

@@ -105,6 +105,8 @@ nav a {
    height: 30px;
 }
 
+input:focus {outline:none;}
+
 nav a:hover::before {
    content: ''; /* To generate the box */
    /* position: absolute;
