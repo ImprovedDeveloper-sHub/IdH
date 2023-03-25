@@ -302,7 +302,7 @@
 </c:if>
 <script>
 	function product_go(url) {
-		alert('product_go');
+		alert('산출물 종료\n 산출물 관리 화면으로 이동합니다.');
 		var productArray = new Array();
 		$('input:checkbox[name=product]:checked').each(function(){
 			productArray.push(this.value);
@@ -316,7 +316,7 @@
 </script>
 <script>
 	function cowork_go(url) {
-		alert('cowork_go');
+		alert('협업요청 완료');
 		var coworkArray = new Array();
 		$('input:checkbox[name=product]:checked').each(function(){
 			coworkArray.push(this.value);

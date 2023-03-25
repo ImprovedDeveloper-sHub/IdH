@@ -29,6 +29,7 @@ import com.sbs.IdH.service.BudgetService;
 import com.sbs.IdH.service.BusinessService;
 import com.sbs.IdH.service.MemberService;
 import com.sbs.IdH.service.ProjectService;
+import com.sbs.IdH.service.UnitworkService;
 import com.sbs.IdH.service.WorkforceService;
 import com.sbs.IdH.utils.MakeFileName;
 
@@ -64,20 +65,32 @@ public class BusinessController {
 		this.workforceService = workforceService;
 	}
 	
-	@Resource(name="memberService")
-	private MemberService memberService;
-	
 	@Resource(name="UploadPath")
 	private String UploadPath;
+	
+	public void setUploadPath(String uploadPath) {
+		UploadPath = uploadPath;
+	}
+	
+	@Resource(name="unitworkService")
+	private UnitworkService unitworkService;
+	public void setUnitworkService(UnitworkService unitworkService) {
+		this.unitworkService = unitworkService;
+	}
+	
+	@Resource(name="memberService")
+	private MemberService memberService;
 	
 	public void setMemberService(MemberService memberService) {
 		this.memberService = memberService;
 	}
 	
 	@GetMapping("/schedule/main")
-	public ModelAndView scheduleMain(ModelAndView mnv, SearchCriteria cri) throws SQLException {
+	public ModelAndView scheduleMain(ModelAndView mnv, SearchCriteria cri) throws Exception {
 		
 		mnv.addAllObjects(businessService.getBusinessList(cri));
+		System.out.println("test");
+		mnv.addAllObjects(projectService.selectProceedingProject(cri));
 		
 		return mnv;
 		
@@ -87,7 +100,7 @@ public class BusinessController {
 	@ResponseBody
 	public List<Map<String, Object>> setParamBusinessSchedule() throws Exception {
 		SearchCriteria cri = new SearchCriteria();
-		return businessService.selectBusinessListForCalendar(cri);
+		return businessService.selectBusinessScheduleListForCalendar(cri);
 	}
 	
 	@GetMapping("/schedule/registForm")
@@ -159,8 +172,12 @@ public class BusinessController {
 	}
 
 	@GetMapping("/schedule/detail")
-	public ModelAndView scheduleDetail(ModelAndView mnv, int business_number) throws SQLException {
+	public ModelAndView scheduleDetail(ModelAndView mnv, int business_number) throws Exception {
 		
+		SearchCriteria cri = new SearchCriteria();
+		
+		mnv.addObject(projectService.selectProceedingProject(cri));
+		mnv.addAllObjects(projectService.selectProjectList(cri));
 		mnv.addObject("business", businessService.getBusiness(business_number));
 
 		
@@ -256,6 +273,7 @@ public class BusinessController {
 	
 	@GetMapping("/budget/main")
 	public ModelAndView budgetMain(ModelAndView mnv, SearchCriteria cri) throws SQLException {
+		
 		mnv.addAllObjects(businessService.getBusinessList(cri));
 		
 		return mnv;
@@ -305,6 +323,7 @@ public class BusinessController {
 	
 	@GetMapping("/group/main")
 	public ModelAndView groupMain(ModelAndView mnv, SearchCriteria cri) throws Exception {
+		
 		mnv.addAllObjects(memberService.selectMemberCountList(cri));
 		mnv.addAllObjects(businessService.getBusinessList(cri));
 		

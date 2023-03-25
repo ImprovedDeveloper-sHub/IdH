@@ -60,17 +60,17 @@ table td {
 				</tr>
 				<tr>
 					<td class="name-td">시작날짜</td>
-					<td class="table-td"><input class="datepicker"
+					<td class="table-td"><input name="startdate" class="datepicker"
 						name="project_startdate"></td>
 					<td class="name-td">종료날짜</td>
-					<td class="table-td" ><input class="datepicker"
+					<td class="table-td" ><input name="enddate" class="datepicker"
 						name="project_enddate"></td>
 				</tr>
 
 				<tr id="reqiure">
 					<td id="title">요구사항</td>
-					<td id="content" colspan="3"><select class="form-control-sm"
-						name="project_business_number" id="business_selector"
+					<td id="require_content" colspan="3"><select class="form-control-sm"
+						name="project_require_number" id="require_selector"
 						style="hegith: 30px; width: 100% !important; border-color: #CED4DA !important;">
 							<option>-</option>
 						
@@ -228,11 +228,19 @@ function regist_project_go(){
 	
 	
 	var form = document.registProjectForm;
-		if(form.title.value==""){
-			alert("제목은 필수입니다.");
-			return;
+		if(!$('input[name="project_name"]').val()){
+		    alert("제목은 필수입니다.");
+		    return;
+		}
+		if(!$('input[name="startdate"]').val()){
+		    alert("시작날짜 입력은 필수입니다.");
+		    return;
 		}
 		
+		if(!$('input[name="enddate"]').val()){
+		    alert("예상종료날짜 입력은 필수입니다.");
+		    return;
+		}
 		form.submit();
 	
 	}
@@ -279,6 +287,7 @@ function regist_project_go(){
 						$('#workforce-plan-list-template'));
 				printPlan(data, $('#unitworkPlan'),
 						$('#unitwork-plan-list-template'));
+				$('#require_content').html("").html("<select><option>성과관리 시스템 추가</option></select>")
 			}
 		});
 	}
@@ -367,6 +376,7 @@ function regist_project_go(){
 <script type="text/x-handlebars-template" id="budget-detail-template">
 			{{budget_name}} : {{budget_detail}} ,&nbsp;&nbsp;&nbsp;    
 </script>
+
 
 
 

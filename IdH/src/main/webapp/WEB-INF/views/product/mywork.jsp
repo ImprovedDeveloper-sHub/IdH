@@ -137,7 +137,7 @@ tbody tr td {
 	<div class="content-parts col-6" style="height:67%;">
 		<div id="myproceed-content" class="card" style="height:98%;">
 			<div class="card-header bg-info">
-				<h3 class="card-title">진행중인 산출물</h3>
+				<h3 class="card-title">나의 진행중인 산출물</h3>
 			</div>
 			<div class="card-tools"
 				style="justify-content: space-between; margin: 3px; display: flex; flex-direction: row-reverse;">
@@ -259,7 +259,7 @@ tbody tr td {
 	<div class="content-parts col-6" style="height:67%;">
 		<div id="content" class="card" style="height:98%;">
 			<div class="card-header bg-info">
-				<h3 class="card-title">종료된 산출물</h3>
+				<h3 class="card-title">나의 종료된 산출물</h3>
 			</div>
 			<div class="card-tools"
 				style="justify-content: space-between; display: flex; margin: 3px; flex-direction: row-reverse;">
