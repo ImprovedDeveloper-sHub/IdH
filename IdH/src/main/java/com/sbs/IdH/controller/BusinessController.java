@@ -28,6 +28,7 @@ import com.sbs.IdH.dto.BusinessgroupVO;
 import com.sbs.IdH.service.BudgetService;
 import com.sbs.IdH.service.BusinessService;
 import com.sbs.IdH.service.ProjectService;
+import com.sbs.IdH.service.UnitworkService;
 import com.sbs.IdH.service.WorkforceService;
 import com.sbs.IdH.utils.MakeFileName;
 
@@ -63,16 +64,25 @@ public class BusinessController {
 		this.workforceService = workforceService;
 	}
 	
-	@Resource(name="fileUploadBusinessPath")
-	private String fileUploadBusinessPath;
-	
 	@Resource(name="UploadPath")
 	private String UploadPath;
 	
+	public void setUploadPath(String uploadPath) {
+		UploadPath = uploadPath;
+	}
+	
+	@Resource(name="unitworkService")
+	private UnitworkService unitworkService;
+	public void setUnitworkService(UnitworkService unitworkService) {
+		this.unitworkService = unitworkService;
+	}
+	
 	@GetMapping("/schedule/main")
-	public ModelAndView scheduleMain(ModelAndView mnv, SearchCriteria cri) throws SQLException {
+	public ModelAndView scheduleMain(ModelAndView mnv, SearchCriteria cri) throws Exception {
 		
 		mnv.addAllObjects(businessService.getBusinessList(cri));
+		System.out.println("test");
+		mnv.addAllObjects(projectService.selectProceedingProject(cri));
 		
 		return mnv;
 		
@@ -154,8 +164,12 @@ public class BusinessController {
 	}
 
 	@GetMapping("/schedule/detail")
-	public ModelAndView scheduleDetail(ModelAndView mnv, int business_number) throws SQLException {
+	public ModelAndView scheduleDetail(ModelAndView mnv, int business_number) throws Exception {
 		
+		SearchCriteria cri = new SearchCriteria();
+		
+		mnv.addObject(projectService.selectProceedingProject(cri));
+		mnv.addAllObjects(projectService.selectProjectList(cri));
 		mnv.addObject("business", businessService.getBusiness(business_number));
 
 		

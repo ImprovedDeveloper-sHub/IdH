@@ -50,7 +50,6 @@ public class ProjectController {
 		Map<String,Object> dataMap = projectService.selectListByGetterId(member.getMember_id());
 		
 		
-		
 		mnv.addAllObjects(projectService.selectProceedingProject(cri));
 		mnv.addAllObjects(dataMap);
 		

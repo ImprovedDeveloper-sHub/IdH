@@ -166,14 +166,16 @@
 										style="cursor: pointer;">
 										<td style="text-align: center; font-size: 13px !important;">${business.business_number}</td>
 										<td style="font-size: 13px !important;">${business.business_name}</td>
+										<c:forEach items="${proceedingProjectList}" var="proceedingProject">
 										<td>
 											<div class="progress progress-xs">
 												<div class="progress-bar progress-bar-danger"
-													style="width: ${business.business_progress}%;"></div>
+													style="width: ${proceedingProject.project_percent}%;"></div>
 											</div>
 										</td>
 										<td style="text-align: right; font-size: 13px !important;"><span
-											class="badge bg-teal">${business.business_progress}%</span></td>
+											class="badge bg-teal">${proceedingProject.project_percent}%</span></td>
+										</c:forEach>
 									</tr>
 								</c:forEach>
 							</tbody>

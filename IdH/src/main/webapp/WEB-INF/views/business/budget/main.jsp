@@ -171,6 +171,39 @@
 							</c:forEach>
 						</tbody>
 					</table>
+					<br/>
+					<nav id="paginationNav" aria-label="Navigation">
+		<ul class="pagination justify-content-center m-0">
+			<li class="page-item">
+				<a class="page-link" href="javascript:pageList_go(1);">
+					<i class="fas fa-angle-double-left"></i>
+				</a>
+			</li>
+			<li class="page-item">
+				<a class="page-link" href="javascript:pageList_go(${pageMaker.prev ? pageMaker.startPage-1 : pageMaker.cri.page});">
+					<i class="fas fa-angle-left"></i>
+				</a>						
+			</li>
+			<c:forEach var="pageNum" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
+	
+			<li class="page-item ${pageMaker.cri.page == pageNum?'active':''}">
+				<a class="page-link" href="javascript:pageList_go('${pageNum}');" >${pageNum }</a>
+			</li>
+			</c:forEach>
+			
+			<li class="page-item">
+				<a class="page-link" href="javascript:pageList_go(${pageMaker.next ? pageMaker.endPage+1 :pageMaker.cri.page});">
+					<i class="fas fa-angle-right" ></i>
+				</a>
+			</li>
+			
+			<li class="page-item">
+				<a class="page-link" href="javascript:pageList_go('${pageMaker.realEndPage}');">
+					<i class="fas fa-angle-double-right"></i>
+				</a>
+			</li>	
+		</ul>
+	</nav>
 				</div>
 			</div>
 		</div>
@@ -193,15 +226,17 @@
 						<div class="input-group input-group-sm" style="width: 350px; margin: 10px;">
 							<select class="form-control-sm" name="searchType" id="searchType"
 								style="hegith: 30px; width: 90px !important; border-color: #CED4DA !important;">
-								<option value="tcw" ${cri.searchType eq 'n' ? 'selected':'' }>전체</option>
+								<option value="tcw" ${cri.searchType eq 'tcw' ? 'selected':'' }>전체</option>
 								<option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제목</option>
-								<option value="w" ${cri.searchType eq 'l' ? 'selected':'' }>수준</option>
+								<option value="w" ${cri.searchType eq 'w' ? 'selected':'' }>등록자</option>
 								<option value="c" ${cri.searchType eq 'c' ? 'selected':'' }>내용</option>
-							</select> <input type="text" name="table_search"
-								class="form-control float-right" placeholder="Search">
+							</select>
+							<input type="text" name="keyword" class="form-control float-right" value="<c:if test="">${cri.keyword}</c:if>">
 							<div class="input-group-append">
+
+
 								<button type="submit" class="btn btn-default"
-									onclick="list_go(1)">
+									onclick="pageList_go(1)">
 									<i class="fas fa-search"></i>
 								</button>
 							</div>
@@ -244,5 +279,24 @@
       }
 </script>
  -->
+ 
+ <script>
+
+function pageList_go(page,url){
+	if(!url) url="main";
+	
+	var jobForm=$('#jobForm');
+	jobForm.find("[name='page']").val(page);
+	jobForm.find("[name='perPageNum']").val(10);
+	jobForm.find("[name='searchType']")
+		.val($('select[name="searchType"]').val());
+	jobForm.find("[name='keyword']")
+		.val($('div.input-group>input[name="keyword"]').val());
+	
+
+	jobForm.attr({action:url,method:'get'}).submit();
+}
+
+</script>
 
 
