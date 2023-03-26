@@ -68,7 +68,7 @@
 					</div>
 					<button type="button" class="btn btn-block btn-info btn-sm"
 					style="width: 80px"
-               onclick="workreport_go('workreportEnd');">결제</button>
+               onclick="workreport_go('workreportEnd');">결재</button>
 				</div>
 				<div id="table-content">
 					<div class="card-body table-responsive p-0">
@@ -317,7 +317,7 @@
 			.val($('select[name="mySearchType"]').val());
 		jobForm.find("[name='keyword']")
 			.val($('div.input-group>input[name="myKeyword"]').val());
-		alert(jobForm.serialize());
+		//alert(jobForm.serialize());
 		$.ajax({
 			url:'getMyworkreportlist',
 			type:"POST",
@@ -356,7 +356,7 @@
 
 <script>
    function workreport_go(url) {
-      alert(url);
+      alert("결재가 완료되었습니다.");
       var workreportArray = new Array();
       $('input:checkbox[name=workreport]:checked').each(function(){
     	  workreportArray.push(this.value);

@@ -108,22 +108,24 @@
 							<tr>
 								<td class="name-td"></td>
 								<td class="name-td">전체</td>
-								<td class="name-td">종료</td>
+								<td class="name-td">국가지원</td>
+								<td class="name-td">회사자체</td>
 								<td class="name-td">집행중</td>
-								<td class="name-td">예정</td>
 								<td class="name-td"></td>
 							</tr>
 						</thead>
+					
 						<tbody>
 							<tr>
 								<td class="table-td"></td>
-								<td class="table-td">03건</td>
-								<td class="table-td">01건</td>
-								<td class="table-td">01건</td>
-								<td class="table-td">01건</td>
+								<td class="table-td">22 건</td>
+								<td class="table-td">18 건</td>
+								<td class="table-td">05 건</td>
+								<td class="table-td">17 건</td>
 								<td class="table-td"></td>
 							</tr>
 						</tbody>
+					
 					</table>
 				</div>
 			</div>
@@ -243,6 +245,8 @@
 						</div>
 						
 					</div>
+					
+					<div id="chart_div" style="margin: 0px; width: 500px; height: 500px;"></div>
 							<!-- <div style="margin-left: 70px;"><div id="columnchart_material" style="width: 400px; height: 450px;"></div></div> -->
 				</div>
 			</div>
@@ -297,6 +301,79 @@ function pageList_go(page,url){
 	jobForm.attr({action:url,method:'get'}).submit();
 }
 
+</script>
+
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart', 'bar']});
+      google.charts.setOnLoadCallback(drawStuff);
+
+      function drawStuff() {
+
+        /* var button = document.getElementById('change-chart'); */
+        var chartDiv = document.getElementById('chart_div');
+
+        var data = google.visualization.arrayToDataTable([
+          
+        	
+          ['Galaxy', '배정 예산', '사용 예산'],
+          ['전체', 50000, 0],
+          ['국가지원', 24000, 0],
+          ['회사자체', 30000, 0],
+          ['집행중', 42000, 0],
+          ['사용예산', 0, 45000]
+        ]);
+
+        
+        
+         /* var materialOptions = {
+          width: 600,
+          chart: {
+            title: 'Nearby galaxies',
+            subtitle: 'distance on the left, brightness on the right'
+          },
+          series: {
+            0: { axis: 'distance' }, // Bind series 0 to an axis named 'distance'.
+            1: { axis: 'brightness' } // Bind series 1 to an axis named 'brightness'.
+          },
+          axes: {
+            y: {
+              distance: {label: 'parsecs'}, // Left y-axis.
+              brightness: {side: 'right', label: 'apparent magnitude'} // Right y-axis.
+            }
+          }
+        }; */
+
+        var classicOptions = {
+          width: 480,
+          height: 450,
+          series: {
+            0: {targetAxisIndex: 0},
+            1: {targetAxisIndex: 1}
+          },
+          title: '',
+          vAxes: {
+            // Adds titles to each axis.
+            0: {title: 'parsecs'},
+            1: {title: 'apparent magnitude'}
+          }
+        };
+		
+        function drawClassicChart() {
+          var classicChart = new google.visualization.ColumnChart(chartDiv);
+          classicChart.draw(data, classicOptions);
+          /* button.innerText = 'Change to Material';
+          button.onclick = drawMaterialChart; */
+        }
+
+        /* function drawMaterialChart() {
+          var materialChart = new google.charts.Bar(chartDiv);
+          materialChart.draw(data, google.charts.Bar.convertOptions(materialOptions));
+          button.innerText = 'Change to Classic';
+          button.onclick = drawClassicChart;
+        } */
+		
+        drawClassicChart();
+    };
 </script>
 
 

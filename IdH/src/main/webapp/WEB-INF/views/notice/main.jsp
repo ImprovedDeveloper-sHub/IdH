@@ -8,7 +8,12 @@
 
 <!-- Notice CSS -->
 
+<style>
+	td{
+		font-size:12px !important;
+	}
 
+</style>
 
 <!-- Notice CSS End -->
 
@@ -58,7 +63,6 @@
 								<th style="width: 35%; font-size: 15px;">내용</th>
 								<th style="width: 15%; font-size: 15px;">작성자</th>
 								<th style="width: 10%; font-size: 15px;">등록일</th>
-								<th style="width: 10%; font-size: 15px;">구분</th>
 							</tr>
 						</thead>
 						<tbody class="text-left myNoticeTbody">
@@ -82,8 +86,6 @@
 									<td
 										style="font-size: 15px; text-align: left; max-width: 10%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><fmt:formatDate
 											value="${notice.notice_regdate}" pattern="yyyy-MM-dd" /></td>
-									<td
-										style="font-size: 15px; text-align: left; max-width: 10%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${notice.notice_level}</td>
 
 								</tr>
 							</c:forEach>

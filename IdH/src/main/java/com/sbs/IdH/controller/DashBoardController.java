@@ -54,6 +54,8 @@ public class DashBoardController {
 	@Resource(name = "workreportService")
 	private WorkreportService workreportService;
 	
+	
+	
 	@GetMapping("/main")
 	public void main() {}
 	
@@ -72,6 +74,10 @@ public class DashBoardController {
 		//프로젝트 진행도
 		mnv.addAllObjects(projectService.selectProjectList(cri));
 		if(project_number != 0)mnv.addObject("project", projectService.selectProject(project_number));
+		
+		
+		cri.setPerPageNum(4);
+		mnv.addAllObjects(workreportService.selectMyWorkreportList(cri, request));
 		
 		return mnv;
 	}

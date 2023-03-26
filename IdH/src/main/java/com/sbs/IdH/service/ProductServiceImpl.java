@@ -36,7 +36,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 	@Override
 	public Map<String, Object> selectProductProceedList(SearchCriteria cri) throws SQLException {
-        cri.setPerPageNum(13);
+        cri.setPerPageNum(10);
 		cri.setStatus(1);
 		List<ProductVO> productProceedList = productDAO.selectProductCriteria(cri);
 		if (productProceedList != null)

@@ -52,6 +52,7 @@ public class RequireController {
        * SearchCriteria cri = new SearchCriteria(); cri.setKeyword(keyword);
        * cri.setSearchType(searchType); cri.setPage(1); cri.setPerPageNum(10);
        */
+	   cri.setPerPageNum(15);
       mnv.addObject("dataMap", requireService.selectRequireList(cri));
       mnv.addAllObjects(requireService.selectRequireList(cri));
       

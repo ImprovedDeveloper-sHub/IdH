@@ -63,7 +63,7 @@ a {
 			<div class="col-md-8">
 				<div class="card" style="height: 95vh;">
 
-					<div class="card-header"
+					<div class="card-header bg-info"
 						style="background: none; border: 1px solid gray;">
 						<h3 class="card-title" style="color: black;">사업 일정</h3>
 					</div>
@@ -96,7 +96,7 @@ a {
 
 				<div class="card card-row card-primar" style="height: 30vh;">
 
-					<div class="card-header"
+					<div class="card-header bg-info"
 						style="background: none; border: 1px solid gray; padding: 5px;">
 
 						<h3 class="card-title"
@@ -149,7 +149,7 @@ a {
 
 				<div class="card card-row card-primar" style="height: 30vh;">
 
-					<div class="card-header"
+					<div class="card-header bg-info"
 						style="background: none; border: 1px solid gray;">
 						<h3 class="card-title" style="color: black;">업무보고</h3>
 					</div>
@@ -162,10 +162,10 @@ a {
 							<thead class="text-left myWorkreportThead">
 								<tr>
 									<th style="width: 20%">제목</th>
-									<th style="width: 30%">첨부파일</th>
+									<th style="width: 25%">첨부파일</th>
 									<th style="width: 20%">작성일</th>
 									<th style="width: 15%">상태</th>
-									<th style="width: 15%">승인자</th>
+									<th style="width: 20%">승인자</th>
 								</tr>
 							</thead>
 							<tbody class="text-left myWorkreportTbody">
@@ -208,7 +208,7 @@ a {
 
 				<div class="card card-row card-primar" style="height: 30vh;">
 
-					<div class="card-header"
+					<div class="card-header bg-info"
 						style="background: none; border: 1px solid gray; padding: 5px;">
 						<h3 class="card-title"
 							style="color: black; margin: 5px; padding: 2px;">프로젝트 진행도</h3>

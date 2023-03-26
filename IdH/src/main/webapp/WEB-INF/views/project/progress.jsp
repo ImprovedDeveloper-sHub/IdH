@@ -11,7 +11,7 @@
 
 <div class="content">
    <div class="row">
-      <div class="card">
+      <div class="card" >
          <div class="col-12">
             <div class="row">
                <div class="col-12">
@@ -19,8 +19,8 @@
                      style="width: 1200; height: 200; margin-bottom: 40px;"></div>
                </div>
             </div>
-            <div class="card">
-               <div class="card-header">
+            <div class="card" style="height: 350px;">
+               <div class="card-header bg-info">
                   <h3 class="card-title">단위 업무 진행률</h3>
                </div>
                <div class="card-body p-0">

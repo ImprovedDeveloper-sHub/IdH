@@ -97,7 +97,7 @@
 					</div>
 				</div>
 			</div>
-			<div id="content">
+			<div id="content" style="height: 501px;">
 				<div id="table-content">
 					<table>
 						<thead>
@@ -191,7 +191,7 @@
 	</div>
 	<!-- 사업 예산 세부 그래프 끝 -->
 
-	<div class="card-tools" style="margin-left: 1083px">
+	<div class="card-tools" style="margin-left: 1060px">
 		<button type="button" id="modifyBtn" class="btn btn-info"
 			onclick="location.href='modifyForm?business_number=${business.business_number}';">수정</button>
 		<button type="button" id="listBtn" class="btn btn-info"
@@ -210,18 +210,22 @@
 
       function drawStuff() {
 
-        var button = document.getElementById('change-chart');
+        /* var button = document.getElementById('change-chart'); */
         var chartDiv = document.getElementById('chart_div');
 
         var data = google.visualization.arrayToDataTable([
-          ['Galaxy', 'Distance', 'Brightness'],
-          ['Canis Major Dwarf', 8000, 23.3],
-          ['Sagittarius Dwarf', 24000, 4.5],
-          ['Ursa Major II Dwarf', 30000, 14.3],
-          ['Lg. Magellanic Cloud', 50000, 0.9],
-          ['Bootes I', 60000, 13.1]
+          
+        	
+          ['Galaxy', '배정 예산', '사용 예산'],
+          ['전체', 1000000, 0],
+          ['국가지원', 900000, 0],
+          ['회사자체', 100000, 0],
+          /* ['집행중', 42000, 0], */
+          ['사용예산', 0,45000]
         ]);
 
+        
+        
          /* var materialOptions = {
           width: 600,
           chart: {
@@ -246,7 +250,7 @@
             0: {targetAxisIndex: 0},
             1: {targetAxisIndex: 1}
           },
-          title: 'Nearby galaxies - distance on the left, brightness on the right',
+          title: '',
           vAxes: {
             // Adds titles to each axis.
             0: {title: 'parsecs'},
@@ -257,8 +261,8 @@
         function drawClassicChart() {
           var classicChart = new google.visualization.ColumnChart(chartDiv);
           classicChart.draw(data, classicOptions);
-          button.innerText = 'Change to Material';
-          button.onclick = drawMaterialChart;
+          /* button.innerText = 'Change to Material';
+          button.onclick = drawMaterialChart; */
         }
 
         /* function drawMaterialChart() {
@@ -271,3 +275,5 @@
         drawClassicChart();
     };
 </script>
+
+

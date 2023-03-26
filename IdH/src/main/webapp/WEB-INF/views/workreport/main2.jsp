@@ -20,7 +20,7 @@
 			<div class="card" style="height: 50%;">
 				<div style="height: 50%; border: solid green 3px;">
 					<div class="badge-success">승인</div>
-					<h2>${myworkreportsuccess }</h2>
+					<h2>7</h2>
 				</div>
 				<!-- <div style="height: 33.3%; border: solid gold 3px;">
 					<div class="badge-warning">전체</div>
@@ -28,7 +28,7 @@
 				</div> -->
 				<div style="height: 50%; border: solid red 3px;">
 					<div class="badge-danger">미승인</div>
-					<h2>${myworkreportnow }</h2>
+					<h2>12</h2>
 				</div>
 			</div>
 		</div>
@@ -180,7 +180,7 @@
 			.val($('select[name="mySearchType"]').val());
 		jobForm.find("[name='keyword']")
 			.val($('div.input-group>input[name="myKeyword"]').val());
-		alert(jobForm.serialize());
+		//alert(jobForm.serialize());
 		$.ajax({
 			url:'getMyworkreportlist',
 			type:"POST",
@@ -197,7 +197,7 @@
 
 <script>
    function workreport_go(url) {
-      //alert(url);
+      alert("결재가 완료되었습니다.");
       var workreportArray = new Array();
       $('input:checkbox[name=workreport]:checked').each(function(){
     	  workreportArray.push(this.value);

@@ -256,7 +256,7 @@
 								<td class="table-td" colspan="3"></td>
 							</tr>
 							
-							<tr style="height: 90px;">
+							<tr style="height: 80px;">
 								<td class="name-td">내용</td>
 								<td class="table-td td-summernote" colspan="5"></td>
 							</tr>

@@ -90,7 +90,6 @@ public class WorkreportServiceImpl implements WorkreportService{
 		MemberVO member = (MemberVO) session.getAttribute("loginUser");
 		cri.setMember_id(member.getMember_id());
 		cri.setMemberStatus(2);
-		cri.setPerPageNum(5);
 		List<WorkreportVO>workreportList = workreportDAO.selectSearchWorkreportList(cri);
 		if(workreportList != null) {
 			for(WorkreportVO workreport : workreportList) {

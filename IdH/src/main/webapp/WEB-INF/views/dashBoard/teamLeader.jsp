@@ -45,7 +45,7 @@ a {
 			<div class="col-md-8">
 				<div class="card" style="height: 95vh;">
 
-					<div class="card-header"
+					<div class="card-header bg-info"
 						style="background: none; border: 1px solid gray;">
 						<h3 class="card-title" style="color: black;">프로젝트 일정</h3>
 					</div>
@@ -78,7 +78,7 @@ a {
 
 				<div class="card card-row card-primar" style="height: 30vh;">
 
-					<div class="card-header"
+					<div class="card-header bg-info"
 						style="background: none; border: 1px solid gray;">
 						<h3 class="card-title" style="color: black;">프로젝트 진행현황</h3>
 					</div>
@@ -89,7 +89,7 @@ a {
 
 				<div class="card card-row card-primar" style="height: 30vh;">
 
-					<div class="card-header"
+					<div class="card-header bg-info"
 						style="background: none; border: 1px solid gray;">
 						<h3 class="card-title" style="color: black;">이슈</h3>
 					</div>
@@ -100,7 +100,7 @@ a {
 
 				<div class="card card-row card-primar" style="height: 30vh;">
 
-					<div class="card-header"
+					<div class="card-header bg-info"
 						style="background: none; border: 1px solid gray;">
 						<h3 class="card-title" style="color: black;">세부계획</h3>
 					</div>

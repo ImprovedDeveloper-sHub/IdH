@@ -71,7 +71,7 @@ body{
 
 .top-menu {
   background: #F0FBFC;
-  width: 1204.5px;
+  width: 1202.5px;
   max-height: 56px;
   float: left;
   margin-bottom:2px !important;
@@ -217,7 +217,7 @@ table td{
       <div class="logo"><img src="<%=request.getContextPath() %>/resources/img/logo.jpg"style="width: 100%;height:100%;background-size: cover;"/></div>
     </div>
     <!-- header종료 -->
-   <div class="main-menu-custom"style="width:81%;">
+   <div class="main-menu-custom"style="width:80%;">
          <c:forEach items="${menuList }" var="menu">
           <div class="menu"><a href="javascript:subMenu_go('${menu.mcode}');goPage('<%=request.getContextPath() %>${menu.murl }','${menu.mcode }');anr('${menu.mcode }');" class="nav-link ${menu.mcode }"><i class="fa-solid ${menu.micon}"></i>
           ${menu.mname }</a></div>

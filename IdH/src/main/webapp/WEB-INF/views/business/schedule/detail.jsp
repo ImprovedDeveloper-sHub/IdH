@@ -184,7 +184,7 @@
 		</div>
 	</div>
 	<!-- 사업 일정 세부 그래프 끝 -->
-	<div class="card-tools" style="margin-left: 1025px">
+	<div class="card-tools" style="margin-left: 1000px">
 		<button type="button" id="modifyBtn" class="btn btn-info" onclick="location.href='modifyForm?business_number=${business.business_number}';">수정</button>
 	   	<button type="button" id="removeBtn" class="btn btn-info" onclick="location.href='remove?business_number=${business.business_number}';">삭제</button>	
 	   	<button type="button" id="listBtn" class="btn btn-info" onclick="location.href='main';">목록</button>
@@ -203,13 +203,13 @@
 
         var data = google.visualization.arrayToDataTable([
           
-        	
-          ['Galaxy', '일정진행도', '예상진행도'],
-          ['Project01', 23000, 5.5],
-          ['Sagittarius Dwarf', 24000, 4.5],
-          ['Ursa Major II Dwarf', 30000, 14.3],
-          ['Lg. Magellanic Cloud', 50000, 0.9],
-          ['Bootes I', 60000, 13.1]
+           
+          ['Galaxy', '일정진행도', 'none'],
+          ['PMS 사업 관리', 50000, 0],
+          ['PMS 인사 관리', 24000, 0],
+          ['PMS 요구사항 분석', 30000, 0],
+          ['PMS 프로젝트 구성', 50000, 0],
+          ['PMS 공지사항', 45000, 0]
         ]);
 
         
@@ -245,7 +245,7 @@
             1: {title: 'apparent magnitude'}
           }
         };
-		
+      
         function drawClassicChart() {
           var classicChart = new google.visualization.ColumnChart(chartDiv);
           classicChart.draw(data, classicOptions);
@@ -259,9 +259,8 @@
           button.innerText = 'Change to Classic';
           button.onclick = drawClassicChart;
         } */
-		
+      
         drawClassicChart();
     };
 </script>
-
 

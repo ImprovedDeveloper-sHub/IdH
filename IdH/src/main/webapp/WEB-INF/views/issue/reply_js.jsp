@@ -103,7 +103,7 @@ function replyRegist_go(){
 		data:JSON.stringify(data),		
 		contentType:'application/json',
 		success:function(data){
-			alert('댓글이 등록되었습니다.\n마지막페이지로 이동합니다.');
+			alert('대안이 제시되었습니다.');
 			replyPage=data; //페이지이동
 			getPage("<%=request.getContextPath()%>/reply/list.do?issue_number="+${issue.issue_number}+"&page="+data); //리스트 출력
 			$('#newReplyText').val("");	

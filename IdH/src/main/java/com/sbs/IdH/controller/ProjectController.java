@@ -71,9 +71,9 @@ public class ProjectController {
 		
 		int project_number = (int)request.getSession().getAttribute("project_now_number");
 		cri.setProject_number(project_number);
+		cri.setPerPageNum(10);
 		
-		
-		mnv.addAllObjects(unitworkService.selectUnitworkList(cri));
+		mnv.addAllObjects(unitworkService.selectUnitworkList1(cri));
 		mnv.addAllObjects(projectService.selectProjectUnitwork_level(cri));
 		
 		return mnv;

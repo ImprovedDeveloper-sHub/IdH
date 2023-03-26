@@ -45,17 +45,23 @@ public class WorkreportController {
 		MemberVO member = (MemberVO) session.getAttribute("loginUser");
 		if(member.getMember_rank()==1) {
 			url = "/workreport/main2";
-
+			cri.setPerPageNum(14);
+			SearchCriteria cri5 = cri.newCri();
+			mnv.addAllObjects(workreportService.selectMyWorkreportList(cri5, request));
+			SearchCriteria cri3 = cri.newCri();
+			mnv.addAllObjects(workreportService.selectMyCheckList(cri3,request));
 		}else {
+			cri.setPerPageNum(5);
 			SearchCriteria cri2 = cri.newCri();
 			mnv.addAllObjects(workreportService.selectGetterWorkreportList(cri2, request));
 			SearchCriteria cri4 = cri.newCri();
-			mnv.addAllObjects(workreportService.selectGetterCheckList(cri4,request));	
+			mnv.addAllObjects(workreportService.selectGetterCheckList(cri4,request));
+			SearchCriteria cri5 = cri.newCri();
+			mnv.addAllObjects(workreportService.selectMyWorkreportList(cri5, request));
+			SearchCriteria cri3 = cri.newCri();
+			mnv.addAllObjects(workreportService.selectMyCheckList(cri3,request));
 		}
-		SearchCriteria cri5 = cri.newCri();
-		mnv.addAllObjects(workreportService.selectMyWorkreportList(cri5, request));
-		SearchCriteria cri3 = cri.newCri();
-		mnv.addAllObjects(workreportService.selectMyCheckList(cri3,request));
+		
 		mnv.setViewName(url);
 		return mnv;
 	}

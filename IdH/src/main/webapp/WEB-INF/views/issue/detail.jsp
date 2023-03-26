@@ -215,7 +215,7 @@ ul, li {
 						<div class="timeline">
 							<!-- timeline time label -->
 							<div class="time-label" id="repliesDiv">
-								<span class="bg-info">대안 </span>							
+								<span class="bg-info">대안 리스트 </span>							
 							</div>
 							
 							

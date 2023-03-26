@@ -70,7 +70,7 @@ input {
 	<!-- 사업 일정 상세 정보 -->
 	<div class="col">
 		<div class="card card-info" style="padding:0 !important; margin:0 !important;">
-			<div class="card-header">
+			<div class="card-header bg-info">
 				<h3 class="card-title">${unitwork.unitwork_name}</h3>
 				<div class="card-tools">
 					<div class="input-group input-group-sm" style="width: 150px;">

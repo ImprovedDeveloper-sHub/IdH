@@ -29,4 +29,6 @@ public interface UnitworkService {
 	public void updateUnitworkForRegistProject(int unitwork_number, int project_number)throws Exception;
 
 	 public List<Map<String,Object>> selectUnitworkListForCalendar(SearchCriteria cri) throws Exception;
+
+	Map<String, Object> selectUnitworkList1(SearchCriteria cri) throws Exception;
 }
