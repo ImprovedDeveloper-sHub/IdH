@@ -49,7 +49,7 @@ public class WorkreportController {
 			SearchCriteria cri5 = cri.newCri();
 			mnv.addAllObjects(workreportService.selectMyWorkreportList(cri5, request));
 			SearchCriteria cri3 = cri.newCri();
-			mnv.addAllObjects(workreportService.selectMyCheckList(cri3,request));
+			mnv.addAllObjects(workreportService.selectGetterCheckList(cri3,request));
 		}else {
 			cri.setPerPageNum(5);
 			SearchCriteria cri2 = cri.newCri();

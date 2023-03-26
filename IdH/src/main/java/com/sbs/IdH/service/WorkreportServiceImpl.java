@@ -138,10 +138,10 @@ public class WorkreportServiceImpl implements WorkreportService{
 		MemberVO member = (MemberVO) session.getAttribute("loginUser");
 		cri.setMember_id(member.getMember_id());
 		cri.setMemberStatus(1);//보낸것은 1
-		cri.setType(1);//승인
+		cri.setType(2);//승인
 		int myworkreportsuccess = workreportDAO.selectSearchWorkreportListCount(cri);
 		cri.setMemberStatus(1);
-		cri.setType(2);//미승인
+		cri.setType(1);//미승인
 		int myworkreportnow = workreportDAO.selectSearchWorkreportListCount(cri);
 		cri.setMemberStatus(1);
 		//int mytotal = workreportDAO.selectWorkreportCriteriaTotalCount(cri);
@@ -160,10 +160,10 @@ public class WorkreportServiceImpl implements WorkreportService{
 		MemberVO member = (MemberVO) session.getAttribute("loginUser");
 		cri.setMember_id(member.getMember_id());
 		cri.setMemberStatus(2);//받은것은 2
-		cri.setType(1);//승인
+		cri.setType(2);//승인
 		int getterworkreportsuccess = workreportDAO.selectSearchWorkreportListCount(cri);
 		cri.setMemberStatus(2);
-		cri.setType(2);//미승인
+		cri.setType(1);//미승인
 		int getterworkreportnow = workreportDAO.selectSearchWorkreportListCount(cri);
 		cri.setMemberStatus(2);
 		//int gettertotal = workreportDAO.selectWorkreportCriteriaTotalCount(cri);

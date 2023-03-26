@@ -368,7 +368,18 @@ public class ProjectServiceImpl implements ProjectService {
 		for(WorkforceVO workforce : workforceList) {
 			projectList.add(projectDAO.selectProject(workforce.getWorkforce_project_number()));
 		}
-		
+		for(ProjectVO project : projectList) {
+			SearchCriteria newCri = new SearchCriteria();
+			project.setProject_business_name(businessDAO.selectBusinessName(project.getProject_business_number()));
+			newCri.setProject_number(project.getProject_number());
+			int unitwork_total = unitworkDAO.selectSearchUnitworkListCount(newCri);
+			newCri.setType(5);
+			int unitwork_end = unitworkDAO.selectSearchUnitworkListCount(newCri);
+			if(unitwork_total != 0 && unitwork_end != 0) {
+				project.setProject_percent((int)((float)(unitwork_total-unitwork_end)/unitwork_total * 100));
+				//System.out.println((int)((float)unitwork_proceeding/(float)unitwork_total  * 100));
+			}
+		}
 		dataMap.put("projectList", projectList);
 		return dataMap;
 	}

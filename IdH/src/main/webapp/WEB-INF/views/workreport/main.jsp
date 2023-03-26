@@ -27,7 +27,7 @@
 			<div class="card" style="height: 98%;">
 				<div style="height: 50%; border: solid green 3px;">
 					<div class="badge-success">승인</div>
-					<h2>${myworkreportsuccess }</h2>
+					<h2>${getterworkreportsuccess }</h2>
 				</div>
 				<!-- <div style="height: 33.3%; border: solid gold 3px;">
 					<div class="badge-warning">전체</div>
@@ -35,7 +35,7 @@
 				</div> -->
 				<div style="height: 50%; border: solid red 3px;">
 					<div class="badge-danger">미승인</div>
-					<h2>${myworkreportnow }</h2>
+					<h2>${getterworkreportnow }</h2>
 				</div>
 			</div>
 		</div>
@@ -161,7 +161,7 @@
 			<div class="card" style="height: 98%;">
 				<div style="height: 50%; border: solid green 3px;">
 					<div class="badge-success">승인</div>
-					<h2>${getterworkreportsuccess }</h2>
+					<h2>${myworkreportsuccess }</h2>
 				</div>
 				<!-- <div style="height: 33.3%; border: solid gold 3px;">
 					<div class="badge-warning">전체</div>
@@ -169,7 +169,7 @@
 				</div> -->
 				<div style="height: 50%; border: solid red 3px;">
 					<div class="badge-danger">미승인</div>
-					<h2>${getterworkreportnow }</h2>
+					<h2>${myworkreportnow }</h2>
 				</div>
 			</div>
 		</div>

@@ -145,9 +145,9 @@
 						<thead>
 							<tr>
 								<td style="width: 20%; text-align: center;">ID</td>
-								<td style="width: 15%; text-align: center;">성명</td>
-								<td style="width: 15%; text-align: center;">담당 업무</td>
-								<td style="width: 50%; text-align: center;">구현 기능</td>
+								<td style="width: 15%; text-align: center;">담당업무</td>
+								<td style="width: 15%; text-align: center;">구현 기능 1</td>
+								<td style="width: 50%; text-align: center;">구현 기능 2</td>
 							</tr>
 						</thead>
 						<tbody>
