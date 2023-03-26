@@ -68,8 +68,8 @@ public class ChartController {
 	
 	@PostMapping("/issueComparison")
 	@ResponseBody
-	public Map<String, Object> issueComparison() throws Exception {
-		ChartVO chart = unitworkService.selectChartForComparison(1, 2);
+	public Map<String, Object> issueComparison(int project_comparison_num1, int project_comparison_num2) throws Exception {
+		ChartVO chart = issueService.selectChartForComparison(project_comparison_num1, project_comparison_num2);
 		return chart.getResult();
 	}
 	
@@ -83,8 +83,8 @@ public class ChartController {
 	
 	@PostMapping("/unitworkComparison")
 	@ResponseBody
-	public Map<String, Object> unitworkComparison() throws Exception {
-		ChartVO chart = unitworkService.selectChartForComparison(1, 2);
+	public Map<String, Object> unitworkComparison(int project_comparison_num1, int project_comparison_num2) throws Exception {
+		ChartVO chart = unitworkService.selectChartForComparison(project_comparison_num1, project_comparison_num2);
 		return chart.getResult();
 	}
 	
@@ -98,8 +98,8 @@ public class ChartController {
 	
 	@PostMapping("/workforceComparison")
 	@ResponseBody
-	public Map<String, Object> workforceComparison() throws Exception {
-		ChartVO chart = workforceService.selectChartForComparison(1, 2);
+	public Map<String, Object> workforceComparison(int project_comparison_num1, int project_comparison_num2) throws Exception {
+		ChartVO chart = workforceService.selectChartForComparison(project_comparison_num1, project_comparison_num2);
 		return chart.getResult();
 	}
 	

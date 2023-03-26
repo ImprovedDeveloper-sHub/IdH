@@ -22,6 +22,7 @@
 			and project_status =  #{status}
 		</if>
 		
+		
 	</sql>
 	
 	<select id="selectProjectNumberBybusinessNumber" resultType="int">

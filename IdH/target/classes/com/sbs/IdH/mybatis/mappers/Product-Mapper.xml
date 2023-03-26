@@ -16,7 +16,7 @@
 			and product_content like '%'||#{keyword}||'%'			
 		</if>
 		
-		<if test="status != null">
+		<if test="status != null and status != 0">
          and product_status = #{status}
       </if>
       <if test="project_number != null and project_number != 0 ">

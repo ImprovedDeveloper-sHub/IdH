@@ -292,7 +292,7 @@ public class IssueServiceImpl implements IssueService{
 		  rowMap_c2.put("c", c1_list);
 		  
 		  ChartVO chart = new ChartVO();
-		  chart.budgetColSet();
+		  chart.issueColSet();
 		  chart.rowSet(rowMap_c1);
 		  chart.rowSet(rowMap_c2);
 		  chart.resultSet(); return chart;

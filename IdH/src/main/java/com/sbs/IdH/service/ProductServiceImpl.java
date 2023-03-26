@@ -297,7 +297,7 @@ public class ProductServiceImpl implements ProductService {
 		rowMap_c2.put("c", c1_list);
 
 		ChartVO chart = new ChartVO();
-		chart.workforceColSet();
+		chart.productColSet();
 		chart.rowSet(rowMap_c1);
 		chart.rowSet(rowMap_c2);
 
